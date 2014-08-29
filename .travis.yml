@@ -1,5 +1,8 @@
 language: node_js
 node_js:
-  - "0.10"
+- '0.10'
 before_install: npm install -g grunt-cli
 after_success: grunt travis
+env:
+  global:
+    secure: tDCKyLn5IICgj4wdoi4e56oEClpr6LUVnpGOtxVAFoDoeisKoITLPjKiW3VWSdY1c9m4vCyYEeHyTu0lz67fo4NLyNq/45Ma9TnHsbKNuIlDgrC8to5hNxCENoZ4/kW2A57wr6zpuZeMNwMYoz6PaPBOtdg0IHtPjDV2zZcKRhU=
