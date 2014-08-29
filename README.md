@@ -2,7 +2,6 @@ supersonic
 ========
 
 [![Build Status](http://img.shields.io/travis/AppGyver/supersonic/master.svg)](https://travis-ci.org/AppGyver/supersonic)
-[![NPM version](http://img.shields.io/npm/v/supersonic.svg)](https://www.npmjs.org/package/supersonic)
 [![Dependency Status](http://img.shields.io/david/AppGyver/supersonic.svg)](https://david-dm.org/AppGyver/supersonic)
 [![Coverage Status](https://img.shields.io/coveralls/AppGyver/supersonic.svg)](https://coveralls.io/r/AppGyver/supersonic)
 
