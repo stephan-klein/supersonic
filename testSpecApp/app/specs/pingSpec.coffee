@@ -4,6 +4,5 @@ describe "ping", ->
     expect( supersonic.ping ).toBeDefined()
 
   it "should pong", ->
-    pong = supersonic.ping()
-
-    expect( pong ).toEqual "Pong!"
+    supersonic.ping().then (pong) ->
+      expect(pong).toEqual "Pong!"
