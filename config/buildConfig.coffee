@@ -1,2 +1,3 @@
 module.exports =
-  dist: 'dist'
+  dist: "dist"
+  testApp: "testApp/www"
