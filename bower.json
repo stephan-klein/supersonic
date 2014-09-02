@@ -18,9 +18,11 @@
   "ignore": [
     "**/.*",
     "bower_components",
+    "config",
     "lib",
     "node_modules",
     "src",
+    "scss",
     "tasks",
     "test",
     "testApp",
