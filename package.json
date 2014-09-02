@@ -30,7 +30,9 @@
     "grunt-mocha-cov": "^0.3.0",
     "load-grunt-config": "^0.13.1",
     "load-grunt-tasks": "^0.6.0",
-    "gulp": "^3.8.7"
+    "gulp": "^3.8.7",
+    "gulp-sass": "^0.7.3",
+    "gulp-concat": "^2.3.4"
   },
   "config": {
     "blanket": {

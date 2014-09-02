@@ -1,0 +1,42 @@
+
+/**
+ * Scaffolding
+ * --------------------------------------------------
+ */
+
+*,
+*:before,
+*:after {
+  @include box-sizing(border-box);
+}
+
+body {
+  @include touch-callout(none);
+  @include font-smoothing(antialiased);
+  @include text-size-adjust(none);
+  @include tap-highlight-transparent();
+  @include user-select(none);
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+
+  margin: 0;
+  padding: 0;
+
+  color: $base-color;
+  word-wrap: break-word;
+  font-size: $font-size-base;
+  font-family: $font-family-base;
+  line-height: $line-height-computed;
+  text-rendering: optimizeLegibility;
+  -webkit-backface-visibility: hidden;
+}
+
+body.grade-b,
+body.grade-c {
+  // disable optimizeLegibility for low end devices
+  text-rendering: auto;
+}
