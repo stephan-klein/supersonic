@@ -17,9 +17,17 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "node_modules",
     "bower_components",
+    "lib",
+    "node_modules",
+    "src",
+    "tasks",
     "test",
-    "tests"
+    "testApp",
+    "coffeelint.json",
+    "env.json",
+    "Gruntfile.coffee",
+    "gulpfile.coffee",
+    "package.json"
   ]
 }
