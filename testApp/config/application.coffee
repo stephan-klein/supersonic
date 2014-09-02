@@ -4,7 +4,7 @@
 steroids.config.name = "testApp"
 
 # ## Start Location
-steroids.config.location = "http://localhost/index.html"
+steroids.config.location = "http://localhost/views/supersonic/index.html"
 
 # ## Tab Bar
 # steroids.config.tabBar.enabled = true

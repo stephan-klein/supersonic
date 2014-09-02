@@ -1,7 +1,7 @@
 gulp = require "gulp"
 sass = require "gulp-sass"
 concat = require "gulp-concat"
-buildConfig = require "config/buildConfig.coffee"
+buildConfig = require "./config/buildConfig.coffee"
 
 
 gulp.task "default", ["build"]
@@ -12,3 +12,4 @@ gulp.task "sass", () ->
     .pipe(sass())
     .pipe(concat("supersonic.css"))
     .pipe(gulp.dest("#{buildConfig.dir.dist}/css"))
+    .pipe(gulp.dest("#{buildConfig.dir.testApp}/css"))

@@ -1,0 +1,2 @@
+window.ping = ->
+  alert "pong"
