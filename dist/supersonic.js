@@ -5290,6 +5290,38 @@ if ((typeof window !== "undefined" && window !== null)) {
   window.supersonic = supersonic;
 }
 
+if ((typeof angular !== "undefined" && angular !== null)) {
+  require('./supersonic/angular')(angular, supersonic);
+}
 
 
-},{"bluebird":3}]},{},[37])
+
+},{"./supersonic/angular":38,"bluebird":3}],38:[function(require,module,exports){
+var __slice = [].slice;
+
+module.exports = function(angular, supersonic) {
+  return angular.module('supersonic', []).service('supersonic', function($q) {
+    var qify, qifyAll;
+    qify = function(f) {
+      return function() {
+        var args;
+        args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        return $q.when(f.apply(null, args));
+      };
+    };
+    qifyAll = function(object) {
+      var key, result, value;
+      result = {};
+      for (key in object) {
+        value = object[key];
+        result[key] = value instanceof Function ? qify(value) : value;
+      }
+      return result;
+    };
+    return qifyAll(supersonic);
+  });
+};
+
+
+
+},{}]},{},[37])
