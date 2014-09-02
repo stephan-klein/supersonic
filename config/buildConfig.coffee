@@ -1,6 +1,6 @@
 module.exports =
   dir:
-    dist: 'lib'
+    dist: 'dist'
     src: 'src'
     tasks: 'tasks'
     test: 'test'
