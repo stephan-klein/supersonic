@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Jasmine Spec Runner for Supersonic</title>
+
+  <link rel="stylesheet" href="/css/supersonic.css">
+
+  <script src="/cordova.js"></script>
+  <script src="js/supersonic.js"></script>
+  <script src="/controllers/supersonic.js"></script>
+
+  <link href="/components/jasmine-standalone/jasmine.css" rel="stylesheet">
+  <script src="/components/jasmine-standalone/jasmine.js"></script>
+  <script src="/components/jasmine-standalone/jasmine-html.js"></script>
+  <script src="/components/jasmine-standalone/jasmine-boot.js"></script>
+
+</head>
+<body>
+
+  <%= yield.view %>
+
+  <!-- runner -->
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
