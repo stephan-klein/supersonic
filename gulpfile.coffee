@@ -1,6 +1,8 @@
 gulp = require "gulp"
 sass = require "gulp-sass"
 concat = require "gulp-concat"
+browserify = require "gulp-browserify"
+
 buildConfig = require "./config/buildConfig.coffee"
 
 
@@ -12,3 +14,12 @@ gulp.task "sass", () ->
     .pipe(sass())
     .pipe(concat("supersonic.css"))
     .pipe(gulp.dest("#{buildConfig.dir.dist}/css"))
+
+gulp.task "coffee", ->
+  gulp.src("#{buildConfig.dir.src}/supersonic.coffee", read: false)
+    .pipe(browserify(
+      transform: ['coffeeify']
+      extensions: ['.coffee']
+    ))
+    .pipe(concat 'supersonic.js')
+    .pipe(gulp.dest "#{buildConfig.dir.dist}")
