@@ -29,3 +29,4 @@ env.json
 
 # Test apps
 testApp/dist/
+testApp/www/components/supersonic/

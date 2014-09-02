@@ -11,6 +11,19 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks("grunt-steroids");
 
-  grunt.registerTask("default", ["steroids-make", "steroids-compile-sass"]);
+  grunt.initConfig({
+    copy: {
+      "supersonic-dist": {
+        src: "../dist/**/*",
+        dest: "www/components/supersonic/dist/"
+      }
+    }
+  });
+
+  grunt.registerTask("default", [
+    "steroids-make",
+    "steroids-compile-sass",
+    "copy"
+  ]);
 
 };
