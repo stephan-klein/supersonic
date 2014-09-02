@@ -1,2 +1,0 @@
-window.ping = ->
-  alert "pong"

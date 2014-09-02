@@ -4,16 +4,18 @@
   <meta charset="utf8">
   <title>Supersonic Test app</title>
 
-  <link rel="stylesheet" href="/components/supersonic/dist/supersonic.css">
+  <link rel="stylesheet" href="/components/supersonic/dist/css/supersonic.css">
 
   <script src="/cordova.js"></script>
   <script src="/components/steroids-js/steroids.js"></script>
+  <script src="/components/angular/angular.js"></script>
   <script src="/components/supersonic/dist/supersonic.js"></script>
 
   <script src="/controllers/supersonic.js"></script>
 
+  <script src="/controllers/<%= yield.controller %>.js"></script>
 </head>
-<body>
+<body ng-app="<%= yield.controller %>App" class="content">
 
   <%= yield.view %>
 
