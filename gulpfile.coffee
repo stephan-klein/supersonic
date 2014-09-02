@@ -11,4 +11,4 @@ gulp.task "sass", () ->
   gulp.src("scss/supersonic.scss")
     .pipe(sass())
     .pipe(concat("supersonic.css"))
-    .pipe(gulp.dest("#{buildConfig.dist}/css"))
+    .pipe(gulp.dest("#{buildConfig.dir.dist}/css"))
