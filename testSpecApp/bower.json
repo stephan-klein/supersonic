@@ -12,6 +12,8 @@
   ],
   "dependencies": {
     "steroids-js": "x",
-    "jasmine-standalone": "^2.0.0"
+    "mocha": "^1.21.4",
+    "chai-as-promised": "^4.1.1",
+    "chai": "^1.9.1"
   }
 }

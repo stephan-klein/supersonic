@@ -1,8 +1,8 @@
-describe "ping", ->
+expect = window.chai.expect
 
+describe "ping", ->
   it "should be defined", ->
-    expect( supersonic.ping ).toBeDefined()
+    expect( supersonic.ping ).to.exist
 
   it "should pong", ->
-    supersonic.ping().then (pong) ->
-      expect(pong).toEqual "Pong!"
+    expect( supersonic.ping() ).to.eventually.equal "Pong!"

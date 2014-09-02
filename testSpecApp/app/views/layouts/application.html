@@ -2,53 +2,31 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>Jasmine Spec Runner for Supersonic</title>
+  <title>Mocha Runner for Supersonic</title>
 
-  <link rel="stylesheet" href="/components/supersonic/dist/supersonic.css">
+  <link rel="stylesheet" href="/components/supersonic/dist/css/supersonic.css">
 
   <script src="/cordova.js"></script>
   <script src="/components/steroids-js/steroids.js"></script>
   <script src="/components/supersonic/dist/supersonic.js"></script>
 
-  <link href="/components/jasmine-standalone/jasmine.css" rel="stylesheet">
-  <script src="/components/jasmine-standalone/jasmine.js"></script>
-  <script src="/components/jasmine-standalone/jasmine-html.js"></script>
-  <script src="/components/jasmine-standalone/jasmine-boot.js"></script>
+  <script src="/components/chai/chai.js"></script>
+  <script src="/components/chai-as-promised/lib/chai-as-promised.js"></script>
+
+  <link rel="stylesheet" href="/components/mocha/mocha.css">
+  <script src="/components/mocha/mocha.js"></script>
 
 </head>
 <body>
-
-  <%= yield.view %>
-
-  <!-- runner -->
-  <script type="text/javascript">
-    (function() {
-      var jasmineEnv = jasmine.getEnv();
-      jasmineEnv.updateInterval = 1000;
-
-      var htmlReporter = new jasmine.HtmlReporter();
-
-      jasmineEnv.addReporter(htmlReporter);
-
-      jasmineEnv.specFilter = function(spec) {
-        return htmlReporter.specFilter(spec);
-      };
-
-      var currentWindowOnload = window.onload;
-
-      window.onload = function() {
-        if (currentWindowOnload) {
-          currentWindowOnload();
-        }
-        execJasmine();
-      };
-
-      function execJasmine() {
-        jasmineEnv.execute();
-      }
-
-    })();
+  <script>
+    mocha.setup("bdd");
   </script>
 
+  <%= yield.view %>
+  <div id="mocha"></div>
+
+  <script>
+    mocha.run();
+  </script>
 </body>
 </html>
