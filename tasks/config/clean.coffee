@@ -1,2 +1,2 @@
 module.exports =
-  compile: '<%= dir.dist %>'
+  build: '<%= dir.dist %>'

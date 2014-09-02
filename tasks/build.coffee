@@ -1,5 +1,5 @@
 module.exports = (grunt) ->
-  grunt.registerTask 'compile', [
+  grunt.registerTask 'build', [
     'clean'
     'coffeelint'
     'gulp'
