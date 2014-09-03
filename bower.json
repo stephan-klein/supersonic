@@ -26,6 +26,7 @@
     "tasks",
     "test",
     "testApp",
+    "testSpecApp",
     "coffeelint.json",
     "env.json",
     "Gruntfile.coffee",
