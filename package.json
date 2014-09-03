@@ -4,8 +4,7 @@
   "description": "supersonic bower library",
   "main": "lib/supersonic.js",
   "scripts": {
-    "test": "grunt test",
-    "prepublish": "grunt compile"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
