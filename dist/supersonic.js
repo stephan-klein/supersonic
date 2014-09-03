@@ -5274,32 +5274,25 @@ process.chdir = function (dir) {
 };
 
 },{}],37:[function(require,module,exports){
-var Promise, supersonic;
+var supersonic;
 
-Promise = require('bluebird');
-
-supersonic = {
-  ping: function() {
-    return Promise.resolve("Pong!");
-  }
-};
+supersonic = require('./supersonic/core');
 
 module.exports = supersonic;
 
-if ((typeof window !== "undefined" && window !== null)) {
-  window.supersonic = supersonic;
-}
-
 if ((typeof angular !== "undefined" && angular !== null)) {
-  require('./supersonic/angular')(angular, supersonic);
+  require('./supersonic/angular')(angular);
 }
 
 
 
-},{"./supersonic/angular":38,"bluebird":3}],38:[function(require,module,exports){
-var __slice = [].slice;
+},{"./supersonic/angular":38,"./supersonic/core":39}],38:[function(require,module,exports){
+var supersonic,
+  __slice = [].slice;
 
-module.exports = function(angular, supersonic) {
+supersonic = require('./core');
+
+module.exports = function(angular) {
   return angular.module('supersonic', []).service('supersonic', function($q) {
     var qify, qifyAll;
     qify = function(f) {
@@ -5324,4 +5317,23 @@ module.exports = function(angular, supersonic) {
 
 
 
-},{}]},{},[37])
+},{"./core":39}],39:[function(require,module,exports){
+var Promise, core;
+
+Promise = require('bluebird');
+
+core = {
+  ping: function() {
+    return Promise.resolve("Pong!");
+  }
+};
+
+module.exports = core;
+
+if ((typeof window !== "undefined" && window !== null)) {
+  window.supersonic = core;
+}
+
+
+
+},{"bluebird":3}]},{},[37])

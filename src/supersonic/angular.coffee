@@ -1,4 +1,6 @@
-module.exports = (angular, supersonic) ->
+supersonic = require './core'
+
+module.exports = (angular) ->
   angular
     .module('supersonic', [])
     .service('supersonic', ($q) ->
