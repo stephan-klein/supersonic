@@ -11,6 +11,8 @@ module.exports =
       .pipe(sass())
       .pipe(concat("supersonic.css"))
       .pipe(gulp.dest("#{buildConfig.dir.dist}/css"))
+    gulp.src("#{buildConfig.dir.fonts}/*")
+      .pipe(gulp.dest("#{buildConfig.dir.dist}/fonts/"))
 
   core: ->
     gulp.src("#{buildConfig.dir.src}/supersonic/core.coffee", read: false)
