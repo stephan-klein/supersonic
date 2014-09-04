@@ -6,6 +6,9 @@ module.exports =
     tasks: 'tasks'
     test: 'test'
     testApp: "testApp/www"
+    components: "components/*"
   files:
     src: '<%= dir.src %>/**/*.coffee'
     test: '<%= dir.test %>/**/*Spec.coffee'
+  file:
+    componentImport: '<%= dir.dist %>/components/import.html'
