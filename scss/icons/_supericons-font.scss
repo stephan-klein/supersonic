@@ -1,0 +1,27 @@
+// Ionicons Font Path
+// --------------------------
+
+@font-face {
+ font-family: $supericons-font-family;
+ src:url("#{$supericons-font-path}/ionicons.eot?v=#{$supericons-version}");
+ src:url("#{$supericons-font-path}/ionicons.eot?v=#{$supericons-version}#iefix") format("embedded-opentype"),
+  url("#{$supericons-font-path}/ionicons.ttf?v=#{$supericons-version}") format("truetype"),
+  url("#{$supericons-font-path}/ionicons.woff?v=#{$supericons-version}") format("woff"),
+  url("#{$supericons-font-path}/ionicons.svg?v=#{$supericons-version}#Ionicons") format("svg");
+ font-weight: normal;
+ font-style: normal;
+}
+
+.ion {
+  display: inline-block;
+  font-family: $supericons-font-family;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
