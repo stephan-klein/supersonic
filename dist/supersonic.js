@@ -5307,7 +5307,16 @@ module.exports = function(angular) {
       result = {};
       for (key in object) {
         value = object[key];
-        result[key] = value instanceof Function ? qify(value) : value;
+        result[key] = (function() {
+          switch (true) {
+            case value instanceof Function:
+              return qify(value);
+            case value instanceof Object:
+              return qifyAll(value);
+            default:
+              return value;
+          }
+        })();
       }
       return result;
     };
@@ -5318,21 +5327,26 @@ module.exports = function(angular) {
 
 
 },{"./core":39}],39:[function(require,module,exports){
-var Promise, core;
+module.exports = {
+  debug: require('./core/debug')
+};
+
+if ((typeof window !== "undefined" && window !== null)) {
+  window.supersonic = module.exports;
+}
+
+
+
+},{"./core/debug":40}],40:[function(require,module,exports){
+var Promise;
 
 Promise = require('bluebird');
 
-core = {
+module.exports = {
   ping: function() {
     return Promise.resolve("Pong!");
   }
 };
-
-module.exports = core;
-
-if ((typeof window !== "undefined" && window !== null)) {
-  window.supersonic = core;
-}
 
 
 

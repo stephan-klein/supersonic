@@ -5274,21 +5274,26 @@ process.chdir = function (dir) {
 };
 
 },{}],37:[function(require,module,exports){
-var Promise, core;
+module.exports = {
+  debug: require('./core/debug')
+};
+
+if ((typeof window !== "undefined" && window !== null)) {
+  window.supersonic = module.exports;
+}
+
+
+
+},{"./core/debug":38}],38:[function(require,module,exports){
+var Promise;
 
 Promise = require('bluebird');
 
-core = {
+module.exports = {
   ping: function() {
     return Promise.resolve("Pong!");
   }
 };
-
-module.exports = core;
-
-if ((typeof window !== "undefined" && window !== null)) {
-  window.supersonic = core;
-}
 
 
 
