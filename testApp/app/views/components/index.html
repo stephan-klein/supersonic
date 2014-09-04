@@ -7,27 +7,22 @@
     document.querySelector('ss-navigation-bar').setAttribute("style", "display: none;");
   }
 </script>
-<div ng-app="componentsApp">
-  <div ng-controller="IndexCtrl" class="padding">
+<div ng-controller="IndexCtrl" class="padding">
 
-    <h4 ng-bind="angularVersionText"></h4>
+  <ss-navigation-bar>
+    <ss-navigation-bar-title ng-bind="navBarTitle"></ss-navigation-bar-title>
+  </ss-navigation-bar>
 
-    <ss-navigation-bar>
-      <ss-navigation-bar-title ng-bind="navBarTitle"></ss-navigation-bar-title>
-    </ss-navigation-bar>
+  <button class="button button-positive" ontouchend="showNav()">SHOW NAV BAR</button>
+  <button class="button button-assertive" ontouchend="hideNav()">HIDE NAV BAR</button>
+  <hr>
+  <button class="button button-positive" ng-click="setNavBarTitle()">SET NAV BAR TITLE</button>
+  <button class="button button-assertive" ng-click="removeNavBarTitle()">REMOVE NAV BAR TITLE</button>
 
-    <button class="button button-positive" ontouchend="showNav()">SHOW NAV BAR</button>
-    <button class="button button-assertive" ontouchend="hideNav()">HIDE NAV BAR</button>
-    <hr>
-    <button class="button button-positive" ng-click="setNavBarTitle()">SET NAV BAR TITLE</button>
-    <button class="button button-assertive" ng-click="removeNavBarTitle()">REMOVE NAV BAR TITLE</button>
-
-    <div class="list">
-      <label class="item item-input">
-        <input class="text" ng-model="navBarTitle" />
-      </label>
-    </div>
-
+  <div class="list">
+    <label class="item item-input">
+      <input class="text" ng-model="navBarTitle" />
+    </label>
   </div>
 
 </div>
