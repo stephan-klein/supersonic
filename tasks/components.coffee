@@ -1,4 +1,5 @@
 coffee = require "coffee-script"
+path = require "path"
 
 module.exports = (grunt) ->
   async = grunt.util.async
@@ -7,7 +8,7 @@ module.exports = (grunt) ->
     done = this.async()
     coreComponents = []
 
-    componentDirectories = grunt.file.expand "components/*"
+    componentDirectories = grunt.file.expand grunt.config.get("dir.components")
 
     async.forEach componentDirectories, (componentDirectory, cb)->
       coreComponent = {
@@ -33,12 +34,14 @@ module.exports = (grunt) ->
 
       coreImports = []
       for component in coreComponents
-        grunt.file.write "dist/#{component.path}", "#{component.html}\n<script>\n#{component.javascript}\n</script>"
+        distPath = path.join grunt.config.get("dir.dist"), component.path
 
-        grunt.log.writeln "dist/#{component.path} created."
+        grunt.file.write distPath, "#{component.html}\n<script>\n#{component.javascript}\n</script>"
+
+        grunt.log.writeln "#{distPath} created."
         coreImports.push "<link rel='import' href='#{component.path.split('components/')[1]}'>"
 
-      grunt.file.write "dist/components/import.html", coreImports.join("\n")
-      grunt.log.writeln "dist/components/import.html created."
+      grunt.file.write grunt.config.get("file.componentImport"), coreImports.join("\n")
+      grunt.log.writeln "#{grunt.config.get("file.componentImport")} created."
 
       done()
