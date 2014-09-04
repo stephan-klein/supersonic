@@ -33,6 +33,6 @@
     "gulpfile.coffee",
     "package.json",
     "components/**/**/*",
-    "!components/**/**/dist"
+    "!components/**/**/dist/*.html"
   ]
 }
