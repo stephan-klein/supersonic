@@ -32,7 +32,7 @@
     "Gruntfile.coffee",
     "gulpfile.coffee",
     "package.json",
-    "components/**/**",
+    "components/**/**/*",
     "!components/**/**/dist"
   ]
 }
