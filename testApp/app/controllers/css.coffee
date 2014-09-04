@@ -1,4 +1,5 @@
 angular
   .module('cssApp', ['supersonic'])
   .controller 'IndexCtrl', ($scope, supersonic) ->
-    xxx = 1
+
+    steroids.view.navigationBar.show "Basic CSS components"
