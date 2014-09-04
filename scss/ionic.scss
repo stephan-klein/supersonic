@@ -1,9 +1,8 @@
 @charset "UTF-8";
 
 @import
-
-  // Icons
-  "icons/supericons.scss",
+  // Ionicons
+  "ionicons/ionicons.scss",
 
   // Variables
   "mixins",
@@ -17,6 +16,8 @@
   // Components
   "action-sheet",
   "backdrop",
+  "bar",
+  "tabs",
   "menu",
   "modal",
   "popover",

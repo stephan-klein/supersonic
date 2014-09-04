@@ -2,6 +2,7 @@ module.exports =
   dir:
     dist: 'dist'
     sass: 'scss'
+    fonts: 'fonts'
     src: 'src'
     tasks: 'tasks'
     test: 'test'
