@@ -3,18 +3,15 @@
     display:none;
   }
 </style>
-<!-- content for script is set by grunt task using compiled component.js -->
-<script>(function() {
-  var SSNavigationBarPrototype, observer, onStyleChanged;
 
-  console.log("NAV BAR JS LOADED");
+<script>
+(function() {
+  var SSNavigationBarPrototype, observer, onStyleChanged;
 
   onStyleChanged = function(node) {
     if (node.isHidden()) {
-      console.log("Hide navigation bar");
       return node.hideNavBar();
     } else {
-      console.log("Show navigation bar");
       return node.showNavBar();
     }
   };
@@ -70,7 +67,6 @@
 
   SSNavigationBarPrototype.attachedCallback = function() {
     var observerConfiguration;
-    console.log("Navigation bar attachedCallback");
     observerConfiguration = {
       attributes: true,
       attributeFilter: ["style", "class"]
@@ -79,21 +75,17 @@
     return onStyleChanged(this);
   };
 
-  SSNavigationBarPrototype.createdCallback = function() {
-    return console.log("Navigation bar createCallback");
-  };
+  SSNavigationBarPrototype.createdCallback = function() {};
 
   SSNavigationBarPrototype.detachedCallback = function() {
-    console.log("Navigation bar detachedCallback");
     observer.disconnect();
     return steroids.view.navigationBar.hide();
   };
-
-  console.log("NAV BAR JS REGISTERING ELEMENT..");
 
   document.registerElement("ss-navigation-bar", {
     prototype: SSNavigationBarPrototype
   });
 
 }).call(this);
+
 </script>
