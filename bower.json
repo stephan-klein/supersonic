@@ -31,6 +31,8 @@
     "env.json",
     "Gruntfile.coffee",
     "gulpfile.coffee",
-    "package.json"
+    "package.json",
+    "components/**/**",
+    "!components/**/**/dist"
   ]
 }

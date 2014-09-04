@@ -1,0 +1,99 @@
+<style>
+  ss-navigation-bar > * {
+    display:none;
+  }
+</style>
+<!-- content for script is set by grunt task using compiled component.js -->
+<script>(function() {
+  var SSNavigationBarPrototype, observer, onStyleChanged;
+
+  console.log("NAV BAR JS LOADED");
+
+  onStyleChanged = function(node) {
+    if (node.isHidden()) {
+      console.log("Hide navigation bar");
+      return node.hideNavBar();
+    } else {
+      console.log("Show navigation bar");
+      return node.showNavBar();
+    }
+  };
+
+  observer = new MutationObserver(function(mutations) {
+    var mutation, _i, _len, _ref, _results;
+    _results = [];
+    for (_i = 0, _len = mutations.length; _i < _len; _i++) {
+      mutation = mutations[_i];
+      if (mutation.type === "attributes" || ((_ref = mutation.attributeName) === "style" || _ref === "class")) {
+        _results.push(onStyleChanged(mutation.target));
+      }
+    }
+    return _results;
+  });
+
+  SSNavigationBarPrototype = Object.create(HTMLElement.prototype);
+
+  Object.defineProperty(SSNavigationBarPrototype, "title", {
+    set: function(title) {
+      this._title = title;
+      return this.onTitleChanged();
+    },
+    get: function() {
+      return this._title;
+    }
+  });
+
+  SSNavigationBarPrototype.isHidden = function() {
+    var style;
+    style = window.getComputedStyle(this);
+    if (style.display === "none" || style.visibility === "hidden") {
+      return true;
+    }
+  };
+
+  SSNavigationBarPrototype.showNavBar = function() {
+    if ((this.title != null) && this.title.length === 0) {
+      this.title = " ";
+    }
+    return steroids.view.navigationBar.show(this.title);
+  };
+
+  SSNavigationBarPrototype.hideNavBar = function() {
+    return steroids.view.navigationBar.hide();
+  };
+
+  SSNavigationBarPrototype.onTitleChanged = function() {
+    if (!this.isHidden()) {
+      return this.showNavBar();
+    }
+  };
+
+  SSNavigationBarPrototype.attachedCallback = function() {
+    var observerConfiguration;
+    console.log("Navigation bar attachedCallback");
+    observerConfiguration = {
+      attributes: true,
+      attributeFilter: ["style", "class"]
+    };
+    observer.observe(this, observerConfiguration);
+    return onStyleChanged(this);
+  };
+
+  SSNavigationBarPrototype.createdCallback = function() {
+    return console.log("Navigation bar createCallback");
+  };
+
+  SSNavigationBarPrototype.detachedCallback = function() {
+    console.log("Navigation bar detachedCallback");
+    observer.disconnect();
+    return steroids.view.navigationBar.hide();
+  };
+
+  console.log("NAV BAR JS REGISTERING ELEMENT..");
+
+  document.registerElement("ss-navigation-bar", {
+    prototype: SSNavigationBarPrototype
+  });
+
+}).call(this);
+</script>
