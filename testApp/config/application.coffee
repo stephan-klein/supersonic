@@ -28,13 +28,13 @@ steroids.config.tabBar.tabs = [
 
 # steroids.config.tabBar.backgroundImage = ""
 
-## Preloads
-steroids.config.preloads = [
- {
-   id: "inlineButton"
-   location: "http://localhost/views/inlineButton/index.html"
- }
-]
+# ## Preloads
+# steroids.config.preloads = [
+#   {
+#     id: "google"
+#     location: "http://www.google.com"
+#   }
+# ]
 
 # ## Drawers
 # steroids.config.drawers =
