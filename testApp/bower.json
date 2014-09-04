@@ -12,6 +12,7 @@
   ],
   "dependencies": {
     "steroids-js": "x",
-    "angular": "1.2.16"
+    "angular": "1.2.16",
+    "platform": "Polymer/platform#~0.4.0"
   }
 }
