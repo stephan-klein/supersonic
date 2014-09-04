@@ -4,7 +4,7 @@
 steroids.config.name = "testApp"
 
 # ## Start Location
-steroids.config.location = "http://localhost/views/css/index.html"
+steroids.config.location = "http://localhost/views/index/index.html"
 
 ## Tab Bar
 steroids.config.tabBar.enabled = true
@@ -28,13 +28,13 @@ steroids.config.tabBar.tabs = [
 
 # steroids.config.tabBar.backgroundImage = ""
 
-# ## Preloads
-# steroids.config.preloads = [
-#   {
-#     id: "google"
-#     location: "http://www.google.com"
-#   }
-# ]
+## Preloads
+steroids.config.preloads = [
+ {
+   id: "inlineButton"
+   location: "http://localhost/views/inlineButton/index.html"
+ }
+]
 
 # ## Drawers
 # steroids.config.drawers =
