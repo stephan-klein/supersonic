@@ -6,7 +6,7 @@ steroids.config.name = "testApp"
 # ## Start Location
 steroids.config.location = "http://localhost/views/ping/index.html"
 
-# ## Tab Bar
+## Tab Bar
 steroids.config.tabBar.enabled = true
 steroids.config.tabBar.tabs = [
   {
