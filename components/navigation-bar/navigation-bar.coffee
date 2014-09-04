@@ -33,7 +33,9 @@ SSNavigationBarPrototype.hideNavBar = ->
 SSNavigationBarPrototype.onTitleChanged = ->
   this.showNavBar() unless this.isHidden()
 
+# What is the difference between attached and created?
 SSNavigationBarPrototype.attachedCallback = ->
+  # Observe attributes style and class
   observerConfiguration =
     attributes: true
     attributeFilter: ["style", "class"]
@@ -48,6 +50,7 @@ SSNavigationBarPrototype.createdCallback = ->
 SSNavigationBarPrototype.detachedCallback = ->
   #console.log "Navigation bar detachedCallback"
   observer.disconnect()
+  # Hide the navbar when this node leaves the DOM
   steroids.view.navigationBar.hide()
 
 document.registerElement "ss-navigation-bar",
