@@ -14,6 +14,7 @@ module.exports =
     gulp.src("#{buildConfig.dir.fonts}/*")
       .pipe(gulp.dest("#{buildConfig.dir.dist}/fonts/"))
 
+  # Only the core supersonic experience
   core: ->
     gulp.src("#{buildConfig.dir.src}/supersonic/core.coffee", read: false)
       .pipe(browserify(
@@ -23,6 +24,7 @@ module.exports =
       .pipe(concat 'supersonic.core.js')
       .pipe(gulp.dest "#{buildConfig.dir.dist}")
 
+  # Core plus Angular modules
   bundle: ->
     gulp.src("#{buildConfig.dir.src}/supersonic.coffee", read: false)
       .pipe(browserify(
