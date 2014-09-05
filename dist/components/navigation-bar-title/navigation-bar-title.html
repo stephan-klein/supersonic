@@ -19,6 +19,8 @@
       mutation = mutations[_i];
       if (mutation.type === "childList") {
         _results.push(onContentChanged(mutation.target));
+      } else {
+        _results.push(void 0);
       }
     }
     return _results;
