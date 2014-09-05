@@ -1,6 +1,6 @@
 {
   "name": "supersonic",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "supersonic bower library",
   "main": "lib/supersonic.js",
   "scripts": {
@@ -12,6 +12,9 @@
   },
   "keywords": [],
   "author": "Eevert Saukkokoski <eevert.saukkokoski@appgyver.com>",
+  "contributors": [
+    "Juha Suuraho <juha.suuraho@appgyver.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AppGyver/supersonic/issues"

@@ -1,9 +1,10 @@
 {
   "name": "supersonic",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "https://github.com/AppGyver/supersonic",
   "authors": [
-    "Eevert Saukkokoski <eevert.saukkokoski@appgyver.com>"
+    "Eevert Saukkokoski <eevert.saukkokoski@appgyver.com>",
+    "Juha Suuraho <juha.suuraho@appgyver.com"
   ],
   "description": "A toolkit for turbocharged Steroids applications",
   "main": "dist/supersonic.js",
