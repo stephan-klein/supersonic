@@ -1,8 +1,5 @@
 <style>
-ss-magic .item
-{
-  background: red;
-}
+/* CSS Styles for ss-magic and its children can be added here */
 </style>
 
 <script>
@@ -10,6 +7,20 @@ ss-magic .item
   var SupersonicPrototype;
 
   SupersonicPrototype = Object.create(HTMLElement.prototype);
+
+  SupersonicPrototype.createdCallback = function() {
+    var action, url;
+    action = this.getAttribute("action");
+    if (action === "click") {
+      url = this.getAttribute("navigate");
+      return this.addEventListener("click", function() {
+        return steroids.layers.push({
+          view: new steroids.views.WebView(url),
+          navigationBar: true
+        });
+      });
+    }
+  };
 
   document.registerElement("ss-magic", {
     prototype: SupersonicPrototype
