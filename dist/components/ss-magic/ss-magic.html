@@ -11,10 +11,10 @@
   SupersonicPrototype.createdCallback = function() {
     var action, modal, navigate;
     action = this.getAttribute("action");
-    if (action === "click") {
+    if (action) {
       navigate = this.getAttribute("navigate");
       if (navigate) {
-        this.addEventListener("click", function() {
+        this.addEventListener(action, function() {
           return steroids.layers.push({
             view: new steroids.views.WebView(navigate),
             navigationBar: true
@@ -25,11 +25,11 @@
       if (modal === null) {
 
       } else if (modal === "hide") {
-        return this.addEventListener("click", function() {
+        return this.addEventListener(action, function() {
           return steroids.modal.hide();
         });
       } else {
-        return this.addEventListener("click", function() {
+        return this.addEventListener(action, function() {
           return steroids.modal.show(new steroids.views.WebView(modal));
         });
       }
