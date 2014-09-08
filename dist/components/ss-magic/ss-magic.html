@@ -9,16 +9,30 @@
   SupersonicPrototype = Object.create(HTMLElement.prototype);
 
   SupersonicPrototype.createdCallback = function() {
-    var action, url;
+    var action, modal, navigate;
     action = this.getAttribute("action");
     if (action === "click") {
-      url = this.getAttribute("navigate");
-      return this.addEventListener("click", function() {
-        return steroids.layers.push({
-          view: new steroids.views.WebView(url),
-          navigationBar: true
+      navigate = this.getAttribute("navigate");
+      if (navigate) {
+        this.addEventListener("click", function() {
+          return steroids.layers.push({
+            view: new steroids.views.WebView(navigate),
+            navigationBar: true
+          });
         });
-      });
+      }
+      modal = this.getAttribute("modal");
+      if (modal === null) {
+
+      } else if (modal === "hide") {
+        return this.addEventListener("click", function() {
+          return steroids.modal.hide();
+        });
+      } else {
+        return this.addEventListener("click", function() {
+          return steroids.modal.show(new steroids.views.WebView(modal));
+        });
+      }
     }
   };
 
