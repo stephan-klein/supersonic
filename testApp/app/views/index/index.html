@@ -1,8 +1,10 @@
 <div ng-controller="IndexCtrl" class="body">
   <ul class="list">
-      <li class="item" ng-click="open('/views/components/index.html')">
-        Components
-      </li>
+      <ss-magic action="navigate" link="/views/components/index.html">
+        <li class="item">
+          Components
+        </li>
+      </ss-magic>
       <li class="item" ng-click="open('/views/inlineButton/index.html')">
         Inline buttons
       </li>
