@@ -1,18 +1,24 @@
 <div ng-controller="IndexCtrl" class="body">
   <ul class="list">
-      <ss-magic action="navigate" link="/views/components/index.html">
+      <ss-magic action="click" navigate="/views/components/index.html">
         <li class="item">
           Components
         </li>
       </ss-magic>
-      <li class="item" ng-click="open('/views/inlineButton/index.html')">
-        Inline buttons
-      </li>
-      <li class="item" ng-click="open('/views/blockButton/index.html')">
-        Block buttons
-      </li>
-      <li class="item" ng-click="open('/views/iconButton/index.html')">
+      <ss-magic action="click" navigate="/views/inlineButton/index.html">
+        <li class="item">
+          Inline buttons
+        </li>
+      </ss-magic>
+      <ss-magic action="click" navigate="/views/blockButton/index.html">
+        <li class="item">
+          Block buttons
+        </li>
+      </ss-magic>
+      <ss-magic action="click" navigate="/views/iconButton/index.html">
+      <li class="item">
         Icon buttons
       </li>
+      </ss-magic>
   </ul>
 </div>
