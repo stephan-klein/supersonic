@@ -1,0 +1,20 @@
+<style>
+ss-magic .item
+{
+  background: red;
+}
+</style>
+
+<script>
+(function() {
+  var SupersonicPrototype;
+
+  SupersonicPrototype = Object.create(HTMLElement.prototype);
+
+  document.registerElement("ss-magic", {
+    prototype: SupersonicPrototype
+  });
+
+}).call(this);
+
+</script>
