@@ -5345,7 +5345,9 @@ module.exports = {
     title = (options != null ? options.title : void 0) || "Alert";
     buttonLabel = (options != null ? options.buttonLabel : void 0) || "OK";
     return new Promise(function(resolve) {
-      return navigator.notification.alert(message, resolve, title, buttonLabel);
+      return document.addEventListener("deviceready", function() {
+        return navigator.notification.alert(message, resolve, title, buttonLabel);
+      });
     });
   },
   confirm: function(options) {
@@ -5358,7 +5360,9 @@ module.exports = {
       callback = function(index) {
         return resolve(index - 1);
       };
-      return navigator.notification.confirm(message, callback, title, buttonLabels);
+      return document.addEventListener("deviceready", function() {
+        return navigator.notification.confirm(message, callback, title, buttonLabels);
+      });
     });
   }
 };

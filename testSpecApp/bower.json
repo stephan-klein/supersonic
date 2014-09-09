@@ -12,6 +12,7 @@
   ],
   "dependencies": {
     "steroids-js": "x",
+    "platform": "Polymer/platform#~0.4.0",
     "mocha": "^1.21.4",
     "chai-as-promised": "^4.1.1",
     "chai": "^1.9.1"
