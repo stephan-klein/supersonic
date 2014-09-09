@@ -57,6 +57,10 @@ For a test-and-watch-for-changes loop, use:
 
     grunt dev
 
+For a build-and-watch-for-changes loop, use:
+
+    grunt build watch:build
+
 ### Publishing to bower
 
 Compile source to a Browserified Javascript bundle and add changes to git:
