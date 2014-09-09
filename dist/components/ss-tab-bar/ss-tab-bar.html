@@ -1,0 +1,40 @@
+<style>
+</style>
+
+<script>
+(function() {
+  var TabBarPrototype;
+
+  TabBarPrototype = Object.create(HTMLElement.prototype);
+
+  TabBarPrototype.createdCallback = function() {
+    var i, tab, tabs, tabsConfig, _i, _ref;
+    tabs = this.getElementsByTagName('tab');
+    tabsConfig = {
+      tabs: []
+    };
+    for (i = _i = 0, _ref = tabs.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+      tab = tabs[i];
+      tabsConfig.tabs.push({
+        title: tab.title,
+        icon: tab.getAttribute("icon"),
+        badge: tab.getAttribute("badge"),
+        location: tab.getAttribute("navigate")
+      });
+    }
+    if (tabsConfig.tabs.length > 0) {
+      return steroids.tabBar.replace(tabsConfig, {
+        onSuccess: function() {
+          return steroids.tabBar.show();
+        }
+      });
+    }
+  };
+
+  document.registerElement("ss-tab-bar", {
+    prototype: TabBarPrototype
+  });
+
+}).call(this);
+
+</script>
