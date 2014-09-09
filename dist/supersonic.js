@@ -5286,7 +5286,7 @@ if ((typeof angular !== "undefined" && angular !== null)) {
 
 
 
-},{"./supersonic/angular":38,"./supersonic/core":39}],38:[function(require,module,exports){
+},{"./supersonic/angular":38,"./supersonic/core":41}],38:[function(require,module,exports){
 var supersonic,
   __slice = [].slice;
 
@@ -5326,9 +5326,36 @@ module.exports = function(angular) {
 
 
 
-},{"./core":39}],39:[function(require,module,exports){
+},{"./core":41}],39:[function(require,module,exports){
 module.exports = {
-  debug: require('./core/debug')
+  notification: require('./cordova/notification')
+};
+
+
+
+},{"./cordova/notification":40}],40:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = {
+  alert: function(options) {
+    var buttonLabel, message, title;
+    message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : "";
+    title = (options != null ? options.title : void 0) || "Alert";
+    buttonLabel = (options != null ? options.buttonLabel : void 0) || "OK";
+    return new Promise(function(resolve) {
+      return navigator.notification.alert(message, resolve, title, buttonLabel);
+    });
+  }
+};
+
+
+
+},{"bluebird":3}],41:[function(require,module,exports){
+module.exports = {
+  debug: require('./core/debug'),
+  cordova: require('./cordova')
 };
 
 if ((typeof window !== "undefined" && window !== null)) {
@@ -5337,7 +5364,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./core/debug":40}],40:[function(require,module,exports){
+},{"./cordova":39,"./core/debug":42}],42:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');

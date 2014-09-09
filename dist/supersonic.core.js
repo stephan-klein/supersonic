@@ -5275,7 +5275,34 @@ process.chdir = function (dir) {
 
 },{}],37:[function(require,module,exports){
 module.exports = {
-  debug: require('./core/debug')
+  notification: require('./cordova/notification')
+};
+
+
+
+},{"./cordova/notification":38}],38:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = {
+  alert: function(options) {
+    var buttonLabel, message, title;
+    message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : "";
+    title = (options != null ? options.title : void 0) || "Alert";
+    buttonLabel = (options != null ? options.buttonLabel : void 0) || "OK";
+    return new Promise(function(resolve) {
+      return navigator.notification.alert(message, resolve, title, buttonLabel);
+    });
+  }
+};
+
+
+
+},{"bluebird":3}],39:[function(require,module,exports){
+module.exports = {
+  debug: require('./core/debug'),
+  cordova: require('./cordova')
 };
 
 if ((typeof window !== "undefined" && window !== null)) {
@@ -5284,7 +5311,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./core/debug":38}],38:[function(require,module,exports){
+},{"./cordova":37,"./core/debug":40}],40:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -5297,4 +5324,4 @@ module.exports = {
 
 
 
-},{"bluebird":3}]},{},[37])
+},{"bluebird":3}]},{},[39])

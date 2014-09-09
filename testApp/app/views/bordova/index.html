@@ -1,0 +1,13 @@
+<div ng-controller="IndexCtrl">
+  <ss-navigation-bar>
+    <ss-navigation-bar-title>Cordova tests</ss-navigation-bar-title>
+  </ss-navigation-bar>
+
+  <div class="card padding">
+    <h1>Alert tests</h1>
+    <button class="button button-block" ng-repeat="test in alertTests"  ng-click="testAlert(test.options)">
+      {{test.title}}
+    </button>
+    <p>Number of alerts dismissed: {{dismissedAlerts}}</p>
+  </div>
+</div>
