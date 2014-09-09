@@ -1,0 +1,16 @@
+<div ng-controller="IndexCtrl">
+  <ss-navigation-bar>
+    <ss-navigation-bar-title>Steroids tests</ss-navigation-bar-title>
+  </ss-navigation-bar>
+
+  <div class="card padding">
+    <h1>OpenURL tests</h1>
+    <button class="button button-block" ng-repeat="test in openURLTests"  ng-click="testOpenURL(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Successful opens: {{successfulOpens}}</li>
+    </ul>
+  </div>
+
+</div>

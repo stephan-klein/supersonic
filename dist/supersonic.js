@@ -5372,7 +5372,8 @@ module.exports = {
 },{"bluebird":3}],41:[function(require,module,exports){
 module.exports = {
   debug: require('./core/debug'),
-  cordova: require('./cordova')
+  cordova: require('./cordova'),
+  steroids: require('./steroids')
 };
 
 if ((typeof window !== "undefined" && window !== null)) {
@@ -5381,7 +5382,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./cordova":39,"./core/debug":42}],42:[function(require,module,exports){
+},{"./cordova":39,"./core/debug":42,"./steroids":43}],42:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -5390,6 +5391,37 @@ module.exports = {
   ping: function() {
     return Promise.resolve("Pong!");
   }
+};
+
+
+
+},{"bluebird":3}],43:[function(require,module,exports){
+module.exports = {
+  openURL: require('./steroids/openURL')
+};
+
+
+
+},{"./steroids/openURL":44}],44:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(url) {
+  return new Promise(function(resolve, reject) {
+    var successCallback;
+    successCallback = function() {
+      return document.addEventListener("resume", function() {
+        return resolve();
+      });
+    };
+    return steroids.openURL({
+      url: url
+    }, {
+      onSuccess: successCallback,
+      onFailure: reject
+    });
+  });
 };
 
 
