@@ -10,4 +10,16 @@
     </button>
     <p>Number of alerts dismissed: {{dismissedAlerts}}</p>
   </div>
+
+  <div class="card padding">
+    <h1>Confirm tests</h1>
+    <button class="button button-block" ng-repeat="test in confirmTests"  ng-click="testConfirm(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Number of confirms okay'd: {{confirms[0]}}</li>
+      <li>Number of confirms denided: {{confirms[1]}}</li>
+      <li>Number of confirm third options: {{confirms[2]}}</li>
+    </ul>
+  </div>
 </div>

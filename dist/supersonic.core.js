@@ -5288,11 +5288,24 @@ Promise = require('bluebird');
 module.exports = {
   alert: function(options) {
     var buttonLabel, message, title;
-    message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : "";
+    message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
     title = (options != null ? options.title : void 0) || "Alert";
     buttonLabel = (options != null ? options.buttonLabel : void 0) || "OK";
     return new Promise(function(resolve) {
       return navigator.notification.alert(message, resolve, title, buttonLabel);
+    });
+  },
+  confirm: function(options) {
+    var buttonLabels, message, title;
+    message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
+    title = (options != null ? options.title : void 0) || "Confirm";
+    buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
+    return new Promise(function(resolve) {
+      var callback;
+      callback = function(index) {
+        return resolve(index - 1);
+      };
+      return navigator.notification.confirm(message, callback, title, buttonLabels);
     });
   }
 };
