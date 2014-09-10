@@ -7,8 +7,9 @@
 
   TabBarPrototype = Object.create(HTMLElement.prototype);
 
-  TabBarPrototype.createdCallback = function() {
+  TabBarPrototype.attachedCallback = function() {
     var i, tab, tabs, tabsConfig, _i, _ref;
+    steroids.logger.log("trying to attach");
     tabs = this.getElementsByTagName('tab');
     tabsConfig = {
       tabs: []
@@ -22,6 +23,12 @@
         location: tab.getAttribute("navigate")
       });
     }
+    steroids.tabBar.on("didchange", function() {
+      return steroids.logger.log("tabbar changed");
+    });
+    steroids.tabBar.on("willchange", function() {
+      return steroids.logger.log("tabbar will bechanged");
+    });
     if (tabsConfig.tabs.length > 0) {
       return steroids.tabBar.replace(tabsConfig, {
         onSuccess: function() {
@@ -29,6 +36,11 @@
         }
       });
     }
+  };
+
+  TabBarPrototype.createdCallback = function() {
+    steroids.logger.log("attached callback");
+    return steroids.tabBar.show();
   };
 
   document.registerElement("ss-tab-bar", {
