@@ -20,6 +20,8 @@
     "**/.*",
     "bower_components",
     "config",
+    "components",
+    "fonts",
     "lib",
     "node_modules",
     "src",
