@@ -1,0 +1,108 @@
+<style>
+ss-drawer {
+  display: none;
+}
+</style>
+
+<script>
+(function() {
+  var SSDrawerPrototype, observer, onStyleChanged;
+
+  onStyleChanged = function(node) {
+    if (node.isHidden()) {
+      return steroids.logger.log("HIDDEN");
+    } else {
+      steroids.logger.log("SHOW");
+      return node.showDrawer();
+    }
+  };
+
+  observer = new MutationObserver(function(mutations) {
+    var mutation, _i, _len, _ref, _results;
+    _results = [];
+    for (_i = 0, _len = mutations.length; _i < _len; _i++) {
+      mutation = mutations[_i];
+      if (mutation.type === "attributes" || ((_ref = mutation.attributeName) === "style" || _ref === "class")) {
+        _results.push(onStyleChanged(mutation.target));
+      }
+    }
+    return _results;
+  });
+
+  SSDrawerPrototype = Object.create(HTMLElement.prototype);
+
+  SSDrawerPrototype.createdCallback = function() {
+    var location;
+    location = this.getAttribute("location");
+    this.side = this.getAttribute("side");
+    this.drawer = new steroids.views.WebView(location);
+    this._preloaded = false;
+    return this.preload();
+  };
+
+  SSDrawerPrototype.preload = function(callback) {
+    var that;
+    that = this;
+    if (!this._preloaded) {
+      return this.drawer.preload({}, {
+        onSuccess: function() {
+          var params;
+          steroids.logger.log("preloaded");
+          that._preloaded = true;
+          params = {};
+          params[that.side] = this.drawer;
+          steroids.drawers.update(params);
+          return callback && callback();
+        }
+      });
+    } else {
+      return callback && callback();
+    }
+  };
+
+  SSDrawerPrototype.showDrawer = function() {
+    var side;
+    steroids.logger.log(222);
+    side = this.side.toUpperCase() || "LEFT";
+    steroids.logger.log(side);
+    return this.preload(function() {
+      steroids.logger.log("trying to show");
+      return steroids.drawers.show({
+        edge: steroids.screen.edges[side]
+      });
+    });
+  };
+
+  SSDrawerPrototype.hideDrawer = function() {
+    return steroids.logger.log("hiding method");
+  };
+
+  SSDrawerPrototype.isHidden = function() {
+    var style;
+    style = window.getComputedStyle(this);
+    if (style.display === "none" || style.visibility === "hidden") {
+      return true;
+    }
+  };
+
+  SSDrawerPrototype.attachedCallback = function() {
+    var observerConfiguration;
+    observerConfiguration = {
+      attributes: true,
+      attributeFilter: ["style", "class"]
+    };
+    observer.observe(this, observerConfiguration);
+    return onStyleChanged(this);
+  };
+
+  SSDrawerPrototype.detachedCallback = function() {
+    return observer.disconnect();
+  };
+
+  document.registerElement("ss-drawer", {
+    prototype: SSDrawerPrototype
+  });
+
+}).call(this);
+
+</script>
