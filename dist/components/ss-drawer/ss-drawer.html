@@ -10,7 +10,8 @@ ss-drawer {
 
   onStyleChanged = function(node) {
     if (node.isHidden()) {
-      return steroids.logger.log("HIDDEN");
+      steroids.logger.log("HIDDEN");
+      return node.hideDrawer();
     } else {
       steroids.logger.log("SHOW");
       return node.showDrawer();
