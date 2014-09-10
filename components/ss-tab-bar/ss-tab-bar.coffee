@@ -1,6 +1,7 @@
 TabBarPrototype = Object.create HTMLElement.prototype
 
-TabBarPrototype.createdCallback = ->
+TabBarPrototype.attachedCallback = ->
+  steroids.logger.log "trying to attach"
   tabs = this.getElementsByTagName('tab')
   tabsConfig = {
     tabs: []
@@ -15,11 +16,21 @@ TabBarPrototype.createdCallback = ->
       location: tab.getAttribute("navigate")
     }
 
+  steroids.tabBar.on "didchange", ()->
+    steroids.logger.log "tabbar changed"
+
+  steroids.tabBar.on "willchange", ()->
+    steroids.logger.log "tabbar will bechanged"
+
   if tabsConfig.tabs.length > 0
     steroids.tabBar.replace tabsConfig, {
       onSuccess: ()->
         steroids.tabBar.show()
     }
+
+TabBarPrototype.createdCallback = ->
+  steroids.logger.log "attached callback"
+  steroids.tabBar.show()
 
 document.registerElement "ss-tab-bar",
   prototype: TabBarPrototype
