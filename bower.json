@@ -35,6 +35,7 @@
     "package.json"
   ],
   "dependencies": {
-    "platform": "Polymer/platform#~0.4.0"
+    "platform": "Polymer/platform#~0.4.0",
+    "steroids-js": "3.x"
   }
 }
