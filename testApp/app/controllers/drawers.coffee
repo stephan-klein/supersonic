@@ -4,7 +4,8 @@ angular
 
     $scope.openDrawer = ()->
       drawer = $element.find('ss-drawer')[0]
-      drawer && drawer.setAttribute("style", "display: block;")
+      # drawer && drawer.setAttribute("style", "display: block;")
+      drawer && drawer.showDrawer()
 
     $scope.openDrawerCtrl = ()->
       drawer = new steroids.views.WebView "/views/components/index.html"
