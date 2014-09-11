@@ -6,7 +6,27 @@ ss-drawer {
 
 <script>
 (function() {
-  var SSDrawerPrototype;
+  var SSDrawerPrototype, observer, onStyleChanged;
+
+  onStyleChanged = function(node) {
+    if (node.isHidden()) {
+      return node.hideDrawer();
+    } else {
+      return node.showDrawer();
+    }
+  };
+
+  observer = new MutationObserver(function(mutations) {
+    var mutation, _i, _len, _ref, _results;
+    _results = [];
+    for (_i = 0, _len = mutations.length; _i < _len; _i++) {
+      mutation = mutations[_i];
+      if (mutation.type === "attributes" || ((_ref = mutation.attributeName) === "style" || _ref === "class")) {
+        _results.push(onStyleChanged(mutation.target));
+      }
+    }
+    return _results;
+  });
 
   SSDrawerPrototype = Object.create(HTMLElement.prototype);
 
@@ -48,6 +68,32 @@ ss-drawer {
     return steroids.drawers.show({
       edge: steroids.screen.edges[side.toUpperCase()]
     });
+  };
+
+  SSDrawerPrototype.hideDrawer = function() {
+    return steroids.logger.log("hiding method");
+  };
+
+  SSDrawerPrototype.isHidden = function() {
+    var style;
+    style = window.getComputedStyle(this);
+    if (style.display === "none" || style.visibility === "hidden") {
+      return true;
+    }
+  };
+
+  SSDrawerPrototype.attachedCallback = function() {
+    var observerConfiguration;
+    observerConfiguration = {
+      attributes: true,
+      attributeFilter: ["style", "class"]
+    };
+    observer.observe(this, observerConfiguration);
+    return onStyleChanged(this);
+  };
+
+  SSDrawerPrototype.detachedCallback = function() {
+    return observer.disconnect();
   };
 
   document.registerElement("ss-drawer", {

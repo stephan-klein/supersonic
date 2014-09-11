@@ -61,7 +61,6 @@ SSDrawerPrototype.attachedCallback = ->
 
 SSDrawerPrototype.detachedCallback = ->
   observer.disconnect()
-  # If a drawer leaves the DOM, it can be dectevated here
 
 document.registerElement "ss-drawer",
   prototype: SSDrawerPrototype
