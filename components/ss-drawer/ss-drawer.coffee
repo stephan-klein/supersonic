@@ -1,3 +1,13 @@
+onStyleChanged = (node)->
+  if node.isHidden()
+    node.hideDrawer()
+  else
+    node.showDrawer()
+
+observer = new MutationObserver (mutations)->
+  for mutation in mutations when mutation.type is "attributes" or mutation.attributeName in ["style", "class"]
+    onStyleChanged(mutation.target)
+
 SSDrawerPrototype = Object.create HTMLElement.prototype
 
 SSDrawerPrototype.createdCallback = ->
@@ -31,6 +41,27 @@ SSDrawerPrototype._openDrawer = ->
   steroids.drawers.show({
     edge: steroids.screen.edges[side.toUpperCase()]
   })
+
+SSDrawerPrototype.hideDrawer = ->
+  steroids.logger.log "hiding method"
+
+SSDrawerPrototype.isHidden = ->
+  style = window.getComputedStyle this
+  return true if style.display is "none" or style.visibility is "hidden"
+
+SSDrawerPrototype.attachedCallback = ->
+  # Observe attributes style and class
+  observerConfiguration =
+    attributes: true
+    attributeFilter: ["style", "class"]
+
+  observer.observe this, observerConfiguration
+
+  onStyleChanged this
+
+SSDrawerPrototype.detachedCallback = ->
+  observer.disconnect()
+  # If a drawer leaves the DOM, it can be dectevated here
 
 document.registerElement "ss-drawer",
   prototype: SSDrawerPrototype
