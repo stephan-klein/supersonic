@@ -3,23 +3,15 @@ angular
   .controller 'IndexCtrl', ($scope, $element, supersonic) ->
 
     $scope.openDrawer = ()->
+      # Opens a drawer calling its method
       drawer = $element.find('ss-drawer')[0]
       # drawer && drawer.setAttribute("style", "display: block;")
       drawer && drawer.showDrawer()
 
-    $scope.openDrawerCtrl = ()->
-      drawer = new steroids.views.WebView "/views/components/index.html"
-      side = "left"
-      drawer.preload {}, {
-        onSuccess: ()->
-          steroids.logger.log "drawer preloaded"
-          params = {}
-          params[side] = drawer
-          steroids.drawers.update params
-          steroids.drawers.show({
-            edge: steroids.screen.edges[side.toUpperCase()]
-          })
-      }
+    $scope.openDrawer2 = ()->
+      # Opens a drawer with CSS
+      drawer = $element.find('ss-drawer')[0]
+      drawer && drawer.setAttribute("style", "display: block;")
 
     backButton = new steroids.buttons.NavigationBarButton()
     backButton.title = "Back"
