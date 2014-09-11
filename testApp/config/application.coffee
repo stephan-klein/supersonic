@@ -1,23 +1,23 @@
 # For an explanation of the steroids.config properties, see the guide at
 # http://guides.appgyver.com/steroids/guides/project_configuration/config-application-coffee/
 
-steroids.config.name = "testApp"
+steroids.config.name = "testApp2"
 
 # ## Start Location
-steroids.config.location = "http://localhost/views/index/index.html"
+steroids.config.location = "http://localhost/app/common/index.html"
 
-## Tab Bar
+# ## Tab Bar
 # steroids.config.tabBar.enabled = true
 # steroids.config.tabBar.tabs = [
 #   {
-#     title: "Ping"
+#     title: "Index"
 #     icon: "icons/pill@2x.png"
-#     location: "http://localhost/views/ping/index.html"
+#     location: "http://localhost/index.html"
 #   },
 #   {
-#     title: "Components"
+#     title: "Internet"
 #     icon: "icons/telescope@2x.png"
-#     location: "http://localhost/views/components/index.html"
+#     location: "http://www.google.com"
 #   }
 # ]
 
