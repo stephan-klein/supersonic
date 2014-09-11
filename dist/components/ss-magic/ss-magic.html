@@ -18,6 +18,10 @@
           return steroids.layers.push({
             view: new steroids.views.WebView(navigate),
             navigationBar: true
+          }, {
+            onSuccess: function() {
+              return supersonic.logger.log("Pushed new layer, URL: " + navigate);
+            }
           });
         });
       }

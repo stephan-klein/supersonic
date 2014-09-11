@@ -8,9 +8,16 @@ SupersonicPrototype.createdCallback = ->
     navigate = this.getAttribute "navigate"
     if navigate
       this.addEventListener action, ()->
-        steroids.layers.push
-          view: new steroids.views.WebView navigate
-          navigationBar: true
+        steroids.layers.push(
+          {
+            view: new steroids.views.WebView navigate
+            navigationBar: true
+          }
+          {
+            onSuccess: ->
+              supersonic.logger.log "Pushed new layer, URL: #{navigate}"
+          }
+        )
 
     modal = this.getAttribute "modal"
 

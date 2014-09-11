@@ -5319,6 +5319,7 @@ module.exports = {
 },{"bluebird":3}],39:[function(require,module,exports){
 module.exports = {
   debug: require('./core/debug'),
+  logger: require('./core/logger'),
   cordova: require('./cordova'),
   steroids: require('./steroids')
 };
@@ -5329,7 +5330,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./cordova":37,"./core/debug":40,"./steroids":41}],40:[function(require,module,exports){
+},{"./cordova":37,"./core/debug":40,"./core/logger":41,"./steroids":42}],40:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -5344,12 +5345,21 @@ module.exports = {
 
 },{"bluebird":3}],41:[function(require,module,exports){
 module.exports = {
+  log: function(message) {
+    return steroids.logger.log(message);
+  }
+};
+
+
+
+},{}],42:[function(require,module,exports){
+module.exports = {
   openURL: require('./steroids/openURL')
 };
 
 
 
-},{"./steroids/openURL":42}],42:[function(require,module,exports){
+},{"./steroids/openURL":43}],43:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');

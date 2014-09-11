@@ -1,5 +1,6 @@
 module.exports =
   debug: require './core/debug'
+  logger: require './core/logger'
   cordova: require './cordova'
   steroids: require './steroids'
 
