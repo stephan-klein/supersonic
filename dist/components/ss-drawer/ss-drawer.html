@@ -1,0 +1,105 @@
+<style>
+ss-drawer {
+  display: none;
+}
+</style>
+
+<script>
+(function() {
+  var SSDrawerPrototype, observer, onStyleChanged;
+
+  onStyleChanged = function(node) {
+    if (node.isHidden()) {
+      return node.hideDrawer();
+    } else {
+      return node.showDrawer();
+    }
+  };
+
+  observer = new MutationObserver(function(mutations) {
+    var mutation, _i, _len, _ref, _results;
+    _results = [];
+    for (_i = 0, _len = mutations.length; _i < _len; _i++) {
+      mutation = mutations[_i];
+      if (mutation.type === "attributes" || ((_ref = mutation.attributeName) === "style" || _ref === "class")) {
+        _results.push(onStyleChanged(mutation.target));
+      }
+    }
+    return _results;
+  });
+
+  SSDrawerPrototype = Object.create(HTMLElement.prototype);
+
+  SSDrawerPrototype.createdCallback = function() {
+    this.location = this.getAttribute("location");
+    this.side = this.getAttribute("side");
+    this.drawer = new steroids.views.WebView(this.location);
+    return this._preloaded = false;
+  };
+
+  SSDrawerPrototype._preload = function(callback) {
+    var that;
+    if (this._preloaded === false) {
+      that = this;
+      return this.drawer.preload({}, {
+        onSuccess: function() {
+          that._preloaded = true;
+          return callback.apply(that);
+        }
+      });
+    } else {
+      return callback.apply(this);
+    }
+  };
+
+  SSDrawerPrototype.showDrawer = function() {
+    var that;
+    that = this;
+    return this._preload(that._openDrawer);
+  };
+
+  SSDrawerPrototype._openDrawer = function() {
+    var drawer, params, side;
+    side = this.side;
+    drawer = this.drawer;
+    params = {};
+    params[side] = drawer;
+    steroids.drawers.update(params);
+    return steroids.drawers.show({
+      edge: steroids.screen.edges[side.toUpperCase()]
+    });
+  };
+
+  SSDrawerPrototype.hideDrawer = function() {
+    return steroids.logger.log("hiding method");
+  };
+
+  SSDrawerPrototype.isHidden = function() {
+    var style;
+    style = window.getComputedStyle(this);
+    if (style.display === "none" || style.visibility === "hidden") {
+      return true;
+    }
+  };
+
+  SSDrawerPrototype.attachedCallback = function() {
+    var observerConfiguration;
+    observerConfiguration = {
+      attributes: true,
+      attributeFilter: ["style", "class"]
+    };
+    observer.observe(this, observerConfiguration);
+    return onStyleChanged(this);
+  };
+
+  SSDrawerPrototype.detachedCallback = function() {
+    return observer.disconnect();
+  };
+
+  document.registerElement("ss-drawer", {
+    prototype: SSDrawerPrototype
+  });
+
+}).call(this);
+
+</script>
