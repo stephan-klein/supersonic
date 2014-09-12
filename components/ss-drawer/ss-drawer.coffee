@@ -21,31 +21,23 @@ SSDrawerPrototype._preload = (callback)->
   that = this
 
   preload = (callback)->
-    this.drawer.preload {}, {
+    that.drawer.preload {}, {
       onSuccess: ()->
         that._preloaded = true
         callback.apply(that)
-      onFailure: ()->
-        # steroids.logger.log "FAILURE"
-        # steroids.logger.log arguments
     }
 
   steroids.getApplicationState {}, {
     onSuccess: (state)->
-      steroids.logger.log 'app state gotten'
-      # steroids.logger.log state.preloads
-      # steroids.logger.log that.location
-      #find = (data.filter (i) -> i.id is that.location)[0]
-      find = (i for i in state.preloads when i.id.indexOf(that.location) != -1)[0]
-      if !find
+      loaded = false
+      state.preloads.forEach (p)->
+        loaded = loaded || (p.id.indexOf(that.location) != -1)
+
+      if !loaded
         preload(callback)
       else
         callback.apply(that)
   }
-
-  #if this._preloaded == false
-  #else
-  #  callback.apply(this)
 
 SSDrawerPrototype.showDrawer = ->
   that = this
@@ -62,7 +54,7 @@ SSDrawerPrototype._openDrawer = ->
   })
 
 SSDrawerPrototype.hideDrawer = ->
-  steroids.logger.log "hiding method"
+  # steroids.logger.log "hiding method"
 
 SSDrawerPrototype.isHidden = ->
   style = window.getComputedStyle this
