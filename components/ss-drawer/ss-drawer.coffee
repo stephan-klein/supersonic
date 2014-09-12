@@ -18,15 +18,34 @@ SSDrawerPrototype.createdCallback = ->
 
 SSDrawerPrototype._preload = (callback)->
 
-  if this._preloaded == false
-    that = this
+  that = this
+
+  preload = (callback)->
     this.drawer.preload {}, {
       onSuccess: ()->
         that._preloaded = true
         callback.apply(that)
+      onFailure: ()->
+        # steroids.logger.log "FAILURE"
+        # steroids.logger.log arguments
     }
-  else
-    callback.apply(this)
+
+  steroids.getApplicationState {}, {
+    onSuccess: (state)->
+      steroids.logger.log 'app state gotten'
+      # steroids.logger.log state.preloads
+      # steroids.logger.log that.location
+      #find = (data.filter (i) -> i.id is that.location)[0]
+      find = (i for i in state.preloads when i.id.indexOf(that.location) != -1)[0]
+      if !find
+        preload(callback)
+      else
+        callback.apply(that)
+  }
+
+  #if this._preloaded == false
+  #else
+  #  callback.apply(this)
 
 SSDrawerPrototype.showDrawer = ->
   that = this
