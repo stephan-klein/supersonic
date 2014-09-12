@@ -38,18 +38,30 @@ ss-drawer {
   };
 
   SSDrawerPrototype._preload = function(callback) {
-    var that;
-    if (this._preloaded === false) {
-      that = this;
-      return this.drawer.preload({}, {
+    var preload, that;
+    that = this;
+    preload = function(callback) {
+      return that.drawer.preload({}, {
         onSuccess: function() {
           that._preloaded = true;
           return callback.apply(that);
         }
       });
-    } else {
-      return callback.apply(this);
-    }
+    };
+    return steroids.getApplicationState({}, {
+      onSuccess: function(state) {
+        var loaded;
+        loaded = false;
+        state.preloads.forEach(function(p) {
+          return loaded = loaded || (p.id.indexOf(that.location) !== -1);
+        });
+        if (!loaded) {
+          return preload(callback);
+        } else {
+          return callback.apply(that);
+        }
+      }
+    });
   };
 
   SSDrawerPrototype.showDrawer = function() {
@@ -70,9 +82,7 @@ ss-drawer {
     });
   };
 
-  SSDrawerPrototype.hideDrawer = function() {
-    return steroids.logger.log("hiding method");
-  };
+  SSDrawerPrototype.hideDrawer = function() {};
 
   SSDrawerPrototype.isHidden = function() {
     var style;
