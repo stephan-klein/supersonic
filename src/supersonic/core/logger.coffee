@@ -3,7 +3,6 @@ class Logger
   constructor: ->
     @messages = []
     @queue = new LogMessageQueue
-    @queue.autoFlush 100
     steroids.app.host.getURL {},
       onSuccess: (url) =>
         @logEndpoint = "#{url}/__appgyver/logger"
@@ -18,7 +17,6 @@ class Logger
       onSuccess: (mode) =>
         return unless mode == "scanner"
         @queue.push logMessage
-    # steroids.logger.log message
 
   info: (message)->
     @log('info', message)
@@ -36,7 +34,6 @@ class Logger
       @screen_id = window.AG_SCREEN_ID
       @layer_id = window.AG_LAYER_ID
       @view_id = window.AG_VIEW_ID
-
 
       @date = new Date()
 
@@ -65,11 +62,11 @@ class Logger
       @messageQueue.push logMessage
 
     flush: ->
-      return false unless steroids.logger.logEndpoint?
+      return false unless supersonic.logger.logEndpoint?
 
       while( logMessage = @messageQueue.pop() )
         xhr = new XMLHttpRequest()
-        xhr.open "POST", steroids.logger.logEndpoint, true
+        xhr.open "POST", supersonic.logger.logEndpoint, true
         xhr.setRequestHeader "Content-Type", "application/json;charset=UTF-8"
         xhr.send JSON.stringify(logMessage.asJSON())
 
@@ -80,7 +77,7 @@ class Logger
         onSuccess: (mode) =>
           return unless mode == "scanner"
 
-          steroids.logger.queue.startFlushing(every)
+          supersonic.logger.queue.startFlushing(every)
 
     startFlushing: (every) ->
       return false if @flushingInterval?
