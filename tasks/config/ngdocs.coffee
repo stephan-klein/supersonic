@@ -1,2 +1,2 @@
 module.exports =
-  all: ['src/**/*.coffee']
+  all: ['dist/**/*.js']

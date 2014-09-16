@@ -1,9 +1,9 @@
 module.exports = (grunt) ->
-  grunt.registerTask 'docs', ->
+  grunt.registerTask 'docs', [ 'build' ], ->
     # Generate documentation
-    console.log 'documentation'
     grunt.loadNpmTasks('grunt-ngdocs');
 
     grunt.task.run [
+      'build'
       'ngdocs'
     ]
