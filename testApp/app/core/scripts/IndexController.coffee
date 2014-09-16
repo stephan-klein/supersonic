@@ -1,5 +1,5 @@
 angular
-  .module('supersonic')
+  .module('core')
   .controller 'IndexController', ($scope, supersonic) ->
     $scope.pongs = 0
     $scope.ping = ->
