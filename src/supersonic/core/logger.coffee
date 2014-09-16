@@ -76,7 +76,7 @@ class Logger
 
     autoFlush: (every) ->
       steroids.app.getMode {},
-        onSuccess: (mode) =>
+        onSuccess: (mode) ->
           return unless mode == "scanner"
 
           supersonic.logger.queue.startFlushing(every)
