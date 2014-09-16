@@ -5376,7 +5376,10 @@ module.exports = {
    * Checks promise resolving
    */
   ping: function() {
-    return Promise.resolve("Pong!");
+    return steroids.device.ping({}, {
+      onSuccess: Promise.resolve("Pong!"),
+      onFailure: Promise.reject
+    });
   }
 };
 
