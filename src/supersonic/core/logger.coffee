@@ -12,6 +12,8 @@ class Logger
       message = type
       type = 'silly'
 
+    # TODO: write "type" into cloud
+
     logMessage = new LogMessage(message)
     steroids.app.getMode {},
       onSuccess: (mode) =>
