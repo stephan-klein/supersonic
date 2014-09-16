@@ -32,16 +32,11 @@ module.exports = (grunt) ->
 
     , ()->
 
-      coreImports = []
+      coreComponentSources = []
       for component in coreComponents
-        distPath = path.join grunt.config.get("dir.dist"), component.path
+        coreComponentSources.push "#{component.html}\n<script>\n#{component.javascript}\n</script>"
 
-        grunt.file.write distPath, "#{component.html}\n<script>\n#{component.javascript}\n</script>"
-
-        grunt.log.writeln "#{distPath} created."
-        coreImports.push "<link rel='import' href='#{component.path.split('components/')[1]}'>"
-
-      grunt.file.write grunt.config.get("file.componentImport"), coreImports.join("\n")
+      grunt.file.write grunt.config.get("file.componentImport"), coreComponentSources.join("\n\n")
       grunt.log.writeln "#{grunt.config.get("file.componentImport")} created."
 
       done()
