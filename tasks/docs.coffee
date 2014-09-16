@@ -1,5 +1,5 @@
 module.exports = (grunt) ->
-  grunt.registerTask 'docsGenerating', ->
+  grunt.registerTask 'docs:generate', ->
     # Generate documentation
     grunt.loadNpmTasks('grunt-ngdocs');
 
@@ -7,7 +7,15 @@ module.exports = (grunt) ->
       'ngdocs'
     ]
 
+  grunt.registerTask 'docs:connect', ->
+
+    grunt.task.run [
+      'docs'
+      'connect:docs'
+      'watch:docs'
+    ]
+
   grunt.registerTask 'docs', [
     'build'
-    'docsGenerating'
+    'docs:generate'
   ]

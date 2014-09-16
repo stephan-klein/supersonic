@@ -15,3 +15,10 @@ module.exports =
     tasks: [
       'build'
     ]
+  docs:
+    files: [
+      '<%= files.src %>'
+    ]
+    tasks: [
+      'docs:generate'
+    ]
