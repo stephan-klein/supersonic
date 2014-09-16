@@ -5459,9 +5459,9 @@ Logger = (function() {
     var logMessage;
     if (!message) {
       message = type;
-      type = 'silly';
+      type = 'info';
     }
-    logMessage = new LogMessage(message);
+    logMessage = new LogMessage(type, message);
     return steroids.app.getMode({}, {
       onSuccess: (function(_this) {
         return function(mode) {
@@ -5487,7 +5487,8 @@ Logger = (function() {
   };
 
   LogMessage = (function() {
-    function LogMessage(message) {
+    function LogMessage(type, message) {
+      this.type = type;
       this.message = message;
       this.location = window.location.href;
       this.screen_id = window.AG_SCREEN_ID;
@@ -5506,6 +5507,7 @@ Logger = (function() {
       }
       obj = {
         message: messageJSON,
+        level: this.type,
         location: this.location,
         date: this.date.toJSON(),
         screen_id: this.screen_id,
