@@ -1,6 +1,7 @@
 Promise = require 'bluebird'
 
 module.exports =
+
   ###*
    * @ngdoc service
    * @name supersonic.debug:ping
@@ -10,4 +11,10 @@ module.exports =
    * Checks promise resolving
   ###
   ping: ->
-    Promise.resolve "Pong!"
+    steroids.device.ping(
+      {}
+      {
+        onSuccess: Promise.resolve "Pong!"
+        onFailure: Promise.reject
+      }
+    )
