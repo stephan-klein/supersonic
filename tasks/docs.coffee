@@ -8,6 +8,6 @@ module.exports = (grunt) ->
     ]
 
   grunt.registerTask 'docs', [
-    'docsGenerating'
     'build'
+    'docsGenerating'
   ]
