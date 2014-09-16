@@ -22,4 +22,24 @@
       <li>Number of confirm third options: {{confirms[2]}}</li>
     </ul>
   </div>
+
+  <div class="card padding">
+    <h1>Vibrate tests</h1>
+    <button class="button button-block" ng-repeat="test in vibrateTests"  ng-click="testVibrate(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Number of vibrations: {{vibrations}}</li>
+    </ul>
+  </div>
+
+  <div class="card padding">
+    <h1>Prompt tests</h1>
+    <button class="button button-block" ng-repeat="test in promptTests"  ng-click="testPrompt(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Input: {{input}}</li>
+    </ul>
+  </div>
 </div>
