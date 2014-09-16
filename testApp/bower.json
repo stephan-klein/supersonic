@@ -1,18 +1,10 @@
 {
-  "name": "supersonicTestApp",
-  "version": "0.0.1",
-  "authors": [],
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "www/components",
-    "www/spec",
-    "test",
-    "tests"
-  ],
+  "name": "testApp2",
+  "version": "0.0.0",
+  "private": true,
   "dependencies": {
-    "steroids-js": "x",
+    "steroids-js": "3.x",
     "angular": "1.2.16",
-    "platform": "Polymer/platform#~0.4.0"
+    "supersonic": "https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic.git#master"
   }
 }
