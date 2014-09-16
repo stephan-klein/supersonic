@@ -5280,6 +5280,8 @@ supersonic = require('./supersonic/core');
 
 module.exports = supersonic;
 
+window.supersonic.logger.queue.autoFlush(100);
+
 if ((typeof angular !== "undefined" && angular !== null)) {
   require('./supersonic/angular')(angular);
 }
@@ -5364,6 +5366,36 @@ module.exports = {
         return navigator.notification.confirm(message, callback, title, buttonLabels);
       });
     });
+  },
+  vibrate: function(options) {
+    var time;
+    time = typeof options === "number" ? options : void 0;
+    return new Promise(function(resolve) {
+      return document.addEventListener("deviceready", function() {
+        return resolve(navigator.notification.vibrate(time));
+      });
+    });
+  },
+  prompt: function(options) {
+    var buttonLabels, defaultText, message, title;
+    message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : new String;
+    title = (options != null ? options.title : void 0) || "Prompt";
+    buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
+    defaultText = (options != null ? options.defaultText : void 0) || new String;
+    return new Promise(function(resolve) {
+      var callback;
+      callback = function(results) {
+        switch (results.buttonIndex) {
+          case 1:
+            return resolve(results.input1);
+          case 2:
+            return reject;
+        }
+      };
+      return document.addEventListener("deviceready", function() {
+        return navigator.notification.prompt(message, callback, title, buttonLabels, defaultText);
+      });
+    });
   }
 };
 
@@ -5406,11 +5438,155 @@ module.exports = {
 
 
 },{"bluebird":3}],43:[function(require,module,exports){
-module.exports = {
-  log: function(message) {
-    return steroids.logger.log(message);
+var Logger;
+
+Logger = (function() {
+  var LogMessage, LogMessageQueue;
+
+  function Logger() {
+    this.messages = [];
+    this.queue = new LogMessageQueue;
+    steroids.app.host.getURL({}, {
+      onSuccess: (function(_this) {
+        return function(url) {
+          return _this.logEndpoint = "" + url + "/__appgyver/logger";
+        };
+      })(this)
+    });
   }
-};
+
+  Logger.prototype.log = function(type, message) {
+    var logMessage;
+    if (!message) {
+      message = type;
+      type = 'silly';
+    }
+    logMessage = new LogMessage(message);
+    return steroids.app.getMode({}, {
+      onSuccess: (function(_this) {
+        return function(mode) {
+          if (mode !== "scanner") {
+            return;
+          }
+          return _this.queue.push(logMessage);
+        };
+      })(this)
+    });
+  };
+
+  Logger.prototype.info = function(message) {
+    return this.log('info', message);
+  };
+
+  Logger.prototype.warn = function(message) {
+    return this.log('warn', message);
+  };
+
+  Logger.prototype.error = function(message) {
+    return this.log('error', message);
+  };
+
+  LogMessage = (function() {
+    function LogMessage(message) {
+      this.message = message;
+      this.location = window.location.href;
+      this.screen_id = window.AG_SCREEN_ID;
+      this.layer_id = window.AG_LAYER_ID;
+      this.view_id = window.AG_VIEW_ID;
+      this.date = new Date();
+    }
+
+    LogMessage.prototype.asJSON = function() {
+      var err, messageJSON, obj;
+      try {
+        messageJSON = JSON.stringify(this.message);
+      } catch (_error) {
+        err = _error;
+        messageJSON = err.toString();
+      }
+      obj = {
+        message: messageJSON,
+        location: this.location,
+        date: this.date.toJSON(),
+        screen_id: this.screen_id,
+        layer_id: this.layer_id,
+        view_id: this.view_id
+      };
+      return obj;
+    };
+
+    return LogMessage;
+
+  })();
+
+  LogMessageQueue = (function() {
+    function LogMessageQueue() {
+      this.messageQueue = [];
+    }
+
+    LogMessageQueue.prototype.push = function(logMessage) {
+      return this.messageQueue.push(logMessage);
+    };
+
+    LogMessageQueue.prototype.flush = function() {
+      var logMessage, xhr;
+      if (supersonic.logger.logEndpoint == null) {
+        return false;
+      }
+      while ((logMessage = this.messageQueue.pop())) {
+        xhr = new XMLHttpRequest();
+        xhr.open("POST", supersonic.logger.logEndpoint, true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify(logMessage.asJSON()));
+      }
+      return true;
+    };
+
+    LogMessageQueue.prototype.autoFlush = function(every) {
+      return steroids.app.getMode({}, {
+        onSuccess: function(mode) {
+          if (mode !== "scanner") {
+            return;
+          }
+          return supersonic.logger.queue.startFlushing(every);
+        }
+      });
+    };
+
+    LogMessageQueue.prototype.startFlushing = function(every) {
+      if (this.flushingInterval != null) {
+        return false;
+      }
+      this.flushingInterval = window.setInterval((function(_this) {
+        return function() {
+          return _this.flush();
+        };
+      })(this), every);
+      return true;
+    };
+
+    LogMessageQueue.prototype.stopFlushing = function() {
+      if (this.flushingInterval == null) {
+        return false;
+      }
+      window.clearInterval(this.flushingInterval);
+      this.flushingInterval = void 0;
+      return true;
+    };
+
+    LogMessageQueue.prototype.getLength = function() {
+      return this.messageQueue.length;
+    };
+
+    return LogMessageQueue;
+
+  })();
+
+  return Logger;
+
+})();
+
+module.exports = new Logger;
 
 
 
