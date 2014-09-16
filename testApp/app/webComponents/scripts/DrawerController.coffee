@@ -1,6 +1,6 @@
 angular
-  .module('drawersApp', ['supersonic'])
-  .controller 'IndexCtrl', ($scope, $element, supersonic) ->
+  .module('webComponents', ['supersonic'])
+  .controller 'DrawerController', ($scope, $element, supersonic) ->
 
     $scope.openDrawer = ()->
       # Opens a drawer calling its method

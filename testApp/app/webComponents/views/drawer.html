@@ -1,14 +1,9 @@
-<style>
-.button {
-  margin: 0.5em;
-}
-</style>
-<div ng-controller="IndexCtrl" class="body">
+<div ng-controller="DrawerController" class="padding">
 
-  <ss-drawer location="/views/components/index.html" side="left"></ss-drawer>
+  <ss-drawer location="app/webComponents/drawerIndex.html" side="left"></ss-drawer>
 
   <button class="button" ng-click="openDrawer()">Show Drawer with method</button>
-
+  <br><br>
   <button class="button" ng-click="openDrawer2()">Show Drawer with CSS</button>
 
 </div>
