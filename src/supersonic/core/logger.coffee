@@ -10,11 +10,9 @@ class Logger
   log: (type, message)->
     if !(message)
       message = type
-      type = 'silly'
+      type = 'info'
 
-    # TODO: write "type" into cloud
-
-    logMessage = new LogMessage(message)
+    logMessage = new LogMessage(type, message)
     steroids.app.getMode {},
       onSuccess: (mode) =>
         return unless mode == "scanner"
@@ -31,7 +29,7 @@ class Logger
 
   class LogMessage
 
-    constructor: (@message) ->
+    constructor: (@type, @message) ->
       @location = window.location.href
       @screen_id = window.AG_SCREEN_ID
       @layer_id = window.AG_LAYER_ID
@@ -47,6 +45,7 @@ class Logger
 
       obj =
         message: messageJSON
+        level: @type
         location: @location
         date: @date.toJSON()
         screen_id: @screen_id
