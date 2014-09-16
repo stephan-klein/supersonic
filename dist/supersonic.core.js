@@ -5311,6 +5311,36 @@ module.exports = {
         return navigator.notification.confirm(message, callback, title, buttonLabels);
       });
     });
+  },
+  vibrate: function(options) {
+    var time;
+    time = typeof options === "number" ? options : void 0;
+    return new Promise(function(resolve) {
+      return document.addEventListener("deviceready", function() {
+        return resolve(navigator.notification.vibrate(time));
+      });
+    });
+  },
+  prompt: function(options) {
+    var buttonLabels, defaultText, message, title;
+    message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : new String;
+    title = (options != null ? options.title : void 0) || "Prompt";
+    buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
+    defaultText = (options != null ? options.defaultText : void 0) || new String;
+    return new Promise(function(resolve) {
+      var callback;
+      callback = function(results) {
+        switch (results.buttonIndex) {
+          case 1:
+            return resolve(results.input1);
+          case 2:
+            return reject;
+        }
+      };
+      return document.addEventListener("deviceready", function() {
+        return navigator.notification.prompt(message, callback, title, buttonLabels, defaultText);
+      });
+    });
   }
 };
 
