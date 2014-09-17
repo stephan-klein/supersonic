@@ -32,3 +32,6 @@ testApp/dist
 testApp/www/components
 testSpecApp/dist
 testSpecApp/www/components
+
+# Docs
+docs/
