@@ -7,7 +7,7 @@ module.exports = (grunt) ->
       'ngdocs'
     ]
 
-  grunt.registerTask 'docs:connect', ->
+  grunt.registerTask 'docs:develop', ->
 
     grunt.task.run [
       'docs'
