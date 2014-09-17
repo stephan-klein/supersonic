@@ -5385,12 +5385,12 @@ module.exports = {
     return new Promise(function(resolve) {
       var callback;
       callback = function(results) {
-        switch (results.buttonIndex) {
-          case 1:
-            return resolve(results.input1);
-          case 2:
-            return reject;
-        }
+        var result;
+        result = {
+          buttonIndex: results.buttonIndex - 1,
+          input: results.input1
+        };
+        return resolve(result);
       };
       return document.addEventListener("deviceready", function() {
         return navigator.notification.prompt(message, callback, title, buttonLabels, defaultText);

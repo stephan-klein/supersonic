@@ -55,11 +55,10 @@ module.exports =
 
     new Promise (resolve) ->
       callback = (results) ->
-        switch results.buttonIndex
-          # Ok button
-          when 1 then resolve results.input1
-          # Cancel button
-          when 2 then reject
+        result =
+          buttonIndex: results.buttonIndex-1 # Cordova indexing starts at 1
+          input: results.input1
+        resolve result
             
       document.addEventListener "deviceready", ->
         navigator.notification.prompt message, callback, title, buttonLabels, defaultText
