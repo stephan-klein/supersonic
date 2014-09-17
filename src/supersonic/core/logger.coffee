@@ -1,3 +1,12 @@
+# Fake steroids for tests
+if !steroids
+  steroids = {
+    app:
+      host:
+        getURL: ->
+      getMode: ->
+  }
+
 class Logger
 
   constructor: ->

@@ -1,3 +1,9 @@
+# Fake steroids for tests
+if !steroids
+  steroids =
+    device:
+      ping: ->
+
 Promise = require 'bluebird'
 
 module.exports =
