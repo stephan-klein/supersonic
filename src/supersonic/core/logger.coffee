@@ -7,6 +7,18 @@ if !steroids
       getMode: ->
   }
 
+###*
+ * @ngdoc overview
+ * @name logger
+ * @description
+ * Provides logging with different log levels. Logs are piped to the Steroids Connect screen.
+ * @usage
+ * ```coffeescript
+ * supersonic.debug.ping().then (response) ->
+ *   console.log response
+ * ```
+###
+
 class Logger
 
   constructor: ->
@@ -16,12 +28,29 @@ class Logger
       onSuccess: (url) =>
         @logEndpoint = "#{url}/__appgyver/logger"
 
-  log: (type, message)->
-    if !(message)
-      message = type
-      type = 'info'
+  ###*
+   * @ngdoc method
+   * @name log
+   * @module logger
+   * @description
+   * Logs a single message with the given log level. Available log levels are:
+   * * `silly`
+   * * `debug`
+   * * `verbose`
+   * * `info`
+   * * `warn`
+   * * `error`
+   * @param {string} message Message to log.
+   * @param {string=} level Log level to use.
+   * @usage
+   * ```coffeescript
+   * supersonic.logger.log "info", "App started!"
+   * ```
+  ###
 
-    logMessage = new LogMessage(type, message)
+  log: (message, level = "info")->
+
+    logMessage = new LogMessage(level, message)
     steroids.app.getMode {},
       onSuccess: (mode) =>
         return unless mode == "scanner"

@@ -5274,11 +5274,17 @@ process.chdir = function (dir) {
 };
 
 },{}],37:[function(require,module,exports){
-var supersonic;
+var supersonic, window;
 
 supersonic = require('./supersonic/core');
 
 module.exports = supersonic;
+
+if (!window) {
+  window = {
+    supersonic: supersonic
+  };
+}
 
 window.supersonic.logger.queue.autoFlush(100);
 
@@ -5416,19 +5422,32 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 },{"./cordova":39,"./core/debug":42,"./core/logger":43,"./steroids":44}],42:[function(require,module,exports){
-var Promise;
+var Promise, steroids;
+
+if (!steroids) {
+  steroids = {
+    device: {
+      ping: function() {}
+    }
+  };
+}
 
 Promise = require('bluebird');
 
 module.exports = {
 
   /**
-   * @ngdoc service
-   * @name supersonic.debug:ping
-   * @function
-   *
+   * @ngdoc method
+   * @name ping()
+   * @module debug
    * @description
-   * Checks promise resolving
+   * Pings the native runtime.
+   * @returns {Promise} A promise that gets resolved once the ping is successful. Resolves with the string `"Pong!"`.
+   * @usage
+   * ```coffeescript
+   * supersonic.debug.ping().then (response) ->
+   *   console.log response
+   * ```
    */
   ping: function() {
     return steroids.device.ping({}, {
@@ -5441,7 +5460,31 @@ module.exports = {
 
 
 },{"bluebird":3}],43:[function(require,module,exports){
-var Logger;
+var Logger, steroids;
+
+if (!steroids) {
+  steroids = {
+    app: {
+      host: {
+        getURL: function() {}
+      },
+      getMode: function() {}
+    }
+  };
+}
+
+
+/**
+ * @ngdoc overview
+ * @name logger
+ * @description
+ * Provides logging with different log levels. Logs are piped to the Steroids Connect screen.
+ * @usage
+ * ```coffeescript
+ * supersonic.debug.ping().then (response) ->
+ *   console.log response
+ * ```
+ */
 
 Logger = (function() {
   var LogMessage, LogMessageQueue;
@@ -5458,13 +5501,33 @@ Logger = (function() {
     });
   }
 
-  Logger.prototype.log = function(type, message) {
+
+  /**
+   * @ngdoc method
+   * @name log
+   * @module logger
+   * @description
+   * Logs a single message with the given log level. Available log levels are:
+   * * `silly`
+   * * `debug`
+   * * `verbose`
+   * * `info`
+   * * `warn`
+   * * `error`
+   * @param {string} message Message to log.
+   * @param {string=} level Log level to use.
+   * @usage
+   * ```coffeescript
+   * supersonic.logger.log "info", "App started!"
+   * ```
+   */
+
+  Logger.prototype.log = function(message, level) {
     var logMessage;
-    if (!message) {
-      message = type;
-      type = 'info';
+    if (level == null) {
+      level = "info";
     }
-    logMessage = new LogMessage(type, message);
+    logMessage = new LogMessage(level, message);
     return steroids.app.getMode({}, {
       onSuccess: (function(_this) {
         return function(mode) {
