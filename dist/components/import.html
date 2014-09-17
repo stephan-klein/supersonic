@@ -1,4 +1,369 @@
-<link rel='import' href='navigation-bar/navigation-bar.html'>
-<link rel='import' href='navigation-bar-title/navigation-bar-title.html'>
-<link rel='import' href='ss-magic/ss-magic.html'>
-<link rel='import' href='ss-tab-bar/ss-tab-bar.html'>
+<style>
+  ss-navigation-bar > * {
+    display:none;
+  }
+</style>
+
+<script>
+(function() {
+  var SSNavigationBarPrototype, observer, onStyleChanged;
+
+  onStyleChanged = function(node) {
+    if (node.isHidden()) {
+      return node.hideNavBar();
+    } else {
+      return node.showNavBar();
+    }
+  };
+
+  observer = new MutationObserver(function(mutations) {
+    var mutation, _i, _len, _ref, _results;
+    _results = [];
+    for (_i = 0, _len = mutations.length; _i < _len; _i++) {
+      mutation = mutations[_i];
+      if (mutation.type === "attributes" || ((_ref = mutation.attributeName) === "style" || _ref === "class")) {
+        _results.push(onStyleChanged(mutation.target));
+      }
+    }
+    return _results;
+  });
+
+  SSNavigationBarPrototype = Object.create(HTMLElement.prototype);
+
+  Object.defineProperty(SSNavigationBarPrototype, "title", {
+    set: function(title) {
+      this._title = title;
+      return this.onTitleChanged();
+    },
+    get: function() {
+      return this._title;
+    }
+  });
+
+  SSNavigationBarPrototype.isHidden = function() {
+    var style;
+    style = window.getComputedStyle(this);
+    if (style.display === "none" || style.visibility === "hidden") {
+      return true;
+    }
+  };
+
+  SSNavigationBarPrototype.showNavBar = function() {
+    if ((this.title != null) && this.title.length === 0) {
+      this.title = " ";
+    }
+    return steroids.view.navigationBar.show(this.title);
+  };
+
+  SSNavigationBarPrototype.hideNavBar = function() {
+    return steroids.view.navigationBar.hide();
+  };
+
+  SSNavigationBarPrototype.onTitleChanged = function() {
+    if (!this.isHidden()) {
+      return this.showNavBar();
+    }
+  };
+
+  SSNavigationBarPrototype.attachedCallback = function() {
+    var observerConfiguration;
+    observerConfiguration = {
+      attributes: true,
+      attributeFilter: ["style", "class"]
+    };
+    observer.observe(this, observerConfiguration);
+    return onStyleChanged(this);
+  };
+
+  SSNavigationBarPrototype.createdCallback = function() {};
+
+  SSNavigationBarPrototype.detachedCallback = function() {
+    observer.disconnect();
+    return steroids.view.navigationBar.hide();
+  };
+
+  document.registerElement("ss-navigation-bar", {
+    prototype: SSNavigationBarPrototype
+  });
+
+}).call(this);
+
+</script>
+
+<style>
+  ss-navigation-bar-title > * {
+    display:none;
+  }
+</style>
+
+<script>
+(function() {
+  var SSNavigationBarTitlePrototype, observer, onContentChanged;
+
+  onContentChanged = function(node) {
+    return node.setParentTitle(node.textContent);
+  };
+
+  observer = new MutationObserver(function(mutations) {
+    var mutation, _i, _len, _results;
+    _results = [];
+    for (_i = 0, _len = mutations.length; _i < _len; _i++) {
+      mutation = mutations[_i];
+      if (mutation.type === "childList") {
+        _results.push(onContentChanged(mutation.target));
+      } else {
+        _results.push(void 0);
+      }
+    }
+    return _results;
+  });
+
+  SSNavigationBarTitlePrototype = Object.create(HTMLElement.prototype);
+
+  SSNavigationBarTitlePrototype.setParentTitle = function(title) {
+    if (this.parentNode.nodeName === "SS-NAVIGATION-BAR") {
+      return this.parentNode.title = title;
+    } else {
+      throw new Error("No ss-navigation-bar component as parent");
+    }
+  };
+
+  SSNavigationBarTitlePrototype.createdCallback = function() {
+    var observerConfiguration;
+    observerConfiguration = {
+      childList: true
+    };
+    observer.observe(this, observerConfiguration);
+    return onContentChanged(this);
+  };
+
+  SSNavigationBarTitlePrototype.detachedCallback = function() {
+    return observer.disconnect();
+  };
+
+  document.registerElement("ss-navigation-bar-title", {
+    prototype: SSNavigationBarTitlePrototype
+  });
+
+}).call(this);
+
+</script>
+
+<style>
+ss-drawer {
+  display: none;
+}
+</style>
+
+<script>
+(function() {
+  var SSDrawerPrototype, observer, onStyleChanged;
+
+  onStyleChanged = function(node) {
+    if (node.isHidden()) {
+      return node.hideDrawer();
+    } else {
+      return node.showDrawer();
+    }
+  };
+
+  observer = new MutationObserver(function(mutations) {
+    var mutation, _i, _len, _ref, _results;
+    _results = [];
+    for (_i = 0, _len = mutations.length; _i < _len; _i++) {
+      mutation = mutations[_i];
+      if (mutation.type === "attributes" || ((_ref = mutation.attributeName) === "style" || _ref === "class")) {
+        _results.push(onStyleChanged(mutation.target));
+      }
+    }
+    return _results;
+  });
+
+  SSDrawerPrototype = Object.create(HTMLElement.prototype);
+
+  SSDrawerPrototype.createdCallback = function() {
+    this.location = this.getAttribute("location");
+    this.side = this.getAttribute("side");
+    this.drawer = new steroids.views.WebView(this.location);
+    return this._preloaded = false;
+  };
+
+  SSDrawerPrototype._preload = function(callback) {
+    var preload, that;
+    that = this;
+    preload = function(callback) {
+      return that.drawer.preload({}, {
+        onSuccess: function() {
+          that._preloaded = true;
+          return callback.apply(that);
+        }
+      });
+    };
+    return steroids.getApplicationState({}, {
+      onSuccess: function(state) {
+        var loaded;
+        loaded = false;
+        state.preloads.forEach(function(p) {
+          return loaded = loaded || (p.id.indexOf(that.location) !== -1);
+        });
+        if (!loaded) {
+          return preload(callback);
+        } else {
+          return callback.apply(that);
+        }
+      }
+    });
+  };
+
+  SSDrawerPrototype.showDrawer = function() {
+    var that;
+    that = this;
+    return this._preload(that._openDrawer);
+  };
+
+  SSDrawerPrototype._openDrawer = function() {
+    var drawer, params, side;
+    side = this.side;
+    drawer = this.drawer;
+    params = {};
+    params[side] = drawer;
+    steroids.drawers.update(params);
+    return steroids.drawers.show({
+      edge: steroids.screen.edges[side.toUpperCase()]
+    });
+  };
+
+  SSDrawerPrototype.hideDrawer = function() {};
+
+  SSDrawerPrototype.isHidden = function() {
+    var style;
+    style = window.getComputedStyle(this);
+    if (style.display === "none" || style.visibility === "hidden") {
+      return true;
+    }
+  };
+
+  SSDrawerPrototype.attachedCallback = function() {
+    var observerConfiguration;
+    observerConfiguration = {
+      attributes: true,
+      attributeFilter: ["style", "class"]
+    };
+    observer.observe(this, observerConfiguration);
+    return onStyleChanged(this);
+  };
+
+  SSDrawerPrototype.detachedCallback = function() {
+    return observer.disconnect();
+  };
+
+  document.registerElement("ss-drawer", {
+    prototype: SSDrawerPrototype
+  });
+
+}).call(this);
+
+</script>
+
+<style>
+/* CSS Styles for ss-magic and its children can be added here */
+</style>
+
+<script>
+(function() {
+  var SupersonicPrototype;
+
+  SupersonicPrototype = Object.create(HTMLElement.prototype);
+
+  SupersonicPrototype.createdCallback = function() {
+    var action, modal, navigate;
+    action = this.getAttribute("action");
+    if (action) {
+      navigate = this.getAttribute("navigate");
+      if (navigate) {
+        this.addEventListener(action, function() {
+          return steroids.layers.push({
+            view: new steroids.views.WebView(navigate),
+            navigationBar: true
+          }, {
+            onSuccess: function() {
+              return supersonic.logger.log("Pushed new layer, URL: " + navigate);
+            }
+          });
+        });
+      }
+      modal = this.getAttribute("modal");
+      if (modal === null) {
+
+      } else if (modal === "hide") {
+        return this.addEventListener(action, function() {
+          return steroids.modal.hide();
+        });
+      } else {
+        return this.addEventListener(action, function() {
+          return steroids.modal.show(new steroids.views.WebView(modal));
+        });
+      }
+    }
+  };
+
+  document.registerElement("ss-magic", {
+    prototype: SupersonicPrototype
+  });
+
+}).call(this);
+
+</script>
+
+<style>
+</style>
+
+<script>
+(function() {
+  var TabBarPrototype;
+
+  TabBarPrototype = Object.create(HTMLElement.prototype);
+
+  TabBarPrototype.attachedCallback = function() {
+    var i, tab, tabs, tabsConfig, _i, _ref;
+    steroids.logger.log("trying to attach");
+    tabs = this.getElementsByTagName('tab');
+    tabsConfig = {
+      tabs: []
+    };
+    for (i = _i = 0, _ref = tabs.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+      tab = tabs[i];
+      tabsConfig.tabs.push({
+        title: tab.title,
+        icon: tab.getAttribute("icon"),
+        badge: tab.getAttribute("badge"),
+        location: tab.getAttribute("navigate")
+      });
+    }
+    steroids.tabBar.on("didchange", function() {
+      return steroids.logger.log("tabbar changed");
+    });
+    steroids.tabBar.on("willchange", function() {
+      return steroids.logger.log("tabbar will bechanged");
+    });
+    if (tabsConfig.tabs.length > 0) {
+      return steroids.tabBar.replace(tabsConfig, {
+        onSuccess: function() {
+          return steroids.tabBar.show();
+        }
+      });
+    }
+  };
+
+  TabBarPrototype.createdCallback = function() {
+    steroids.logger.log("attached callback");
+    return steroids.tabBar.show();
+  };
+
+  document.registerElement("ss-tab-bar", {
+    prototype: TabBarPrototype
+  });
+
+}).call(this);
+
+</script>
