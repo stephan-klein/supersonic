@@ -89,7 +89,7 @@ angular
         options:
           title: "Custom Title" 
           message: "I am a prompt"
-          buttonLabels: ["Yay","NO!"]
+          buttonLabels: ["Yay","NO!","Maybe"]
           defaultText: "Type something"
       }
       {
@@ -102,6 +102,7 @@ angular
     ]
 
     $scope.testPrompt = (options) ->
-      supersonic.cordova.notification.prompt(options).then (input) ->
-        $scope.input = input
+      supersonic.cordova.notification.prompt(options).then (result) ->
+        $scope.buttonIndex = result.buttonIndex
+        $scope.input = result.input
 
