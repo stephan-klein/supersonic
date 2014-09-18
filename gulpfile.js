@@ -38,4 +38,6 @@ var argv = require('minimist')(process.argv.slice(2));
 /**
  * Load Docs Tasks
  */
-require('./tasks/gulp-docs')(gulp, argv);
+require('./tasks/gulp/docs')(gulp, argv);
+
+gulp.task('default', ['docs']);

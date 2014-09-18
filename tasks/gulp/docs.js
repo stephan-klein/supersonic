@@ -1,4 +1,4 @@
-var buildConfig = require('./build.config.js');
+var buildConfig = require('../build.config.js');
 var cp = require('child_process');
 var dgeni = require('dgeni');
 var es = require('event-stream');
@@ -8,7 +8,7 @@ var htmlparser = require('htmlparser2');
 var lunr = require('lunr');
 var mkdirp = require('mkdirp');
 var path = require('canonical-path');
-var projectRoot = path.resolve(__dirname, '..');
+var projectRoot = path.resolve(__dirname, '../..');
 var semver = require('semver');
 var yaml = require('js-yaml');
 
