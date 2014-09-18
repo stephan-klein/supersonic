@@ -30,7 +30,7 @@ module.exports = function(gulp, argv) {
     config.set('currentVersion', docVersion);
     config.set(
       'rendering.outputFolder',
-      argv.dist ? argv.dist : path.resolve(projectRoot, buildConfig.dist, 'ionic-site')
+      argv.dist ? argv.dist : path.resolve(projectRoot, buildConfig.dist, 'supersonic-site')
     );
 
     return dgeni.generator(config)().then(function() {
