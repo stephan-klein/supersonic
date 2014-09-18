@@ -20,12 +20,6 @@ TabBarPrototype.attachedCallback = ->
             location: tab.getAttribute("navigate")
           }
 
-        # steroids.tabBar.on "didchange", ()->
-        #   steroids.logger.log "tabbar changed"
-        #
-        # steroids.tabBar.on "willchange", ()->
-        #   steroids.logger.log "tabbar will bechanged"
-        #
         if tabsConfig.tabs.length > 0
           steroids.tabBar.replace tabsConfig, {
             onSuccess: ()->
@@ -35,10 +29,6 @@ TabBarPrototype.attachedCallback = ->
     onFailure: ->
       steroids.logger.log 'Tabs WebComponent crashed'
   }
-
-TabBarPrototype.createdCallback = ->
-  # TODO: Probably to remove it
-  # steroids.tabBar.show()
 
 document.registerElement "ss-tab-bar",
   prototype: TabBarPrototype
