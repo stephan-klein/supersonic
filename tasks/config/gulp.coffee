@@ -5,6 +5,8 @@ browserify = require "gulp-browserify"
 
 buildConfig = require "../../config/buildConfig.coffee"
 
+argv = require('minimist')(process.argv.slice(2))
+
 module.exports =
   sass: ->
     gulp.src("#{buildConfig.dir.sass}/supersonic.scss")
@@ -33,3 +35,7 @@ module.exports =
       ))
       .pipe(concat 'supersonic.js')
       .pipe(gulp.dest "#{buildConfig.dir.dist}")
+
+  # Build documentation
+  docs: ->
+    require('../../tasks/gulp/docs')(gulp, argv)
