@@ -1,141 +1,135 @@
-# Fake steroids for tests
-if !steroids
-  steroids = {
-    app:
-      host:
-        getURL: ->
-      getMode: ->
-  }
 
-###*
- * @ngdoc overview
- * @name logger
- * @description
- * Provides logging with different log levels. Logs are piped to the Steroids Connect screen.
- * @usage
- * ```coffeescript
- * supersonic.debug.ping().then (response) ->
- *   console.log response
- * ```
-###
-
-class Logger
-
-  constructor: ->
-    @messages = []
-    @queue = new LogMessageQueue
-    steroids.app.host.getURL {},
-      onSuccess: (url) =>
-        @logEndpoint = "#{url}/__appgyver/logger"
-
+module.exports = (steroids) ->
+  
   ###*
-   * @ngdoc method
-   * @name log
-   * @module logger
+   * @ngdoc overview
+   * @name logger
    * @description
-   * Logs a single message with the given log level. Available log levels are:
-   * * `silly`
-   * * `debug`
-   * * `verbose`
-   * * `info`
-   * * `warn`
-   * * `error`
-   * @param {string} message Message to log.
-   * @param {string=} level Log level to use.
+   * Provides logging with different log levels. Logs are piped to the Steroids Connect screen.
    * @usage
    * ```coffeescript
-   * supersonic.logger.log "info", "App started!"
+   * supersonic.debug.ping().then (response) ->
+   *   console.log response
    * ```
   ###
 
-  log: (message, level = "info")->
-
-    logMessage = new LogMessage(level, message)
-    steroids.app.getMode {},
-      onSuccess: (mode) =>
-        return unless mode == "scanner"
-        @queue.push logMessage
-
-  info: (message)->
-    @log('info', message)
-
-  warn: (message)->
-    @log('warn', message)
-
-  error: (message)->
-    @log('error', message)
-
-  class LogMessage
-
-    constructor: (@type, @message) ->
-      @location = window.location.href
-      @screen_id = window.AG_SCREEN_ID
-      @layer_id = window.AG_LAYER_ID
-      @view_id = window.AG_VIEW_ID
-
-      @date = new Date()
-
-    asJSON: ->
-      try
-        messageJSON = JSON.stringify(@message)
-      catch err
-        messageJSON = err.toString()
-
-      obj =
-        message: messageJSON
-        level: @type
-        location: @location
-        date: @date.toJSON()
-        screen_id: @screen_id
-        layer_id: @layer_id
-        view_id: @view_id
-
-      return obj
-
-  class LogMessageQueue
+  class Logger
 
     constructor: ->
-      @messageQueue = []
+      @messages = []
+      @queue = new LogMessageQueue
+      steroids.app.host.getURL {},
+        onSuccess: (url) =>
+          @logEndpoint = "#{url}/__appgyver/logger"
 
-    push: (logMessage)->
-      @messageQueue.push logMessage
+    ###*
+     * @ngdoc method
+     * @name log
+     * @module logger
+     * @description
+     * Logs a single message with the given log level. Available log levels are:
+     * * `silly`
+     * * `debug`
+     * * `verbose`
+     * * `info`
+     * * `warn`
+     * * `error`
+     * @param {string} message Message to log.
+     * @param {string=} level Log level to use.
+     * @usage
+     * ```coffeescript
+     * supersonic.logger.log "info", "App started!"
+     * ```
+    ###
 
-    flush: ->
-      return false unless supersonic.logger.logEndpoint?
+    log: (message, level = "info")->
 
-      while( logMessage = @messageQueue.pop() )
-        xhr = new XMLHttpRequest()
-        xhr.open "POST", supersonic.logger.logEndpoint, true
-        xhr.setRequestHeader "Content-Type", "application/json;charset=UTF-8"
-        xhr.send JSON.stringify(logMessage.asJSON())
-
-      return true
-
-    autoFlush: (every) ->
+      logMessage = new LogMessage(level, message)
       steroids.app.getMode {},
-        onSuccess: (mode) ->
+        onSuccess: (mode) =>
           return unless mode == "scanner"
+          @queue.push logMessage
 
-          supersonic.logger.queue.startFlushing(every)
+    info: (message)->
+      @log('info', message)
 
-    startFlushing: (every) ->
-      return false if @flushingInterval?
+    warn: (message)->
+      @log('warn', message)
 
-      @flushingInterval = window.setInterval =>
-        @flush()
-      , every
+    error: (message)->
+      @log('error', message)
 
-      return true
+    class LogMessage
 
-    stopFlushing: ->
-      return false unless @flushingInterval?
+      constructor: (@type, @message) ->
+        @location = window.location.href
+        @screen_id = window.AG_SCREEN_ID
+        @layer_id = window.AG_LAYER_ID
+        @view_id = window.AG_VIEW_ID
 
-      window.clearInterval(@flushingInterval)
-      @flushingInterval = undefined
+        @date = new Date()
 
-      return true
+      asJSON: ->
+        try
+          messageJSON = JSON.stringify(@message)
+        catch err
+          messageJSON = err.toString()
 
-    getLength: ->
-      @messageQueue.length
+        obj =
+          message: messageJSON
+          level: @type
+          location: @location
+          date: @date.toJSON()
+          screen_id: @screen_id
+          layer_id: @layer_id
+          view_id: @view_id
 
-module.exports = new Logger
+        return obj
+
+    class LogMessageQueue
+
+      constructor: ->
+        @messageQueue = []
+
+      push: (logMessage)->
+        @messageQueue.push logMessage
+
+      flush: ->
+        return false unless supersonic.logger.logEndpoint?
+
+        while( logMessage = @messageQueue.pop() )
+          xhr = new XMLHttpRequest()
+          xhr.open "POST", supersonic.logger.logEndpoint, true
+          xhr.setRequestHeader "Content-Type", "application/json;charset=UTF-8"
+          xhr.send JSON.stringify(logMessage.asJSON())
+
+        return true
+
+      autoFlush: (every) ->
+        steroids.app.getMode {},
+          onSuccess: (mode) ->
+            return unless mode == "scanner"
+
+            supersonic.logger.queue.startFlushing(every)
+
+      startFlushing: (every) ->
+        return false if @flushingInterval?
+
+        @flushingInterval = window.setInterval =>
+          @flush()
+        , every
+
+        return true
+
+      stopFlushing: ->
+        return false unless @flushingInterval?
+
+        window.clearInterval(@flushingInterval)
+        @flushingInterval = undefined
+
+        return true
+
+      getLength: ->
+        @messageQueue.length
+
+  return new Logger

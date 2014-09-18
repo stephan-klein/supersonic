@@ -2,7 +2,8 @@ chai = require('chai')
 chai.should()
 chai.use require 'chai-as-promised'
 
-app = require('../../src/supersonic/steroids/app')
+steroids = require '../../src/supersonic/steroids.mock'
+app = require('../../src/supersonic/steroids/app')(steroids)
 
 describe "supersonic.steroids.app.getLaunchURL", ->
   it "should exist", ->
