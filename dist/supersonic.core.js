@@ -5376,12 +5376,17 @@ Promise = require('bluebird');
 module.exports = {
 
   /**
-   * @ngdoc service
-   * @name supersonic.debug:ping
-   * @function
-   *
+   * @ngdoc method
+   * @name ping()
+   * @module debug
    * @description
-   * Checks promise resolving
+   * Pings the native runtime.
+   * @returns {Promise} A promise that gets resolved once the ping is successful. Resolves with the string `"Pong!"`.
+   * @usage
+   * ```coffeescript
+   * supersonic.debug.ping().then (response) ->
+   *   console.log response
+   * ```
    */
   ping: function() {
     return steroids.device.ping({}, {
@@ -5407,6 +5412,19 @@ if (!steroids) {
   };
 }
 
+
+/**
+ * @ngdoc overview
+ * @name logger
+ * @description
+ * Provides logging with different log levels. Logs are piped to the Steroids Connect screen.
+ * @usage
+ * ```coffeescript
+ * supersonic.debug.ping().then (response) ->
+ *   console.log response
+ * ```
+ */
+
 Logger = (function() {
   var LogMessage, LogMessageQueue;
 
@@ -5422,13 +5440,33 @@ Logger = (function() {
     });
   }
 
-  Logger.prototype.log = function(type, message) {
+
+  /**
+   * @ngdoc method
+   * @name log
+   * @module logger
+   * @description
+   * Logs a single message with the given log level. Available log levels are:
+   * * `silly`
+   * * `debug`
+   * * `verbose`
+   * * `info`
+   * * `warn`
+   * * `error`
+   * @param {string} message Message to log.
+   * @param {string=} level Log level to use.
+   * @usage
+   * ```coffeescript
+   * supersonic.logger.log "info", "App started!"
+   * ```
+   */
+
+  Logger.prototype.log = function(message, level) {
     var logMessage;
-    if (!message) {
-      message = type;
-      type = 'info';
+    if (level == null) {
+      level = "info";
     }
-    logMessage = new LogMessage(type, message);
+    logMessage = new LogMessage(level, message);
     return steroids.app.getMode({}, {
       onSuccess: (function(_this) {
         return function(mode) {
@@ -5561,12 +5599,68 @@ module.exports = new Logger;
 
 },{}],42:[function(require,module,exports){
 module.exports = {
-  openURL: require('./steroids/openURL')
+  openURL: require('./steroids/openURL'),
+  app: require('./steroids/app')
 };
 
 
 
-},{"./steroids/openURL":43}],43:[function(require,module,exports){
+},{"./steroids/app":43,"./steroids/openURL":44}],43:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = {
+  getLaunchURL: function() {
+    return new Promise(function(resolve, reject) {
+      var launchURL;
+      launchURL = steroids.app.getLaunchURL();
+      if (launchURL != null) {
+        return resolve(launchURL);
+      } else {
+        return reject();
+      }
+    });
+  },
+  sleep: {
+    disable: function() {
+      return new Promise(function(resolve) {
+        return steroids.device.disableSleep({}, {
+          onSuccess: resolve
+        });
+      });
+    },
+    enable: function() {
+      return new Promise(function(resolve) {
+        return steroids.device.enableSleep({}, {
+          onSuccess: resolve
+        });
+      });
+    }
+  },
+  splashscreen: {
+    show: function() {
+      return new Promise(function(resolve, reject) {
+        return steroids.splashscreen.show({}, {
+          onSuccess: resolve,
+          onFailure: reject
+        });
+      });
+    },
+    hide: function() {
+      return new Promise(function(resolve, reject) {
+        return steroids.splashscreen.hide({}, {
+          onSuccess: resolve,
+          onFailure: reject
+        });
+      });
+    }
+  }
+};
+
+
+
+},{"bluebird":3}],44:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
