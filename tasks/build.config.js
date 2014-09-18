@@ -36,33 +36,6 @@ module.exports = {
 
   ionicFiles: [
     // Base
-    'js/ionic.js',
-
-    // Utils
-    'js/utils/dom.js',
-    'js/utils/events.js',
-    'js/utils/gestures.js',
-    'js/utils/platform.js',
-    'js/utils/poly.js',
-    'js/utils/tap.js',
-    'js/utils/activator.js',
-    'js/utils/utils.js',
-    'js/utils/keyboard.js',
-    'js/utils/viewport.js',
-
-    // Views
-    'js/views/view.js',
-    'js/views/scrollView.js',
-    'js/views/headerBarView.js',
-    'js/views/listView.js',
-    'js/views/modalView.js',
-    'js/views/sideMenuView.js',
-    'js/views/sliderView.js',
-    'js/views/toggleView.js',
-
-    // Controllers
-    'js/controllers/viewController.js',
-    'js/controllers/sideMenuController.js',
     'dist/**/*.js'
   ],
 
