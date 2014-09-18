@@ -8,7 +8,7 @@ var htmlparser = require('htmlparser2');
 var lunr = require('lunr');
 var mkdirp = require('mkdirp');
 var path = require('canonical-path');
-var projectRoot = path.resolve(__dirname, '../..');
+var projectRoot = path.resolve(__dirname, '..');
 var semver = require('semver');
 var yaml = require('js-yaml');
 
