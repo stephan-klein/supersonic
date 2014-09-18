@@ -38,36 +38,6 @@ module.exports = function(gulp, argv) {
     });
   });
 
-  gulp.task('demos', function(done) {
-    var demoVersion = argv['demo-version'] || 'nightly';
-    if (demoVersion != 'nightly' && !semver.valid(demoVersion)) {
-      console.log('Usage: gulp docs --doc-version=(nightly|versionName)');
-      return process.exit(1);
-    }
-
-    var config = dgeni.loadConfig(path.resolve(projectRoot, 'config/demos/demos.config.js'));
-    config.set('currentVersion', demoVersion);
-    config.set('dist', buildConfig.dist);
-    config.set(
-      'rendering.outputFolder',
-      argv.dist ? argv.dist : path.resolve(projectRoot, buildConfig.dist, 'ionic-demo')
-    );
-    config.set('demoFolderPrefix', argv.release ? '' : '/dist/ionic-demo');
-
-    dgeni.generator(config)().then(function() {
-      gutil.log('Demos for', gutil.colors.cyan(demoVersion), 'generated!');
-      gutil.log('Building ionic into demo folder...');
-      cp.spawn('node', [
-        projectRoot + '/node_modules/.bin/gulp',
-        'build',
-        argv.release ? '--release' : '--no-release',
-        '--dist=' + config.rendering.outputFolder + '/' +
-          config.rendering.contentsFolder + '/ionic'
-      ])
-      .on('exit', done);
-    });
-  });
-
   gulp.task('docs-index', function() {
     var idx = lunr(function() {
       this.field('path');
