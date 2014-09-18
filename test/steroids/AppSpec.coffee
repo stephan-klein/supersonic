@@ -24,3 +24,7 @@ describe "supersonic.steroids.app.splashscreen.show", ->
  describe "supersonic.steroids.app.splashscreen.hide", ->
   it "should exist", ->
     app.splashscreen.hide.should.exist
+
+ describe "supersonic.steroids.app.openURL", ->
+  it "should exist", ->
+    app.openURL.should.exist
