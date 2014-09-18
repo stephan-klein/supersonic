@@ -21,7 +21,6 @@ module.exports = function(gulp, argv) {
   gulp.task('docs', function() {
     // TODO: Review versions
     var docVersion = argv['doc-version'] || 'nightly';
-    console.log(docVersion)
     if (docVersion != 'nightly' && !semver.valid(docVersion)) {
       console.log('Usage: gulp docs --doc-version=(nightly|versionName)');
       return process.exit(1);
