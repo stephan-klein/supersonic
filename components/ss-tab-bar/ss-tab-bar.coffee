@@ -23,6 +23,8 @@ TabBarPrototype.attachedCallback = ->
         if tabsConfig.tabs.length > 0
           steroids.tabBar.replace tabsConfig, {
             onSuccess: ()->
+              # TODO: When native side bug is fixed, this
+              # callback is not needed
               steroids.tabBar.show()
           }
 
