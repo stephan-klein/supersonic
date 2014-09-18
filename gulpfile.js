@@ -7,7 +7,7 @@ var gulp = require('gulp');
 // var semver = require('semver');
 // var through = require('through');
 //
-// var argv = require('minimist')(process.argv.slice(2));
+var argv = require('minimist')(process.argv.slice(2));
 //
 // var _ = require('lodash');
 // var buildConfig = require('./config/build.config.js');
