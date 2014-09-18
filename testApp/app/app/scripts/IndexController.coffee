@@ -52,30 +52,4 @@ angular
         $scope.sleepDisabled++
         supersonic.app.sleep.enable().then ->
          $scope.sleepEnabled++
-
-    $scope.splashscreenShown = 0
-    $scope.splashscreenHidden = 0
-
-    $scope.showAndHideSplashscreenTests = [
-      {
-        title: "Show Splashscreen and Hide in 5000 ms"
-      }
-    ]
-
-    $scope.testShowAndHideSplashscreen = (options) ->
-      supersonic.steroids.app.splashscreen.show().then( 
-        () ->
-          $scope.splashscreenShown++
-          $timeout ->
-            supersonic.steroids.app.splashscreen.hide().then( 
-              () ->
-                $scope.splashscreenHidden++
-              (message) ->
-                alert "Could not hide splashscreen! \n\n #{JSON.stringify(message)}"
-            )
-          , 5000
-        (message) ->
-          alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
-      )
-
     
