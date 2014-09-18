@@ -22,10 +22,11 @@ module.exports =
    * ```
   ###
   ping: ->
-    steroids.device.ping(
-      {}
-      {
-        onSuccess: Promise.resolve "Pong!"
-        onFailure: Promise.reject
-      }
-    )
+    new Promise (resolve, reject) ->
+      steroids.device.ping(
+        {}
+        {
+          onSuccess: -> resolve "Pong!"
+          onFailure: reject
+        }
+      )
