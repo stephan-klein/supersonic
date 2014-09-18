@@ -50,13 +50,16 @@ module.exports = (steroids) ->
           @queue.push logMessage
 
     info: (message)->
-      @log('info', message)
+      @log(message, 'info')
 
     warn: (message)->
-      @log('warn', message)
+      @log(message, 'warn')
 
     error: (message)->
-      @log('error', message)
+      @log(message, 'error')
+
+    debug: (message)->
+      @log(message, 'debug')
 
     class LogMessage
 

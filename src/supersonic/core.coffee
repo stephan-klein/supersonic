@@ -7,7 +7,7 @@ module.exports =
   debug: require('./core/debug')(steroids)
   logger: require('./core/logger')(steroids)
   cordova: require('./cordova')
-  steroids: require('./steroids')(steroids)
+  app: require('./app')(steroids)
 
 # Export to window as global if we're in the browser
 if (window?)
