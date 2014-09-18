@@ -5274,11 +5274,17 @@ process.chdir = function (dir) {
 };
 
 },{}],37:[function(require,module,exports){
-var supersonic;
+var supersonic, window;
 
 supersonic = require('./supersonic/core');
 
 module.exports = supersonic;
+
+if (!window) {
+  window = {
+    supersonic: supersonic
+  };
+}
 
 window.supersonic.logger.queue.autoFlush(100);
 
@@ -5416,7 +5422,15 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 },{"./cordova":39,"./core/debug":42,"./core/logger":43,"./steroids":44}],42:[function(require,module,exports){
-var Promise;
+var Promise, steroids;
+
+if (!steroids) {
+  steroids = {
+    device: {
+      ping: function() {}
+    }
+  };
+}
 
 Promise = require('bluebird');
 
@@ -5441,7 +5455,18 @@ module.exports = {
 
 
 },{"bluebird":3}],43:[function(require,module,exports){
-var Logger;
+var Logger, steroids;
+
+if (!steroids) {
+  steroids = {
+    app: {
+      host: {
+        getURL: function() {}
+      },
+      getMode: function() {}
+    }
+  };
+}
 
 Logger = (function() {
   var LogMessage, LogMessageQueue;

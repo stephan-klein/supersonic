@@ -5361,7 +5361,15 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 },{"./cordova":37,"./core/debug":40,"./core/logger":41,"./steroids":42}],40:[function(require,module,exports){
-var Promise;
+var Promise, steroids;
+
+if (!steroids) {
+  steroids = {
+    device: {
+      ping: function() {}
+    }
+  };
+}
 
 Promise = require('bluebird');
 
@@ -5386,7 +5394,18 @@ module.exports = {
 
 
 },{"bluebird":3}],41:[function(require,module,exports){
-var Logger;
+var Logger, steroids;
+
+if (!steroids) {
+  steroids = {
+    app: {
+      host: {
+        getURL: function() {}
+      },
+      getMode: function() {}
+    }
+  };
+}
 
 Logger = (function() {
   var LogMessage, LogMessageQueue;
