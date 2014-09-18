@@ -1,4 +1,3 @@
-var buildConfig = require('../build.config.js');
 var cp = require('child_process');
 var dgeni = require('dgeni');
 var es = require('event-stream');
@@ -12,10 +11,10 @@ var projectRoot = path.resolve(__dirname, '../..');
 var semver = require('semver');
 var yaml = require('js-yaml');
 
-module.exports = function(gulp, argv) {
+module.exports = function(gulp, argv, buildConfig) {
 
   if (argv.dist) {
-    buildConfig.dist = argv.dist;
+    buildConfig.dir.dist = argv.dist;
   }
 
   // TODO: Review versions
@@ -29,7 +28,7 @@ module.exports = function(gulp, argv) {
   config.set('currentVersion', docVersion);
   config.set(
     'rendering.outputFolder',
-    argv.dist ? argv.dist : path.resolve(projectRoot, buildConfig.dist, 'supersonic-site')
+    argv.dist ? argv.dist : path.resolve(projectRoot, buildConfig.dir.dist, 'supersonic-site')
   );
 
   return dgeni.generator(config)().then(function() {
