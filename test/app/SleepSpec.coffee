@@ -3,7 +3,7 @@ chai.should()
 chai.use require 'chai-as-promised'
 
 steroids = require '../../src/supersonic/steroids.mock'
-sleep = require('../../src/supersonic/app/sleep/')(steroids)
+sleep = require('../../src/supersonic/app/sleep')(steroids)
 
 describe "supersonic.app.sleep.disable", ->
   it "should exist", ->
