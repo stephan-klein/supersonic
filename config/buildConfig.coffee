@@ -13,3 +13,7 @@ module.exports =
     test: '<%= dir.test %>/**/*Spec.coffee'
   file:
     componentImport: '<%= dir.dist %>/components/import.html'
+  docs:
+    jsFiles: [
+      'dist/**/*.js'
+    ]

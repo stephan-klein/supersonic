@@ -2,8 +2,7 @@ var path = require('canonical-path');
 var _ = require('lodash');
 var basePackage = require('dgeni-packages/ngdoc');
 
-// TODO: Merge to buildConfig.coffee
-var buildConfig = require('../../tasks/build.config');
+var buildConfig = require('../buildConfig.coffee');
 
 var projectBase = path.resolve(__dirname, '../..');
 var pkg = require('../../package.json');
@@ -36,7 +35,7 @@ module.exports = function(config) {
     require('./inline-tag-defs/link')
   ]);
 
-  config.set('source.files', buildConfig.ionicFiles.concat(buildConfig.angularIonicFiles).map(function(file) {
+  config.set('source.files', buildConfig.docs.jsFiles.map(function(file) {
     return { pattern: file, basePath: projectBase };
   }));
 
