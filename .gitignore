@@ -35,3 +35,4 @@ testSpecApp/www/components
 
 # Docs
 docs/
+!config/docs/

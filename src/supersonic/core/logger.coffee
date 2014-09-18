@@ -1,5 +1,5 @@
 module.exports = (steroids) ->
-  
+
   ###*
    * @ngdoc overview
    * @name logger

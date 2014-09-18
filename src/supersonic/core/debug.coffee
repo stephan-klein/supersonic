@@ -4,7 +4,7 @@ module.exports = (steroids) ->
 
   ###*
    * @ngdoc method
-   * @name ping()
+   * @name ping
    * @module debug
    * @description
    * Pings the native runtime.
