@@ -1,6 +1,6 @@
 Promise = require 'bluebird'
 
-module.exports = (url) ->
+module.exports = (steroids) -> (url) ->
   new Promise (resolve, reject) ->
     successCallback = ->
       document.addEventListener "resume", ->

@@ -1,3 +1,3 @@
-module.exports =
-  openURL: require './steroids/openURL'
-  app: require './steroids/app'
+module.exports = (steroids) ->
+  openURL: require('./steroids/openURL')(steroids)
+  app: require('./steroids/app')(steroids)

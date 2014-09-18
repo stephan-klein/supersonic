@@ -1,12 +1,6 @@
-# Fake steroids for tests
-if !steroids
-  steroids =
-    device:
-      ping: ->
-
 Promise = require 'bluebird'
 
-module.exports =
+module.exports = (steroids) ->
 
   ###*
    * @ngdoc method
@@ -22,10 +16,11 @@ module.exports =
    * ```
   ###
   ping: ->
-    steroids.device.ping(
-      {}
-      {
-        onSuccess: Promise.resolve "Pong!"
-        onFailure: Promise.reject
-      }
-    )
+    new Promise (resolve, reject) ->
+      steroids.device.ping(
+        {}
+        {
+          onSuccess: -> resolve "Pong!"
+          onFailure: reject
+        }
+      )

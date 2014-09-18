@@ -1,6 +1,6 @@
 Promise = require 'bluebird'
 
-module.exports =
+module.exports = (steroids) ->
 
   getLaunchURL: ->
     new Promise (resolve, reject) ->
