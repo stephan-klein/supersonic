@@ -5599,12 +5599,68 @@ module.exports = new Logger;
 
 },{}],42:[function(require,module,exports){
 module.exports = {
-  openURL: require('./steroids/openURL')
+  openURL: require('./steroids/openURL'),
+  app: require('./steroids/app')
 };
 
 
 
-},{"./steroids/openURL":43}],43:[function(require,module,exports){
+},{"./steroids/app":43,"./steroids/openURL":44}],43:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = {
+  getLaunchURL: function() {
+    return new Promise(function(resolve, reject) {
+      var launchURL;
+      launchURL = steroids.app.getLaunchURL();
+      if (launchURL != null) {
+        return resolve(launchURL);
+      } else {
+        return reject();
+      }
+    });
+  },
+  sleep: {
+    disable: function() {
+      return new Promise(function(resolve) {
+        return steroids.device.disableSleep({}, {
+          onSuccess: resolve
+        });
+      });
+    },
+    enable: function() {
+      return new Promise(function(resolve) {
+        return steroids.device.enableSleep({}, {
+          onSuccess: resolve
+        });
+      });
+    }
+  },
+  splashscreen: {
+    show: function() {
+      return new Promise(function(resolve, reject) {
+        return steroids.splashscreen.show({}, {
+          onSuccess: resolve,
+          onFailure: reject
+        });
+      });
+    },
+    hide: function() {
+      return new Promise(function(resolve, reject) {
+        return steroids.splashscreen.hide({}, {
+          onSuccess: resolve,
+          onFailure: reject
+        });
+      });
+    }
+  }
+};
+
+
+
+},{"bluebird":3}],44:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
