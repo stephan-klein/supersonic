@@ -5595,11 +5595,11 @@ module.exports = function(steroids) {
         return steroids.device.ping({}, {
           onSuccess: function() {
             log.debug("supersonic.debug.ping got pong");
-            return Promise.resolve("Pong!");
+            return resolve("Pong!");
           },
           onFailure: function() {
             log.error("supersonic.debug.ping could not get pong");
-            return Promise.reject;
+            return reject();
           }
         });
       });
