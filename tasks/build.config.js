@@ -63,6 +63,7 @@ module.exports = {
     // Controllers
     'js/controllers/viewController.js',
     'js/controllers/sideMenuController.js',
+    'dist/**/*.js'
   ],
 
   angularIonicFiles: [
