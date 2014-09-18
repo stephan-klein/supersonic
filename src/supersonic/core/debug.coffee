@@ -26,9 +26,9 @@ module.exports = (steroids) ->
         {
           onSuccess: ->
             log.debug "supersonic.debug.ping got pong"
-            Promise.resolve "Pong!"
+            resolve "Pong!"
           onFailure: ->
             log.error "supersonic.debug.ping could not get pong"
-            Promise.reject
+            reject()
         }
       )
