@@ -1,7 +1,8 @@
 Promise = require 'bluebird'
-log = require '../core/logger'
+logger = require '../core/logger'
 
 module.exports = (steroids) ->
+  log = logger steroids
 
   ###*
    * @ngdoc method
@@ -15,13 +16,15 @@ module.exports = (steroids) ->
    * supersonic.app.getLaunchURL()
    * ```
   ###
-  
-  log.debug "supersonic.app.getLaunchURL called"
-  new Promise (resolve, reject) ->
-    launchURL = steroids.app.getLaunchURL()
-    if launchURL?
-      log.debug "supersonic.app.getLaunchURL got #{launchURL}"
-      resolve launchURL
-    else
-      log.error "supersonic.app. didn't get a launch URL"
-      reject()
+  getLaunchURL = ->
+    log.debug "supersonic.app.getLaunchURL called"
+    new Promise (resolve, reject) ->
+      launchURL = steroids.app.getLaunchURL()
+      if launchURL?
+        log.debug "supersonic.app.getLaunchURL got #{launchURL}"
+        resolve launchURL
+      else
+        log.error "supersonic.app. didn't get a launch URL"
+        reject()
+
+  return getLaunchURL
