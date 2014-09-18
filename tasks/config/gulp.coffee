@@ -42,4 +42,4 @@ module.exports =
 
   # Build documentation index
   'docs-index': ->
-    require('../../tasks/gulp/docs-index')(gulp, argv)
+    require('../../tasks/gulp/docs-index')(gulp, argv, buildConfig)

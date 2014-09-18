@@ -1,4 +1,3 @@
-var buildConfig = require('../build.config.js');
 var cp = require('child_process');
 var dgeni = require('dgeni');
 var es = require('event-stream');
@@ -12,7 +11,7 @@ var projectRoot = path.resolve(__dirname, '../..');
 var semver = require('semver');
 var yaml = require('js-yaml');
 
-module.exports = function(gulp, argv) {
+module.exports = function(gulp, argv, buildConfig) {
 
   var idx = lunr(function() {
     this.field('path');
@@ -30,7 +29,7 @@ module.exports = function(gulp, argv) {
     refId++;
   }
 
-  var docPath = buildConfig.dist + '/supersonic-site';
+  var docPath = buildConfig.dir.dist + '/supersonic-site';
   gutil.log('Reading docs from', gutil.colors.cyan(docPath));
 
   return gulp.src([
