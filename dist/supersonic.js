@@ -5327,11 +5327,15 @@ module.exports = function(angular) {
 
 
 },{"./core":44}],39:[function(require,module,exports){
-var Promise;
+var Promise, logger;
 
 Promise = require('bluebird');
 
+logger = require('../core/logger');
+
 module.exports = function(steroids) {
+  var getLaunchURL, log;
+  log = logger(steroids);
 
   /**
    * @ngdoc method
@@ -5345,23 +5349,26 @@ module.exports = function(steroids) {
    * supersonic.app.getLaunchURL()
    * ```
    */
-  supersonic.logger.log("supersonic.app.getLaunchURL called", "debug");
-  return new Promise(function(resolve, reject) {
-    var launchURL;
-    launchURL = steroids.app.getLaunchURL();
-    if (launchURL != null) {
-      supersonic.logger.log("supersonic.app.getLaunchURL got " + launchURL, "debug");
-      return resolve(launchURL);
-    } else {
-      supersonic.logger.log("supersonic.app. didn't get a launch URL", "error");
-      return reject();
-    }
-  });
+  getLaunchURL = function() {
+    log.debug("supersonic.app.getLaunchURL called");
+    return new Promise(function(resolve, reject) {
+      var launchURL;
+      launchURL = steroids.app.getLaunchURL();
+      if (launchURL != null) {
+        log.debug("supersonic.app.getLaunchURL got " + launchURL);
+        return resolve(launchURL);
+      } else {
+        log.error("supersonic.app. didn't get a launch URL");
+        return reject();
+      }
+    });
+  };
+  return getLaunchURL;
 };
 
 
 
-},{"bluebird":3}],40:[function(require,module,exports){
+},{"../core/logger":46,"bluebird":3}],40:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -5376,11 +5383,15 @@ module.exports = function(steroids) {
 
 
 },{"./getLaunchURL":39,"./sleep":41,"bluebird":3}],41:[function(require,module,exports){
-var Promise;
+var Promise, logger;
 
 Promise = require('bluebird');
 
+logger = require('../core/logger');
+
 module.exports = function(steroids) {
+  var log;
+  log = logger(steroids);
   return {
 
     /**
@@ -5404,11 +5415,11 @@ module.exports = function(steroids) {
      * ```
      */
     disable: function() {
-      supersonic.logger.log("supersonic.app.sleep.disable called", "debug");
+      log.debug("supersonic.app.sleep.disable called");
       return new Promise(function(resolve) {
         return steroids.device.disableSleep({}, {
           onSuccess: function() {
-            supersonic.logger.log("supersonic.app.sleep.disable disabled sleep", "debug");
+            log.debug("supersonic.app.sleep.disable disabled sleep");
             return resolve();
           }
         });
@@ -5428,11 +5439,11 @@ module.exports = function(steroids) {
      * ```
      */
     enable: function() {
-      supersonic.logger.log("supersonic.app.sleep.enable called", "debug");
+      log.debug("supersonic.app.sleep.enable called");
       return new Promise(function(resolve) {
         return steroids.device.enableSleep({}, {
           onSuccess: function() {
-            supersonic.logger.log("supersonic.app.sleep.enable enabled sleep", "debug");
+            log.debug("supersonic.app.sleep.enable enabled sleep");
             return resolve();
           }
         });
@@ -5443,7 +5454,7 @@ module.exports = function(steroids) {
 
 
 
-},{"bluebird":3}],42:[function(require,module,exports){
+},{"../core/logger":46,"bluebird":3}],42:[function(require,module,exports){
 module.exports = {
   notification: require('./cordova/notification')
 };
@@ -5554,11 +5565,15 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 },{"./app":40,"./cordova":42,"./core/debug":45,"./core/logger":46,"./steroids.mock":47}],45:[function(require,module,exports){
-var Promise;
+var Promise, logger;
 
 Promise = require('bluebird');
 
+logger = require('../core/logger');
+
 module.exports = function(steroids) {
+  var log;
+  log = logger(steroids);
   return {
 
     /**
@@ -5575,15 +5590,15 @@ module.exports = function(steroids) {
      * ```
      */
     ping: function() {
-      supersonic.logger.log("supersonic.debug.ping called", "debug");
+      log.debug("supersonic.debug.ping called");
       return new Promise(function(resolve, reject) {
         return steroids.device.ping({}, {
           onSuccess: function() {
-            supersonic.logger.log("supersonic.debug.ping got pong", "debug");
+            log.debug("supersonic.debug.ping got pong");
             return Promise.resolve("Pong!");
           },
           onFailure: function() {
-            supersonic.logger.log("supersonic.debug.ping could not get pong", "error");
+            log.error("supersonic.debug.ping could not get pong");
             return Promise.reject;
           }
         });
@@ -5594,7 +5609,7 @@ module.exports = function(steroids) {
 
 
 
-},{"bluebird":3}],46:[function(require,module,exports){
+},{"../core/logger":46,"bluebird":3}],46:[function(require,module,exports){
 module.exports = function(steroids) {
 
   /**
@@ -5664,15 +5679,19 @@ module.exports = function(steroids) {
     };
 
     Logger.prototype.info = function(message) {
-      return this.log('info', message);
+      return this.log(message, 'info');
     };
 
     Logger.prototype.warn = function(message) {
-      return this.log('warn', message);
+      return this.log(message, 'warn');
     };
 
     Logger.prototype.error = function(message) {
-      return this.log('error', message);
+      return this.log(message, 'error');
+    };
+
+    Logger.prototype.debug = function(message) {
+      return this.log(message, 'debug');
     };
 
     LogMessage = (function() {
