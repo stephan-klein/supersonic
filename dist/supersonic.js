@@ -5274,22 +5274,14 @@ process.chdir = function (dir) {
 };
 
 },{}],37:[function(require,module,exports){
-var supersonic, window;
+var supersonic;
 
 supersonic = require('./supersonic/core');
 
 module.exports = supersonic;
 
-if (!window) {
-  window = {
-    supersonic: supersonic
-  };
-}
-
-window.supersonic.logger.queue.autoFlush(100);
-
-if ((typeof angular !== "undefined" && angular !== null)) {
-  require('./supersonic/angular')(angular);
+if (((typeof window !== "undefined" && window !== null ? window.angular : void 0) != null)) {
+  require('./supersonic/angular')(window.angular);
 }
 
 
@@ -5347,6 +5339,24 @@ var Promise;
 Promise = require('bluebird');
 
 module.exports = {
+
+  /**
+   * @ngdoc method
+   * @name alert
+   * @module notification
+   * @description
+   * Shows a native alert box.
+   * @param {string} alert message.
+   * @returns {Promise} Promise that is resolved when the the button in the alert box is tapped.
+   * @usage
+   * ```coffeescript
+   * supersonic.notification.alert("You are awesome!")
+   * supersonic.notification.alert(
+   *  {
+   *   }
+   * )
+   * ```
+   */
   alert: function(options) {
     var buttonLabel, message, title;
     message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
@@ -5408,339 +5418,471 @@ module.exports = {
 
 
 },{"bluebird":3}],41:[function(require,module,exports){
+var steroids;
+
+steroids = (typeof window !== "undefined" && window !== null ? window.steroids : void 0) != null ? window.steroids : require('./steroids.mock');
+
 module.exports = {
-  debug: require('./core/debug'),
-  logger: require('./core/logger'),
+  debug: require('./core/debug')(steroids),
+  logger: require('./core/logger')(steroids),
   cordova: require('./cordova'),
-  steroids: require('./steroids')
+  steroids: require('./steroids')(steroids)
 };
 
 if ((typeof window !== "undefined" && window !== null)) {
   window.supersonic = module.exports;
+  window.supersonic.logger.queue.autoFlush(100);
 }
 
 
 
-},{"./cordova":39,"./core/debug":42,"./core/logger":43,"./steroids":44}],42:[function(require,module,exports){
-var Promise, steroids;
-
-if (!steroids) {
-  steroids = {
-    device: {
-      ping: function() {}
-    }
-  };
-}
+},{"./cordova":39,"./core/debug":42,"./core/logger":43,"./steroids":44,"./steroids.mock":45}],42:[function(require,module,exports){
+var Promise;
 
 Promise = require('bluebird');
 
-module.exports = {
+module.exports = function(steroids) {
+  return {
 
-  /**
-   * @ngdoc method
-   * @name ping()
-   * @module debug
-   * @description
-   * Pings the native runtime.
-   * @returns {Promise} A promise that gets resolved once the ping is successful. Resolves with the string `"Pong!"`.
-   * @usage
-   * ```coffeescript
-   * supersonic.debug.ping().then (response) ->
-   *   console.log response
-   * ```
-   */
-  ping: function() {
-    return steroids.device.ping({}, {
-      onSuccess: Promise.resolve("Pong!"),
-      onFailure: Promise.reject
-    });
-  }
+    /**
+     * @ngdoc method
+     * @name ping()
+     * @module debug
+     * @description
+     * Pings the native runtime.
+     * @returns {Promise} A promise that gets resolved once the ping is successful. Resolves with the string `"Pong!"`.
+     * @usage
+     * ```coffeescript
+     * supersonic.debug.ping().then (response) ->
+     *   supersonic.logger.log response
+     * ```
+     */
+    ping: function() {
+      supersonic.logger.log("supersonic.debug.ping called", "debug");
+      return new Promise(function(resolve, reject) {
+        return steroids.device.ping({}, {
+          onSuccess: function() {
+            supersonic.logger.log("supersonic.debug.ping got pong", "debug");
+            return Promise.resolve("Pong!");
+          },
+          onFailure: function() {
+            supersonic.logger.log("supersonic.debug.ping could not get pong", "error");
+            return Promise.reject;
+          }
+        });
+      });
+    }
+  };
 };
 
 
 
 },{"bluebird":3}],43:[function(require,module,exports){
-var Logger, steroids;
-
-if (!steroids) {
-  steroids = {
-    app: {
-      host: {
-        getURL: function() {}
-      },
-      getMode: function() {}
-    }
-  };
-}
-
-
-/**
- * @ngdoc overview
- * @name logger
- * @description
- * Provides logging with different log levels. Logs are piped to the Steroids Connect screen.
- * @usage
- * ```coffeescript
- * supersonic.debug.ping().then (response) ->
- *   console.log response
- * ```
- */
-
-Logger = (function() {
-  var LogMessage, LogMessageQueue;
-
-  function Logger() {
-    this.messages = [];
-    this.queue = new LogMessageQueue;
-    steroids.app.host.getURL({}, {
-      onSuccess: (function(_this) {
-        return function(url) {
-          return _this.logEndpoint = "" + url + "/__appgyver/logger";
-        };
-      })(this)
-    });
-  }
-
+module.exports = function(steroids) {
 
   /**
-   * @ngdoc method
-   * @name log
-   * @module logger
+   * @ngdoc overview
+   * @name logger
    * @description
-   * Logs a single message with the given log level. Available log levels are:
-   * * `silly`
-   * * `debug`
-   * * `verbose`
-   * * `info`
-   * * `warn`
-   * * `error`
-   * @param {string} message Message to log.
-   * @param {string=} level Log level to use.
+   * Provides logging with different log levels. Logs are piped to the Steroids Connect screen.
    * @usage
    * ```coffeescript
-   * supersonic.logger.log "info", "App started!"
+   * supersonic.logger.log "Something awesome happened!"
+   *   console.log response
    * ```
    */
+  var Logger;
+  Logger = (function() {
+    var LogMessage, LogMessageQueue;
 
-  Logger.prototype.log = function(message, level) {
-    var logMessage;
-    if (level == null) {
-      level = "info";
-    }
-    logMessage = new LogMessage(level, message);
-    return steroids.app.getMode({}, {
-      onSuccess: (function(_this) {
-        return function(mode) {
-          if (mode !== "scanner") {
-            return;
-          }
-          return _this.queue.push(logMessage);
-        };
-      })(this)
-    });
-  };
-
-  Logger.prototype.info = function(message) {
-    return this.log('info', message);
-  };
-
-  Logger.prototype.warn = function(message) {
-    return this.log('warn', message);
-  };
-
-  Logger.prototype.error = function(message) {
-    return this.log('error', message);
-  };
-
-  LogMessage = (function() {
-    function LogMessage(type, message) {
-      this.type = type;
-      this.message = message;
-      this.location = window.location.href;
-      this.screen_id = window.AG_SCREEN_ID;
-      this.layer_id = window.AG_LAYER_ID;
-      this.view_id = window.AG_VIEW_ID;
-      this.date = new Date();
+    function Logger() {
+      this.messages = [];
+      this.queue = new LogMessageQueue;
+      steroids.app.host.getURL({}, {
+        onSuccess: (function(_this) {
+          return function(url) {
+            return _this.logEndpoint = "" + url + "/__appgyver/logger";
+          };
+        })(this)
+      });
     }
 
-    LogMessage.prototype.asJSON = function() {
-      var err, messageJSON, obj;
-      try {
-        messageJSON = JSON.stringify(this.message);
-      } catch (_error) {
-        err = _error;
-        messageJSON = err.toString();
+
+    /**
+     * @ngdoc method
+     * @name log
+     * @module logger
+     * @description
+     * Logs a single message with the given log level. Available log levels are:
+     * * `silly`
+     * * `debug`
+     * * `verbose`
+     * * `info`
+     * * `warn`
+     * * `error`
+     * @param {string} message Message to log.
+     * @param {string=} level Log level to use.
+     * @usage
+     * ```coffeescript
+     * supersonic.logger.log "info", "App started!"
+     * ```
+     */
+
+    Logger.prototype.log = function(message, level) {
+      var logMessage;
+      if (level == null) {
+        level = "info";
       }
-      obj = {
-        message: messageJSON,
-        level: this.type,
-        location: this.location,
-        date: this.date.toJSON(),
-        screen_id: this.screen_id,
-        layer_id: this.layer_id,
-        view_id: this.view_id
-      };
-      return obj;
-    };
-
-    return LogMessage;
-
-  })();
-
-  LogMessageQueue = (function() {
-    function LogMessageQueue() {
-      this.messageQueue = [];
-    }
-
-    LogMessageQueue.prototype.push = function(logMessage) {
-      return this.messageQueue.push(logMessage);
-    };
-
-    LogMessageQueue.prototype.flush = function() {
-      var logMessage, xhr;
-      if (supersonic.logger.logEndpoint == null) {
-        return false;
-      }
-      while ((logMessage = this.messageQueue.pop())) {
-        xhr = new XMLHttpRequest();
-        xhr.open("POST", supersonic.logger.logEndpoint, true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify(logMessage.asJSON()));
-      }
-      return true;
-    };
-
-    LogMessageQueue.prototype.autoFlush = function(every) {
+      logMessage = new LogMessage(level, message);
       return steroids.app.getMode({}, {
-        onSuccess: function(mode) {
-          if (mode !== "scanner") {
-            return;
-          }
-          return supersonic.logger.queue.startFlushing(every);
-        }
+        onSuccess: (function(_this) {
+          return function(mode) {
+            if (mode !== "scanner") {
+              return;
+            }
+            return _this.queue.push(logMessage);
+          };
+        })(this)
       });
     };
 
-    LogMessageQueue.prototype.startFlushing = function(every) {
-      if (this.flushingInterval != null) {
-        return false;
+    Logger.prototype.info = function(message) {
+      return this.log('info', message);
+    };
+
+    Logger.prototype.warn = function(message) {
+      return this.log('warn', message);
+    };
+
+    Logger.prototype.error = function(message) {
+      return this.log('error', message);
+    };
+
+    LogMessage = (function() {
+      function LogMessage(type, message) {
+        this.type = type;
+        this.message = message;
+        this.location = window.location.href;
+        this.screen_id = window.AG_SCREEN_ID;
+        this.layer_id = window.AG_LAYER_ID;
+        this.view_id = window.AG_VIEW_ID;
+        this.date = new Date();
       }
-      this.flushingInterval = window.setInterval((function(_this) {
-        return function() {
-          return _this.flush();
+
+      LogMessage.prototype.asJSON = function() {
+        var err, messageJSON, obj;
+        try {
+          messageJSON = JSON.stringify(this.message);
+        } catch (_error) {
+          err = _error;
+          messageJSON = err.toString();
+        }
+        obj = {
+          message: messageJSON,
+          level: this.type,
+          location: this.location,
+          date: this.date.toJSON(),
+          screen_id: this.screen_id,
+          layer_id: this.layer_id,
+          view_id: this.view_id
         };
-      })(this), every);
-      return true;
-    };
+        return obj;
+      };
 
-    LogMessageQueue.prototype.stopFlushing = function() {
-      if (this.flushingInterval == null) {
-        return false;
+      return LogMessage;
+
+    })();
+
+    LogMessageQueue = (function() {
+      function LogMessageQueue() {
+        this.messageQueue = [];
       }
-      window.clearInterval(this.flushingInterval);
-      this.flushingInterval = void 0;
-      return true;
-    };
 
-    LogMessageQueue.prototype.getLength = function() {
-      return this.messageQueue.length;
-    };
+      LogMessageQueue.prototype.push = function(logMessage) {
+        return this.messageQueue.push(logMessage);
+      };
 
-    return LogMessageQueue;
+      LogMessageQueue.prototype.flush = function() {
+        var logMessage, xhr;
+        if (supersonic.logger.logEndpoint == null) {
+          return false;
+        }
+        while ((logMessage = this.messageQueue.pop())) {
+          xhr = new XMLHttpRequest();
+          xhr.open("POST", supersonic.logger.logEndpoint, true);
+          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xhr.send(JSON.stringify(logMessage.asJSON()));
+        }
+        return true;
+      };
+
+      LogMessageQueue.prototype.autoFlush = function(every) {
+        return steroids.app.getMode({}, {
+          onSuccess: function(mode) {
+            if (mode !== "scanner") {
+              return;
+            }
+            return supersonic.logger.queue.startFlushing(every);
+          }
+        });
+      };
+
+      LogMessageQueue.prototype.startFlushing = function(every) {
+        if (this.flushingInterval != null) {
+          return false;
+        }
+        this.flushingInterval = window.setInterval((function(_this) {
+          return function() {
+            return _this.flush();
+          };
+        })(this), every);
+        return true;
+      };
+
+      LogMessageQueue.prototype.stopFlushing = function() {
+        if (this.flushingInterval == null) {
+          return false;
+        }
+        window.clearInterval(this.flushingInterval);
+        this.flushingInterval = void 0;
+        return true;
+      };
+
+      LogMessageQueue.prototype.getLength = function() {
+        return this.messageQueue.length;
+      };
+
+      return LogMessageQueue;
+
+    })();
+
+    return Logger;
 
   })();
-
-  return Logger;
-
-})();
-
-module.exports = new Logger;
+  return new Logger;
+};
 
 
 
 },{}],44:[function(require,module,exports){
-module.exports = {
-  openURL: require('./steroids/openURL'),
-  app: require('./steroids/app')
+module.exports = function(steroids) {
+  return {
+    app: require('./steroids/app')(steroids)
+  };
 };
 
 
 
-},{"./steroids/app":45,"./steroids/openURL":46}],45:[function(require,module,exports){
-var Promise;
-
-Promise = require('bluebird');
-
+},{"./steroids/app":46}],45:[function(require,module,exports){
 module.exports = {
-  getLaunchURL: function() {
-    return new Promise(function(resolve, reject) {
-      var launchURL;
-      launchURL = steroids.app.getLaunchURL();
-      if (launchURL != null) {
-        return resolve(launchURL);
-      } else {
-        return reject();
-      }
-    });
+  device: {
+    ping: function() {}
   },
-  sleep: {
-    disable: function() {
-      return new Promise(function(resolve) {
-        return steroids.device.disableSleep({}, {
-          onSuccess: resolve
-        });
-      });
+  app: {
+    host: {
+      getURL: function() {}
     },
-    enable: function() {
-      return new Promise(function(resolve) {
-        return steroids.device.enableSleep({}, {
-          onSuccess: resolve
-        });
-      });
-    }
-  },
-  splashscreen: {
-    show: function() {
-      return new Promise(function(resolve, reject) {
-        return steroids.splashscreen.show({}, {
-          onSuccess: resolve,
-          onFailure: reject
-        });
-      });
-    },
-    hide: function() {
-      return new Promise(function(resolve, reject) {
-        return steroids.splashscreen.hide({}, {
-          onSuccess: resolve,
-          onFailure: reject
-        });
-      });
-    }
+    getMode: function() {}
   }
 };
 
 
 
-},{"bluebird":3}],46:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
 
-module.exports = function(url) {
-  return new Promise(function(resolve, reject) {
-    var successCallback;
-    successCallback = function() {
-      return document.addEventListener("resume", function() {
-        return resolve();
+module.exports = function(steroids) {
+  return {
+
+    /**
+     * @ngdoc method
+     * @name getLaunchURL
+     * @module app
+     * @description
+     * Returns the string that was used to launch the application with URL scheme.
+     * @returns {Promise} Promise that is resolved with the launch URL string as an argument when the application was launched using an URL schema.
+     * @usage
+     * ```coffeescript
+     * supersonic.steroids.app.getLaunchURL()
+     * ```
+     */
+    getLaunchURL: function() {
+      supersonic.logger.log("supersonic.steroids.app.getLaunchURL called", "debug");
+      return new Promise(function(resolve, reject) {
+        var launchURL;
+        launchURL = steroids.app.getLaunchURL();
+        if (launchURL != null) {
+          supersonic.logger.log("supersonic.steroids.app.getLaunchURL got " + launchURL, "debug");
+          return resolve(launchURL);
+        } else {
+          supersonic.logger.log("supersonic.steroids.debug.ping didn't get a launch URL", "error");
+          return reject();
+        }
       });
-    };
-    return steroids.openURL({
-      url: url
-    }, {
-      onSuccess: successCallback,
-      onFailure: reject
-    });
-  });
+    },
+
+    /**
+     * @ngdoc overview
+     * @name sleep
+     * @module app
+     * @description
+     * Allows the user to turn the device automatic sleep on or off for your app.
+     */
+    sleep: {
+
+      /**
+       * @ngdoc method
+       * @name disable
+       * @module sleep
+       * @description
+       * Disables the device automatic sleep for your app.
+       * @returns {Promise} Promise that is resolved when the native side has successfully disabled sleep.
+       * @usage
+       * ```coffeescript
+       * supersonic.steroids.app.sleep.disable()
+       * ```
+       */
+      disable: function() {
+        supersonic.logger.log("supersonic.steroids.app.sleep.disable called", "debug");
+        return new Promise(function(resolve) {
+          return steroids.device.disableSleep({}, {
+            onSuccess: function() {
+              supersonic.logger.log("supersonic.steroids.app.sleep.disable disabled sleep", "debug");
+              return resolve();
+            }
+          });
+        });
+      },
+
+      /**
+       * @ngdoc method
+       * @name enable
+       * @module sleep
+       * @description
+       * Enables the device automatic sleep for your app.
+       * @returns {Promise} Promise that is resolved when the native side has successfully enabled sleep.
+       * @usage
+       * ```coffeescript
+       * supersonic.steroids.app.sleep.enable()
+       * ```
+       */
+      enable: function() {
+        supersonic.logger.log("supersonic.steroids.app.sleep.enable called", "debug");
+        return new Promise(function(resolve) {
+          return steroids.device.enableSleep({}, {
+            onSuccess: function() {
+              supersonic.logger.log("supersonic.steroids.app.sleep.enable enabled sleep", "debug");
+              return resolve();
+            }
+          });
+        });
+      }
+    },
+
+    /**
+     * @ngdoc overview
+     * @name splashscreen
+     * @module app
+     * @description
+     * The splashscreen is shown in the application startup. The initial splashscreen is hidden automatically after 3 seconds on iOS and on the pageload event on Android. Allows the user to hide and show the splashscreen programmitically. The splashscreen is defined in your project's build configuration.
+     */
+    splashscreen: {
+
+      /**
+       * @ngdoc method
+       * @name show
+       * @module splashscreen
+       * @description
+       * Shows the splashscreen programmatically.
+       * @returns {Promise} Promise that is resolved when the splashscreen is shown.
+       * @usage
+       * ```coffeescript
+       * supersonic.steroids.app.splashscreen.show()
+       * ```
+       */
+      show: function() {
+        supersonic.logger.log("supersonic.steroids.app.splashscreen.show called", "debug");
+        return new Promise(function(resolve, reject) {
+          return steroids.splashscreen.show({}, {
+            onSuccess: function() {
+              supersonic.logger.log("supersonic.steroids.app.splashscreen.show showed splaschscreen", "debug");
+              return resolve();
+            },
+            onFailure: function() {
+              supersonic.logger.log("supersonic.steroids.app.splashscreen.show could not show splaschscreen", "error");
+              return reject();
+            }
+          });
+        });
+      },
+
+      /**
+       * @ngdoc method
+       * @name hide
+       * @module splashscreen
+       * @description
+       * Hides the splashscreen programmatically.
+       * @returns {Promise} Promise that is resolved when the splashscreen is hidden.
+       * @usage
+       * ```coffeescript
+       * supersonic.steroids.app.splashscreen.hide()
+       * ```
+       */
+      hide: function() {
+        supersonic.logger.log("supersonic.steroids.app.splashscreen.hide called", "debug");
+        return new Promise(function(resolve, reject) {
+          return steroids.splashscreen.hide({}, {
+            onSuccess: function() {
+              supersonic.logger.log("supersonic.steroids.app.splashscreen.hide hid splashscreen", "debug");
+              return resolve();
+            },
+            onFailure: function() {
+              supersonic.logger.log("supersonic.steroids.app.splashscreen.show could not hide splaschscreen", "error");
+              return reject();
+            }
+          });
+        });
+      }
+    },
+
+    /**
+     * @ngdoc method
+     * @name openURL
+     * @module app
+     * @description
+     * Launches browser to open the URL or any external application with that applications URL scheme.
+     * @param {string} URL to open. URLs starting with "http(s)://" will be opened in the device's browser.
+     * @returns {Promise} Promise that is resolved when the application is resumed.
+     * @usage
+     * ```coffeescript
+     * supersonic.app.openURL("http://www.google.com")
+     * supersonic.app.openURL("otherapp://?foo=1&bar=2")
+     * ```
+     */
+    openURL: function(url) {
+      supersonic.logger.log("supersonic.steroids.openURL called", "debug");
+      return new Promise(function(resolve, reject) {
+        var successCallback;
+        successCallback = function() {
+          return document.addEventListener("resume", function() {
+            supersonic.logger.log("supersonic.steroids.openURL opened URL, the app is resumed", "debug");
+            return resolve();
+          });
+        };
+        return steroids.openURL({
+          url: url
+        }, {
+          onSuccess: successCallback,
+          onFailure: function() {
+            supersonic.logger.log("supersonic.steroids.openURL could not open URL", "error");
+            return reject();
+          }
+        });
+      });
+    }
+  };
 };
 
 

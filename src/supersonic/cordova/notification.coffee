@@ -1,6 +1,23 @@
 Promise = require 'bluebird'
 
 module.exports =
+  ###*
+   * @ngdoc method
+   * @name alert
+   * @module notification
+   * @description
+   * Shows a native alert box.
+   * @param {string} alert message.
+   * @returns {Promise} Promise that is resolved when the the button in the alert box is tapped.
+   * @usage
+   * ```coffeescript
+   * supersonic.notification.alert("You are awesome!")
+   * supersonic.notification.alert(
+   *  {
+   *   }
+   * )
+   * ```
+  ###
   alert: (options) ->
     message = if typeof options is "string"
       options

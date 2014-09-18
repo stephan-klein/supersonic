@@ -12,15 +12,21 @@ module.exports = (steroids) ->
    * @usage
    * ```coffeescript
    * supersonic.debug.ping().then (response) ->
-   *   console.log response
+   *   supersonic.logger.log response
    * ```
   ###
   ping: ->
+    supersonic.logger.log "supersonic.debug.ping called", "debug"
+
     new Promise (resolve, reject) ->
       steroids.device.ping(
         {}
         {
-          onSuccess: -> resolve "Pong!"
-          onFailure: reject
+          onSuccess: ->
+            supersonic.logger.log "supersonic.debug.ping got pong", "debug"
+            Promise.resolve "Pong!"
+          onFailure: ->
+            supersonic.logger.log "supersonic.debug.ping could not get pong", "error"
+            Promise.reject
         }
       )

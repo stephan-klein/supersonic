@@ -1,4 +1,3 @@
-
 module.exports = (steroids) ->
   
   ###*
@@ -8,7 +7,7 @@ module.exports = (steroids) ->
    * Provides logging with different log levels. Logs are piped to the Steroids Connect screen.
    * @usage
    * ```coffeescript
-   * supersonic.debug.ping().then (response) ->
+   * supersonic.logger.log "Something awesome happened!"
    *   console.log response
    * ```
   ###

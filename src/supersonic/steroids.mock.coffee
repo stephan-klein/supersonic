@@ -1,4 +1,4 @@
-module.exports = 
+module.exports =
   device:
     ping: ->
   app:
