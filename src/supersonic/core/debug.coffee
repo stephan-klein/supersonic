@@ -1,4 +1,5 @@
 Promise = require 'bluebird'
+log = require '../core/logger'
 
 module.exports = (steroids) ->
 
@@ -16,17 +17,17 @@ module.exports = (steroids) ->
    * ```
   ###
   ping: ->
-    supersonic.logger.log "supersonic.debug.ping called", "debug"
+    log.debug "supersonic.debug.ping called"
 
     new Promise (resolve, reject) ->
       steroids.device.ping(
         {}
         {
           onSuccess: ->
-            supersonic.logger.log "supersonic.debug.ping got pong", "debug"
+            log.debug "supersonic.debug.ping got pong"
             Promise.resolve "Pong!"
           onFailure: ->
-            supersonic.logger.log "supersonic.debug.ping could not get pong", "error"
+            log.error "supersonic.debug.ping could not get pong"
             Promise.reject
         }
       )

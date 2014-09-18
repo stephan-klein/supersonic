@@ -1,86 +1,7 @@
 Promise = require 'bluebird'
+log = require '../core/logger'
 
 module.exports = (steroids) ->
-
-  ###*
-   * @ngdoc method
-   * @name getLaunchURL
-   * @module app
-   * @description
-   * Returns the string that was used to launch the application with URL scheme.
-   * @returns {Promise} Promise that is resolved with the launch URL string as an argument when the application was launched using an URL schema.
-   * @usage
-   * ```coffeescript
-   * supersonic.steroids.app.getLaunchURL()
-   * ```
-  ###
-  getLaunchURL: ->
-    supersonic.logger.log "supersonic.steroids.app.getLaunchURL called", "debug"
-    new Promise (resolve, reject) ->
-      launchURL = steroids.app.getLaunchURL()
-      if launchURL?
-        supersonic.logger.log "supersonic.steroids.app.getLaunchURL got #{launchURL}", "debug"
-        resolve launchURL
-      else
-        supersonic.logger.log "supersonic.steroids.debug.ping didn't get a launch URL", "error"
-        reject()
-
-  ###*
-   * @ngdoc overview
-   * @name sleep
-   * @module app
-   * @description
-   * Allows the user to turn the device automatic sleep on or off for your app.
-  ###
-  sleep:
-    
-    ###*
-     * @ngdoc method
-     * @name disable
-     * @module sleep
-     * @description
-     * Disables the device automatic sleep for your app.
-     * @returns {Promise} Promise that is resolved when the native side has successfully disabled sleep.
-     * @usage
-     * ```coffeescript
-     * supersonic.steroids.app.sleep.disable()
-     * ```
-    ###
-    disable: ->
-      supersonic.logger.log "supersonic.steroids.app.sleep.disable called", "debug"
-      new Promise (resolve) ->
-        steroids.device.disableSleep(
-          {}
-          {
-            onSuccess: ->
-              supersonic.logger.log "supersonic.steroids.app.sleep.disable disabled sleep", "debug"
-              resolve()
-          }
-        )
-
-    ###*
-     * @ngdoc method
-     * @name enable
-     * @module sleep
-     * @description
-     * Enables the device automatic sleep for your app.
-     * @returns {Promise} Promise that is resolved when the native side has successfully enabled sleep.
-     * @usage
-     * ```coffeescript
-     * supersonic.steroids.app.sleep.enable()
-     * ```
-    ###
-    enable: ->
-      supersonic.logger.log "supersonic.steroids.app.sleep.enable called", "debug"
-      new Promise (resolve) ->
-        steroids.device.enableSleep(
-          {}
-          {
-            onSuccess: ->
-              supersonic.logger.log "supersonic.steroids.app.sleep.enable enabled sleep", "debug"
-              resolve()
-          }
-        )
       
   ###*
    * @ngdoc overview
@@ -104,16 +25,16 @@ module.exports = (steroids) ->
      * ```
     ###
     show: ->
-      supersonic.logger.log "supersonic.steroids.app.splashscreen.show called", "debug"
+      log.debug "supersonic.steroids.app.splashscreen.show called"
       new Promise (resolve, reject) ->
         steroids.splashscreen.show(
           {}
           {
             onSuccess: ->
-              supersonic.logger.log "supersonic.steroids.app.splashscreen.show showed splaschscreen", "debug"
+              log.debug "supersonic.steroids.app.splashscreen.show showed splaschscreen"
               resolve()
             onFailure: ->
-              supersonic.logger.log "supersonic.steroids.app.splashscreen.show could not show splaschscreen", "error"
+              log.error "supersonic.steroids.app.splashscreen.show could not show splaschscreen"
               reject()
           }
         )
@@ -131,16 +52,16 @@ module.exports = (steroids) ->
      * ```
     ###
     hide: ->
-      supersonic.logger.log "supersonic.steroids.app.splashscreen.hide called", "debug"
+      log.debug "supersonic.steroids.app.splashscreen.hide called"
       new Promise (resolve, reject) ->
         steroids.splashscreen.hide(
           {}
           {
             onSuccess: ->
-              supersonic.logger.log "supersonic.steroids.app.splashscreen.hide hid splashscreen", "debug"
+              log.debug "supersonic.steroids.app.splashscreen.hide hid splashscreen"
               resolve()
             onFailure: ->
-              supersonic.logger.log "supersonic.steroids.app.splashscreen.show could not hide splaschscreen", "error"
+              log.error "supersonic.steroids.app.splashscreen.show could not hide splaschscreen"
               reject()
           }
         )
@@ -160,11 +81,11 @@ module.exports = (steroids) ->
    * ```
   ###
   openURL: (url) ->
-    supersonic.logger.log "supersonic.steroids.openURL called", "debug"
+    log.debug "supersonic.steroids.openURL called"
     new Promise (resolve, reject) ->
       successCallback = ->
         document.addEventListener "resume", ->
-          supersonic.logger.log "supersonic.steroids.openURL opened URL, the app is resumed", "debug"
+          log.debug "supersonic.steroids.openURL opened URL, the app is resumed"
           resolve()
 
       steroids.openURL(
@@ -172,7 +93,7 @@ module.exports = (steroids) ->
         {
           onSuccess: successCallback
           onFailure: ->
-            supersonic.logger.log "supersonic.steroids.openURL could not open URL", "error"
+            log.error "supersonic.steroids.openURL could not open URL"
             reject()
         }
       )

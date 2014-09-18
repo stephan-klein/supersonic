@@ -1,4 +1,5 @@
 Promise = require 'bluebird'
+log = require '../core/logger'
 
 module.exports = (steroids) ->
 
@@ -15,12 +16,12 @@ module.exports = (steroids) ->
    * ```
   ###
   
-  supersonic.logger.log "supersonic.app.getLaunchURL called", "debug"
+  log.debug "supersonic.app.getLaunchURL called"
   new Promise (resolve, reject) ->
     launchURL = steroids.app.getLaunchURL()
     if launchURL?
-      supersonic.logger.log "supersonic.app.getLaunchURL got #{launchURL}", "debug"
+      log.debug "supersonic.app.getLaunchURL got #{launchURL}"
       resolve launchURL
     else
-      supersonic.logger.log "supersonic.app. didn't get a launch URL", "error"
+      log.error "supersonic.app. didn't get a launch URL"
       reject()

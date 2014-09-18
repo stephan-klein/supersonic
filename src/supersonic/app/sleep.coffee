@@ -1,4 +1,5 @@
 Promise = require 'bluebird'
+log = require '../core/logger'
 
 module.exports = (steroids) ->
 
@@ -23,13 +24,13 @@ module.exports = (steroids) ->
    * ```
   ###
   disable: ->
-    supersonic.logger.log "supersonic.app.sleep.disable called", "debug"
+    log.debug "supersonic.app.sleep.disable called"
     new Promise (resolve) ->
       steroids.device.disableSleep(
         {}
         {
           onSuccess: ->
-            supersonic.logger.log "supersonic.app.sleep.disable disabled sleep", "debug"
+            log.debug "supersonic.app.sleep.disable disabled sleep"
             resolve()
         }
       )
@@ -46,13 +47,13 @@ module.exports = (steroids) ->
    * ```
   ###
   enable: ->
-    supersonic.logger.log "supersonic.app.sleep.enable called", "debug"
+    log.debug "supersonic.app.sleep.enable called"
     new Promise (resolve) ->
       steroids.device.enableSleep(
         {}
         {
           onSuccess: ->
-            supersonic.logger.log "supersonic.app.sleep.enable enabled sleep", "debug"
+            log.debug "supersonic.app.sleep.enable enabled sleep"
             resolve()
         }
       )
