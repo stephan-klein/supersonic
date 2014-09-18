@@ -1,7 +1,9 @@
 var path = require('canonical-path');
 var _ = require('lodash');
 var basePackage = require('dgeni-packages/ngdoc');
-var buildConfig = require('../build.config');
+
+// TODO: Merge to buildConfig.coffee
+var buildConfig = require('../../tasks/build.config');
 
 var projectBase = path.resolve(__dirname, '../..');
 var pkg = require('../../package.json');
