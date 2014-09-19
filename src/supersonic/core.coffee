@@ -9,7 +9,7 @@ module.exports = {
   logger
   debug: require('./core/debug')(steroids, logger)
   app: require('./app')(steroids, logger)
-  cordova: require('./cordova')
+  notification: require('./notification')
 }
 
 # Export to window as global if we're in the browser
