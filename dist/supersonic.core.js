@@ -8624,7 +8624,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":39,"./core/debug":44,"./core/logger":45,"./notification":47,"./steroids.mock":48}],44:[function(require,module,exports){
+},{"./app":39,"./core/debug":44,"./core/logger":45,"./notification":48,"./steroids.mock":50}],44:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8891,13 +8891,97 @@ var Promise;
 
 Promise = require('bluebird');
 
-module.exports = {
-  alert: require("./alert")
+
+/**
+ * @ngdoc method
+ * @name confirm
+ * @module notification
+ * @description
+ * Shows a native confirm dialog.
+ * @param {string} message confirm message (shorthand).
+ * @param {Object} options an options object (verbose). The following properties are available:
+ * * `message`: confirm message
+ * * `title`: confirm title (optional, defaults to "Confirm")
+ * * `buttonLabels`: Array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
+ * @returns {Promise} Promise that is resolved with the index of the tapped button as an argument.
+ * @usage
+ * ```coffeescript
+ * # Shorthand
+ * supersonic.notification.confirm("You are awesome!")
+ *
+ * # Verbose
+ * options =
+ *   title: "Custom Title"
+ *   message: "I'm a confirm!"
+ *   buttonLabel: ["Yes", "Close"]
+ * supersonic.notification.confirm(options)
+ * ```
+ */
+
+module.exports = function(options) {
+  var buttonLabels, message, title;
+  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
+  title = (options != null ? options.title : void 0) || "Confirm";
+  buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
+  return new Promise(function(resolve) {
+    var callback;
+    callback = function(index) {
+      return resolve(index - 1);
+    };
+    return document.addEventListener("deviceready", function() {
+      return navigator.notification.confirm(message, callback, title, buttonLabels);
+    });
+  });
 };
 
 
 
-},{"./alert":46,"bluebird":4}],48:[function(require,module,exports){
+},{"bluebird":4}],48:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = {
+  alert: require("./alert"),
+  confirm: require("./confirm"),
+  vibrate: require("./vibrate")
+};
+
+
+
+},{"./alert":46,"./confirm":47,"./vibrate":49,"bluebird":4}],49:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+
+/**
+ * @ngdoc method
+ * @name vibrate
+ * @module notification
+ * @description
+ * Vibrates the device for the specified amount of time.
+ * @param {Number} time time in illiseconds to vibrate the device. Please note: iOS ignores the time parameter and always vibrates for a pre-set amount of time.
+ * @returns {Promise} Promise that is resolved when the native side has vibrated.
+ * @usage
+ * ```coffeescript
+ * supersonic.notification.vibrate(2500)
+ * ```
+ */
+
+module.exports = function(options) {
+  var time;
+  time = typeof options === "number" ? options : void 0;
+  return new Promise(function(resolve) {
+    return document.addEventListener("deviceready", function() {
+      return resolve(navigator.notification.vibrate(time));
+    });
+  });
+};
+
+
+
+},{"bluebird":4}],50:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
