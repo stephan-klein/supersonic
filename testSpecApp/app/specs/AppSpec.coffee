@@ -1,32 +1,50 @@
 expect = window.chai.expect
 window.chai.should()
 
-describe "supersonic.steroids.app.getLaunchURL", ->
+describe "supersonic.app.getLaunchURL", ->
   it "should be defined", ->
-    supersonic.steroids.app.getLaunchURL.should.exist
+    supersonic.app.getLaunchURL.should.exist
 
   it "should be rejected", ->
-    supersonic.steroids.app.getLaunchURL().should.be.rejected
+    supersonic.app.getLaunchURL().should.be.rejected
 
-describe "supersonic.steroids.app.sleep", ->
+describe "supersonic.app.sleep", ->
   it "should be defined", ->
-    supersonic.steroids.app.sleep.should.exist
+    supersonic.app.sleep.should.exist
 
   it "should disable sleep", ->
-    supersonic.steroids.app.sleep.disable().should.be.fulfilled
+    supersonic.app.sleep.disable().should.be.fulfilled
 
   it "should enable sleep", ->
-    supersonic.steroids.app.sleep.enable().should.be.fulfilled
+    supersonic.app.sleep.enable().should.be.fulfilled
 
-describe "supersonic.steroids.app.splashscreen", ->
+describe "supersonic.app.splashscreen", ->
   it "should be defined", ->
-    supersonic.steroids.app.splashscreen.should.exist
+    supersonic.app.splashscreen.should.exist
 
   it "should show splashscreen", ->
-    supersonic.steroids.app.splashscreen.show().should.be.fulfilled
+    supersonic.app.splashscreen.show().should.be.fulfilled
 
   it "should hide splashscreen", ->
     @timeout 5000
-    supersonic.steroids.app.splashscreen.hide().should.be.fulfilled
+    supersonic.app.splashscreen.hide().should.be.fulfilled
+
+describe "supersonic.Apple.openURL", ->
+  it "should be defined", ->
+    supersonic.app.openURL.should.exist
+
+  it "should open Apple Maps", ->
+    @timeout 10000
+
+    url = "maps://?daddr=San+Francisco,+CA&saddr=cupertino"
+
+    supersonic.app.openURL(url).should.be.fulfilled
+
+  it "should not open dolanz://", ->
+    supersonic.app.openURL("dolanz://").should.be.rejected
+
+  it "should not open null", ->
+    #acually crashes
+    #supersonic.app.openURL(null).should.be.rejected
 
 
