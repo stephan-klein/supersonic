@@ -1,6 +1,8 @@
 Promise = require 'bluebird'
+logger = require '../core/logger'
 
 module.exports = (steroids) ->
+  log = logger steroids
 
   ###*
    * @ngdoc method
@@ -16,17 +18,17 @@ module.exports = (steroids) ->
    * ```
   ###
   ping: ->
-    supersonic.logger.log "supersonic.debug.ping called", "debug"
+    log.debug "supersonic.debug.ping called"
 
     new Promise (resolve, reject) ->
       steroids.device.ping(
         {}
         {
           onSuccess: ->
-            supersonic.logger.log "supersonic.debug.ping got pong", "debug"
-            Promise.resolve "Pong!"
+            log.debug "supersonic.debug.ping got pong"
+            resolve "Pong!"
           onFailure: ->
-            supersonic.logger.log "supersonic.debug.ping could not get pong", "error"
-            Promise.reject
+            log.error "supersonic.debug.ping could not get pong"
+            reject()
         }
       )
