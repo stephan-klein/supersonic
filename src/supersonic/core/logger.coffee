@@ -74,10 +74,22 @@ module.exports = (steroids) -> do (window) ->
     messages.plug streamsPerLogLevel.error.out
     messages.plug streamsPerLogLevel.debug.out
 
-    {
+    log = {
       # Don't expose messages, qify for angular goes haywire
       autoFlush: autoFlush messages
       log: streamsPerLogLevel.info.in
+
+      # Wrap functions that return Promises so that start/end and rejection is logged
+      debuggable: (namespace) -> (name, f) -> (args...) ->
+        log.debug "#{namespace}.#{name} called"
+        f(args...).then(
+          (value) ->
+            log.debug "#{namespace}.#{name} resolved"
+            value
+          (error) ->
+            log.error "#{namespace}.#{name} rejected: #{JSON.stringify(error)}"
+            Promise.reject error
+        )
 
       ###*
        * @ngdoc method
@@ -96,7 +108,7 @@ module.exports = (steroids) -> do (window) ->
        * @module logger
        * @usage
        * ```coffeescript
-       * supersonic.logger.info("Something that probably should not be happening... is happening.")
+       * supersonic.logger.warn("Something that probably should not be happening... is happening.")
        * ```
       ###
       warn: streamsPerLogLevel.warn.in

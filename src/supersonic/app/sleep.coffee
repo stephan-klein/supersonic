@@ -1,6 +1,7 @@
 Promise = require 'bluebird'
 
 module.exports = (steroids, log) ->
+  bug = log.debuggable "supersonic.app.sleep"
 
   ###*
    * @ngdoc overview
@@ -22,17 +23,16 @@ module.exports = (steroids, log) ->
    * supersonic.app.sleep.disable()
    * ```
   ###
-  disable: ->
-    log.debug "supersonic.app.sleep.disable called"
+  disable: bug "disable", ->
     new Promise (resolve) ->
       steroids.device.disableSleep(
         {}
         {
           onSuccess: ->
-            log.debug "supersonic.app.sleep.disable disabled sleep"
             resolve()
         }
       )
+  
   ###*
    * @ngdoc method
    * @name enable
@@ -45,14 +45,12 @@ module.exports = (steroids, log) ->
    * supersonic.app.sleep.enable()
    * ```
   ###
-  enable: ->
-    log.debug "supersonic.app.sleep.enable called"
+  enable: bug "enable", ->
     new Promise (resolve) ->
       steroids.device.enableSleep(
         {}
         {
           onSuccess: ->
-            log.debug "supersonic.app.sleep.enable enabled sleep"
             resolve()
         }
       )

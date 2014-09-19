@@ -1,6 +1,7 @@
 Promise = require 'bluebird'
 
 module.exports = (steroids, log) ->
+  bug = log.debuggable "supersonic.app"
 
   ###*
    * @ngdoc method
@@ -16,12 +17,10 @@ module.exports = (steroids, log) ->
    * supersonic.app.openURL("otherapp://?foo=1&bar=2")
    * ```
   ###
-  openURL = (url) ->
-    log.debug "supersonic.app.openURL called"
+  openURL = bug "openURL", (url) ->
     new Promise (resolve, reject) ->
       successCallback = ->
         document.addEventListener "resume", ->
-          log.debug "supersonic.app.openURL opened URL, the app is resumed"
           resolve()
 
       steroids.openURL(
@@ -29,7 +28,6 @@ module.exports = (steroids, log) ->
         {
           onSuccess: successCallback
           onFailure: ->
-            log.error "supersonic.app.openURL could not open URL"
             reject()
         }
       )
