@@ -1,6 +1,7 @@
 Promise = require 'bluebird'
 
 module.exports = (steroids, log) ->
+  bug = log.debuggable "supersonic.app.splashscreen"
 
   ###*
    * @ngdoc overview
@@ -23,17 +24,14 @@ module.exports = (steroids, log) ->
    * supersonic.app.splashscreen.show()
    * ```
   ###
-  show: ->
-    log.debug "supersonic.app.splashscreen.show called"
+  show: bug "show", ->
     new Promise (resolve, reject) ->
       steroids.splashscreen.show(
         {}
         {
           onSuccess: ->
-            log.debug "supersonic.app.splashscreen.show showed splaschscreen"
             resolve()
           onFailure: ->
-            log.error "supersonic.app.splashscreen.show could not show splaschscreen"
             reject()
         }
       )
@@ -50,17 +48,14 @@ module.exports = (steroids, log) ->
    * supersonic.app.splashscreen.hide()
    * ```
   ###
-  hide: ->
-    log.debug "supersonic.app.splashscreen.hide called"
+  hide: bug "hide", ->
     new Promise (resolve, reject) ->
       steroids.splashscreen.hide(
         {}
         {
           onSuccess: ->
-            log.debug "supersonic.app.splashscreen.hide hid splashscreen"
             resolve()
           onFailure: ->
-            log.error "supersonic.app.splashscreen.show could not hide splaschscreen"
             reject()
         }
       )

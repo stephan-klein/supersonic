@@ -8425,6 +8425,8 @@ var Promise;
 Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
+  var bug, getLaunchURL;
+  bug = log.debuggable("supersonic.app");
 
   /**
    * @ngdoc method
@@ -8438,21 +8440,17 @@ module.exports = function(steroids, log) {
    * supersonic.app.getLaunchURL()
    * ```
    */
-  var getLaunchURL;
-  getLaunchURL = function() {
-    log.debug("supersonic.app.getLaunchURL called");
+  getLaunchURL = bug("getLaunchURL", function() {
     return new Promise(function(resolve, reject) {
       var launchURL;
       launchURL = steroids.app.getLaunchURL();
       if (launchURL != null) {
-        log.debug("supersonic.app.getLaunchURL got " + launchURL);
         return resolve(launchURL);
       } else {
-        log.error("supersonic.app. didn't get a launch URL");
         return reject();
       }
     });
-  };
+  });
   return getLaunchURL;
 };
 
@@ -8463,7 +8461,7 @@ var Promise;
 
 Promise = require('bluebird');
 
-module.exports = function(steroids) {
+module.exports = function(steroids, log) {
   return {
     sleep: require("./sleep")(steroids, log),
     getLaunchURL: require("./getLaunchURL")(steroids, log),
@@ -8475,15 +8473,13 @@ module.exports = function(steroids) {
 
 
 },{"./getLaunchURL":40,"./openURL":42,"./sleep":43,"./splashscreen":44,"bluebird":4}],42:[function(require,module,exports){
-var Promise, logger;
+var Promise;
 
 Promise = require('bluebird');
 
-logger = require('../core/logger');
-
-module.exports = function(steroids) {
-  var log, openURL;
-  log = logger(steroids);
+module.exports = function(steroids, log) {
+  var bug, openURL;
+  bug = log.debuggable("supersonic.app");
 
   /**
    * @ngdoc method
@@ -8499,13 +8495,11 @@ module.exports = function(steroids) {
    * supersonic.app.openURL("otherapp://?foo=1&bar=2")
    * ```
    */
-  openURL = function(url) {
-    log.debug("supersonic.app.openURL called");
+  openURL = bug("openURL", function(url) {
     return new Promise(function(resolve, reject) {
       var successCallback;
       successCallback = function() {
         return document.addEventListener("resume", function() {
-          log.debug("supersonic.app.openURL opened URL, the app is resumed");
           return resolve();
         });
       };
@@ -8514,23 +8508,24 @@ module.exports = function(steroids) {
       }, {
         onSuccess: successCallback,
         onFailure: function() {
-          log.error("supersonic.app.openURL could not open URL");
           return reject();
         }
       });
     });
-  };
+  });
   return openURL;
 };
 
 
 
-},{"../core/logger":49,"bluebird":4}],43:[function(require,module,exports){
+},{"bluebird":4}],43:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
+  var bug;
+  bug = log.debuggable("supersonic.app.sleep");
   return {
 
     /**
@@ -8553,17 +8548,15 @@ module.exports = function(steroids, log) {
      * supersonic.app.sleep.disable()
      * ```
      */
-    disable: function() {
-      log.debug("supersonic.app.sleep.disable called");
+    disable: bug("disable", function() {
       return new Promise(function(resolve) {
         return steroids.device.disableSleep({}, {
           onSuccess: function() {
-            log.debug("supersonic.app.sleep.disable disabled sleep");
             return resolve();
           }
         });
       });
-    },
+    }),
 
     /**
      * @ngdoc method
@@ -8577,32 +8570,28 @@ module.exports = function(steroids, log) {
      * supersonic.app.sleep.enable()
      * ```
      */
-    enable: function() {
-      log.debug("supersonic.app.sleep.enable called");
+    enable: bug("enable", function() {
       return new Promise(function(resolve) {
         return steroids.device.enableSleep({}, {
           onSuccess: function() {
-            log.debug("supersonic.app.sleep.enable enabled sleep");
             return resolve();
           }
         });
       });
-    }
+    })
   };
 };
 
 
 
 },{"bluebird":4}],44:[function(require,module,exports){
-var Promise, logger;
+var Promise;
 
 Promise = require('bluebird');
 
-logger = require('../core/logger');
-
-module.exports = function(steroids) {
-  var log;
-  log = logger(steroids);
+module.exports = function(steroids, log) {
+  var bug;
+  bug = log.debuggable("supersonic.app.splashscreen");
   return {
 
     /**
@@ -8625,21 +8614,18 @@ module.exports = function(steroids) {
      * supersonic.app.splashscreen.show()
      * ```
      */
-    show: function() {
-      log.debug("supersonic.app.splashscreen.show called");
+    show: bug("show", function() {
       return new Promise(function(resolve, reject) {
         return steroids.splashscreen.show({}, {
           onSuccess: function() {
-            log.debug("supersonic.app.splashscreen.show showed splaschscreen");
             return resolve();
           },
           onFailure: function() {
-            log.error("supersonic.app.splashscreen.show could not show splaschscreen");
             return reject();
           }
         });
       });
-    },
+    }),
 
     /**
      * @ngdoc method
@@ -8653,27 +8639,24 @@ module.exports = function(steroids) {
      * supersonic.app.splashscreen.hide()
      * ```
      */
-    hide: function() {
-      log.debug("supersonic.app.splashscreen.hide called");
+    hide: bug("hide", function() {
       return new Promise(function(resolve, reject) {
         return steroids.splashscreen.hide({}, {
           onSuccess: function() {
-            log.debug("supersonic.app.splashscreen.hide hid splashscreen");
             return resolve();
           },
           onFailure: function() {
-            log.error("supersonic.app.splashscreen.show could not hide splaschscreen");
             return reject();
           }
         });
       });
-    }
+    })
   };
 };
 
 
 
-},{"../core/logger":49,"bluebird":4}],45:[function(require,module,exports){
+},{"bluebird":4}],45:[function(require,module,exports){
 module.exports = {
   notification: require('./cordova/notification')
 };
@@ -8791,6 +8774,8 @@ var Promise;
 Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
+  var bug;
+  bug = log.debuggable("supersonic.debug");
   return {
 
     /**
@@ -8806,28 +8791,26 @@ module.exports = function(steroids, log) {
      *   supersonic.logger.log response
      * ```
      */
-    ping: function() {
-      log.debug("supersonic.debug.ping called");
+    ping: bug("ping", function() {
       return new Promise(function(resolve, reject) {
         return steroids.device.ping({}, {
           onSuccess: function() {
-            log.debug("supersonic.debug.ping got pong");
             return resolve("Pong!");
           },
           onFailure: function() {
-            log.error("supersonic.debug.ping could not get pong");
             return reject();
           }
         });
       });
-    }
+    })
   };
 };
 
 
 
 },{"bluebird":4}],49:[function(require,module,exports){
-var Bacon, Promise, logMessageEnvelope, logMessageStream, startFlushing;
+var Bacon, Promise, logMessageEnvelope, logMessageStream, startFlushing,
+  __slice = [].slice;
 
 Promise = require('bluebird');
 
@@ -8919,7 +8902,7 @@ module.exports = function(steroids) {
       };
     };
     return (function(toEnvelopeForLevel) {
-      var messages, streamsPerLogLevel;
+      var log, messages, streamsPerLogLevel;
       messages = new Bacon.Bus;
       streamsPerLogLevel = {
         info: logMessageStream(toEnvelopeForLevel('info')),
@@ -8931,9 +8914,25 @@ module.exports = function(steroids) {
       messages.plug(streamsPerLogLevel.warn.out);
       messages.plug(streamsPerLogLevel.error.out);
       messages.plug(streamsPerLogLevel.debug.out);
-      return {
+      return log = {
         autoFlush: autoFlush(messages),
         log: streamsPerLogLevel.info["in"],
+        debuggable: function(namespace) {
+          return function(name, f) {
+            return function() {
+              var args;
+              args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+              log.debug("" + namespace + "." + name + " called");
+              return f.apply(null, args).then(function(value) {
+                log.debug("" + namespace + "." + name + " resolved");
+                return value;
+              }, function(error) {
+                log.error("" + namespace + "." + name + " rejected: " + (JSON.stringify(error)));
+                return Promise.reject(error);
+              });
+            };
+          };
+        },
 
         /**
          * @ngdoc method
@@ -8952,7 +8951,7 @@ module.exports = function(steroids) {
          * @module logger
          * @usage
          * ```coffeescript
-         * supersonic.logger.info("Something that probably should not be happening... is happening.")
+         * supersonic.logger.warn("Something that probably should not be happening... is happening.")
          * ```
          */
         warn: streamsPerLogLevel.warn["in"],
