@@ -8677,7 +8677,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":41,"./core/debug":46,"./core/logger":47,"./notification":50,"./steroids.mock":52}],46:[function(require,module,exports){
+},{"./app":41,"./core/debug":46,"./core/logger":47,"./notification":50,"./steroids.mock":53}],46:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8966,7 +8966,7 @@ Promise = require('bluebird');
  * options =
  *   title: "Custom Title"
  *   message: "I'm a confirm!"
- *   buttonLabel: ["Yes", "Close"]
+ *   buttonLabels: ["Yes", "Close"]
  * supersonic.notification.confirm(options)
  * ```
  */
@@ -8997,12 +8997,73 @@ Promise = require('bluebird');
 module.exports = {
   alert: require("./alert"),
   confirm: require("./confirm"),
-  vibrate: require("./vibrate")
+  vibrate: require("./vibrate"),
+  prompt: require("./prompt")
 };
 
 
 
-},{"./alert":48,"./confirm":49,"./vibrate":51,"bluebird":4}],51:[function(require,module,exports){
+},{"./alert":48,"./confirm":49,"./prompt":51,"./vibrate":52,"bluebird":4}],51:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+
+/**
+ * @ngdoc method
+ * @name prompt
+ * @module notification
+ * @description
+ * Shows a native prompt dialog.
+ * @param {string} message confirm dialog (shorthand).
+ * @param {Object} options an options object (verbose). The following properties are available:
+ * * `message`: confirm message
+ * * `title`: dialog title (optional, defaults to "Confirm")
+ * * `buttonLabels`: array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
+ * * `defaultText`: default textbox input value (optional, defaults to an empty string)
+ * @returns {Promise} Promise that is resolved with an object as an argument. The argument object has the following properties:
+ * * `buttonIndex`: index of the pressed button
+ * * `input`: input string
+ * @usage
+ * ```coffeescript
+ * # Shorthand
+ * supersonic.notification.prompt("This is a prompt. Type something")
+ *
+ * # Verbose
+ * options =
+ *   title: "Custom Title"
+ *   message: "I'm a prompt!"
+ *   buttonLabels: ["Yes", "No", "Cancel"]
+ *   defaultText: "Type here"
+ * supersonic.notification.prompt(options)
+ * ```
+ */
+
+module.exports = function(options) {
+  var buttonLabels, defaultText, message, title;
+  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : new String;
+  title = (options != null ? options.title : void 0) || "Prompt";
+  buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
+  defaultText = (options != null ? options.defaultText : void 0) || new String;
+  return new Promise(function(resolve) {
+    var callback;
+    callback = function(results) {
+      var result;
+      result = {
+        buttonIndex: results.buttonIndex - 1,
+        input: results.input1
+      };
+      return resolve(result);
+    };
+    return document.addEventListener("deviceready", function() {
+      return navigator.notification.prompt(message, callback, title, buttonLabels, defaultText);
+    });
+  });
+};
+
+
+
+},{"bluebird":4}],52:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9034,7 +9095,7 @@ module.exports = function(options) {
 
 
 
-},{"bluebird":4}],52:[function(require,module,exports){
+},{"bluebird":4}],53:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
