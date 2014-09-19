@@ -63,6 +63,7 @@
     }
   },
   "dependencies": {
+    "baconjs": "^0.7.22",
     "bluebird": "^2.3.2",
     "coffee-script": "^1.8.0"
   }
