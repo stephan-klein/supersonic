@@ -3,13 +3,16 @@ steroids = if window?.steroids?
   else
     require './steroids.mock'
 
-module.exports =
-  debug: require('./core/debug')(steroids)
-  logger: require('./core/logger')(steroids)
+logger = require('./core/logger')(steroids)
+
+module.exports = {
+  logger
+  debug: require('./core/debug')(steroids, logger)
+  app: require('./app')(steroids, logger)
   cordova: require('./cordova')
-  app: require('./app')(steroids)
+}
 
 # Export to window as global if we're in the browser
 if (window?)
   window.supersonic = module.exports
-  window.supersonic.logger.queue.autoFlush(100)
+  window.supersonic.logger.autoFlush()
