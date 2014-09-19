@@ -5315,7 +5315,7 @@ module.exports = function(steroids) {
 
 
 
-},{"../core/logger":44,"bluebird":3}],38:[function(require,module,exports){
+},{"../core/logger":46,"bluebird":3}],38:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -5323,13 +5323,66 @@ Promise = require('bluebird');
 module.exports = function(steroids) {
   return {
     sleep: require("./sleep")(steroids),
-    getLaunchURL: require("./getLaunchURL")(steroids)
+    getLaunchURL: require("./getLaunchURL")(steroids),
+    splashscreen: require("./splashscreen")(steroids),
+    openURL: require("./openURL")(steroids)
   };
 };
 
 
 
-},{"./getLaunchURL":37,"./sleep":39,"bluebird":3}],39:[function(require,module,exports){
+},{"./getLaunchURL":37,"./openURL":39,"./sleep":40,"./splashscreen":41,"bluebird":3}],39:[function(require,module,exports){
+var Promise, logger;
+
+Promise = require('bluebird');
+
+logger = require('../core/logger');
+
+module.exports = function(steroids) {
+  var log, openURL;
+  log = logger(steroids);
+
+  /**
+   * @ngdoc method
+   * @name openURL
+   * @module app
+   * @description
+   * Launches browser to open the URL or any external application with that applications URL scheme.
+   * @param {string} URL to open. URLs starting with "http(s)://" will be opened in the device's browser.
+   * @returns {Promise} Promise that is resolved when the application is resumed.
+   * @usage
+   * ```coffeescript
+   * supersonic.app.openURL("http://www.google.com")
+   * supersonic.app.openURL("otherapp://?foo=1&bar=2")
+   * ```
+   */
+  openURL = function(url) {
+    log.debug("supersonic.app.openURL called");
+    return new Promise(function(resolve, reject) {
+      var successCallback;
+      successCallback = function() {
+        return document.addEventListener("resume", function() {
+          log.debug("supersonic.app.openURL opened URL, the app is resumed");
+          return resolve();
+        });
+      };
+      return steroids.openURL({
+        url: url
+      }, {
+        onSuccess: successCallback,
+        onFailure: function() {
+          log.error("supersonic.app.openURL could not open URL");
+          return reject();
+        }
+      });
+    });
+  };
+  return openURL;
+};
+
+
+
+},{"../core/logger":46,"bluebird":3}],40:[function(require,module,exports){
 var Promise, logger;
 
 Promise = require('bluebird');
@@ -5401,14 +5454,94 @@ module.exports = function(steroids) {
 
 
 
-},{"../core/logger":44,"bluebird":3}],40:[function(require,module,exports){
+},{"../core/logger":46,"bluebird":3}],41:[function(require,module,exports){
+var Promise, logger;
+
+Promise = require('bluebird');
+
+logger = require('../core/logger');
+
+module.exports = function(steroids) {
+  var log;
+  log = logger(steroids);
+  return {
+
+    /**
+     * @ngdoc overview
+     * @name splashscreen
+     * @module app
+     * @description
+     * The splashscreen is shown in the application startup. The initial splashscreen is hidden automatically after 3 seconds on iOS and on the pageload event on Android. Allows the user to hide and show the splashscreen programmitically. The splashscreen is defined in your project's build configuration.
+     */
+
+    /**
+     * @ngdoc method
+     * @name show
+     * @module splashscreen
+     * @description
+     * Shows the splashscreen programmatically.
+     * @returns {Promise} Promise that is resolved when the splashscreen is shown.
+     * @usage
+     * ```coffeescript
+     * supersonic.app.splashscreen.show()
+     * ```
+     */
+    show: function() {
+      log.debug("supersonic.app.splashscreen.show called");
+      return new Promise(function(resolve, reject) {
+        return steroids.splashscreen.show({}, {
+          onSuccess: function() {
+            log.debug("supersonic.app.splashscreen.show showed splaschscreen");
+            return resolve();
+          },
+          onFailure: function() {
+            log.error("supersonic.app.splashscreen.show could not show splaschscreen");
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name hide
+     * @module splashscreen
+     * @description
+     * Hides the splashscreen programmatically.
+     * @returns {Promise} Promise that is resolved when the splashscreen is hidden.
+     * @usage
+     * ```coffeescript
+     * supersonic.app.splashscreen.hide()
+     * ```
+     */
+    hide: function() {
+      log.debug("supersonic.app.splashscreen.hide called");
+      return new Promise(function(resolve, reject) {
+        return steroids.splashscreen.hide({}, {
+          onSuccess: function() {
+            log.debug("supersonic.app.splashscreen.hide hid splashscreen");
+            return resolve();
+          },
+          onFailure: function() {
+            log.error("supersonic.app.splashscreen.show could not hide splaschscreen");
+            return reject();
+          }
+        });
+      });
+    }
+  };
+};
+
+
+
+},{"../core/logger":46,"bluebird":3}],42:[function(require,module,exports){
 module.exports = {
   notification: require('./cordova/notification')
 };
 
 
 
-},{"./cordova/notification":41}],41:[function(require,module,exports){
+},{"./cordova/notification":43}],43:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -5492,7 +5625,7 @@ module.exports = {
 
 
 
-},{"bluebird":3}],42:[function(require,module,exports){
+},{"bluebird":3}],44:[function(require,module,exports){
 var steroids;
 
 steroids = (typeof window !== "undefined" && window !== null ? window.steroids : void 0) != null ? window.steroids : require('./steroids.mock');
@@ -5511,7 +5644,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":38,"./cordova":40,"./core/debug":43,"./core/logger":44,"./steroids.mock":45}],43:[function(require,module,exports){
+},{"./app":38,"./cordova":42,"./core/debug":45,"./core/logger":46,"./steroids.mock":47}],45:[function(require,module,exports){
 var Promise, logger;
 
 Promise = require('bluebird');
@@ -5556,7 +5689,7 @@ module.exports = function(steroids) {
 
 
 
-},{"../core/logger":44,"bluebird":3}],44:[function(require,module,exports){
+},{"../core/logger":46,"bluebird":3}],46:[function(require,module,exports){
 module.exports = function(steroids) {
 
   /**
@@ -5747,7 +5880,7 @@ module.exports = function(steroids) {
 
 
 
-},{}],45:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -5762,4 +5895,4 @@ module.exports = {
 
 
 
-},{}]},{},[42])
+},{}]},{},[44])
