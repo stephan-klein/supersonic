@@ -1,8 +1,6 @@
 Promise = require 'bluebird'
-logger = require '../core/logger'
 
-module.exports = (steroids) ->
-  log = logger steroids
+module.exports = (steroids, log) ->
 
   ###*
    * @ngdoc overview

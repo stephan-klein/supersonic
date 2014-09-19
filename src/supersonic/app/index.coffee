@@ -1,6 +1,6 @@
 Promise = require 'bluebird'
 
-module.exports = (steroids) ->
+module.exports = (steroids, log) ->
   sleep: require("./sleep")(steroids, log)
   getLaunchURL: require("./getLaunchURL")(steroids, log)
   splashscreen: require("./splashscreen")(steroids, log)
