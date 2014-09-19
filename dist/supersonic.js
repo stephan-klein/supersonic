@@ -8379,7 +8379,7 @@ if (((typeof window !== "undefined" && window !== null ? window.angular : void 0
 
 
 
-},{"./supersonic/angular":39,"./supersonic/core":47}],39:[function(require,module,exports){
+},{"./supersonic/angular":39,"./supersonic/core":45}],39:[function(require,module,exports){
 var supersonic,
   __slice = [].slice;
 
@@ -8419,7 +8419,7 @@ module.exports = function(angular) {
 
 
 
-},{"./core":47}],40:[function(require,module,exports){
+},{"./core":45}],40:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8657,97 +8657,6 @@ module.exports = function(steroids, log) {
 
 
 },{"bluebird":4}],45:[function(require,module,exports){
-module.exports = {
-  notification: require('./cordova/notification')
-};
-
-
-
-},{"./cordova/notification":46}],46:[function(require,module,exports){
-var Promise;
-
-Promise = require('bluebird');
-
-module.exports = {
-
-  /**
-   * @ngdoc method
-   * @name alert
-   * @module notification
-   * @description
-   * Shows a native alert box.
-   * @param {string} alert message.
-   * @returns {Promise} Promise that is resolved when the the button in the alert box is tapped.
-   * @usage
-   * ```coffeescript
-   * supersonic.notification.alert("You are awesome!")
-   * supersonic.notification.alert(
-   *  {
-   *   }
-   * )
-   * ```
-   */
-  alert: function(options) {
-    var buttonLabel, message, title;
-    message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
-    title = (options != null ? options.title : void 0) || "Alert";
-    buttonLabel = (options != null ? options.buttonLabel : void 0) || "OK";
-    return new Promise(function(resolve) {
-      return document.addEventListener("deviceready", function() {
-        return navigator.notification.alert(message, resolve, title, buttonLabel);
-      });
-    });
-  },
-  confirm: function(options) {
-    var buttonLabels, message, title;
-    message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
-    title = (options != null ? options.title : void 0) || "Confirm";
-    buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
-    return new Promise(function(resolve) {
-      var callback;
-      callback = function(index) {
-        return resolve(index - 1);
-      };
-      return document.addEventListener("deviceready", function() {
-        return navigator.notification.confirm(message, callback, title, buttonLabels);
-      });
-    });
-  },
-  vibrate: function(options) {
-    var time;
-    time = typeof options === "number" ? options : void 0;
-    return new Promise(function(resolve) {
-      return document.addEventListener("deviceready", function() {
-        return resolve(navigator.notification.vibrate(time));
-      });
-    });
-  },
-  prompt: function(options) {
-    var buttonLabels, defaultText, message, title;
-    message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : new String;
-    title = (options != null ? options.title : void 0) || "Prompt";
-    buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
-    defaultText = (options != null ? options.defaultText : void 0) || new String;
-    return new Promise(function(resolve) {
-      var callback;
-      callback = function(results) {
-        var result;
-        result = {
-          buttonIndex: results.buttonIndex - 1,
-          input: results.input1
-        };
-        return resolve(result);
-      };
-      return document.addEventListener("deviceready", function() {
-        return navigator.notification.prompt(message, callback, title, buttonLabels, defaultText);
-      });
-    });
-  }
-};
-
-
-
-},{"bluebird":4}],47:[function(require,module,exports){
 var logger, steroids;
 
 steroids = (typeof window !== "undefined" && window !== null ? window.steroids : void 0) != null ? window.steroids : require('./steroids.mock');
@@ -8758,7 +8667,7 @@ module.exports = {
   logger: logger,
   debug: require('./core/debug')(steroids, logger),
   app: require('./app')(steroids, logger),
-  cordova: require('./cordova')
+  notification: require('./notification')
 };
 
 if ((typeof window !== "undefined" && window !== null)) {
@@ -8768,7 +8677,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":41,"./cordova":45,"./core/debug":48,"./core/logger":49,"./steroids.mock":50}],48:[function(require,module,exports){
+},{"./app":41,"./core/debug":46,"./core/logger":47,"./notification":50,"./steroids.mock":53}],46:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8808,7 +8717,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],49:[function(require,module,exports){
+},{"bluebird":4}],47:[function(require,module,exports){
 var Bacon, Promise, logMessageEnvelope, logMessageStream, startFlushing,
   __slice = [].slice;
 
@@ -8984,7 +8893,209 @@ module.exports = function(steroids) {
 
 
 
-},{"baconjs":1,"bluebird":4}],50:[function(require,module,exports){
+},{"baconjs":1,"bluebird":4}],48:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+
+/**
+ * @ngdoc method
+ * @name alert
+ * @module notification
+ * @description
+ * Shows a native alert box.
+ * @param {string} message alert message (shorthand).
+ * @param {Object} options an options object (verbose). The following properties are available:
+ * * `message`: alert message
+ * * `title`: alert title (optional, defaults to "Alert")
+ * * `buttonName`: button name (optional, defaults to "OK")
+ * @returns {Promise} Promise that is resolved when the the button in the alert box is tapped.
+ * @usage
+ * ```coffeescript
+ * # Shorthand
+ * supersonic.notification.alert("You are awesome!")
+ *
+ * # Verbose
+ * options =
+ *   title: "Custom Title"
+ *   message: "I'm an alert!"
+ *   buttonLabel: "Close"
+ * supersonic.notification.alert(options)
+ * ```
+ */
+
+module.exports = function(options) {
+  var buttonLabel, message, title;
+  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
+  title = (options != null ? options.title : void 0) || "Alert";
+  buttonLabel = (options != null ? options.buttonLabel : void 0) || "OK";
+  return new Promise(function(resolve) {
+    return document.addEventListener("deviceready", function() {
+      return navigator.notification.alert(message, resolve, title, buttonLabel);
+    });
+  });
+};
+
+
+
+},{"bluebird":4}],49:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+
+/**
+ * @ngdoc method
+ * @name confirm
+ * @module notification
+ * @description
+ * Shows a native confirm dialog.
+ * @param {string} message confirm message (shorthand).
+ * @param {Object} options an options object (verbose). The following properties are available:
+ * * `message`: confirm message
+ * * `title`: confirm title (optional, defaults to "Confirm")
+ * * `buttonLabels`: Array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
+ * @returns {Promise} Promise that is resolved with the index of the tapped button as an argument.
+ * @usage
+ * ```coffeescript
+ * # Shorthand
+ * supersonic.notification.confirm("You are awesome!")
+ *
+ * # Verbose
+ * options =
+ *   title: "Custom Title"
+ *   message: "I'm a confirm!"
+ *   buttonLabels: ["Yes", "Close"]
+ * supersonic.notification.confirm(options)
+ * ```
+ */
+
+module.exports = function(options) {
+  var buttonLabels, message, title;
+  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
+  title = (options != null ? options.title : void 0) || "Confirm";
+  buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
+  return new Promise(function(resolve) {
+    var callback;
+    callback = function(index) {
+      return resolve(index - 1);
+    };
+    return document.addEventListener("deviceready", function() {
+      return navigator.notification.confirm(message, callback, title, buttonLabels);
+    });
+  });
+};
+
+
+
+},{"bluebird":4}],50:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = {
+  alert: require("./alert"),
+  confirm: require("./confirm"),
+  vibrate: require("./vibrate"),
+  prompt: require("./prompt")
+};
+
+
+
+},{"./alert":48,"./confirm":49,"./prompt":51,"./vibrate":52,"bluebird":4}],51:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+
+/**
+ * @ngdoc method
+ * @name prompt
+ * @module notification
+ * @description
+ * Shows a native prompt dialog.
+ * @param {string} message confirm dialog (shorthand).
+ * @param {Object} options an options object (verbose). The following properties are available:
+ * * `message`: confirm message
+ * * `title`: dialog title (optional, defaults to "Confirm")
+ * * `buttonLabels`: array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
+ * * `defaultText`: default textbox input value (optional, defaults to an empty string)
+ * @returns {Promise} Promise that is resolved with an object as an argument. The argument object has the following properties:
+ * * `buttonIndex`: index of the pressed button
+ * * `input`: input string
+ * @usage
+ * ```coffeescript
+ * # Shorthand
+ * supersonic.notification.prompt("This is a prompt. Type something")
+ *
+ * # Verbose
+ * options =
+ *   title: "Custom Title"
+ *   message: "I'm a prompt!"
+ *   buttonLabels: ["Yes", "No", "Cancel"]
+ *   defaultText: "Type here"
+ * supersonic.notification.prompt(options)
+ * ```
+ */
+
+module.exports = function(options) {
+  var buttonLabels, defaultText, message, title;
+  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : new String;
+  title = (options != null ? options.title : void 0) || "Prompt";
+  buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
+  defaultText = (options != null ? options.defaultText : void 0) || new String;
+  return new Promise(function(resolve) {
+    var callback;
+    callback = function(results) {
+      var result;
+      result = {
+        buttonIndex: results.buttonIndex - 1,
+        input: results.input1
+      };
+      return resolve(result);
+    };
+    return document.addEventListener("deviceready", function() {
+      return navigator.notification.prompt(message, callback, title, buttonLabels, defaultText);
+    });
+  });
+};
+
+
+
+},{"bluebird":4}],52:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+
+/**
+ * @ngdoc method
+ * @name vibrate
+ * @module notification
+ * @description
+ * Vibrates the device for the specified amount of time.
+ * @param {Number} time time in illiseconds to vibrate the device. Please note: iOS ignores the time parameter and always vibrates for a pre-set amount of time.
+ * @returns {Promise} Promise that is resolved when the native side has vibrated.
+ * @usage
+ * ```coffeescript
+ * supersonic.notification.vibrate(2500)
+ * ```
+ */
+
+module.exports = function(options) {
+  var time;
+  time = typeof options === "number" ? options : void 0;
+  return new Promise(function(resolve) {
+    return document.addEventListener("deviceready", function() {
+      return resolve(navigator.notification.vibrate(time));
+    });
+  });
+};
+
+
+
+},{"bluebird":4}],53:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
