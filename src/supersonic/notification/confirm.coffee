@@ -21,7 +21,7 @@ Promise = require 'bluebird'
  * options =
  *   title: "Custom Title"
  *   message: "I'm a confirm!"
- *   buttonLabel: ["Yes", "Close"]
+ *   buttonLabels: ["Yes", "Close"]
  * supersonic.notification.confirm(options)
  * ```
 ###
