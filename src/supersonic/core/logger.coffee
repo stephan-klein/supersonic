@@ -78,8 +78,48 @@ module.exports = (steroids) -> do (window) ->
       # Don't expose messages, qify for angular goes haywire
       autoFlush: autoFlush messages
       log: streamsPerLogLevel.info.in
+
+      ###*
+       * @ngdoc method
+       * @name info
+       * @module logger
+       * @usage
+       * ```coffeescript
+       * supersonic.logger.info("Just notifying you that X is going on")
+       * ```
+      ###
       info: streamsPerLogLevel.info.in
+
+      ###*
+       * @ngdoc method
+       * @name warn
+       * @module logger
+       * @usage
+       * ```coffeescript
+       * supersonic.logger.info("Something that probably should not be happening... is happening.")
+       * ```
+      ###
       warn: streamsPerLogLevel.warn.in
+
+      ###*
+       * @ngdoc method
+       * @name error
+       * @module logger
+       * @usage
+       * ```coffeescript
+       * supersonic.logger.error("Something failed")
+       * ```
+      ###
       error: streamsPerLogLevel.error.in
+
+      ###*
+       * @ngdoc method
+       * @name debug
+       * @module logger
+       * @usage
+       * ```coffeescript
+       * supersonic.logger.debug("This information is here only for your debugging convenience")
+       * ```
+      ###
       debug: streamsPerLogLevel.debug.in
     }
