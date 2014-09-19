@@ -1,137 +1,85 @@
-module.exports = (steroids) ->
+Promise = require 'bluebird'
+Bacon = require 'baconjs'
 
-  ###*
-   * @ngdoc overview
-   * @name logger
-   * @description
-   * Provides logging with different log levels. Logs are piped to the Steroids Connect screen.
-   * @usage
-   * ```coffeescript
-   * supersonic.logger.log "Something awesome happened!"
-   *   console.log response
-   * ```
-  ###
+# (window) -> (level: string) -> (message: object) -> LeveledLogMessageEnvelope
+logMessageEnvelope = (window) -> (level) -> (message) ->
+  {
+    message: try
+        JSON.stringify message
+      catch e
+        e.toString()
+    date: new Date().toString()
+    level: level
+    location: window.location.href
+    screen_id: window.AG_SCREEN_ID
+    layer_id: window.AG_LAYER_ID
+    view_id: window.AG_VIEW_ID
+  }
 
-  class Logger
+# (messageStream: Bacon.Bus(LogMessageEnvelope)) -> stopFlushing
+startFlushing = (messageStream, sink) ->
+  messageStream.onValue sink
 
-    constructor: ->
-      @messages = []
-      @queue = new LogMessageQueue
+# (object -> LogMessageEnvelope) -> {in: (object) -> (), out: Bacon.Bus(LogMessageEnvelope) }
+logMessageStream = (toEnvelope) ->
+  stream = new Bacon.Bus
+  in: (message) -> stream.push message
+  out: stream.map(toEnvelope)
+
+module.exports = (steroids) -> do (window) ->
+  defaultLogEndPoint = ->
+    new Promise (resolve) ->
       steroids.app.host.getURL {},
-        onSuccess: (url) =>
-          @logEndpoint = "#{url}/__appgyver/logger"
+        onSuccess: (url) ->
+          resolve "#{url}/__appgyver/logger"
 
-    ###*
-     * @ngdoc method
-     * @name log
-     * @module logger
-     * @description
-     * Logs a single message with the given log level. Available log levels are:
-     * * `silly`
-     * * `debug`
-     * * `verbose`
-     * * `info`
-     * * `warn`
-     * * `error`
-     * @param {string} message Message to log.
-     * @param {string=} level Log level to use.
-     * @usage
-     * ```coffeescript
-     * supersonic.logger.log "info", "App started!"
-     * ```
-    ###
-
-    log: (message, level = "info")->
-
-      logMessage = new LogMessage(level, message)
+  shouldAutoFlush = ->
+    new Promise (resolve, reject) ->
       steroids.app.getMode {},
-        onSuccess: (mode) =>
-          return unless mode == "scanner"
-          @queue.push logMessage
+        onSuccess: (mode) ->
+          if mode is "scanner"
+            resolve("Inside Scanner, autoflush allowed")
+          else
+            reject("Not in a Scanner app, disabling autoflush for logging")
 
-    info: (message)->
-      @log(message, 'info')
+  # (logEndPoint: string) -> (LogMessageEnvelope) -> XMLHttpRequest
+  sendToEndPoint = (logEndPoint) -> (envelope) ->
+    xhr = new window.XMLHttpRequest()
+    xhr.open "POST", logEndPoint, true
+    xhr.setRequestHeader "Content-Type", "application/json;charset=UTF-8"
+    xhr.send JSON.stringify(envelope)
+    xhr
 
-    warn: (message)->
-      @log(message, 'warn')
+  # (messageStream: Bacon.Bus(LogMessageEnvelope)) -> () -> Promise stopFlushing
+  autoFlush = (messageStream) -> () ->
+    shouldAutoFlush().then(
+      ->
+        defaultLogEndPoint().then (endPoint) ->
+          startFlushing(messageStream, sendToEndPoint endPoint)
+      (reason) ->
+        console.log reason
+    )
 
-    error: (message)->
-      @log(message, 'error')
+  do (toEnvelopeForLevel = logMessageEnvelope window) ->
+    messages = new Bacon.Bus
 
-    debug: (message)->
-      @log(message, 'debug')
+    streamsPerLogLevel =
+      info: logMessageStream toEnvelopeForLevel 'info'
+      warn: logMessageStream toEnvelopeForLevel 'warn'
+      error: logMessageStream toEnvelopeForLevel 'error'
+      debug: logMessageStream toEnvelopeForLevel 'debug'
 
-    class LogMessage
+    messages.plug streamsPerLogLevel.info.out
+    messages.plug streamsPerLogLevel.warn.out
+    messages.plug streamsPerLogLevel.error.out
+    messages.plug streamsPerLogLevel.debug.out
 
-      constructor: (@type, @message) ->
-        @location = window.location.href
-        @screen_id = window.AG_SCREEN_ID
-        @layer_id = window.AG_LAYER_ID
-        @view_id = window.AG_VIEW_ID
-
-        @date = new Date()
-
-      asJSON: ->
-        try
-          messageJSON = JSON.stringify(@message)
-        catch err
-          messageJSON = err.toString()
-
-        obj =
-          message: messageJSON
-          level: @type
-          location: @location
-          date: @date.toJSON()
-          screen_id: @screen_id
-          layer_id: @layer_id
-          view_id: @view_id
-
-        return obj
-
-    class LogMessageQueue
-
-      constructor: ->
-        @messageQueue = []
-
-      push: (logMessage)->
-        @messageQueue.push logMessage
-
-      flush: ->
-        return false unless supersonic.logger.logEndpoint?
-
-        while( logMessage = @messageQueue.pop() )
-          xhr = new XMLHttpRequest()
-          xhr.open "POST", supersonic.logger.logEndpoint, true
-          xhr.setRequestHeader "Content-Type", "application/json;charset=UTF-8"
-          xhr.send JSON.stringify(logMessage.asJSON())
-
-        return true
-
-      autoFlush: (every) ->
-        steroids.app.getMode {},
-          onSuccess: (mode) ->
-            return unless mode == "scanner"
-
-            supersonic.logger.queue.startFlushing(every)
-
-      startFlushing: (every) ->
-        return false if @flushingInterval?
-
-        @flushingInterval = window.setInterval =>
-          @flush()
-        , every
-
-        return true
-
-      stopFlushing: ->
-        return false unless @flushingInterval?
-
-        window.clearInterval(@flushingInterval)
-        @flushingInterval = undefined
-
-        return true
-
-      getLength: ->
-        @messageQueue.length
-
-  return new Logger
+    {
+      # Don't expose messages, qify for angular goes haywire
+      autoFlush: autoFlush messages
+      log: streamsPerLogLevel.info.in
+      info: streamsPerLogLevel.info.in
+      warn: streamsPerLogLevel.warn.in
+      error: streamsPerLogLevel.error.in
+      debug: streamsPerLogLevel.debug.in
+    }
