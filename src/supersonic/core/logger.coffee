@@ -74,7 +74,7 @@ module.exports = (steroids, window) ->
     messages.plug streamsPerLogLevel.error.out
     messages.plug streamsPerLogLevel.debug.out
 
-    log = {
+    return log = {
       # Don't expose messages, qify for angular goes haywire
       autoFlush: autoFlush messages
       log: streamsPerLogLevel.info.in
