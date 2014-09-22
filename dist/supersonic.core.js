@@ -8604,11 +8604,13 @@ module.exports = function(steroids, log) {
 
 
 },{"bluebird":4}],43:[function(require,module,exports){
-var logger, steroids;
+var global, logger, steroids;
 
-steroids = (typeof window !== "undefined" && window !== null ? window.steroids : void 0) != null ? window.steroids : require('./steroids.mock');
+global = typeof window !== "undefined" && window !== null ? window : require('./mock/window');
 
-logger = require('./core/logger')(steroids);
+steroids = global.steroids != null ? global.steroids : require('./mock/steroids');
+
+logger = require('./core/logger')(steroids, global);
 
 module.exports = {
   logger: logger,
@@ -8624,7 +8626,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":39,"./core/debug":44,"./core/logger":45,"./notification":48,"./steroids.mock":51}],44:[function(require,module,exports){
+},{"./app":39,"./core/debug":44,"./core/logger":45,"./mock/steroids":46,"./mock/window":47,"./notification":50}],44:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8711,136 +8713,161 @@ logMessageStream = function(toEnvelope) {
   };
 };
 
-module.exports = function(steroids) {
-  return (function(window) {
-    var autoFlush, defaultLogEndPoint, sendToEndPoint, shouldAutoFlush;
-    defaultLogEndPoint = function() {
-      return new Promise(function(resolve) {
-        return steroids.app.host.getURL({}, {
-          onSuccess: function(url) {
-            return resolve("" + url + "/__appgyver/logger");
+module.exports = function(steroids, window) {
+  var autoFlush, defaultLogEndPoint, sendToEndPoint, shouldAutoFlush;
+  defaultLogEndPoint = function() {
+    return new Promise(function(resolve) {
+      return steroids.app.host.getURL({}, {
+        onSuccess: function(url) {
+          return resolve("" + url + "/__appgyver/logger");
+        }
+      });
+    });
+  };
+  shouldAutoFlush = function() {
+    return new Promise(function(resolve, reject) {
+      return steroids.app.getMode({}, {
+        onSuccess: function(mode) {
+          if (mode === "scanner") {
+            return resolve("Inside Scanner, autoflush allowed");
+          } else {
+            return reject("Not in a Scanner app, disabling autoflush for logging");
           }
+        }
+      });
+    });
+  };
+  sendToEndPoint = function(logEndPoint) {
+    return function(envelope) {
+      var xhr;
+      xhr = new window.XMLHttpRequest();
+      xhr.open("POST", logEndPoint, true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.send(JSON.stringify(envelope));
+      return xhr;
+    };
+  };
+  autoFlush = function(messageStream) {
+    return function() {
+      return shouldAutoFlush().then(function() {
+        return defaultLogEndPoint().then(function(endPoint) {
+          return startFlushing(messageStream, sendToEndPoint(endPoint));
         });
+      }, function(reason) {
+        return console.log(reason);
       });
     };
-    shouldAutoFlush = function() {
-      return new Promise(function(resolve, reject) {
-        return steroids.app.getMode({}, {
-          onSuccess: function(mode) {
-            if (mode === "scanner") {
-              return resolve("Inside Scanner, autoflush allowed");
-            } else {
-              return reject("Not in a Scanner app, disabling autoflush for logging");
-            }
-          }
-        });
-      });
+  };
+  return (function(toEnvelopeForLevel) {
+    var log, messages, streamsPerLogLevel;
+    messages = new Bacon.Bus;
+    streamsPerLogLevel = {
+      info: logMessageStream(toEnvelopeForLevel('info')),
+      warn: logMessageStream(toEnvelopeForLevel('warn')),
+      error: logMessageStream(toEnvelopeForLevel('error')),
+      debug: logMessageStream(toEnvelopeForLevel('debug'))
     };
-    sendToEndPoint = function(logEndPoint) {
-      return function(envelope) {
-        var xhr;
-        xhr = new window.XMLHttpRequest();
-        xhr.open("POST", logEndPoint, true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify(envelope));
-        return xhr;
-      };
-    };
-    autoFlush = function(messageStream) {
-      return function() {
-        return shouldAutoFlush().then(function() {
-          return defaultLogEndPoint().then(function(endPoint) {
-            return startFlushing(messageStream, sendToEndPoint(endPoint));
-          });
-        }, function(reason) {
-          return console.log(reason);
-        });
-      };
-    };
-    return (function(toEnvelopeForLevel) {
-      var log, messages, streamsPerLogLevel;
-      messages = new Bacon.Bus;
-      streamsPerLogLevel = {
-        info: logMessageStream(toEnvelopeForLevel('info')),
-        warn: logMessageStream(toEnvelopeForLevel('warn')),
-        error: logMessageStream(toEnvelopeForLevel('error')),
-        debug: logMessageStream(toEnvelopeForLevel('debug'))
-      };
-      messages.plug(streamsPerLogLevel.info.out);
-      messages.plug(streamsPerLogLevel.warn.out);
-      messages.plug(streamsPerLogLevel.error.out);
-      messages.plug(streamsPerLogLevel.debug.out);
-      return log = {
-        autoFlush: autoFlush(messages),
-        log: streamsPerLogLevel.info["in"],
-        debuggable: function(namespace) {
-          return function(name, f) {
-            return function() {
-              var args;
-              args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-              log.debug("" + namespace + "." + name + " called");
-              return f.apply(null, args).then(function(value) {
-                log.debug("" + namespace + "." + name + " resolved");
-                return value;
-              }, function(error) {
-                log.error("" + namespace + "." + name + " rejected: " + (JSON.stringify(error)));
-                return Promise.reject(error);
-              });
-            };
+    messages.plug(streamsPerLogLevel.info.out);
+    messages.plug(streamsPerLogLevel.warn.out);
+    messages.plug(streamsPerLogLevel.error.out);
+    messages.plug(streamsPerLogLevel.debug.out);
+    return log = {
+      autoFlush: autoFlush(messages),
+      log: streamsPerLogLevel.info["in"],
+      debuggable: function(namespace) {
+        return function(name, f) {
+          return function() {
+            var args;
+            args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+            log.debug("" + namespace + "." + name + " called");
+            return f.apply(null, args).then(function(value) {
+              log.debug("" + namespace + "." + name + " resolved");
+              return value;
+            }, function(error) {
+              log.error("" + namespace + "." + name + " rejected: " + (JSON.stringify(error)));
+              return Promise.reject(error);
+            });
           };
-        },
+        };
+      },
 
-        /**
-         * @ngdoc method
-         * @name info
-         * @module logger
-         * @usage
-         * ```coffeescript
-         * supersonic.logger.info("Just notifying you that X is going on")
-         * ```
-         */
-        info: streamsPerLogLevel.info["in"],
+      /**
+       * @ngdoc method
+       * @name info
+       * @module logger
+       * @usage
+       * ```coffeescript
+       * supersonic.logger.info("Just notifying you that X is going on")
+       * ```
+       */
+      info: streamsPerLogLevel.info["in"],
 
-        /**
-         * @ngdoc method
-         * @name warn
-         * @module logger
-         * @usage
-         * ```coffeescript
-         * supersonic.logger.warn("Something that probably should not be happening... is happening.")
-         * ```
-         */
-        warn: streamsPerLogLevel.warn["in"],
+      /**
+       * @ngdoc method
+       * @name warn
+       * @module logger
+       * @usage
+       * ```coffeescript
+       * supersonic.logger.warn("Something that probably should not be happening... is happening.")
+       * ```
+       */
+      warn: streamsPerLogLevel.warn["in"],
 
-        /**
-         * @ngdoc method
-         * @name error
-         * @module logger
-         * @usage
-         * ```coffeescript
-         * supersonic.logger.error("Something failed")
-         * ```
-         */
-        error: streamsPerLogLevel.error["in"],
+      /**
+       * @ngdoc method
+       * @name error
+       * @module logger
+       * @usage
+       * ```coffeescript
+       * supersonic.logger.error("Something failed")
+       * ```
+       */
+      error: streamsPerLogLevel.error["in"],
 
-        /**
-         * @ngdoc method
-         * @name debug
-         * @module logger
-         * @usage
-         * ```coffeescript
-         * supersonic.logger.debug("This information is here only for your debugging convenience")
-         * ```
-         */
-        debug: streamsPerLogLevel.debug["in"]
-      };
-    })(logMessageEnvelope(window));
-  })(window);
+      /**
+       * @ngdoc method
+       * @name debug
+       * @module logger
+       * @usage
+       * ```coffeescript
+       * supersonic.logger.debug("This information is here only for your debugging convenience")
+       * ```
+       */
+      debug: streamsPerLogLevel.debug["in"]
+    };
+  })(logMessageEnvelope(window));
 };
 
 
 
 },{"baconjs":1,"bluebird":4}],46:[function(require,module,exports){
+module.exports = {
+  device: {
+    ping: function() {}
+  },
+  app: {
+    host: {
+      getURL: function() {}
+    },
+    getMode: function() {}
+  }
+};
+
+
+
+},{}],47:[function(require,module,exports){
+module.exports = {
+  location: {
+    href: ''
+  },
+  AG_SCREEN_ID: 0,
+  AG_LAYER_ID: 0,
+  AG_VIEW_ID: 0
+};
+
+
+
+},{}],48:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8886,7 +8913,7 @@ module.exports = function(options) {
 
 
 
-},{"bluebird":4}],47:[function(require,module,exports){
+},{"bluebird":4}],49:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8936,7 +8963,7 @@ module.exports = function(options) {
 
 
 
-},{"bluebird":4}],48:[function(require,module,exports){
+},{"bluebird":4}],50:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8950,7 +8977,7 @@ module.exports = {
 
 
 
-},{"./alert":46,"./confirm":47,"./prompt":49,"./vibrate":50,"bluebird":4}],49:[function(require,module,exports){
+},{"./alert":48,"./confirm":49,"./prompt":51,"./vibrate":52,"bluebird":4}],51:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9010,7 +9037,7 @@ module.exports = function(options) {
 
 
 
-},{"bluebird":4}],50:[function(require,module,exports){
+},{"bluebird":4}],52:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9042,19 +9069,4 @@ module.exports = function(options) {
 
 
 
-},{"bluebird":4}],51:[function(require,module,exports){
-module.exports = {
-  device: {
-    ping: function() {}
-  },
-  app: {
-    host: {
-      getURL: function() {}
-    },
-    getMode: function() {}
-  }
-};
-
-
-
-},{}]},{},[43])
+},{"bluebird":4}]},{},[43])
