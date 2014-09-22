@@ -1,5 +1,5 @@
 angular
-  .module('bordova')
+  .module('notification')
   .controller 'IndexController', ($scope) ->
     $scope.dismissedAlerts = 0
 
@@ -25,7 +25,7 @@ angular
     ]
 
     $scope.testAlert = (options) ->
-      supersonic.cordova.notification.alert(options).then ->
+      supersonic.notification.alert(options).then ->
         $scope.dismissedAlerts++
 
     $scope.confirms = [
@@ -56,7 +56,7 @@ angular
     ]
 
     $scope.testConfirm = (options) ->
-      supersonic.cordova.notification.confirm(options).then (index) ->
+      supersonic.notification.confirm(options).then (index) ->
         $scope.confirms[index]++
 
     $scope.vibrations = 0
@@ -73,7 +73,7 @@ angular
     ]
 
     $scope.testVibrate = (options) ->
-      supersonic.cordova.notification.vibrate(options).then ->
+      supersonic.notification.vibrate(options).then ->
         $scope.vibrations++
 
     $scope.buttonIndex = undefined
@@ -102,7 +102,7 @@ angular
     ]
 
     $scope.testPrompt = (options) ->
-      supersonic.cordova.notification.prompt(options).then (result) ->
+      supersonic.notification.prompt(options).then (result) ->
         $scope.buttonIndex = result.buttonIndex
         $scope.input = result.input
 

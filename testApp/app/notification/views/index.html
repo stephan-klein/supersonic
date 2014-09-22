@@ -1,6 +1,6 @@
 <div ng-controller="IndexController">
   <ss-navigation-bar>
-    <ss-navigation-bar-title>Cordova tests</ss-navigation-bar-title>
+    <ss-navigation-bar-title>Notification tests</ss-navigation-bar-title>
   </ss-navigation-bar>
 
   <div class="card padding">
@@ -18,8 +18,8 @@
     <h1>Confirm tests</h1>
     <button
       class="button button-block"
-      ng-repeat="test in alertTests"
-      ng-click="testAlert(test.options)">
+      ng-repeat="test in confirmTests"
+      ng-click="testConfirm(test.options)">
       {{test.title}}
     </button>
     <ul>
