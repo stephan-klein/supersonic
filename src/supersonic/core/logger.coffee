@@ -26,7 +26,7 @@ logMessageStream = (toEnvelope) ->
   in: (message) -> stream.push message
   out: stream.map(toEnvelope)
 
-module.exports = (steroids) -> do (window) ->
+module.exports = (steroids, window) ->
   defaultLogEndPoint = ->
     new Promise (resolve) ->
       steroids.app.host.getURL {},

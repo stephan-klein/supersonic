@@ -1,9 +1,14 @@
-steroids = if window?.steroids?
-    window.steroids
+global = if window?
+    window
   else
-    require './steroids.mock'
+    require './mock/window'
 
-logger = require('./core/logger')(steroids)
+steroids = if global.steroids?
+    global.steroids
+  else
+    require './mock/steroids'
+
+logger = require('./core/logger')(steroids, global)
 
 module.exports = {
   logger
