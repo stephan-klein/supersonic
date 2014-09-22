@@ -2,9 +2,10 @@ chai = require('chai')
 chai.should()
 chai.use require 'chai-as-promised'
 
-steroids = require '../../src/supersonic/steroids.mock'
-debug = require('../../src/supersonic/core/logger')(steroids)
+steroids = require '../../src/supersonic/mock/steroids'
+window = require '../../src/supersonic/mock/window'
+logger = require('../../src/supersonic/core/logger')(steroids, window)
 
 describe "supersonic.core.logger", ->
   it "should have log", ->
-    debug.log.should.exist
+    logger.log.should.exist
