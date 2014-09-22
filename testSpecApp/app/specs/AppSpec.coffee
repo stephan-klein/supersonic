@@ -47,4 +47,27 @@ describe "supersonic.Apple.openURL", ->
     #acually crashes
     #supersonic.app.openURL(null).should.be.rejected
 
+describe "supersonic.app.statusBar", ->
+  it "should be defined", ->
+    supersonic.app.statusBar.should.exist
+
+  it "should hide status bar", ->
+    supersonic.app.statusBar.hide().should.be.fulfilled
+
+  it "should show status bar", ->
+    supersonic.app.statusBar.show().should.be.fulfilled
+
+  it "should hide status bar again", ->
+    supersonic.app.statusBar.hide().should.be.fulfilled
+
+  it "should show status bar with a string param", ->
+    supersonic.app.statusBar.show("light").should.be.fulfilled
+
+  it "should hide status bar once again", ->
+    supersonic.app.statusBar.hide().should.be.fulfilled
+
+  it "should show status bar an object param", ->
+    options =
+      style = "light"
+    supersonic.app.statusBar.show(options).should.be.fulfilled
 
