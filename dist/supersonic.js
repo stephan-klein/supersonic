@@ -8379,18 +8379,15 @@ if (((typeof window !== "undefined" && window !== null ? window.angular : void 0
 
 
 
-},{"./supersonic/angular":39,"./supersonic/core":47}],39:[function(require,module,exports){
-var superscope, supersonic,
+},{"./supersonic/angular":39,"./supersonic/core":45}],39:[function(require,module,exports){
+var supersonic,
   __slice = [].slice;
 
 supersonic = require('./core');
 
-superscope = require('./angular/superscope');
-
 module.exports = function(angular) {
-  superscope(angular);
-  return angular.module('supersonic', ['supersonic.superscope']).service('supersonic', function($q) {
-    var accelerometer, geolocation, qify, qifyAll;
+  return angular.module('supersonic', []).service('supersonic', function($q) {
+    var qify, qifyAll;
     qify = function(f) {
       return function() {
         var args;
@@ -8416,30 +8413,13 @@ module.exports = function(angular) {
       }
       return result;
     };
-    geolocation = supersonic.device.geolocation;
-    geolocation.getPosition = qify(geolocation.getPosition);
-    accelerometer = supersonic.device.accelerometer;
-    accelerometer.getAcceleration = qify(accelerometer.getAcceleration);
-    return {
-      logger: qifyAll(supersonic.logger),
-      debug: qifyAll(supersonic.debug),
-      app: qifyAll(supersonic.app),
-      notification: qifyAll(supersonic.notification),
-      device: supersonic.device
-    };
+    return qifyAll(supersonic);
   });
 };
 
 
 
-},{"./angular/superscope":40,"./core":47}],40:[function(require,module,exports){
-module.exports = function(angular) {
-  return angular.module('supersonic.superscope', []).service('superscope', function($rootScope) {});
-};
-
-
-
-},{}],41:[function(require,module,exports){
+},{"./core":45}],40:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8476,7 +8456,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],42:[function(require,module,exports){
+},{"bluebird":4}],41:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8486,14 +8466,13 @@ module.exports = function(steroids, log) {
     sleep: require("./sleep")(steroids, log),
     getLaunchURL: require("./getLaunchURL")(steroids, log),
     splashscreen: require("./splashscreen")(steroids, log),
-    openURL: require("./openURL")(steroids, log),
-    statusBar: require("./statusBar")(steroids, log)
+    openURL: require("./openURL")(steroids, log)
   };
 };
 
 
 
-},{"./getLaunchURL":41,"./openURL":43,"./sleep":44,"./splashscreen":45,"./statusBar":46,"bluebird":4}],43:[function(require,module,exports){
+},{"./getLaunchURL":40,"./openURL":42,"./sleep":43,"./splashscreen":44,"bluebird":4}],42:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8517,17 +8496,20 @@ module.exports = function(steroids, log) {
    * ```
    */
   openURL = bug("openURL", function(url) {
-    if (url == null) {
-      return Promise.reject("URL is undefined");
-    }
     return new Promise(function(resolve, reject) {
+      var successCallback;
+      successCallback = function() {
+        return document.addEventListener("resume", function() {
+          return resolve();
+        });
+      };
       return steroids.openURL({
         url: url
       }, {
-        onSuccess: function() {
-          return document.addEventListener("resume", resolve);
-        },
-        onFailure: reject
+        onSuccess: successCallback,
+        onFailure: function() {
+          return reject();
+        }
       });
     });
   });
@@ -8536,7 +8518,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],44:[function(require,module,exports){
+},{"bluebird":4}],43:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8602,7 +8584,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],45:[function(require,module,exports){
+},{"bluebird":4}],44:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8674,91 +8656,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],46:[function(require,module,exports){
-var Promise;
-
-Promise = require('bluebird');
-
-module.exports = function(steroids, log) {
-  var bug;
-  bug = log.debuggable("supersonic.app.statusBar");
-  return {
-
-    /**
-     * @ngdoc overview
-     * @name statusBar
-     * @module app
-     * @description
-     * The native status bar shown on the top of the screen. The native status bar is displayed by default. It can be hidden and shown application wide.
-     */
-
-    /**
-     * @ngdoc method
-     * @name hide
-     * @module statusBar
-     * @description
-     * Hides the native status bar application wide.
-     * @returns {Promise} Promise that is resolved when the status bar is hidden.
-     * @usage
-     * ```coffeescript
-     * supersonic.app.statusBar.hide()
-     * ```
-     */
-    hide: bug("hide", function() {
-      return new Promise(function(resolve, reject) {
-        return steroids.statusBar.hide({}, {
-          onSuccess: function() {
-            return resolve();
-          },
-          onFailure: function() {
-            return reject();
-          }
-        });
-      });
-    }),
-
-    /**
-     * @ngdoc method
-     * @name show
-     * @module statusBar
-     * @description
-     * Shows the native status bar application wide. If no parameters are given, the status bar text color is the default color (black on iOS 7).
-     * @param {string} style If set to "light" (shorthand), then the native status bar text color is light (white on iOS 7). Optional.
-     * @param {Object} options Options object with `style` property (verbose). Optional.
-     * @returns {Promise} Promise that is resolved when the status bar is shown.
-     * @usage
-     * ```coffeescript
-     * supersonic.app.statusBar.show()
-     * # Shorthand
-     * supersonic.app.statusBar.show("light")
-     * # Verbose
-     * options =
-     *  style: "light"
-     * supersonic.app.statusBar.show(options)
-     * ```
-     */
-    show: bug("show", function(options) {
-      var style;
-      style = typeof options === "string" ? options : (options != null ? options.style : void 0) != null ? options.style : void 0;
-      return new Promise(function(resolve, reject) {
-        return steroids.statusBar.show({
-          style: style
-        }, {
-          onSuccess: function() {
-            return resolve();
-          },
-          onFailure: function() {
-            return reject();
-          }
-        });
-      });
-    })
-  };
-};
-
-
-
-},{"bluebird":4}],47:[function(require,module,exports){
+},{"bluebird":4}],45:[function(require,module,exports){
 var global, logger, steroids;
 
 global = typeof window !== "undefined" && window !== null ? window : require('./mock/window');
@@ -8772,7 +8670,7 @@ module.exports = {
   debug: require('./core/debug')(steroids, logger),
   app: require('./app')(steroids, logger),
   notification: require('./notification'),
-  device: require('./device')(steroids, logger)
+  ui: require('./ui')(steroids, logger)
 };
 
 if ((typeof window !== "undefined" && window !== null)) {
@@ -8782,7 +8680,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":42,"./core/debug":48,"./core/logger":49,"./device":52,"./mock/steroids":54,"./mock/window":55,"./notification":58}],48:[function(require,module,exports){
+},{"./app":41,"./core/debug":46,"./core/logger":47,"./mock/steroids":48,"./mock/window":49,"./notification":52,"./ui":55}],46:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8822,7 +8720,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],49:[function(require,module,exports){
+},{"bluebird":4}],47:[function(require,module,exports){
 var Bacon, Promise, logMessageEnvelope, logMessageStream, startFlushing,
   __slice = [].slice;
 
@@ -8996,217 +8894,7 @@ module.exports = function(steroids, window) {
 
 
 
-},{"baconjs":1,"bluebird":4}],50:[function(require,module,exports){
-var Bacon, Promise, deviceready;
-
-Promise = require('bluebird');
-
-Bacon = require('baconjs');
-
-deviceready = require('../events').deviceready;
-
-module.exports = function(steroids, log) {
-  var bug, getAcceleration, watchAcceleration;
-  bug = log.debuggable("supersonic.device.accelerometer");
-
-  /**
-   * @ngdoc overview
-   * @name accelerometer
-   * @module device
-   * @description
-   *  provides access to the device's accelerometer. The accelerometer is a motion sensor that detects the change (delta) in movement relative to the current device orientation, in three dimensions along the x, y, and z axis.
-   */
-
-  /**
-   * @ngdoc method
-   * @name watchAcceleration
-   * @module accelerometer
-   * @description
-   * Returns a stream of acceleration updates.
-   * @param {Integer} frequency update interval in milliseconds (optional, defaults to 40)
-   * @returns {Stream} Stream of acceleration updates
-   * @usage
-   * ```coffeescript
-   * supersonic.device.accelerometer.watchAcceleration().onValue( (acceleration) ->
-   *  console.log('Acceleration X: '  + acceleration.x  + '\n' +
-   *              'Acceleration Y: ' + acceleration.y + '\n' +
-   *              'Acceleration Z: ' + acceleration.z + '\n' +
-   *              'Timestamp: ' + acceleration.timestamp)
-   * )
-   * ```
-   */
-  watchAcceleration = function(frequency) {
-    var options;
-    if (frequency == null) {
-      frequency = 40;
-    }
-    options = {
-      frequency: frequency
-    };
-    return Bacon.fromPromise(deviceready).flatMap(function() {
-      return Bacon.fromBinder(function(sink) {
-        var watchId;
-        watchId = window.navigator.accelerometer.watchAcceleration(function(acceleration) {
-          return sink(new Bacon.Next(acceleration));
-        }, function(error) {
-          return sink(new Bacon.Error(error));
-        }, options);
-        return function() {
-          return window.navigator.accelerometer.clearWatch(watchId);
-        };
-      });
-    });
-  };
-
-  /**
-   * @ngdoc method
-   * @name getAcceleration
-   * @module accelerometer
-   * @description
-   * Returns device's current acceleration.
-   * @returns {Promise} Promise is resolved to the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.
-   * @usage
-   * ```coffeescript
-   * supersonic.device.accelerometer.getAcceleration().then( (acceleration) ->
-   *  console.log('Acceleration X: '  + acceleration.x  + '\n' +
-   *              'Acceleration Y: ' + acceleration.y + '\n' +
-   *              'Acceleration Z: ' + acceleration.z + '\n' +
-   *              'Timestamp: ' + acceleration.timestamp)
-   * )
-   * ```
-   */
-  getAcceleration = bug("getAcceleration", function() {
-    return new Promise(function(resolve) {
-      return watchAcceleration().take(1).onValue(resolve);
-    });
-  });
-  return {
-    watchAcceleration: watchAcceleration,
-    getAcceleration: getAcceleration
-  };
-};
-
-
-
-},{"../events":53,"baconjs":1,"bluebird":4}],51:[function(require,module,exports){
-var Bacon, Promise, deviceready;
-
-Promise = require('bluebird');
-
-Bacon = require('baconjs');
-
-deviceready = require('../events').deviceready;
-
-module.exports = function(steroids, log) {
-  var bug, getPosition, watchPosition;
-  bug = log.debuggable("supersonic.device.geolocation");
-
-  /**
-   * @ngdoc overview
-   * @name geolocation
-   * @module device
-   * @description
-   * Provides access to location data based on the device's GPS sensor or inferred from network signals.
-   */
-
-  /**
-   * @ngdoc method
-   * @name watchPosition
-   * @module geolocation
-   * @description
-   * Returns a stream of position updates.
-   * @returns {Stream} Stream of position updates
-   * @usage
-   * ```coffeescript
-   * supersonic.device.geolocation.watchPosition().onValue( (position) ->
-   *  console.log('Latitude: '  + position.coords.latitude  + '\n' +
-   *                        'Longitude: ' + position.coords.longitude + '\n' +
-   *                        'Timestamp: ' + position.timestamp)
-   * )
-   * ```
-   */
-  watchPosition = function(options) {
-    if (options == null) {
-      options = {};
-    }
-    if (options.enableHighAccuracy == null) {
-      options.enableHighAccuracy = true;
-    }
-    return Bacon.fromPromise(deviceready).flatMap(function() {
-      return Bacon.fromBinder(function(sink) {
-        var watchId;
-        watchId = window.navigator.geolocation.watchPosition(function(position) {
-          return sink(new Bacon.Next(position));
-        }, function(error) {
-          return sink(new Bacon.Error(error));
-        }, options);
-        return function() {
-          return window.navigator.geolocation.clearWatch(watchId);
-        };
-      });
-    });
-  };
-
-  /**
-   * @ngdoc method
-   * @name getPosition
-   * @module geolocation
-   * @description
-   * Returns device's current position.
-   * @returns {Promise} Promise is resolved to the next available position data. Will wait for data for an indeterminate time; use a timeout if required.
-   * @usage
-   * ```coffeescript
-   * supersonic.device.geolocation.getPosition().then( (position) ->
-   *  console.log('Latitude: '  + position.coords.latitude  + '\n' +
-   *                        'Longitude: ' + position.coords.longitude + '\n' +
-   *                        'Timestamp: ' + position.timestamp)
-   * )
-   * ```
-   */
-  getPosition = function(options) {
-    if (options == null) {
-      options = {};
-    }
-    return new Promise(function(resolve) {
-      return watchPosition(options).take(1).onValue(resolve);
-    });
-  };
-  return {
-    watchPosition: watchPosition,
-    getPosition: getPosition
-  };
-};
-
-
-
-},{"../events":53,"baconjs":1,"bluebird":4}],52:[function(require,module,exports){
-var Promise;
-
-Promise = require('bluebird');
-
-module.exports = function(steroids, log) {
-  return {
-    geolocation: require("./geolocation")(steroids, log),
-    accelerometer: require("./accelerometer")(steroids, log)
-  };
-};
-
-
-
-},{"./accelerometer":50,"./geolocation":51,"bluebird":4}],53:[function(require,module,exports){
-var Promise;
-
-Promise = require('bluebird');
-
-module.exports = {
-  deviceready: typeof document !== "undefined" && document !== null ? new Promise(function(resolve) {
-    return document.addEventListener('deviceready', resolve);
-  }) : Promise.resolve()
-};
-
-
-
-},{"bluebird":4}],54:[function(require,module,exports){
+},{"baconjs":1,"bluebird":4}],48:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -9221,7 +8909,7 @@ module.exports = {
 
 
 
-},{}],55:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -9233,12 +8921,10 @@ module.exports = {
 
 
 
-},{}],56:[function(require,module,exports){
-var Promise, deviceready;
+},{}],50:[function(require,module,exports){
+var Promise;
 
 Promise = require('bluebird');
-
-deviceready = require('../events').deviceready;
 
 
 /**
@@ -9247,33 +8933,33 @@ deviceready = require('../events').deviceready;
  * @module notification
  * @description
  * Shows a native alert box.
- * @param {string} message alert message.
- * @param {Object} options an options object (optional). The following properties are available:
+ * @param {string} message alert message (shorthand).
+ * @param {Object} options an options object (verbose). The following properties are available:
+ * * `message`: alert message
  * * `title`: alert title (optional, defaults to "Alert")
  * * `buttonName`: button name (optional, defaults to "OK")
  * @returns {Promise} Promise that is resolved when the the button in the alert box is tapped.
  * @usage
  * ```coffeescript
- * # Basic usage
+ * # Shorthand
  * supersonic.notification.alert("You are awesome!")
  *
- * # With options
- * supersonic.notification.alert("I'm an alert!", {
+ * # Verbose
+ * options =
  *   title: "Custom Title"
+ *   message: "I'm an alert!"
  *   buttonLabel: "Close"
- * })
+ * supersonic.notification.alert(options)
  * ```
  */
 
-module.exports = function(message, options) {
-  var buttonLabel, title;
-  if (options == null) {
-    options = {};
-  }
+module.exports = function(options) {
+  var buttonLabel, message, title;
+  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
   title = (options != null ? options.title : void 0) || "Alert";
   buttonLabel = (options != null ? options.buttonLabel : void 0) || "OK";
-  return deviceready.then(function() {
-    return new Promise(function(resolve) {
+  return new Promise(function(resolve) {
+    return document.addEventListener("deviceready", function() {
       return navigator.notification.alert(message, resolve, title, buttonLabel);
     });
   });
@@ -9281,12 +8967,10 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":53,"bluebird":4}],57:[function(require,module,exports){
-var Promise, deviceready;
+},{"bluebird":4}],51:[function(require,module,exports){
+var Promise;
 
 Promise = require('bluebird');
-
-deviceready = require('../events').deviceready;
 
 
 /**
@@ -9295,43 +8979,45 @@ deviceready = require('../events').deviceready;
  * @module notification
  * @description
  * Shows a native confirm dialog.
- * @param {string} message confirm message.
- * @param {Object} options an options object (optional). The following properties are available:
+ * @param {string} message confirm message (shorthand).
+ * @param {Object} options an options object (verbose). The following properties are available:
+ * * `message`: confirm message
  * * `title`: confirm title (optional, defaults to "Confirm")
  * * `buttonLabels`: Array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
  * @returns {Promise} Promise that is resolved with the index of the tapped button as an argument.
  * @usage
  * ```coffeescript
- * # Basic usage
+ * # Shorthand
  * supersonic.notification.confirm("You are awesome!")
  *
- * # With options
- * supersonic.notification.confirm("I'm a confirm!", {
+ * # Verbose
+ * options =
  *   title: "Custom Title"
+ *   message: "I'm a confirm!"
  *   buttonLabels: ["Yes", "Close"]
- * })
+ * supersonic.notification.confirm(options)
  * ```
  */
 
-module.exports = function(message, options) {
-  var buttonLabels, title;
-  if (options == null) {
-    options = {};
-  }
+module.exports = function(options) {
+  var buttonLabels, message, title;
+  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
   title = (options != null ? options.title : void 0) || "Confirm";
   buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
-  return deviceready.then(function() {
-    return new Promise(function(resolve) {
-      return navigator.notification.confirm(message, resolve, title, buttonLabels);
+  return new Promise(function(resolve) {
+    var callback;
+    callback = function(index) {
+      return resolve(index - 1);
+    };
+    return document.addEventListener("deviceready", function() {
+      return navigator.notification.confirm(message, callback, title, buttonLabels);
     });
-  }).then(function(index) {
-    return index - 1;
   });
 };
 
 
 
-},{"../events":53,"bluebird":4}],58:[function(require,module,exports){
+},{"bluebird":4}],52:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9345,12 +9031,10 @@ module.exports = {
 
 
 
-},{"./alert":56,"./confirm":57,"./prompt":59,"./vibrate":60,"bluebird":4}],59:[function(require,module,exports){
-var Promise, deviceready;
+},{"./alert":50,"./confirm":51,"./prompt":53,"./vibrate":54,"bluebird":4}],53:[function(require,module,exports){
+var Promise;
 
 Promise = require('bluebird');
-
-deviceready = require('../events').deviceready;
 
 
 /**
@@ -9359,8 +9043,9 @@ deviceready = require('../events').deviceready;
  * @module notification
  * @description
  * Shows a native prompt dialog.
- * @param {string} message confirm message.
- * @param {Object} options an options object (optionals). The following properties are available:
+ * @param {string} message confirm dialog (shorthand).
+ * @param {Object} options an options object (verbose). The following properties are available:
+ * * `message`: confirm message
  * * `title`: dialog title (optional, defaults to "Confirm")
  * * `buttonLabels`: array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
  * * `defaultText`: default textbox input value (optional, defaults to an empty string)
@@ -9369,47 +9054,47 @@ deviceready = require('../events').deviceready;
  * * `input`: input string
  * @usage
  * ```coffeescript
- * # Basic usage
+ * # Shorthand
  * supersonic.notification.prompt("This is a prompt. Type something")
  *
- * # With options
- * supersonic.notification.prompt("I'm a prompt!", {
+ * # Verbose
+ * options =
  *   title: "Custom Title"
+ *   message: "I'm a prompt!"
  *   buttonLabels: ["Yes", "No", "Cancel"]
  *   defaultText: "Type here"
- * })
+ * supersonic.notification.prompt(options)
  * ```
  */
 
-module.exports = function(message, options) {
-  var buttonLabels, defaultText, msg, title;
-  if (options == null) {
-    options = {};
-  }
-  msg = message || new String;
+module.exports = function(options) {
+  var buttonLabels, defaultText, message, title;
+  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : new String;
   title = (options != null ? options.title : void 0) || "Prompt";
   buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
   defaultText = (options != null ? options.defaultText : void 0) || new String;
-  return deviceready.then(function() {
-    return new Promise(function(resolve) {
-      return navigator.notification.prompt(msg, resolve, title, buttonLabels, defaultText);
-    });
-  }).then(function(results) {
-    return {
-      buttonIndex: results.buttonIndex - 1,
-      input: results.input1
+  return new Promise(function(resolve) {
+    var callback;
+    callback = function(results) {
+      var result;
+      result = {
+        buttonIndex: results.buttonIndex - 1,
+        input: results.input1
+      };
+      return resolve(result);
     };
+    return document.addEventListener("deviceready", function() {
+      return navigator.notification.prompt(message, callback, title, buttonLabels, defaultText);
+    });
   });
 };
 
 
 
-},{"../events":53,"bluebird":4}],60:[function(require,module,exports){
-var Promise, deviceready;
+},{"bluebird":4}],54:[function(require,module,exports){
+var Promise;
 
 Promise = require('bluebird');
-
-deviceready = require('../events').deviceready;
 
 
 /**
@@ -9428,9 +9113,9 @@ deviceready = require('../events').deviceready;
 
 module.exports = function(options) {
   var time;
-  time = typeof options === "number" ? options : null;
-  return deviceready.then(function() {
-    return new Promise(function(resolve) {
+  time = typeof options === "number" ? options : void 0;
+  return new Promise(function(resolve) {
+    return document.addEventListener("deviceready", function() {
       return resolve(navigator.notification.vibrate(time));
     });
   });
@@ -9438,4 +9123,50 @@ module.exports = function(options) {
 
 
 
-},{"../events":53,"bluebird":4}]},{},[38])
+},{"bluebird":4}],55:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+    views: require("./views")(steroids, log)
+  };
+};
+
+
+
+},{"./views":56,"bluebird":4}],56:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  var bug, views;
+  bug = log.debuggable("supersonic.app");
+
+  /**
+   * @ngdoc method
+   * @name openURL
+   * @module app
+   * @description
+   * Launches browser to open the URL or any external application with that applications URL scheme.
+   * @param {string} URL to open. URLs starting with "http(s)://" will be opened in the device's browser.
+   * @returns {Promise} Promise that is resolved when the application is resumed.
+   * @usage
+   * ```coffeescript
+   * supersonic.app.openURL("http://www.google.com")
+   * supersonic.app.openURL("otherapp://?foo=1&bar=2")
+   * ```
+   */
+  views = {
+    create: function() {
+      return supersonic.logger.log("to create a biew");
+    }
+  };
+  return views;
+};
+
+
+
+},{"bluebird":4}]},{},[38])
