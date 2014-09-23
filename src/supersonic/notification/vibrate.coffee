@@ -1,5 +1,7 @@
 Promise = require 'bluebird'
 
+{deviceready} = require '../events'
+
 ###*
  * @ngdoc method
  * @name vibrate
@@ -16,9 +18,12 @@ Promise = require 'bluebird'
 
 module.exports = (options) ->
   time = if typeof options is "number"
-    options
-  else
-  new Promise (resolve) ->
-    document.addEventListener "deviceready", ->
+      options
+    else
+      null
+
+  deviceready.then ->
+    new Promise (resolve) ->
       resolve navigator.notification.vibrate(time)
+      
       

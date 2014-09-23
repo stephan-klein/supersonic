@@ -1,5 +1,7 @@
 Promise = require 'bluebird'
 
+{deviceready} = require '../events'
+
 ###*
  * @ngdoc method
  * @name alert
@@ -36,6 +38,7 @@ module.exports = (options) ->
   title = options?.title || "Alert"
   buttonLabel = options?.buttonLabel || "OK"
 
-  new Promise (resolve) ->
-    document.addEventListener "deviceready", ->
+  deviceready.then ->
+    new Promise (resolve) ->
       navigator.notification.alert message, resolve, title, buttonLabel
+

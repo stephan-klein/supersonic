@@ -1,5 +1,7 @@
 Promise = require 'bluebird'
 
+{deviceready} = require '../events'
+
 ###*
  * @ngdoc method
  * @name confirm
@@ -35,12 +37,9 @@ module.exports = (options) ->
   title = options?.title || "Confirm"
   buttonLabels = options?.buttonLabels || ["OK","Cancel"]
 
-  new Promise (resolve) ->
-    callback = (index) ->
-      resolve(index-1) # Cordova indexing starts at 1
-
-    document.addEventListener "deviceready", ->
-      navigator.notification.confirm message, callback, title, buttonLabels
-
-
- 
+  deviceready
+    .then(->
+      new Promise (resolve) ->
+        navigator.notification.confirm message, resolve, title, buttonLabels
+    ).then (index) ->
+      index - 1 # Cordova indexing starts at 1
