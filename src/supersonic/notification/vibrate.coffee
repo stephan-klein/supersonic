@@ -22,8 +22,8 @@ module.exports = (options) ->
     else
       null
 
+  # TODO: Actually resolve the promise only after the vibration is done
   deviceready.then ->
     new Promise (resolve) ->
       resolve navigator.notification.vibrate(time)
-      
       
