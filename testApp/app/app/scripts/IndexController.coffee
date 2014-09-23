@@ -1,6 +1,6 @@
 angular
   .module('app')
-  .controller 'IndexController', ($scope, $timeout, supersonic) ->
+  .controller 'IndexController', ($scope, $timeout, $q, supersonic) ->
     $scope.successfulOpens = 0
 
     $scope.openURLTests = [
@@ -77,7 +77,7 @@ angular
         (message) ->
           alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
       )
-  .controller 'ViewsController', ($scope, supersonic) ->
+  .controller 'ViewsController', ($scope, $q, supersonic) ->
 
     $scope.statusBarHidden = 0
     $scope.statusBarShown = 0
@@ -115,4 +115,17 @@ angular
 
 
     $scope.newView = ->
-      supersonic.ui.view.create("http://www.google.com").viewMethod()
+      v = supersonic.ui.view("http://localhost/app/notification/index.html", "myView")
+
+      # TODO: Find normal way for qifying
+      qify = (f, sc) ->
+        () ->
+          args = arguments
+          # NOTE: It's important to preserve scope!
+          $q.when ()->
+            f.apply sc, args
+
+      v.preload = qify v.preload, v
+
+      v.preload().then ()->
+        supersonic.logger.log "preloaded"
