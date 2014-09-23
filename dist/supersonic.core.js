@@ -8626,7 +8626,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":39,"./core/debug":44,"./core/logger":45,"./mock/steroids":46,"./mock/window":47,"./notification":50}],44:[function(require,module,exports){
+},{"./app":39,"./core/debug":44,"./core/logger":45,"./mock/steroids":47,"./mock/window":48,"./notification":51}],44:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8841,6 +8841,19 @@ module.exports = function(steroids, window) {
 
 
 },{"baconjs":1,"bluebird":4}],46:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = {
+  deviceready: typeof document !== "undefined" && document !== null ? new Promise(function(resolve) {
+    return document.addEventListener('deviceready', resolve);
+  }) : Promise.resolve()
+};
+
+
+
+},{"bluebird":4}],47:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -8855,7 +8868,7 @@ module.exports = {
 
 
 
-},{}],47:[function(require,module,exports){
+},{}],48:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -8867,10 +8880,12 @@ module.exports = {
 
 
 
-},{}],48:[function(require,module,exports){
-var Promise;
+},{}],49:[function(require,module,exports){
+var Promise, deviceready;
 
 Promise = require('bluebird');
+
+deviceready = require('../events').deviceready;
 
 
 /**
@@ -8904,8 +8919,8 @@ module.exports = function(options) {
   message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
   title = (options != null ? options.title : void 0) || "Alert";
   buttonLabel = (options != null ? options.buttonLabel : void 0) || "OK";
-  return new Promise(function(resolve) {
-    return document.addEventListener("deviceready", function() {
+  return deviceready.then(function() {
+    return new Promise(function(resolve) {
       return navigator.notification.alert(message, resolve, title, buttonLabel);
     });
   });
@@ -8913,10 +8928,12 @@ module.exports = function(options) {
 
 
 
-},{"bluebird":4}],49:[function(require,module,exports){
-var Promise;
+},{"../events":46,"bluebird":4}],50:[function(require,module,exports){
+var Promise, deviceready;
 
 Promise = require('bluebird');
+
+deviceready = require('../events').deviceready;
 
 
 /**
@@ -8950,20 +8967,18 @@ module.exports = function(options) {
   message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
   title = (options != null ? options.title : void 0) || "Confirm";
   buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
-  return new Promise(function(resolve) {
-    var callback;
-    callback = function(index) {
-      return resolve(index - 1);
-    };
-    return document.addEventListener("deviceready", function() {
-      return navigator.notification.confirm(message, callback, title, buttonLabels);
+  return deviceready.then(function() {
+    return new Promise(function(resolve) {
+      return navigator.notification.confirm(message, resolve, title, buttonLabels);
     });
+  }).then(function(index) {
+    return index - 1;
   });
 };
 
 
 
-},{"bluebird":4}],50:[function(require,module,exports){
+},{"../events":46,"bluebird":4}],51:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8977,10 +8992,12 @@ module.exports = {
 
 
 
-},{"./alert":48,"./confirm":49,"./prompt":51,"./vibrate":52,"bluebird":4}],51:[function(require,module,exports){
-var Promise;
+},{"./alert":49,"./confirm":50,"./prompt":52,"./vibrate":53,"bluebird":4}],52:[function(require,module,exports){
+var Promise, deviceready;
 
 Promise = require('bluebird');
+
+deviceready = require('../events').deviceready;
 
 
 /**
@@ -9019,28 +9036,26 @@ module.exports = function(options) {
   title = (options != null ? options.title : void 0) || "Prompt";
   buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
   defaultText = (options != null ? options.defaultText : void 0) || new String;
-  return new Promise(function(resolve) {
-    var callback;
-    callback = function(results) {
-      var result;
-      result = {
-        buttonIndex: results.buttonIndex - 1,
-        input: results.input1
-      };
-      return resolve(result);
-    };
-    return document.addEventListener("deviceready", function() {
-      return navigator.notification.prompt(message, callback, title, buttonLabels, defaultText);
+  return deviceready.then(function() {
+    return new Promise(function(resolve) {
+      return navigator.notification.prompt(message, resolve, title, buttonLabels, defaultText);
     });
+  }).then(function(results) {
+    return {
+      buttonIndex: results.buttonIndex - 1,
+      input: results.input1
+    };
   });
 };
 
 
 
-},{"bluebird":4}],52:[function(require,module,exports){
-var Promise;
+},{"../events":46,"bluebird":4}],53:[function(require,module,exports){
+var Promise, deviceready;
 
 Promise = require('bluebird');
+
+deviceready = require('../events').deviceready;
 
 
 /**
@@ -9059,9 +9074,9 @@ Promise = require('bluebird');
 
 module.exports = function(options) {
   var time;
-  time = typeof options === "number" ? options : void 0;
-  return new Promise(function(resolve) {
-    return document.addEventListener("deviceready", function() {
+  time = typeof options === "number" ? options : null;
+  return deviceready.then(function() {
+    return new Promise(function(resolve) {
       return resolve(navigator.notification.vibrate(time));
     });
   });
@@ -9069,4 +9084,4 @@ module.exports = function(options) {
 
 
 
-},{"bluebird":4}]},{},[43])
+},{"../events":46,"bluebird":4}]},{},[43])
