@@ -1,42 +1,53 @@
 Promise = require 'bluebird'
 
+
 module.exports = (steroids, log) ->
   # TODO: add bug later
-  # bug = log.debuggable "supersonic.app"
+  # bug = log.debuggable "supersonic.ui.view"
 
-  class ViewClass
+  class View
 
-    constructor: (@location, @id) ->
-      if !@id
-        @id = @location
+    ###*
+    * @ngdoc method
+    * @name create
+    * @module views
+    * @description
+    * Creates a new view
+    * @param {string} URL of a view
+    * @returns View object
+    * @usage
+    * ```coffeescript
+    * supersonic.ui.view.create("http://www.google.com")
+    * ```
+    ###
+    constructor: (location, id) ->
+      # if this !instanceof View
+      #   return new View(location, id)
 
+      @location = location
+      @id = id || location
+
+      supersonic.logger.info "'#{@location}' view was created with '#{@id}' id"
 
       @_view = new steroids.views.WebView {
         location: @location,
         id: @id
       }
 
-    viewMethod: () ->
-      supersonic.logger.log "View method is called"
+    # TODO: Maybe preloads whould happen in contructor by default?
+    preload: () ->
+      new Promise (resolve) ->
+        @_view.preload( {
+          id: @id
+        }, {
 
-  view = {
-    ###*
-     * @ngdoc method
-     * @name create
-     * @module views
-     * @description
-     * Creates a new view
-     * @param {string} URL of a view
-     * @returns View object
-     * @usage
-     * ```coffeescript
-     * supersonic.ui.view.create("http://www.google.com")
-     * ```
-    ###
-    create: (location, id)->
+          onSuccess: ()->
+            supersonic.logger.info "'#{@id}' view was preloaded"
+            resolve()
 
-      return new ViewClass(location, id)
+          onFailure: ()->
+            supersonic.logger.error "Preloading of '#{@id}' was failed"
+        })
 
-  }
-
-  return view
+  return (location, id)->
+    return new View(location, id)
