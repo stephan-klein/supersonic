@@ -8709,7 +8709,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":39,"./core/debug":45,"./core/logger":46,"./device":48,"./mock/steroids":50,"./mock/window":51,"./notification":54}],45:[function(require,module,exports){
+},{"./app":39,"./core/debug":45,"./core/logger":46,"./device":49,"./mock/steroids":51,"./mock/window":52,"./notification":55}],45:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8933,6 +8933,96 @@ Bacon = require('baconjs');
 deviceready = require('../events').deviceready;
 
 module.exports = function(steroids, log) {
+  var bug, getAcceleration, watchAcceleration;
+  bug = log.debuggable("supersonic.device.accelerometer");
+
+  /**
+   * @ngdoc overview
+   * @name accelerometer
+   * @module device
+   * @description
+   *  provides access to the device's accelerometer. The accelerometer is a motion sensor that detects the change (delta) in movement relative to the current device orientation, in three dimensions along the x, y, and z axis.
+   */
+
+  /**
+   * @ngdoc method
+   * @name watchPosition
+   * @module accelerometer
+   * @description
+   * Returns a stream of acceleration updates.
+   * @returns {Stream} Stream of acceleration updates
+   * @usage
+   * ```coffeescript
+   * supersonic.device.accelerometer.watchPosition().onValue( (acceleration) ->
+   *  console.log('Acceleration X: '  + acceleration.x  + '\n' +
+   *              'Acceleration Y: ' + acceleration.y + '\n' +
+   *              'Acceleration Z: ' + acceleration.z + '\n' +
+   *              'Timestamp: ' + acceleration.timestamp)
+   * )
+   * ```
+   */
+  watchAcceleration = function(options) {
+    if (options == null) {
+      options = {};
+    }
+    return Bacon.fromPromise(deviceready).flatMap(function() {
+      return Bacon.fromBinder(function(sink) {
+        var watchId;
+        watchId = window.navigator.geolocation.watchAcceleration(function(acceleration) {
+          return sink(new Bacon.Next(acceleration));
+        }, function(error) {
+          return sink(new Bacon.Error(error));
+        }, options);
+        return function() {
+          return window.navigator.watchAcceleration.clearWatch(watchId);
+        };
+      });
+    });
+  };
+
+  /**
+   * @ngdoc method
+   * @name getAcceleration
+   * @module accelerometer
+   * @description
+   * Returns device's current acceleration.
+   * @returns {Promise} Promise is resolved to the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.
+   * @usage
+   * ```coffeescript
+   * supersonic.device.geolocation.getAcceleration().then( (acceleration) ->
+   *  console.log('Acceleration X: '  + acceleration.x  + '\n' +
+   *              'Acceleration Y: ' + acceleration.y + '\n' +
+   *              'Acceleration Z: ' + acceleration.z + '\n' +
+   *              'Timestamp: ' + acceleration.timestamp)
+   * )
+   * ```
+   */
+  getAcceleration = function(options) {
+    if (options == null) {
+      options = {};
+    }
+    return new Promise(function(resolve) {
+      return watchPosition(options).take(1).onValue(resolve);
+    });
+  };
+  return {
+    watchAcceleration: watchAcceleration,
+    getAcceleration: getAcceleration
+  };
+};
+
+
+
+},{"../events":50,"baconjs":1,"bluebird":4}],48:[function(require,module,exports){
+var Bacon, Promise, deviceready;
+
+Promise = require('bluebird');
+
+Bacon = require('baconjs');
+
+deviceready = require('../events').deviceready;
+
+module.exports = function(steroids, log) {
   var bug, getPosition, watchPosition;
   bug = log.debuggable("supersonic.device.geolocation");
 
@@ -9014,20 +9104,21 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":49,"baconjs":1,"bluebird":4}],48:[function(require,module,exports){
+},{"../events":50,"baconjs":1,"bluebird":4}],49:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
   return {
-    geolocation: require("./geolocation")(steroids, log)
+    geolocation: require("./geolocation")(steroids, log),
+    accelerometer: require("./accelerometer")(steroids, log)
   };
 };
 
 
 
-},{"./geolocation":47,"bluebird":4}],49:[function(require,module,exports){
+},{"./accelerometer":47,"./geolocation":48,"bluebird":4}],50:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9040,7 +9131,7 @@ module.exports = {
 
 
 
-},{"bluebird":4}],50:[function(require,module,exports){
+},{"bluebird":4}],51:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -9055,7 +9146,7 @@ module.exports = {
 
 
 
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -9067,7 +9158,7 @@ module.exports = {
 
 
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9115,7 +9206,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":49,"bluebird":4}],53:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],54:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9165,7 +9256,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":49,"bluebird":4}],54:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],55:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9179,7 +9270,7 @@ module.exports = {
 
 
 
-},{"./alert":52,"./confirm":53,"./prompt":55,"./vibrate":56,"bluebird":4}],55:[function(require,module,exports){
+},{"./alert":53,"./confirm":54,"./prompt":56,"./vibrate":57,"bluebird":4}],56:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9238,7 +9329,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":49,"bluebird":4}],56:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],57:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9272,4 +9363,4 @@ module.exports = function(options) {
 
 
 
-},{"../events":49,"bluebird":4}]},{},[44])
+},{"../events":50,"bluebird":4}]},{},[44])
