@@ -9148,47 +9148,54 @@ var Promise;
 Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
-  var ViewClass, view;
-  ViewClass = (function() {
-    function ViewClass(location, id) {
+  var View;
+  View = (function() {
+
+    /**
+    * @ngdoc method
+    * @name create
+    * @module views
+    * @description
+    * Creates a new view
+    * @param {string} URL of a view
+    * @returns View object
+    * @usage
+    * ```coffeescript
+    * supersonic.ui.view.create("http://www.google.com")
+    * ```
+     */
+    function View(location, id) {
       this.location = location;
-      this.id = id;
-      if (!this.id) {
-        this.id = this.location;
-      }
+      this.id = id || location;
+      supersonic.logger.info("'" + this.location + "' view was created with '" + this.id + "' id");
       this._view = new steroids.views.WebView({
         location: this.location,
         id: this.id
       });
     }
 
-    ViewClass.prototype.viewMethod = function() {
-      return supersonic.logger.log("View method is called");
+    View.prototype.preload = function() {
+      return new Promise(function(resolve) {
+        return this._view.preload({
+          id: this.id
+        }, {
+          onSuccess: function() {
+            supersonic.logger.info("'" + this.id + "' view was preloaded");
+            return resolve();
+          },
+          onFailure: function() {
+            return supersonic.logger.error("Preloading of '" + this.id + "' was failed");
+          }
+        });
+      });
     };
 
-    return ViewClass;
+    return View;
 
   })();
-  view = {
-
-    /**
-     * @ngdoc method
-     * @name create
-     * @module views
-     * @description
-     * Creates a new view
-     * @param {string} URL of a view
-     * @returns View object
-     * @usage
-     * ```coffeescript
-     * supersonic.ui.view.create("http://www.google.com")
-     * ```
-     */
-    create: function(location, id) {
-      return new ViewClass(location, id);
-    }
+  return function(location, id) {
+    return new View(location, id);
   };
-  return view;
 };
 
 
