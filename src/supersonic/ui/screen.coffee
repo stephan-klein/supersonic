@@ -10,7 +10,7 @@ module.exports = (steroids, log) ->
    * @description
    * Methods and properties to control the visible part of the application.
   ###
-    
+
   ###*
    * @ngdoc method
    * @name setAllowedRotations
@@ -40,14 +40,14 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject) ->
       steroids.screen.setAllowedRotations(
         {
-          orientations: orientations
+          allowedRotations: orientations
         }
         {
           onSuccess: resolve
           onFailure: reject
         }
       )
-  
+
   ###*
    * @ngdoc method
    * @name rotateTo
@@ -84,4 +84,3 @@ module.exports = (steroids, log) ->
           onFailure: reject
         }
       )
-      
