@@ -15,6 +15,7 @@ module.exports = {
   debug: require('./core/debug')(steroids, logger)
   app: require('./app')(steroids, logger)
   notification: require('./notification')
+  device: require('./device')(steroids, logger)
 }
 
 # Export to window as global if we're in the browser
