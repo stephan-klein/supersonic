@@ -26,7 +26,7 @@ logMessageStream = (toEnvelope) ->
   in: (message) -> stream.push message
   out: stream.map(toEnvelope)
 
-module.exports = (steroids) -> do (window) ->
+module.exports = (steroids, window) ->
   defaultLogEndPoint = ->
     new Promise (resolve) ->
       steroids.app.host.getURL {},
@@ -74,7 +74,7 @@ module.exports = (steroids) -> do (window) ->
     messages.plug streamsPerLogLevel.error.out
     messages.plug streamsPerLogLevel.debug.out
 
-    log = {
+    return log = {
       # Don't expose messages, qify for angular goes haywire
       autoFlush: autoFlush messages
       log: streamsPerLogLevel.info.in
