@@ -9077,41 +9077,59 @@ Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
   return {
-    views: require("./views")(steroids, log)
+    view: require("./view")(steroids, log)
   };
 };
 
 
 
-},{"./views":54,"bluebird":4}],54:[function(require,module,exports){
+},{"./view":54,"bluebird":4}],54:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
-  var bug, views;
-  bug = log.debuggable("supersonic.app");
+  var ViewClass, view;
+  ViewClass = (function() {
+    function ViewClass(location, id) {
+      this.location = location;
+      this.id = id;
+      if (!this.id) {
+        this.id = this.location;
+      }
+      this._view = new steroids.views.WebView({
+        location: this.location,
+        id: this.id
+      });
+    }
 
-  /**
-   * @ngdoc method
-   * @name openURL
-   * @module app
-   * @description
-   * Launches browser to open the URL or any external application with that applications URL scheme.
-   * @param {string} URL to open. URLs starting with "http(s)://" will be opened in the device's browser.
-   * @returns {Promise} Promise that is resolved when the application is resumed.
-   * @usage
-   * ```coffeescript
-   * supersonic.app.openURL("http://www.google.com")
-   * supersonic.app.openURL("otherapp://?foo=1&bar=2")
-   * ```
-   */
-  views = {
-    create: function() {
-      return supersonic.logger.log("to create a biew");
+    ViewClass.prototype.viewMethod = function() {
+      return supersonic.logger.log("View method is called");
+    };
+
+    return ViewClass;
+
+  })();
+  view = {
+
+    /**
+     * @ngdoc method
+     * @name create
+     * @module views
+     * @description
+     * Creates a new view
+     * @param {string} URL of a view
+     * @returns View object
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view.create("http://www.google.com")
+     * ```
+     */
+    create: function(location, id) {
+      return new ViewClass(location, id);
     }
   };
-  return views;
+  return view;
 };
 
 
