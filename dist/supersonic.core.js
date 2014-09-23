@@ -8698,7 +8698,8 @@ module.exports = {
   logger: logger,
   debug: require('./core/debug')(steroids, logger),
   app: require('./app')(steroids, logger),
-  notification: require('./notification')
+  notification: require('./notification'),
+  device: require('./device')(steroids, logger)
 };
 
 if ((typeof window !== "undefined" && window !== null)) {
@@ -8708,7 +8709,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":39,"./core/debug":45,"./core/logger":46,"./mock/steroids":48,"./mock/window":49,"./notification":52}],45:[function(require,module,exports){
+},{"./app":39,"./core/debug":45,"./core/logger":46,"./device":48,"./mock/steroids":50,"./mock/window":51,"./notification":54}],45:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8923,6 +8924,110 @@ module.exports = function(steroids, window) {
 
 
 },{"baconjs":1,"bluebird":4}],47:[function(require,module,exports){
+var Bacon, Promise, deviceready;
+
+Promise = require('bluebird');
+
+Bacon = require('baconjs');
+
+deviceready = require('../events').deviceready;
+
+module.exports = function(steroids, log) {
+  var bug, getPosition, watchPosition;
+  bug = log.debuggable("supersonic.device.geolocation");
+
+  /**
+   * @ngdoc overview
+   * @name geolocation
+   * @module device
+   * @description
+   * Provides access to location data based on the device's GPS sensor or inferred from network signals.
+   */
+
+  /**
+   * @ngdoc method
+   * @name watchPosition
+   * @module geolocation
+   * @description
+   * Returns a stream of position updates.
+   * @returns {Stream} Stream of position updates
+   * @usage
+   * ```coffeescript
+   * supersonic.device.geolocation.watchPosition().onValue( (position) ->
+   *  console.log('Latitude: '  + position.coords.latitude  + '\n' +
+   *                        'Longitude: ' + position.coords.longitude + '\n' +
+   *                        'Timestamp: ' + position.timestamp)
+   * )
+   * ```
+   */
+  watchPosition = function(options) {
+    if (options == null) {
+      options = {};
+    }
+    if (options.enableHighAccuracy == null) {
+      options.enableHighAccuracy = true;
+    }
+    return Bacon.fromPromise(deviceready).flatMap(function() {
+      return Bacon.fromBinder(function(sink) {
+        var watchId;
+        watchId = window.navigator.geolocation.watchPosition(function(position) {
+          return sink(new Bacon.Next(position));
+        }, function(error) {
+          return sink(new Bacon.Error(error));
+        }, options);
+        return function() {
+          return window.navigator.geolocation.clearWatch(watchId);
+        };
+      });
+    });
+  };
+
+  /**
+   * @ngdoc method
+   * @name enable
+   * @module getPosition
+   * @description
+   * Returns device's current position.
+   * @returns {Promise} Promise is resolved to the next available position data. Will wait for data for an indeterminate time; use a timeout if required.
+   * @usage
+   * ```coffeescript
+   * supersonic.device.geolocation.getPosition().then( (position) ->
+   *  console.log('Latitude: '  + position.coords.latitude  + '\n' +
+   *                        'Longitude: ' + position.coords.longitude + '\n' +
+   *                        'Timestamp: ' + position.timestamp)
+   * )
+   * ```
+   */
+  getPosition = function(options) {
+    if (options == null) {
+      options = {};
+    }
+    return new Promise(function(resolve) {
+      return watchPosition(options).take(1).onValue(resolve);
+    });
+  };
+  return {
+    watchPosition: watchPosition,
+    getPosition: getPosition
+  };
+};
+
+
+
+},{"../events":49,"baconjs":1,"bluebird":4}],48:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+    geolocation: require("./geolocation")(steroids, log)
+  };
+};
+
+
+
+},{"./geolocation":47,"bluebird":4}],49:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8935,7 +9040,7 @@ module.exports = {
 
 
 
-},{"bluebird":4}],48:[function(require,module,exports){
+},{"bluebird":4}],50:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -8950,7 +9055,7 @@ module.exports = {
 
 
 
-},{}],49:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -8962,7 +9067,7 @@ module.exports = {
 
 
 
-},{}],50:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9010,7 +9115,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":47,"bluebird":4}],51:[function(require,module,exports){
+},{"../events":49,"bluebird":4}],53:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9060,7 +9165,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":47,"bluebird":4}],52:[function(require,module,exports){
+},{"../events":49,"bluebird":4}],54:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9074,7 +9179,7 @@ module.exports = {
 
 
 
-},{"./alert":50,"./confirm":51,"./prompt":53,"./vibrate":54,"bluebird":4}],53:[function(require,module,exports){
+},{"./alert":52,"./confirm":53,"./prompt":55,"./vibrate":56,"bluebird":4}],55:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9133,7 +9238,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":47,"bluebird":4}],54:[function(require,module,exports){
+},{"../events":49,"bluebird":4}],56:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9167,4 +9272,4 @@ module.exports = function(options) {
 
 
 
-},{"../events":47,"bluebird":4}]},{},[44])
+},{"../events":49,"bluebird":4}]},{},[44])

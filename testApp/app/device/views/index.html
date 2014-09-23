@@ -1,0 +1,31 @@
+<div ng-controller="IndexController">
+  <ss-navigation-bar>
+    <ss-navigation-bar-title>
+      Device tests
+    </ss-navigation-bar-title>
+  </ss-navigation-bar>
+
+  <div class="card padding">
+    <h1>screen.watchPosition tests</h1>
+    <button
+      class="button button-block"
+      ng-repeat="test in watchPositionTests"
+      ng-click="testWatchPosition(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Latest position received: {{watchPosition}}</li>
+    </ul>
+  </div>
+
+  <div class="card padding">
+    <h1>screen.getPosition tests</h1>
+    <button class="button button-block" ng-repeat="test in getPositionTests"  ng-click="testGetPosition(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Latest position received: {{latestPosition}}</li>
+    </ul>
+  </div>
+  
+</div>
