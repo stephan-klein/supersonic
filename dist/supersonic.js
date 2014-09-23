@@ -8379,7 +8379,7 @@ if (((typeof window !== "undefined" && window !== null ? window.angular : void 0
 
 
 
-},{"./supersonic/angular":39,"./supersonic/core":45}],39:[function(require,module,exports){
+},{"./supersonic/angular":39,"./supersonic/core":46}],39:[function(require,module,exports){
 var supersonic,
   __slice = [].slice;
 
@@ -8419,7 +8419,7 @@ module.exports = function(angular) {
 
 
 
-},{"./core":45}],40:[function(require,module,exports){
+},{"./core":46}],40:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8466,13 +8466,14 @@ module.exports = function(steroids, log) {
     sleep: require("./sleep")(steroids, log),
     getLaunchURL: require("./getLaunchURL")(steroids, log),
     splashscreen: require("./splashscreen")(steroids, log),
-    openURL: require("./openURL")(steroids, log)
+    openURL: require("./openURL")(steroids, log),
+    statusBar: require("./statusBar")(steroids, log)
   };
 };
 
 
 
-},{"./getLaunchURL":40,"./openURL":42,"./sleep":43,"./splashscreen":44,"bluebird":4}],42:[function(require,module,exports){
+},{"./getLaunchURL":40,"./openURL":42,"./sleep":43,"./splashscreen":44,"./statusBar":45,"bluebird":4}],42:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8657,6 +8658,90 @@ module.exports = function(steroids, log) {
 
 
 },{"bluebird":4}],45:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  var bug;
+  bug = log.debuggable("supersonic.app.statusBar");
+  return {
+
+    /**
+     * @ngdoc overview
+     * @name statusBar
+     * @module app
+     * @description
+     * The native status bar shown on the top of the screen. The native status bar is displayed by default. It can be hidden and shown application wide.
+     */
+
+    /**
+     * @ngdoc method
+     * @name hide
+     * @module statusBar
+     * @description
+     * Hides the native status bar application wide.
+     * @returns {Promise} Promise that is resolved when the status bar is hidden.
+     * @usage
+     * ```coffeescript
+     * supersonic.app.statusBar.hide()
+     * ```
+     */
+    hide: bug("hide", function() {
+      return new Promise(function(resolve, reject) {
+        return steroids.statusBar.hide({}, {
+          onSuccess: function() {
+            return resolve();
+          },
+          onFailure: function() {
+            return reject();
+          }
+        });
+      });
+    }),
+
+    /**
+     * @ngdoc method
+     * @name show
+     * @module statusBar
+     * @description
+     * Shows the native status bar application wide. If no parameters are given, the status bar text color is the default color (black on iOS 7).
+     * @params {string} style If set to "light" (shorthand), then the native status bar text color is light (white on iOS 7). Optional.
+     * @params {Object} options Options object with `style` property (verbose). Optional.
+     * @returns {Promise} Promise that is resolved when the status bar is shown.
+     * @usage
+     * ```coffeescript
+     * supersonic.app.statusBar.show()
+     * # Shorthand
+     * supersonic.app.statusBar.show("light")
+     * # Verbose
+     * options =
+     *  style: "light"
+     * supersonic.app.statusBar.show(options)
+     * ```
+     */
+    show: bug("show", function(options) {
+      var style;
+      style = typeof options === "string" ? options : (options != null ? options.style : void 0) != null ? options.style : void 0;
+      return new Promise(function(resolve, reject) {
+        return steroids.statusBar.show({
+          style: style
+        }, {
+          onSuccess: function() {
+            return resolve();
+          },
+          onFailure: function() {
+            return reject();
+          }
+        });
+      });
+    })
+  };
+};
+
+
+
+},{"bluebird":4}],46:[function(require,module,exports){
 var global, logger, steroids;
 
 global = typeof window !== "undefined" && window !== null ? window : require('./mock/window');
@@ -8679,7 +8764,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":41,"./core/debug":46,"./core/logger":47,"./mock/steroids":49,"./mock/window":50,"./notification":53}],46:[function(require,module,exports){
+},{"./app":41,"./core/debug":47,"./core/logger":48,"./mock/steroids":50,"./mock/window":51,"./notification":54}],47:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8719,7 +8804,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],47:[function(require,module,exports){
+},{"bluebird":4}],48:[function(require,module,exports){
 var Bacon, Promise, logMessageEnvelope, logMessageStream, startFlushing,
   __slice = [].slice;
 
@@ -8893,7 +8978,7 @@ module.exports = function(steroids, window) {
 
 
 
-},{"baconjs":1,"bluebird":4}],48:[function(require,module,exports){
+},{"baconjs":1,"bluebird":4}],49:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8906,7 +8991,7 @@ module.exports = {
 
 
 
-},{"bluebird":4}],49:[function(require,module,exports){
+},{"bluebird":4}],50:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -8921,7 +9006,7 @@ module.exports = {
 
 
 
-},{}],50:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -8933,7 +9018,7 @@ module.exports = {
 
 
 
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -8981,7 +9066,7 @@ module.exports = function(options) {
 
 
 
-},{"../events":48,"bluebird":4}],52:[function(require,module,exports){
+},{"../events":49,"bluebird":4}],53:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9031,7 +9116,7 @@ module.exports = function(options) {
 
 
 
-},{"../events":48,"bluebird":4}],53:[function(require,module,exports){
+},{"../events":49,"bluebird":4}],54:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9045,7 +9130,7 @@ module.exports = {
 
 
 
-},{"./alert":51,"./confirm":52,"./prompt":54,"./vibrate":55,"bluebird":4}],54:[function(require,module,exports){
+},{"./alert":52,"./confirm":53,"./prompt":55,"./vibrate":56,"bluebird":4}],55:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9103,7 +9188,7 @@ module.exports = function(options) {
 
 
 
-},{"../events":48,"bluebird":4}],55:[function(require,module,exports){
+},{"../events":49,"bluebird":4}],56:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9137,4 +9222,4 @@ module.exports = function(options) {
 
 
 
-},{"../events":48,"bluebird":4}]},{},[38])
+},{"../events":49,"bluebird":4}]},{},[38])

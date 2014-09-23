@@ -49,5 +49,19 @@
       <li>Splashscreen hidden: {{splashscreenHidden}}</li>
     </ul>
   </div>
+
+  <div class="card padding">
+    <h1>statusBar.show/hide tests</h1>
+    <button
+      class="button button-block"
+      ng-repeat="test in hideAndShowStatusBarTests"
+      ng-click="testHideAndShowStatusBar(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Status bar hidden: {{statusBarHidden}}</li>
+      <li>Status bar shown: {{statusBarShown}}</li>
+    </ul>
+  </div>
   
 </div>
