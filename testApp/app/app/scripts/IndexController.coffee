@@ -31,7 +31,7 @@ angular
     ]
 
     $scope.testGetLaunchURL = (options) ->
-      supersonic.app.getLaunchURL().then( 
+      supersonic.app.getLaunchURL().then(
         (launchURL) ->
           $scope.launchURL = launchURL
         (message) ->
@@ -63,11 +63,11 @@ angular
     ]
 
     $scope.testShowAndHideSplashscreen = (options) ->
-      supersonic.app.splashscreen.show().then( 
+      supersonic.app.splashscreen.show().then(
         () ->
           $scope.splashscreenShown++
           $timeout ->
-            supersonic.app.splashscreen.hide().then( 
+            supersonic.app.splashscreen.hide().then(
               () ->
                 $scope.splashscreenHidden++
               (message) ->
@@ -77,6 +77,7 @@ angular
         (message) ->
           alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
       )
+  .controller 'ViewsController', ($scope, supersonic) ->
 
     $scope.statusBarHidden = 0
     $scope.statusBarShown = 0
@@ -92,7 +93,7 @@ angular
       }
       {
         title: "Hide and show status bar with an object param"
-        options: 
+        options:
           style: "light"
       }
     ]
@@ -112,4 +113,6 @@ angular
       )
 
 
-    
+
+    $scope.newView = ->
+      supersonic.logger.log "Hello sweetty!"
