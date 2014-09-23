@@ -1,6 +1,7 @@
 angular
   .module('device')
   .controller 'IndexController', ($scope, supersonic) ->
+
     $scope.watchPosition = undefined
 
     $scope.watchPositionTests = [
