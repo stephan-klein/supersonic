@@ -9047,8 +9047,8 @@ module.exports = function(steroids, log) {
 
   /**
    * @ngdoc method
-   * @name enable
-   * @module getPosition
+   * @name getPosition
+   * @module geolocation
    * @description
    * Returns device's current position.
    * @returns {Promise} Promise is resolved to the next available position data. Will wait for data for an indeterminate time; use a timeout if required.
