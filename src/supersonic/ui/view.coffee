@@ -1,9 +1,10 @@
 Promise = require 'bluebird'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.app"
+  # TODO: add bug later
+  # bug = log.debuggable "supersonic.app"
 
-  views = {
+  view = {
     ###*
      * @ngdoc method
      * @name create
@@ -14,11 +15,11 @@ module.exports = (steroids, log) ->
      * @returns {Promise} Promise that is resolved when the application is resumed.
      * @usage
      * ```coffeescript
-     * supersonic.ui.views.create("http://www.google.com")
+     * supersonic.ui.view.create("http://www.google.com")
      * ```
     ###
     create: ()->
       supersonic.logger.log "to create a view"
   }
 
-  return views
+  return view

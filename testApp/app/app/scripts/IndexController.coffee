@@ -115,4 +115,4 @@ angular
 
 
     $scope.newView = ->
-      supersonic.ui.views.create()
+      supersonic.ui.view.create()
