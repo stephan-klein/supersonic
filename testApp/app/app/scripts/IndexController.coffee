@@ -115,4 +115,4 @@ angular
 
 
     $scope.newView = ->
-      supersonic.ui.view.create()
+      supersonic.ui.view.create("http://www.google.com").viewMethod()
