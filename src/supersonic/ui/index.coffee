@@ -1,4 +1,4 @@
 Promise = require 'bluebird'
 
 module.exports = (steroids, log) ->
-  views: require("./views")(steroids, log)
+  view: require("./view")(steroids, log)

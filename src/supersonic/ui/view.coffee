@@ -4,6 +4,21 @@ module.exports = (steroids, log) ->
   # TODO: add bug later
   # bug = log.debuggable "supersonic.app"
 
+  class ViewClass
+
+    constructor: (@location, @id) ->
+      if !@id
+        @id = @location
+
+
+      @_view = new steroids.views.WebView {
+        location: @location,
+        id: @id
+      }
+
+    viewMethod: () ->
+      supersonic.logger.log "View method is called"
+
   view = {
     ###*
      * @ngdoc method
@@ -12,14 +27,16 @@ module.exports = (steroids, log) ->
      * @description
      * Creates a new view
      * @param {string} URL of a view
-     * @returns {Promise} Promise that is resolved when the application is resumed.
+     * @returns View object
      * @usage
      * ```coffeescript
      * supersonic.ui.view.create("http://www.google.com")
      * ```
     ###
-    create: ()->
-      supersonic.logger.log "to create a view"
+    create: (location, id)->
+
+      return new ViewClass(location, id)
+
   }
 
   return view
