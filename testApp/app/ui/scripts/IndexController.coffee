@@ -11,14 +11,14 @@ angular
       v = supersonic.ui.view(url, "myView")
       supersonic.ui.layer.push(v)
 
-    $scope.asLeftDrawer = (url)->
+    $scope.asLeftDrawer = (url, width)->
       v = supersonic.ui.view(url)
 
-      v.preload().then ()->
+      v.setWidth(width).preload().then ()->
         supersonic.ui.drawer.asLeft(v)
 
-    $scope.asRightDrawer = (url)->
+    $scope.asRightDrawer = (url, width)->
       v = supersonic.ui.view(url)
 
-      v.preload().then ()->
+      v.setWidth(width).preload().then ()->
         supersonic.ui.drawer.asRight(v)
