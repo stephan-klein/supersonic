@@ -37,7 +37,8 @@ angular
 
     $scope.testWatchAcceleration = (options) ->
       supersonic.device.accelerometer.watchAcceleration().onValue (acceleration) ->
-        $scope.watchAcceleration = acceleration.timestamp
+        $scope.$apply ->
+          $scope.watchAcceleration = acceleration.timestamp
 
     $scope.latestAcceleration = undefined
 
