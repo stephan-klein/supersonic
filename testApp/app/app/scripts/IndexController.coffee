@@ -77,7 +77,6 @@ angular
         (message) ->
           alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
       )
-  .controller 'ViewsController', ($scope, $q, supersonic) ->
 
     $scope.statusBarHidden = 0
     $scope.statusBarShown = 0
@@ -111,22 +110,3 @@ angular
         (message) ->
           alert "Could not hide status bar! \n\n #{JSON.stringify(message)}"
       )
-
-
-
-    $scope.newView = ->
-      v = supersonic.ui.view("http://localhost/app/notification/index.html", "myView")
-      supersonic.ui.layer.push(v)
-
-      # TODO: Find normal way for qifying
-      qify = (f, sc) ->
-        () ->
-          args = arguments
-          # NOTE: It's important to preserve scope!
-          $q.when ()->
-            f.apply sc, args
-
-      v.preload = qify v.preload, v
-
-      # v.preload().then ()->
-      #   supersonic.logger.log "preloaded"
