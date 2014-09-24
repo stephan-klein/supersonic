@@ -8,17 +8,17 @@ module.exports = (steroids, log) ->
   class View
 
     ###*
-    * @ngdoc method
-    * @name create
-    * @module views
-    * @description
-    * Creates a new view
-    * @param {string} URL of a view
-    * @returns View object
-    * @usage
-    * ```coffeescript
-    * supersonic.ui.view.create("http://www.google.com")
-    * ```
+     * @ngdoc method
+     * @name view
+     * @module ui
+     * @description
+     * Creates a new view
+     * @param {string} URL of a view
+     * @returns View object
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view("http://www.google.com")
+     * ```
     ###
     constructor: (location, id) ->
       # if this !instanceof View
@@ -35,6 +35,23 @@ module.exports = (steroids, log) ->
       }
 
     # TODO: Maybe preloads whould happen in contructor by default?
+
+    ###*
+     * @ngdoc method
+     * @name preload
+     * @module view
+     * @description
+     * Preloads a new
+     * @param {string} URL of a view
+     * @returns View object
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view("http://www.google.com").preload
+     *
+     * v = supersonic.ui.view("http://www.google.com")
+     * v.preload()
+     * ```
+    ###
     preload: () ->
       new Promise (resolve) ->
         @_view.preload( {
