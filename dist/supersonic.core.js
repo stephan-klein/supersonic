@@ -9115,7 +9115,16 @@ module.exports = function(steroids, log) {
      * ```
      */
     push: function(view) {
-      return steroids.layers.push(view.getWebView());
+      return steroids.layers.push({
+        view: view.getWebView()
+      }, {
+        onSuccess: function() {
+          return supersonic.logger.info("New layer is shown");
+        },
+        onFailure: function(error) {
+          return supersonic.logger.info("New layer was not shown due to an error " + error.errorDescription);
+        }
+      });
     }
   };
 };
@@ -9154,7 +9163,7 @@ module.exports = function(steroids, log) {
      */
     function View(location, id) {
       this.location = location;
-      supersonic.logger.info("'" + this.location + "' view was created with '" + this.id + "' id");
+      supersonic.logger.info("'" + this.location + "' view was created");
       this._webView = new steroids.views.WebView({
         location: this.location,
         id: this.id
