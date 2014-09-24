@@ -66,5 +66,8 @@ module.exports = (steroids, log) ->
             supersonic.logger.error "Preloading of '#{@id}' was failed"
         })
 
+    getView: ()->
+      return @_view
+
   return (location, id)->
     return new View(location, id)
