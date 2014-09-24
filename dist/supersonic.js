@@ -8418,8 +8418,7 @@ module.exports = function(angular) {
       debug: qifyAll(supersonic.debug),
       app: qifyAll(supersonic.app),
       notification: qifyAll(supersonic.notification),
-      ui: supersonic.ui,
-      layer: supersonic.layer
+      ui: supersonic.ui
     };
   });
 };
@@ -8687,7 +8686,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":41,"./core/debug":46,"./core/logger":47,"./mock/steroids":48,"./mock/window":49,"./notification":52,"./ui":55}],46:[function(require,module,exports){
+},{"./app":41,"./core/debug":46,"./core/logger":47,"./mock/steroids":48,"./mock/window":49,"./notification":52,"./ui":56}],46:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9137,14 +9136,30 @@ Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
   return {
-    view: require("./view")(steroids, log),
-    layer: require("./layer")(steroids, log)
+    asLeft: function(view) {
+      return supersonic.logger.log("asLeft");
+    }
   };
 };
 
 
 
-},{"./layer":56,"./view":57,"bluebird":4}],56:[function(require,module,exports){
+},{"bluebird":4}],56:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+    view: require("./view")(steroids, log),
+    layer: require("./layer")(steroids, log),
+    drawer: require("./drawer")(steroids, log)
+  };
+};
+
+
+
+},{"./drawer":55,"./layer":57,"./view":58,"bluebird":4}],57:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9191,7 +9206,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],57:[function(require,module,exports){
+},{"bluebird":4}],58:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');

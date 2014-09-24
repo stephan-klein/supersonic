@@ -8627,7 +8627,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":39,"./core/debug":44,"./core/logger":45,"./mock/steroids":46,"./mock/window":47,"./notification":50,"./ui":53}],44:[function(require,module,exports){
+},{"./app":39,"./core/debug":44,"./core/logger":45,"./mock/steroids":46,"./mock/window":47,"./notification":50,"./ui":54}],44:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9077,14 +9077,30 @@ Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
   return {
-    view: require("./view")(steroids, log),
-    layer: require("./layer")(steroids, log)
+    asLeft: function(view) {
+      return supersonic.logger.log("asLeft");
+    }
   };
 };
 
 
 
-},{"./layer":54,"./view":55,"bluebird":4}],54:[function(require,module,exports){
+},{"bluebird":4}],54:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+    view: require("./view")(steroids, log),
+    layer: require("./layer")(steroids, log),
+    drawer: require("./drawer")(steroids, log)
+  };
+};
+
+
+
+},{"./drawer":53,"./layer":55,"./view":56,"bluebird":4}],55:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9131,7 +9147,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],55:[function(require,module,exports){
+},{"bluebird":4}],56:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
