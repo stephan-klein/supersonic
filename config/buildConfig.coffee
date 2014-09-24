@@ -11,6 +11,8 @@ module.exports =
   files:
     src: '<%= dir.src %>/**/*.coffee'
     test: '<%= dir.test %>/**/*Spec.coffee'
+    stylesheets: '<%= dir.sass %>/**/*.*'
+    components: 'components/**/*.*'
   file:
     componentImport: '<%= dir.dist %>/components/import.html'
   docs:
