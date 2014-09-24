@@ -128,5 +128,5 @@ angular
 
       v.preload = qify v.preload, v
 
-      v.preload().then ()->
-        supersonic.logger.log "preloaded"
+      # v.preload().then ()->
+      #   supersonic.logger.log "preloaded"
