@@ -12,6 +12,8 @@ describe "supersonic.app.sleep", ->
   it "should be defined", ->
     supersonic.app.sleep.should.exist
 
+  # TODO: Can we find out disabled/enabled status so we can assert whether that status changes?
+
   it "should disable sleep", ->
     supersonic.app.sleep.disable().should.be.fulfilled
 
@@ -21,6 +23,8 @@ describe "supersonic.app.sleep", ->
 describe "supersonic.app.splashscreen", ->
   it "should be defined", ->
     supersonic.app.splashscreen.should.exist
+
+  # TODO: Can we find out splashscreen shown/hidden status so we can assert whether that changes?
 
   it "should show splashscreen", ->
     supersonic.app.splashscreen.show().should.be.fulfilled
@@ -49,6 +53,8 @@ describe "supersonic.app.openURL", ->
 describe "supersonic.app.statusBar", ->
   it "should be defined", ->
     supersonic.app.statusBar.should.exist
+
+  # TODO: Can we find out statusBar shown/hidden status so we can assert whether that changes?
 
   describe "hide", ->
     beforeEach ->
