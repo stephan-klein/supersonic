@@ -1,7 +1,8 @@
 module.exports = (grunt) ->
   grunt.registerTask 'build', [
     'clean'
-    'coffeelint'
-    'components'
-    'gulp'
+    'compile-coffee'
+    'compile-components'
+    'compile-stylesheets'
+    'compile-docs'
   ]
