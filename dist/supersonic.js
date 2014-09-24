@@ -9212,6 +9212,28 @@ module.exports = function(steroids, log) {
           return supersonic.logger.log("" + side + " drawer fails");
         }
       });
+    },
+
+    /**
+     * @ngdoc method
+     * @name setOptions
+     * @module drawer
+     * @description
+     * Sets options for drawers
+     * @param {Object} Hash of parameters
+     * @returns
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.drawer.setOptions {
+     *   showShadow: true
+     *   animation: steroids.drawers.defaultAnimations.PARALLAX
+     * }
+     * ```
+     */
+    setOptions: function(options) {
+      return steroids.drawers.update({
+        options: options
+      });
     }
   };
 };
