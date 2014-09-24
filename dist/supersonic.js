@@ -8418,7 +8418,8 @@ module.exports = function(angular) {
       debug: qifyAll(supersonic.debug),
       app: qifyAll(supersonic.app),
       notification: qifyAll(supersonic.notification),
-      ui: supersonic.ui
+      ui: supersonic.ui,
+      layer: supersonic.layer
     };
   });
 };
@@ -9136,13 +9137,29 @@ Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
   return {
-    view: require("./view")(steroids, log)
+    view: require("./view")(steroids, log),
+    layer: require("./layer")(steroids, log)
   };
 };
 
 
 
-},{"./view":56,"bluebird":4}],56:[function(require,module,exports){
+},{"./layer":56,"./view":57,"bluebird":4}],56:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+    push: function(view) {
+      return steroids.layers.push(view);
+    }
+  };
+};
+
+
+
+},{"bluebird":4}],57:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9152,27 +9169,44 @@ module.exports = function(steroids, log) {
   View = (function() {
 
     /**
-    * @ngdoc method
-    * @name create
-    * @module views
-    * @description
-    * Creates a new view
-    * @param {string} URL of a view
-    * @returns View object
-    * @usage
-    * ```coffeescript
-    * supersonic.ui.view.create("http://www.google.com")
-    * ```
+     * @ngdoc method
+     * @name view
+     * @module ui
+     * @description
+     * Creates a new view
+     * @param {string} URL of a view
+     * @returns View object
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view("http://www.google.com")
+     * ```
      */
     function View(location, id) {
       this.location = location;
-      this.id = id || location;
       supersonic.logger.info("'" + this.location + "' view was created with '" + this.id + "' id");
       this._view = new steroids.views.WebView({
         location: this.location,
         id: this.id
       });
     }
+
+
+    /**
+     * @ngdoc method
+     * @name preload
+     * @module view
+     * @description
+     * Preloads a new
+     * @param
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view("http://www.google.com").preload
+     *
+     * v = supersonic.ui.view("http://www.google.com")
+     * v.preload()
+     * ```
+     */
 
     View.prototype.preload = function() {
       return new Promise(function(resolve) {
@@ -9188,6 +9222,25 @@ module.exports = function(steroids, log) {
           }
         });
       });
+    };
+
+
+    /**
+     * @ngdoc method
+     * @name getView
+     * @module view
+     * @description
+     * Gets the webView of a current instance
+     * @param
+     * @returns {Object} View object
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view("http://www.google.com").getView()
+     * ```
+     */
+
+    View.prototype.getView = function() {
+      return this._view;
     };
 
     return View;
