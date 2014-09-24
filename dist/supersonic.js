@@ -9029,29 +9029,29 @@ deviceready = require('../events').deviceready;
  * @module notification
  * @description
  * Shows a native alert box.
- * @param {string} message alert message (shorthand).
- * @param {Object} options an options object (verbose). The following properties are available:
- * * `message`: alert message
+ * @param {string} message alert message.
+ * @param {Object} options an options object (optional). The following properties are available:
  * * `title`: alert title (optional, defaults to "Alert")
  * * `buttonName`: button name (optional, defaults to "OK")
  * @returns {Promise} Promise that is resolved when the the button in the alert box is tapped.
  * @usage
  * ```coffeescript
- * # Shorthand
+ * # Basic usage
  * supersonic.notification.alert("You are awesome!")
  *
- * # Verbose
- * options =
+ * # With options
+ * supersonic.notification.alert("I'm an alert!", {
  *   title: "Custom Title"
- *   message: "I'm an alert!"
  *   buttonLabel: "Close"
- * supersonic.notification.alert(options)
+ * })
  * ```
  */
 
-module.exports = function(options) {
-  var buttonLabel, message, title;
-  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
+module.exports = function(message, options) {
+  var buttonLabel, title;
+  if (options == null) {
+    options = {};
+  }
   title = (options != null ? options.title : void 0) || "Alert";
   buttonLabel = (options != null ? options.buttonLabel : void 0) || "OK";
   return deviceready.then(function() {

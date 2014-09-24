@@ -5,27 +5,27 @@ angular
 
     $scope.alertTests = [
       {
-        title: "Alert with String as param"
-        options: "Just a string value."
+        title: "Alert with message as param"
+        message: "Just a string value."
       }
       {
-        title: "Alert with options object param"
+        title: "Alert with message and options params"
+        message: "I'm an alert!"
         options:
           title: "Custom Title"
-          message: "I'm an alert!"
           buttonLabel: "Close"
       }
       {
-        title: "Alert with null options"
-        options: null
+        title: "Alert with null message"
+        message: null
       }
       {
-        title: "Alert without options"
+        title: "Alert without params"
       }
     ]
 
-    $scope.testAlert = (options) ->
-      supersonic.notification.alert(options).then ->
+    $scope.testAlert = (message, options) ->
+      supersonic.notification.alert(message, options).then ->
         $scope.dismissedAlerts++
 
     $scope.confirms = [

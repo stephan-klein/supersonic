@@ -14,13 +14,12 @@ describe "supersonic.notification.alert", ->
   it "should present an alert with custom string title", ->
     supersonic.notification.alert("Custom").should.be.fulfilled
 
-  it "should present an alert with options object", ->
+  it "should present an alert with message string and options object as params", ->
     options =
       title: "Custom Title"
-      message: "I'm an alert!"
       buttonLabel: "Close"
 
-    supersonic.notification.alert(options).should.be.fulfilled
+    supersonic.notification.alert("I'm an alert!", options).should.be.fulfilled
 
 
 describe "supersonic.notification.confirm", ->
