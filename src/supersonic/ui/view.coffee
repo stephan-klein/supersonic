@@ -18,6 +18,7 @@ module.exports = (steroids, log) ->
     ###*
      * @ngdoc method
      * @name view
+     * @constructor
      * @module ui
      * @description
      * Creates a new view
@@ -42,6 +43,40 @@ module.exports = (steroids, log) ->
         id: @id
       }
 
+    ###*
+     * @ngdoc method
+     * @name _checkIfPreloaded
+     * @module view
+     * @private
+     * @description
+     * Asynchroniously checks if a view is already preloaded
+     * @param
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * this._checkIfPreloaded().then (isPreloaded)->
+     *   # gets {Boolean} ifPreloaded
+     * ```
+    ###
+    _checkIfPreloaded: ()->
+      that = @
+      new Promise (resolve, reject) ->
+        steroids.getApplicationState {}, {
+          onSuccess: (state)->
+            loaded = false
+            state.preloads.forEach (p)->
+              loaded = loaded || (p.id.indexOf(that.location) != -1)
+
+            if !loaded
+              resolve(false)
+            else
+              resolve(true)
+
+          onFailure: ()->
+            supersonic.logger.log "Somethig went wrong with checking the applicaiton state"
+            reject()
+        }
+
     # TODO: Maybe preloads whould happen in contructor by default?
 
     ###*
@@ -63,19 +98,24 @@ module.exports = (steroids, log) ->
     preload: () ->
       that = @
       new Promise (resolve, reject) ->
-        params = {}
-        if that.id
-          params.id = that.id
-        that._webView.preload( params, {
-
-          onSuccess: ()->
-            supersonic.logger.info "View was preloaded"
+        that._checkIfPreloaded().then (isPreloaded)->
+          if isPreloaded
+            supersonic.logger.info "View was already preloaded"
             resolve()
+          else
+            params = {}
+            if that.id
+              params.id = that.id
+            that._webView.preload( params, {
 
-          onFailure: ()->
-            supersonic.logger.error "Preloading was failed"
-            reject()
-        })
+              onSuccess: ()->
+                supersonic.logger.info "View was preloaded"
+                resolve()
+
+              onFailure: ()->
+                supersonic.logger.error "Preloading was failed"
+                reject()
+            })
 
     ###*
      * @ngdoc method
