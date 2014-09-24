@@ -29,7 +29,7 @@ describe "supersonic.app.splashscreen", ->
     @timeout 5000
     supersonic.app.splashscreen.hide().should.be.fulfilled
 
-describe "supersonic.Apple.openURL", ->
+describe "supersonic.app.openURL", ->
   it "should be defined", ->
     supersonic.app.openURL.should.exist
 
@@ -68,7 +68,7 @@ describe "supersonic.app.statusBar", ->
       it "should show status bar with a string param", ->
         supersonic.app.statusBar.show("light").should.be.fulfilled
 
-      it "should show status bar an object param", ->
+      it "should show status bar with an object param", ->
         options =
           style = "light"
         supersonic.app.statusBar.show(options).should.be.fulfilled
