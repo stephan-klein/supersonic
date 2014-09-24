@@ -9091,8 +9091,31 @@ Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
   return {
+
+    /**
+     * @ngdoc overview
+     * @name layer
+     * @module ui
+     * @description
+     * Provides methods to work with layers
+     */
+
+    /**
+     * @ngdoc method
+     * @name push
+     * @module layer
+     * @description
+     * Navigates to a given view
+     * @param {View} A view object
+     * @returns
+     * @usage
+     * ```coffeescript
+     * v = supersonic.ui.view("http://www.google.com")
+     * supersonic.iu.layer.push(v)
+     * ```
+     */
     push: function(view) {
-      return steroids.layers.push(view);
+      return steroids.layers.push(view.getWebView());
     }
   };
 };
@@ -9105,6 +9128,14 @@ var Promise;
 Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
+
+  /**
+   * @ngdoc overview
+   * @name view
+   * @module ui
+   * @description
+   * Allows to create new View instances
+   */
   var View;
   View = (function() {
 
@@ -9124,7 +9155,7 @@ module.exports = function(steroids, log) {
     function View(location, id) {
       this.location = location;
       supersonic.logger.info("'" + this.location + "' view was created with '" + this.id + "' id");
-      this._view = new steroids.views.WebView({
+      this._webView = new steroids.views.WebView({
         location: this.location,
         id: this.id
       });
@@ -9150,7 +9181,7 @@ module.exports = function(steroids, log) {
 
     View.prototype.preload = function() {
       return new Promise(function(resolve) {
-        return this._view.preload({
+        return this._webView.preload({
           id: this.id
         }, {
           onSuccess: function() {
@@ -9172,15 +9203,15 @@ module.exports = function(steroids, log) {
      * @description
      * Gets the webView of a current instance
      * @param
-     * @returns {Object} View object
+     * @returns {Object} webView object
      * @usage
      * ```coffeescript
      * supersonic.ui.view("http://www.google.com").getView()
      * ```
      */
 
-    View.prototype.getView = function() {
-      return this._view;
+    View.prototype.getWebView = function() {
+      return this._webView;
     };
 
     return View;
