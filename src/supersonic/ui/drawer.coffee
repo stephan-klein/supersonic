@@ -78,3 +78,24 @@ module.exports = (steroids, log) ->
         supersonic.logger.log "#{side} drawer fails"
     }
     return
+
+  ###*
+   * @ngdoc method
+   * @name setOptions
+   * @module drawer
+   * @description
+   * Sets options for drawers
+   * @param {Object} Hash of parameters
+   * @returns
+   * @usage
+   * ```coffeescript
+   * supersonic.ui.drawer.setOptions {
+   *   showShadow: true
+   *   animation: steroids.drawers.defaultAnimations.PARALLAX
+   * }
+   * ```
+  ###
+  setOptions: (options)->
+    steroids.drawers.update {
+      options: options
+    }
