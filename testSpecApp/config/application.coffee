@@ -4,7 +4,7 @@
 steroids.config.name = "testSpecApp"
 
 # ## Start Location
-steroids.config.location = "http://localhost/app/common/getting-started.html"
+steroids.config.location = "http://localhost/app/test-index/index.html"
 
 # ## Tab Bar
 # steroids.config.tabBar.enabled = true
