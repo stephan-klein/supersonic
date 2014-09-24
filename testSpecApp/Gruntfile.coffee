@@ -14,7 +14,7 @@ module.exports = (grunt) ->
     copy: {
       "supersonic-dist": {
         src: "../dist/**/*"
-        dest: "www/components/supersonic/dist/"
+        dest: "bower_components/supersonic/dist/"
       }
     }
   }
