@@ -8968,13 +8968,13 @@ module.exports = function(steroids, log) {
     return Bacon.fromPromise(deviceready).flatMap(function() {
       return Bacon.fromBinder(function(sink) {
         var watchId;
-        watchId = window.navigator.geolocation.watchAcceleration(function(acceleration) {
+        watchId = window.navigator.accelerometer.watchAcceleration(function(acceleration) {
           return sink(new Bacon.Next(acceleration));
         }, function(error) {
           return sink(new Bacon.Error(error));
         }, options);
         return function() {
-          return window.navigator.watchAcceleration.clearWatch(watchId);
+          return window.navigator.accelerometer.clearWatch(watchId);
         };
       });
     });
@@ -9002,7 +9002,7 @@ module.exports = function(steroids, log) {
       options = {};
     }
     return new Promise(function(resolve) {
-      return watchPosition(options).take(1).onValue(resolve);
+      return watchAcceleration(options).take(1).onValue(resolve);
     });
   };
   return {

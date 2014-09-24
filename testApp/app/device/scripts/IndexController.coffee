@@ -27,4 +27,28 @@ angular
       supersonic.device.geolocation.getPosition().then (position) ->
         $scope.latestPosition = position.timestamp
 
+    $scope.watchAcceleration = undefined
+
+    $scope.watchAccelerationTests = [
+      {
+        title: "Watch acceleration"
+      }
+    ]
+
+    $scope.testWatchAcceleration = (options) ->
+      supersonic.device.accelerometer.watchAcceleration().onValue (acceleration) ->
+        $scope.watchAcceleration = acceleration.timestamp
+
+    $scope.latestAcceleration = undefined
+
+    $scope.getAccelerationTests = [
+      {
+        title: "Get latest acceleration"
+      }
+    ]
+
+    $scope.testGetAcceleration = (options) ->
+      supersonic.device.accelerometer.getAcceleration().then (acceleration) ->
+        $scope.latestAcceleration = acceleration.timestamp
+
  

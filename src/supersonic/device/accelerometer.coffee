@@ -35,13 +35,13 @@ module.exports = (steroids, log) ->
 
     Bacon.fromPromise(deviceready).flatMap ->
       Bacon.fromBinder (sink) ->
-        watchId = window.navigator.geolocation.watchAcceleration(
+        watchId = window.navigator.accelerometer.watchAcceleration(
           (acceleration) -> sink new Bacon.Next acceleration
           (error) -> sink new Bacon.Error error
           options
         )
         ->
-          window.navigator.watchAcceleration.clearWatch watchId
+          window.navigator.accelerometer.clearWatch watchId
   
   ###*
    * @ngdoc method
@@ -62,6 +62,6 @@ module.exports = (steroids, log) ->
   ###
   getAcceleration = (options = {}) ->
     new Promise (resolve) ->
-      watchPosition(options).take(1).onValue resolve
+      watchAcceleration(options).take(1).onValue resolve
 
   return {watchAcceleration, getAcceleration}
