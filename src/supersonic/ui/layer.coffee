@@ -6,4 +6,4 @@ module.exports = (steroids, log) ->
   # bug = log.debuggable "supersonic.ui.layer"
 
   push: (view)->
-    steroids.layers.push(view)
+    steroids.layers.push(view.getWebView())
