@@ -9136,8 +9136,82 @@ Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
   return {
+
+    /**
+     * @ngdoc overview
+     * @name drawer
+     * @module ui
+     * @description
+     * Module of methods to work with drawers
+     */
+
+    /**
+     * @ngdoc method
+     * @name asLeft
+     * @module drawer
+     * @description
+     * Shows a view as a left drawer
+     * @param {View} View object
+     * @returns
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/drawers/left.html")
+     * supersonic.ui.drawer.asLeft(view)
+     * ```
+     */
     asLeft: function(view) {
-      return supersonic.logger.log("asLeft");
+      this.show(view, 'left');
+    },
+
+    /**
+     * @ngdoc method
+     * @name asRight
+     * @module drawer
+     * @description
+     * Shows a view as a right drawer
+     * @param {View} View object
+     * @returns
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/drawers/right.html")
+     * supersonic.ui.drawer.asRight(view)
+     * ```
+     */
+    asRight: function(view) {
+      this.show(view, 'right');
+    },
+
+    /**
+     * @ngdoc method
+     * @name show
+     * @module drawer
+     * @description
+     * Shows a view as a drawer of the given side
+     * @param {View} View object
+     * @param {String} Side to show a drawer: "left" or "right"
+     * @returns
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/drawers/index.html")
+     * supersonic.ui.drawer.show(view, "left")
+     * ```
+     */
+    show: function(view, side) {
+      var params, webView;
+      webView = view.getWebView();
+      params = {};
+      params[side] = webView;
+      steroids.drawers.update(params);
+      steroids.drawers.show({
+        edge: steroids.screen.edges[side.toUpperCase()]
+      }, {
+        onSuccess: function() {
+          return supersonic.logger.log("" + side + " drawer should be shown");
+        },
+        onFailure: function() {
+          return supersonic.logger.log("" + side + " drawer fails");
+        }
+      });
     }
   };
 };
@@ -9186,7 +9260,7 @@ module.exports = function(steroids, log) {
      * @usage
      * ```coffeescript
      * v = supersonic.ui.view("http://www.google.com")
-     * supersonic.iu.layer.push(v)
+     * supersonic.ui.layer.push(v)
      * ```
      */
     push: function(view) {
@@ -9226,6 +9300,7 @@ module.exports = function(steroids, log) {
     /**
      * @ngdoc method
      * @name view
+     * @constructor
      * @module ui
      * @description
      * Creates a new view
@@ -9248,6 +9323,48 @@ module.exports = function(steroids, log) {
 
     /**
      * @ngdoc method
+     * @name _checkIfPreloaded
+     * @module view
+     * @private
+     * @description
+     * Asynchroniously checks if a view is already preloaded
+     * @param
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * this._checkIfPreloaded().then (isPreloaded)->
+     *   # gets {Boolean} ifPreloaded
+     * ```
+     */
+
+    View.prototype._checkIfPreloaded = function() {
+      var that;
+      that = this;
+      return new Promise(function(resolve, reject) {
+        return steroids.getApplicationState({}, {
+          onSuccess: function(state) {
+            var loaded;
+            loaded = false;
+            state.preloads.forEach(function(p) {
+              return loaded = loaded || (p.id.indexOf(that.location) !== -1);
+            });
+            if (!loaded) {
+              return resolve(false);
+            } else {
+              return resolve(true);
+            }
+          },
+          onFailure: function() {
+            supersonic.logger.log("Somethig went wrong with checking the applicaiton state");
+            return reject();
+          }
+        });
+      });
+    };
+
+
+    /**
+     * @ngdoc method
      * @name preload
      * @module view
      * @description
@@ -9256,7 +9373,7 @@ module.exports = function(steroids, log) {
      * @returns {Promise}
      * @usage
      * ```coffeescript
-     * supersonic.ui.view("http://www.google.com").preload
+     * supersonic.ui.view("http://www.google.com").preload()
      *
      * v = supersonic.ui.view("http://www.google.com")
      * v.preload()
@@ -9264,16 +9381,29 @@ module.exports = function(steroids, log) {
      */
 
     View.prototype.preload = function() {
-      return new Promise(function(resolve) {
-        return this._webView.preload({
-          id: this.id
-        }, {
-          onSuccess: function() {
-            supersonic.logger.info("'" + this.id + "' view was preloaded");
+      var that;
+      that = this;
+      return new Promise(function(resolve, reject) {
+        return that._checkIfPreloaded().then(function(isPreloaded) {
+          var params;
+          if (isPreloaded) {
+            supersonic.logger.info("View was already preloaded");
             return resolve();
-          },
-          onFailure: function() {
-            return supersonic.logger.error("Preloading of '" + this.id + "' was failed");
+          } else {
+            params = {};
+            if (that.id) {
+              params.id = that.id;
+            }
+            return that._webView.preload(params, {
+              onSuccess: function() {
+                supersonic.logger.info("View was preloaded");
+                return resolve();
+              },
+              onFailure: function() {
+                supersonic.logger.error("Preloading was failed");
+                return reject();
+              }
+            });
           }
         });
       });
