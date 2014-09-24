@@ -35,7 +35,7 @@ module.exports = (steroids, log) ->
       @location = location
       # @id = id || location
 
-      supersonic.logger.info "'#{@location}' view was created with '#{@id}' id"
+      supersonic.logger.info "'#{@location}' view was created"
 
       @_webView = new steroids.views.WebView {
         location: @location,
