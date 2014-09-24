@@ -20,13 +20,14 @@ angular
       v.preload = qify v.preload, v
 
       # v.preload().then ()->
-      webView = supersonic.ui.view(url, "myView3").getWebView()
 
-      supersonic.logger.log "not loaded3"
+      webView = v.getWebView()
+
+      supersonic.logger.log "not loaded4"
       webView.preload {}, {
         onSuccess: ()->
           supersonic.logger.log "preloaded"
-          supersonic.ui.drawer.asLeft(webView)
+          supersonic.ui.drawer.asLeft(v)
           # supersonic.ui.drawer.asLeft(v)
       }
       #

@@ -6,8 +6,8 @@ module.exports = (steroids, log) ->
   # bug = log.debuggable "supersonic.ui.drawer"
 
   asLeft: (view)->
-    supersonic.logger.log "asLeft"
-    webView = view
+    supersonic.logger.log "asLeft2"
+    webView = view.getWebView()
     steroids.drawers.update {
       left: webView
     }
