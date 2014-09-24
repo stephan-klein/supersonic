@@ -69,11 +69,12 @@ module.exports = (steroids, log) ->
         that._webView.preload( params, {
 
           onSuccess: ()->
-            supersonic.logger.info "'#{@id}' view was preloaded"
+            supersonic.logger.info "View was preloaded"
             resolve()
 
           onFailure: ()->
-            supersonic.logger.error "Preloading of '#{@id}' was failed"
+            supersonic.logger.error "Preloading was failed"
+            reject()
         })
 
     ###*
