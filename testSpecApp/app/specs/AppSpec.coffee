@@ -44,8 +44,7 @@ describe "supersonic.Apple.openURL", ->
     supersonic.app.openURL("dolanz://").should.be.rejected
 
   it "should not open null", ->
-    #acually crashes
-    #supersonic.app.openURL(null).should.be.rejected
+    supersonic.app.openURL(null).should.be.rejected
 
 describe "supersonic.app.statusBar", ->
   it "should be defined", ->

@@ -8444,20 +8444,17 @@ module.exports = function(steroids, log) {
    * ```
    */
   openURL = bug("openURL", function(url) {
+    if (url == null) {
+      return Promise.reject("URL is undefined");
+    }
     return new Promise(function(resolve, reject) {
-      var successCallback;
-      successCallback = function() {
-        return document.addEventListener("resume", function() {
-          return resolve();
-        });
-      };
       return steroids.openURL({
         url: url
       }, {
-        onSuccess: successCallback,
-        onFailure: function() {
-          return reject();
-        }
+        onSuccess: function() {
+          return document.addEventListener("resume", resolve);
+        },
+        onFailure: reject
       });
     });
   });
