@@ -1,7 +1,6 @@
 structurePath = require.resolve("./structure")
 delete require.cache[structurePath] if require.cache[structurePath]
-
-structure = require "./structure"
+structure = require structurePath
 
 module.exports =
   steroids:

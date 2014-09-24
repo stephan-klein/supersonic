@@ -1,7 +1,7 @@
 module.exports =
 
-  rootView:
-    route: "common/index"
+  # rootView:
+  #   route: "common/index"
 
   tabs: [
     {
@@ -16,9 +16,9 @@ module.exports =
     }
   ]
 
-  initialView:
-    id: "initialView"
-    route: "common/initial-view"
+  # initialView:
+  #   id: "initialView"
+  #   route: "common/initial-view"
 
   # drawers:
   #   left:
