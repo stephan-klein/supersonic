@@ -25,7 +25,7 @@ module.exports = (steroids, log) ->
       #   return new View(location, id)
 
       @location = location
-      @id = id || location
+      # @id = id || location
 
       supersonic.logger.info "'#{@location}' view was created with '#{@id}' id"
 
