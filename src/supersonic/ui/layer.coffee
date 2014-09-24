@@ -28,4 +28,11 @@ module.exports = (steroids, log) ->
    * ```
   ###
   push: (view)->
-    steroids.layers.push(view.getWebView())
+    steroids.layers.push {
+        view: view.getWebView()
+    }, {
+      onSuccess: ()->
+        supersonic.logger.info "New layer is shown"
+      onFailure: (error)->
+        supersonic.logger.info "New layer was not shown due to an error #{error.errorDescription}"
+    }
