@@ -28,6 +28,7 @@ module.exports = (steroids, log) ->
    * ```
   ###
   push: (view)->
+    # TODO: Promisify
     steroids.layers.push {
         view: view.getWebView()
     }, {
