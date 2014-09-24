@@ -6,12 +6,23 @@
   </ss-navigation-bar>
 
   <div class="card padding">
-    <h1>View tests</h1>
-    <button
-      class="button button-block"
-      ng-click="newView(test.options)">
-      New View
-    </button>
+    <h1>View examples</h1>
+    <ul class="list">
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="navigateTo('http://google.com')">
+          Navigate to Google
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="asDrawer('http://yandex.ru')">
+          Drawer
+        </button>
+      </li>
+    </ul>
   </div>
 
 </div>

@@ -2,9 +2,12 @@ angular
   .module('ui')
   .controller 'IndexController', ($scope, $q, supersonic) ->
 
-    $scope.newView = ->
-      v = supersonic.ui.view("http://localhost/app/notification/index.html", "myView")
+    $scope.navigateTo = (url)->
+      v = supersonic.ui.view(url, "myView")
       supersonic.ui.layer.push(v)
+
+    $scope.navigateWithPreloading = (url)->
+      v = supersonic.ui.view(url, "myView2")
 
       # TODO: Find normal way for qifying
       qify = (f, sc) ->
@@ -16,5 +19,9 @@ angular
 
       v.preload = qify v.preload, v
 
-      # v.preload().then ()->
-      #   supersonic.logger.log "preloaded"
+      v.preload().then ()->
+        supersonic.ui.layer.push(v)
+        supersonic.logger.log "preloaded"
+
+    $scope.asDrawer = ()->
+      supersonic.ui.drawer.asLeft()
