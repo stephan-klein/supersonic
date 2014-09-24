@@ -24,7 +24,7 @@ module.exports = (steroids, log) ->
    * @usage
    * ```coffeescript
    * v = supersonic.ui.view("http://www.google.com")
-   * supersonic.iu.layer.push(v)
+   * supersonic.ui.layer.push(v)
    * ```
   ###
   push: (view)->
