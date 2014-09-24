@@ -19,7 +19,7 @@
     <button
       class="button button-block"
       ng-repeat="test in confirmTests"
-      ng-click="testConfirm(test.options)">
+      ng-click="testConfirm(test.message, test.options)">
       {{test.title}}
     </button>
     <ul>

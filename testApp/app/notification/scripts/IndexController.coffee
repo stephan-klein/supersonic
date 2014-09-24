@@ -1,6 +1,6 @@
 angular
   .module('notification')
-  .controller 'IndexController', ($scope) ->
+  .controller 'IndexController', ($scope, supersonic) ->
     $scope.dismissedAlerts = 0
 
     $scope.alertTests = [
@@ -36,27 +36,27 @@ angular
 
     $scope.confirmTests = [
       {
-        title: "Confirm with String as param"
-        options: "Just a string value."
+        title: "Confirm with message as param"
+        message: "Just a string value."
       }
       {
-        title: "Alert with options object param"
+        title: "Alert with message string and options object params"
+        message: "I'm a Confirm!"
         options:
           title: "Custom Title"
-          message: "I'm a Confirm!"
           buttonLabels: ["Yay","NO!","third"]
       }
       {
-        title: "Confirm with null options"
-        options: null
+        title: "Confirm with null message"
+        message: null
       }
       {
         title: "Confirm without options"
       }
     ]
 
-    $scope.testConfirm = (options) ->
-      supersonic.notification.confirm(options).then (index) ->
+    $scope.testConfirm = (message, options) ->
+      supersonic.notification.confirm(message, options).then (index) ->
         $scope.confirms[index]++
 
     $scope.vibrations = 0

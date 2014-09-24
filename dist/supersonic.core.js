@@ -9024,29 +9024,29 @@ deviceready = require('../events').deviceready;
  * @module notification
  * @description
  * Shows a native confirm dialog.
- * @param {string} message confirm message (shorthand).
- * @param {Object} options an options object (verbose). The following properties are available:
- * * `message`: confirm message
+ * @param {string} message confirm message.
+ * @param {Object} options an options object (optional). The following properties are available:
  * * `title`: confirm title (optional, defaults to "Confirm")
  * * `buttonLabels`: Array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
  * @returns {Promise} Promise that is resolved with the index of the tapped button as an argument.
  * @usage
  * ```coffeescript
- * # Shorthand
+ * # Basic usage
  * supersonic.notification.confirm("You are awesome!")
  *
- * # Verbose
- * options =
+ * # With options
+ * supersonic.notification.confirm("I'm a confirm!", {
  *   title: "Custom Title"
- *   message: "I'm a confirm!"
  *   buttonLabels: ["Yes", "Close"]
- * supersonic.notification.confirm(options)
+ * })
  * ```
  */
 
-module.exports = function(options) {
-  var buttonLabels, message, title;
-  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : void 0;
+module.exports = function(message, options) {
+  var buttonLabels, title;
+  if (options == null) {
+    options = {};
+  }
   title = (options != null ? options.title : void 0) || "Confirm";
   buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
   return deviceready.then(function() {
