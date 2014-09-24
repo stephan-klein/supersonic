@@ -28,11 +28,10 @@ node_modules
 env.json
 
 # Test apps
-testApp/dist
-testApp/www/components
-testSpecApp/dist
-testSpecApp/www/components
+/testApp/dist
+/testApp/www/components
+/testSpecApp/dist
+/testSpecApp/www/components
 
 # Docs
-docs/
-!config/docs/
+/docs/
