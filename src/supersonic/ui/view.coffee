@@ -61,12 +61,12 @@ module.exports = (steroids, log) ->
      * ```
     ###
     preload: () ->
-      new Promise (resolve) ->
+      that = @
+      new Promise (resolve, reject) ->
         params = {}
-        if @id
-          params.id = @id
-        # supersonic.logger.log(params)
-        @_webView.preload( {}, {
+        if that.id
+          params.id = that.id
+        that._webView.preload( params, {
 
           onSuccess: ()->
             supersonic.logger.info "'#{@id}' view was preloaded"
