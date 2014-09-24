@@ -54,7 +54,7 @@ module.exports = (steroids, log) ->
      * @returns {Promise}
      * @usage
      * ```coffeescript
-     * supersonic.ui.view("http://www.google.com").preload
+     * supersonic.ui.view("http://www.google.com").preload()
      *
      * v = supersonic.ui.view("http://www.google.com")
      * v.preload()
