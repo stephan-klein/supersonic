@@ -7,3 +7,17 @@ module.exports = (steroids, log) ->
 
   asLeft: (view)->
     supersonic.logger.log "asLeft"
+    webView = view
+    steroids.drawers.update {
+      left: webView
+    }
+    supersonic.logger.log "drawers are updated"
+    steroids.drawers.show {
+      edge: steroids.screen.edges.LEFT
+    }, {
+      onSuccess: ()->
+        supersonic.logger.log "drawer should be shown"
+      onFailure: ()->
+        supersonic.logger.log "drawer fails"
+    }
+    return
