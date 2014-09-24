@@ -116,6 +116,7 @@ angular
 
     $scope.newView = ->
       v = supersonic.ui.view("http://localhost/app/notification/index.html", "myView")
+      supersonic.ui.layer.push(v.getView())
 
       # TODO: Find normal way for qifying
       qify = (f, sc) ->
