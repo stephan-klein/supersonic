@@ -41,7 +41,7 @@
 
   <div class="card padding">
     <h1>Prompt tests</h1>
-    <button class="button button-block" ng-repeat="test in promptTests"  ng-click="testPrompt(test.options)">
+    <button class="button button-block" ng-repeat="test in promptTests"  ng-click="testPrompt(test.message, test.options)">
       {{test.title}}
     </button>
     <ul>

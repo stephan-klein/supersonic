@@ -9088,9 +9088,8 @@ deviceready = require('../events').deviceready;
  * @module notification
  * @description
  * Shows a native prompt dialog.
- * @param {string} message confirm dialog (shorthand).
- * @param {Object} options an options object (verbose). The following properties are available:
- * * `message`: confirm message
+ * @param {string} message confirm message.
+ * @param {Object} options an options object (optionals). The following properties are available:
  * * `title`: dialog title (optional, defaults to "Confirm")
  * * `buttonLabels`: array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
  * * `defaultText`: default textbox input value (optional, defaults to an empty string)
@@ -9099,28 +9098,30 @@ deviceready = require('../events').deviceready;
  * * `input`: input string
  * @usage
  * ```coffeescript
- * # Shorthand
+ * # Basic usage
  * supersonic.notification.prompt("This is a prompt. Type something")
  *
- * # Verbose
- * options =
+ * # With options
+ * supersonic.notification.prompt("I'm a prompt!", {
  *   title: "Custom Title"
- *   message: "I'm a prompt!"
  *   buttonLabels: ["Yes", "No", "Cancel"]
  *   defaultText: "Type here"
- * supersonic.notification.prompt(options)
+ * })
  * ```
  */
 
-module.exports = function(options) {
-  var buttonLabels, defaultText, message, title;
-  message = typeof options === "string" ? options : (options != null ? options.message : void 0) != null ? options.message : new String;
+module.exports = function(message, options) {
+  var buttonLabels, defaultText, msg, title;
+  if (options == null) {
+    options = {};
+  }
+  msg = message || new String;
   title = (options != null ? options.title : void 0) || "Prompt";
   buttonLabels = (options != null ? options.buttonLabels : void 0) || ["OK", "Cancel"];
   defaultText = (options != null ? options.defaultText : void 0) || new String;
   return deviceready.then(function() {
     return new Promise(function(resolve) {
-      return navigator.notification.prompt(message, resolve, title, buttonLabels, defaultText);
+      return navigator.notification.prompt(msg, resolve, title, buttonLabels, defaultText);
     });
   }).then(function(results) {
     return {
