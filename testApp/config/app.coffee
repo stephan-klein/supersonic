@@ -1,7 +1,3 @@
-structurePath = require.resolve("./structure")
-delete require.cache[structurePath] if require.cache[structurePath]
-structure = require structurePath
-
 module.exports =
   steroids:
     schemaVersion: "2.0.0"
@@ -24,5 +20,3 @@ module.exports =
     shrinksView: false
     hideAccessoryBar: false
     displayRequiresUserAction: true
-
-  structure: structure
