@@ -119,6 +119,23 @@ module.exports = (steroids, log) ->
 
     ###*
      * @ngdoc method
+     * @name setWidth
+     * @module view
+     * @description
+     * Sets width of a view. Useful for showing as a drawer
+     * @param
+     * @returns {Object} View object
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("http://www.google.com").setWidth(200)
+     * ```
+    ###
+    setWidth: (width)->
+      @getWebView().widthOfDrawerInPixels = width
+      return @
+
+    ###*
+     * @ngdoc method
      * @name getView
      * @module view
      * @description
