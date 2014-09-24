@@ -42,8 +42,8 @@ module.exports = (steroids, log) ->
      * @module view
      * @description
      * Preloads a new
-     * @param {string} URL of a view
-     * @returns View object
+     * @param
+     * @returns {Promise}
      * @usage
      * ```coffeescript
      * supersonic.ui.view("http://www.google.com").preload
@@ -66,6 +66,19 @@ module.exports = (steroids, log) ->
             supersonic.logger.error "Preloading of '#{@id}' was failed"
         })
 
+    ###*
+     * @ngdoc method
+     * @name getView
+     * @module view
+     * @description
+     * Gets the webView of a current instance
+     * @param
+     * @returns {Object} View object
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view("http://www.google.com").getView()
+     * ```
+    ###
     getView: ()->
       return @_view
 
