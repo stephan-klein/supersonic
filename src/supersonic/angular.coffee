@@ -37,6 +37,5 @@ module.exports = (angular) ->
         notification: qifyAll supersonic.notification
         device: supersonic.device
         ui: supersonic.ui
-        layer: supersonic.layer
       }
     )
