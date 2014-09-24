@@ -8,6 +8,7 @@ module.exports =
     test: 'test'
     testApp: "testApp/www"
     components: "components/*"
+    docs: 'docs'
   files:
     src: '<%= dir.src %>/**/*.coffee'
     test: '<%= dir.test %>/**/*Spec.coffee'
