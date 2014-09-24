@@ -69,7 +69,5 @@ describe "supersonic.app.statusBar", ->
         supersonic.app.statusBar.show("light").should.be.fulfilled
 
       it "should show status bar with an object param", ->
-        options =
-          style = "light"
-        supersonic.app.statusBar.show(options).should.be.fulfilled
+        supersonic.app.statusBar.show(style: "light").should.be.fulfilled
 
