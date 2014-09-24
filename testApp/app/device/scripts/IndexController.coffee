@@ -11,7 +11,8 @@ angular
 
     $scope.testWatchPosition = (options) ->
       supersonic.device.geolocation.watchPosition().onValue (position) ->
-        $scope.watchPosition = position.timestamp
+        $scope.$apply ->
+          $scope.watchPosition = position.timestamp
 
     $scope.latestPosition = undefined
 
