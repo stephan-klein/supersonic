@@ -1,4 +1,3 @@
-expect = window.chai.expect
 
 describe "supersonic.debug.ping", ->
   it "should be defined", ->
