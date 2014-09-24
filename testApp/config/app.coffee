@@ -15,6 +15,7 @@ module.exports =
     disableOverscroll: false
     enableViewportScale: true # kinda harmful?
     enablePopGestureRecognition: true
+    allowInlineMediaPlayback: true
 
   keyboard:
     shrinksView: false
