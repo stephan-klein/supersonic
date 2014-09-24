@@ -5,6 +5,14 @@ module.exports = (steroids, log) ->
   # TODO: add bug later
   # bug = log.debuggable "supersonic.ui.view"
 
+  ###*
+   * @ngdoc overview
+   * @name view
+   * @module ui
+   * @description
+   * Allows to create new View instances
+  ###
+
   class View
 
     ###*
@@ -29,7 +37,7 @@ module.exports = (steroids, log) ->
 
       supersonic.logger.info "'#{@location}' view was created with '#{@id}' id"
 
-      @_view = new steroids.views.WebView {
+      @_webView = new steroids.views.WebView {
         location: @location,
         id: @id
       }
@@ -54,7 +62,7 @@ module.exports = (steroids, log) ->
     ###
     preload: () ->
       new Promise (resolve) ->
-        @_view.preload( {
+        @_webView.preload( {
           id: @id
         }, {
 
@@ -73,14 +81,14 @@ module.exports = (steroids, log) ->
      * @description
      * Gets the webView of a current instance
      * @param
-     * @returns {Object} View object
+     * @returns {Object} webView object
      * @usage
      * ```coffeescript
      * supersonic.ui.view("http://www.google.com").getView()
      * ```
     ###
-    getView: ()->
-      return @_view
+    getWebView: ()->
+      return @_webView
 
   return (location, id)->
     return new View(location, id)
