@@ -8390,7 +8390,7 @@ superscope = require('./angular/superscope');
 module.exports = function(angular) {
   superscope(angular);
   return angular.module('supersonic', ['supersonic.superscope']).service('supersonic', function($q) {
-    var qify, qifyAll;
+    var geolocation, qify, qifyAll;
     qify = function(f) {
       return function() {
         var args;
@@ -8416,7 +8416,15 @@ module.exports = function(angular) {
       }
       return result;
     };
-    return qifyAll(supersonic);
+    geolocation = supersonic.device.geolocation;
+    geolocation.getPosition = qify(geolocation.getPosition);
+    return {
+      logger: qifyAll(supersonic.logger),
+      debug: qifyAll(supersonic.debug),
+      app: qifyAll(supersonic.app),
+      notification: qifyAll(supersonic.notification),
+      device: supersonic.device
+    };
   });
 };
 
