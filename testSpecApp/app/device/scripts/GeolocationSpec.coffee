@@ -1,5 +1,3 @@
-expect = window.chai.expect
-window.chai.should()
 
 describe "supersonic.device.geolocation", ->
   it "should be defined", ->
