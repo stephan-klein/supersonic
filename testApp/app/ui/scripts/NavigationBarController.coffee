@@ -3,4 +3,5 @@ angular
   .controller 'NavigationBarController', ($scope, $q, supersonic) ->
 
     $scope.hide = ()->
-      supersonic.ui.navigationBar.hide({ animated: true })
+      supersonic.ui.navigationBar.hide({ animated: true }).then ()->
+        supersonic.logger.log "promise works"
