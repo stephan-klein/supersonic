@@ -9288,13 +9288,14 @@ module.exports = function(steroids, log) {
   return {
     view: require("./view")(steroids, log),
     layer: require("./layer")(steroids, log),
-    drawer: require("./drawer")(steroids, log)
+    drawer: require("./drawer")(steroids, log),
+    modal: require("./modal")(steroids, log)
   };
 };
 
 
 
-},{"./drawer":55,"./layer":57,"./view":58,"bluebird":4}],57:[function(require,module,exports){
+},{"./drawer":55,"./layer":57,"./modal":58,"./view":59,"bluebird":4}],57:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9462,6 +9463,126 @@ module.exports = function(steroids, log) {
 
 
 },{"bluebird":4}],58:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+
+    /**
+     * @ngdoc overview
+     * @name modal
+     * @module ui
+     * @description
+     * Provides methods to work with layers
+     */
+
+    /**
+     * @ngdoc method
+     * @name show
+     * @module modal
+     * @description
+     * Shows a view as a modal
+     * @param {View} View object
+     * @param {Object} [parameters]
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/modal.html")
+     * supersonic.ui.modal.show(view, { disableAnimation: true })
+     * ```
+     */
+    show: function(view, params) {
+      if (params == null) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        params.view = view.getWebView();
+        return steroids.modal.show(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Modal view was shown");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Showing a modal view has crashed with the error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name hide
+     * @module modal
+     * @description
+     * Hides a modal view
+     * @param {Object} [parameters]
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/modal.html")
+     * supersonic.ui.modal.show(view, { disableAnimation: true }).then ()->
+     *   supersonic.ui.modal.hide()
+     * ```
+     */
+    hide: function(params) {
+      if (params == null) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.modal.hide(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Modal view was hidden");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Hiding a modal view has crashed with the error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name hideAll
+     * @module modal
+     * @description
+     * Hides a modal view
+     * @param {Object} [parameters]
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/modal.html")
+     * supersonic.ui.modal.show(view, { disableAnimation: true }).then ()->
+     *   supersonic.ui.modal.hideAll()
+     * ```
+     */
+    hideAll: function(params) {
+      if (params == null) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.modal.hideAll(params, {
+          onSuccess: function() {
+            supersonic.logger.info("All the modals were hidden");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Hiding all the modals has crashed with the error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    }
+  };
+};
+
+
+
+},{"bluebird":4}],59:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
