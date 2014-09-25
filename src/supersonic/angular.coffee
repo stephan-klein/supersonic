@@ -10,6 +10,10 @@ module.exports = (angular) ->
     ])
     .service('supersonic', ($q) ->
       qify = (f) -> (args...) -> $q.when f args...
+      # NOTE: When qifying an instance of a class, it is
+      # worth to preserve the context. The 'qify' is compilated into
+      # f.call(null, args) which means loosing the context. Please
+      # take this into account when refactoring.
       qifyAll = (object) ->
         result = {}
         for key, value of object
@@ -19,5 +23,17 @@ module.exports = (angular) ->
             else value
         result
 
-      qifyAll supersonic
+      # TODO: Every module should define themselves if they are wrapped
+      # or not.
+      
+      geolocation =  supersonic.device.geolocation
+      geolocation.getPosition = qify geolocation.getPosition
+      {
+        logger: qifyAll supersonic.logger
+        debug: qifyAll supersonic.debug
+        app: qifyAll supersonic.app
+        notification: qifyAll supersonic.notification
+        device: supersonic.device
+      }
+
     )
