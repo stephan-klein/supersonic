@@ -7,13 +7,13 @@ module.exports =
     version: "0.1.0"
 
   splashscreen:
-    autohide: false
+    autohide: true
 
   webView:
     viewsIgnoreStatusBar: false
     enableDoubleTapToFocus: false
     disableOverscroll: false
-    enableViewportScale: true # kinda harmful?
+    enableViewportScale: false # kinda harmful?
     enablePopGestureRecognition: true
     allowInlineMediaPlayback: true
 
