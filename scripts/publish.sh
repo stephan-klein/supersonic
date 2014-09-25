@@ -9,8 +9,8 @@ TARGET_DIR=tmp/target
 
 HEAD_VERSION=$(git rev-parse HEAD)
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-SOURCE_REPO=https://$GITHUB_AUTHENTICATION@github.com/AppGyver/supersonic.git#$HEAD_VERSION
-TARGET_REPO=https://$GITHUB_AUTHENTICATION@github.com/AppGyver/supersonic-bower.git
+SOURCE_REPO=https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic.git#$HEAD_VERSION
+TARGET_REPO=https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic-bower.git
 
 # Install supersonic from current revision to temp dir
 echo Installing $SOURCE_REPO to $ARTEFACTS_DIR
