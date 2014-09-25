@@ -15,6 +15,31 @@ module.exports = (steroids, log) ->
 
   ###*
    * @ngdoc method
+   * @name show
+   * @module navigationBar
+   * @description
+   * Shows a navigation bar
+   * @param {Object} [parameters] Parameters of hiding
+   * @returns {Promise}
+   * @usage
+   * ```coffeescript
+   * supersonic.ui.navigationBar.show({ animated: true, title: "New Title" }).then ()->
+   *   supersonic.logger.log "promise works"
+   * ```
+  ###
+  show: (params = {})->
+    new Promise (resolve, reject)->
+      steroids.view.navigationBar.show params, {
+        onSuccess: ()->
+          supersonic.logger.info "Navigation bar was shown"
+          resolve()
+        onFailure: (error)->
+          supersonic.logger.error "Showing the navigation bar crashed due to the error: #{error.errorDescription}"
+          reject()
+      }
+
+  ###*
+   * @ngdoc method
    * @name hide
    * @module navigationBar
    * @description
