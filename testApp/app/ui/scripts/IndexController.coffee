@@ -37,4 +37,7 @@ angular
 
     $scope.asModal = (url)->
       v = supersonic.ui.view(url)
-      supersonic.ui.modal.show(v)
+      supersonic.ui.modal.show(v, {
+        disableAnimation: true
+      }).then ()->
+        supersonic.logger.log "promise works"

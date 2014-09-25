@@ -13,11 +13,9 @@ module.exports = (steroids, log) ->
    * Provides methods to work with layers
   ###
 
-  show: (view)->
-    supersonic.logger.log "will show a view"
-    steroids.modal.show {
-      view: view.getWebView()
-    }, {
+  show: (view, params)->    
+    params.view = view.getWebView()
+    steroids.modal.show params, {
       onSuccess: ()->
         supersonic.logger.log "Was shown"
     }
