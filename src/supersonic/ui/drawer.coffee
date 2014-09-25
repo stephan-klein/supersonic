@@ -65,6 +65,7 @@ module.exports = (steroids, log) ->
    * ```
   ###
   show: (view, side)->
+    # TODO: Promises
     webView = view.getWebView()
     params = {}
     params[side] = webView
