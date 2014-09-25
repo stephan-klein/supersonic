@@ -11,7 +11,8 @@ angular
       v = supersonic.ui.view(url)
 
       v.setWidth(width).preload().then ()->
-        supersonic.ui.drawer.asLeft(v)
+        supersonic.ui.drawer.asLeft(v).then ()->
+          supersonic.logger.log "promise works"
 
     $scope.asRightDrawer = (url, width)->
       v = supersonic.ui.view(url)
