@@ -38,10 +38,25 @@ module.exports = (steroids, log) ->
         supersonic.logger.info "New layer was not shown due to an error #{error.errorDescription}"
     }
 
-  showInitial: ()->
-    supersonic.logger.info "Initial view was shown"
-    steroids.initialView.show()
+  showInitial: (params)->
+    new Promise (resolve, reject)->
+      steroids.initialView.show({},{
+        onSuccess: ()->
+          supersonic.logger.info "Initial view was shown"
+          resolve()
+        onFailure: ()->
+          supersonic.logger.info "Showing of an initial view was failed"
+          reject()
+        })
 
-  hideInitial: ()->
-    supersonic.logger.info "Initial view was hidden"
-    steroids.initialView.dismiss()
+  hideInitial: (params)->
+    new Promise (resolve, reject)->
+      steroids.initialView.dismiss({}, {
+        onSuccess: ()->
+          supersonic.logger.info "Initial view was hidden"
+          resolve()
+        onFailure: ()->
+          supersonic.logger.info "Hiding of an initial view was failed"
+          reject()
+
+        })
