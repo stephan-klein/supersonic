@@ -78,4 +78,38 @@ angular
           alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
       )
 
+    $scope.statusBarHidden = 0
+    $scope.statusBarShown = 0
+
+    $scope.hideAndShowStatusBarTests = [
+      {
+        title: "Hide and show status bar without params"
+        options: null
+      }
+      {
+        title: "Hide and show status bar with a string param"
+        options: "light"
+      }
+      {
+        title: "Hide and show status bar with an object param"
+        options: 
+          style: "light"
+      }
+    ]
+
+    $scope.testHideAndShowStatusBar = (options) ->
+      supersonic.app.statusBar.hide().then(
+        () ->
+          $scope.statusBarHidden++
+          supersonic.app.statusBar.show(options).then(
+            () ->
+              $scope.statusBarShown++
+            (message) ->
+              alert "Could not hide status bar! \n\n #{JSON.stringify(message)}"
+          )
+        (message) ->
+          alert "Could not hide status bar! \n\n #{JSON.stringify(message)}"
+      )
+
+
     

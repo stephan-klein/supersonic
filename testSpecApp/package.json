@@ -1,18 +1,11 @@
 {
-  "name": "supersonicTestSpecApp",
-  "version": "0.0.1",
-  "description": "Automated tests for Supersonic",
-  "repository": "N/A",
-  "readme":"N/A",
+  "name": "testSpecApp",
+  "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "dependencies": {},
   "devDependencies": {
-    "grunt-steroids": "0.x"
+    "grunt-steroids": "git+https://jepjep:e072ec18c4b0a3724637b731e345f2009ffe87f1@github.com/appgyver/grunt-devroids.git#master"
   },
-  "license": "none",
   "engines": {
     "steroids": "3.5.0"
   }

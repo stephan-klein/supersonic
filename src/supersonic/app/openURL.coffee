@@ -18,17 +18,16 @@ module.exports = (steroids, log) ->
    * ```
   ###
   openURL = bug "openURL", (url) ->
-    new Promise (resolve, reject) ->
-      successCallback = ->
-        document.addEventListener "resume", ->
-          resolve()
+    # Trying to open with null will crash the app
+    return Promise.reject("URL is undefined") unless url?
 
+    new Promise (resolve, reject) ->
       steroids.openURL(
         { url: url }
         {
-          onSuccess: successCallback
-          onFailure: ->
-            reject()
+          onSuccess: ->
+            document.addEventListener "resume", resolve
+          onFailure: reject
         }
       )
 

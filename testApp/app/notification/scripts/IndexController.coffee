@@ -1,31 +1,31 @@
 angular
   .module('notification')
-  .controller 'IndexController', ($scope) ->
+  .controller 'IndexController', ($scope, supersonic) ->
     $scope.dismissedAlerts = 0
 
     $scope.alertTests = [
       {
-        title: "Alert with String as param"
-        options: "Just a string value."
+        title: "Alert with message as param"
+        message: "Just a string value."
       }
       {
-        title: "Alert with options object param"
+        title: "Alert with message and options params"
+        message: "I'm an alert!"
         options:
           title: "Custom Title"
-          message: "I'm an alert!"
           buttonLabel: "Close"
       }
       {
-        title: "Alert with null options"
-        options: null
+        title: "Alert with null message"
+        message: null
       }
       {
-        title: "Alert without options"
+        title: "Alert without params"
       }
     ]
 
-    $scope.testAlert = (options) ->
-      supersonic.notification.alert(options).then ->
+    $scope.testAlert = (message, options) ->
+      supersonic.notification.alert(message, options).then ->
         $scope.dismissedAlerts++
 
     $scope.confirms = [
@@ -36,27 +36,27 @@ angular
 
     $scope.confirmTests = [
       {
-        title: "Confirm with String as param"
-        options: "Just a string value."
+        title: "Confirm with message as param"
+        message: "Just a string value."
       }
       {
-        title: "Alert with options object param"
+        title: "Alert with message string and options object params"
+        message: "I'm a Confirm!"
         options:
           title: "Custom Title"
-          message: "I'm a Confirm!"
           buttonLabels: ["Yay","NO!","third"]
       }
       {
-        title: "Confirm with null options"
-        options: null
+        title: "Confirm with null message"
+        message: null
       }
       {
         title: "Confirm without options"
       }
     ]
 
-    $scope.testConfirm = (options) ->
-      supersonic.notification.confirm(options).then (index) ->
+    $scope.testConfirm = (message, options) ->
+      supersonic.notification.confirm(message, options).then (index) ->
         $scope.confirms[index]++
 
     $scope.vibrations = 0
@@ -81,28 +81,28 @@ angular
 
     $scope.promptTests = [
       {
-        title: "Prompt with String as param"
-        options: "Just a string value."
+        title: "Prompt with message as param"
+        message: "Just a string value."
       }
       {
-        title: "Prompt with options object param"
+        title: "Prompt with message string and options object params"
+        message: "I am a prompt"
         options:
           title: "Custom Title" 
-          message: "I am a prompt"
           buttonLabels: ["Yay","NO!","Maybe"]
           defaultText: "Type something"
       }
       {
-        title: "Prompt with null options"
-        options: null
+        title: "Prompt with null message"
+        message: null
       }
       {
         title: "Prompt without options"
       }
     ]
 
-    $scope.testPrompt = (options) ->
-      supersonic.notification.prompt(options).then (result) ->
+    $scope.testPrompt = (message, options) ->
+      supersonic.notification.prompt(message, options).then (result) ->
         $scope.buttonIndex = result.buttonIndex
         $scope.input = result.input
 

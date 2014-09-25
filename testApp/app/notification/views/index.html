@@ -8,7 +8,7 @@
     <button
       class="button button-block"
       ng-repeat="test in alertTests"
-      ng-click="testAlert(test.options)">
+      ng-click="testAlert(test.message, test.options)">
       {{test.title}}
     </button>
     <p>Number of alerts dismissed: {{dismissedAlerts}}</p>
@@ -19,7 +19,7 @@
     <button
       class="button button-block"
       ng-repeat="test in confirmTests"
-      ng-click="testConfirm(test.options)">
+      ng-click="testConfirm(test.message, test.options)">
       {{test.title}}
     </button>
     <ul>
@@ -41,7 +41,7 @@
 
   <div class="card padding">
     <h1>Prompt tests</h1>
-    <button class="button button-block" ng-repeat="test in promptTests"  ng-click="testPrompt(test.options)">
+    <button class="button button-block" ng-repeat="test in promptTests"  ng-click="testPrompt(test.message, test.options)">
       {{test.title}}
     </button>
     <ul>

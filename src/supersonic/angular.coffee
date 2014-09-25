@@ -1,8 +1,13 @@
 supersonic = require './core'
+superscope = require './angular/superscope'
 
 module.exports = (angular) ->
+  superscope(angular)
+
   angular
-    .module('supersonic', [])
+    .module('supersonic', [
+      'supersonic.superscope'
+    ])
     .service('supersonic', ($q) ->
       qify = (f) -> (args...) -> $q.when f args...
       qifyAll = (object) ->

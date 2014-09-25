@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Mocha Runner for Supersonic: <%= yield.viewName %></title>
+
+  <link rel="stylesheet" href="/components/supersonic/dist/css/supersonic.css">
+
+  <link rel="import" href="/components/supersonic/dist/components/import.html">
+
+  <script src="/cordova.js"></script>
+  <script src="/components/steroids-js/steroids.js"></script>
+  <script src="/components/angular/angular.js"></script>
+  <script src="/components/supersonic/dist/supersonic.js"></script>
+
+  <script src="/components/platform/platform.js"></script>
+
+  <script src="/components/chai/chai.js"></script>
+  <script src="/components/chai-as-promised/lib/chai-as-promised.js"></script>
+
+  <link rel="stylesheet" href="/components/mocha/mocha.css">
+  <script src="/components/mocha/mocha.js"></script>
+</head>
+<body>
+  <script>
+    mocha.setup("bdd");
+  </script>
+  <!-- angular mocks autodetects mocha -->
+  <script src="/components/angular-mocks/angular-mocks.js"></script>
+
+  <%= yield.view %>
+  <div id="mocha"></div>
+
+  <script>
+    mocha.run();
+  </script>
+</body>
+</html>
