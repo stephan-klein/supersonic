@@ -9191,7 +9191,7 @@ module.exports = function(steroids, log) {
      * @description
      * Shows a view as a left drawer
      * @param {View} View object
-     * @returns
+     * @returns {Promise}
      * @usage
      * ```coffeescript
      * view = supersonic.ui.view("app/drawers/left.html")
@@ -9199,7 +9199,13 @@ module.exports = function(steroids, log) {
      * ```
      */
     asLeft: function(view) {
-      this.show(view, 'left');
+      var that;
+      that = this;
+      return new Promise(function(resolve, reject) {
+        return that.show(view, 'left').then(function() {
+          return resolve();
+        });
+      });
     },
 
     /**
@@ -9209,7 +9215,7 @@ module.exports = function(steroids, log) {
      * @description
      * Shows a view as a right drawer
      * @param {View} View object
-     * @returns
+     * @returns {Promise}
      * @usage
      * ```coffeescript
      * view = supersonic.ui.view("app/drawers/right.html")
@@ -9217,7 +9223,13 @@ module.exports = function(steroids, log) {
      * ```
      */
     asRight: function(view) {
-      this.show(view, 'right');
+      var that;
+      that = this;
+      return new Promise(function(resolve, reject) {
+        return that.show(view, 'right').then(function() {
+          return resolve();
+        });
+      });
     },
 
     /**
@@ -9228,7 +9240,7 @@ module.exports = function(steroids, log) {
      * Shows a view as a drawer of the given side
      * @param {View} View object
      * @param {String} Side to show a drawer: "left" or "right"
-     * @returns
+     * @returns {Promise}
      * @usage
      * ```coffeescript
      * view = supersonic.ui.view("app/drawers/index.html")
@@ -9236,20 +9248,24 @@ module.exports = function(steroids, log) {
      * ```
      */
     show: function(view, side) {
-      var params, webView;
-      webView = view.getWebView();
-      params = {};
-      params[side] = webView;
-      steroids.drawers.update(params);
-      steroids.drawers.show({
-        edge: steroids.screen.edges[side.toUpperCase()]
-      }, {
-        onSuccess: function() {
-          return supersonic.logger.log("" + side + " drawer should be shown");
-        },
-        onFailure: function() {
-          return supersonic.logger.log("" + side + " drawer fails");
-        }
+      return new Promise(function(resolve, reject) {
+        var params, webView;
+        webView = view.getWebView();
+        params = {};
+        params[side] = webView;
+        steroids.drawers.update(params);
+        return steroids.drawers.show({
+          edge: steroids.screen.edges[side.toUpperCase()]
+        }, {
+          onSuccess: function() {
+            supersonic.logger.info("" + side + " drawer should be shown");
+            return resolve();
+          },
+          onFailure: function() {
+            supersonic.logger.error("" + side + " drawer fails");
+            return reject();
+          }
+        });
       });
     },
 
@@ -9289,13 +9305,14 @@ module.exports = function(steroids, log) {
     view: require("./view")(steroids, log),
     layer: require("./layer")(steroids, log),
     drawer: require("./drawer")(steroids, log),
-    modal: require("./modal")(steroids, log)
+    modal: require("./modal")(steroids, log),
+    navigationBar: require("./navigation-bar")(steroids, log)
   };
 };
 
 
 
-},{"./drawer":55,"./layer":57,"./modal":58,"./view":59,"bluebird":4}],57:[function(require,module,exports){
+},{"./drawer":55,"./layer":57,"./modal":58,"./navigation-bar":59,"./view":60,"bluebird":4}],57:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9335,7 +9352,7 @@ module.exports = function(steroids, log) {
             return resolve();
           },
           onFailure: function(error) {
-            supersonic.logger.info("New layer was not shown due to an error " + error.errorDescription);
+            supersonic.logger.error("New layer was not shown due to an error " + error.errorDescription);
             return reject();
           }
         });
@@ -9362,7 +9379,7 @@ module.exports = function(steroids, log) {
             return resolve();
           },
           onFailure: function(error) {
-            supersonic.logger.info("Popping the layer failes with this error: " + error.errorDescription);
+            supersonic.logger.error("Popping the layer failes with this error: " + error.errorDescription);
             return reject();
           }
         });
@@ -9389,7 +9406,7 @@ module.exports = function(steroids, log) {
             return resolve();
           },
           onFailure: function(error) {
-            supersonic.logger.info("Popping the layer failes with this error: " + error.errorDescription);
+            supersonic.logger.error("Popping the layer failes with this error: " + error.errorDescription);
             return reject();
           }
         });
@@ -9420,7 +9437,7 @@ module.exports = function(steroids, log) {
             return resolve();
           },
           onFailure: function() {
-            supersonic.logger.info("Showing of an initial view was failed");
+            supersonic.logger.error("Showing of an initial view was failed");
             return reject();
           }
         });
@@ -9451,7 +9468,7 @@ module.exports = function(steroids, log) {
             return resolve();
           },
           onFailure: function() {
-            supersonic.logger.info("Hiding of an initial view was failed");
+            supersonic.logger.error("Hiding of an initial view was failed");
             return reject();
           }
         });
@@ -9588,6 +9605,29 @@ var Promise;
 Promise = require('bluebird');
 
 module.exports = function(steroids, log) {
+  return {
+
+    /**
+     * @ngdoc overview
+     * @name navigationBar
+     * @module ui
+     * @description
+     * Provides methods to work with layers
+     */
+    hide: function() {
+      return supersonic.logger.log("will hide the navigation bar");
+    }
+  };
+};
+
+
+
+},{"bluebird":4}],60:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
 
   /**
    * @ngdoc overview
@@ -9657,7 +9697,7 @@ module.exports = function(steroids, log) {
             }
           },
           onFailure: function() {
-            supersonic.logger.log("Somethig went wrong with checking the applicaiton state");
+            supersonic.logger.error("Somethig went wrong with checking the applicaiton state");
             return reject();
           }
         });
