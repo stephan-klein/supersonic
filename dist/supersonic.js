@@ -9405,13 +9405,67 @@ module.exports = function(steroids, log) {
         }
       });
     },
-    showInitial: function() {
-      supersonic.logger.info("Initial view was shown");
-      return steroids.initialView.show();
+
+    /**
+     * @ngdoc method
+     * @name showInitial
+     * @module layer
+     * @description
+     * Shows initial view
+     * @param {Object} Parameters of animation
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.layer.showInitial()
+     * ```
+     */
+    showInitial: function(params) {
+      if (!params) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.initialView.show(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Initial view was shown");
+            return resolve();
+          },
+          onFailure: function() {
+            supersonic.logger.info("Showing of an initial view was failed");
+            return reject();
+          }
+        });
+      });
     },
-    hideInitial: function() {
-      supersonic.logger.info("Initial view was hidden");
-      return steroids.initialView.dismiss();
+
+    /**
+     * @ngdoc method
+     * @name hideInitial
+     * @module layer
+     * @description
+     * Hides initial view
+     * @param {Object} Parameters of animation
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.layer.hideInitial()
+     * ```
+     */
+    hideInitial: function(params) {
+      if (!params) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.initialView.dismiss(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Initial view was hidden");
+            return resolve();
+          },
+          onFailure: function() {
+            supersonic.logger.info("Hiding of an initial view was failed");
+            return reject();
+          }
+        });
+      });
     }
   };
 };
