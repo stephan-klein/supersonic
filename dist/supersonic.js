@@ -8379,14 +8379,17 @@ if (((typeof window !== "undefined" && window !== null ? window.angular : void 0
 
 
 
-},{"./supersonic/angular":39,"./supersonic/core":46}],39:[function(require,module,exports){
-var supersonic,
+},{"./supersonic/angular":39,"./supersonic/core":47}],39:[function(require,module,exports){
+var superscope, supersonic,
   __slice = [].slice;
 
 supersonic = require('./core');
 
+superscope = require('./angular/superscope');
+
 module.exports = function(angular) {
-  return angular.module('supersonic', []).service('supersonic', function($q) {
+  superscope(angular);
+  return angular.module('supersonic', ['supersonic.superscope']).service('supersonic', function($q) {
     var qify, qifyAll;
     qify = function(f) {
       return function() {
@@ -8419,7 +8422,14 @@ module.exports = function(angular) {
 
 
 
-},{"./core":46}],40:[function(require,module,exports){
+},{"./angular/superscope":40,"./core":47}],40:[function(require,module,exports){
+module.exports = function(angular) {
+  return angular.module('supersonic.superscope', []).service('superscope', function($rootScope) {});
+};
+
+
+
+},{}],41:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8456,7 +8466,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],41:[function(require,module,exports){
+},{"bluebird":4}],42:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8473,7 +8483,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./getLaunchURL":40,"./openURL":42,"./sleep":43,"./splashscreen":44,"./statusBar":45,"bluebird":4}],42:[function(require,module,exports){
+},{"./getLaunchURL":41,"./openURL":43,"./sleep":44,"./splashscreen":45,"./statusBar":46,"bluebird":4}],43:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8516,7 +8526,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],43:[function(require,module,exports){
+},{"bluebird":4}],44:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8582,7 +8592,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],44:[function(require,module,exports){
+},{"bluebird":4}],45:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8654,7 +8664,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],45:[function(require,module,exports){
+},{"bluebird":4}],46:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8738,7 +8748,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],46:[function(require,module,exports){
+},{"bluebird":4}],47:[function(require,module,exports){
 var global, logger, steroids;
 
 global = typeof window !== "undefined" && window !== null ? window : require('./mock/window');
@@ -8761,7 +8771,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":41,"./core/debug":47,"./core/logger":48,"./mock/steroids":50,"./mock/window":51,"./notification":54}],47:[function(require,module,exports){
+},{"./app":42,"./core/debug":48,"./core/logger":49,"./mock/steroids":51,"./mock/window":52,"./notification":55}],48:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8801,7 +8811,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],48:[function(require,module,exports){
+},{"bluebird":4}],49:[function(require,module,exports){
 var Bacon, Promise, logMessageEnvelope, logMessageStream, startFlushing,
   __slice = [].slice;
 
@@ -8975,7 +8985,7 @@ module.exports = function(steroids, window) {
 
 
 
-},{"baconjs":1,"bluebird":4}],49:[function(require,module,exports){
+},{"baconjs":1,"bluebird":4}],50:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8988,7 +8998,7 @@ module.exports = {
 
 
 
-},{"bluebird":4}],50:[function(require,module,exports){
+},{"bluebird":4}],51:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -9003,7 +9013,7 @@ module.exports = {
 
 
 
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -9015,7 +9025,7 @@ module.exports = {
 
 
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9063,7 +9073,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":49,"bluebird":4}],53:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],54:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9113,7 +9123,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":49,"bluebird":4}],54:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],55:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9127,7 +9137,7 @@ module.exports = {
 
 
 
-},{"./alert":52,"./confirm":53,"./prompt":55,"./vibrate":56,"bluebird":4}],55:[function(require,module,exports){
+},{"./alert":53,"./confirm":54,"./prompt":56,"./vibrate":57,"bluebird":4}],56:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9186,7 +9196,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":49,"bluebird":4}],56:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],57:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9220,4 +9230,4 @@ module.exports = function(options) {
 
 
 
-},{"../events":49,"bluebird":4}]},{},[38])
+},{"../events":50,"bluebird":4}]},{},[38])
