@@ -9335,7 +9335,7 @@ module.exports = function(steroids, log) {
      * @description
      * Navigates to a given view
      * @param {View} A view object
-     * @returns
+     * @returns {Promise}
      * @usage
      * ```coffeescript
      * v = supersonic.ui.view("http://www.google.com")
@@ -9365,7 +9365,7 @@ module.exports = function(steroids, log) {
      * @module layer
      * @description
      * Removes the topmost view from the navigation stack
-     * @returns
+     * @returns {Promise}
      * @usage
      * ```coffeescript
      * supersonic.ui.layer.pop()
@@ -9392,7 +9392,7 @@ module.exports = function(steroids, log) {
      * @module layer
      * @description
      * Pops all views except for the root view from the layer stack
-     * @returns
+     * @returns {Promise}
      * @usage
      * ```coffeescript
      * supersonic.ui.layer.popAll()
@@ -9613,6 +9613,21 @@ module.exports = function(steroids, log) {
      * @module ui
      * @description
      * Provides methods to work with layers
+     */
+
+    /**
+     * @ngdoc method
+     * @name hide
+     * @module navigationBar
+     * @description
+     * Hides a navigation bar
+     * @param {Object} [parameters] Parameters of hiding
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.navigationBar.hide({ animated: true }).then ()->
+     *   supersonic.logger.log "promise works"
+     * ```
      */
     hide: function(params) {
       if (params == null) {
