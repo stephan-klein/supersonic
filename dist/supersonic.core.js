@@ -8650,8 +8650,8 @@ module.exports = function(steroids, log) {
      * @module statusBar
      * @description
      * Shows the native status bar application wide. If no parameters are given, the status bar text color is the default color (black on iOS 7).
-     * @params {string} style If set to "light" (shorthand), then the native status bar text color is light (white on iOS 7). Optional.
-     * @params {Object} options Options object with `style` property (verbose). Optional.
+     * @param {string} style If set to "light" (shorthand), then the native status bar text color is light (white on iOS 7). Optional.
+     * @param {Object} options Options object with `style` property (verbose). Optional.
      * @returns {Promise} Promise that is resolved when the status bar is shown.
      * @usage
      * ```coffeescript
