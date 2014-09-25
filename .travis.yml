@@ -4,6 +4,7 @@ node_js:
 before_install: npm install -g grunt-cli
 after_success:
 - grunt travis
+- npm install -g bower
 - sh scripts/publish.sh
 env:
   global:
