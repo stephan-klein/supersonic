@@ -37,3 +37,11 @@ module.exports = (steroids, log) ->
       onFailure: (error)->
         supersonic.logger.info "New layer was not shown due to an error #{error.errorDescription}"
     }
+
+  showInitial: ()->
+    supersonic.logger.info "Initial view was shown"
+    steroids.initialView.show()
+
+  hideInitial: ()->
+    supersonic.logger.info "Initial view was hidden"
+    steroids.initialView.dismiss()
