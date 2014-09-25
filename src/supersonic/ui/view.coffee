@@ -73,7 +73,7 @@ module.exports = (steroids, log) ->
               resolve(true)
 
           onFailure: ()->
-            supersonic.logger.log "Somethig went wrong with checking the applicaiton state"
+            supersonic.logger.error "Somethig went wrong with checking the applicaiton state"
             reject()
         }
 

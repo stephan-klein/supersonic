@@ -74,9 +74,9 @@ module.exports = (steroids, log) ->
       edge: steroids.screen.edges[side.toUpperCase()]
     }, {
       onSuccess: ()->
-        supersonic.logger.log "#{side} drawer should be shown"
+        supersonic.logger.info "#{side} drawer should be shown"
       onFailure: ()->
-        supersonic.logger.log "#{side} drawer fails"
+        supersonic.logger.error "#{side} drawer fails"
     }
     return
 
