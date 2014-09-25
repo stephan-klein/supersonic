@@ -42,6 +42,29 @@ module.exports = (steroids, log) ->
 
   ###*
    * @ngdoc method
+   * @name pop
+   * @module layer
+   * @description
+   * Removes the topmost view from the navigation stack
+   * @returns
+   * @usage
+   * ```coffeescript
+   * supersonic.ui.layer.pop()
+   * ```
+  ###
+  pop: ()->
+    new Promise (resolve, reject)->
+      steroids.layers.pop {}, {
+        onSuccess: ()->
+          supersonic.logger.info "The layer was poppped"
+          resolve()
+        onFailure: (error)->
+          supersonic.logger.info "Popping the layer failes with this error: #{error.errorDescription}"
+          reject()
+      }
+
+  ###*
+   * @ngdoc method
    * @name showInitial
    * @module layer
    * @description
