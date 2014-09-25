@@ -34,6 +34,6 @@ module.exports = (steroids, log) ->
           supersonic.logger.info "Navigation bar was hidden"
           resolve()
         onFailure: (error)->
-          supersonic.logger.error "Hiding a navigation bar crashed due to the error: #{error.errorDescription}"
+          supersonic.logger.error "Hiding the navigation bar crashed due to the error: #{error.errorDescription}"
           reject()
       }
