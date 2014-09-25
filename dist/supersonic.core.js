@@ -8698,6 +8698,7 @@ module.exports = {
   logger: logger,
   debug: require('./core/debug')(steroids, logger),
   app: require('./app')(steroids, logger),
+  media: require('./media')(steroids, logger),
   notification: require('./notification'),
   device: require('./device')(steroids, logger),
   ui: require('./ui')(steroids, logger)
@@ -8710,7 +8711,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":39,"./core/debug":45,"./core/logger":46,"./device":49,"./mock/steroids":51,"./mock/window":52,"./notification":55,"./ui":59}],45:[function(require,module,exports){
+},{"./app":39,"./core/debug":45,"./core/logger":46,"./device":49,"./media":52,"./mock/steroids":53,"./mock/window":54,"./notification":57,"./ui":61}],45:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9135,6 +9136,113 @@ module.exports = {
 
 
 },{"bluebird":4}],51:[function(require,module,exports){
+var Promise, deviceready;
+
+Promise = require('bluebird');
+
+deviceready = require('../events').deviceready;
+
+
+/**
+ * @ngdoc method
+ * @name prompt
+ * @module notification
+ * @description
+ * Shows a native prompt dialog.
+ * @param {string} message confirm message.
+ * @param {Object} options an options object (optionals). The following properties are available:
+ * * `title`: dialog title (optional, defaults to "Confirm")
+ * * `buttonLabels`: array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
+ * * `defaultText`: default textbox input value (optional, defaults to an empty string)
+ * @returns {Promise} Promise that is resolved with an object as an argument. The argument object has the following properties:
+ * * `buttonIndex`: index of the pressed button
+ * * `input`: input string
+ * @usage
+ * ```coffeescript
+ * # Basic usage
+ * supersonic.notification.prompt("This is a prompt. Type something")
+ *
+ * # With options
+ * supersonic.notification.prompt("I'm a prompt!", {
+ *   title: "Custom Title"
+ *   buttonLabels: ["Yes", "No", "Cancel"]
+ *   defaultText: "Type here"
+ * })
+ * ```
+ */
+
+module.exports = function(steroids, log) {
+  var bug, getFromPhotoLibrary, takePicture;
+  bug = log.debuggable("supersonic.media.camera");
+  takePicture = function(options) {
+    var cameraOptions;
+    if (options == null) {
+      options = {};
+    }
+    cameraOptions = {
+      quality: ((options != null ? options.quality : void 0) != null) || 100,
+      destinationType: Camera.DestinationType.FILE_URI,
+      allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: options.targetWidth,
+      targetHeight: options.targetHeight,
+      mediaType: 0,
+      correctOrientation: true,
+      saveToPhotoAlbum: ((options != null ? options.saveToPhotoAlbum : void 0) != null) || false,
+      cameraDirection: ((options != null ? options.cameraDirection : void 0) != null) || null
+    };
+    return deviceready.then(function() {
+      return new Promise(function(resolve, reject) {
+        return navigator.camera.getPicture(resolve, reject, cameraOptions);
+      });
+    });
+  };
+  getFromPhotoLibrary = function(options) {
+    var cameraOptions;
+    if (options == null) {
+      options = {};
+    }
+    cameraOptions = {
+      quality: ((options != null ? options.quality : void 0) != null) || 100,
+      destinationType: ((options != null ? options.destinationType : void 0) != null) || Camera.DestinationType.FILE_URI,
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: options.targetWidth,
+      targetHeight: options.targetHeight,
+      mediaType: ((options != null ? options.mediaType : void 0) != null) || 0,
+      correctOrientation: true,
+      saveToPhotoAlbum: ((options != null ? options.saveToPhotoAlbum : void 0) != null) || false,
+      popoverOptions: {}
+    };
+    return deviceready.then(function() {
+      return new Promise(function(resolve, reject) {
+        return navigator.camera.getPicture(resolve, reject, cameraOptions);
+      });
+    });
+  };
+  return {
+    takePicture: takePicture,
+    getFromPhotoLibrary: getFromPhotoLibrary
+  };
+};
+
+
+
+},{"../events":50,"bluebird":4}],52:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+    camera: require("./camera")(steroids, log)
+  };
+};
+
+
+
+},{"./camera":51,"bluebird":4}],53:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -9149,7 +9257,7 @@ module.exports = {
 
 
 
-},{}],52:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -9161,7 +9269,7 @@ module.exports = {
 
 
 
-},{}],53:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9209,7 +9317,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],54:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],56:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9259,7 +9367,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],55:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],57:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9273,7 +9381,7 @@ module.exports = {
 
 
 
-},{"./alert":53,"./confirm":54,"./prompt":56,"./vibrate":57,"bluebird":4}],56:[function(require,module,exports){
+},{"./alert":55,"./confirm":56,"./prompt":58,"./vibrate":59,"bluebird":4}],58:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9332,7 +9440,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],57:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],59:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9366,7 +9474,7 @@ module.exports = function(options) {
 
 
 
-},{"../events":50,"bluebird":4}],58:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],60:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9490,7 +9598,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],59:[function(require,module,exports){
+},{"bluebird":4}],61:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9508,7 +9616,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./drawer":58,"./layer":60,"./modal":61,"./navigation-bar":62,"./navigation-button":63,"./view":64,"bluebird":4}],60:[function(require,module,exports){
+},{"./drawer":60,"./layer":62,"./modal":63,"./navigation-bar":64,"./navigation-button":65,"./view":66,"bluebird":4}],62:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9675,7 +9783,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],61:[function(require,module,exports){
+},{"bluebird":4}],63:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9795,7 +9903,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],62:[function(require,module,exports){
+},{"bluebird":4}],64:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9918,7 +10026,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],63:[function(require,module,exports){
+},{"bluebird":4}],65:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9972,7 +10080,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],64:[function(require,module,exports){
+},{"bluebird":4}],66:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
