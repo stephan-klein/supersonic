@@ -39,8 +39,10 @@ module.exports = (steroids, log) ->
     }
 
   showInitial: (params)->
+    if !params
+      params = {}
     new Promise (resolve, reject)->
-      steroids.initialView.show({},{
+      steroids.initialView.show(params,{
         onSuccess: ()->
           supersonic.logger.info "Initial view was shown"
           resolve()
@@ -50,8 +52,10 @@ module.exports = (steroids, log) ->
         })
 
   hideInitial: (params)->
+    if !params
+      params = {}
     new Promise (resolve, reject)->
-      steroids.initialView.dismiss({}, {
+      steroids.initialView.dismiss(params, {
         onSuccess: ()->
           supersonic.logger.info "Initial view was hidden"
           resolve()
