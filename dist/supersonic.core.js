@@ -9144,52 +9144,108 @@ deviceready = require('../events').deviceready;
 
 
 /**
- * @ngdoc method
- * @name prompt
- * @module notification
- * @description
- * Shows a native prompt dialog.
- * @param {string} message confirm message.
- * @param {Object} options an options object (optionals). The following properties are available:
- * * `title`: dialog title (optional, defaults to "Confirm")
- * * `buttonLabels`: array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
- * * `defaultText`: default textbox input value (optional, defaults to an empty string)
- * @returns {Promise} Promise that is resolved with an object as an argument. The argument object has the following properties:
- * * `buttonIndex`: index of the pressed button
- * * `input`: input string
- * @usage
- * ```coffeescript
- * # Basic usage
- * supersonic.notification.prompt("This is a prompt. Type something")
- *
- * # With options
- * supersonic.notification.prompt("I'm a prompt!", {
- *   title: "Custom Title"
- *   buttonLabels: ["Yes", "No", "Cancel"]
- *   defaultText: "Type here"
- * })
- * ```
+   * @ngdoc overview
+   * @name camera
+   * @module media
+   * @description
+   * Provides access to the device's default camera application.
  */
 
 module.exports = function(steroids, log) {
   var bug, getFromPhotoLibrary, takePicture;
   bug = log.debuggable("supersonic.media.camera");
-  takePicture = function(options) {
-    var cameraOptions;
+
+  /**
+   * @ngdoc method
+   * @name takePicture
+   * @module camera
+   * @description
+   * Opens the device's default camera application that allows users to take pictures. Once the user takes the photo, the camera application closes and the application is restored.
+   * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
+   * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
+   * @param {Object} options an options object (optional). The following properties are available:
+   * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
+   * * `destinationType`: Choose the format of the return value (Number). Available formats:
+   *  * "dataURL": Return image as base64-encoded string
+   *  * "fileURI": Return image file URI (default)
+   *  * "nativeURI": Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
+   * * `allowEdit`:  Allow simple editing of image before selection (Boolean). Defaults to `false`. Note that Android ignores the `allowEdit parameter.
+   * * `encodingType`: Choose the returned image file's encoding. Available encoding types:
+   *  * "jpeg": Return JPEG encoded image (default).
+   *  * "png": Return PNG encoded image.
+   * * `correctOrientation`: Rotate the image to correct for the orientation of the device during capture (Boolean). Defaults to `true`.
+   * * `saveToPhotoAlbum`: Save the image to the photo album on the device after capture (Boolean). Defaults to `false`.
+   * * `cameraDirection`: Choose the camera to use (front- or back-facing). Note that any `cameraDirection` value results in a back-facing photo on Android. Available directions:
+   *  * "back": Use the back-facing camera (default).
+   *  * "front": Use the front-facing camera.
+   * @returns {Promise} Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the `destinationType` option.
+   * @usage
+   * ```coffeescript
+   * # Basic usage
+   * supersonic.media.camera.takePicture(300, 300)
+   *
+   * # With options
+   * supersonic.media.camera.takePicture(300, 300 {
+   *   quality: 50
+   *   allowEdit: true
+   *   encodingType: "png"
+   *   saveToPhotoAlbum: true
+   * })
+   * ```
+   */
+  takePicture = function(width, height, options) {
+    var cameraDirection, cameraOptions, destinationType, encodingType;
     if (options == null) {
       options = {};
     }
+    destinationType = (function() {
+      if ((options != null ? options.destinationType : void 0) != null) {
+        switch (options.destinationType) {
+          case "dataURL":
+            return Camera.DestinationType.DATA_URL;
+          case "fileURI":
+            return Camera.DestinationType.FILE_URI;
+          case "nativeURI":
+            return Camera.DestinationType.NATIVE_URI;
+        }
+      } else {
+        return Camera.DestinationType.FILE_URI;
+      }
+    })();
+    encodingType = (function() {
+      if ((options != null ? options.encodingType : void 0) != null) {
+        switch (options.encodingType) {
+          case "jpeg":
+            return Camera.EncodingType.JPEG;
+          case "png":
+            return Camera.EncodingType.PNG;
+        }
+      } else {
+        return Camera.EncodingType.JPEG;
+      }
+    })();
+    cameraDirection = (function() {
+      if ((options != null ? options.cameraDirection : void 0) != null) {
+        switch (options.cameraDirection) {
+          case "back":
+            return Camera.Direction.BACK;
+          case "front":
+            return Camera.Direction.FRONT;
+        }
+      } else {
+        return Camera.Direction.BACK;
+      }
+    })();
     cameraOptions = {
       quality: ((options != null ? options.quality : void 0) != null) || 100,
-      destinationType: Camera.DestinationType.FILE_URI,
+      destinationType: destinationType,
       allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: options.targetWidth,
-      targetHeight: options.targetHeight,
-      mediaType: 0,
-      correctOrientation: true,
+      encodingType: encodingType,
+      targetWidth: width,
+      targetHeight: height,
+      correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true,
       saveToPhotoAlbum: ((options != null ? options.saveToPhotoAlbum : void 0) != null) || false,
-      cameraDirection: ((options != null ? options.cameraDirection : void 0) != null) || null
+      cameraDirection: cameraDirection
     };
     return deviceready.then(function() {
       return new Promise(function(resolve, reject) {
@@ -9197,23 +9253,101 @@ module.exports = function(steroids, log) {
       });
     });
   };
-  getFromPhotoLibrary = function(options) {
-    var cameraOptions;
+
+  /**
+   * @ngdoc method
+   * @name getFromPhotoLibrary
+   * @module camera
+   * @description
+   * Displays a dialog that allows users to select an existing image. Once the user selects the photo, the camera application closes and the application is restored.
+   * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
+   * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
+   * @param {Object} options an options object (optional). The following properties are available:
+   * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
+   * * `destinationType`: Choose the format of the return value. Available formats:
+   *  * "dataURL": Return image as base64-encoded string
+   *  * "fileURI": Return image file URI (default)
+   *  * "nativeURI": Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
+   * * `allowEdit`:  Allow simple editing of image before selection (Boolean). Defaults to `false`. Note that Android ignores the `allowEdit parameter.
+   * * `encodingType`: Choose the returned image file's encoding. Available encoding types:
+   *  * "jpeg": Return JPEG encoded image (default).
+   *  * "png": Return PNG encoded image.
+   * * `mediaType`: Set the type of media to select from. Available media types:
+   *  * "picture": Allow selection of still pictures only (default).
+   *  * "video": Allow selection of video only, will always return "fileURI".
+   *  * "allMedia": Allow selection from all media types.
+   * * `correctOrientation`: Rotate the image to correct for the orientation of the device during capture (Boolean). Defaults to `true`.
+   * * `popoverOptions`: NOT SUPPORTED
+   * @returns {Promise} Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the `destinationType` option.
+   * @usage
+   * ```coffeescript
+   * # Basic usage
+   * supersonic.media.camera.getFromPhotoLibrary(300, 300)
+   *
+   * # With options
+   * supersonic.media.camera.getFromPhotoLibrary(300, 300 {
+   *   quality: 50
+   *   allowEdit: true
+   *   encodingType: "png"
+   * })
+   * ```
+   */
+  getFromPhotoLibrary = function(width, height, options) {
+    var cameraOptions, destinationType, encodingType, mediaType, popoverOptions;
     if (options == null) {
       options = {};
     }
+    destinationType = (function() {
+      if ((options != null ? options.destinationType : void 0) != null) {
+        switch (options.destinationType) {
+          case "dataURL":
+            return Camera.DestinationType.DATA_URL;
+          case "fileURI":
+            return Camera.DestinationType.FILE_URI;
+          case "nativeURI":
+            return Camera.DestinationType.NATIVE_URI;
+        }
+      } else {
+        return Camera.DestinationType.FILE_URI;
+      }
+    })();
+    encodingType = (function() {
+      if ((options != null ? options.encodingType : void 0) != null) {
+        switch (options.encodingType) {
+          case "jpeg":
+            return Camera.EncodingType.JPEG;
+          case "png":
+            return Camera.EncodingType.PNG;
+        }
+      } else {
+        return Camera.EncodingType.JPEG;
+      }
+    })();
+    mediaType = (function() {
+      if ((options != null ? options.mediaType : void 0) != null) {
+        switch (options.mediaType) {
+          case "picture":
+            return Camera.MediaType.PICTURE;
+          case "video":
+            return Camera.MediaType.VIDEO;
+          case "allMedia":
+            return Camera.MediaType.ALLMEDIA;
+        }
+      } else {
+        return Camera.MediaType.PICTURE;
+      }
+    })();
+    popoverOptions = (options != null ? options.popoverOptions : void 0) != null ? void 0 : {};
     cameraOptions = {
-      quality: ((options != null ? options.quality : void 0) != null) || 100,
-      destinationType: ((options != null ? options.destinationType : void 0) != null) || Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      quality: ((options != null ? options.quality : void 0) != null) || 100,
+      destinationType: destinationType,
       allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: options.targetWidth,
-      targetHeight: options.targetHeight,
-      mediaType: ((options != null ? options.mediaType : void 0) != null) || 0,
-      correctOrientation: true,
-      saveToPhotoAlbum: ((options != null ? options.saveToPhotoAlbum : void 0) != null) || false,
-      popoverOptions: {}
+      encodingType: encodingType,
+      targetWidth: width,
+      targetHeight: height,
+      mediaType: mediaType,
+      correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true
     };
     return deviceready.then(function() {
       return new Promise(function(resolve, reject) {
