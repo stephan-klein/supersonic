@@ -9614,8 +9614,22 @@ module.exports = function(steroids, log) {
      * @description
      * Provides methods to work with layers
      */
-    hide: function() {
-      return supersonic.logger.log("will hide the navigation bar");
+    hide: function(params) {
+      if (params == null) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.view.navigationBar.hide(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Navigation bar was hidden");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Hiding a navigation bar crashed due to the error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
     }
   };
 };
