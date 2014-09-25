@@ -9,7 +9,11 @@ angular
 
     $scope.navigateTo = (url)->
       v = supersonic.ui.view(url, "myView")
-      supersonic.ui.layer.push(v)
+      supersonic.ui.layer.push(v).then ()->
+        supersonic.logger.log "PROMISIFIED"
+
+    $scope.pop = ()->
+      supersonic.ui.layer.pop()
 
     $scope.hideInitialView = ()->
       supersonic.ui.layer.hideInitial()
