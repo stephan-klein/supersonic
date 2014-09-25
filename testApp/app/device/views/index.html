@@ -27,5 +27,28 @@
       <li>Latest position received: {{latestPosition}}</li>
     </ul>
   </div>
+
+  <div class="card padding">
+    <h1>device.watchAcceleration tests</h1>
+    <button
+      class="button button-block"
+      ng-repeat="test in watchAccelerationTests"
+      ng-click="testWatchAcceleration(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Latest acceleration received: {{watchAcceleration}}</li>
+    </ul>
+  </div>
+
+  <div class="card padding">
+    <h1>device.getAcceleration tests</h1>
+    <button class="button button-block" ng-repeat="test in getAccelerationTests"  ng-click="testGetAcceleration(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Latest acceleration received: {{latestAcceleration}}</li>
+    </ul>
+  </div>
   
 </div>
