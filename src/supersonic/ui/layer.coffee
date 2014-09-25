@@ -65,6 +65,29 @@ module.exports = (steroids, log) ->
 
   ###*
    * @ngdoc method
+   * @name popAll
+   * @module layer
+   * @description
+   * Pops all views except for the root view from the layer stack
+   * @returns
+   * @usage
+   * ```coffeescript
+   * supersonic.ui.layer.popAll()
+   * ```
+  ###
+  popAll: ()->
+    new Promise (resolve, reject)->
+      steroids.layers.popAll {}, {
+        onSuccess: ()->
+          supersonic.logger.info "The layer was poppped"
+          resolve()
+        onFailure: (error)->
+          supersonic.logger.info "Popping the layer failes with this error: #{error.errorDescription}"
+          reject()
+      }
+
+  ###*
+   * @ngdoc method
    * @name showInitial
    * @module layer
    * @description
