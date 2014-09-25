@@ -28,15 +28,17 @@ module.exports = (steroids, log) ->
    * ```
   ###
   push: (view)->
-    # TODO: Promisify
-    steroids.layers.push {
-        view: view.getWebView()
-    }, {
-      onSuccess: ()->
-        supersonic.logger.info "New layer is shown"
-      onFailure: (error)->
-        supersonic.logger.info "New layer was not shown due to an error #{error.errorDescription}"
-    }
+    new Promise (resolve, reject)->
+      steroids.layers.push {
+          view: view.getWebView()
+      }, {
+        onSuccess: ()->
+          supersonic.logger.info "New layer is shown"
+          resolve()
+        onFailure: (error)->
+          supersonic.logger.info "New layer was not shown due to an error #{error.errorDescription}"
+          reject()
+      }
 
   ###*
    * @ngdoc method
