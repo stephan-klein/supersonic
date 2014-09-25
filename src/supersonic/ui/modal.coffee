@@ -13,7 +13,7 @@ module.exports = (steroids, log) ->
    * Provides methods to work with layers
   ###
 
-  show: (view, params)->
+  show: (view, params = {})->
     new Promise (resolve, reject)->
       params.view = view.getWebView()
       steroids.modal.show params, {
