@@ -20,7 +20,7 @@ module.exports = (steroids, log) ->
    * Opens the device's default camera application that allows users to take pictures. Once the user takes the photo, the camera application closes and the application is restored.
    * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
    * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
-   * @param {Object} options an options object (optional). The following properties are available:
+   * @param {Object} [options] an options object (optional). The following properties are available:
    * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
    * * `destinationType`: Choose the format of the return value (Number). Available formats:
    *  * "dataURL": Return image as base64-encoded string
@@ -51,41 +51,44 @@ module.exports = (steroids, log) ->
    * ```
   ###
   takePicture = (width, height, options = {}) ->
-    destinationType = if options?.destinationType?
-      switch options.destinationType
-        when "dataURL" then Camera.DestinationType.DATA_URL
-        when "fileURI" then Camera.DestinationType.FILE_URI
-        when "nativeURI" then Camera.DestinationType.NATIVE_URI
-    else
-      Camera.DestinationType.FILE_URI
 
-    encodingType = if options?.encodingType?
-      switch options.encodingType
-        when "jpeg" then Camera.EncodingType.JPEG
-        when "png" then Camera.EncodingType.PNG
-    else
-      Camera.EncodingType.JPEG
-
-    cameraDirection = if options?.cameraDirection?
-      switch options.cameraDirection
-        when "back" then Camera.Direction.BACK
-        when "front" then Camera.Direction.FRONT
-    else
-      Camera.Direction.BACK
-
-    cameraOptions =
-      quality: options?.quality? || 100
-      destinationType: destinationType
-      allowEdit: options?.allowEdit? || false
-      encodingType: encodingType
-      targetWidth: width
-      targetHeight: height
-      correctOrientation: options?.correctOrientation? || true
-      saveToPhotoAlbum: options?.saveToPhotoAlbum? || false
-      cameraDirection: cameraDirection
+    getCameraOptions = ->
+      destinationType = if options?.destinationType?
+        switch options.destinationType
+          when "dataURL" then Camera.DestinationType.DATA_URL
+          when "fileURI" then Camera.DestinationType.FILE_URI
+          when "nativeURI" then Camera.DestinationType.NATIVE_URI
+      else
+        Camera.DestinationType.FILE_URI
+  
+      encodingType = if options?.encodingType?
+        switch options.encodingType
+          when "jpeg" then Camera.EncodingType.JPEG
+          when "png" then Camera.EncodingType.PNG
+      else
+        Camera.EncodingType.JPEG
+  
+      cameraDirection = if options?.cameraDirection?
+        switch options.cameraDirection
+          when "back" then Camera.Direction.BACK
+          when "front" then Camera.Direction.FRONT
+      else
+        Camera.Direction.BACK
+  
+      cameraOptions =
+        quality: options?.quality? || 100
+        destinationType: destinationType
+        allowEdit: options?.allowEdit? || false
+        encodingType: encodingType
+        targetWidth: width
+        targetHeight: height
+        correctOrientation: options?.correctOrientation? || true
+        saveToPhotoAlbum: options?.saveToPhotoAlbum? || false
+        cameraDirection: cameraDirection
   
     deviceready
-      .then(->
+      .then(getCameraOptions)
+      .then( (cameraOptions) ->
         new Promise (resolve, reject) ->
           navigator.camera.getPicture resolve, reject, cameraOptions
       )
@@ -98,7 +101,7 @@ module.exports = (steroids, log) ->
    * Displays a dialog that allows users to select an existing image. Once the user selects the photo, the camera application closes and the application is restored.
    * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
    * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
-   * @param {Object} options an options object (optional). The following properties are available:
+   * @param {Object} [options] an options object (optional). The following properties are available:
    * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
    * * `destinationType`: Choose the format of the return value. Available formats:
    *  * "dataURL": Return image as base64-encoded string
@@ -129,47 +132,50 @@ module.exports = (steroids, log) ->
    * ```
   ###
   getFromPhotoLibrary = (width, height, options = {}) ->
-    destinationType = if options?.destinationType?
-      switch options.destinationType
-        when "dataURL" then Camera.DestinationType.DATA_URL
-        when "fileURI" then Camera.DestinationType.FILE_URI
-        when "nativeURI" then Camera.DestinationType.NATIVE_URI
-    else
-      Camera.DestinationType.FILE_URI
 
-    encodingType = if options?.encodingType?
-      switch options.encodingType
-        when "jpeg" then Camera.EncodingType.JPEG
-        when "png" then Camera.EncodingType.PNG
-    else
-      Camera.EncodingType.JPEG
-
-    mediaType = if options?.mediaType?
-      switch options.mediaType
-        when "picture" then Camera.MediaType.PICTURE
-        when "video" then Camera.MediaType.VIDEO
-        when "allMedia" then Camera.MediaType.ALLMEDIA
-    else
-      Camera.MediaType.PICTURE
-
-    popoverOptions = if options?.popoverOptions?
-
-    else
-      {}
-
-    cameraOptions =
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY
-      quality: options?.quality? || 100
-      destinationType: destinationType
-      allowEdit: options?.allowEdit? || false
-      encodingType: encodingType
-      targetWidth: width
-      targetHeight: height
-      mediaType: mediaType
-      correctOrientation: options?.correctOrientation? || true
+    getCameraOptions = ->
+      destinationType = if options?.destinationType?
+        switch options.destinationType
+          when "dataURL" then Camera.DestinationType.DATA_URL
+          when "fileURI" then Camera.DestinationType.FILE_URI
+          when "nativeURI" then Camera.DestinationType.NATIVE_URI
+      else
+        Camera.DestinationType.FILE_URI
+  
+      encodingType = if options?.encodingType?
+        switch options.encodingType
+          when "jpeg" then Camera.EncodingType.JPEG
+          when "png" then Camera.EncodingType.PNG
+      else
+        Camera.EncodingType.JPEG
+  
+      mediaType = if options?.mediaType?
+        switch options.mediaType
+          when "picture" then Camera.MediaType.PICTURE
+          when "video" then Camera.MediaType.VIDEO
+          when "allMedia" then Camera.MediaType.ALLMEDIA
+      else
+        Camera.MediaType.PICTURE
+  
+      popoverOptions = if options?.popoverOptions?
+  
+      else
+        {}
+  
+      cameraOptions =
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+        quality: options?.quality? || 100
+        destinationType: destinationType
+        allowEdit: options?.allowEdit? || false
+        encodingType: encodingType
+        targetWidth: width
+        targetHeight: height
+        mediaType: mediaType
+        correctOrientation: options?.correctOrientation? || true
       
     deviceready
-      .then(->
+      .then(getCameraOptions)
+      .then( (cameraOptions) ->
         new Promise (resolve, reject) ->
           navigator.camera.getPicture resolve, reject, cameraOptions
       )

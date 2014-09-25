@@ -9237,7 +9237,7 @@ module.exports = function(steroids, log) {
    * Opens the device's default camera application that allows users to take pictures. Once the user takes the photo, the camera application closes and the application is restored.
    * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
    * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
-   * @param {Object} options an options object (optional). The following properties are available:
+   * @param {Object} [options] an options object (optional). The following properties are available:
    * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
    * * `destinationType`: Choose the format of the return value (Number). Available formats:
    *  * "dataURL": Return image as base64-encoded string
@@ -9268,60 +9268,63 @@ module.exports = function(steroids, log) {
    * ```
    */
   takePicture = function(width, height, options) {
-    var cameraDirection, cameraOptions, destinationType, encodingType;
+    var getCameraOptions;
     if (options == null) {
       options = {};
     }
-    destinationType = (function() {
-      if ((options != null ? options.destinationType : void 0) != null) {
-        switch (options.destinationType) {
-          case "dataURL":
-            return Camera.DestinationType.DATA_URL;
-          case "fileURI":
-            return Camera.DestinationType.FILE_URI;
-          case "nativeURI":
-            return Camera.DestinationType.NATIVE_URI;
+    getCameraOptions = function() {
+      var cameraDirection, cameraOptions, destinationType, encodingType;
+      destinationType = (function() {
+        if ((options != null ? options.destinationType : void 0) != null) {
+          switch (options.destinationType) {
+            case "dataURL":
+              return Camera.DestinationType.DATA_URL;
+            case "fileURI":
+              return Camera.DestinationType.FILE_URI;
+            case "nativeURI":
+              return Camera.DestinationType.NATIVE_URI;
+          }
+        } else {
+          return Camera.DestinationType.FILE_URI;
         }
-      } else {
-        return Camera.DestinationType.FILE_URI;
-      }
-    })();
-    encodingType = (function() {
-      if ((options != null ? options.encodingType : void 0) != null) {
-        switch (options.encodingType) {
-          case "jpeg":
-            return Camera.EncodingType.JPEG;
-          case "png":
-            return Camera.EncodingType.PNG;
+      })();
+      encodingType = (function() {
+        if ((options != null ? options.encodingType : void 0) != null) {
+          switch (options.encodingType) {
+            case "jpeg":
+              return Camera.EncodingType.JPEG;
+            case "png":
+              return Camera.EncodingType.PNG;
+          }
+        } else {
+          return Camera.EncodingType.JPEG;
         }
-      } else {
-        return Camera.EncodingType.JPEG;
-      }
-    })();
-    cameraDirection = (function() {
-      if ((options != null ? options.cameraDirection : void 0) != null) {
-        switch (options.cameraDirection) {
-          case "back":
-            return Camera.Direction.BACK;
-          case "front":
-            return Camera.Direction.FRONT;
+      })();
+      cameraDirection = (function() {
+        if ((options != null ? options.cameraDirection : void 0) != null) {
+          switch (options.cameraDirection) {
+            case "back":
+              return Camera.Direction.BACK;
+            case "front":
+              return Camera.Direction.FRONT;
+          }
+        } else {
+          return Camera.Direction.BACK;
         }
-      } else {
-        return Camera.Direction.BACK;
-      }
-    })();
-    cameraOptions = {
-      quality: ((options != null ? options.quality : void 0) != null) || 100,
-      destinationType: destinationType,
-      allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
-      encodingType: encodingType,
-      targetWidth: width,
-      targetHeight: height,
-      correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true,
-      saveToPhotoAlbum: ((options != null ? options.saveToPhotoAlbum : void 0) != null) || false,
-      cameraDirection: cameraDirection
+      })();
+      return cameraOptions = {
+        quality: ((options != null ? options.quality : void 0) != null) || 100,
+        destinationType: destinationType,
+        allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
+        encodingType: encodingType,
+        targetWidth: width,
+        targetHeight: height,
+        correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true,
+        saveToPhotoAlbum: ((options != null ? options.saveToPhotoAlbum : void 0) != null) || false,
+        cameraDirection: cameraDirection
+      };
     };
-    return deviceready.then(function() {
+    return deviceready.then(getCameraOptions).then(function(cameraOptions) {
       return new Promise(function(resolve, reject) {
         return navigator.camera.getPicture(resolve, reject, cameraOptions);
       });
@@ -9336,7 +9339,7 @@ module.exports = function(steroids, log) {
    * Displays a dialog that allows users to select an existing image. Once the user selects the photo, the camera application closes and the application is restored.
    * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
    * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
-   * @param {Object} options an options object (optional). The following properties are available:
+   * @param {Object} [options] an options object (optional). The following properties are available:
    * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
    * * `destinationType`: Choose the format of the return value. Available formats:
    *  * "dataURL": Return image as base64-encoded string
@@ -9367,63 +9370,66 @@ module.exports = function(steroids, log) {
    * ```
    */
   getFromPhotoLibrary = function(width, height, options) {
-    var cameraOptions, destinationType, encodingType, mediaType, popoverOptions;
+    var getCameraOptions;
     if (options == null) {
       options = {};
     }
-    destinationType = (function() {
-      if ((options != null ? options.destinationType : void 0) != null) {
-        switch (options.destinationType) {
-          case "dataURL":
-            return Camera.DestinationType.DATA_URL;
-          case "fileURI":
-            return Camera.DestinationType.FILE_URI;
-          case "nativeURI":
-            return Camera.DestinationType.NATIVE_URI;
+    getCameraOptions = function() {
+      var cameraOptions, destinationType, encodingType, mediaType, popoverOptions;
+      destinationType = (function() {
+        if ((options != null ? options.destinationType : void 0) != null) {
+          switch (options.destinationType) {
+            case "dataURL":
+              return Camera.DestinationType.DATA_URL;
+            case "fileURI":
+              return Camera.DestinationType.FILE_URI;
+            case "nativeURI":
+              return Camera.DestinationType.NATIVE_URI;
+          }
+        } else {
+          return Camera.DestinationType.FILE_URI;
         }
-      } else {
-        return Camera.DestinationType.FILE_URI;
-      }
-    })();
-    encodingType = (function() {
-      if ((options != null ? options.encodingType : void 0) != null) {
-        switch (options.encodingType) {
-          case "jpeg":
-            return Camera.EncodingType.JPEG;
-          case "png":
-            return Camera.EncodingType.PNG;
+      })();
+      encodingType = (function() {
+        if ((options != null ? options.encodingType : void 0) != null) {
+          switch (options.encodingType) {
+            case "jpeg":
+              return Camera.EncodingType.JPEG;
+            case "png":
+              return Camera.EncodingType.PNG;
+          }
+        } else {
+          return Camera.EncodingType.JPEG;
         }
-      } else {
-        return Camera.EncodingType.JPEG;
-      }
-    })();
-    mediaType = (function() {
-      if ((options != null ? options.mediaType : void 0) != null) {
-        switch (options.mediaType) {
-          case "picture":
-            return Camera.MediaType.PICTURE;
-          case "video":
-            return Camera.MediaType.VIDEO;
-          case "allMedia":
-            return Camera.MediaType.ALLMEDIA;
+      })();
+      mediaType = (function() {
+        if ((options != null ? options.mediaType : void 0) != null) {
+          switch (options.mediaType) {
+            case "picture":
+              return Camera.MediaType.PICTURE;
+            case "video":
+              return Camera.MediaType.VIDEO;
+            case "allMedia":
+              return Camera.MediaType.ALLMEDIA;
+          }
+        } else {
+          return Camera.MediaType.PICTURE;
         }
-      } else {
-        return Camera.MediaType.PICTURE;
-      }
-    })();
-    popoverOptions = (options != null ? options.popoverOptions : void 0) != null ? void 0 : {};
-    cameraOptions = {
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      quality: ((options != null ? options.quality : void 0) != null) || 100,
-      destinationType: destinationType,
-      allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
-      encodingType: encodingType,
-      targetWidth: width,
-      targetHeight: height,
-      mediaType: mediaType,
-      correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true
+      })();
+      popoverOptions = (options != null ? options.popoverOptions : void 0) != null ? void 0 : {};
+      return cameraOptions = {
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        quality: ((options != null ? options.quality : void 0) != null) || 100,
+        destinationType: destinationType,
+        allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
+        encodingType: encodingType,
+        targetWidth: width,
+        targetHeight: height,
+        mediaType: mediaType,
+        correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true
+      };
     };
-    return deviceready.then(function() {
+    return deviceready.then(getCameraOptions).then(function(cameraOptions) {
       return new Promise(function(resolve, reject) {
         return navigator.camera.getPicture(resolve, reject, cameraOptions);
       });
