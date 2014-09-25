@@ -15,5 +15,5 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'compile-docs', [
-    'bdocs'
+    'docs'
   ]

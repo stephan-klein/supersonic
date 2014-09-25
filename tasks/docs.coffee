@@ -1,11 +1,12 @@
 dox = require "dox"
+_ = require "lodash"
 
 module.exports = (grunt)->
 
   #grunt.loadNpmTasks "grunt-extend-config"
 
   grunt.extendConfig {
-    "bdocs":
+    "docs":
       sources:
         expand: true
         cwd: 'src/'
@@ -14,11 +15,19 @@ module.exports = (grunt)->
         ext: ".json"
   }
 
-  grunt.registerMultiTask "bdocs", "Get comments from src/*. to docs/_data/*.json", ->
+  cleanUpJsonObject: (object)->
+
+
+  grunt.registerMultiTask "docs", "Get comments from src/*. to docs/_data/*.json", ->
     @files.forEach (file) ->
       filePath = file.src[0]
       coffee = grunt.file.read filePath
 
-      prettyJSON = JSON.stringify dox.parseCommentsCoffee(coffee), undefined, 2
+      doxObject = dox.parseCommentsCoffee(coffee)
+
+      unless doxObject[0].tags.length > 0
+        return
+
+      prettyJSON = JSON.stringify doxObject, undefined, 2
 
       grunt.file.write file.dest, prettyJSON
