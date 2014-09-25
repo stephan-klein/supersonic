@@ -36,10 +36,9 @@ module.exports = (steroids, log) ->
           supersonic.logger.info "Modal view was shown"
           resolve()
         onFailure: (error)->
-          supersonic.logger.error "Showing a modal view was crashed with the error: #{error.errorDescription}"
+          supersonic.logger.error "Showing a modal view has crashed with the error: #{error.errorDescription}"
           reject()
     }
-
 
   ###*
    * @ngdoc method
@@ -64,6 +63,33 @@ module.exports = (steroids, log) ->
           supersonic.logger.info "Modal view was hidden"
           resolve()
         onFailure: (error)->
-          supersonic.logger.error "Hiding a modal view was crashed with the error: #{error.errorDescription}"
+          supersonic.logger.error "Hiding a modal view has crashed with the error: #{error.errorDescription}"
+          reject()
+    }
+
+  ###*
+   * @ngdoc method
+   * @name hideAll
+   * @module modal
+   * @description
+   * Hides a modal view
+   * @param {Object} [parameters]
+   * @returns {Promise}
+   * @usage
+   * ```coffeescript
+   * view = supersonic.ui.view("app/modal.html")
+   * supersonic.ui.modal.show(view, { disableAnimation: true }).then ()->
+   *   supersonic.ui.modal.hideAll()
+   * ```
+  ###
+  hideAll: (params = {})->
+    new Promise (resolve, reject)->
+      # debugger
+      steroids.modal.hideAll params, {
+        onSuccess: ()->
+          supersonic.logger.info "All the modals were hidden"
+          resolve()
+        onFailure: (error)->
+          supersonic.logger.error "Hiding all the modals has crashed with the error: #{error.errorDescription}"
           reject()
     }
