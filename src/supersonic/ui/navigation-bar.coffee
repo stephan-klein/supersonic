@@ -13,6 +13,20 @@ module.exports = (steroids, log) ->
    * Provides methods to work with layers
   ###
 
+  ###*
+   * @ngdoc method
+   * @name hide
+   * @module navigationBar
+   * @description
+   * Hides a navigation bar
+   * @param {Object} [parameters] Parameters of hiding
+   * @returns {Promise}
+   * @usage
+   * ```coffeescript
+   * supersonic.ui.navigationBar.hide({ animated: true }).then ()->
+   *   supersonic.logger.log "promise works"
+   * ```
+  ###
   hide: (params = {})->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.hide params, {
