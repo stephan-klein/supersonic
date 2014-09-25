@@ -38,6 +38,19 @@ module.exports = (steroids, log) ->
         supersonic.logger.info "New layer was not shown due to an error #{error.errorDescription}"
     }
 
+  ###*
+   * @ngdoc method
+   * @name showInitial
+   * @module layer
+   * @description
+   * Shows initial view
+   * @param {Object} Parameters of animation
+   * @returns {Promise}
+   * @usage
+   * ```coffeescript
+   * supersonic.ui.layer.showInitial()
+   * ```
+  ###
   showInitial: (params)->
     if !params
       params = {}
@@ -51,6 +64,19 @@ module.exports = (steroids, log) ->
           reject()
         })
 
+  ###*
+   * @ngdoc method
+   * @name hideInitial
+   * @module layer
+   * @description
+   * Hides initial view
+   * @param {Object} Parameters of animation
+   * @returns {Promise}
+   * @usage
+   * ```coffeescript
+   * supersonic.ui.layer.hideInitial()
+   * ```
+  ###
   hideInitial: (params)->
     if !params
       params = {}
