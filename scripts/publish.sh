@@ -21,6 +21,7 @@ mkdir -p $ARTEFACTS_DIR
 echo Cloning $TARGET_REPO to $TARGET_DIR
 rm -rf $TARGET_DIR
 git clone $TARGET_REPO $TARGET_DIR
+(cd $TARGET_DIR ; git config user.email "richard.anderson+supersonic@appgyver.com" ; git config user.name "Richard Anderson")
 
 # Copy bower-installed supersonic artefacts to target bower repo
 cp -r $ARTEFACTS_DIR/bower_components/supersonic/* $TARGET_DIR
