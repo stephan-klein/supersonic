@@ -15,3 +15,9 @@ module.exports = (steroids, log) ->
 
   show: (view)->
     supersonic.logger.log "will show a view"
+    steroids.modal.show {
+      view: view.getWebView()
+    }, {
+      onSuccess: ()->
+        supersonic.logger.log "Was shown"
+    }

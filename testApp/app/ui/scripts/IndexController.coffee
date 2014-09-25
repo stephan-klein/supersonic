@@ -34,3 +34,7 @@ angular
 
       v.setWidth(width).preload().then ()->
         supersonic.ui.drawer.asRight(v)
+
+    $scope.asModal = (url)->
+      v = supersonic.ui.view(url)
+      supersonic.ui.modal.show(v)
