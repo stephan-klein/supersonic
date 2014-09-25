@@ -15,6 +15,5 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'compile-docs', [
-    'gulp:docs'
-    'gulp:docs-index'
+    'bdocs'
   ]
