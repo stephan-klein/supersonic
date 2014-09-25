@@ -20,7 +20,7 @@ module.exports = (steroids, log) ->
    * @description
    * Navigates to a given view
    * @param {View} A view object
-   * @returns
+   * @returns {Promise}
    * @usage
    * ```coffeescript
    * v = supersonic.ui.view("http://www.google.com")
@@ -46,7 +46,7 @@ module.exports = (steroids, log) ->
    * @module layer
    * @description
    * Removes the topmost view from the navigation stack
-   * @returns
+   * @returns {Promise}
    * @usage
    * ```coffeescript
    * supersonic.ui.layer.pop()
@@ -69,7 +69,7 @@ module.exports = (steroids, log) ->
    * @module layer
    * @description
    * Pops all views except for the root view from the layer stack
-   * @returns
+   * @returns {Promise}
    * @usage
    * ```coffeescript
    * supersonic.ui.layer.popAll()
