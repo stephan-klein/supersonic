@@ -20,6 +20,7 @@ module.exports = (steroids, log) ->
    * @module accelerometer
    * @description
    * Returns a stream of acceleration updates.
+   * @param {Integer} frequency update interval in milliseconds (optional, defaults to 40)
    * @returns {Stream} Stream of acceleration updates
    * @usage
    * ```coffeescript
@@ -31,8 +32,8 @@ module.exports = (steroids, log) ->
    * )
    * ```
   ###
-  watchAcceleration = (options = {}) ->
-
+  watchAcceleration = (frequency = 40) ->
+    options = { frequency }
     Bacon.fromPromise(deviceready).flatMap ->
       Bacon.fromBinder (sink) ->
         watchId = window.navigator.accelerometer.watchAcceleration(
@@ -60,8 +61,8 @@ module.exports = (steroids, log) ->
    * )
    * ```
   ###
-  getAcceleration = (options = {}) ->
+  getAcceleration = bug "getAcceleration", ->
     new Promise (resolve) ->
-      watchAcceleration(options).take(1).onValue resolve
+      watchAcceleration().take(1).onValue resolve
 
   return {watchAcceleration, getAcceleration}

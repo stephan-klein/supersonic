@@ -8950,6 +8950,7 @@ module.exports = function(steroids, log) {
    * @module accelerometer
    * @description
    * Returns a stream of acceleration updates.
+   * @param {Integer} frequency update interval in milliseconds (optional, defaults to 40)
    * @returns {Stream} Stream of acceleration updates
    * @usage
    * ```coffeescript
@@ -8961,10 +8962,14 @@ module.exports = function(steroids, log) {
    * )
    * ```
    */
-  watchAcceleration = function(options) {
-    if (options == null) {
-      options = {};
+  watchAcceleration = function(frequency) {
+    var options;
+    if (frequency == null) {
+      frequency = 40;
     }
+    options = {
+      frequency: frequency
+    };
     return Bacon.fromPromise(deviceready).flatMap(function() {
       return Bacon.fromBinder(function(sink) {
         var watchId;
@@ -8997,14 +9002,11 @@ module.exports = function(steroids, log) {
    * )
    * ```
    */
-  getAcceleration = function(options) {
-    if (options == null) {
-      options = {};
-    }
+  getAcceleration = bug("getAcceleration", function() {
     return new Promise(function(resolve) {
-      return watchAcceleration(options).take(1).onValue(resolve);
+      return watchAcceleration().take(1).onValue(resolve);
     });
-  };
+  });
   return {
     watchAcceleration: watchAcceleration,
     getAcceleration: getAcceleration
