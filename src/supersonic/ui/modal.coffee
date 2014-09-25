@@ -24,3 +24,15 @@ module.exports = (steroids, log) ->
           supersonic.logger.error "Showing a modal view was crashed with the error: #{error.errorDescription}"
           reject()
     }
+
+  hide: (params = {})->
+    new Promise (resolve, reject)->
+      # debugger
+      steroids.modal.hide params, {
+        onSuccess: ()->
+          supersonic.logger.info "Modal view was hidden"
+          resolve()
+        onFailure: (error)->
+          supersonic.logger.error "Hiding a modal view was crashed with the error: #{error.errorDescription}"
+          reject()
+    }
