@@ -9394,15 +9394,73 @@ module.exports = function(steroids, log) {
      * ```
      */
     push: function(view) {
-      return steroids.layers.push({
-        view: view.getWebView()
-      }, {
-        onSuccess: function() {
-          return supersonic.logger.info("New layer is shown");
-        },
-        onFailure: function(error) {
-          return supersonic.logger.info("New layer was not shown due to an error " + error.errorDescription);
-        }
+      return new Promise(function(resolve, reject) {
+        return steroids.layers.push({
+          view: view.getWebView()
+        }, {
+          onSuccess: function() {
+            supersonic.logger.info("New layer is shown");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.info("New layer was not shown due to an error " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name pop
+     * @module layer
+     * @description
+     * Removes the topmost view from the navigation stack
+     * @returns
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.layer.pop()
+     * ```
+     */
+    pop: function() {
+      return new Promise(function(resolve, reject) {
+        return steroids.layers.pop({}, {
+          onSuccess: function() {
+            supersonic.logger.info("The layer was poppped");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.info("Popping the layer failes with this error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name popAll
+     * @module layer
+     * @description
+     * Pops all views except for the root view from the layer stack
+     * @returns
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.layer.popAll()
+     * ```
+     */
+    popAll: function() {
+      return new Promise(function(resolve, reject) {
+        return steroids.layers.popAll({}, {
+          onSuccess: function() {
+            supersonic.logger.info("The layer was poppped");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.info("Popping the layer failes with this error: " + error.errorDescription);
+            return reject();
+          }
+        });
       });
     },
 
