@@ -1,0 +1,27 @@
+<div ng-controller="DrawersController">
+  <ss-navigation-bar>
+    <ss-navigation-bar-title>
+      Drawers UI API
+    </ss-navigation-bar-title>
+  </ss-navigation-bar>
+
+  <div class="padding">
+    <ul class="list">
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="asLeftDrawer('app/webComponents/drawerIndex.html', 200)">
+          Left Drawer
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="asRightDrawer('app/webComponents/drawerIndex2.html', 300)">
+          Right Drawer
+        </button>
+      </li>
+    </ul>
+  </div>
+
+</div>
