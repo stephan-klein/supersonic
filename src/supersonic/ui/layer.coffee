@@ -36,7 +36,7 @@ module.exports = (steroids, log) ->
           supersonic.logger.info "New layer is shown"
           resolve()
         onFailure: (error)->
-          supersonic.logger.info "New layer was not shown due to an error #{error.errorDescription}"
+          supersonic.logger.error "New layer was not shown due to an error #{error.errorDescription}"
           reject()
       }
 
@@ -59,7 +59,7 @@ module.exports = (steroids, log) ->
           supersonic.logger.info "The layer was poppped"
           resolve()
         onFailure: (error)->
-          supersonic.logger.info "Popping the layer failes with this error: #{error.errorDescription}"
+          supersonic.logger.error "Popping the layer failes with this error: #{error.errorDescription}"
           reject()
       }
 
@@ -82,7 +82,7 @@ module.exports = (steroids, log) ->
           supersonic.logger.info "The layer was poppped"
           resolve()
         onFailure: (error)->
-          supersonic.logger.info "Popping the layer failes with this error: #{error.errorDescription}"
+          supersonic.logger.error "Popping the layer failes with this error: #{error.errorDescription}"
           reject()
       }
 
@@ -108,7 +108,7 @@ module.exports = (steroids, log) ->
           supersonic.logger.info "Initial view was shown"
           resolve()
         onFailure: ()->
-          supersonic.logger.info "Showing of an initial view was failed"
+          supersonic.logger.error "Showing of an initial view was failed"
           reject()
         })
 
@@ -134,7 +134,7 @@ module.exports = (steroids, log) ->
           supersonic.logger.info "Initial view was hidden"
           resolve()
         onFailure: ()->
-          supersonic.logger.info "Hiding of an initial view was failed"
+          supersonic.logger.error "Hiding of an initial view was failed"
           reject()
 
         })
