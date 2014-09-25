@@ -11,6 +11,9 @@ angular
       v = supersonic.ui.view(url, "myView")
       supersonic.ui.layer.push(v)
 
+    $scope.hideInitialView = ()->
+      supersonic.ui.layer.hideInitial()
+
     $scope.asLeftDrawer = (url, width)->
       v = supersonic.ui.view(url)
 
