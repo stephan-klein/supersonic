@@ -13,5 +13,10 @@ module.exports = (steroids, log) ->
    * Provides methods to work with layers
   ###
 
-  hide: ()->
-    supersonic.logger.log "will hide the navigation bar"
+  hide: (params = {})->
+    steroids.view.navigationBar.hide params, {
+      onSuccess: ()->
+        supersonic.logger.info "Navigation bar was hidden"
+      onFailure: (error)->
+        supersonic.logger.error "Hiding a navigation bar crashed due to the error: #{error.errorDescription}"
+    }
