@@ -9686,6 +9686,38 @@ module.exports = function(steroids, log) {
 
     /**
      * @ngdoc method
+     * @name show
+     * @module navigationBar
+     * @description
+     * Shows a navigation bar
+     * @param {Object} [parameters] Parameters of hiding
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.navigationBar.show({ animated: true, title: "New Title" }).then ()->
+     *   supersonic.logger.log "promise works"
+     * ```
+     */
+    show: function(params) {
+      if (params == null) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.view.navigationBar.show(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Navigation bar was shown");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Showing the navigation bar crashed due to the error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
      * @name hide
      * @module navigationBar
      * @description
@@ -9709,7 +9741,7 @@ module.exports = function(steroids, log) {
             return resolve();
           },
           onFailure: function(error) {
-            supersonic.logger.error("Hiding a navigation bar crashed due to the error: " + error.errorDescription);
+            supersonic.logger.error("Hiding the navigation bar crashed due to the error: " + error.errorDescription);
             return reject();
           }
         });
