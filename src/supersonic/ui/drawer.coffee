@@ -20,7 +20,7 @@ module.exports = (steroids, log) ->
    * @description
    * Shows a view as a left drawer
    * @param {View} View object
-   * @returns
+   * @returns {Promise}
    * @usage
    * ```coffeescript
    * view = supersonic.ui.view("app/drawers/left.html")
@@ -28,8 +28,10 @@ module.exports = (steroids, log) ->
    * ```
   ###
   asLeft: (view)->
-    @show(view, 'left')
-    return
+    that = @
+    new Promise (resolve, reject)->
+      that.show(view, 'left').then ()->
+        resolve()
 
   ###*
    * @ngdoc method
@@ -38,7 +40,7 @@ module.exports = (steroids, log) ->
    * @description
    * Shows a view as a right drawer
    * @param {View} View object
-   * @returns
+   * @returns {Promise}
    * @usage
    * ```coffeescript
    * view = supersonic.ui.view("app/drawers/right.html")
@@ -46,8 +48,10 @@ module.exports = (steroids, log) ->
    * ```
   ###
   asRight: (view)->
-    @show(view, 'right')
-    return
+    that = @
+    new Promise (resolve, reject)->
+      that.show(view, 'right').then ()->
+        resolve()
 
   ###*
    * @ngdoc method
@@ -57,7 +61,7 @@ module.exports = (steroids, log) ->
    * Shows a view as a drawer of the given side
    * @param {View} View object
    * @param {String} Side to show a drawer: "left" or "right"
-   * @returns
+   * @returns {Promise}
    * @usage
    * ```coffeescript
    * view = supersonic.ui.view("app/drawers/index.html")
@@ -65,20 +69,21 @@ module.exports = (steroids, log) ->
    * ```
   ###
   show: (view, side)->
-    # TODO: Promises
-    webView = view.getWebView()
-    params = {}
-    params[side] = webView
-    steroids.drawers.update params
-    steroids.drawers.show {
-      edge: steroids.screen.edges[side.toUpperCase()]
-    }, {
-      onSuccess: ()->
-        supersonic.logger.info "#{side} drawer should be shown"
-      onFailure: ()->
-        supersonic.logger.error "#{side} drawer fails"
-    }
-    return
+    new Promise (resolve, reject)->
+      webView = view.getWebView()
+      params = {}
+      params[side] = webView
+      steroids.drawers.update params
+      steroids.drawers.show {
+        edge: steroids.screen.edges[side.toUpperCase()]
+      }, {
+        onSuccess: ()->
+          supersonic.logger.info "#{side} drawer should be shown"
+          resolve()
+        onFailure: ()->
+          supersonic.logger.error "#{side} drawer fails"
+          reject()
+      }
 
   ###*
    * @ngdoc method
