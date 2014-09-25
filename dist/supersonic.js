@@ -9404,6 +9404,14 @@ module.exports = function(steroids, log) {
           return supersonic.logger.info("New layer was not shown due to an error " + error.errorDescription);
         }
       });
+    },
+    showInitial: function() {
+      supersonic.logger.info("Initial view was shown");
+      return steroids.initialView.show();
+    },
+    hideInitial: function() {
+      supersonic.logger.info("Initial view was hidden");
+      return steroids.initialView.dismiss();
     }
   };
 };
