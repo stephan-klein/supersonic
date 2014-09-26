@@ -62,3 +62,39 @@ module.exports = (steroids, log) ->
           supersonic.logger.error "Hiding the navigation bar crashed due to the error: #{error.errorDescription}"
           reject()
       }
+
+  ###*
+   * @ngdoc method
+   * @name update
+   * @module navigationBar
+   * @description
+   * Updates the navigation bar
+   * @param {Object} [parameters] Parameters of hiding
+   * @returns {Promise}
+   * @usage
+   * ```coffeescript
+   * leftButton = new supersonic.ui.navigationButton({
+   *   title: "Left"
+   *   onTap: ()->
+   *     alert "left"
+   * });
+   * supersonic.ui.navigationBar.update({
+   *   overrideBackButton: true,
+   *   buttons: {
+   *     left: [leftButton]
+   *   }
+   * }).then ()->
+   *   supersonic.logger.log "promise works"
+   * ```
+  ###
+  update: (params)->
+    new Promise (resolve, reject)->
+      # debugger
+      steroids.view.navigationBar.update params, {
+        onSuccess: ()->
+          supersonic.logger.info "Navigation bar was updated"
+          resolve()
+        onFailure: ()->
+          supersonic.logger.error "Updating the navigation bar chashed"
+          reject()
+      }
