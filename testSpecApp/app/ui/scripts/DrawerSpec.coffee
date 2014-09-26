@@ -14,7 +14,7 @@ describe "supersonic.ui.drawer", ->
         view.preload().then ()->
           dr.show(view, 'left')
 
-    descibe "hide", ->
+    describe "hide", ->
       it "should be defined", ->
         dr.hide.should.exist
       it "shold hide a drawer", ->
