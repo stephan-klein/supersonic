@@ -31,7 +31,7 @@ echo Updating branch $CURRENT_BRANCH in target repository
 (cd $TARGET_DIR && \
   git add -A && \
   git commit -m $VERSION && \
-  git push origin $CURRENT_BRANCH)
+  git push origin -f $CURRENT_BRANCH)
 
 # Clean up
 echo Cleaning up
