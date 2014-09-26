@@ -8,9 +8,11 @@ ARTEFACTS_DIR=tmp/artefacts
 TARGET_DIR=tmp/target
 
 HEAD_VERSION=$(git rev-parse HEAD)
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-SOURCE_REPO=https://$GITHUB_AUTHENTICATION@github.com/AppGyver/supersonic.git#$HEAD_VERSION
-TARGET_REPO=https://$GITHUB_AUTHENTICATION@github.com/AppGyver/supersonic-bower.git
+CURRENT_BRANCH=$TRAVIS_BRANCH || $(git rev-parse --abbrev-ref HEAD)
+SOURCE_REPO=https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic.git#$HEAD_VERSION
+TARGET_REPO=https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic-bower.git
+
+echo Publishing branch $CURRENT_BRANCH version $HEAD_VERSION with message $VERSION
 
 # Install supersonic from current revision to temp dir
 echo Installing $SOURCE_REPO to $ARTEFACTS_DIR
@@ -21,12 +23,19 @@ mkdir -p $ARTEFACTS_DIR
 echo Cloning $TARGET_REPO to $TARGET_DIR
 rm -rf $TARGET_DIR
 git clone $TARGET_REPO $TARGET_DIR
+(cd $TARGET_DIR ; git config user.email "richard.anderson+supersonic@appgyver.com" ; git config user.name "Richard Anderson")
 
 # Copy bower-installed supersonic artefacts to target bower repo
-cp -r $ARTEFACTS_DIR/bower_components/supersonic/* $TARGET_DIR
-
 # Tag and push repo
-(cd $TARGET_DIR ; git checkout $CURRENT_BRANCH ; git add -A ; git commit -m $VERSION ; git push origin $CURRENT_BRANCH)
+echo Updating branch $CURRENT_BRANCH in target repository
+(cd $TARGET_DIR && (git checkout -b $CURRENT_BRANCH || git checkout $CURRENT_BRANCH)) && \
+(rm -rf $TARGET_DIR/* && cp -r $ARTEFACTS_DIR/bower_components/supersonic/* $TARGET_DIR) && \
+(cd $TARGET_DIR && \
+  git add -A && \
+  git commit -m $VERSION && \
+  git push origin -f $CURRENT_BRANCH)
 
 # Clean up
+echo Cleaning up
 rm -rf $TMP_DIR/*
+echo Done!

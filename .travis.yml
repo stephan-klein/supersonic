@@ -4,8 +4,8 @@ node_js:
 before_install: npm install -g grunt-cli
 after_success:
 - grunt travis
+- npm install -g bower
 - sh scripts/publish.sh
 env:
   global:
   - secure: tDCKyLn5IICgj4wdoi4e56oEClpr6LUVnpGOtxVAFoDoeisKoITLPjKiW3VWSdY1c9m4vCyYEeHyTu0lz67fo4NLyNq/45Ma9TnHsbKNuIlDgrC8to5hNxCENoZ4/kW2A57wr6zpuZeMNwMYoz6PaPBOtdg0IHtPjDV2zZcKRhU=
-  - secure: RExGR3q7JkIM1U3SnG4AZKTElTJ7Oue4ACA4CRCYK2DbugHNVO1XMJE2rZa9P0uBmXQk9lI/BrWmLgqM734QtIaKygREoHulDchgp8lIXA+PFLI31fSPtArAsNjfAQRynA4n59SQ1358KlhOV0Kk/74y2Mmf5qxJHi6H/bhkwYQ=

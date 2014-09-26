@@ -36,3 +36,6 @@ env.json
 
 # Docs
 /docs/_data/supersonic/
+
+# Bower deployment temp dir
+/tmp
