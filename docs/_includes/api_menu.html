@@ -1,0 +1,18 @@
+  {% for namespace in site.data.api %}
+
+  <li class="menu-section">
+    <a href="#" class="api-section">
+      {{ namespace.name }}
+    </a>
+    <ul>
+      {% for method in namespace.methods %}
+      <li>
+        <a href="api/{{namespace.name}}/{{method.name}}.html">
+          {{ method.name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+
+  {% endfor %}

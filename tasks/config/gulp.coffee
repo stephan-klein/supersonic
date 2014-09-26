@@ -35,11 +35,3 @@ module.exports =
       ))
       .pipe(concat 'supersonic.js')
       .pipe(gulp.dest "#{buildConfig.dir.dist}")
-
-  # Build documentation
-  docs: ->
-    require('../../tasks/docs/docs')(gulp, argv, buildConfig)
-
-  # Build documentation index
-  'docs-index': ->
-    require('../../tasks/docs/docs-index')(gulp, argv, buildConfig)

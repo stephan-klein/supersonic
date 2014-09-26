@@ -8,8 +8,8 @@ Promise = require 'bluebird'
  * @module notification
  * @description
  * Shows a native confirm dialog.
- * @param {string} message confirm message.
- * @param {Object} options an options object (optional). The following properties are available:
+ * @param {string} message confirm message
+ * @param {Object} [options] an options object. The following properties are available:
  * * `title`: confirm title (optional, defaults to "Confirm")
  * * `buttonLabels`: Array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
  * @returns {Promise} Promise that is resolved with the index of the tapped button as an argument.
