@@ -1,0 +1,15 @@
+
+describe "supersonic.ui.view", ->
+  it "should be defined", ->
+    supersonic.ui.view.should.exist
+
+  # describe "getPosition", ->
+  #   it "should resolve to next known position", ->
+  #     supersonic.device.geolocation.getPosition().should.eventually.have.property 'coords'
+  #
+  # describe "watchPosition", ->
+  #   it "should return be a stream of position updates", ->
+  #     pos = new Promise (resolve) ->
+  #       supersonic.device.geolocation.watchPosition().onValue resolve
+  #
+  #     pos.should.eventually.have.property 'coords'
