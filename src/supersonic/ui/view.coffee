@@ -23,7 +23,7 @@ module.exports = (steroids, log) ->
      * @description
      * Creates a new view
      * @param {string} URL of a view
-     * @returns View object
+     * @returns {Object} The created view object.
      * @usage
      * ```coffeescript
      * supersonic.ui.view("http://www.google.com")
@@ -50,8 +50,7 @@ module.exports = (steroids, log) ->
      * @private
      * @description
      * Asynchroniously checks if a view is already preloaded
-     * @param
-     * @returns {Promise}
+     * @returns {Promise} A promise that will be resolved with a boolean value indicating if the view is preloaded or not.
      * @usage
      * ```coffeescript
      * this._checkIfPreloaded().then (isPreloaded)->
@@ -85,8 +84,7 @@ module.exports = (steroids, log) ->
      * @module view
      * @description
      * Preloads a new
-     * @param
-     * @returns {Promise}
+     * @returns {Promise} A promise that will be resolved once the view has been preloaded.
      * @usage
      * ```coffeescript
      * supersonic.ui.view("http://www.google.com").preload()
@@ -123,7 +121,6 @@ module.exports = (steroids, log) ->
      * @module view
      * @description
      * Sets width of a view. Useful for showing as a drawer
-     * @param
      * @returns {Object} View object
      * @usage
      * ```coffeescript
@@ -139,9 +136,8 @@ module.exports = (steroids, log) ->
      * @name getView
      * @module view
      * @description
-     * Gets the webView of a current instance
-     * @param
-     * @returns {Object} webView object
+     * Gets the WebView of a current view instance
+     * @returns {Object} WebView object
      * @usage
      * ```coffeescript
      * supersonic.ui.view("http://www.google.com").getView()
