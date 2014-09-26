@@ -8419,9 +8419,9 @@ module.exports = function(angular) {
     geolocation = supersonic.device.geolocation;
     geolocation.getPosition = qify(geolocation.getPosition);
     accelerometer = supersonic.device.accelerometer;
-    accelerometer.getAcceleration = qify(accelerometer.getHeading);
+    accelerometer.getAcceleration = qify(accelerometer.getAcceleration);
     compass = supersonic.device.compass;
-    compass.getHeading = qify(compass.getAcceleration);
+    compass.getHeading = qify(compass.getHeading);
     return {
       logger: qifyAll(supersonic.logger),
       debug: qifyAll(supersonic.debug),
