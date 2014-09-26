@@ -8698,6 +8698,7 @@ module.exports = {
   logger: logger,
   debug: require('./core/debug')(steroids, logger),
   app: require('./app')(steroids, logger),
+  media: require('./media')(steroids, logger),
   notification: require('./notification'),
   device: require('./device')(steroids, logger),
   ui: require('./ui')(steroids, logger)
@@ -8710,7 +8711,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":39,"./core/debug":45,"./core/logger":46,"./device":49,"./mock/steroids":51,"./mock/window":52,"./notification":55,"./ui":59}],45:[function(require,module,exports){
+},{"./app":39,"./core/debug":45,"./core/logger":46,"./device":49,"./media":52,"./mock/steroids":53,"./mock/window":54,"./notification":57,"./ui":61}],45:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9135,6 +9136,253 @@ module.exports = {
 
 
 },{"bluebird":4}],51:[function(require,module,exports){
+var Promise, deviceready;
+
+Promise = require('bluebird');
+
+deviceready = require('../events').deviceready;
+
+
+/**
+   * @ngdoc overview
+   * @name camera
+   * @module media
+   * @description
+   * Provides access to the device's default camera application.
+ */
+
+module.exports = function(steroids, log) {
+  var bug, getFromPhotoLibrary, takePicture;
+  bug = log.debuggable("supersonic.media.camera");
+
+  /**
+   * @ngdoc method
+   * @name takePicture
+   * @module camera
+   * @description
+   * Opens the device's default camera application that allows users to take pictures. Once the user takes the photo, the camera application closes and the application is restored.
+   * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
+   * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
+   * @param {Object} [options] an options object (optional). The following properties are available:
+   * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
+   * * `destinationType`: Choose the format of the return value (Number). Available formats:
+   *  * "dataURL": Return image as base64-encoded string
+   *  * "fileURI": Return image file URI (default)
+   *  * "nativeURI": Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
+   * * `allowEdit`:  Allow simple editing of image before selection (Boolean). Defaults to `false`. Note that Android ignores the `allowEdit parameter.
+   * * `encodingType`: Choose the returned image file's encoding. Available encoding types:
+   *  * "jpeg": Return JPEG encoded image (default).
+   *  * "png": Return PNG encoded image.
+   * * `correctOrientation`: Rotate the image to correct for the orientation of the device during capture (Boolean). Defaults to `true`.
+   * * `saveToPhotoAlbum`: Save the image to the photo album on the device after capture (Boolean). Defaults to `false`.
+   * * `cameraDirection`: Choose the camera to use (front- or back-facing). Note that any `cameraDirection` value results in a back-facing photo on Android. Available directions:
+   *  * "back": Use the back-facing camera (default).
+   *  * "front": Use the front-facing camera.
+   * @returns {Promise} Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the `destinationType` option.
+   * @usage
+   * ```coffeescript
+   * # Basic usage
+   * supersonic.media.camera.takePicture(300, 300)
+   *
+   * # With options
+   * supersonic.media.camera.takePicture(300, 300 {
+   *   quality: 50
+   *   allowEdit: true
+   *   encodingType: "png"
+   *   saveToPhotoAlbum: true
+   * })
+   * ```
+   */
+  takePicture = function(width, height, options) {
+    var getCameraOptions;
+    if (options == null) {
+      options = {};
+    }
+    getCameraOptions = function() {
+      var cameraDirection, cameraOptions, destinationType, encodingType;
+      destinationType = (function() {
+        if ((options != null ? options.destinationType : void 0) != null) {
+          switch (options.destinationType) {
+            case "dataURL":
+              return Camera.DestinationType.DATA_URL;
+            case "fileURI":
+              return Camera.DestinationType.FILE_URI;
+            case "nativeURI":
+              return Camera.DestinationType.NATIVE_URI;
+          }
+        } else {
+          return Camera.DestinationType.FILE_URI;
+        }
+      })();
+      encodingType = (function() {
+        if ((options != null ? options.encodingType : void 0) != null) {
+          switch (options.encodingType) {
+            case "jpeg":
+              return Camera.EncodingType.JPEG;
+            case "png":
+              return Camera.EncodingType.PNG;
+          }
+        } else {
+          return Camera.EncodingType.JPEG;
+        }
+      })();
+      cameraDirection = (function() {
+        if ((options != null ? options.cameraDirection : void 0) != null) {
+          switch (options.cameraDirection) {
+            case "back":
+              return Camera.Direction.BACK;
+            case "front":
+              return Camera.Direction.FRONT;
+          }
+        } else {
+          return Camera.Direction.BACK;
+        }
+      })();
+      return cameraOptions = {
+        quality: ((options != null ? options.quality : void 0) != null) || 100,
+        destinationType: destinationType,
+        allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
+        encodingType: encodingType,
+        targetWidth: width,
+        targetHeight: height,
+        correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true,
+        saveToPhotoAlbum: ((options != null ? options.saveToPhotoAlbum : void 0) != null) || false,
+        cameraDirection: cameraDirection
+      };
+    };
+    return deviceready.then(getCameraOptions).then(function(cameraOptions) {
+      return new Promise(function(resolve, reject) {
+        return navigator.camera.getPicture(resolve, reject, cameraOptions);
+      });
+    });
+  };
+
+  /**
+   * @ngdoc method
+   * @name getFromPhotoLibrary
+   * @module camera
+   * @description
+   * Displays a dialog that allows users to select an existing image. Once the user selects the photo, the camera application closes and the application is restored.
+   * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
+   * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
+   * @param {Object} [options] an options object (optional). The following properties are available:
+   * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
+   * * `destinationType`: Choose the format of the return value. Available formats:
+   *  * "dataURL": Return image as base64-encoded string
+   *  * "fileURI": Return image file URI (default)
+   *  * "nativeURI": Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
+   * * `allowEdit`:  Allow simple editing of image before selection (Boolean). Defaults to `false`. Note that Android ignores the `allowEdit parameter.
+   * * `encodingType`: Choose the returned image file's encoding. Available encoding types:
+   *  * "jpeg": Return JPEG encoded image (default).
+   *  * "png": Return PNG encoded image.
+   * * `mediaType`: Set the type of media to select from. Available media types:
+   *  * "picture": Allow selection of still pictures only (default).
+   *  * "video": Allow selection of video only, will always return "fileURI".
+   *  * "allMedia": Allow selection from all media types.
+   * * `correctOrientation`: Rotate the image to correct for the orientation of the device during capture (Boolean). Defaults to `true`.
+   * * `popoverOptions`: NOT SUPPORTED
+   * @returns {Promise} Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the `destinationType` option.
+   * @usage
+   * ```coffeescript
+   * # Basic usage
+   * supersonic.media.camera.getFromPhotoLibrary(300, 300)
+   *
+   * # With options
+   * supersonic.media.camera.getFromPhotoLibrary(300, 300 {
+   *   quality: 50
+   *   allowEdit: true
+   *   encodingType: "png"
+   * })
+   * ```
+   */
+  getFromPhotoLibrary = function(width, height, options) {
+    var getCameraOptions;
+    if (options == null) {
+      options = {};
+    }
+    getCameraOptions = function() {
+      var cameraOptions, destinationType, encodingType, mediaType, popoverOptions;
+      destinationType = (function() {
+        if ((options != null ? options.destinationType : void 0) != null) {
+          switch (options.destinationType) {
+            case "dataURL":
+              return Camera.DestinationType.DATA_URL;
+            case "fileURI":
+              return Camera.DestinationType.FILE_URI;
+            case "nativeURI":
+              return Camera.DestinationType.NATIVE_URI;
+          }
+        } else {
+          return Camera.DestinationType.FILE_URI;
+        }
+      })();
+      encodingType = (function() {
+        if ((options != null ? options.encodingType : void 0) != null) {
+          switch (options.encodingType) {
+            case "jpeg":
+              return Camera.EncodingType.JPEG;
+            case "png":
+              return Camera.EncodingType.PNG;
+          }
+        } else {
+          return Camera.EncodingType.JPEG;
+        }
+      })();
+      mediaType = (function() {
+        if ((options != null ? options.mediaType : void 0) != null) {
+          switch (options.mediaType) {
+            case "picture":
+              return Camera.MediaType.PICTURE;
+            case "video":
+              return Camera.MediaType.VIDEO;
+            case "allMedia":
+              return Camera.MediaType.ALLMEDIA;
+          }
+        } else {
+          return Camera.MediaType.PICTURE;
+        }
+      })();
+      popoverOptions = (options != null ? options.popoverOptions : void 0) != null ? void 0 : {};
+      return cameraOptions = {
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        quality: ((options != null ? options.quality : void 0) != null) || 100,
+        destinationType: destinationType,
+        allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
+        encodingType: encodingType,
+        targetWidth: width,
+        targetHeight: height,
+        mediaType: mediaType,
+        correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true
+      };
+    };
+    return deviceready.then(getCameraOptions).then(function(cameraOptions) {
+      return new Promise(function(resolve, reject) {
+        return navigator.camera.getPicture(resolve, reject, cameraOptions);
+      });
+    });
+  };
+  return {
+    takePicture: takePicture,
+    getFromPhotoLibrary: getFromPhotoLibrary
+  };
+};
+
+
+
+},{"../events":50,"bluebird":4}],52:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+    camera: require("./camera")(steroids, log)
+  };
+};
+
+
+
+},{"./camera":51,"bluebird":4}],53:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -9149,7 +9397,7 @@ module.exports = {
 
 
 
-},{}],52:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -9161,7 +9409,7 @@ module.exports = {
 
 
 
-},{}],53:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9209,7 +9457,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],54:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],56:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9259,7 +9507,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],55:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],57:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9273,7 +9521,7 @@ module.exports = {
 
 
 
-},{"./alert":53,"./confirm":54,"./prompt":56,"./vibrate":57,"bluebird":4}],56:[function(require,module,exports){
+},{"./alert":55,"./confirm":56,"./prompt":58,"./vibrate":59,"bluebird":4}],58:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9332,7 +9580,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],57:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],59:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9366,7 +9614,7 @@ module.exports = function(options) {
 
 
 
-},{"../events":50,"bluebird":4}],58:[function(require,module,exports){
+},{"../events":50,"bluebird":4}],60:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9490,7 +9738,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],59:[function(require,module,exports){
+},{"bluebird":4}],61:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9508,7 +9756,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./drawer":58,"./layer":60,"./modal":61,"./navigation-bar":62,"./navigation-button":63,"./view":64,"bluebird":4}],60:[function(require,module,exports){
+},{"./drawer":60,"./layer":62,"./modal":63,"./navigation-bar":64,"./navigation-button":65,"./view":66,"bluebird":4}],62:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9675,7 +9923,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],61:[function(require,module,exports){
+},{"bluebird":4}],63:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9795,7 +10043,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],62:[function(require,module,exports){
+},{"bluebird":4}],64:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9918,7 +10166,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],63:[function(require,module,exports){
+},{"bluebird":4}],65:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9972,7 +10220,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],64:[function(require,module,exports){
+},{"bluebird":4}],66:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');

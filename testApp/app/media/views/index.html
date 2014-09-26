@@ -1,0 +1,36 @@
+<div ng-controller="IndexController">
+  <ss-navigation-bar>
+    <ss-navigation-bar-title>
+      Media tests
+    </ss-navigation-bar-title>
+  </ss-navigation-bar>
+
+  <div class="card padding">
+    <h1>camera.takePicture tests</h1>
+    <button
+      class="button button-block"
+      ng-repeat="test in takePictureTests"
+      ng-click="testTakePicture(test.width, test.height, test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>picture URL: {{pictureURL}}</li>
+    </ul>
+    <img ng-src="{{picturePath}}" alt="">
+  </div>
+
+  <div class="card padding">
+    <h1>camera.getFromPhotoLibarary tests</h1>
+    <button
+      class="button button-block"
+      ng-repeat="test in getFromPhotoLibraryTests"
+      ng-click="testGetFromPhotoLibrary(test.width, test.height, test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>picture URL: {{fromLibraryURL}}</li>
+    </ul>
+    <img ng-src="{{fromLibraryPath}}" alt="">
+  </div>
+  
+</div>

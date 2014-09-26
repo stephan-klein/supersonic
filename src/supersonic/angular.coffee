@@ -34,6 +34,7 @@ module.exports = (angular) ->
         logger: qifyAll supersonic.logger
         debug: qifyAll supersonic.debug
         app: qifyAll supersonic.app
+        media: qifyAll supersonic.media
         notification: qifyAll supersonic.notification
         device: supersonic.device
         ui: supersonic.ui
