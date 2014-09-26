@@ -16,7 +16,7 @@ module.exports = (steroids, log) ->
     
   ###*
    * @ngdoc method
-   * @name watchPosition
+   * @name watchAcceleration
    * @module accelerometer
    * @description
    * Returns a stream of acceleration updates.
@@ -24,7 +24,7 @@ module.exports = (steroids, log) ->
    * @returns {Stream} Stream of acceleration updates
    * @usage
    * ```coffeescript
-   * supersonic.device.accelerometer.watchPosition().onValue( (acceleration) ->
+   * supersonic.device.accelerometer.watchAcceleration().onValue( (acceleration) ->
    *  console.log('Acceleration X: '  + acceleration.x  + '\n' +
    *              'Acceleration Y: ' + acceleration.y + '\n' +
    *              'Acceleration Z: ' + acceleration.z + '\n' +
@@ -53,7 +53,7 @@ module.exports = (steroids, log) ->
    * @returns {Promise} Promise is resolved to the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.
    * @usage
    * ```coffeescript
-   * supersonic.device.geolocation.getAcceleration().then( (acceleration) ->
+   * supersonic.device.accelerometer.getAcceleration().then( (acceleration) ->
    *  console.log('Acceleration X: '  + acceleration.x  + '\n' +
    *              'Acceleration Y: ' + acceleration.y + '\n' +
    *              'Acceleration Z: ' + acceleration.z + '\n' +
