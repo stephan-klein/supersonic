@@ -3,7 +3,7 @@
 # Push a version update commit with this message
 VERSION=$(git rev-parse HEAD)
 
-TARGET_DIR=$(mktemp -dt supersonic-bower)
+TARGET_DIR=$(mktemp -d)
 DIST_DIR=dist
 HEAD_VERSION=$(git rev-parse HEAD)
 DEFAULT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
