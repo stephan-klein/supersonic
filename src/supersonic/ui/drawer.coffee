@@ -84,6 +84,19 @@ module.exports = (steroids, log) ->
           reject()
       }
 
+  # TODO: Finish the method
+  hide: ()->
+    new Promise (resolve, reject)->
+      steroids.drawers.hide {
+      }, {
+        onSuccess: ()->
+          supersonic.logger.info "Drawer was hidden"
+          resolve()
+        onFailure: ()->
+          supersonic.logger.error "Hiding a drawer crached"
+          reject()
+      }
+
   ###*
    * @ngdoc method
    * @name setOptions
