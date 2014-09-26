@@ -52,4 +52,40 @@ angular
       supersonic.device.accelerometer.getAcceleration().then (acceleration) ->
         $scope.latestAcceleration = acceleration.timestamp
 
+    $scope.watchHeading = undefined
+
+    $scope.watchHeadingTests = [
+      {
+        title: "Watch heading with no params"
+      }
+      {
+        title: "Watch heading with frequency param"
+        options:
+          frequency: 200
+      }
+      {
+        title: "Watch heading with filter param"
+        options:
+          frequency: 200
+          filter: 5
+      }
+    ]
+
+    $scope.testWatchHeading = (options) ->
+      supersonic.device.compass.watchHeading(options).onValue (heading) ->
+        $scope.$apply ->
+          $scope.watchHeading = heading.timestamp
+
+    $scope.latestHeading = undefined
+
+    $scope.getHeadingTests = [
+      {
+        title: "Get latest heading"
+      }
+    ]
+
+    $scope.testGetHeading = (options) ->
+      supersonic.device.compass.getHeading().then (heading) ->
+        $scope.latestHeading = heading.timestamp
+
  
