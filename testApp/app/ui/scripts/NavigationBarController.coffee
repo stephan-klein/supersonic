@@ -13,3 +13,17 @@ angular
     $scope.show2 = ()->
       supersonic.ui.navigationBar.show({ animated: true, title: "New Title" }).then ()->
         supersonic.logger.log "promise works"
+
+    $scope.update = ()->
+      leftButton = new supersonic.ui.navigationButton({
+        title: "Left"
+        onTap: ()->
+          alert "left"
+      });
+      supersonic.ui.navigationBar.update({
+        overrideBackButton: true,
+        buttons: {
+          left: [leftButton]
+        }
+      }).then ()->
+        supersonic.logger.log "promise works"
