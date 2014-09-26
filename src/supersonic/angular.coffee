@@ -30,6 +30,8 @@ module.exports = (angular) ->
       geolocation.getPosition = qify geolocation.getPosition
       accelerometer =  supersonic.device.accelerometer
       accelerometer.getAcceleration = qify accelerometer.getAcceleration
+      compass =  supersonic.device.compass
+      compass.getHeading = qify compass.getHeading
       {
         logger: qifyAll supersonic.logger
         debug: qifyAll supersonic.debug

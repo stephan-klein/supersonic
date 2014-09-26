@@ -8711,7 +8711,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":39,"./core/debug":45,"./core/logger":46,"./device":49,"./media":52,"./mock/steroids":53,"./mock/window":54,"./notification":57,"./ui":61}],45:[function(require,module,exports){
+},{"./app":39,"./core/debug":45,"./core/logger":46,"./device":50,"./media":53,"./mock/steroids":54,"./mock/window":55,"./notification":58,"./ui":62}],45:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9017,7 +9017,102 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":50,"baconjs":1,"bluebird":4}],48:[function(require,module,exports){
+},{"../events":51,"baconjs":1,"bluebird":4}],48:[function(require,module,exports){
+var Bacon, Promise, deviceready;
+
+Promise = require('bluebird');
+
+Bacon = require('baconjs');
+
+deviceready = require('../events').deviceready;
+
+module.exports = function(steroids, log) {
+  var bug, getHeading, watchHeading;
+  bug = log.debuggable("supersonic.device.compass");
+
+  /**
+   * @ngdoc overview
+   * @name compass
+   * @module device
+   * @description
+   *  provides access to the device's compass. The compass is a sensor that detects the direction or heading that the device is pointed, typically from the top of the device. It measures the heading in degrees from 0 to 359.99, where 0 is north.
+   */
+
+  /**
+   * @ngdoc method
+   * @name watchHeading
+   * @module compass
+   * @description
+   * Returns a stream of compass heading updates.
+   * @param {Object} [options] Options object (optional). The following properties are available:
+   * * `frequency`: update interval in milliseconds (Number, optional) Defaults to 100.
+   * * `filter`: The change in degrees required to initiate a watchHeading success callback (Number, optional). When this value is set, `frequency` is ignored.
+   * @returns {Stream} Stream of heading updates.
+   * @usage
+   * ```coffeescript
+   * supersonic.device.compass.watchHeading().onValue( (heading) ->
+   *  console.log('Magnetic heading: ' + heading.magneticHeading  + '\n' +
+   *              'True heading: ' + heading.trueHeading + '\n' +
+   *              'Heading accuracy: ' + heading.headingAccuracy + '\n' +
+   *              'Timestamp: ' + heading.timestamp)
+   * )
+   * ```
+   */
+  watchHeading = function(options) {
+    var compassOptions;
+    if (options == null) {
+      options = {};
+    }
+    compassOptions = {
+      frequency: ((options != null ? options.frequency : void 0) != null) || 100,
+      filter: ((options != null ? options.filter : void 0) != null) || null
+    };
+    return Bacon.fromPromise(deviceready).flatMap(function() {
+      return Bacon.fromBinder(function(sink) {
+        var watchId;
+        watchId = window.navigator.compass.watchHeading(function(heading) {
+          return sink(new Bacon.Next(heading));
+        }, function(error) {
+          return sink(new Bacon.Error(error));
+        }, compassOptions);
+        return function() {
+          return window.navigator.compass.clearWatch(watchId);
+        };
+      });
+    });
+  };
+
+  /**
+   * @ngdoc method
+   * @name getHeading
+   * @module compass
+   * @description
+   * Returns device's current heading.
+   * @returns {Promise} Promise is resolved to the next available heading data.
+   * @usage
+   * ```coffeescript
+   * supersonic.device.compass.getHeading().then( (heading) ->
+   *  console.log('Magnetic heading: ' + heading.magneticHeading  + '\n' +
+   *              'True heading: ' + heading.trueHeading + '\n' +
+   *              'Heading accuracy: ' + heading.headingAccuracy + '\n' +
+   *              'Timestamp: ' + heading.timestamp)
+   * )
+   * ```
+   */
+  getHeading = function() {
+    return new Promise(function(resolve) {
+      return watchHeading().take(1).onValue(resolve);
+    });
+  };
+  return {
+    watchHeading: watchHeading,
+    getHeading: getHeading
+  };
+};
+
+
+
+},{"../events":51,"baconjs":1,"bluebird":4}],49:[function(require,module,exports){
 var Bacon, Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9108,7 +9203,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":50,"baconjs":1,"bluebird":4}],49:[function(require,module,exports){
+},{"../events":51,"baconjs":1,"bluebird":4}],50:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9116,13 +9211,14 @@ Promise = require('bluebird');
 module.exports = function(steroids, log) {
   return {
     geolocation: require("./geolocation")(steroids, log),
-    accelerometer: require("./accelerometer")(steroids, log)
+    accelerometer: require("./accelerometer")(steroids, log),
+    compass: require("./compass")(steroids, log)
   };
 };
 
 
 
-},{"./accelerometer":47,"./geolocation":48,"bluebird":4}],50:[function(require,module,exports){
+},{"./accelerometer":47,"./compass":48,"./geolocation":49,"bluebird":4}],51:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9135,7 +9231,7 @@ module.exports = {
 
 
 
-},{"bluebird":4}],51:[function(require,module,exports){
+},{"bluebird":4}],52:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9369,7 +9465,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"../events":50,"bluebird":4}],52:[function(require,module,exports){
+},{"../events":51,"bluebird":4}],53:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9382,7 +9478,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./camera":51,"bluebird":4}],53:[function(require,module,exports){
+},{"./camera":52,"bluebird":4}],54:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -9397,7 +9493,7 @@ module.exports = {
 
 
 
-},{}],54:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -9409,7 +9505,7 @@ module.exports = {
 
 
 
-},{}],55:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9457,7 +9553,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],56:[function(require,module,exports){
+},{"../events":51,"bluebird":4}],57:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9507,7 +9603,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],57:[function(require,module,exports){
+},{"../events":51,"bluebird":4}],58:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9521,7 +9617,7 @@ module.exports = {
 
 
 
-},{"./alert":55,"./confirm":56,"./prompt":58,"./vibrate":59,"bluebird":4}],58:[function(require,module,exports){
+},{"./alert":56,"./confirm":57,"./prompt":59,"./vibrate":60,"bluebird":4}],59:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9580,7 +9676,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],59:[function(require,module,exports){
+},{"../events":51,"bluebird":4}],60:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9614,7 +9710,7 @@ module.exports = function(options) {
 
 
 
-},{"../events":50,"bluebird":4}],60:[function(require,module,exports){
+},{"../events":51,"bluebird":4}],61:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9738,7 +9834,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],61:[function(require,module,exports){
+},{"bluebird":4}],62:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9756,7 +9852,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./drawer":60,"./layer":62,"./modal":63,"./navigation-bar":64,"./navigation-button":65,"./view":66,"bluebird":4}],62:[function(require,module,exports){
+},{"./drawer":61,"./layer":63,"./modal":64,"./navigation-bar":65,"./navigation-button":66,"./view":67,"bluebird":4}],63:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9923,7 +10019,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],63:[function(require,module,exports){
+},{"bluebird":4}],64:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -10043,7 +10139,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],64:[function(require,module,exports){
+},{"bluebird":4}],65:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -10166,7 +10262,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],65:[function(require,module,exports){
+},{"bluebird":4}],66:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -10220,7 +10316,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],66:[function(require,module,exports){
+},{"bluebird":4}],67:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
