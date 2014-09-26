@@ -9297,8 +9297,8 @@ deviceready = require('../events').deviceready;
  * @module notification
  * @description
  * Shows a native confirm dialog.
- * @param {string} message confirm message.
- * @param {Object} options an options object (optional). The following properties are available:
+ * @param {string} message confirm message
+ * @param {Object} [options] an options object. The following properties are available:
  * * `title`: confirm title (optional, defaults to "Confirm")
  * * `buttonLabels`: Array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
  * @returns {Promise} Promise that is resolved with the index of the tapped button as an argument.
@@ -9448,27 +9448,26 @@ Promise = require('bluebird');
 module.exports = function(steroids, log) {
   return {
 
-    /**
-     * @ngdoc overview
-     * @name drawer
-     * @module ui
-     * @description
-     * Module of methods to work with drawers
+    /*
+      * @ngdoc overview
+      * @name drawer
+      * @module ui
+      * @description Module of methods to work with drawers
      */
 
-    /**
-     * @ngdoc method
-     * @name asLeft
-     * @module drawer
-     * @description
-     * Shows a view as a left drawer
-     * @param {View} View object
-     * @returns {Promise}
-     * @usage
-     * ```coffeescript
-     * view = supersonic.ui.view("app/drawers/left.html")
-     * supersonic.ui.drawer.asLeft(view)
-     * ```
+    /*
+      * @ngdoc method
+      * @name asLeft
+      * @module drawer
+      * @description
+      * Shows a view as a left drawer
+      * @param {View} View object
+      * @returns {Promise} A promise that will be resolved once the drawer has been shown.
+      * @usage
+      * ```coffeescript
+      * view = supersonic.ui.view("app/drawers/left.html")
+      * supersonic.ui.drawer.asLeft(view)
+      * ```
      */
     asLeft: function(view) {
       var that;
@@ -9487,7 +9486,7 @@ module.exports = function(steroids, log) {
      * @description
      * Shows a view as a right drawer
      * @param {View} View object
-     * @returns {Promise}
+     * @returns {Promise} A promise that will be resolved once the drawer has been shown.
      * @usage
      * ```coffeescript
      * view = supersonic.ui.view("app/drawers/right.html")
@@ -9512,7 +9511,7 @@ module.exports = function(steroids, log) {
      * Shows a view as a drawer of the given side
      * @param {View} View object
      * @param {String} Side to show a drawer: "left" or "right"
-     * @returns {Promise}
+     * @returns {Promise} A promise that will be resolved once the drawer has been shown.
      * @usage
      * ```coffeescript
      * view = supersonic.ui.view("app/drawers/index.html")
@@ -9548,13 +9547,11 @@ module.exports = function(steroids, log) {
      * @description
      * Sets options for drawers
      * @param {Object} Hash of parameters
-     * @returns
      * @usage
      * ```coffeescript
-     * supersonic.ui.drawer.setOptions {
+     * supersonic.ui.drawer.setOptions
      *   showShadow: true
      *   animation: steroids.drawers.defaultAnimations.PARALLAX
-     * }
      * ```
      */
     setOptions: function(options) {
@@ -10074,7 +10071,7 @@ module.exports = function(steroids, log) {
      * @description
      * Creates a new view
      * @param {string} URL of a view
-     * @returns View object
+     * @returns {Object} The created view object.
      * @usage
      * ```coffeescript
      * supersonic.ui.view("http://www.google.com")
@@ -10097,8 +10094,7 @@ module.exports = function(steroids, log) {
      * @private
      * @description
      * Asynchroniously checks if a view is already preloaded
-     * @param
-     * @returns {Promise}
+     * @returns {Promise} A promise that will be resolved with a boolean value indicating if the view is preloaded or not.
      * @usage
      * ```coffeescript
      * this._checkIfPreloaded().then (isPreloaded)->
@@ -10138,8 +10134,7 @@ module.exports = function(steroids, log) {
      * @module view
      * @description
      * Preloads a new
-     * @param
-     * @returns {Promise}
+     * @returns {Promise} A promise that will be resolved once the view has been preloaded.
      * @usage
      * ```coffeescript
      * supersonic.ui.view("http://www.google.com").preload()
@@ -10185,7 +10180,6 @@ module.exports = function(steroids, log) {
      * @module view
      * @description
      * Sets width of a view. Useful for showing as a drawer
-     * @param
      * @returns {Object} View object
      * @usage
      * ```coffeescript
@@ -10204,9 +10198,8 @@ module.exports = function(steroids, log) {
      * @name getView
      * @module view
      * @description
-     * Gets the webView of a current instance
-     * @param
-     * @returns {Object} webView object
+     * Gets the WebView of a current view instance
+     * @returns {Object} WebView object
      * @usage
      * ```coffeescript
      * supersonic.ui.view("http://www.google.com").getView()
