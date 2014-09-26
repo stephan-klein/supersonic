@@ -33,8 +33,6 @@ echo Updating branch $CURRENT_BRANCH in target repository
   git commit -m $VERSION && \
   git push origin -f $CURRENT_BRANCH)
 
-mktemp -t supersonic-bower
-
 # Clean up
 echo Cleaning up
 rm -rf $TARGET_DIR
