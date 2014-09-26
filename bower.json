@@ -7,7 +7,7 @@
     "Juha Suuraho <juha.suuraho@appgyver.com>"
   ],
   "description": "A toolkit for turbocharged Steroids applications",
-  "main": "dist/supersonic.js",
+  "main": "supersonic.js",
   "keywords": [
     "steroids",
     "steroids-js",
@@ -17,26 +17,6 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
-    "/bower_components",
-    "/config",
-    "/components",
-    "/docs",
-    "/fonts",
-    "/lib",
-    "/node_modules",
-    "/src",
-    "/scripts",
-    "/scss",
-    "/tasks",
-    "/test",
-    "/testApp",
-    "/testSpecApp",
-    "/coffeelint.json",
-    "/env.json",
-    "/Gruntfile.coffee",
-    "/gulpfile.coffee",
-    "/package.json"
   ],
   "dependencies": {
     "platform": "Polymer/platform#0.4.1",
