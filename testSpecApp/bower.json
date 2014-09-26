@@ -11,5 +11,8 @@
     "chai": "^1.9.1",
     "angular-mocks": "~1.2.25",
     "bluebird": "^2.3.2"
+  },
+  "resolutions": {
+    "angular": "1.2.25"
   }
 }
