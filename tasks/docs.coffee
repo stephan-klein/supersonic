@@ -10,7 +10,7 @@ module.exports = (grunt)->
       sources:
         expand: true
         cwd: 'src/'
-        src: '**/*.coffee'
+        src: '**/alert.coffee'
         dest: 'docs/_data/'
         ext: ".json"
   }

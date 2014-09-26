@@ -2,13 +2,13 @@
 layout: "docs_api"
 version: "page.method"
 versionHref: "/docs"
-path: "notification/alert/"
+path: "notification/vibrate/"
 
-title: "Alert"
+title: "vibrate"
 header_sub_title: ""
 ---
 
-{% assign method = site.data.supersonic.notification.alert %}
+{% assign method = site.data.supersonic.notification.vibrate %}
 
 [View Source]({{method.source_link}})
 
