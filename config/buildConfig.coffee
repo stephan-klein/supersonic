@@ -16,7 +16,3 @@ module.exports =
     components: 'components/**/*.*'
   file:
     componentImport: '<%= dir.dist %>/components/import.html'
-  docs:
-    jsFiles: [
-      'dist/**/*.js'
-    ]
