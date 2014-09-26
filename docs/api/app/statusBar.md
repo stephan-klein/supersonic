@@ -8,17 +8,19 @@ title: "statusBar"
 header_sub_title: ""
 ---
 
-{% assign method = site.data.supersonic.app.statusBar %}
+{% assign methods = site.data.supersonic.app.statusBar %}
+
+{% for method in methods %}
 
 [View Source]({{method.source_link}})
 
-# {{method.name.string}}
+# {{method.name}}
 
-{{method.description.string}}
+{{method.description}}
 
 {% if method.usage %}
 ## Usage
-{{method.usage.string}}
+{{method.usage}}
 {% endif %}
 
 {% if method.params.size > 0 %}
@@ -39,3 +41,4 @@ header_sub_title: ""
 <li>{{method.returns.description}}</li>
 </ul>
 {% endif %}
+{% endfor %}
