@@ -1,25 +1,28 @@
 - name: App
+  href: "#"
   methods:
     - name: getLaunchURL
     - name: openURL
     - name: sleep
     - name: splashscreen
     - name: statusBar
+
 - name: Debug
+  href: "#"
   methods:
     - name: ping
+
 - name: Device
+  href: "#"
   methods:
     - name: accelerometer
     - name: geolocation
+
 - name: Logger
-  methods:
-    - name: log
-    - name: info
-    - name: warn
-    - name: error
-    - name: debug
+  href: /api/logger
+
 - name: Notifications
+  href: "#"
   methods:
     - name: alert
       href: notification/alert
@@ -29,6 +32,7 @@
       href: notification/prompt
     - name: vibrate
       href: notification/vibrate
+
 - name: Native UI
   methods:
     - name: Drawers

@@ -1,7 +1,7 @@
   {% for namespace in site.data.api_index %}
 
   <li class="menu-section">
-    <a href="#" class="api-section">
+    <a href="{{namespace.href}}" class="api-section">
       {{ namespace.name }}
     </a>
     <ul>

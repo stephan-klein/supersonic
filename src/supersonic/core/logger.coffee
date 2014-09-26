@@ -95,6 +95,7 @@ module.exports = (steroids, window) ->
        * @ngdoc method
        * @name info
        * @module logger
+       * @param {String} message Message to log.
        * @usage
        * ```coffeescript
        * supersonic.logger.info("Just notifying you that X is going on")
@@ -106,6 +107,7 @@ module.exports = (steroids, window) ->
        * @ngdoc method
        * @name warn
        * @module logger
+       * @param {String} message Message to log.
        * @usage
        * ```coffeescript
        * supersonic.logger.warn("Something that probably should not be happening... is happening.")
@@ -117,6 +119,7 @@ module.exports = (steroids, window) ->
        * @ngdoc method
        * @name error
        * @module logger
+       * @param {String} error Error message to log.
        * @usage
        * ```coffeescript
        * supersonic.logger.error("Something failed")
@@ -128,6 +131,7 @@ module.exports = (steroids, window) ->
        * @ngdoc method
        * @name debug
        * @module logger
+       * @param {String} message Debug message to log.
        * @usage
        * ```coffeescript
        * supersonic.logger.debug("This information is here only for your debugging convenience")
