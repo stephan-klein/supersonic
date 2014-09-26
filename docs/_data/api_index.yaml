@@ -1,13 +1,3 @@
-- name: Debug
-  methods:
-    - name: ping
-- name: Logger
-  methods:
-    - name: log
-    - name: info
-    - name: warn
-    - name: error
-    - name: debug
 - name: App
   methods:
     - name: getLaunchURL
@@ -15,9 +5,30 @@
     - name: sleep
     - name: splashscreen
     - name: statusBar
-- name: Notification
+- name: Debug
+  methods:
+    - name: ping
+- name: Device
+  methods:
+    - name: accelerometer
+    - name: geolocation
+- name: Logger
+  methods:
+    - name: log
+    - name: info
+    - name: warn
+    - name: error
+    - name: debug
+- name: Notifications
   methods:
     - name: alert
     - name: confirm
     - name: prompt
     - name: vibrate
+- name: Native UI
+  methods:
+    - name: Drawers
+    - name: Layer stack
+    - name: Modal windows
+    - name: Navigation bar
+    - name: Views
