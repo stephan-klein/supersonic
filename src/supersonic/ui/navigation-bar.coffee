@@ -10,7 +10,7 @@ module.exports = (steroids, log) ->
    * @name navigationBar
    * @module ui
    * @description
-   * Provides methods to work with layers
+   * Provides methods to work with navigation bar
   ###
 
   ###*
