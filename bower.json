@@ -25,6 +25,7 @@
     "/lib",
     "/node_modules",
     "/src",
+    "/scripts",
     "/scss",
     "/tasks",
     "/test",
