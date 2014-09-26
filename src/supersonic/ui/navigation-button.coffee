@@ -34,7 +34,7 @@ module.exports = (steroids, log) ->
      * ```
     ###
     constructor: (params)->
-      btn = new steroids.buttons.NavigationBarButton();
+      btn = new steroids.buttons.NavigationBarButton()
       for key of params
         btn[key] = params[key]
       return btn

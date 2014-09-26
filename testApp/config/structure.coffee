@@ -1,7 +1,7 @@
 module.exports =
 
-  # rootView:
-  #   route: "common/index"
+  rootView:
+    route: "common/index"
 
   tabs: [
     {

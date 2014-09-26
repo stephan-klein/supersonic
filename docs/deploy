@@ -1,0 +1,56 @@
+#!/bin/sh
+
+APP=supersonic
+
+usage() { echo "Usage: $0 [-e <appgyver.com|testgyver.com|devgyver.com>]" 1>&2; exit 1; }
+
+while getopts "e:" opt; do
+  case "$opt" in
+    e)
+      if [ "$OPTARG" == "appgyver.com" ]; then
+        ENVIRONMENT=$OPTARG
+      elif [ "$OPTARG" == "testgyver.com" ]; then
+        ENVIRONMENT=$OPTARG
+      elif [ "$OPTARG" == "devgyver.com" ]; then
+        ENVIRONMENT=$OPTARG
+      else
+        echo "-$opt must be 'appgyver.com' or 'testgyver.com' or 'devgyver.com'"
+        exit 1
+      fi
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+
+shift $((OPTIND-1))
+
+if [ -z "${ENVIRONMENT}" ]; then
+  usage
+fi
+
+echo "Have you versioned? Hit enter to continue."
+read
+
+echo "Deploying to $APP.$ENVIRONMENT"
+
+
+# Syncing without deleting (maybefix cache issues?)
+CMD_WITHOUT_DELETE="s3cmd sync _site/ s3://$APP.$ENVIRONMENT --acl-public --no-delete-removed --exclude='.DS_Store'"
+
+# Syncing again WITH deleting (maybefix)
+CMD_WITH_DELETE="s3cmd sync _site/ s3://$APP.$ENVIRONMENT --acl-public --delete-removed --exclude='.DS_Store'"
+
+echo "running $CMD_WITHOUT_DELETE"
+eval $CMD_WITHOUT_DELETE
+
+echo "running $CMD_WITH_DELETE"
+eval $CMD_WITH_DELETE
+
+# Maybefix based on these:
+# --delete-removed
+#        Delete remote objects with no corresponding local file [sync]
+#
+# --no-delete-removed
+#        Don't delete remote objects.
