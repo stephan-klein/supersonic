@@ -18,7 +18,7 @@ module.exports =
 
   # initialView:
   #   id: "initialView"
-  #   route: "common/initial-view"
+  #   route: "common/index"
 
   # drawers:
   #   left:

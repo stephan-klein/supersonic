@@ -8425,7 +8425,8 @@ module.exports = function(angular) {
       debug: qifyAll(supersonic.debug),
       app: qifyAll(supersonic.app),
       notification: qifyAll(supersonic.notification),
-      device: supersonic.device
+      device: supersonic.device,
+      ui: supersonic.ui
     };
   });
 };
@@ -8772,7 +8773,8 @@ module.exports = {
   debug: require('./core/debug')(steroids, logger),
   app: require('./app')(steroids, logger),
   notification: require('./notification'),
-  device: require('./device')(steroids, logger)
+  device: require('./device')(steroids, logger),
+  ui: require('./ui')(steroids, logger)
 };
 
 if ((typeof window !== "undefined" && window !== null)) {
@@ -8782,7 +8784,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":42,"./core/debug":48,"./core/logger":49,"./device":52,"./mock/steroids":54,"./mock/window":55,"./notification":58}],48:[function(require,module,exports){
+},{"./app":42,"./core/debug":48,"./core/logger":49,"./device":52,"./mock/steroids":54,"./mock/window":55,"./notification":58,"./ui":62}],48:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9438,4 +9440,791 @@ module.exports = function(options) {
 
 
 
-},{"../events":53,"bluebird":4}]},{},[38])
+},{"../events":53,"bluebird":4}],61:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+
+    /**
+     * @ngdoc overview
+     * @name drawer
+     * @module ui
+     * @description
+     * Module of methods to work with drawers
+     */
+
+    /**
+     * @ngdoc method
+     * @name asLeft
+     * @module drawer
+     * @description
+     * Shows a view as a left drawer
+     * @param {View} View object
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/drawers/left.html")
+     * supersonic.ui.drawer.asLeft(view)
+     * ```
+     */
+    asLeft: function(view) {
+      var that;
+      that = this;
+      return new Promise(function(resolve, reject) {
+        return that.show(view, 'left').then(function() {
+          return resolve();
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name asRight
+     * @module drawer
+     * @description
+     * Shows a view as a right drawer
+     * @param {View} View object
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/drawers/right.html")
+     * supersonic.ui.drawer.asRight(view)
+     * ```
+     */
+    asRight: function(view) {
+      var that;
+      that = this;
+      return new Promise(function(resolve, reject) {
+        return that.show(view, 'right').then(function() {
+          return resolve();
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name show
+     * @module drawer
+     * @description
+     * Shows a view as a drawer of the given side
+     * @param {View} View object
+     * @param {String} Side to show a drawer: "left" or "right"
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/drawers/index.html")
+     * supersonic.ui.drawer.show(view, "left")
+     * ```
+     */
+    show: function(view, side) {
+      return new Promise(function(resolve, reject) {
+        var params, webView;
+        webView = view.getWebView();
+        params = {};
+        params[side] = webView;
+        steroids.drawers.update(params);
+        return steroids.drawers.show({
+          edge: steroids.screen.edges[side.toUpperCase()]
+        }, {
+          onSuccess: function() {
+            supersonic.logger.info("" + side + " drawer should be shown");
+            return resolve();
+          },
+          onFailure: function() {
+            supersonic.logger.error("" + side + " drawer fails");
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name setOptions
+     * @module drawer
+     * @description
+     * Sets options for drawers
+     * @param {Object} Hash of parameters
+     * @returns
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.drawer.setOptions {
+     *   showShadow: true
+     *   animation: steroids.drawers.defaultAnimations.PARALLAX
+     * }
+     * ```
+     */
+    setOptions: function(options) {
+      return steroids.drawers.update({
+        options: options
+      });
+    }
+  };
+};
+
+
+
+},{"bluebird":4}],62:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+    view: require("./view")(steroids, log),
+    layer: require("./layer")(steroids, log),
+    drawer: require("./drawer")(steroids, log),
+    modal: require("./modal")(steroids, log),
+    navigationBar: require("./navigation-bar")(steroids, log),
+    navigationButton: require("./navigation-button")(steroids, log)
+  };
+};
+
+
+
+},{"./drawer":61,"./layer":63,"./modal":64,"./navigation-bar":65,"./navigation-button":66,"./view":67,"bluebird":4}],63:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+
+    /**
+     * @ngdoc overview
+     * @name layer
+     * @module ui
+     * @description
+     * Provides methods to work with layers
+     */
+
+    /**
+     * @ngdoc method
+     * @name push
+     * @module layer
+     * @description
+     * Navigates to a given view
+     * @param {View} A view object
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * v = supersonic.ui.view("http://www.google.com")
+     * supersonic.ui.layer.push(v)
+     * ```
+     */
+    push: function(view) {
+      return new Promise(function(resolve, reject) {
+        return steroids.layers.push({
+          view: view.getWebView()
+        }, {
+          onSuccess: function() {
+            supersonic.logger.info("New layer is shown");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("New layer was not shown due to an error " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name pop
+     * @module layer
+     * @description
+     * Removes the topmost view from the navigation stack
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.layer.pop()
+     * ```
+     */
+    pop: function() {
+      return new Promise(function(resolve, reject) {
+        return steroids.layers.pop({}, {
+          onSuccess: function() {
+            supersonic.logger.info("The layer was poppped");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Popping the layer failes with this error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name popAll
+     * @module layer
+     * @description
+     * Pops all views except for the root view from the layer stack
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.layer.popAll()
+     * ```
+     */
+    popAll: function() {
+      return new Promise(function(resolve, reject) {
+        return steroids.layers.popAll({}, {
+          onSuccess: function() {
+            supersonic.logger.info("The layer was poppped");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Popping the layer failes with this error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name showInitial
+     * @module layer
+     * @description
+     * Shows initial view
+     * @param {Object} Parameters of animation
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.layer.showInitial()
+     * ```
+     */
+    showInitial: function(params) {
+      if (!params) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.initialView.show(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Initial view was shown");
+            return resolve();
+          },
+          onFailure: function() {
+            supersonic.logger.error("Showing of an initial view was failed");
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name hideInitial
+     * @module layer
+     * @description
+     * Hides initial view
+     * @param {Object} Parameters of animation
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.layer.hideInitial()
+     * ```
+     */
+    hideInitial: function(params) {
+      if (!params) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.initialView.dismiss(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Initial view was hidden");
+            return resolve();
+          },
+          onFailure: function() {
+            supersonic.logger.error("Hiding of an initial view was failed");
+            return reject();
+          }
+        });
+      });
+    }
+  };
+};
+
+
+
+},{"bluebird":4}],64:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+
+    /**
+     * @ngdoc overview
+     * @name modal
+     * @module ui
+     * @description
+     * Provides methods to work with layers
+     */
+
+    /**
+     * @ngdoc method
+     * @name show
+     * @module modal
+     * @description
+     * Shows a view as a modal
+     * @param {View} View object
+     * @param {Object} [parameters]
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/modal.html")
+     * supersonic.ui.modal.show(view, { disableAnimation: true })
+     * ```
+     */
+    show: function(view, params) {
+      if (params == null) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        params.view = view.getWebView();
+        return steroids.modal.show(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Modal view was shown");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Showing a modal view has crashed with the error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name hide
+     * @module modal
+     * @description
+     * Hides a modal view
+     * @param {Object} [parameters]
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/modal.html")
+     * supersonic.ui.modal.show(view, { disableAnimation: true }).then ()->
+     *   supersonic.ui.modal.hide()
+     * ```
+     */
+    hide: function(params) {
+      if (params == null) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.modal.hide(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Modal view was hidden");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Hiding a modal view has crashed with the error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name hideAll
+     * @module modal
+     * @description
+     * Hides a modal view
+     * @param {Object} [parameters]
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("app/modal.html")
+     * supersonic.ui.modal.show(view, { disableAnimation: true }).then ()->
+     *   supersonic.ui.modal.hideAll()
+     * ```
+     */
+    hideAll: function(params) {
+      if (params == null) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.modal.hideAll(params, {
+          onSuccess: function() {
+            supersonic.logger.info("All the modals were hidden");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Hiding all the modals has crashed with the error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    }
+  };
+};
+
+
+
+},{"bluebird":4}],65:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+
+    /**
+     * @ngdoc overview
+     * @name navigationBar
+     * @module ui
+     * @description
+     * Provides methods to work with navigation bar
+     */
+
+    /**
+     * @ngdoc method
+     * @name show
+     * @module navigationBar
+     * @description
+     * Shows a navigation bar
+     * @param {Object} [parameters] Parameters of hiding
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.navigationBar.show({ animated: true, title: "New Title" }).then ()->
+     *   supersonic.logger.log "promise works"
+     * ```
+     */
+    show: function(params) {
+      if (params == null) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.view.navigationBar.show(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Navigation bar was shown");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Showing the navigation bar crashed due to the error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name hide
+     * @module navigationBar
+     * @description
+     * Hides a navigation bar
+     * @param {Object} [parameters] Parameters of hiding
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.navigationBar.hide({ animated: true }).then ()->
+     *   supersonic.logger.log "promise works"
+     * ```
+     */
+    hide: function(params) {
+      if (params == null) {
+        params = {};
+      }
+      return new Promise(function(resolve, reject) {
+        return steroids.view.navigationBar.hide(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Navigation bar was hidden");
+            return resolve();
+          },
+          onFailure: function(error) {
+            supersonic.logger.error("Hiding the navigation bar crashed due to the error: " + error.errorDescription);
+            return reject();
+          }
+        });
+      });
+    },
+
+    /**
+     * @ngdoc method
+     * @name update
+     * @module navigationBar
+     * @description
+     * Updates the navigation bar
+     * @param {Object} [parameters] Parameters of hiding
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * leftButton = new supersonic.ui.navigationButton({
+     *   title: "Left"
+     *   onTap: ()->
+     *     alert "left"
+     * });
+     * supersonic.ui.navigationBar.update({
+     *   overrideBackButton: true,
+     *   buttons: {
+     *     left: [leftButton]
+     *   }
+     * }).then ()->
+     *   supersonic.logger.log "promise works"
+     * ```
+     */
+    update: function(params) {
+      return new Promise(function(resolve, reject) {
+        return steroids.view.navigationBar.update(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Navigation bar was updated");
+            return resolve();
+          },
+          onFailure: function() {
+            supersonic.logger.error("Updating the navigation bar chashed");
+            return reject();
+          }
+        });
+      });
+    }
+  };
+};
+
+
+
+},{"bluebird":4}],66:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+
+  /**
+   * @ngdoc overview
+   * @name navigationButton
+   * @module ui
+   * @description
+   * Creates new navigation button and sets its params
+   */
+  var Button;
+  Button = (function() {
+
+    /**
+     * @ngdoc method
+     * @name view
+     * @constructor
+     * @module navigationButton
+     * @description
+     * Creates a new navigation button
+     * @param {Object} Button parameters
+     * @returns {Button} Button object
+     * @usage
+     * ```coffeescript
+     * leftButton = new supersonic.ui.navigationButton({
+     *   title: "Left"
+     *   onTap: ()->
+     *     alert "left"
+     * });
+     * ```
+     */
+    function Button(params) {
+      var btn, key;
+      btn = new steroids.buttons.NavigationBarButton();
+      for (key in params) {
+        btn[key] = params[key];
+      }
+      return btn;
+    }
+
+    return Button;
+
+  })();
+  return function(params) {
+    return new Button(params);
+  };
+};
+
+
+
+},{"bluebird":4}],67:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+
+  /**
+   * @ngdoc overview
+   * @name view
+   * @module ui
+   * @description
+   * Allows to create new View instances
+   */
+  var View;
+  View = (function() {
+
+    /**
+     * @ngdoc method
+     * @name view
+     * @constructor
+     * @module ui
+     * @description
+     * Creates a new view
+     * @param {string} URL of a view
+     * @returns View object
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view("http://www.google.com")
+     * ```
+     */
+    function View(location, id) {
+      this.location = location;
+      supersonic.logger.info("'" + this.location + "' view was created");
+      this._webView = new steroids.views.WebView({
+        location: this.location,
+        id: this.id
+      });
+    }
+
+
+    /**
+     * @ngdoc method
+     * @name _checkIfPreloaded
+     * @module view
+     * @private
+     * @description
+     * Asynchroniously checks if a view is already preloaded
+     * @param
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * this._checkIfPreloaded().then (isPreloaded)->
+     *   # gets {Boolean} ifPreloaded
+     * ```
+     */
+
+    View.prototype._checkIfPreloaded = function() {
+      var that;
+      that = this;
+      return new Promise(function(resolve, reject) {
+        return steroids.getApplicationState({}, {
+          onSuccess: function(state) {
+            var loaded;
+            loaded = false;
+            state.preloads.forEach(function(p) {
+              return loaded = loaded || (p.id.indexOf(that.location) !== -1);
+            });
+            if (!loaded) {
+              return resolve(false);
+            } else {
+              return resolve(true);
+            }
+          },
+          onFailure: function() {
+            supersonic.logger.error("Somethig went wrong with checking the applicaiton state");
+            return reject();
+          }
+        });
+      });
+    };
+
+
+    /**
+     * @ngdoc method
+     * @name preload
+     * @module view
+     * @description
+     * Preloads a new
+     * @param
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view("http://www.google.com").preload()
+     *
+     * v = supersonic.ui.view("http://www.google.com")
+     * v.preload()
+     * ```
+     */
+
+    View.prototype.preload = function() {
+      var that;
+      that = this;
+      return new Promise(function(resolve, reject) {
+        return that._checkIfPreloaded().then(function(isPreloaded) {
+          var params;
+          if (isPreloaded) {
+            supersonic.logger.info("View was already preloaded");
+            return resolve();
+          } else {
+            params = {};
+            if (that.id) {
+              params.id = that.id;
+            }
+            return that._webView.preload(params, {
+              onSuccess: function() {
+                supersonic.logger.info("View was preloaded");
+                return resolve();
+              },
+              onFailure: function() {
+                supersonic.logger.error("Preloading was failed");
+                return reject();
+              }
+            });
+          }
+        });
+      });
+    };
+
+
+    /**
+     * @ngdoc method
+     * @name setWidth
+     * @module view
+     * @description
+     * Sets width of a view. Useful for showing as a drawer
+     * @param
+     * @returns {Object} View object
+     * @usage
+     * ```coffeescript
+     * view = supersonic.ui.view("http://www.google.com").setWidth(200)
+     * ```
+     */
+
+    View.prototype.setWidth = function(width) {
+      this.getWebView().widthOfDrawerInPixels = width;
+      return this;
+    };
+
+
+    /**
+     * @ngdoc method
+     * @name getView
+     * @module view
+     * @description
+     * Gets the webView of a current instance
+     * @param
+     * @returns {Object} webView object
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view("http://www.google.com").getView()
+     * ```
+     */
+
+    View.prototype.getWebView = function() {
+      return this._webView;
+    };
+
+    return View;
+
+  })();
+  return function(location, id) {
+    return new View(location, id);
+  };
+};
+
+
+
+},{"bluebird":4}]},{},[38])

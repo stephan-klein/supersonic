@@ -25,7 +25,7 @@ module.exports = (angular) ->
 
       # TODO: Every module should define themselves if they are wrapped
       # or not.
-      
+
       geolocation =  supersonic.device.geolocation
       geolocation.getPosition = qify geolocation.getPosition
       accelerometer =  supersonic.device.accelerometer
@@ -36,6 +36,6 @@ module.exports = (angular) ->
         app: qifyAll supersonic.app
         notification: qifyAll supersonic.notification
         device: supersonic.device
+        ui: supersonic.ui
       }
-
     )

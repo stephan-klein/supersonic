@@ -1,0 +1,28 @@
+<div ng-controller="OtherController">
+  <ss-navigation-bar>
+    <ss-navigation-bar-title>
+      Other UI APIs
+    </ss-navigation-bar-title>
+  </ss-navigation-bar>
+
+  <div class="padding">
+    <h1>View examples</h1>
+    <ul class="list">
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="hideInitialView()">
+          Hide initial view
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="asModal('app/ui/modal.html')">
+          Modal View
+        </button>
+      </li>
+    </ul>
+  </div>
+
+</div>

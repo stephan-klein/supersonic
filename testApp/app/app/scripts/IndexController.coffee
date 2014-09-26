@@ -1,6 +1,6 @@
 angular
   .module('app')
-  .controller 'IndexController', ($scope, $timeout, supersonic) ->
+  .controller 'IndexController', ($scope, $timeout, $q, supersonic) ->
     $scope.successfulOpens = 0
 
     $scope.openURLTests = [
@@ -31,7 +31,7 @@ angular
     ]
 
     $scope.testGetLaunchURL = (options) ->
-      supersonic.app.getLaunchURL().then( 
+      supersonic.app.getLaunchURL().then(
         (launchURL) ->
           $scope.launchURL = launchURL
         (message) ->
@@ -63,11 +63,11 @@ angular
     ]
 
     $scope.testShowAndHideSplashscreen = (options) ->
-      supersonic.app.splashscreen.show().then( 
+      supersonic.app.splashscreen.show().then(
         () ->
           $scope.splashscreenShown++
           $timeout ->
-            supersonic.app.splashscreen.hide().then( 
+            supersonic.app.splashscreen.hide().then(
               () ->
                 $scope.splashscreenHidden++
               (message) ->
@@ -92,7 +92,7 @@ angular
       }
       {
         title: "Hide and show status bar with an object param"
-        options: 
+        options:
           style: "light"
       }
     ]
@@ -110,6 +110,3 @@ angular
         (message) ->
           alert "Could not hide status bar! \n\n #{JSON.stringify(message)}"
       )
-
-
-    
