@@ -5,10 +5,10 @@
       {{ namespace.name }}
     </a>
     <ul>
-      {% for method in namespace.methods %}
+      {% for subpage in namespace.subpages %}
       <li>
-        <a href="/api/{{method.href}}/">
-          {{ method.name }}
+        <a href="/api/{{subpage.href}}/">
+          {{ subpage.name }}
         </a>
       </li>
       {% endfor %}
