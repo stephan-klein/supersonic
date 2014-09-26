@@ -2,21 +2,29 @@
   href: "#"
   methods:
     - name: getLaunchURL
+      href: app/getLaunchURL
     - name: openURL
+      href: app/openURL
     - name: sleep
+      href: app/sleep
     - name: splashscreen
+      href: app/splashscreen
     - name: statusBar
+      href: app/statusBar
 
 - name: Debug
   href: "#"
   methods:
     - name: ping
+      href: core/ping
 
 - name: Device
   href: "#"
   methods:
     - name: accelerometer
+      href: device/accelerometer
     - name: geolocation
+      href: device/geolocation
 
 - name: Logger
   href: /api/logger
