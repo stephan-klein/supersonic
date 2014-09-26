@@ -22,9 +22,13 @@
 - name: Notifications
   methods:
     - name: alert
+      href: notification/alert
     - name: confirm
+      href: notification/confirm
     - name: prompt
+      href: notification/prompt
     - name: vibrate
+      href: notification/vibrate
 - name: Native UI
   methods:
     - name: Drawers
