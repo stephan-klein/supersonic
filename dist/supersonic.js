@@ -9375,13 +9375,14 @@ module.exports = function(steroids, log) {
     layer: require("./layer")(steroids, log),
     drawer: require("./drawer")(steroids, log),
     modal: require("./modal")(steroids, log),
-    navigationBar: require("./navigation-bar")(steroids, log)
+    navigationBar: require("./navigation-bar")(steroids, log),
+    navigationButton: require("./navigation-button")(steroids, log)
   };
 };
 
 
 
-},{"./drawer":58,"./layer":60,"./modal":61,"./navigation-bar":62,"./view":63,"bluebird":4}],60:[function(require,module,exports){
+},{"./drawer":58,"./layer":60,"./modal":61,"./navigation-bar":62,"./navigation-button":63,"./view":64,"bluebird":4}],60:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9681,7 +9682,7 @@ module.exports = function(steroids, log) {
      * @name navigationBar
      * @module ui
      * @description
-     * Provides methods to work with layers
+     * Provides methods to work with navigation bar
      */
 
     /**
@@ -9746,6 +9747,45 @@ module.exports = function(steroids, log) {
           }
         });
       });
+    },
+
+    /**
+     * @ngdoc method
+     * @name update
+     * @module navigationBar
+     * @description
+     * Updates the navigation bar
+     * @param {Object} [parameters] Parameters of hiding
+     * @returns {Promise}
+     * @usage
+     * ```coffeescript
+     * leftButton = new supersonic.ui.navigationButton({
+     *   title: "Left"
+     *   onTap: ()->
+     *     alert "left"
+     * });
+     * supersonic.ui.navigationBar.update({
+     *   overrideBackButton: true,
+     *   buttons: {
+     *     left: [leftButton]
+     *   }
+     * }).then ()->
+     *   supersonic.logger.log "promise works"
+     * ```
+     */
+    update: function(params) {
+      return new Promise(function(resolve, reject) {
+        return steroids.view.navigationBar.update(params, {
+          onSuccess: function() {
+            supersonic.logger.info("Navigation bar was updated");
+            return resolve();
+          },
+          onFailure: function() {
+            supersonic.logger.error("Updating the navigation bar chashed");
+            return reject();
+          }
+        });
+      });
     }
   };
 };
@@ -9753,6 +9793,56 @@ module.exports = function(steroids, log) {
 
 
 },{"bluebird":4}],63:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+
+  /**
+   * @ngdoc overview
+   * @name navigationButton
+   * @module ui
+   * @description
+   * Creates new navigation button and sets its params
+   */
+  var Button;
+  Button = (function() {
+
+    /**
+     * @ngdoc method
+     * @name view
+     * @constructor
+     * @module navigationButton
+     * @description
+     * Creates a new navigation button
+     * @param {Object} Button parameters
+     * @returns {Button} Button object
+     * @usage
+     * ```coffeescript
+     * supersonic.ui.view("http://www.google.com")
+     * ```
+     */
+    function Button(params) {
+      var btn, key;
+      btn = new steroids.buttons.NavigationBarButton();
+      for (key in params) {
+        btn[key] = params[key];
+      }
+      return btn;
+    }
+
+    return Button;
+
+  })();
+  return function(params) {
+    return new Button(params);
+  };
+};
+
+
+
+},{"bluebird":4}],64:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
