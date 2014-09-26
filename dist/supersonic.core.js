@@ -9751,7 +9751,11 @@ module.exports = function(steroids, log) {
      * @returns {Button} Button object
      * @usage
      * ```coffeescript
-     * supersonic.ui.view("http://www.google.com")
+     * leftButton = new supersonic.ui.navigationButton({
+     *   title: "Left"
+     *   onTap: ()->
+     *     alert "left"
+     * });
      * ```
      */
     function Button(params) {
