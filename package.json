@@ -26,6 +26,7 @@
     "chai-as-promised": "^4.1.1",
     "coffeeify": "^0.7.0",
     "cpr": "^0.3.2",
+    "dox": "git+https://github.com/appgyver/dox-coffee#master",
     "event-stream": "^3.1.7",
     "grunt": "^0.4.5",
     "grunt-coffeelint": "0.0.13",
