@@ -21,6 +21,7 @@
     "/bower_components",
     "/config",
     "/components",
+    "/docs",
     "/fonts",
     "/lib",
     "/node_modules",
