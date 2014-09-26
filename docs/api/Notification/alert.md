@@ -16,9 +16,12 @@ header_sub_title: ""
 
 {{method.description.string}}
 
+{% if method.usage %}
 ## Usage
 {{method.usage.string}}
+{% endif %}
 
+{% if method.params.size > 0 %}
 ## Params
 {% for param in method.params %}
   <strong>{{param.name}} [<em>{{param.types}}</em>]</strong>
@@ -27,9 +30,12 @@ header_sub_title: ""
   </ul>
 
 {% endfor %}
+{% endif %}
 
+{% if method.returns %}
 ## Returns
 <strong>{{method.returns.types}}</strong>
 <ul>
 <li>{{method.returns.description}}</li>
 </ul>
+{% endif %}
