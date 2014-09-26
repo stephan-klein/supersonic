@@ -8390,7 +8390,7 @@ superscope = require('./angular/superscope');
 module.exports = function(angular) {
   superscope(angular);
   return angular.module('supersonic', ['supersonic.superscope']).service('supersonic', function($q) {
-    var qify, qifyAll;
+    var accelerometer, geolocation, qify, qifyAll;
     qify = function(f) {
       return function() {
         var args;
@@ -8416,11 +8416,16 @@ module.exports = function(angular) {
       }
       return result;
     };
+    geolocation = supersonic.device.geolocation;
+    geolocation.getPosition = qify(geolocation.getPosition);
+    accelerometer = supersonic.device.accelerometer;
+    accelerometer.getAcceleration = qify(accelerometer.getAcceleration);
     return {
       logger: qifyAll(supersonic.logger),
       debug: qifyAll(supersonic.debug),
       app: qifyAll(supersonic.app),
       notification: qifyAll(supersonic.notification),
+      device: supersonic.device,
       ui: supersonic.ui
     };
   });
@@ -8719,8 +8724,8 @@ module.exports = function(steroids, log) {
      * @module statusBar
      * @description
      * Shows the native status bar application wide. If no parameters are given, the status bar text color is the default color (black on iOS 7).
-     * @params {string} style If set to "light" (shorthand), then the native status bar text color is light (white on iOS 7). Optional.
-     * @params {Object} options Options object with `style` property (verbose). Optional.
+     * @param {string} style If set to "light" (shorthand), then the native status bar text color is light (white on iOS 7). Optional.
+     * @param {Object} options Options object with `style` property (verbose). Optional.
      * @returns {Promise} Promise that is resolved when the status bar is shown.
      * @usage
      * ```coffeescript
@@ -8768,6 +8773,7 @@ module.exports = {
   debug: require('./core/debug')(steroids, logger),
   app: require('./app')(steroids, logger),
   notification: require('./notification'),
+  device: require('./device')(steroids, logger),
   ui: require('./ui')(steroids, logger)
 };
 
@@ -8778,7 +8784,7 @@ if ((typeof window !== "undefined" && window !== null)) {
 
 
 
-},{"./app":42,"./core/debug":48,"./core/logger":49,"./mock/steroids":51,"./mock/window":52,"./notification":55,"./ui":59}],48:[function(require,module,exports){
+},{"./app":42,"./core/debug":48,"./core/logger":49,"./device":52,"./mock/steroids":54,"./mock/window":55,"./notification":58,"./ui":62}],48:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -8993,6 +8999,203 @@ module.exports = function(steroids, window) {
 
 
 },{"baconjs":1,"bluebird":4}],50:[function(require,module,exports){
+var Bacon, Promise, deviceready;
+
+Promise = require('bluebird');
+
+Bacon = require('baconjs');
+
+deviceready = require('../events').deviceready;
+
+module.exports = function(steroids, log) {
+  var bug, getAcceleration, watchAcceleration;
+  bug = log.debuggable("supersonic.device.accelerometer");
+
+  /**
+   * @ngdoc overview
+   * @name accelerometer
+   * @module device
+   * @description
+   *  provides access to the device's accelerometer. The accelerometer is a motion sensor that detects the change (delta) in movement relative to the current device orientation, in three dimensions along the x, y, and z axis.
+   */
+
+  /**
+   * @ngdoc method
+   * @name watchAcceleration
+   * @module accelerometer
+   * @description
+   * Returns a stream of acceleration updates.
+   * @param {Integer} frequency update interval in milliseconds (optional, defaults to 40)
+   * @returns {Stream} Stream of acceleration updates
+   * @usage
+   * ```coffeescript
+   * supersonic.device.accelerometer.watchAcceleration().onValue( (acceleration) ->
+   *  console.log('Acceleration X: '  + acceleration.x  + '\n' +
+   *              'Acceleration Y: ' + acceleration.y + '\n' +
+   *              'Acceleration Z: ' + acceleration.z + '\n' +
+   *              'Timestamp: ' + acceleration.timestamp)
+   * )
+   * ```
+   */
+  watchAcceleration = function(frequency) {
+    var options;
+    if (frequency == null) {
+      frequency = 40;
+    }
+    options = {
+      frequency: frequency
+    };
+    return Bacon.fromPromise(deviceready).flatMap(function() {
+      return Bacon.fromBinder(function(sink) {
+        var watchId;
+        watchId = window.navigator.accelerometer.watchAcceleration(function(acceleration) {
+          return sink(new Bacon.Next(acceleration));
+        }, function(error) {
+          return sink(new Bacon.Error(error));
+        }, options);
+        return function() {
+          return window.navigator.accelerometer.clearWatch(watchId);
+        };
+      });
+    });
+  };
+
+  /**
+   * @ngdoc method
+   * @name getAcceleration
+   * @module accelerometer
+   * @description
+   * Returns device's current acceleration.
+   * @returns {Promise} Promise is resolved to the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.
+   * @usage
+   * ```coffeescript
+   * supersonic.device.accelerometer.getAcceleration().then( (acceleration) ->
+   *  console.log('Acceleration X: '  + acceleration.x  + '\n' +
+   *              'Acceleration Y: ' + acceleration.y + '\n' +
+   *              'Acceleration Z: ' + acceleration.z + '\n' +
+   *              'Timestamp: ' + acceleration.timestamp)
+   * )
+   * ```
+   */
+  getAcceleration = bug("getAcceleration", function() {
+    return new Promise(function(resolve) {
+      return watchAcceleration().take(1).onValue(resolve);
+    });
+  });
+  return {
+    watchAcceleration: watchAcceleration,
+    getAcceleration: getAcceleration
+  };
+};
+
+
+
+},{"../events":53,"baconjs":1,"bluebird":4}],51:[function(require,module,exports){
+var Bacon, Promise, deviceready;
+
+Promise = require('bluebird');
+
+Bacon = require('baconjs');
+
+deviceready = require('../events').deviceready;
+
+module.exports = function(steroids, log) {
+  var bug, getPosition, watchPosition;
+  bug = log.debuggable("supersonic.device.geolocation");
+
+  /**
+   * @ngdoc overview
+   * @name geolocation
+   * @module device
+   * @description
+   * Provides access to location data based on the device's GPS sensor or inferred from network signals.
+   */
+
+  /**
+   * @ngdoc method
+   * @name watchPosition
+   * @module geolocation
+   * @description
+   * Returns a stream of position updates.
+   * @returns {Stream} Stream of position updates
+   * @usage
+   * ```coffeescript
+   * supersonic.device.geolocation.watchPosition().onValue( (position) ->
+   *  console.log('Latitude: '  + position.coords.latitude  + '\n' +
+   *                        'Longitude: ' + position.coords.longitude + '\n' +
+   *                        'Timestamp: ' + position.timestamp)
+   * )
+   * ```
+   */
+  watchPosition = function(options) {
+    if (options == null) {
+      options = {};
+    }
+    if (options.enableHighAccuracy == null) {
+      options.enableHighAccuracy = true;
+    }
+    return Bacon.fromPromise(deviceready).flatMap(function() {
+      return Bacon.fromBinder(function(sink) {
+        var watchId;
+        watchId = window.navigator.geolocation.watchPosition(function(position) {
+          return sink(new Bacon.Next(position));
+        }, function(error) {
+          return sink(new Bacon.Error(error));
+        }, options);
+        return function() {
+          return window.navigator.geolocation.clearWatch(watchId);
+        };
+      });
+    });
+  };
+
+  /**
+   * @ngdoc method
+   * @name getPosition
+   * @module geolocation
+   * @description
+   * Returns device's current position.
+   * @returns {Promise} Promise is resolved to the next available position data. Will wait for data for an indeterminate time; use a timeout if required.
+   * @usage
+   * ```coffeescript
+   * supersonic.device.geolocation.getPosition().then( (position) ->
+   *  console.log('Latitude: '  + position.coords.latitude  + '\n' +
+   *                        'Longitude: ' + position.coords.longitude + '\n' +
+   *                        'Timestamp: ' + position.timestamp)
+   * )
+   * ```
+   */
+  getPosition = function(options) {
+    if (options == null) {
+      options = {};
+    }
+    return new Promise(function(resolve) {
+      return watchPosition(options).take(1).onValue(resolve);
+    });
+  };
+  return {
+    watchPosition: watchPosition,
+    getPosition: getPosition
+  };
+};
+
+
+
+},{"../events":53,"baconjs":1,"bluebird":4}],52:[function(require,module,exports){
+var Promise;
+
+Promise = require('bluebird');
+
+module.exports = function(steroids, log) {
+  return {
+    geolocation: require("./geolocation")(steroids, log),
+    accelerometer: require("./accelerometer")(steroids, log)
+  };
+};
+
+
+
+},{"./accelerometer":50,"./geolocation":51,"bluebird":4}],53:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9005,7 +9208,7 @@ module.exports = {
 
 
 
-},{"bluebird":4}],51:[function(require,module,exports){
+},{"bluebird":4}],54:[function(require,module,exports){
 module.exports = {
   device: {
     ping: function() {}
@@ -9020,7 +9223,7 @@ module.exports = {
 
 
 
-},{}],52:[function(require,module,exports){
+},{}],55:[function(require,module,exports){
 module.exports = {
   location: {
     href: ''
@@ -9032,7 +9235,7 @@ module.exports = {
 
 
 
-},{}],53:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9080,7 +9283,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],54:[function(require,module,exports){
+},{"../events":53,"bluebird":4}],57:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9130,7 +9333,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],55:[function(require,module,exports){
+},{"../events":53,"bluebird":4}],58:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9144,7 +9347,7 @@ module.exports = {
 
 
 
-},{"./alert":53,"./confirm":54,"./prompt":56,"./vibrate":57,"bluebird":4}],56:[function(require,module,exports){
+},{"./alert":56,"./confirm":57,"./prompt":59,"./vibrate":60,"bluebird":4}],59:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9203,7 +9406,7 @@ module.exports = function(message, options) {
 
 
 
-},{"../events":50,"bluebird":4}],57:[function(require,module,exports){
+},{"../events":53,"bluebird":4}],60:[function(require,module,exports){
 var Promise, deviceready;
 
 Promise = require('bluebird');
@@ -9237,7 +9440,7 @@ module.exports = function(options) {
 
 
 
-},{"../events":50,"bluebird":4}],58:[function(require,module,exports){
+},{"../events":53,"bluebird":4}],61:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9364,7 +9567,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],59:[function(require,module,exports){
+},{"bluebird":4}],62:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9382,7 +9585,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"./drawer":58,"./layer":60,"./modal":61,"./navigation-bar":62,"./navigation-button":63,"./view":64,"bluebird":4}],60:[function(require,module,exports){
+},{"./drawer":61,"./layer":63,"./modal":64,"./navigation-bar":65,"./navigation-button":66,"./view":67,"bluebird":4}],63:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9549,7 +9752,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],61:[function(require,module,exports){
+},{"bluebird":4}],64:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9669,7 +9872,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],62:[function(require,module,exports){
+},{"bluebird":4}],65:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9792,7 +9995,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],63:[function(require,module,exports){
+},{"bluebird":4}],66:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
@@ -9846,7 +10049,7 @@ module.exports = function(steroids, log) {
 
 
 
-},{"bluebird":4}],64:[function(require,module,exports){
+},{"bluebird":4}],67:[function(require,module,exports){
 var Promise;
 
 Promise = require('bluebird');
