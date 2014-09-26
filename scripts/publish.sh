@@ -25,7 +25,7 @@ git clone $TARGET_REPO $TARGET_DIR
 
 # Copy bower-installed supersonic artefacts to target bower repo
 # Tag and push repo
-(cd $TARGET_DIR && git checkout $CURRENT_BRANCH) && \
+(cd $TARGET_DIR && (git checkout -b $CURRENT_BRANCH || git checkout $CURRENT_BRANCH)) && \
 (rm -rf $TARGET_DIR/* && cp -r $ARTEFACTS_DIR/bower_components/supersonic/* $TARGET_DIR) && \
 (cd $TARGET_DIR && \
   git add -A && \
