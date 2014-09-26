@@ -17,7 +17,7 @@ describe "supersonic.ui.drawer", ->
     describe "hide", ->
       it "should be defined", ->
         dr.hide.should.exist
-      it "shold hide a drawer", ->
+      it "should hide a drawer", ->
         dr.hide()
 
     describe "asLeft", ->
