@@ -8,9 +8,11 @@ ARTEFACTS_DIR=tmp/artefacts
 TARGET_DIR=tmp/target
 
 HEAD_VERSION=$(git rev-parse HEAD)
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CURRENT_BRANCH=$TRAVIS_BRANCH || $(git rev-parse --abbrev-ref HEAD)
 SOURCE_REPO=https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic.git#$HEAD_VERSION
 TARGET_REPO=https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic-bower.git
+
+echo Publishing branch $CURRENT_BRANCH version $HEAD_VERSION with message $VERSION
 
 # Install supersonic from current revision to temp dir
 echo Installing $SOURCE_REPO to $ARTEFACTS_DIR
