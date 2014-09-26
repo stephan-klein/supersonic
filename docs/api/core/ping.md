@@ -1,8 +1,9 @@
 ---
-layout: "docs_api"
+layout: "docs_home"
 version: "page.method"
 versionHref: "/docs"
 path: "core/ping"
+section_id: supersonic-js
 
 title: "ping"
 header_sub_title: ""

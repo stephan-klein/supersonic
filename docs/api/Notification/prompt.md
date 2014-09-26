@@ -1,8 +1,9 @@
 ---
-layout: "docs_api"
+layout: "docs_home"
 version: "page.method"
 versionHref: "/docs"
 path: "notification/prompt/"
+section_id: supersonic-js
 
 title: "prompt"
 header_sub_title: ""

@@ -1,8 +1,9 @@
 ---
-layout: "docs_api"
+layout: "docs_home"
 version: "page.method"
 versionHref: "/docs"
 path: "notification/alert/"
+section_id: supersonic-js
 
 title: "Alert"
 header_sub_title: ""

@@ -1,8 +1,9 @@
 ---
-layout: "docs_api"
+layout: "docs_home"
 version: "page.method"
 versionHref: "/docs"
 path: "notification/confirm/"
+section_id: supersonic-js
 
 title: "confirm"
 header_sub_title: ""

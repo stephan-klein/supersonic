@@ -1,8 +1,10 @@
 ---
-layout: "docs_api"
+layout: "docs_home"
 version: "page.method"
 versionHref: "/docs"
 path: "app/getLaunchURL"
+section:
+  name: "Supersonic.js"
 
 title: "getLaunchURL"
 header_sub_title: ""

@@ -1,8 +1,9 @@
 ---
-layout: "docs_api"
+layout: "docs_home"
 version: "page.method"
 versionHref: "/docs"
 path: "app/sleep"
+section_id: supersonic-js
 
 title: "sleep"
 header_sub_title: ""

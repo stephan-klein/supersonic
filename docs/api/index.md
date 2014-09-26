@@ -1,8 +1,9 @@
 ---
-layout: "docs_api"
+layout: "docs_home"
 version: "nightly"
 versionHref: "/api/nightly"
 path: ""
+section_id: supersonic-js
 
 title: Supersonic.js
 header_sub_title: Tap into the native layer with the Supersonic.js library

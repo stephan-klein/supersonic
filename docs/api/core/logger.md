@@ -1,8 +1,9 @@
 ---
-layout: "docs_api"
+layout: "docs_home"
 version: "page.method"
 versionHref: "/docs"
 path: "core/logger"
+section_id: supersonic-js
 
 title: "logger"
 header_sub_title: ""

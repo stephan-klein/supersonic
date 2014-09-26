@@ -1,8 +1,9 @@
 ---
-layout: "docs_api"
+layout: "docs_home"
 version: "page.method"
 versionHref: "/docs"
 path: "device/accelerometer/"
+section_id: supersonic-js
 
 title: "Accelerometer"
 header_sub_title: ""
