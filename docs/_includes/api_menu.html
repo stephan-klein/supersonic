@@ -1,18 +1,18 @@
-  {% for namespace in site.data.api_index %}
+{% for namespace in site.data.api_index %}
 
-  <li class="menu-section">
-    <a href="{{namespace.href}}" class="api-section">
-      {{ namespace.name }}
-    </a>
-    <ul>
-      {% for method in namespace.methods %}
-      <li>
-        <a href="{{method.href}}/">
-          {{ method.name }}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </li>
+<li class="menu-section">
+  <a href="{{namespace.href}}" class="api-section">
+    {{ namespace.name }}
+  </a>
+  <ul>
+    {% for subpage in namespace.subpages %}
+    <li>
+      <a href="/api/{{subpage.href}}/">
+        {{ subpage.name }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</li>
 
-  {% endfor %}
+{% endfor %}

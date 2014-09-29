@@ -1,29 +1,37 @@
 - name: App
   href: "#"
-  methods:
+  subpages:
     - name: getLaunchURL
+      href: app/getLaunchURL
     - name: openURL
+      href: app/openURL
     - name: sleep
+      href: app/sleep
     - name: splashscreen
+      href: app/splashscreen
     - name: statusBar
+      href: app/statusBar
 
 - name: Debug
   href: "#"
-  methods:
+  subpages:
     - name: ping
+      href: core/ping
 
 - name: Device
   href: "#"
-  methods:
+  subpages:
     - name: accelerometer
+      href: device/accelerometer
     - name: geolocation
+      href: device/geolocation
 
 - name: Logger
   href: /api/logger
 
 - name: Notifications
   href: "#"
-  methods:
+  subpages:
     - name: alert
       href: notification/alert
     - name: confirm
@@ -34,7 +42,7 @@
       href: notification/vibrate
 
 - name: Native UI
-  methods:
+  subpages:
     - name: Drawers
     - name: Layer stack
     - name: Modal windows

@@ -32,5 +32,18 @@
     </ul>
     <img ng-src="{{fromLibraryPath}}" alt="">
   </div>
+
+  <div class="card padding">
+    <h1>audio.play tests</h1>
+    <button
+      class="button button-block"
+      ng-repeat="test in playAudioTests"
+      ng-click="testPlayAudio(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Number of times played: {{played}}</li>
+    </ul>
+  </div>
   
 </div>
