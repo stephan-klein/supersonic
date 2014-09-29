@@ -21,11 +21,11 @@ Supersonic ships with compiled Javascript, CSS and Web Component assets, along w
 
 The easiest way to get Supersonic for your existing app is to install it as a [bower](http://bower.io/) dependency:
 
-    bower install https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic.git --save
+    bower install https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic-bower.git --save
 
-Your Steroids application will now have `www/components/supersonic` set up. Having your application use the library is one line of code.
+Your Steroids application will now have `bower_components/supersonic` set up. Having your application use the library is one line of code.
 
-    <script src="/components/supersonic/dist/supersonic.bundle.js"></script>
+    <script src="/components/supersonic/supersonic.js"></script>
 
 You don't need to include the Javascript, CSS and Web Components separately, unless you really want to.
 
@@ -63,9 +63,13 @@ For a build-and-watch-for-changes loop, use:
 
 ### Publishing to bower
 
-Compile source to a Browserified Javascript bundle and add changes to git:
+This repository is set up with [Travis CI](https://magnum.travis-ci.com/AppGyver/supersonic). On each push to a branch that has passing unit tests, the continuous integration server will prepare a bower distributable version. That distributable will be deployed to [supersonic-bower](https://github.com/AppGyver/supersonic-bower) in an identically named branch, where it is installable via bower.
 
-    grunt build && git commit -am "update dist"
+In other words, publishing is automatic. You don't need to do anything.
+
+#### Tagging releases
+
+What the publication process doesn't do yet, is handle semver updates and tagging. This is done manually for the source repo like this.
 
 Update version tags in:
 
@@ -79,3 +83,5 @@ Tag git version:
 Publish:
 
     git push origin master --tags
+
+Note that tags will not go through to supersonic-bower yet.
