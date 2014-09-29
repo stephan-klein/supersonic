@@ -21,11 +21,11 @@ Supersonic ships with compiled Javascript, CSS and Web Component assets, along w
 
 The easiest way to get Supersonic for your existing app is to install it as a [bower](http://bower.io/) dependency:
 
-    bower install https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic.git --save
+    bower install https://supersonic-backdoor:103944e9fd881b4de88536ab5529a30c387a93bd@github.com/AppGyver/supersonic-bower.git --save
 
-Your Steroids application will now have `www/components/supersonic` set up. Having your application use the library is one line of code.
+Your Steroids application will now have `bower_components/supersonic` set up. Having your application use the library is one line of code.
 
-    <script src="/components/supersonic/dist/supersonic.bundle.js"></script>
+    <script src="/components/supersonic/supersonic.js"></script>
 
 You don't need to include the Javascript, CSS and Web Components separately, unless you really want to.
 
