@@ -6,24 +6,25 @@ angular
 
     $scope.takePictureTests = [
       {
-        title: "Take a picture with null paramters"
+        title: "Take a picture with null params"
       }
       {
         title: "Take a picture of size 100x100"
-        width: 100
-        height: 100
+        options:
+          targetWidth: 100
+          targetHeight: 100
       }
       {
-        title: "Take a picture of size 100x100 with options param"
-        width: 100
-        height: 100
+        title: "Take a picture of size 100x100 with allowEdit option"
         options:
+          targetWidth: 100
+          targetHeight: 100
           allowEdit: true
       }
     ]
 
-    $scope.testTakePicture = (width, height, options) ->
-      supersonic.media.camera.takePicture(width, height, options)
+    $scope.testTakePicture = (options) ->
+      supersonic.media.camera.takePicture(options)
         .then(
           (imageURI) ->
             $scope.pictureURL = imageURI
@@ -68,28 +69,27 @@ angular
         title: "Choose a picture with null params"
       }
       {
-        title: "Choose a picture with width and height params"
-        width: 200
-        height: 200
+        title: "Choose a picture with targetWidth and targetHeight params"
+        options:
+          targetWidth: 200
+          targetHeight: 200
       }
       {
-        title: "Choose a picture with width, height and options params"
-        width: 200
-        height: 200
+        title: "Choose a picture with targetWidth, targetHeight and allowEdit params"
         options:
+          targetWidth: 200
+          targetHeight: 200
           allowEdit: true
       }
       {
         title: "Choose a video"
-        width: 200
-        height: 200
         options:
           mediaType: "video"
       }
     ]
 
-    $scope.testGetFromPhotoLibrary = (width, height, options) ->
-      supersonic.media.camera.getFromPhotoLibrary(width, height, options)
+    $scope.testGetFromPhotoLibrary = (options) ->
+      supersonic.media.camera.getFromPhotoLibrary(options)
         .then(
           (imageURI) ->
             $scope.fromLibraryURL = imageURI

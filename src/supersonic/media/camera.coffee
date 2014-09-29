@@ -18,8 +18,6 @@ module.exports = (steroids, log) ->
    * @module camera
    * @description
    * Opens the device's default camera application that allows users to take pictures. Once the user takes the photo, the camera application closes and the application is restored.
-   * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
-   * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
    * @param {Object} [options] an options object (optional). The following properties are available:
    * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
    * * `destinationType`: Choose the format of the return value (Number). Available formats:
@@ -30,6 +28,8 @@ module.exports = (steroids, log) ->
    * * `encodingType`: Choose the returned image file's encoding. Available encoding types:
    *  * "jpeg": Return JPEG encoded image (default).
    *  * "png": Return PNG encoded image.
+   * * `targetWidth`: Target width in pixels to scale image. Must be used with `targetHeight`. Aspect ratio remains constant.
+   * * `targetHeight`: Target height in pixels to scale image. Must be used with `targetWidth`. Aspect ratio remains constant.
    * * `correctOrientation`: Rotate the image to correct for the orientation of the device during capture (Boolean). Defaults to `true`.
    * * `saveToPhotoAlbum`: Save the image to the photo album on the device after capture (Boolean). Defaults to `false`.
    * * `cameraDirection`: Choose the camera to use (front- or back-facing). Note that any `cameraDirection` value results in a back-facing photo on Android. Available directions:
@@ -50,7 +50,7 @@ module.exports = (steroids, log) ->
    * })
    * ```
   ###
-  takePicture = (width, height, options = {}) ->
+  takePicture = (options = {}) ->
 
     getCameraOptions = ->
       destinationType = if options?.destinationType?
@@ -76,12 +76,12 @@ module.exports = (steroids, log) ->
         Camera.Direction.BACK
   
       cameraOptions =
-        quality: options?.quality? || 100
+        quality: options?.quality || 100
         destinationType: destinationType
         allowEdit: options?.allowEdit? || false
         encodingType: encodingType
-        targetWidth: width
-        targetHeight: height
+        targetWidth: options?.targetWidth
+        targetHeight: options?.targetHeight
         correctOrientation: options?.correctOrientation? || true
         saveToPhotoAlbum: options?.saveToPhotoAlbum? || false
         cameraDirection: cameraDirection
@@ -99,8 +99,6 @@ module.exports = (steroids, log) ->
    * @module camera
    * @description
    * Displays a dialog that allows users to select an existing image. Once the user selects the photo, the camera application closes and the application is restored.
-   * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
-   * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
    * @param {Object} [options] an options object (optional). The following properties are available:
    * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
    * * `destinationType`: Choose the format of the return value. Available formats:
@@ -111,6 +109,8 @@ module.exports = (steroids, log) ->
    * * `encodingType`: Choose the returned image file's encoding. Available encoding types:
    *  * "jpeg": Return JPEG encoded image (default).
    *  * "png": Return PNG encoded image.
+   * * `targetWidth`: Target width in pixels to scale image. Must be used with `targetHeight`. Aspect ratio remains constant.
+   * * `targetHeight`: Target height in pixels to scale image. Must be used with `targetWidth`. Aspect ratio remains constant.
    * * `mediaType`: Set the type of media to select from. Available media types:
    *  * "picture": Allow selection of still pictures only (default).
    *  * "video": Allow selection of video only, will always return "fileURI".
@@ -131,7 +131,7 @@ module.exports = (steroids, log) ->
    * })
    * ```
   ###
-  getFromPhotoLibrary = (width, height, options = {}) ->
+  getFromPhotoLibrary = (options = {}) ->
 
     getCameraOptions = ->
       destinationType = if options?.destinationType?
@@ -157,19 +157,14 @@ module.exports = (steroids, log) ->
       else
         Camera.MediaType.PICTURE
   
-      popoverOptions = if options?.popoverOptions?
-  
-      else
-        {}
-  
       cameraOptions =
         sourceType: Camera.PictureSourceType.PHOTOLIBRARY
-        quality: options?.quality? || 100
+        quality: options?.quality || 100
         destinationType: destinationType
         allowEdit: options?.allowEdit? || false
         encodingType: encodingType
-        targetWidth: width
-        targetHeight: height
+        targetWidth: options?.targetWidth
+        targetHeight: options?.targetHeight
         mediaType: mediaType
         correctOrientation: options?.correctOrientation? || true
       

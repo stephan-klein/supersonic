@@ -10,7 +10,7 @@
     <button
       class="button button-block"
       ng-repeat="test in takePictureTests"
-      ng-click="testTakePicture(test.width, test.height, test.options)">
+      ng-click="testTakePicture(test.options)">
       {{test.title}}
     </button>
     <ul>
@@ -24,7 +24,7 @@
     <button
       class="button button-block"
       ng-repeat="test in getFromPhotoLibraryTests"
-      ng-click="testGetFromPhotoLibrary(test.width, test.height, test.options)">
+      ng-click="testGetFromPhotoLibrary(test.options)">
       {{test.title}}
     </button>
     <ul>

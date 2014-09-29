@@ -8957,6 +8957,7 @@ module.exports = function(steroids, window) {
        * @ngdoc method
        * @name info
        * @module logger
+       * @param {String} message Message to log.
        * @usage
        * ```coffeescript
        * supersonic.logger.info("Just notifying you that X is going on")
@@ -8968,6 +8969,7 @@ module.exports = function(steroids, window) {
        * @ngdoc method
        * @name warn
        * @module logger
+       * @param {String} message Message to log.
        * @usage
        * ```coffeescript
        * supersonic.logger.warn("Something that probably should not be happening... is happening.")
@@ -8979,6 +8981,7 @@ module.exports = function(steroids, window) {
        * @ngdoc method
        * @name error
        * @module logger
+       * @param {String} error Error message to log.
        * @usage
        * ```coffeescript
        * supersonic.logger.error("Something failed")
@@ -8990,6 +8993,7 @@ module.exports = function(steroids, window) {
        * @ngdoc method
        * @name debug
        * @module logger
+       * @param {String} message Debug message to log.
        * @usage
        * ```coffeescript
        * supersonic.logger.debug("This information is here only for your debugging convenience")
@@ -9334,8 +9338,6 @@ module.exports = function(steroids, log) {
    * @module camera
    * @description
    * Opens the device's default camera application that allows users to take pictures. Once the user takes the photo, the camera application closes and the application is restored.
-   * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
-   * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
    * @param {Object} [options] an options object (optional). The following properties are available:
    * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
    * * `destinationType`: Choose the format of the return value (Number). Available formats:
@@ -9346,6 +9348,8 @@ module.exports = function(steroids, log) {
    * * `encodingType`: Choose the returned image file's encoding. Available encoding types:
    *  * "jpeg": Return JPEG encoded image (default).
    *  * "png": Return PNG encoded image.
+   * * `targetWidth`: Target width in pixels to scale image. Must be used with `targetHeight`. Aspect ratio remains constant.
+   * * `targetHeight`: Target height in pixels to scale image. Must be used with `targetWidth`. Aspect ratio remains constant.
    * * `correctOrientation`: Rotate the image to correct for the orientation of the device during capture (Boolean). Defaults to `true`.
    * * `saveToPhotoAlbum`: Save the image to the photo album on the device after capture (Boolean). Defaults to `false`.
    * * `cameraDirection`: Choose the camera to use (front- or back-facing). Note that any `cameraDirection` value results in a back-facing photo on Android. Available directions:
@@ -9366,7 +9370,7 @@ module.exports = function(steroids, log) {
    * })
    * ```
    */
-  takePicture = function(width, height, options) {
+  takePicture = function(options) {
     var getCameraOptions;
     if (options == null) {
       options = {};
@@ -9411,17 +9415,19 @@ module.exports = function(steroids, log) {
           return Camera.Direction.BACK;
         }
       })();
-      return cameraOptions = {
-        quality: ((options != null ? options.quality : void 0) != null) || 100,
+      cameraOptions = {
+        quality: (options != null ? options.quality : void 0) || 100,
         destinationType: destinationType,
         allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
         encodingType: encodingType,
-        targetWidth: width,
-        targetHeight: height,
+        targetWidth: options != null ? options.targetWidth : void 0,
+        targetHeight: options != null ? options.targetHeight : void 0,
         correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true,
         saveToPhotoAlbum: ((options != null ? options.saveToPhotoAlbum : void 0) != null) || false,
         cameraDirection: cameraDirection
       };
+      console.log(cameraOptions);
+      return cameraOptions;
     };
     return deviceready.then(getCameraOptions).then(function(cameraOptions) {
       return new Promise(function(resolve, reject) {
@@ -9436,8 +9442,6 @@ module.exports = function(steroids, log) {
    * @module camera
    * @description
    * Displays a dialog that allows users to select an existing image. Once the user selects the photo, the camera application closes and the application is restored.
-   * @param {Number} width Target width in pixels to scale image. Must be used with `height`. Aspect ratio remains constant.
-   * @param {Number} height Target height in pixels to scale image. Must be used with `width`. Aspect ratio remains constant.
    * @param {Object} [options] an options object (optional). The following properties are available:
    * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
    * * `destinationType`: Choose the format of the return value. Available formats:
@@ -9448,6 +9452,8 @@ module.exports = function(steroids, log) {
    * * `encodingType`: Choose the returned image file's encoding. Available encoding types:
    *  * "jpeg": Return JPEG encoded image (default).
    *  * "png": Return PNG encoded image.
+   * * `targetWidth`: Target width in pixels to scale image. Must be used with `targetHeight`. Aspect ratio remains constant.
+   * * `targetHeight`: Target height in pixels to scale image. Must be used with `targetWidth`. Aspect ratio remains constant.
    * * `mediaType`: Set the type of media to select from. Available media types:
    *  * "picture": Allow selection of still pictures only (default).
    *  * "video": Allow selection of video only, will always return "fileURI".
@@ -9468,13 +9474,13 @@ module.exports = function(steroids, log) {
    * })
    * ```
    */
-  getFromPhotoLibrary = function(width, height, options) {
+  getFromPhotoLibrary = function(options) {
     var getCameraOptions;
     if (options == null) {
       options = {};
     }
     getCameraOptions = function() {
-      var cameraOptions, destinationType, encodingType, mediaType, popoverOptions;
+      var cameraOptions, destinationType, encodingType, mediaType;
       destinationType = (function() {
         if ((options != null ? options.destinationType : void 0) != null) {
           switch (options.destinationType) {
@@ -9515,18 +9521,19 @@ module.exports = function(steroids, log) {
           return Camera.MediaType.PICTURE;
         }
       })();
-      popoverOptions = (options != null ? options.popoverOptions : void 0) != null ? void 0 : {};
-      return cameraOptions = {
+      cameraOptions = {
         sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-        quality: ((options != null ? options.quality : void 0) != null) || 100,
+        quality: (options != null ? options.quality : void 0) || 100,
         destinationType: destinationType,
         allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
         encodingType: encodingType,
-        targetWidth: width,
-        targetHeight: height,
+        targetWidth: options != null ? options.targetWidth : void 0,
+        targetHeight: options != null ? options.targetHeight : void 0,
         mediaType: mediaType,
         correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true
       };
+      console.log(cameraOptions);
+      return cameraOptions;
     };
     return deviceready.then(getCameraOptions).then(function(cameraOptions) {
       return new Promise(function(resolve, reject) {
