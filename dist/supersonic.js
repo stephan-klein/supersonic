@@ -9415,7 +9415,7 @@ module.exports = function(steroids, log) {
           return Camera.Direction.BACK;
         }
       })();
-      cameraOptions = {
+      return cameraOptions = {
         quality: (options != null ? options.quality : void 0) || 100,
         destinationType: destinationType,
         allowEdit: ((options != null ? options.allowEdit : void 0) != null) || false,
@@ -9426,8 +9426,6 @@ module.exports = function(steroids, log) {
         saveToPhotoAlbum: ((options != null ? options.saveToPhotoAlbum : void 0) != null) || false,
         cameraDirection: cameraDirection
       };
-      console.log(cameraOptions);
-      return cameraOptions;
     };
     return deviceready.then(getCameraOptions).then(function(cameraOptions) {
       return new Promise(function(resolve, reject) {
@@ -9521,7 +9519,7 @@ module.exports = function(steroids, log) {
           return Camera.MediaType.PICTURE;
         }
       })();
-      cameraOptions = {
+      return cameraOptions = {
         sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
         quality: (options != null ? options.quality : void 0) || 100,
         destinationType: destinationType,
@@ -9532,8 +9530,6 @@ module.exports = function(steroids, log) {
         mediaType: mediaType,
         correctOrientation: ((options != null ? options.correctOrientation : void 0) != null) || true
       };
-      console.log(cameraOptions);
-      return cameraOptions;
     };
     return deviceready.then(getCameraOptions).then(function(cameraOptions) {
       return new Promise(function(resolve, reject) {
