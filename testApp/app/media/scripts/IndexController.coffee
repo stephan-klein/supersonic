@@ -110,7 +110,7 @@ angular
         options: "http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3"
       }
       {
-        title: "Play audio from locahost"
+        title: "Play audio from localhost"
         options: "http://localhost/slap.mp3"
       }
     ]
