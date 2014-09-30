@@ -3,13 +3,13 @@ module.exports =
     schemaVersion: "2.0.0"
 
   app:
-    name: "Supersonic testApp"
+    name: "Supersonic testSpecApp"
     version: "0.1.0"
 
   network:
     extraResponseHeaders:
-      #"Access-Control-Allow-Origin": "*"
-      #"Access-Control-Allow-Headers": "Content-Type, X-Requested-With"
+      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Headers": "Content-Type, X-Requested-With"
 
   splashscreen:
     autohide: true

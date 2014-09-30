@@ -10,7 +10,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-steroids"
   grunt.loadNpmTasks "grunt-contrib-copy"
   grunt.loadNpmTasks "grunt-shell"
-  
+
   grunt.initConfig
     copy:
       "supersonic-dist":
