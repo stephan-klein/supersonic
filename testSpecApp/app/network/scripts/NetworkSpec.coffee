@@ -1,22 +1,22 @@
-describe "CORS", ->
-  it "should succeed in making a CORS request", (done)->
+describe "CORS request", ->
+  it "should make GET to www.appgyver.com that returns correct data", (done)->
     xhr = new XMLHttpRequest()
 
+    successfulRequest = false
+
     xhr.onload = ->
+      titleText = xhr.responseText.match("<title>(.*)?</title>")[1]
+      titleText.should.equal "AppGyver"
       done()
 
-    xhr.onerror = (e)->
+    xhr.onerror = ->
+      (false).should.be.true
+      done()
 
-    xhr.onreadystatechange = ->
-      DONE = @DONE || 4
-      if @readyState is DONE
-        console.log "yey"
 
     method = "GET"
     url = "http://www.appgyver.com"
 
     xhr.open method, url
-
     xhr.setRequestHeader "X-Requested-With", "XMLHttpRequest"
-
     xhr.send null
