@@ -1,0 +1,22 @@
+<div ng-controller="ScreenController">
+  <ss-navigation-bar>
+    <ss-navigation-bar-title>
+      Screen tests
+    </ss-navigation-bar-title>
+  </ss-navigation-bar>
+
+  <div class="card padding">
+    <h1>setAllowedRotations tests</h1>
+    <button
+      class="button button-block"
+      ng-repeat="test in setAllowedRotationsAndRotateTests"
+      ng-click="testSetAllowedRotationsAndRotate(test.options)">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Allowed Rotations: {{allowedRotations}}</li>
+
+    </ul>
+  </div>
+
+</div>
