@@ -9,6 +9,13 @@ describe "supersonic.app.openURL", ->
 
     supersonic.app.openURL(url).should.be.fulfilled
 
+  it "should open Google Maps", ->
+    @timeout 10000
+
+    url = "geo:42,2?z=8"
+
+    supersonic.app.openURL(url).should.be.fulfilled
+
   it "should not open dolanz://", ->
     supersonic.app.openURL("dolanz://").should.be.rejected
 
