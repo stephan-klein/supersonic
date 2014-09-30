@@ -5,8 +5,12 @@ angular
 
     $scope.openURLTests = [
       {
-        title: "Apple Maps maps://"
+        title: "Apple Maps maps:// (iOS)"
         options: "maps://?daddr=San+Francisco,+CA&saddr=cupertino"
+      }
+      {
+        title: "Google Maps geo: (Android)"
+        options: "geo:42,2?z=8"
       }
       {
         title: "Dolanz dolanz:// (should fail)"
