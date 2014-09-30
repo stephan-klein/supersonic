@@ -109,6 +109,10 @@ angular
         title: "Play audio"
         options: "http://audio.ibeat.org/content/p1rj1s/p1rj1s_-_rockGuitar.mp3"
       }
+      {
+        title: "Play audio from locahost"
+        options: "http://localhost/slap.mp3"
+      }
     ]
 
     $scope.testPlayAudio = (options) ->
