@@ -28,10 +28,11 @@ Promise = require 'bluebird'
 
 module.exports = (message, options = {}) ->
   
+  msg = message || new String
   title = options?.title || "Alert"
   buttonLabel = options?.buttonLabel || "OK"
 
   deviceready.then ->
     new Promise (resolve) ->
-      navigator.notification.alert message, resolve, title, buttonLabel
+      navigator.notification.alert msg, resolve, title, buttonLabel
 

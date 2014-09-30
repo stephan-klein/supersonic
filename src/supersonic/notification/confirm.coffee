@@ -27,12 +27,13 @@ Promise = require 'bluebird'
 ###
 module.exports = (message, options = {}) ->
 
+  msg = message || new String
   title = options?.title || "Confirm"
   buttonLabels = options?.buttonLabels || ["OK","Cancel"]
 
   deviceready
     .then(->
       new Promise (resolve) ->
-        navigator.notification.confirm message, resolve, title, buttonLabels
+        navigator.notification.confirm msg, resolve, title, buttonLabels
     ).then (index) ->
       index - 1 # Cordova indexing starts at 1
