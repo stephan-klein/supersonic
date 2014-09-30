@@ -4,5 +4,5 @@ describe "supersonic.media.audio", ->
 
   describe "play", ->
     it "should play an audio file from path", ->
-      @timeout 2000
+      @timeout 4000
       supersonic.media.audio.play("http://localhost/slap.mp3").should.be.fulfilled
