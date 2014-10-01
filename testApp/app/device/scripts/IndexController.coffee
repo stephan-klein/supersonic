@@ -93,7 +93,7 @@ angular
 
     $scope.platformTests = [
       {
-        title: "Get platform name and version"
+        title: "Get platform name and version and device's model"
       }
     ]
 
@@ -101,5 +101,6 @@ angular
       supersonic.device.platform().then (platform) ->
         $scope.platformName = platform.name
         $scope.platformVersion = platform.version
+        $scope.platformModel = platform.model
 
  

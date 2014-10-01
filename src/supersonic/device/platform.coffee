@@ -11,22 +11,23 @@ module.exports = (steroids, log) ->
    * @module device
    * @description
    * Get the device's operating system name and version.
-   * @returns {Promise} Promise resolves to the name and version of the operating system.
+   * @returns {Promise} Promise resolves to the name and version of the operating system and the model of the device.
    * @usage
    * ```coffeescript
    * supersonic.device.platform().then( (platform) ->
    *  console.log('Name: '  + platform.name  + '\n' +
-   *              'Version: ' + platform.version)
+   *              'Version: '  + platform.version  + '\n' +
+   *              'Model: ' + platform.model)
    * )
    * ```
   ###
-  getPlatform = ->
+  platform = ->
     deviceready.then ->
       platform =
         name: device.platform
         version: device.version
+        model: device.model
       new Promise (resolve) ->
         resolve platform
 
-  return getPlatform
-        
+  return platform
