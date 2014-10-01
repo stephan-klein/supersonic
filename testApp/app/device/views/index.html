@@ -73,5 +73,16 @@
       <li>Latest heading received: {{latestHeading}}</li>
     </ul>
   </div>
+
+  <div class="card padding">
+    <h1>platform tests</h1>
+    <button class="button button-block" ng-repeat="test in platformTests"  ng-click="testPlatform()">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Platform name: {{platformName}}</li>
+      <li>Platform version: {{platformVersion}}</li>
+    </ul>
+  </div>
   
 </div>

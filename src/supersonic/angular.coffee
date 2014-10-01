@@ -32,6 +32,7 @@ module.exports = (angular) ->
       accelerometer.getAcceleration = qify accelerometer.getAcceleration
       compass =  supersonic.device.compass
       compass.getHeading = qify compass.getHeading
+      platform = qify supersonic.device.platform
       {
         logger: qifyAll supersonic.logger
         debug: qifyAll supersonic.debug

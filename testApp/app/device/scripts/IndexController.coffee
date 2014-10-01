@@ -88,4 +88,18 @@ angular
       supersonic.device.compass.getHeading().then (heading) ->
         $scope.latestHeading = heading.timestamp
 
+    $scope.platformName = undefined
+    $scope.platformVersion = undefined
+
+    $scope.platformTests = [
+      {
+        title: "Get platform name and version"
+      }
+    ]
+
+    $scope.testPlatform = () ->
+      supersonic.device.platform().then (platform) ->
+        $scope.platformName = platform.name
+        $scope.platformVersion = platform.version
+
  
