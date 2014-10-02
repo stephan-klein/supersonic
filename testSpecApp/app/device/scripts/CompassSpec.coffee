@@ -3,8 +3,8 @@ describe "supersonic.device.compass", ->
     supersonic.device.compass.should.exist
 
   describe "getHeading", ->
-    it "should resolve to next known heading", ->
-      supersonic.device.compass.getHeading().should.eventually.have.property 'magneticHeading'
+    it "should resolve to next known heading and return a proper heading object", ->
+      supersonic.device.compass.getHeading().should.eventually.have.keys ['magneticHeading', 'trueHeading', 'headingAccuracy', 'timestamp']
 
   describe "watchHeading", ->
     it "should return be a stream of heading updates", ->
@@ -12,4 +12,4 @@ describe "supersonic.device.compass", ->
       pos = new Promise (resolve) ->
         supersonic.device.compass.watchHeading().onValue resolve
 
-      pos.should.eventually.have.property 'magneticHeading'
+      pos.should.eventually.have.keys ['magneticHeading', 'trueHeading', 'headingAccuracy', 'timestamp']
