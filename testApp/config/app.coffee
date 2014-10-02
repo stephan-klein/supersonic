@@ -6,10 +6,10 @@ module.exports =
     name: "Supersonic testApp"
     version: "0.1.0"
 
-  network:
-    extraResponseHeaders:
-      #"Access-Control-Allow-Origin": "*"
-      #"Access-Control-Allow-Headers": "Content-Type, X-Requested-With"
+  # network:
+  #   extraResponseHeaders:
+  #     "Access-Control-Allow-Origin": "*"
+  #     "Access-Control-Allow-Headers": "Content-Type, X-Requested-With"
 
   splashscreen:
     autohide: true
