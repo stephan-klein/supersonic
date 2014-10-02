@@ -12,6 +12,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'compile-stylesheets', [
     'gulp:sass'
+    'gulp:fonts'
   ]
 
   grunt.registerTask 'compile-docs', [
