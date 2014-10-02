@@ -4,12 +4,12 @@ describe "supersonic.device.geolocation", ->
     supersonic.device.geolocation.should.exist
 
   describe "getPosition", ->
-    it "should resolve to next known position", ->
-      supersonic.device.geolocation.getPosition().should.eventually.have.property 'coords'
+    it "should resolve to next known position and return a proper heading object", ->
+      supersonic.device.geolocation.getPosition().should.eventually.have.keys ['coords', 'timestamp']
 
   describe "watchPosition", ->
     it "should return be a stream of position updates", ->
       pos = new Promise (resolve) ->
         supersonic.device.geolocation.watchPosition().onValue resolve
 
-      pos.should.eventually.have.property 'coords'
+      pos.should.eventually.have.keys ['coords', 'timestamp']

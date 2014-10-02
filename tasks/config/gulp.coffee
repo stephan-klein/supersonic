@@ -13,6 +13,9 @@ module.exports =
       .pipe(sass())
       .pipe(concat("supersonic.css"))
       .pipe(gulp.dest("#{buildConfig.dir.dist}/css"))
+
+  # TODO: This does in no way need to be a gulp task
+  fonts: ->
     gulp.src("#{buildConfig.dir.fonts}/*")
       .pipe(gulp.dest("#{buildConfig.dir.dist}/fonts/"))
 
