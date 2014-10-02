@@ -17,8 +17,12 @@ See also how the [Steroids tooling helps you with debugging your app](/steroids/
 ## Logger
 The Supersonic Logger API is a powerful way to keep track of what's happening in your app. All logs are streamed to the [Steroids Connect](TODO) screen (as well as saved locally) for easy viewing.
 
-[View guide for supersonic.logger &raquo;](/supersonic/javascript/debug/logger/)
+[View API docs for `supersonic.logger` &raquo;](/supersonic/api/core/logger/)
 
-## Other methods
+## Other, Less Important APIs
 
-* [Ping](/supersonic/api/debug/ping) – ping the native side and get a "Pong" in response.
+### Ping
+
+Poing the native side and get a "Pong" in response. Really only useful for seeing that your app's JavaScript code is not broken.
+
+[View API docs for `supersonic.debug.ping` &raquo;](/supersonic/api/core/ping/)

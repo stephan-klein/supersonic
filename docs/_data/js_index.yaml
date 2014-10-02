@@ -1,27 +1,28 @@
 - name: Debugging
   id: debug
-  href: /supersonic/javascript/debug
+  subpages:
+    - name: Logger
+      id: logger
+    - name: Ping
+      id: ping
 
 - name: Device
   id: device
-  href: /supersonic/javascript/device
+  subpages:
+    - name: Accelerometer
+      id: accelerometer
+    - name: Compass
+      id: compass
+    - name: Geolocation
+      id: geolocation
+    - name: Platform
+      id: platform
 
 - name: Dialogs
   id: dialogs
-  href: /supersonic/javascript/dialogs
-
-- name: Events
-  id: events
-  href: /supersonic/javascript/events
 
 - name: Media
   id: media
-  href: /supersonic/javascript/media
-
-- name: Native UI
-  id: native-ui
-  href: /supersonic/javascript/native-ui
 
 - name: Network
   id: network
-  href: /supersonic/javascript/network
