@@ -63,7 +63,8 @@
   },
   "dependencies": {
     "baconjs": "^0.7.22",
-    "bluebird": "^2.3.2",
-    "coffee-script": "^1.8.0"
+    "bluebird": "^2.3.4",
+    "coffee-script": "^1.8.0",
+    "steroids-data": "git+https://github.com/AppGyver/steroids-data.git"
   }
 }
