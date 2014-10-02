@@ -1,8 +1,5 @@
 ---
 layout: "docs_home"
-version: "nightly"
-versionHref: "/api/nightly"
-path: ""
 section_id: supersonic-js
 
 title: Supersonic.js

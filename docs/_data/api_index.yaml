@@ -44,6 +44,7 @@
       href: notification/vibrate
 
 - name: Native UI
+  href: /supersonic/javascript/native-ui
   subpages:
     - name: Drawers
     - name: Layer stack
