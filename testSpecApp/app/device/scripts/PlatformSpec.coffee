@@ -3,4 +3,4 @@ describe "supersonic.device.platform", ->
     supersonic.device.platform.should.exist
 
   it "should resolve to platform's name and version and device's model", ->
-    supersonic.device.platform().should.eventually.have.property 'name'
+    supersonic.device.platform().should.eventually.have.keys ['name', 'version', 'model']
