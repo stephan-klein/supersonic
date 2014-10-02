@@ -22,5 +22,8 @@ SuperNavigatePrototype.createdCallback = ->
         view = supersonic.ui.view(url)
         supersonic.ui.layer.push(view)
 
+    # TODO: 
+    # route = this.getAttribute "route" 
+
 document.registerElement "super-navigate",
   prototype: SuperNavigatePrototype
