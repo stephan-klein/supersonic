@@ -23,11 +23,8 @@ module.exports = (steroids, log) ->
   ###
   platform = ->
     deviceready.then ->
-      platform =
-        name: device.platform
-        version: device.version
-        model: device.model
-      new Promise (resolve) ->
-        resolve platform
+      name: window.device.platform
+      version: window.device.version
+      model: window.device.model
 
   return platform
