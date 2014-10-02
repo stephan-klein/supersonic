@@ -1,5 +1,5 @@
 - name: App
-  href: "#"
+  href: /supersonic/javascript/
   subpages:
     - name: getLaunchURL
       href: app/getLaunchURL
@@ -12,14 +12,16 @@
     - name: statusBar
       href: app/statusBar
 
-- name: Debug
-  href: "#"
+- name: Debugging
+  href: /supersonic/javascript/debug/
+  id: debug
   subpages:
-    - name: ping
-      href: core/ping
+    - name: Logger
+      href: /supersonic/javascript/debug/logger
 
 - name: Device
   href: "#"
+  id: device
   subpages:
     - name: accelerometer
       href: device/accelerometer
