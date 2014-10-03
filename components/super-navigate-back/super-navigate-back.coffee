@@ -1,5 +1,4 @@
 SuperNavigateBackPrototype = Object.create HTMLElement.prototype
-<<<<<<< HEAD
 ###*
  * @type webComponent
  * @name super-navigate-back
@@ -11,9 +10,6 @@ SuperNavigateBackPrototype = Object.create HTMLElement.prototype
  * <super-navigate-back action="click">Go back</super-navigate-back>
  * ```
 ###
-=======
-
->>>>>>> adds super-navigate-back to supersonic
 SuperNavigateBackPrototype.createdCallback = ->
   action = this.getAttribute "action"
 
