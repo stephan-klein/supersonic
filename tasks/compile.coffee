@@ -4,6 +4,7 @@ module.exports = (grunt) ->
     'coffeelint'
     'gulp:core'
     'gulp:bundle'
+    'usebanner'
   ]
 
   grunt.registerTask 'compile-components', [

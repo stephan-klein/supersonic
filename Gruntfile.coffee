@@ -1,5 +1,6 @@
 module.exports = (grunt) ->
   buildConfig = require './config/buildConfig'
+  buildConfig.pkg = grunt.file.readJSON('package.json')
 
   require('load-grunt-config')(grunt, {
     configPath: "#{__dirname}/tasks/config"
