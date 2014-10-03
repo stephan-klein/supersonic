@@ -7,9 +7,9 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name navigationButton
    * @module ui
+   * @name navigationButton
+   * @overview
    * @description
    * Creates new navigation button and sets its params
   ###
@@ -17,10 +17,9 @@ module.exports = (steroids, log) ->
   class Button
 
     ###*
-     * @ngdoc method
+     * @module navigationButton
      * @name view
      * @constructor
-     * @module navigationButton
      * @description
      * Creates a new navigation button
      * @param {Object} Button parameters

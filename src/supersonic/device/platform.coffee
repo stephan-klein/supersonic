@@ -7,9 +7,9 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @ngdoc method
-   * @name platform
    * @module device
+   * @name platform
+   * @function
    * @description
    * Get the device's operating system name and version.
    * @returns {Promise} Promise resolves to the name and version of the operating system and the model of the device.

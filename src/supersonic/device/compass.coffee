@@ -8,17 +8,17 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name compass
    * @module device
+   * @name compass
+   * @overview
    * @description
    *  provides access to the device's compass. The compass is a sensor that detects the direction or heading that the device is pointed, typically from the top of the device. It measures the heading in degrees from 0 to 359.99, where 0 is north.
   ###
     
   ###*
-   * @ngdoc method
-   * @name watchHeading
    * @module compass
+   * @name watchHeading
+   * @function
    * @description
    * Returns a stream of compass heading updates.
    * @param {Object} [options] Options object (optional). The following properties are available:
@@ -51,9 +51,9 @@ module.exports = (steroids, log) ->
           window.navigator.compass.clearWatch watchId
   
   ###*
-   * @ngdoc method
-   * @name getHeading
    * @module compass
+   * @name getHeading
+   * @function
    * @description
    * Returns device's current heading.
    * @returns {Promise} Promise is resolved to the next available heading data.

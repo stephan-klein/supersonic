@@ -7,17 +7,17 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name modal
    * @module ui
+   * @name modal
+   * @overview
    * @description
    * Provides methods to work with layers
   ###
 
   ###*
-   * @ngdoc method
-   * @name show
    * @module modal
+   * @name show
+   * @function
    * @description
    * Shows a view as a modal
    * @param {View} View object
@@ -42,9 +42,9 @@ module.exports = (steroids, log) ->
     }
 
   ###*
-   * @ngdoc method
-   * @name hide
    * @module modal
+   * @name hide
+   * @function
    * @description
    * Hides a modal view
    * @param {Object} [parameters]
@@ -69,9 +69,9 @@ module.exports = (steroids, log) ->
     }
 
   ###*
-   * @ngdoc method
-   * @name hideAll
    * @module modal
+   * @name hideAll
+   * @function
    * @description
    * Hides a modal view
    * @param {Object} [parameters]

@@ -7,16 +7,16 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name drawer
    * @module ui
+   * @name drawer
+   * @overview
    * @description Module of methods to work with drawers
   ###
 
   ###*
-   * @ngdoc method
-   * @name asLeft
    * @module drawer
+   * @name asLeft
+   * @function
    * @description
    * Shows a view as a left drawer
    * @param {View} View object
@@ -34,9 +34,9 @@ module.exports = (steroids, log) ->
         resolve()
 
   ###*
-   * @ngdoc method
-   * @name asRight
    * @module drawer
+   * @name asRight
+   * @function
    * @description
    * Shows a view as a right drawer
    * @param {View} View object
@@ -54,9 +54,9 @@ module.exports = (steroids, log) ->
         resolve()
 
   ###*
-   * @ngdoc method
-   * @name show
    * @module drawer
+   * @name show
+   * @function
    * @description
    * Shows a view as a drawer of the given side
    * @param {View} View object
@@ -99,9 +99,9 @@ module.exports = (steroids, log) ->
       }
 
   ###*
-   * @ngdoc method
-   * @name setOptions
    * @module drawer
+   * @name setOptions
+   * @function
    * @description
    * Sets options for drawers
    * @param {Object} Hash of parameters

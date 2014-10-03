@@ -5,9 +5,9 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @ngdoc method
-   * @name openURL
    * @module app
+   * @name openURL
+   * @function
    * @description
    * Launches browser to open the URL or any external application with that applications URL scheme.
    * @param {string} URL to open. URLs starting with "http(s)://" will be opened in the device's browser.

@@ -8,17 +8,17 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name geolocation
    * @module device
+   * @name geolocation
+   * @overview
    * @description
    * Provides access to location data based on the device's GPS sensor or inferred from network signals.
   ###
     
   ###*
-   * @ngdoc method
-   * @name watchPosition
    * @module geolocation
+   * @name watchPosition
+   * @function
    * @description
    * Returns a stream of position updates.
    * @returns {Stream} Stream of position updates
@@ -46,9 +46,9 @@ module.exports = (steroids, log) ->
           window.navigator.geolocation.clearWatch watchId
   
   ###*
-   * @ngdoc method
-   * @name getPosition
    * @module geolocation
+   * @name getPosition
+   * @function
    * @description
    * Returns device's current position.
    * @returns {Promise} Promise is resolved to the next available position data. Will wait for data for an indeterminate time; use a timeout if required.

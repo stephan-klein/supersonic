@@ -5,17 +5,17 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name statusBar
    * @module app
+   * @name statusBar
+   * @overview
    * @description
    * The native status bar shown on the top of the screen. The native status bar is displayed by default. It can be hidden and shown application wide.
   ###
     
   ###*
-   * @ngdoc method
-   * @name hide
    * @module statusBar
+   * @name hide
+   * @function
    * @description
    * Hides the native status bar application wide.
    * @returns {Promise} Promise that is resolved when the status bar is hidden.
@@ -37,9 +37,9 @@ module.exports = (steroids, log) ->
       )
   
   ###*
-   * @ngdoc method
-   * @name show
    * @module statusBar
+   * @name show
+   * @function
    * @description
    * Shows the native status bar application wide. If no parameters are given, the status bar text color is the default color (black on iOS 7).
    * @param {string} style If set to "light" (shorthand), then the native status bar text color is light (white on iOS 7). Optional.

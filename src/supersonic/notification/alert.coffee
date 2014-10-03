@@ -4,9 +4,9 @@ Promise = require 'bluebird'
 
 ###*
  * @category core
- * @ngdoc method
- * @name alert
  * @module notification
+ * @name alert
+ * @function
  * @description
  * Shows a native alert box.
  * @param {string} message alert message.

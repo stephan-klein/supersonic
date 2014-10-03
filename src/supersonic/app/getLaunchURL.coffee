@@ -5,9 +5,9 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @ngdoc method
-   * @name getLaunchURL
    * @module app
+   * @name getLaunchURL
+   * @function
    * @description
    * Returns the string that was used to launch the application with URL scheme.
    * @returns {Promise} Promise that is resolved with the launch URL string as an argument when the application was launched using an URL schema.

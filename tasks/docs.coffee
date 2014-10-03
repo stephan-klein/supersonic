@@ -40,6 +40,8 @@ module.exports = (grunt)->
           betterObject.overview = true
         when "category"
           betterObject.category = tag.string
+        when "function"
+          betterObject.function = true
 
     betterObject
 

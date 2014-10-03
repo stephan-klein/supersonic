@@ -5,9 +5,9 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @ngdoc method
-   * @name ping
    * @module debug
+   * @name ping
+   * @function
    * @description
    * Pings the native runtime.
    * @returns {Promise} A promise that gets resolved once the ping is successful. Resolves with the string `"Pong!"`.

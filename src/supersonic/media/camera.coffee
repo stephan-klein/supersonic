@@ -3,9 +3,9 @@ Promise = require 'bluebird'
 {deviceready} = require '../events'
 ###*
    * @category core
-   * @overview
-   * @name camera
    * @module media
+   * @name camera
+   * @overview
    * @description
    * Provides access to the device's default camera application.
   ###
@@ -14,9 +14,9 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.media.camera"
 
   ###*
-   * @ngdoc method
-   * @name takePicture
    * @module camera
+   * @name takePicture
+   * @function
    * @description
    * Opens the device's default camera application that allows users to take pictures. Once the user takes the photo, the camera application closes and the application is restored.
    * @param {Object} [options] an options object (optional). The following properties are available:
@@ -95,9 +95,9 @@ module.exports = (steroids, log) ->
       )
 
   ###*
-   * @ngdoc method
-   * @name getFromPhotoLibrary
    * @module camera
+   * @name getFromPhotoLibrary
+   * @function
    * @description
    * Displays a dialog that allows users to select an existing image. Once the user selects the photo, the camera application closes and the application is restored.
    * @param {Object} [options] an options object (optional). The following properties are available:

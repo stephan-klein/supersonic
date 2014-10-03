@@ -4,9 +4,9 @@ Promise = require 'bluebird'
 
 ###*
  * @category core
- * @ngdoc method
- * @name vibrate
  * @module notification
+ * @name vibrate
+ * @function
  * @description
  * Vibrates the device for the specified amount of time.
  * @param {Number} time time in illiseconds to vibrate the device. Please note: iOS ignores the time parameter and always vibrates for a pre-set amount of time.

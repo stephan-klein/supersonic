@@ -7,17 +7,17 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name navigationBar
    * @module ui
+   * @name navigationBar
+   * @overview
    * @description
    * Provides methods to work with navigation bar
   ###
 
   ###*
-   * @ngdoc method
-   * @name show
    * @module navigationBar
+   * @name show
+   * @function
    * @description
    * Shows a navigation bar
    * @param {Object} [parameters] Parameters of hiding
@@ -40,9 +40,9 @@ module.exports = (steroids, log) ->
       }
 
   ###*
-   * @ngdoc method
-   * @name hide
    * @module navigationBar
+   * @name hide
+   * @function
    * @description
    * Hides a navigation bar
    * @param {Object} [parameters] Parameters of hiding
@@ -65,9 +65,9 @@ module.exports = (steroids, log) ->
       }
 
   ###*
-   * @ngdoc method
-   * @name update
    * @module navigationBar
+   * @name update
+   * @function
    * @description
    * Updates the navigation bar
    * @param {Object} [parameters] Parameters of hiding

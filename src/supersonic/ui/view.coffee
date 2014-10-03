@@ -7,9 +7,9 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name view
    * @module ui
+   * @name view
+   * @overview
    * @description
    * Allows to create new View instances
   ###
@@ -17,10 +17,9 @@ module.exports = (steroids, log) ->
   class View
 
     ###*
-     * @ngdoc method
+     * @module ui
      * @name view
      * @constructor
-     * @module ui
      * @description
      * Creates a new view
      * @param {string} URL of a view
@@ -44,20 +43,6 @@ module.exports = (steroids, log) ->
         id: @id
       }
 
-    ###*
-     * @ngdoc method
-     * @name _checkIfPreloaded
-     * @module view
-     * @private
-     * @description
-     * Asynchroniously checks if a view is already preloaded
-     * @returns {Promise} A promise that will be resolved with a boolean value indicating if the view is preloaded or not.
-     * @usage
-     * ```coffeescript
-     * this._checkIfPreloaded().then (isPreloaded)->
-     *   # gets {Boolean} ifPreloaded
-     * ```
-    ###
     _checkIfPreloaded: ()->
       that = @
       new Promise (resolve, reject) ->
@@ -117,9 +102,9 @@ module.exports = (steroids, log) ->
             })
 
     ###*
-     * @ngdoc method
-     * @name setWidth
      * @module view
+     * @name setWidth
+     * @function
      * @description
      * Sets width of a view. Useful for showing as a drawer
      * @returns {Object} View object
@@ -133,9 +118,9 @@ module.exports = (steroids, log) ->
       return @
 
     ###*
-     * @ngdoc method
-     * @name getView
      * @module view
+     * @name getView
+     * @function
      * @description
      * Gets the WebView of a current view instance
      * @returns {Object} WebView object

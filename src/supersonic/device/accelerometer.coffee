@@ -8,17 +8,17 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name accelerometer
    * @module device
+   * @name accelerometer
+   * @overview
    * @description
    *  provides access to the device's accelerometer. The accelerometer is a motion sensor that detects the change (delta) in movement relative to the current device orientation, in three dimensions along the x, y, and z axis.
   ###
     
   ###*
-   * @ngdoc method
-   * @name watchAcceleration
    * @module accelerometer
+   * @name watchAcceleration
+   * @function
    * @description
    * Returns a stream of acceleration updates.
    * @param {Integer} frequency update interval in milliseconds (optional, defaults to 40)
@@ -46,9 +46,9 @@ module.exports = (steroids, log) ->
           window.navigator.accelerometer.clearWatch watchId
   
   ###*
-   * @ngdoc method
-   * @name getAcceleration
    * @module accelerometer
+   * @name getAcceleration
+   * @function
    * @description
    * Returns device's current acceleration.
    * @returns {Promise} Promise is resolved to the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.

@@ -7,17 +7,17 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name layer
    * @module ui
+   * @name layer
+   * @overview
    * @description
    * Provides methods to work with layers
   ###
 
   ###*
-   * @ngdoc method
-   * @name push
    * @module layer
+   * @name push
+   * @function
    * @description
    * Navigates to a given view
    * @param {View} A view object
@@ -42,9 +42,9 @@ module.exports = (steroids, log) ->
       }
 
   ###*
-   * @ngdoc method
-   * @name pop
    * @module layer
+   * @name pop
+   * @function
    * @description
    * Removes the topmost view from the navigation stack
    * @returns {Promise}
@@ -65,9 +65,9 @@ module.exports = (steroids, log) ->
       }
 
   ###*
-   * @ngdoc method
-   * @name popAll
    * @module layer
+   * @name popAll
+   * @function
    * @description
    * Pops all views except for the root view from the layer stack
    * @returns {Promise}
@@ -88,9 +88,9 @@ module.exports = (steroids, log) ->
       }
 
   ###*
-   * @ngdoc method
-   * @name showInitial
    * @module layer
+   * @name showInitial
+   * @function
    * @description
    * Shows initial view
    * @param {Object} Parameters of animation
@@ -114,9 +114,9 @@ module.exports = (steroids, log) ->
         })
 
   ###*
-   * @ngdoc method
-   * @name hideInitial
    * @module layer
+   * @name hideInitial
+   * @function
    * @description
    * Hides initial view
    * @param {Object} Parameters of animation

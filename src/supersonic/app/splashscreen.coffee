@@ -5,18 +5,18 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name splashscreen
    * @module app
+   * @name splashscreen
+   * @overview
    * @description
    * The splashscreen is shown in the application startup. The initial splashscreen is hidden automatically after 3 seconds on iOS and on the pageload event on Android. Allows the user to hide and show the splashscreen programmitically. The splashscreen is defined in your project's build configuration.
   ###
   
 
   ###*
-   * @ngdoc method
-   * @name show
    * @module splashscreen
+   * @name show
+   * @function
    * @description
    * Shows the splashscreen programmatically.
    * @returns {Promise} Promise that is resolved when the splashscreen is shown.
@@ -38,9 +38,9 @@ module.exports = (steroids, log) ->
       )
       
   ###*
-   * @ngdoc method
-   * @name hide
    * @module splashscreen
+   * @name hide
+   * @function
    * @description
    * Hides the splashscreen programmatically.
    * @returns {Promise} Promise that is resolved when the splashscreen is hidden.

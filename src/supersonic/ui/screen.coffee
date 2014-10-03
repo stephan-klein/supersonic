@@ -5,17 +5,17 @@ module.exports = (steroids, log) ->
 
   ###*
    * @category core
-   * @overview
-   * @name screen
    * @module ui
+   * @name screen
+   * @overview
    * @description
    * Methods and properties to control the visible part of the application.
   ###
 
   ###*
-   * @ngdoc method
-   * @name setAllowedRotations
    * @module screen
+   * @name setAllowedRotations
+   * @function
    * @description
    * Determine which of the four possible screen rotations are enabled on your device. By default all rotations are allowed, with the exception of custom builds where the build settings have been used to lock the app into a certain rotation scheme. Modals are not affected by setting allowed rotations in other views and conversely setting allowed rotations in a modal does not affect the rest of the app.
    * @params {Array} orientations Shorthand. Possible values "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight".
@@ -50,9 +50,9 @@ module.exports = (steroids, log) ->
       )
 
   ###*
-   * @ngdoc method
-   * @name rotateTo
    * @module screen
+   * @name rotateTo
+   * @function
    * @description
    * Rotate the screen to one of the four preset orientations. Allowed rotations must be set with `supersonic.ui.screen.setAllowedRotations`, or the call to supersonic.ui.screen.rotate will fail.
    * @returns {Promise} Promise that is resolved when the screen is rotated.

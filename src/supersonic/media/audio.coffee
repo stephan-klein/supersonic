@@ -3,9 +3,9 @@ Promise = require 'bluebird'
 {deviceready} = require '../events'
 ###*
  * @category core
- * @overview
- * @name audio
  * @module media
+ * @name audio
+ * @overview
  * @description
  * Provides the ability to record and play back audio files on a device.
 ###
@@ -14,9 +14,9 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.media.audio"
 
   ###*
-   * @ngdoc method
-   * @name play
    * @module audio
+   * @name play
+   * @function
    * @description
    * Plays an audio file.
    * @param {string} src URI containing the audio content.

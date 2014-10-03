@@ -4,9 +4,9 @@ Promise = require 'bluebird'
 
 ###*
  * @category core
- * @ngdoc method
- * @name confirm
  * @module notification
+ * @name confirm
+ * @function
  * @description
  * Shows a native confirm dialog.
  * @param {string} message confirm message
