@@ -11,7 +11,9 @@
         "optional": false
       }
     ],
+    "category": "core",
     "name": "vibrate",
+    "function": true,
     "description": "Vibrates the device for the specified amount of time.",
     "returns": {
       "type": "returns",

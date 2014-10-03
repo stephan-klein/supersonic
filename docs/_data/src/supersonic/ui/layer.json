@@ -1,7 +1,9 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "layer",
+    "overview": true,
     "description": "Provides methods to work with layers"
   },
   {
@@ -17,6 +19,7 @@
       }
     ],
     "name": "push",
+    "function": true,
     "description": "Navigates to a given view",
     "returns": {
       "type": "returns",
@@ -30,6 +33,7 @@
   {
     "params": [],
     "name": "pop",
+    "function": true,
     "description": "Removes the topmost view from the navigation stack",
     "returns": {
       "type": "returns",
@@ -43,6 +47,7 @@
   {
     "params": [],
     "name": "popAll",
+    "function": true,
     "description": "Pops all views except for the root view from the layer stack",
     "returns": {
       "type": "returns",
@@ -66,6 +71,7 @@
       }
     ],
     "name": "showInitial",
+    "function": true,
     "description": "Shows initial view",
     "returns": {
       "type": "returns",
@@ -89,6 +95,7 @@
       }
     ],
     "name": "hideInitial",
+    "function": true,
     "description": "Hides initial view",
     "returns": {
       "type": "returns",

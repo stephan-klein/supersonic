@@ -1,12 +1,15 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "splashscreen",
+    "overview": true,
     "description": "The splashscreen is shown in the application startup. The initial splashscreen is hidden automatically after 3 seconds on iOS and on the pageload event on Android. Allows the user to hide and show the splashscreen programmitically. The splashscreen is defined in your project's build configuration."
   },
   {
     "params": [],
     "name": "show",
+    "function": true,
     "description": "Shows the splashscreen programmatically.",
     "returns": {
       "type": "returns",
@@ -20,6 +23,7 @@
   {
     "params": [],
     "name": "hide",
+    "function": true,
     "description": "Hides the splashscreen programmatically.",
     "returns": {
       "type": "returns",

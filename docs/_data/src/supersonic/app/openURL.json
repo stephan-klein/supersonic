@@ -11,7 +11,9 @@
         "optional": false
       }
     ],
+    "category": "core",
     "name": "openURL",
+    "function": true,
     "description": "Launches browser to open the URL or any external application with that applications URL scheme.",
     "returns": {
       "type": "returns",

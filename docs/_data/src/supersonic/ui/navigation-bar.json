@@ -1,7 +1,9 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "navigationBar",
+    "overview": true,
     "description": "Provides methods to work with navigation bar"
   },
   {
@@ -17,6 +19,7 @@
       }
     ],
     "name": "show",
+    "function": true,
     "description": "Shows a navigation bar",
     "returns": {
       "type": "returns",
@@ -40,6 +43,7 @@
       }
     ],
     "name": "hide",
+    "function": true,
     "description": "Hides a navigation bar",
     "returns": {
       "type": "returns",
@@ -63,6 +67,7 @@
       }
     ],
     "name": "update",
+    "function": true,
     "description": "Updates the navigation bar",
     "returns": {
       "type": "returns",

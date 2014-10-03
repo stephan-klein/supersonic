@@ -20,7 +20,9 @@
         "optional": false
       }
     ],
+    "category": "core",
     "name": "alert",
+    "function": true,
     "description": "Shows a native alert box.",
     "returns": {
       "type": "returns",

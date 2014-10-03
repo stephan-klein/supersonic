@@ -1,7 +1,9 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "drawer",
+    "overview": true,
     "description": "Module of methods to work with drawers"
   },
   {
@@ -17,6 +19,7 @@
       }
     ],
     "name": "asLeft",
+    "function": true,
     "description": "Shows a view as a left drawer",
     "returns": {
       "type": "returns",
@@ -40,6 +43,7 @@
       }
     ],
     "name": "asRight",
+    "function": true,
     "description": "Shows a view as a right drawer",
     "returns": {
       "type": "returns",
@@ -72,6 +76,7 @@
       }
     ],
     "name": "show",
+    "function": true,
     "description": "Shows a view as a drawer of the given side",
     "returns": {
       "type": "returns",
@@ -95,6 +100,7 @@
       }
     ],
     "name": "setOptions",
+    "function": true,
     "description": "Sets options for drawers",
     "usage": "```coffeescript\nsupersonic.ui.drawer.setOptions\n  showShadow: true\n  animation: steroids.drawers.defaultAnimations.PARALLAX\n```"
   }

@@ -20,7 +20,9 @@
         "optional": false
       }
     ],
+    "category": "core",
     "name": "prompt",
+    "function": true,
     "description": "Shows a native prompt dialog.",
     "returns": {
       "type": "returns",

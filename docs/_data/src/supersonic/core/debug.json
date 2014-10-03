@@ -1,7 +1,9 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "ping",
+    "function": true,
     "description": "Pings the native runtime.",
     "returns": {
       "type": "returns",

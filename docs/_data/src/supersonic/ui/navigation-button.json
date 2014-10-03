@@ -1,7 +1,9 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "navigationButton",
+    "overview": true,
     "description": "Creates new navigation button and sets its params"
   },
   {

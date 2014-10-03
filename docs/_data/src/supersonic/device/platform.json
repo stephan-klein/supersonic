@@ -1,7 +1,9 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "platform",
+    "function": true,
     "description": "Get the device's operating system name and version.",
     "returns": {
       "type": "returns",

@@ -1,12 +1,15 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "geolocation",
+    "overview": true,
     "description": "Provides access to location data based on the device's GPS sensor or inferred from network signals."
   },
   {
     "params": [],
     "name": "watchPosition",
+    "function": true,
     "description": "Returns a stream of position updates.",
     "returns": {
       "type": "returns",
@@ -20,6 +23,7 @@
   {
     "params": [],
     "name": "getPosition",
+    "function": true,
     "description": "Returns device's current position.",
     "returns": {
       "type": "returns",

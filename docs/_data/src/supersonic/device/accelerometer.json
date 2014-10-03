@@ -1,7 +1,9 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "accelerometer",
+    "overview": true,
     "description": " provides access to the device's accelerometer. The accelerometer is a motion sensor that detects the change (delta) in movement relative to the current device orientation, in three dimensions along the x, y, and z axis."
   },
   {
@@ -17,6 +19,7 @@
       }
     ],
     "name": "watchAcceleration",
+    "function": true,
     "description": "Returns a stream of acceleration updates.",
     "returns": {
       "type": "returns",
@@ -30,6 +33,7 @@
   {
     "params": [],
     "name": "getAcceleration",
+    "function": true,
     "description": "Returns device's current acceleration.",
     "returns": {
       "type": "returns",

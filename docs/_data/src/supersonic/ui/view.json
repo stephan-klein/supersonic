@@ -1,7 +1,9 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "view",
+    "overview": true,
     "description": "Allows to create new View instances"
   },
   {
@@ -29,19 +31,6 @@
   },
   {
     "params": [],
-    "name": "_checkIfPreloaded",
-    "description": "Asynchroniously checks if a view is already preloaded",
-    "returns": {
-      "type": "returns",
-      "types": [
-        "Promise"
-      ],
-      "description": "A promise that will be resolved with a boolean value indicating if the view is preloaded or not."
-    },
-    "usage": "```coffeescript\nthis._checkIfPreloaded().then (isPreloaded)->\n  # gets {Boolean} ifPreloaded\n```"
-  },
-  {
-    "params": [],
     "name": "preload",
     "description": "Preloads a new",
     "returns": {
@@ -56,6 +45,7 @@
   {
     "params": [],
     "name": "setWidth",
+    "function": true,
     "description": "Sets width of a view. Useful for showing as a drawer",
     "returns": {
       "type": "returns",
@@ -69,6 +59,7 @@
   {
     "params": [],
     "name": "getView",
+    "function": true,
     "description": "Gets the WebView of a current view instance",
     "returns": {
       "type": "returns",

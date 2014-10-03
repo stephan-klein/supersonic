@@ -1,12 +1,15 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "statusBar",
+    "overview": true,
     "description": "The native status bar shown on the top of the screen. The native status bar is displayed by default. It can be hidden and shown application wide."
   },
   {
     "params": [],
     "name": "hide",
+    "function": true,
     "description": "Hides the native status bar application wide.",
     "returns": {
       "type": "returns",
@@ -39,6 +42,7 @@
       }
     ],
     "name": "show",
+    "function": true,
     "description": "Shows the native status bar application wide. If no parameters are given, the status bar text color is the default color (black on iOS 7).",
     "returns": {
       "type": "returns",

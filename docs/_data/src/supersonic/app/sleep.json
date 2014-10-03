@@ -1,12 +1,15 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "sleep",
+    "overview": true,
     "description": "Allows the user to turn the device automatic sleep on or off for your app."
   },
   {
     "params": [],
     "name": "disable",
+    "function": true,
     "description": "Disables the device automatic sleep for your app.",
     "returns": {
       "type": "returns",
@@ -20,6 +23,7 @@
   {
     "params": [],
     "name": "enable",
+    "function": true,
     "description": "Enables the device automatic sleep for your app.",
     "returns": {
       "type": "returns",

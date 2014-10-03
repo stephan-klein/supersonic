@@ -1,7 +1,9 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "modal",
+    "overview": true,
     "description": "Provides methods to work with layers"
   },
   {
@@ -26,6 +28,7 @@
       }
     ],
     "name": "show",
+    "function": true,
     "description": "Shows a view as a modal",
     "returns": {
       "type": "returns",
@@ -49,6 +52,7 @@
       }
     ],
     "name": "hide",
+    "function": true,
     "description": "Hides a modal view",
     "returns": {
       "type": "returns",
@@ -72,6 +76,7 @@
       }
     ],
     "name": "hideAll",
+    "function": true,
     "description": "Hides a modal view",
     "returns": {
       "type": "returns",

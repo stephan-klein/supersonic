@@ -20,7 +20,9 @@
         "optional": true
       }
     ],
+    "category": "core",
     "name": "confirm",
+    "function": true,
     "description": "Shows a native confirm dialog.",
     "returns": {
       "type": "returns",

@@ -1,7 +1,9 @@
 [
   {
     "params": [],
+    "category": "core",
     "name": "camera",
+    "overview": true,
     "description": "Provides access to the device's default camera application."
   },
   {
@@ -17,6 +19,7 @@
       }
     ],
     "name": "takePicture",
+    "function": true,
     "description": "Opens the device's default camera application that allows users to take pictures. Once the user takes the photo, the camera application closes and the application is restored.",
     "returns": {
       "type": "returns",
@@ -40,6 +43,7 @@
       }
     ],
     "name": "getFromPhotoLibrary",
+    "function": true,
     "description": "Displays a dialog that allows users to select an existing image. Once the user selects the photo, the camera application closes and the application is restored.",
     "returns": {
       "type": "returns",
