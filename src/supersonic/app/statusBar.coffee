@@ -4,7 +4,8 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.app.statusBar"
 
   ###*
-   * @ngdoc overview
+   * @category core
+   * @overview
    * @name statusBar
    * @module app
    * @description

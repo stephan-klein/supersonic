@@ -7,7 +7,8 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.device.geolocation"
 
   ###*
-   * @ngdoc overview
+   * @category core
+   * @overview
    * @name geolocation
    * @module device
    * @description

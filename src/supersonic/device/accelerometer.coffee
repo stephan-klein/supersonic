@@ -7,7 +7,8 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.device.accelerometer"
 
   ###*
-   * @ngdoc overview
+   * @category core
+   * @overview
    * @name accelerometer
    * @module device
    * @description

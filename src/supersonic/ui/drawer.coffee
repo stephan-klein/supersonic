@@ -5,26 +5,27 @@ module.exports = (steroids, log) ->
   # TODO: add bug later
   # bug = log.debuggable "supersonic.ui.drawer"
 
-  ###
-   # @ngdoc overview
-   # @name drawer
-   # @module ui
-   # @description Module of methods to work with drawers
+  ###*
+   * @category core
+   * @overview
+   * @name drawer
+   * @module ui
+   * @description Module of methods to work with drawers
   ###
 
-  ###
-   # @ngdoc method
-   # @name asLeft
-   # @module drawer
-   # @description
-   # Shows a view as a left drawer
-   # @param {View} View object
-   # @returns {Promise} A promise that will be resolved once the drawer has been shown.
-   # @usage
-   # ```coffeescript
-   # view = supersonic.ui.view("app/drawers/left.html")
-   # supersonic.ui.drawer.asLeft(view)
-   # ```
+  ###*
+   * @ngdoc method
+   * @name asLeft
+   * @module drawer
+   * @description
+   * Shows a view as a left drawer
+   * @param {View} View object
+   * @returns {Promise} A promise that will be resolved once the drawer has been shown.
+   * @usage
+   * ```coffeescript
+   * view = supersonic.ui.view("app/drawers/left.html")
+   * supersonic.ui.drawer.asLeft(view)
+   * ```
   ###
   asLeft: (view)->
     that = @

@@ -6,7 +6,8 @@ module.exports = (steroids, log) ->
   # bug = log.debuggable "supersonic.ui.navigationBar"
 
   ###*
-   * @ngdoc overview
+   * @category core
+   * @overview
    * @name navigationBar
    * @module ui
    * @description

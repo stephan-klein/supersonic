@@ -3,6 +3,7 @@ Promise = require 'bluebird'
 {deviceready} = require '../events'
 
 ###*
+ * @category core
  * @ngdoc method
  * @name alert
  * @module notification

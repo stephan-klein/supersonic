@@ -4,6 +4,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.debug"
 
   ###*
+   * @category core
    * @ngdoc method
    * @name ping
    * @module debug

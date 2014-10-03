@@ -38,6 +38,8 @@ module.exports = (grunt)->
           betterObject.usage = tag.string
         when "overview"
           betterObject.overview = true
+        when "category"
+          betterObject.category = tag.string
 
     betterObject
 

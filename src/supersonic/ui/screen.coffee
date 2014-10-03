@@ -4,7 +4,8 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.ui.screen"
 
   ###*
-   * @ngdoc overview
+   * @category core
+   * @overview
    * @name screen
    * @module ui
    * @description

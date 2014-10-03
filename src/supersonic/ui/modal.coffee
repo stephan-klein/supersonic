@@ -6,7 +6,8 @@ module.exports = (steroids, log) ->
   # bug = log.debuggable "supersonic.ui.modal"
 
   ###*
-   * @ngdoc overview
+   * @category core
+   * @overview
    * @name modal
    * @module ui
    * @description

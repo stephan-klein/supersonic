@@ -4,7 +4,8 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.app.sleep"
 
   ###*
-   * @ngdoc overview
+   * @category core
+   * @overview
    * @name sleep
    * @module app
    * @description

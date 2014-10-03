@@ -2,7 +2,8 @@ Promise = require 'bluebird'
 
 {deviceready} = require '../events'
 ###*
- * @ngdoc overview
+ * @category core
+ * @overview
  * @name audio
  * @module media
  * @description
