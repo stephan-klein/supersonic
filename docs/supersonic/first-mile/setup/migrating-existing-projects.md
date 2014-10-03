@@ -1,10 +1,8 @@
 ---
 layout: "docs_home"
-version: "page.method"
-versionHref: "/first-mile"
-path: "setup/existing_projects"
-section:
-  name: "First mile"
+section_id: first-mile
+subsection_id: migrating-existing-projects
+
 
 title: "Migrate Steroids projects"
 header_sub_title: ""

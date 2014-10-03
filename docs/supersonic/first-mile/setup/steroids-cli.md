@@ -1,12 +1,9 @@
 ---
 layout: "docs_home"
-version: "page.method"
-versionHref: "/first-mile"
-path: "setup/steroids"
-section:
-  name: "First mile"
+section_id: first-mile
+subsection_id: steroids-cli
 
-title: "Install Steroids CLI"
+title: "Installing Steroids CLI"
 header_sub_title: ""
 ---
 

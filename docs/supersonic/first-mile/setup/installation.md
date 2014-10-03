@@ -1,10 +1,7 @@
 ---
-layout: "docs_home"
-version: "page.method"
-versionHref: "/first-mile"
-path: "setup/dependencies"
-section:
-  name: "First mile"
+layout: docs_home
+section_id: first-mile
+subsection_id: installation
 
 title: "Install dependencies"
 header_sub_title: ""

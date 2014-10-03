@@ -1,13 +1,13 @@
 {% for namespace in site.data.first_mile_index %}
 
 <li class="menu-section">
-  <a href="{{namespace.href}}" class="api-section">
+  <a href="/supersonic/first-mile/{{namespace.href}}" class="api-section">
     {{ namespace.name }}
   </a>
   <ul>
     {% for subpage in namespace.subpages %}
     <li>
-      <a href="/first-mile/{{subpage.href}}/">
+      <a href="/supersonic/first-mile/{{namespace.id}}/{{subpage.id}}/">
         {{ subpage.name }}
       </a>
     </li>
