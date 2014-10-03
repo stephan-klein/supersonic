@@ -1,5 +1,5 @@
 - name: App
-  href: /supersonic/javascript/
+  href: "#"
   subpages:
     - name: getLaunchURL
       href: app/getLaunchURL
@@ -12,12 +12,13 @@
     - name: statusBar
       href: app/statusBar
 
-- name: Debugging
-  href: /supersonic/javascript/debug/
-  id: debug
+- name: Core
+  href: "#"
   subpages:
-    - name: Logger
-      href: /supersonic/javascript/debug/logger
+    - name: debug
+      href: core/debug
+    - name: logger
+      href: core/logger
 
 - name: Device
   href: "#"
@@ -25,13 +26,22 @@
   subpages:
     - name: accelerometer
       href: device/accelerometer
+    - name: compass
+      href: device/compass
     - name: geolocation
       href: device/geolocation
+    - name: platform
+      href: device/platform
 
-- name: Logger
-  href: /api/logger
+- name: Media
+  href: "#"
+  subpages:
+    - name: audio
+      href: media/audio
+    - name: camera
+      href: media/camera
 
-- name: Notifications
+- name: Notification
   href: "#"
   subpages:
     - name: alert
@@ -44,10 +54,17 @@
       href: notification/vibrate
 
 - name: Native UI
-  href: /supersonic/javascript/native-ui
+  href: "#"
   subpages:
     - name: Drawers
-    - name: Layer stack
-    - name: Modal windows
+      href: ui/drawer
+    - name: Layers
+      href: ui/layer
+    - name: Modal
+      href: ui/modal
     - name: Navigation bar
+      href: ui/navigation-bar
+    - name: Navigation bar button
+      href: ui/navigation-button
     - name: Views
+      href: ui/view

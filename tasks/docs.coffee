@@ -64,6 +64,7 @@ module.exports = (grunt)->
 
     methodString = filePath.substr 0, filePath.lastIndexOf "."
     methodString = methodString.replace /\//g, "."
+    methodString = methodString.replace "src.", ""
 
     {filePath, jsonDestPath, markdownDestPath, methodString}
 
@@ -89,7 +90,7 @@ module.exports = (grunt)->
       markdownOutput = grunt.util._.template(template) {
           module:
             version: "nightly"
-            versionHref: "/api/nightly"
+            versionHref: "#"
             name: "Lol"
             path: methodString
         }

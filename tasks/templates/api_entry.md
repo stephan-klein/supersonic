@@ -1,5 +1,5 @@
 ---
-layout: "docs_home"
+layout: "docs_api"
 version: <%= module.version %>
 versionHref: <%= module.versionHref %>
 section_id: api
