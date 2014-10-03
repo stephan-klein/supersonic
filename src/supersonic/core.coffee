@@ -18,6 +18,7 @@ module.exports = {
   notification: require('./notification')
   device: require('./device')(steroids, logger)
   ui: require('./ui')(steroids, logger)
+  data: require './data'
 }
 
 # Export to window as global if we're in the browser
