@@ -1,12 +1,12 @@
 SuperNavigateBackPrototype = Object.create HTMLElement.prototype
 ###*
- * @type webComponent
+ * @category webComponent
  * @name super-navigate-back
  * @description
  * Navigates back to the previous view.
  * @attribute action
  * @usage
- * ```coffeescript
+ * ```html
  * <super-navigate-back action="click">Go back</super-navigate-back>
  * ```
 ###

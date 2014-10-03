@@ -9,8 +9,8 @@ module.exports = (grunt)->
     docs:
       sources:
         expand: true
-        cwd: "src/"
-        src: "**/*.coffee"
+        cwd: ""
+        src: ["src/**/*.coffee", "components/**/*.coffee"]
         dest: ""
         ext: ""
 
@@ -87,6 +87,8 @@ module.exports = (grunt)->
           betterObject.exampleCoffeeScript = tag.string
         when "apiCall"
           betterObject.apiCall = tag.string
+        when "attribute"
+          betterObject.attribute = tag.string
 
     betterObject
 

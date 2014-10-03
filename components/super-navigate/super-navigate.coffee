@@ -1,13 +1,13 @@
 SuperNavigatePrototype = Object.create HTMLElement.prototype
 ###*
- * @type webComponent
+ * @category webComponent
  * @name super-navigate
  * @description
  * Navigates to a view.
  * @attribute action
  * @attribute url url or path to the window.location of the view to be shown as a modal.
  * @usage
- * ```coffeescript
+ * ```html
  * <super-navigate action="click" url="http://google.com">Open Google</super-navigate>
  * ```
 ###

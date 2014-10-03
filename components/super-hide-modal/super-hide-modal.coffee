@@ -1,12 +1,12 @@
 SuperHideModalPrototype = Object.create HTMLElement.prototype
 ###*
- * @type webComponent
+ * @category webComponent
  * @name super-hide-modal
  * @description
  * Hides a modal.
  * @attribute action
  * @usage
- * ```coffeescript
+ * ```html
  * <super-hide-modal action="click">Open modal</super-hide-modal>
  * ```
 ###
