@@ -5,15 +5,14 @@ module.exports = (grunt)->
 
   #grunt.loadNpmTasks "grunt-extend-config"
 
-  grunt.extendConfig {
-    "docs":
+  grunt.extendConfig
+    docs:
       sources:
         expand: true
-        cwd: 'src/'
-        src: '**/*.coffee'
-        dest: 'docs/_data/'
-        ext: ".json"
-  }
+        cwd: "src/"
+        src: "**/*.coffee"
+        dest: ""
+        ext: ""
 
   cleanUpDoxObject = (object)->
     betterObject =
@@ -45,22 +44,54 @@ module.exports = (grunt)->
 
     betterObject
 
+  cleanUpDoxArray = (doxArray)->
+    cleanedUpArray = []
+
+    for doxObject in doxArray
+      cleanedUpArray.push cleanUpDoxObject(doxObject)
+
+    cleanedUpArray
+
+  writeArrayToJson = (cleanedUpArray, fileDestination) ->
+    prettyJSON = JSON.stringify cleanedUpArray, undefined, 2
+    grunt.file.write fileDestination, prettyJSON
+
+
+  getStringsFromFile = (file) ->
+    filePath = file.src[0]
+    markdownDestPath = "docs/api/#{file.dest}.md"
+    jsonDestPath = "docs/_data/#{file.dest}.json"
+
+    methodString = filePath.substr 0, filePath.lastIndexOf "."
+    methodString = methodString.replace /\//g, "."
+
+    {filePath, jsonDestPath, markdownDestPath, methodString}
+
   grunt.registerMultiTask "docs", "Get comments from src/*. to docs/_data/*.json", ->
     @files.forEach (file) ->
-      filePath = file.src[0]
+      { filePath
+        jsonDestPath
+        markdownDestPath
+        methodString } = getStringsFromFile(file)
+
       coffee = grunt.file.read filePath
 
       doxArray = dox.parseCommentsCoffee(coffee)
-
       unless doxArray[0].tags.length > 0
         return
 
-      cleanedUpArray = []
+      cleanedUpArray = cleanUpDoxArray(doxArray)
 
-      for doxObject in doxArray
-        cleanedUpArray.push cleanUpDoxObject(doxObject)
+      writeArrayToJson(cleanedUpArray, jsonDestPath)
 
+      templatePath = "tasks/templates/api_entry.md"
+      template = grunt.file.read templatePath
+      markdownOutput = grunt.util._.template(template) {
+          module:
+            version: "nightly"
+            versionHref: "/api/nightly"
+            name: "Lol"
+            path: methodString
+        }
 
-      prettyJSON = JSON.stringify cleanedUpArray, undefined, 2
-
-      grunt.file.write file.dest, prettyJSON
+      grunt.file.write markdownDestPath, markdownOutput
