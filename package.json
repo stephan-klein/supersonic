@@ -65,6 +65,6 @@
     "baconjs": "^0.7.23",
     "bluebird": "^2.3.4",
     "coffee-script": "^1.8.0",
-    "steroids-data": "git+https://github.com/AppGyver/steroids-data.git"
+    "steroids-data": "^3.5.1"
   }
 }
