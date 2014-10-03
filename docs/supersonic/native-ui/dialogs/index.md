@@ -1,21 +1,27 @@
 ---
 layout: "docs_home"
-section_id: javascript
+section_id: native-ui
 subsection_id: dialogs
 
 title: Supersonic.js
 header_sub_title: Tap into the native layer with the Supersonic.js library
 ---
-# Media
+# Dialogs
 Displaying native dialogs is awesome, but the syntax for the core Cordova dialog
 plugins sucks.
 
 We wrapped the core dialogs and promisified them. Nothing more, just the simple goods.
 
-## Audio
+## Alert
 
-Play audio.
+Alerts be alerting
 
-## Camera
+## Confirm
 
-Use the camera!
+Confirms be confirming
+
+## Prompt
+
+Prompts be prompting
+
+## Vibrate

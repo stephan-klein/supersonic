@@ -1,3 +1,6 @@
+- name: App
+  id: app
+
 - name: Debugging
   id: debug
   subpages:
@@ -18,11 +21,11 @@
     - name: Platform
       id: platform
 
-- name: Dialogs
-  id: dialogs
+- name: Events
+  id: events
 
 - name: Media
   id: media
 
-- name: Network
-  id: network
+- name: Messaging Between Views
+  id: messaging

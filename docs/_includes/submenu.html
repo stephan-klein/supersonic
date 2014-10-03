@@ -1,8 +1,17 @@
 {% case include.sectionId %}
-{% when "supersonic-js" %}
+{% when "javascript" %}
   {% include js_menu.html %}
 {% when "css-components" %}
   {% include css_menu.html %}
+<<<<<<< HEAD
 {% when "first-mile" %}
   {% include first-mile_menu.html %}
+=======
+{% when "native-ui" %}
+  {% include native_ui_menu.html %}
+{% when "project-structure" %}
+  {% include project_structure_menu.html %}
+{% when "angular" %}
+  {% include angular_menu.html %}
+>>>>>>> full nav structure in place for supersonic
 {% endcase %}

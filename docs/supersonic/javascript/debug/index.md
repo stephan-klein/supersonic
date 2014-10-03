@@ -1,6 +1,6 @@
 ---
 layout: "docs_home"
-section_id: supersonic-js
+section_id: javascript
 subsection_id: debug
 
 title: Supersonic.js
@@ -16,6 +16,8 @@ See also how the [Steroids tooling helps you with debugging your app](/steroids/
 
 ## Logger
 The Supersonic Logger API is a powerful way to keep track of what's happening in your app. All logs are streamed to the [Steroids Connect](TODO) screen (as well as saved locally) for easy viewing.
+
+It's built to be compatible with [winston](http://github.com/flatiron/winston) (which is what we use in Steroids tooling to process the logs – see [here] for more techincal details.)
 
 [View API docs for `supersonic.logger` &raquo;](/supersonic/api/core/logger/)
 

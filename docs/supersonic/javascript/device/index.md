@@ -1,6 +1,6 @@
 ---
 layout: "docs_home"
-section_id: supersonic-js
+section_id: javascript
 subsection_id: device
 
 title: Supersonic.js

@@ -1,19 +1,20 @@
 - name: Overview
   id: overview
-  href: /supersonic/overview
 
-- name: Supersonic.js
-  id: supersonic-js
-  href: /supersonic/javascript
+- name: First Mile Tutorial
+  id: first-mile
 
-- name: CSS Components
-  id: css-components
-  href: /supersonic/css-components
+- name: Project Structure
+  id: project-structure
+
+- name: Core JS
+  id: javascript
 
 - name: Native UI
   id: native-ui
-  href: /supersonic/native-ui
 
-- name: Supersonic AngularJS
-  id: supersonic-angular
-  href: /supersonic/angular
+- name: CSS Components
+  id: css-components
+
+- name: Supersonic with AngularJS
+  id: angular
