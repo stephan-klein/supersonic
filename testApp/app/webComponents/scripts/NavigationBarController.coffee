@@ -4,5 +4,5 @@ angular
     $scope.showNav = ->
       document.querySelector('ss-navigation-bar').setAttribute("style", "display: block;")
 
-    $scope.hideNave = ->
+    $scope.hideNav = ->
       document.querySelector('ss-navigation-bar').setAttribute("style", "display: none;")

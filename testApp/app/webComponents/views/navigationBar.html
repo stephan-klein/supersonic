@@ -3,8 +3,8 @@
     <ss-navigation-bar-title ng-bind="navBarTitle"></ss-navigation-bar-title>
   </ss-navigation-bar>
 
-  <button class="button button-positive" ontouchend="showNav()">SHOW NAV BAR</button>
-  <button class="button button-assertive" ontouchend="hideNav()">HIDE NAV BAR</button>
+  <button class="button button-positive" ng-click="showNav()">SHOW NAV BAR</button>
+  <button class="button button-assertive" ng-click="hideNav()">HIDE NAV BAR</button>
   <hr>
   <button class="button button-positive" ng-click="setNavBarTitle()">SET NAV BAR TITLE</button>
   <button class="button button-assertive" ng-click="removeNavBarTitle()">REMOVE NAV BAR TITLE</button>
