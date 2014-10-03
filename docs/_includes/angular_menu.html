@@ -1,13 +1,13 @@
-{% for namespace in site.data.api_index %}
+{% for namespace in site.data.angular_index %}
 
-<li class="menu-section">
-  <a href="{{namespace.href}}" class="api-section">
+<li>
+  <a href="/supersonic/angular/{{namespace.id}}">
     {{ namespace.name }}
   </a>
   <ul>
     {% for subpage in namespace.subpages %}
     <li>
-      <a href="/api/supersonic/{{subpage.href}}/">
+      <a href="#/supersonic/angular/{{namespace.id}}/#{{subpage.id}}">
         {{ subpage.name }}
       </a>
     </li>

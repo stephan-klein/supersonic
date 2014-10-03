@@ -1,0 +1,46 @@
+- name: Setup
+  href: "#"
+  id: setup
+  subpages:
+    - name: Installation
+      id: installation
+    - name: Steroids CLI
+      id: steroids-cli
+    - name: Migrate Steroids projects
+      id: migrating-existing-projects
+
+- name: Basics
+  href: "#"
+  id: basics
+  subpages:
+    - name: Hello World
+      id: hello-world
+    - name: Connect Screen
+      id: connect-screen
+
+- name: Under the hood
+  href: "#"
+  id: under-the-hood
+  subpages:
+    - name: app structure
+      id: app-structure
+    - name: supersonic promises
+      id: promises
+    - name: Supersonic Web Components
+      id: web-components
+
+- name: Beyond a web app
+  href: "#"
+  id: beyond-a-web-app
+  subpages:
+    - name: Steroids APIs
+      id: steroids-apis
+    - name: Cordova APIs
+      id: cordova-apis
+
+- name: My First App
+  href: "#"
+  id: my-first-app
+  subpages:
+    - name: Sample App
+      id: cool

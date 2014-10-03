@@ -12,24 +12,36 @@
     - name: statusBar
       href: app/statusBar
 
-- name: Debug
+- name: Core
   href: "#"
   subpages:
-    - name: ping
-      href: core/ping
+    - name: debug
+      href: core/debug
+    - name: logger
+      href: core/logger
 
 - name: Device
   href: "#"
+  id: device
   subpages:
     - name: accelerometer
       href: device/accelerometer
+    - name: compass
+      href: device/compass
     - name: geolocation
       href: device/geolocation
+    - name: platform
+      href: device/platform
 
-- name: Logger
-  href: /api/logger
+- name: Media
+  href: "#"
+  subpages:
+    - name: audio
+      href: media/audio
+    - name: camera
+      href: media/camera
 
-- name: Notifications
+- name: Notification
   href: "#"
   subpages:
     - name: alert
@@ -42,9 +54,17 @@
       href: notification/vibrate
 
 - name: Native UI
+  href: "#"
   subpages:
     - name: Drawers
-    - name: Layer stack
-    - name: Modal windows
+      href: ui/drawer
+    - name: Layers
+      href: ui/layer
+    - name: Modal
+      href: ui/modal
     - name: Navigation bar
+      href: ui/navigation-bar
+    - name: Navigation bar button
+      href: ui/navigation-button
     - name: Views
+      href: ui/view

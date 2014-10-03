@@ -16,18 +16,15 @@
 
         <div class="col-md-2 col-sm-3 aside-menu">
 
-          <div class="docked-menu">
-            {% for section in site.data.supersonic_index %}
-            <ul class="nav left-menu {% if page.section_id == section.id %}active-menu{% endif %}">
+          <div>
+            <ul class="nav left-menu active-menu">
               <li class="menu-title">
-                <a href="/supersonic/{{section.id}}">{{section.name}}</a>
-                {% if page.section_id == section.id %}
-                  {% include submenu.html sectionId=section.id %}
-                {% endif %}
+                <a href="/api">
+                  API docs
+                </a>
               </li>
+              {% include api_menu.html %}
             </ul>
-            {% endfor %}
-
           </div>
 
         </div>
