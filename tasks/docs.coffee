@@ -10,29 +10,51 @@ module.exports = (grunt)->
       sources:
         expand: true
         cwd: "src/"
-        src: "**/*.coffee"
+        src: "**/navigation-bar.coffee"
         dest: ""
         ext: ""
 
   cleanUpDoxObject = (object)->
     betterObject =
       params: []
+      typedefs: []
       # name: undefined
       # description: undefined
       # params: []
       # returns: null
       # usage: null
 
+    parseDefaultValue = (nameString)->
+      nameArray = nameString.split "="
+      betterName = nameArray[0]
+      defaultValue = nameArray[1] || null
+      {name: betterName, defaultValue: defaultValue}
+
     for tag in object.tags
       switch tag.type
-        when "param"
-          betterObject.params.push tag
+        when "define"
+          {name, defaultValue} = parseDefaultValue tag.name
+          betterTag =
+            name: name
+            defaultValue: defaultValue
+            description: tag.description
+          betterObject.params.push betterTag
+        when "type"
+          betterObject.type = tag.typeString
+        when "typedef"
+          betterTag =
+            name: tag.name
+            description: tag.description
+          betterObject.typedefs.push betterTag
         when "description"
           betterObject.description = tag.string
         when "name"
           betterObject.name = tag.string
         when "returns"
-          betterObject.returns = tag
+          betterTag =
+            type: tag.types[0]
+            description: tag.description
+          betterObject.returns = betterTag
         when "usage"
           betterObject.usage = tag.string
         when "overview"
@@ -41,6 +63,10 @@ module.exports = (grunt)->
           betterObject.category = tag.string
         when "function"
           betterObject.function = true
+        when "signature"
+          betterObject.signature = tag.string
+        when "usageCoffeeScript"
+          betterObject.usageCoffeeScript = tag.string
 
     betterObject
 

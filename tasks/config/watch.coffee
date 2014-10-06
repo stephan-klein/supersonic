@@ -8,7 +8,7 @@ module.exports =
     tasks: [
       'build'
     ]
-  
+
   test:
     files: [
       '<%= files.src %>'
@@ -43,6 +43,7 @@ module.exports =
   docs:
     files: [
       '<%= files.src %>'
+      'tasks/templates/'
     ]
     tasks: [
       'compile-docs'

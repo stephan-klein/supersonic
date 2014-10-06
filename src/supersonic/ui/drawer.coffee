@@ -2,8 +2,7 @@ Promise = require 'bluebird'
 
 
 module.exports = (steroids, log) ->
-  # TODO: add bug later
-  # bug = log.debuggable "supersonic.ui.drawer"
+  bug = log.debuggable "supersonic.ui.drawer"
 
   ###
    # @category core
