@@ -2,7 +2,7 @@ Promise = require 'bluebird'
 
 {deviceready} = require '../events'
 
-###*
+###
  * @category core
  * @module notification
  * @name prompt

@@ -1,55 +1,55 @@
 Promise = require 'bluebird'
 
 {deviceready} = require '../events'
-###*
-   * @category core
-   * @module media
-   * @name camera
-   * @overview
-   * @description
-   * Provides access to the device's default camera application.
+###
+   # @category core
+   # @module media
+   # @name camera
+   # @overview
+   # @description
+   # Provides access to the device's default camera application.
   ###
 
 module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.media.camera"
 
-  ###*
-   * @module camera
-   * @name takePicture
-   * @function
-   * @description
-   * Opens the device's default camera application that allows users to take pictures. Once the user takes the photo, the camera application closes and the application is restored.
-   * @param {Object} [options] an options object (optional). The following properties are available:
-   * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
-   * * `destinationType`: Choose the format of the return value (Number). Available formats:
-   *  * "dataURL": Return image as base64-encoded string
-   *  * "fileURI": Return image file URI (default)
-   *  * "nativeURI": Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
-   * * `allowEdit`:  Allow simple editing of image before selection (Boolean). Defaults to `false`. Note that Android ignores the `allowEdit parameter.
-   * * `encodingType`: Choose the returned image file's encoding. Available encoding types:
-   *  * "jpeg": Return JPEG encoded image (default).
-   *  * "png": Return PNG encoded image.
-   * * `targetWidth`: Target width in pixels to scale image. Must be used with `targetHeight`. Aspect ratio remains constant.
-   * * `targetHeight`: Target height in pixels to scale image. Must be used with `targetWidth`. Aspect ratio remains constant.
-   * * `correctOrientation`: Rotate the image to correct for the orientation of the device during capture (Boolean). Defaults to `true`.
-   * * `saveToPhotoAlbum`: Save the image to the photo album on the device after capture (Boolean). Defaults to `false`.
-   * * `cameraDirection`: Choose the camera to use (front- or back-facing). Note that any `cameraDirection` value results in a back-facing photo on Android. Available directions:
-   *  * "back": Use the back-facing camera (default).
-   *  * "front": Use the front-facing camera.
-   * @returns {Promise} Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the `destinationType` option.
-   * @usage
-   * ```coffeescript
-   * # Basic usage
-   * supersonic.media.camera.takePicture(300, 300)
-   *
-   * # With options
-   * supersonic.media.camera.takePicture(300, 300 {
-   *   quality: 50
-   *   allowEdit: true
-   *   encodingType: "png"
-   *   saveToPhotoAlbum: true
-   * })
-   * ```
+  ###
+   # @module camera
+   # @name takePicture
+   # @function
+   # @description
+   # Opens the device's default camera application that allows users to take pictures. Once the user takes the photo, the camera application closes and the application is restored.
+   # @param {Object} [options] an options object (optional). The following properties are available:
+   # * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
+   # * `destinationType`: Choose the format of the return value (Number). Available formats:
+   #  * "dataURL": Return image as base64-encoded string
+   #  * "fileURI": Return image file URI (default)
+   #  * "nativeURI": Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
+   # * `allowEdit`:  Allow simple editing of image before selection (Boolean). Defaults to `false`. Note that Android ignores the `allowEdit parameter.
+   # * `encodingType`: Choose the returned image file's encoding. Available encoding types:
+   #  * "jpeg": Return JPEG encoded image (default).
+   #  * "png": Return PNG encoded image.
+   # * `targetWidth`: Target width in pixels to scale image. Must be used with `targetHeight`. Aspect ratio remains constant.
+   # * `targetHeight`: Target height in pixels to scale image. Must be used with `targetWidth`. Aspect ratio remains constant.
+   # * `correctOrientation`: Rotate the image to correct for the orientation of the device during capture (Boolean). Defaults to `true`.
+   # * `saveToPhotoAlbum`: Save the image to the photo album on the device after capture (Boolean). Defaults to `false`.
+   # * `cameraDirection`: Choose the camera to use (front- or back-facing). Note that any `cameraDirection` value results in a back-facing photo on Android. Available directions:
+   #  * "back": Use the back-facing camera (default).
+   #  * "front": Use the front-facing camera.
+   # @returns {Promise} Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the `destinationType` option.
+   # @usage
+   # ```coffeescript
+   # # Basic usage
+   # supersonic.media.camera.takePicture(300, 300)
+   #
+   # # With options
+   # supersonic.media.camera.takePicture(300, 300 {
+   #   quality: 50
+   #   allowEdit: true
+   #   encodingType: "png"
+   #   saveToPhotoAlbum: true
+   # })
+   # ```
   ###
   takePicture = (options = {}) ->
 
@@ -94,43 +94,43 @@ module.exports = (steroids, log) ->
           navigator.camera.getPicture resolve, reject, cameraOptions
       )
 
-  ###*
-   * @module camera
-   * @name getFromPhotoLibrary
-   * @function
-   * @description
-   * Displays a dialog that allows users to select an existing image. Once the user selects the photo, the camera application closes and the application is restored.
-   * @param {Object} [options] an options object (optional). The following properties are available:
-   * * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
-   * * `destinationType`: Choose the format of the return value. Available formats:
-   *  * "dataURL": Return image as base64-encoded string
-   *  * "fileURI": Return image file URI (default)
-   *  * "nativeURI": Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
-   * * `allowEdit`:  Allow simple editing of image before selection (Boolean). Defaults to `false`. Note that Android ignores the `allowEdit parameter.
-   * * `encodingType`: Choose the returned image file's encoding. Available encoding types:
-   *  * "jpeg": Return JPEG encoded image (default).
-   *  * "png": Return PNG encoded image.
-   * * `targetWidth`: Target width in pixels to scale image. Must be used with `targetHeight`. Aspect ratio remains constant.
-   * * `targetHeight`: Target height in pixels to scale image. Must be used with `targetWidth`. Aspect ratio remains constant.
-   * * `mediaType`: Set the type of media to select from. Available media types:
-   *  * "picture": Allow selection of still pictures only (default).
-   *  * "video": Allow selection of video only, will always return "fileURI".
-   *  * "allMedia": Allow selection from all media types.
-   * * `correctOrientation`: Rotate the image to correct for the orientation of the device during capture (Boolean). Defaults to `true`.
-   * * `popoverOptions`: NOT SUPPORTED
-   * @returns {Promise} Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the `destinationType` option.
-   * @usage
-   * ```coffeescript
-   * # Basic usage
-   * supersonic.media.camera.getFromPhotoLibrary(300, 300)
-   *
-   * # With options
-   * supersonic.media.camera.getFromPhotoLibrary(300, 300 {
-   *   quality: 50
-   *   allowEdit: true
-   *   encodingType: "png"
-   * })
-   * ```
+  ###
+   # @module camera
+   # @name getFromPhotoLibrary
+   # @function
+   # @description
+   # Displays a dialog that allows users to select an existing image. Once the user selects the photo, the camera application closes and the application is restored.
+   # @param {Object} [options] an options object (optional). The following properties are available:
+   # * `quality`: Quality of the saved image (Number), expressed as a range of 0-100, where 100 is typically full resolution with no loss from file compression. Defaults to 100.
+   # * `destinationType`: Choose the format of the return value. Available formats:
+   #  * "dataURL": Return image as base64-encoded string
+   #  * "fileURI": Return image file URI (default)
+   #  * "nativeURI": Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
+   # * `allowEdit`:  Allow simple editing of image before selection (Boolean). Defaults to `false`. Note that Android ignores the `allowEdit parameter.
+   # * `encodingType`: Choose the returned image file's encoding. Available encoding types:
+   #  * "jpeg": Return JPEG encoded image (default).
+   #  * "png": Return PNG encoded image.
+   # * `targetWidth`: Target width in pixels to scale image. Must be used with `targetHeight`. Aspect ratio remains constant.
+   # * `targetHeight`: Target height in pixels to scale image. Must be used with `targetWidth`. Aspect ratio remains constant.
+   # * `mediaType`: Set the type of media to select from. Available media types:
+   #  * "picture": Allow selection of still pictures only (default).
+   #  * "video": Allow selection of video only, will always return "fileURI".
+   #  * "allMedia": Allow selection from all media types.
+   # * `correctOrientation`: Rotate the image to correct for the orientation of the device during capture (Boolean). Defaults to `true`.
+   # * `popoverOptions`: NOT SUPPORTED
+   # @returns {Promise} Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the `destinationType` option.
+   # @usage
+   # ```coffeescript
+   # # Basic usage
+   # supersonic.media.camera.getFromPhotoLibrary(300, 300)
+   #
+   # # With options
+   # supersonic.media.camera.getFromPhotoLibrary(300, 300 {
+   #   quality: 50
+   #   allowEdit: true
+   #   encodingType: "png"
+   # })
+   # ```
   ###
   getFromPhotoLibrary = (options = {}) ->
 

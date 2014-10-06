@@ -91,51 +91,51 @@ module.exports = (steroids, window) ->
             Promise.reject error
         )
 
-      ###*
-       * @ngdoc method
-       * @name info
-       * @module logger
-       * @param {String} message Message to log.
-       * @usage
-       * ```coffeescript
-       * supersonic.logger.info("Just notifying you that X is going on")
-       * ```
+      ###
+       # @ngdoc method
+       # @name info
+       # @module logger
+       # @param {String} message Message to log.
+       # @usage
+       # ```coffeescript
+       # supersonic.logger.info("Just notifying you that X is going on")
+       # ```
       ###
       info: streamsPerLogLevel.info.in
 
-      ###*
-       * @ngdoc method
-       * @name warn
-       * @module logger
-       * @param {String} message Message to log.
-       * @usage
-       * ```coffeescript
-       * supersonic.logger.warn("Something that probably should not be happening... is happening.")
-       * ```
+      ###
+       # @ngdoc method
+       # @name warn
+       # @module logger
+       # @param {String} message Message to log.
+       # @usage
+       # ```coffeescript
+       # supersonic.logger.warn("Something that probably should not be happening... is happening.")
+       # ```
       ###
       warn: streamsPerLogLevel.warn.in
 
-      ###*
-       * @ngdoc method
-       * @name error
-       * @module logger
-       * @param {String} error Error message to log.
-       * @usage
-       * ```coffeescript
-       * supersonic.logger.error("Something failed")
-       * ```
+      ###
+       # @ngdoc method
+       # @name error
+       # @module logger
+       # @param {String} error Error message to log.
+       # @usage
+       # ```coffeescript
+       # supersonic.logger.error("Something failed")
+       # ```
       ###
       error: streamsPerLogLevel.error.in
 
-      ###*
-       * @ngdoc method
-       * @name debug
-       * @module logger
-       * @param {String} message Debug message to log.
-       * @usage
-       * ```coffeescript
-       * supersonic.logger.debug("This information is here only for your debugging convenience")
-       * ```
+      ###
+       # @ngdoc method
+       # @name debug
+       # @module logger
+       # @param {String} message Debug message to log.
+       # @usage
+       # ```coffeescript
+       # supersonic.logger.debug("This information is here only for your debugging convenience")
+       # ```
       ###
       debug: streamsPerLogLevel.debug.in
     }

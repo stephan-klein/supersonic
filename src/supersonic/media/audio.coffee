@@ -1,7 +1,7 @@
 Promise = require 'bluebird'
 
 {deviceready} = require '../events'
-###*
+###
  * @category core
  * @module media
  * @name audio
@@ -13,18 +13,18 @@ Promise = require 'bluebird'
 module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.media.audio"
 
-  ###*
-   * @module audio
-   * @name play
-   * @function
-   * @description
-   * Plays an audio file.
-   * @param {string} src URI containing the audio content.
-   * @returns {Promise} Promise that is resolved when the audio file is played.
-   * @usage
-   * ```coffeescript
-   * supersonic.media.audio.play("http://mysite.com/audio.mp3")
-   * ```
+  ###
+   # @module audio
+   # @name play
+   # @function
+   # @description
+   # Plays an audio file.
+   # @param {string} src URI containing the audio content.
+   # @returns {Promise} Promise that is resolved when the audio file is played.
+   # @usage
+   # ```coffeescript
+   # supersonic.media.audio.play("http://mysite.com/audio.mp3")
+   # ```
   ###
   play = (src) ->
     deviceready

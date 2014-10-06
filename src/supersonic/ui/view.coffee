@@ -5,29 +5,29 @@ module.exports = (steroids, log) ->
   # TODO: add bug later
   # bug = log.debuggable "supersonic.ui.view"
 
-  ###*
-   * @category core
-   * @module ui
-   * @name view
-   * @overview
-   * @description
-   * Allows to create new View instances
+  ###
+   # @category core
+   # @module ui
+   # @name view
+   # @overview
+   # @description
+   # Allows to create new View instances
   ###
 
   class View
 
-    ###*
-     * @module ui
-     * @name view
-     * @constructor
-     * @description
-     * Creates a new view
-     * @param {string} URL of a view
-     * @returns {Object} The created view object.
-     * @usage
-     * ```coffeescript
-     * supersonic.ui.view("http://www.google.com")
-     * ```
+    ###
+     # @module ui
+     # @name view
+     # @constructor
+     # @description
+     # Creates a new view
+     # @param {string} URL of a view
+     # @returns {Object} The created view object.
+     # @usage
+     # ```coffeescript
+     # supersonic.ui.view("http://www.google.com")
+     # ```
     ###
     constructor: (location, id) ->
       # if this !instanceof View
@@ -64,20 +64,20 @@ module.exports = (steroids, log) ->
 
     # TODO: Maybe preloads whould happen in contructor by default?
 
-    ###*
-     * @ngdoc method
-     * @name preload
-     * @module view
-     * @description
-     * Preloads a new
-     * @returns {Promise} A promise that will be resolved once the view has been preloaded.
-     * @usage
-     * ```coffeescript
-     * supersonic.ui.view("http://www.google.com").preload()
-     *
-     * v = supersonic.ui.view("http://www.google.com")
-     * v.preload()
-     * ```
+    ###
+     # @ngdoc method
+     # @name preload
+     # @module view
+     # @description
+     # Preloads a new
+     # @returns {Promise} A promise that will be resolved once the view has been preloaded.
+     # @usage
+     # ```coffeescript
+     # supersonic.ui.view("http://www.google.com").preload()
+     #
+     # v = supersonic.ui.view("http://www.google.com")
+     # v.preload()
+     # ```
     ###
     preload: () ->
       that = @
@@ -101,33 +101,33 @@ module.exports = (steroids, log) ->
                 reject()
             })
 
-    ###*
-     * @module view
-     * @name setWidth
-     * @function
-     * @description
-     * Sets width of a view. Useful for showing as a drawer
-     * @returns {Object} View object
-     * @usage
-     * ```coffeescript
-     * view = supersonic.ui.view("http://www.google.com").setWidth(200)
-     * ```
+    ###
+     # @module view
+     # @name setWidth
+     # @function
+     # @description
+     # Sets width of a view. Useful for showing as a drawer
+     # @returns {Object} View object
+     # @usage
+     # ```coffeescript
+     # view = supersonic.ui.view("http://www.google.com").setWidth(200)
+     # ```
     ###
     setWidth: (width)->
       @getWebView().widthOfDrawerInPixels = width
       return @
 
-    ###*
-     * @module view
-     * @name getView
-     * @function
-     * @description
-     * Gets the WebView of a current view instance
-     * @returns {Object} WebView object
-     * @usage
-     * ```coffeescript
-     * supersonic.ui.view("http://www.google.com").getView()
-     * ```
+    ###
+     # @module view
+     # @name getView
+     # @function
+     # @description
+     # Gets the WebView of a current view instance
+     # @returns {Object} WebView object
+     # @usage
+     # ```coffeescript
+     # supersonic.ui.view("http://www.google.com").getView()
+     # ```
     ###
     getWebView: ()->
       return @_webView
