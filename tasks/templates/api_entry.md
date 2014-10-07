@@ -38,7 +38,7 @@ header_sub_title: ""
 {% endif %}
 
 {% if method.params.size > 0 %}
-### Params
+#### Params
 <table class="table" style="margin:0;">
   <thead>
     <tr>
@@ -85,16 +85,16 @@ header_sub_title: ""
 {% endif %}
 
 
-{% if method.returns %}
-### Returns
+{% if method.returnsDescription %}
+#### Returns
 {{ method.returnsDescription }}
 
+{% if method.returns.size > 0 %}
 <table class="table" style="margin:0;">
   <thead>
     <tr>
       <th>Name</th>
       <th>Type</th>
-      <th>Default value</th>
       <th>Details</th>
     </tr>
   </thead>
@@ -107,11 +107,6 @@ header_sub_title: ""
         {{return.type | xml_escape}}
         </code>
       </td>
-      <td class="highlight">
-        <code class="language-coffeescript" data-lang="coffeescript">
-        {{return.defaultValue}}
-        </code>
-      </td>
       <td>{{return.description}}</td>
     </tr>
     {% for property in return.properties %}
@@ -122,16 +117,12 @@ header_sub_title: ""
           {{property.type | xml_escape}}
           </code>
         </td>
-        <td class="highlight">
-          <code class="language-coffeescript" data-lang="coffeescript">
-          {{property.defaultValue}}
-          </code>
-        </td>
         <td>{{property.description}}</td>
       </tr>
     {% endfor %}
   {% endfor %}
 </table>
+{% endif %}
 {% endif %}
 
 {% if method.exampleCoffeeScript || method.exampleJavaScript %}
