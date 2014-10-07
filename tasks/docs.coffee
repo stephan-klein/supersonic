@@ -10,51 +10,67 @@ module.exports = (grunt)->
       sources:
         expand: true
         cwd: "src/"
-        src: "**/navigation-bar.coffee"
+        src: "**/prompt.coffee"
         dest: ""
         ext: ""
 
   cleanUpDoxObject = (object)->
     betterObject =
       params: []
-      typedefs: []
-      # name: undefined
-      # description: undefined
-      # params: []
-      # returns: null
-      # usage: null
+      returns: []
 
-    parseDefaultValue = (nameString)->
-      nameArray = nameString.split "="
+    parseDefineTag = (defineTag)->
+      nameArray = defineTag.name.split "="
       betterName = nameArray[0]
       defaultValue = nameArray[1] || null
-      {name: betterName, defaultValue: defaultValue}
+
+      returns = if defineTag.typeName.match /^=>/
+        defineTag.typeName = defineTag.typeName.replace "=>", ""
+        true
+      else
+        false
+
+      {
+        name: betterName
+        defaultValue: defaultValue
+        description: defineTag.description
+        type: defineTag.typeName
+        returns: returns
+        properties: []
+      }
+
+    getNamespaceFromTag = (betterTag)->
+      namespace = betterTag.name.split(".")[0]
+      findTarget = if betterTag.returns
+        betterObject.returns
+      else
+        betterObject.params
+
+      _.find findTarget, (tagName)->
+        tagName.name is namespace
 
     for tag in object.tags
       switch tag.type
         when "define"
-          {name, defaultValue} = parseDefaultValue tag.name
-          betterTag =
-            name: name
-            defaultValue: defaultValue
-            description: tag.description
-          betterObject.params.push betterTag
+          betterTag = parseDefineTag tag
+          namespaceObject = getNamespaceFromTag betterTag
+
+          if namespaceObject
+            betterTag.name = betterTag.name.split(".")[1]
+            namespaceObject.properties.push betterTag
+          else
+            if betterTag.returns
+              betterObject.returns.push betterTag
+            else
+              betterObject.params.push betterTag
         when "type"
           betterObject.type = tag.typeString
-        when "typedef"
-          betterTag =
-            name: tag.name
-            description: tag.description
-          betterObject.typedefs.push betterTag
         when "description"
           betterObject.description = tag.string
+        when "returnsDescription"
+          betterObject.returnsDescription = tag.string
         when "name"
           betterObject.name = tag.string
-        when "returns"
-          betterTag =
-            type: tag.types[0]
-            description: tag.description
-          betterObject.returns = betterTag
         when "usage"
           betterObject.usage = tag.string
         when "overview"
@@ -67,6 +83,8 @@ module.exports = (grunt)->
           betterObject.signature = tag.string
         when "usageCoffeeScript"
           betterObject.usageCoffeeScript = tag.string
+        when "exampleCoffeeScript"
+          betterObject.exampleCoffeeScript = tag.string
 
     betterObject
 
@@ -81,7 +99,6 @@ module.exports = (grunt)->
   writeArrayToJson = (cleanedUpArray, fileDestination) ->
     prettyJSON = JSON.stringify cleanedUpArray, undefined, 2
     grunt.file.write fileDestination, prettyJSON
-
 
   getStringsFromFile = (file) ->
     filePath = file.src[0]

@@ -299,3 +299,7 @@ ul.events > li > h3 {
 .type-hint-number {
   background:rgb(189, 63, 66);
 }
+
+td.property {
+  padding-left:30px !important;
+}

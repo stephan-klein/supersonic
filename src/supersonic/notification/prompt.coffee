@@ -3,35 +3,43 @@ Promise = require 'bluebird'
 {deviceready} = require '../events'
 
 ###
- * @category core
- * @module notification
- * @name prompt
- * @function
- * @description
- * Shows a native prompt dialog.
- * @param {string} message confirm message.
- * @param {Object} options an options object (optionals). The following properties are available:
- * * `title`: dialog title (optional, defaults to "Confirm")
- * * `buttonLabels`: array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
- * * `defaultText`: default textbox input value (optional, defaults to an empty string)
- * @returns {Promise} Promise that is resolved with an object as an argument. The argument object has the following properties:
- * * `buttonIndex`: index of the pressed button
- * * `input`: input string
- * @usage
- * ```coffeescript
- * # Basic usage
- * supersonic.notification.prompt("This is a prompt. Type something")
- *
- * # With options
- * supersonic.notification.prompt("I'm a prompt!", {
- *   title: "Custom Title"
- *   buttonLabels: ["Yes", "No", "Cancel"]
- *   defaultText: "Type here"
- * })
- * ```
+ # @category core
+ # @module notification
+ # @name prompt
+ # @function
+ # @apiCall supersonic.notification.prompt
+ # @description
+ # Displays a native prompt dialog.
+ # @type
+ # supersonic.notification.prompt: (
+ #   message?: String,
+ #   options?: {
+ #     title?: String,
+ #     buttonLabels?: Array<String>,
+ #     defaultText?: String
+ #   }
+ # ) => Promise { buttonIndex: Integer, input: String }
+ # @define {String} message="" Message shown on the prompt.
+ # @define {Object} options={} An optional options object.
+ # @define {String} options.title="Confirm" Prompt dialog title text.
+ # @define {Array<String>} options.buttonLables=["OK","Cancel"] An array of strings specifying button labels.
+ # @define {String} options.defaultText="" Default value for the prompt input textbox.
+ # @returnsDescription
+ # Returns a Promise. Once the prompt dialog is dismissed (by tapping on one of the buttons), the promise is resolved with an object that has the following properties.
+ # @define {=>Integer} buttonIndex Index of the button tapped by user.
+ # @define {=>String} input String inputted by user.
+ # @usageCoffeeScript
+ # supersonic.notification.prompt "This is a prompt. Type something", options
+ # @exampleCoffeeScript
+ # supersonic.notification.prompt("I'm a prompt!", {
+ #   title: "Custom Title"
+ #   buttonLabels: ["Yes", "No", "Cancel"]
+ #   defaultText: "Type here"
+ # }).then (result)->
+ #   supersonic.logger.log "User clicked button #{result.buttonIndex} with text #{result.input}"
 ###
 module.exports = (message, options = {}) ->
-  
+
   msg = message || new String
   title = options?.title || "Prompt"
   buttonLabels = options?.buttonLabels || ["OK","Cancel"]

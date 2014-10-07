@@ -30,8 +30,13 @@ module.exports = (steroids, log) ->
    # @define options.animated=true Determines if the navigation bar will be shown with an animation.
    # @returns {Promise} A promise that will be resolved after the navigation bar is shown.
    # @usageCoffeeScript
-   # supersonic.ui.navigationBar.show({ animated: true }).then ()->
-   #   supersonic.logger.log "promise works"
+   # supersonic.ui.navigationBar.show({ animated: false }).then ()->
+   #   supersonic.logger.log "Navigation bar shown without animation.
+   # @usageJavaScript
+   # supersonic.ui.navigationBar.show({ animated: false }).then(function() {
+   #   supersonic.logger.log("Navigation bar shown without animation.");
+   # });
+   #
   ###
   show: (params = {})->
     filteredParams =

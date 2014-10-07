@@ -24,7 +24,7 @@ header_sub_title: ""
 {{method.description}}
 
 {% if method.usageCoffeeScript || method.usageJavaScript %}
-### Usage
+### Basic usage
 ```coffeescript
 {{method.usageCoffeeScript}}
 ```
@@ -37,37 +37,13 @@ header_sub_title: ""
 ```
 {% endif %}
 
-{% if method.typedefs.size > 0 %}
-### Custom Type Definitions
-<table class="table" style="margin:0;">
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for typedef in method.typedefs %}
-  <tr>
-  <td>
-  {{typedef.name}}
-  </td>
-  <td class="highlight">
-  <code class="language-coffeescript" data-lang="coffeescript">
-  {{typedef.description}}
-  </code>
-  </td>
-  </tr>
-  {% endfor %}
-</table>
-{% endif %}
-
 {% if method.params.size > 0 %}
 ### Params
 <table class="table" style="margin:0;">
   <thead>
     <tr>
-      <th>Param</th>
+      <th>Name</th>
+      <th>Type</th>
       <th>Default value</th>
       <th>Details</th>
     </tr>
@@ -75,41 +51,94 @@ header_sub_title: ""
   <tbody>
   {% for param in method.params %}
   <tr>
-  <td>
-  {{param.name}}
-  </td>
-  <td class="highlight">
-  <code class="language-coffeescript" data-lang="coffeescript">
-  {{param.defaultValue}}
-  </code>
-  </td>
-  <td>
-  {{param.description}}
-  </td>
+    <td>{{param.name}}</td>
+    <td class="highlight">
+      <code class="language-coffeescript" data-lang="coffeescript">
+      {{param.type | xml_escape}}
+      </code>
+    </td>
+    <td class="highlight">
+      <code class="language-coffeescript" data-lang="coffeescript">
+      {{param.defaultValue}}
+      </code>
+    </td>
+    <td>{{param.description}}</td>
   </tr>
+    {% for property in param.properties %}
+      <tr>
+        <td class="property">{{property.name}}</td>
+        <td class="highlight">
+          <code class="language-coffeescript" data-lang="coffeescript">
+          {{property.type | xml_escape}}
+          </code>
+        </td>
+        <td class="highlight">
+          <code class="language-coffeescript" data-lang="coffeescript">
+          {{property.defaultValue}}
+          </code>
+        </td>
+        <td>{{property.description}}</td>
+      </tr>
+    {% endfor %}
   {% endfor %}
 </table>
 {% endif %}
 
+
 {% if method.returns %}
 ### Returns
+{{ method.returnsDescription }}
+
 <table class="table" style="margin:0;">
   <thead>
     <tr>
-      <th>Returns</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Default value</th>
       <th>Details</th>
     </tr>
   </thead>
   <tbody>
-  <tr>
-  <td>
-  {{method.returns.type}}
-  </td>
-  <td>
-  {{method.returns.description}}
-  </td>
-  </tr>
+  {% for return in method.returns %}
+    <tr>
+      <td>{{return.name}}</td>
+      <td class="highlight">
+        <code class="language-coffeescript" data-lang="coffeescript">
+        {{return.type | xml_escape}}
+        </code>
+      </td>
+      <td class="highlight">
+        <code class="language-coffeescript" data-lang="coffeescript">
+        {{return.defaultValue}}
+        </code>
+      </td>
+      <td>{{return.description}}</td>
+    </tr>
+    {% for property in return.properties %}
+      <tr>
+        <td class="property">{{property.name}}</td>
+        <td class="highlight">
+          <code class="language-coffeescript" data-lang="coffeescript">
+          {{property.type | xml_escape}}
+          </code>
+        </td>
+        <td class="highlight">
+          <code class="language-coffeescript" data-lang="coffeescript">
+          {{property.defaultValue}}
+          </code>
+        </td>
+        <td>{{property.description}}</td>
+      </tr>
+    {% endfor %}
+  {% endfor %}
 </table>
+{% endif %}
+
+{% if method.exampleCoffeeScript || method.exampleJavaScript %}
+### Full example
+```coffeescript
+{{method.exampleCoffeeScript}}
+```
 {% endif %}
 
 {% endif %}
