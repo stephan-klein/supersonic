@@ -8,8 +8,8 @@
     <button
       class="button button-block"
       ng-repeat="test in alertTests"
-      ng-click="testAlert(test.message, test.options)">
-      {{test.title}}
+      ng-click="testAlert(test.title, test.options)">
+      {{test.testTitle}}
     </button>
     <p>Number of alerts dismissed: {{dismissedAlerts}}</p>
   </div>
@@ -19,8 +19,8 @@
     <button
       class="button button-block"
       ng-repeat="test in confirmTests"
-      ng-click="testConfirm(test.message, test.options)">
-      {{test.title}}
+      ng-click="testConfirm(test.title, test.options)">
+      {{test.testTitle}}
     </button>
     <ul>
       <li>Number of confirms okay'd: {{confirms[0]}}</li>
@@ -30,19 +30,9 @@
   </div>
 
   <div class="card padding">
-    <h1>Vibrate tests</h1>
-    <button class="button button-block" ng-repeat="test in vibrateTests"  ng-click="testVibrate(test.options)">
-      {{test.title}}
-    </button>
-    <ul>
-      <li>Number of vibrations: {{vibrations}}</li>
-    </ul>
-  </div>
-
-  <div class="card padding">
     <h1>Prompt tests</h1>
-    <button class="button button-block" ng-repeat="test in promptTests"  ng-click="testPrompt(test.message, test.options)">
-      {{test.title}}
+    <button class="button button-block" ng-repeat="test in promptTests"  ng-click="testPrompt(test.title, test.options)">
+      {{test.testTitle}}
     </button>
     <ul>
       <li>Button index: {{buttonIndex}}</li>

@@ -3,37 +3,43 @@ Promise = require 'bluebird'
 {deviceready} = require '../events'
 
 ###
- * @category core
- * @module notification
- * @name alert
- * @function
- * @description
- * Shows a native alert box.
- * @param {string} message alert message.
- * @param {Object} options an options object (optional). The following properties are available:
- * * `title`: alert title (optional, defaults to "Alert")
- * * `buttonName`: button name (optional, defaults to "OK")
- * @returns {Promise} Promise that is resolved when the the button in the alert box is tapped.
- * @usage
- * ```coffeescript
- * # Basic usage
- * supersonic.notification.alert("You are awesome!")
- *
- * # With options
- * supersonic.notification.alert("I'm an alert!", {
- *   title: "Custom Title"
- *   buttonLabel: "Close"
- * })
- * ```
+ # @category core
+ # @module notification
+ # @name alert
+ # @function
+ # @apiCall supersonic.notification.alert
+ # @description
+ # Shows a native alert dialog.
+ # @type
+ # supersonic.notification.alert: (
+ #   title?: String,
+ #   options?: {
+ #     message?: String,
+ #     buttonName?: String
+ #   }
+ # ) => Promise
+ # @define {String} title="Alert" Alert dialog title text.
+ # @define {Object} options={} An optional options object.
+ # @define {String} options.message="" Optional message text shown under the title.
+ # @define {String} options.buttonLabel="OK" Custom button text for the alert dialog.
+ # @returnsDescription
+ # [Promise](todo), resolved when the the button in the alert dialog is tapped.
+ # @usageCoffeeScript
+ # supersonic.notification.alert "Who's awesome? You're awesome!", options
+ # @exampleCoffeeScript
+ # supersonic.notification.alert("Custom title!", {
+ #   message: "A longer message with \n\n\n\nmultiple lines."
+ #   buttonLabel: "Close"
+ # }).then ->
+ #   supersonic.logger.log "Alert closed."
 ###
 
-module.exports = (message, options = {}) ->
-  
-  msg = message || new String
-  title = options?.title || "Alert"
+module.exports = (title, options = {}) ->
+
+  title = title || "Alert"
+  message = options?.message || new String
   buttonLabel = options?.buttonLabel || "OK"
 
   deviceready.then ->
     new Promise (resolve) ->
-      navigator.notification.alert msg, resolve, title, buttonLabel
-
+      navigator.notification.alert message, resolve, title, buttonLabel

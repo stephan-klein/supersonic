@@ -85,5 +85,15 @@
       <li>Platform model: {{platformModel}}</li>
     </ul>
   </div>
-  
+
+  <div class="card padding">
+    <h1>vibrate tests</h1>
+    <button class="button button-block" ng-repeat="test in vibrateTests"  ng-click="testVibrate()">
+      {{test.title}}
+    </button>
+    <ul>
+      <li>Number of vibrations: {{vibrations}}</li>
+    </ul>
+  </div>
+
 </div>

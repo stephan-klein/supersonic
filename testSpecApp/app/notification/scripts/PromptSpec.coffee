@@ -12,9 +12,10 @@ describe "supersonic.notification.prompt", ->
     supersonic.notification.prompt("Please type").should.be.fulfilled
 
   it "should present a prompt with title string and options object params", ->
+    title = "I'm a Custom Prompt!"
     options =
-      message: "Custom Title"
+      message: "Custom Message"
       buttonLabels: ["Yay","NO!"]
       defaultText: "Default text"
 
-    supersonic.notification.prompt("I'm a Custom Prompt!", options).should.be.fulfilled
+    supersonic.notification.prompt(title, options).should.be.fulfilled

@@ -32,6 +32,8 @@
       href: device/geolocation
     - name: platform
       href: device/platform
+    - name: vibrate
+      href: device/vibrate
 
 - name: Media
   href: "#"
@@ -50,8 +52,6 @@
       href: notification/confirm
     - name: prompt
       href: notification/prompt
-    - name: vibrate
-      href: notification/vibrate
 
 - name: Native UI
   href: "#"

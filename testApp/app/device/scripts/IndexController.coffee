@@ -103,4 +103,14 @@ angular
         $scope.platformVersion = platform.version
         $scope.platformModel = platform.model
 
- 
+    $scope.vibrations = 0
+
+    $scope.vibrateTests = [
+      {
+        title: "Vibrate"
+      }
+    ]
+
+    $scope.testVibrate = () ->
+      supersonic.device.vibrate().then ->
+        $scope.vibrations++

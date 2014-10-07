@@ -27,5 +27,7 @@ module.exports = (angular) ->
             getPosition: qify geolocation.getPosition
 
           platform: qify device.platform
+
+          vibrate: device.vibrate
         }
     )

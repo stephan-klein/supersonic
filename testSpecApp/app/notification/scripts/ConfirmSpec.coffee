@@ -8,12 +8,13 @@ describe "supersonic.notification.confirm", ->
   it "should present a confirm with null params", ->
     supersonic.notification.confirm(null).should.be.fulfilled
 
-  it "should present a confirm with message as param", ->
+  it "should present a confirm with title as param", ->
     supersonic.notification.confirm("What up?").should.be.fulfilled
 
-  it "should present a confirm with messsage and options params", ->
+  it "should present a confirm with title and options params", ->
+    title = "I'm a Custom Confirm!"
     options =
-      title: "Custom Title"
+      message: "Custom Message"
       buttonLabels: ["Yay","NO!","third"]
 
-    supersonic.notification.confirm("I'm a Custom Confirm!", options).should.be.fulfilled
+    supersonic.notification.confirm(title, options).should.be.fulfilled

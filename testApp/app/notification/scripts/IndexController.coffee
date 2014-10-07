@@ -5,27 +5,27 @@ angular
 
     $scope.alertTests = [
       {
-        title: "Alert with message as param"
-        message: "Just a string value."
+        testTitle: "Alert with message as param"
+        title: "Just a string value."
       }
       {
-        title: "Alert with message and options params"
-        message: "I'm an alert!"
+        testTitle: "Alert with message and options params"
+        title: "I'm an alert!"
         options:
-          title: "Custom Title"
+          message: "Custom Message"
           buttonLabel: "Close"
       }
       {
-        title: "Alert with null message"
-        message: null
+        testTitle: "Alert with null message"
+        title: null
       }
       {
-        title: "Alert without params"
+        testTitle: "Alert without params"
       }
     ]
 
-    $scope.testAlert = (message, options) ->
-      supersonic.notification.alert(message, options).then ->
+    $scope.testAlert = (title, options) ->
+      supersonic.notification.alert(title, options).then ->
         $scope.dismissedAlerts++
 
     $scope.confirms = [
@@ -36,45 +36,28 @@ angular
 
     $scope.confirmTests = [
       {
-        title: "Confirm with message as param"
-        message: "Just a string value."
+        testTitle: "Confirm with title string"
+        title: "Just a String"
       }
       {
-        title: "Alert with message string and options object params"
-        message: "I'm a Confirm!"
+        testTitle: "Alert with title string and options object params"
+        title: "I'm a Confirm!"
         options:
-          title: "Custom Title"
-          buttonLabels: ["Yay","NO!","third"]
+          message: "Custom Message"
+          buttonLabels: ["Yay","NO!","Third"]
       }
       {
-        title: "Confirm with null message"
-        message: null
+        testTitle: "Confirm with null title"
+        title: null
       }
       {
-        title: "Confirm without options"
+        testTitle: "Confirm without options"
       }
     ]
 
-    $scope.testConfirm = (message, options) ->
-      supersonic.notification.confirm(message, options).then (index) ->
+    $scope.testConfirm = (title, options) ->
+      supersonic.notification.confirm(title, options).then (index) ->
         $scope.confirms[index]++
-
-    $scope.vibrations = 0
-
-    $scope.vibrateTests = [
-      {
-        title: "Vibrate for 2500 ms"
-        options: 2500
-      }
-      {
-        title: "Vibrate"
-        options: null
-      }
-    ]
-
-    $scope.testVibrate = (options) ->
-      supersonic.notification.vibrate(options).then ->
-        $scope.vibrations++
 
     $scope.buttonIndex = undefined
     $scope.input = undefined

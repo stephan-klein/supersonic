@@ -19,15 +19,16 @@ Promise = require 'bluebird'
  #     defaultText?: String
  #   }
  # ) => Promise { buttonIndex: Integer, input: String }
- # @define {String} title="Prompt" Title text for the prompt.
- # @define {Object} options={} An optional options object.
+ # @define {String} title="Prompt" Title text for the prompt dialog.
+ # @define {Object} options={} Optional options object.
  # @define {String} options.message="" Additional message shown under the title.
- # @define {Array<String>} options.buttonLables=["OK","Cancel"] An array of strings specifying button labels.
+ # @define {Array<String>} options.buttonLables=["OK","Cancel"] Array of strings specifying button labels.
  # @define {String} options.defaultText="" Default value for the prompt input textbox.
  # @returnsDescription
- # Returns a Promise. Once the prompt dialog is dismissed (by tapping on one of the buttons), the promise is resolved with an object that has the following properties.
- # @define {=>Integer} buttonIndex Index of the button tapped by user.
- # @define {=>String} input String inputted by user.
+ # Returns a [Promise](todo). Once the prompt dialog is dismissed (by tapping on one of the buttons), the promise is resolved with an object that has the following properties.
+ # @define {=>Object} result Result object.
+ # @define {=>Integer} result.buttonIndex Index of the button tapped by the user.
+ # @define {=>String} result.input String inputted by user.
  # @usageCoffeeScript
  # supersonic.notification.prompt "Type something!", options
  # @exampleCoffeeScript

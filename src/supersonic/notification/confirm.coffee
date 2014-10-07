@@ -3,38 +3,49 @@ Promise = require 'bluebird'
 {deviceready} = require '../events'
 
 ###
- * @category core
- * @module notification
- * @name confirm
- * @function
- * @description
- * Shows a native confirm dialog.
- * @param {string} message confirm message
- * @param {Object} [options] an options object. The following properties are available:
- * * `title`: confirm title (optional, defaults to "Confirm")
- * * `buttonLabels`: Array of strings specifying button labels (optional, defaults to ["OK","Cancel"]).
- * @returns {Promise} Promise that is resolved with the index of the tapped button as an argument.
- * @usage
- * ```coffeescript
- * # Basic usage
- * supersonic.notification.confirm("You are awesome!")
- *
- * # With options
- * supersonic.notification.confirm("I'm a confirm!", {
- *   title: "Custom Title"
- *   buttonLabels: ["Yes", "Close"]
- * })
- * ```
+ # @category core
+ # @module notification
+ # @name confirm
+ # @function
+ # @apiCall supersonic.notification.confirm
+ # @description
+ # Shows a native confirm dialog.
+ # @type
+ # supersonic.notification.confirm: (
+ #   title?: String,
+ #   options?: {
+ #     message?: String,
+ #     buttonLabels?: Array<String>
+ #   }
+ # ) => Promise buttonIndex: Integer
+ # @define {String} title="Confirm" Title text for the confirm dialog.
+ # @define {Object} options={} Optional options object.
+ # @define {String} message="" Additional message
+ # @define {Array<String>} buttonLabels=["OK","Cancel"] Array of strings specifying button labels.
+ # @returnsDescription
+ # Returns a [Promise](todo). Once the confirm dialog is dismissed (by tapping on one of the buttons), the promise resolves with the index of the button tapped.
+ # @define {=>Integer} buttonIndex Index of the button tapped by the user.
+ # @usageCoffeeScript
+ # supersonic.notification.confirm "Are you awesome?", options
+ # @exampleCoffeeScript
+ # supersonic.notification.confirm("Are you awesome?", {
+ #   message: "Please reply honestly, now."
+ #   buttonLabels: ["Yes", "No"]
+ # }).then (index)->
+ #  if result.index is 0
+ #    supersonic.logger.log "User is awesome!"
+ #  else
+ #    supersonic.logger.log "User wasn't awesome. :("
 ###
-module.exports = (message, options = {}) ->
+module.exports = (title, options = {}) ->
 
-  msg = message || new String
-  title = options?.title || "Confirm"
+  title = title || "Confirm"
+  message = options?.message || new String
   buttonLabels = options?.buttonLabels || ["OK","Cancel"]
 
   deviceready
     .then(->
       new Promise (resolve) ->
-        navigator.notification.confirm msg, resolve, title, buttonLabels
+        navigator.notification.confirm message, resolve, title, buttonLabels
     ).then (index) ->
       index - 1 # Cordova indexing starts at 1
