@@ -10,7 +10,7 @@ module.exports = (grunt)->
       sources:
         expand: true
         cwd: "src/"
-        src: "**/prompt.coffee"
+        src: "**/*.coffee"
         dest: ""
         ext: ""
 

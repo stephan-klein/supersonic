@@ -81,28 +81,27 @@ angular
 
     $scope.promptTests = [
       {
-        title: "Prompt with message as param"
-        message: "Just a string value."
+        testTitle: "Prompt with String title as only param"
+        title: "String title!"
       }
       {
-        title: "Prompt with message string and options object params"
-        message: "I am a prompt"
+        testTitle: "Prompt with title String and options object params"
+        title: "I am a prompt"
         options:
-          title: "Custom Title" 
+          message: "Custom Title"
           buttonLabels: ["Yay","NO!","Maybe"]
           defaultText: "Type something"
       }
       {
-        title: "Prompt with null message"
-        message: null
+        testTitle: "Prompt with null title"
+        title: null
       }
       {
-        title: "Prompt without options"
+        testTitle: "Prompt without params"
       }
     ]
 
-    $scope.testPrompt = (message, options) ->
-      supersonic.notification.prompt(message, options).then (result) ->
+    $scope.testPrompt = (title, options) ->
+      supersonic.notification.prompt(title, options).then (result) ->
         $scope.buttonIndex = result.buttonIndex
         $scope.input = result.input
-

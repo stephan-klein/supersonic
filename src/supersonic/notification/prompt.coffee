@@ -12,16 +12,16 @@ Promise = require 'bluebird'
  # Displays a native prompt dialog.
  # @type
  # supersonic.notification.prompt: (
- #   message?: String,
+ #   title?: String,
  #   options?: {
- #     title?: String,
+ #     message?: String,
  #     buttonLabels?: Array<String>,
  #     defaultText?: String
  #   }
  # ) => Promise { buttonIndex: Integer, input: String }
- # @define {String} message="" Message shown on the prompt.
+ # @define {String} title="Prompt" Title text for the prompt.
  # @define {Object} options={} An optional options object.
- # @define {String} options.title="Confirm" Prompt dialog title text.
+ # @define {String} options.message="" Additional message shown under the title.
  # @define {Array<String>} options.buttonLables=["OK","Cancel"] An array of strings specifying button labels.
  # @define {String} options.defaultText="" Default value for the prompt input textbox.
  # @returnsDescription
@@ -29,19 +29,19 @@ Promise = require 'bluebird'
  # @define {=>Integer} buttonIndex Index of the button tapped by user.
  # @define {=>String} input String inputted by user.
  # @usageCoffeeScript
- # supersonic.notification.prompt "This is a prompt. Type something", options
+ # supersonic.notification.prompt "Type something!", options
  # @exampleCoffeeScript
- # supersonic.notification.prompt("I'm a prompt!", {
- #   title: "Custom Title"
- #   buttonLabels: ["Yes", "No", "Cancel"]
+ # supersonic.notification.prompt("Colorize text", {
+ #   title: "Please type some text and click on the desired color"
+ #   buttonLabels: ["Blue", "Red", "Yellow"]
  #   defaultText: "Type here"
  # }).then (result)->
- #   supersonic.logger.log "User clicked button #{result.buttonIndex} with text #{result.input}"
+ #   supersonic.logger.log "User clicked button number #{result.buttonIndex} with text #{result.input}"
 ###
-module.exports = (message, options = {}) ->
+module.exports = (title, options = {}) ->
 
-  msg = message || new String
-  title = options?.title || "Prompt"
+  title = title || "Prompt"
+  msg = options?.message || new String
   buttonLabels = options?.buttonLabels || ["OK","Cancel"]
   defaultText = options?.defaultText || new String
 

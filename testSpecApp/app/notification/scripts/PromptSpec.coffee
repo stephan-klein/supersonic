@@ -8,12 +8,12 @@ describe "supersonic.notification.prompt", ->
   it "should present a prompt with null params", ->
     supersonic.notification.prompt(null).should.be.fulfilled
 
-  it "should present a prompt with message as param", ->
+  it "should present a prompt with title as param", ->
     supersonic.notification.prompt("Please type").should.be.fulfilled
 
-  it "should present a prompt with message string and options object params", ->
+  it "should present a prompt with title string and options object params", ->
     options =
-      title: "Custom Title"
+      message: "Custom Title"
       buttonLabels: ["Yay","NO!"]
       defaultText: "Default text"
 
