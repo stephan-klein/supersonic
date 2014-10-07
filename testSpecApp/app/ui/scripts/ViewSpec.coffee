@@ -1,30 +1,36 @@
-
 describe "supersonic.ui.view", ->
   it "should be defined", ->
     supersonic.ui.view.should.exist
 
-    view = {}
+  describe "view with route", ->
+    view = supersonic.ui.view("debug#UISpec")
 
-    describe "constructor", ->
-      it "should create a view", ->
-        view = supersonic.ui.view("/app/debug/DebugSpec.html")
-        view.location.should.exist
+    it "should create a view", ->
+      view.location.should.exist
+      view._webView.should.exist
 
-    describe "preload", ->
-      it "should be defined", ->
-        view.preload.should.exist
-      # it "should preload", ->
-      #   view.preload().should.be.fulfilled
+    it "should have a location of type String", ->
+      view.location.should.be.a "string"
 
-    describe "getWebView", ->
-      it "should be defined", ->
-        view.getWebView.should.exist
-      it "should return WebView", ->
-        view.getWebView().should.exist
+    it "should have a _webView of type Object", ->
+      view._webView.should.be.an "object"
 
-    describe "setWidth", ->
-      it "should be defined", ->
-        view.setWidth.should.exist
-      it "should set width", ->
-        view.setWidth(150)
-        view.getWebView().widthOfDrawerInPixels.should.be.equal(150)
+    it "should parse route correctly", ->
+      setTimeout 1000, ->
+        view._webView.location.should.equal "/app/debug/views/UISpec.html"
+
+  describe "view with URL", ->
+    view = supersonic.ui.view("http://www.google.com")
+
+    it "should create a view", ->
+      view.location.should.exist
+      view._webView.should.exist
+
+    it "should have a location of type String", ->
+      view.location.should.be.a "string"
+
+    it "should have a _webView of type Object", ->
+      view._webView.should.be.an "object"
+
+    it "should set location correctly", ->
+      view._webView.location.should.equal "http://www.google.com"
