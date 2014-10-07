@@ -300,6 +300,6 @@ ul.events > li > h3 {
   background:rgb(189, 63, 66);
 }
 
-td.property {
-  padding-left:30px !important;
+td.property::before {
+  content: "\21B3  "
 }
