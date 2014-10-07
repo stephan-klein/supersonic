@@ -1,15 +1,15 @@
 SuperShowModalPrototype = Object.create HTMLElement.prototype
-###*
- * @category webComponent
- * @name super-show-modal
- * @description
- * Shows a modal.
- * @attribute action
- * @attribute route path to the location of the view to be shown as a modal.
- * @usage
- * ```html
- * <super-show-modal action="click" route="cars#modalView">Open modal</super-show-modal>
- * ```
+###
+ # @category webComponent
+ # @name super-show-modal
+ # @description
+ # Shows a modal.
+ # @attribute action
+ # @attribute route path to the location of the view to be shown as a modal.
+ # @usage
+ # ```html
+ # <super-show-modal action="click" route="cars#modalView">Open modal</super-show-modal>
+ # ```
 ###
 SuperShowModalPrototype.createdCallback = ->
   action = this.getAttribute "action"
