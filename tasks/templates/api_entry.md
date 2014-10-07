@@ -19,7 +19,7 @@ header_sub_title: ""
 
 {% else %}
 
-## {{method.name}}{% if method.function %}(){% endif %}
+## {{method.apiCall}}{% if method.function %}(){% endif %}
 
 {{method.description}}
 
@@ -62,7 +62,7 @@ header_sub_title: ""
       {{param.defaultValue}}
       </code>
     </td>
-    <td>{{param.description}}</td>
+    <td>{{param.description | markdownify}}</td>
   </tr>
     {% for property in param.properties %}
       <tr>
@@ -77,7 +77,7 @@ header_sub_title: ""
           {{property.defaultValue}}
           </code>
         </td>
-        <td>{{property.description}}</td>
+        <td>{{property.description | markdownify}}</td>
       </tr>
     {% endfor %}
   {% endfor %}
@@ -107,7 +107,7 @@ header_sub_title: ""
         {{return.type | xml_escape}}
         </code>
       </td>
-      <td>{{return.description}}</td>
+      <td>{{return.description | markdownify}}</td>
     </tr>
     {% for property in return.properties %}
       <tr>
@@ -117,7 +117,7 @@ header_sub_title: ""
           {{property.type | xml_escape}}
           </code>
         </td>
-        <td>{{property.description}}</td>
+        <td>{{property.description | markdownify}}</td>
       </tr>
     {% endfor %}
   {% endfor %}

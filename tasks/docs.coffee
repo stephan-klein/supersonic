@@ -85,6 +85,8 @@ module.exports = (grunt)->
           betterObject.usageCoffeeScript = tag.string
         when "exampleCoffeeScript"
           betterObject.exampleCoffeeScript = tag.string
+        when "apiCall"
+          betterObject.apiCall = tag.string
 
     betterObject
 
