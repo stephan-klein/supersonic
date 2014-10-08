@@ -61,6 +61,14 @@ For a build-and-watch-for-changes loop, use:
 
     grunt build watch:build
 
+###Running testApp and testSpecApp
+
+Running testApp and testSpecApp requires [devroids](https://github.com/AppGyver/devroids)
+
+* Clone [devroids](https://github.com/AppGyver/devroids) repo, install its dependencies (npm install) and run `npm link`.
+* Use devroids as you would use steroids.
+
+
 ### Publishing to bower
 
 This repository is set up with [Travis CI](https://magnum.travis-ci.com/AppGyver/supersonic). On each push to a branch that has passing unit tests, the continuous integration server will prepare a bower distributable version. That distributable will be deployed to [supersonic-bower](https://github.com/AppGyver/supersonic-bower) in an identically named branch, where it is installable via bower.
