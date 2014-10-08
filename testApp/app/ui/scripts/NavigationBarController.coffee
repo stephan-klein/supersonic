@@ -19,7 +19,29 @@ angular
         title: "Left"
         onTap: ()->
           alert "left"
-      });
+      })
+      rightButton = new supersonic.ui.navigationButton({
+        title: "Right"
+        onTap: ()->
+          alert "right"
+      })
+
+      supersonic.ui.navigationBar.update({
+        overrideBackButton: true,
+        buttons: {
+          left: [leftButton]
+          right: [rightButton]
+        }
+      }).then ()->
+        supersonic.logger.log "promise works"
+
+    $scope.update2 = ()->
+      leftButton = new supersonic.ui.navigationButton({
+        title: "New"
+        onTap: ()->
+          alert "New left"
+      })
+      
       supersonic.ui.navigationBar.update({
         overrideBackButton: true,
         buttons: {
