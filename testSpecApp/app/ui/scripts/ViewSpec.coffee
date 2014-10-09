@@ -3,34 +3,33 @@ describe "supersonic.ui.view", ->
     supersonic.ui.view.should.exist
 
   describe "view with route", ->
-    view = supersonic.ui.view("debug#UISpec")
-
-    it "should create a view", ->
-      view.location.should.exist
-      view._webView.should.exist
-
-    it "should have a location of type String", ->
-      view.location.should.be.a "string"
-
-    it "should have a _webView of type Object", ->
-      view._webView.should.be.an "object"
+    route = "debug#empty"
+    view = supersonic.ui.view route
 
     it "should parse route correctly", ->
-      setTimeout 1000, ->
-        view._webView.location.should.equal "/app/debug/views/UISpec.html"
+      view._getWebView().location.should.equal "http://localhost/app/debug/views/empty.html"
+
+    describe "getLocation()", ->
+      it "should be a function", ->
+        view.getLocation.should.exist
+        view.getLocation.should.be.a "function"
+
+      it "should return a String", ->
+        view.getLocation().should.be.a "string"
+
+      it "should return the given route", ->
+        view.getLocation().should.equal
+
+    describe "_getWebView()", ->
+      it "should be a function", ->
+        view._getWebView.should.exist
+        view._getWebView.should.be.a "function"
+
+      it "should return an object", ->
+        view._getWebView().should.be.an "object"
 
   describe "view with URL", ->
     view = supersonic.ui.view("http://www.google.com")
 
-    it "should create a view", ->
-      view.location.should.exist
-      view._webView.should.exist
-
-    it "should have a location of type String", ->
-      view.location.should.be.a "string"
-
-    it "should have a _webView of type Object", ->
-      view._webView.should.be.an "object"
-
     it "should set location correctly", ->
-      view._webView.location.should.equal "http://www.google.com"
+      view._getWebView().location.should.equal "http://www.google.com"

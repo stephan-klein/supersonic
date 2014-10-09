@@ -20,7 +20,7 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.ui.view
    # @description
-   # Creates a new view with the route or URL given as the parameter.
+   # Creates a new view pointer with the route or URL given as the parameter.
    # @type
    # View: (
    #  location: String
@@ -39,38 +39,34 @@ module.exports = (steroids, log) ->
    #
   ###
 
-  createView = (location, id)->
-    new View(location, id)
+  getView = (location)->
+    parsedLocation = parseRoute location
+    webView = new steroids.views.WebView
+      location: parsedLocation
 
-  ###
-   # @module ui
-   # @name View
-   # @class
-   # @apiCall supersonic.ui.View
-   # @description
-   # A Supersonic View. A View points to a specific location (route or URL). It can be passed as an argument to other API calls (like `supersonic.ui.navigate` or `supersonic.ui.preload`).
-   # @type
-   # View: {
-   #   location: String
-   # }
-   # @define {String} location The view's location, set when `supersonic.ui.view()` was called.
-  ###
+    ###
+     # @module ui
+     # @name View
+     # @class
+     # @description
+     # A Supersonic View. A View is a pointer to a specific location (route or URL). A View can be passed as an argument to other API calls (like `supersonic.ui.navigate`).
+     # @type
+     # View: {
+     #   getLocation: () => String
+     # }
+     # @define {Function => String} getLocation Returns the View's location String.
+    ###
 
-  class View
+    {
+      getLocation: -> location
+      _getWebView: -> webView
+    }
 
-    constructor: (location, options={}) ->
-      @location = location
+  parseRoute = (location) ->
+    if location.match /^[\w\-]+#[\w\-]+$/
+      routeParts = location.split "#"
+      "app/#{routeParts[0]}/views/#{routeParts[1]}.html"
+    else
+      location
 
-      parsedLocation = @_parseRoute location
-
-      @_webView = new steroids.views.WebView
-        location: parsedLocation
-
-    _parseRoute: (location) ->
-      if location.match /^[\w\-]+#[\w\-]+$/
-        routeParts = location.split "#"
-        "app/#{routeParts[0]}/views/#{routeParts[1]}.html"
-      else
-        location
-
-  return createView
+  return getView
