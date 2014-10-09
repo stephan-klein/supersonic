@@ -10,17 +10,28 @@ module.exports = (steroids, log) ->
    # @module device
    # @name platform
    # @function
+   # @apiCall supersonic.device.platform
    # @description
    # Get the device's operating system name and version.
-   # @returns {Promise} Promise resolves to the name and version of the operating system and the model of the device.
-   # @usage
-   # ```coffeescript
-   # supersonic.device.platform().then( (platform) ->
-   #  console.log('Name: '  + platform.name  + '\n' +
-   #              'Version: '  + platform.version  + '\n' +
-   #              'Model: ' + platform.model)
-   # )
-   # ```
+   # @type
+   # supersonic.device.platform: ()
+   # => Promise {
+   #  name: String,
+   #  version: String,
+   #  model: String
+   # }
+   # @returnsDescription [Promise](todo) is resolved to the name and version of the operating system and the model of the device.
+   # @define {=>Object} platform Platform object.
+   # @define {=>String} platform.name  The device's operating system name.
+   # @define {=>String} platform.version  The operating system version.
+   # @define {=>String} platform.model The name of the device's model or product. The value is set by the device manufacturer and may be different across versions of the same product.
+   # @usageCoffeeScript
+   # supersonic.device.platform()
+   # @exampleCoffeeScript
+   # supersonic.device.platform().then (platform) ->
+   #  steroids.logger.log('Name: '  + platform.name  + '\n' +
+   #                      'Version: '  + platform.version  + '\n' +
+   #                      'Model: ' + platform.model)
   ###
   platform = ->
     deviceready.then ->
