@@ -12,18 +12,20 @@ module.exports = (steroids, log) ->
    # The splashscreen is shown in the application startup. The initial splashscreen is hidden automatically after 3 seconds on iOS and on the pageload event on Android. Allows the user to hide and show the splashscreen programmitically. The splashscreen is defined in your project's build configuration.
   ###
   
-
   ###
    # @module splashscreen
    # @name show
    # @function
+   # @apiCall supersonic.app.splashscreen.show
    # @description
    # Shows the splashscreen programmatically.
-   # @returns {Promise} Promise that is resolved when the splashscreen is shown.
-   # @usage
-   # ```coffeescript
+   # @type
+   # supersonic.app.splashscreen.show: ()
+   # => Promise
+   # @returnsDescription
+   # [Promise](todo) that is resolved when the splashscreen is shown.
+   # @usageCoffeeScript
    # supersonic.app.splashscreen.show()
-   # ```
   ###
   show: bug "show", ->
     new Promise (resolve, reject) ->
@@ -41,13 +43,16 @@ module.exports = (steroids, log) ->
    # @module splashscreen
    # @name hide
    # @function
+   # @apiCall supersonic.app.splashscreen.hide
    # @description
    # Hides the splashscreen programmatically.
-   # @returns {Promise} Promise that is resolved when the splashscreen is hidden.
-   # @usage
-   # ```coffeescript
+   # @type
+   # supersonic.app.splashscreen.hide: ()
+   # => Promise
+   # @returnsDescription
+   # [Promise](todo) that is resolved when the splashscreen is hidden.
+   # @usageCoffeeScript
    # supersonic.app.splashscreen.hide()
-   # ```
   ###
   hide: bug "hide", ->
     new Promise (resolve, reject) ->
