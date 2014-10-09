@@ -36,23 +36,40 @@ module.exports = (steroids, log) ->
   ###
 
   find = (id) ->
+    isStarted(id).then ->
+      createStartedView(id)
+
+  start = (view, id) ->
     new Promise (resolve, reject) ->
-      viewToTest = new steroids.views.WebView
+      isStarted(id).then( ->
+        error =
+          errorDescription: "A view with id #{id} is already started."
+        reject error
+      ).catch ->
+        view._getWebView().preload {id: id}, {
+          onSuccess: ->
+            resolve createStartedView(id)
+          onFailure: (error)->
+            reject error
+        }
+
+
+  isStarted = (id) ->
+    new Promise (resolve, reject) ->
+      testView = new steroids.views.WebView
         location: "null"
         id: id
 
-      viewToTest.preload {}, {
+      testView.preload {}, {
         onSuccess: ->
           # View with that ID didn't exist, so unload immediately.
-          viewToTest.unload {}, {
+          testView.unload {}, {
             onSuccess: ->
               reject()
           }
-        onFailure: ->
+        onFailure: (error) ->
           if error.errorDescription is "A preloaded layer with this identifier already exists"
-              resolve createStartedView(id)
-            else
-              reject error
+            resolve()
       }
 
   createStartedView = (id) ->
@@ -74,4 +91,5 @@ module.exports = (steroids, log) ->
 
   {
     find: find
+    start: start
   }
