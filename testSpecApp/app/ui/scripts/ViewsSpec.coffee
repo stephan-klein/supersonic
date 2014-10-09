@@ -9,15 +9,21 @@ describe "supersonic.ui.views", ->
     it "should be a function", ->
       supersonic.ui.views.start.should.be.a "function"
 
-    it "should start a view with id test", ->
+    describe "with view object", ->
       view = supersonic.ui.view "ui#empty"
 
-      supersonic.ui.views.start(view, "test").should.be.fulfilled
+      it "should start a view with id test", ->
+        supersonic.ui.views.start(view, "test").should.be.fulfilled
 
-    it "should fail to start another view with id test", ->
-      view = supersonic.ui.view "ui#empty"
+      it "should fail to start another view with id test", ->
+        supersonic.ui.views.start(view, "test").should.be.rejected
 
-      supersonic.ui.views.start(view, "test").should.be.rejected
+    describe "with shorthand route", ->
+      it "should start a view id test2", ->
+        supersonic.ui.views.start("ui#empty", "test2").should.be.fulfilled
+
+      it "should fail to start another view with id test2", ->
+        supersonic.ui.views.start("ui#empty", "test2").should.be.rejected
 
   describe "find", ->
     it "should exist", ->
@@ -26,14 +32,7 @@ describe "supersonic.ui.views", ->
     it "should be a function", ->
       supersonic.ui.views.find.should.be.a "function"
 
-    it "should start a view with id test2", ->
-      view = supersonic.ui.view "ui#empty"
-
-      supersonic.ui.views.start(view, "test2").should.be.fulfilled
-
-    it "should find a started view with id test2", (done)->
-      view = supersonic.ui.view "ui#empty"
-
+    it "should find a started view with id test2", ->
       supersonic.ui.views.find("test2").should.be.fulfilled
 
     it "should return a promise that resolves with a StartedView", ->
@@ -41,3 +40,19 @@ describe "supersonic.ui.views", ->
 
     it "should not find a preloaded view with id dolan", ->
       supersonic.ui.views.find("dolan").should.be.rejected
+
+  describe "stop", ->
+    it "should exist", ->
+      supersonic.ui.views.stop.should.exist
+
+    it "should be a function", ->
+      supersonic.ui.views.stop.should.be.a "function"
+
+    it "should stop a view with id test", ->
+      supersonic.ui.views.stop("test").should.be.fulfilled
+
+    it "should stop a view with id test2", ->
+      supersonic.ui.views.stop("test2").should.be.fulfilled
+
+    it "should fail to stop a view with id dolan", ->
+      supersonic.ui.views.stop("dolan").should.be.rejected

@@ -39,20 +39,40 @@ module.exports = (steroids, log) ->
     isStarted(id).then ->
       createStartedView(id)
 
+
   start = (view, id) ->
     new Promise (resolve, reject) ->
+      betterView = if view.constructor.name is "String"
+        supersonic.ui.view(view)
+      else
+        view
+
       isStarted(id).then( ->
         error =
           errorDescription: "A view with id #{id} is already started."
         reject error
       ).catch ->
-        view._getWebView().preload {id: id}, {
+        betterView._getWebView().preload {id: id}, {
           onSuccess: ->
             resolve createStartedView(id)
           onFailure: (error)->
             reject error
         }
 
+  stop = (id) ->
+    new Promise (resolve, reject) ->
+      viewToUnload = new steroids.views.WebView
+        location: "null"
+        id: id
+
+      viewToUnload.unload {}, {
+        onSuccess: ->
+          resolve()
+        onFailure: ->
+          error =
+            errorMsg: "Could not find a StartedView with id #{id} to stop."
+          reject()
+      }
 
   isStarted = (id) ->
     new Promise (resolve, reject) ->
@@ -70,6 +90,8 @@ module.exports = (steroids, log) ->
         onFailure: (error) ->
           if error.errorDescription is "A preloaded layer with this identifier already exists"
             resolve()
+          else
+            reject()
       }
 
   createStartedView = (id) ->
@@ -92,4 +114,5 @@ module.exports = (steroids, log) ->
   {
     find: find
     start: start
+    stop: stop
   }
