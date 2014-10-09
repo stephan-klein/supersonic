@@ -5,35 +5,52 @@ Bacon = require 'baconjs'
 
 module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.device.compass"
-
+  
   ###
    # @category core
    # @module device
    # @name compass
    # @overview
    # @description
-   #  provides access to the device's compass. The compass is a sensor that detects the direction or heading that the device is pointed, typically from the top of the device. It measures the heading in degrees from 0 to 359.99, where 0 is north.
+   #  Provides access to the device's compass. The compass is a sensor that detects the direction or heading that the device is pointed, typically from the top of the device. It measures the heading in degrees from 0 to 359.99, where 0 is north.
   ###
     
   ###
    # @module compass
    # @name watchHeading
    # @function
+   # @apiCall supersonic.device.compass.watchHeading
    # @description
    # Returns a stream of compass heading updates.
-   # @param {Object} [options] Options object (optional). The following properties are available:
-   # * `frequency`: update interval in milliseconds (Number, optional) Defaults to 100.
-   # * `filter`: The change in degrees required to initiate a watchHeading success callback (Number, optional). When this value is set, `frequency` is ignored.
-   # @returns {Stream} Stream of heading updates.
-   # @usage
-   # ```coffeescript
-   # supersonic.device.compass.watchHeading().onValue( (heading) ->
-   #  console.log('Magnetic heading: ' + heading.magneticHeading  + '\n' +
+   # @type
+   # supersonic.device.compass.watchHeading: (
+   #  options?: {
+   #   frequency?: Integer,
+   #   filter?: Integer
+   #  }
+   # ) => Stream: {
+   #  magneticHeading: Number,
+   #  trueHeading: Number,
+   #  headingAccuracy: Number,
+   #  timestamp: Number
+   # }
+   # @define {Object} options={} Optional options object.
+   # @define {Integer} options.frequency=100 Update interval in milliseconds.
+   # @define {Integer} options.filter The change in degrees required to initiate a watchHeading success callback (optional). When this value is set, `options.frequency` is ignored.
+   # @returnsDescription [Stream](todo) of heading objects with the following properties:
+   # @define {=>Object} heading Heading object.
+   # @define {=>Number} heading.magneticHeading  The heading in degrees from 0-359.99 at a single moment in time.
+   # @define {=>Number} heading.trueHeading The heading relative to the geographic North Pole in degrees 0-359.99 at a single moment in time. A negative value indicates that the true heading can't be determined.
+   # @define {=>Number} heading.headingAccuracy The deviation in degrees between the reported heading and the true heading.
+   # @define {=>Number} heading.timestamp Creation timestamp in milliseconds.
+   # @usageCoffeeScript
+   # supersonic.device.compass.watchHeading options
+   # @exampleCoffeeScript
+   # supersonic.device.compass.watchHeading().onValue (heading) ->
+   #  supersonic.logger.log('Magnetic heading: ' + heading.magneticHeading  + '\n' +
    #              'True heading: ' + heading.trueHeading + '\n' +
    #              'Heading accuracy: ' + heading.headingAccuracy + '\n' +
    #              'Timestamp: ' + heading.timestamp)
-   # )
-   # ```
   ###
   watchHeading = (options = {}) ->
     compassOptions =
@@ -54,18 +71,31 @@ module.exports = (steroids, log) ->
    # @module compass
    # @name getHeading
    # @function
+   # @apiCall supersonic.device.compass.getHeading
    # @description
    # Returns device's current heading.
-   # @returns {Promise} Promise is resolved to the next available heading data.
-   # @usage
-   # ```coffeescript
-   # supersonic.device.compass.getHeading().then( (heading) ->
-   #  console.log('Magnetic heading: ' + heading.magneticHeading  + '\n' +
-   #              'True heading: ' + heading.trueHeading + '\n' +
-   #              'Heading accuracy: ' + heading.headingAccuracy + '\n' +
-   #              'Timestamp: ' + heading.timestamp)
-   # )
-   # ```
+   # @type
+   # supersonic.device.compass.getHeading: ()
+   # => Promise: {
+   #  magneticHeading: Number,
+   #  trueHeading: Number,
+   #  headingAccuracy: Number,
+   #  timestamp: Number
+   # }
+   # @returnsDescription [Promise](todo) is resolved to the next available heading data.
+   # @define {=>Object} heading Heading object.
+   # @define {=>Number} heading.magneticHeading  The heading in degrees from 0-359.99 at a single moment in time.
+   # @define {=>Number} heading.trueHeading The heading relative to the geographic North Pole in degrees 0-359.99 at a single moment in time. A negative value indicates that the true heading can't be determined.
+   # @define {=>Number} heading.headingAccuracy The deviation in degrees between the reported heading and the true heading.
+   # @define {=>Number} heading.timestamp Creation timestamp in milliseconds.
+   # @usageCoffeeScript
+   # supersonic.device.compass.getHeading()
+   # @exampleCoffeeScript
+   # supersonic.device.compass.getHeading().then (heading) ->
+   #  steroids.logger.log('Magnetic heading: ' + heading.magneticHeading  + '\n' +
+   #                      'True heading: ' + heading.trueHeading + '\n' +
+   #                      'Heading accuracy: ' + heading.headingAccuracy + '\n' +
+   #                      'Timestamp: ' + heading.timestamp)
   ###
   getHeading = ->
     new Promise (resolve) ->
