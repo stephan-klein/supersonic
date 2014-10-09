@@ -92,50 +92,74 @@ module.exports = (steroids, window) ->
         )
 
       ###
-       # @ngdoc method
-       # @name info
+       # @category core
+       # @module core
+       # @name logger
+       # @overview
+       # @description Log messages directly to web console.
+      ###
+
+      ###
+       # @category core
        # @module logger
-       # @param {String} message Message to log.
-       # @usage
-       # ```coffeescript
+       # @name info
+       # @function
+       # @apiCall supersonic.logger.info
+       # @description
+       # Logs info level messages.
+       # @type
+       # supersonic.logger.info: (message: String)
+       # @define {String} message Message to log.
+       # @usageCoffeeScript
        # supersonic.logger.info("Just notifying you that X is going on")
-       # ```
       ###
       info: streamsPerLogLevel.info.in
 
       ###
-       # @ngdoc method
-       # @name warn
+       # @category core
        # @module logger
-       # @param {String} message Message to log.
-       # @usage
-       # ```coffeescript
+       # @name warn
+       # @function
+       # @apiCall supersonic.logger.warn
+       # @description
+       # Logs warn level messages.
+       # @type
+       # supersonic.logger.warn: (message: String)
+       # @define {String} message Message to log.
+       # @usageCoffeeScript
        # supersonic.logger.warn("Something that probably should not be happening... is happening.")
-       # ```
       ###
       warn: streamsPerLogLevel.warn.in
 
       ###
-       # @ngdoc method
-       # @name error
+       # @category core
        # @module logger
-       # @param {String} error Error message to log.
-       # @usage
-       # ```coffeescript
+       # @name error
+       # @function
+       # @apiCall supersonic.logger.error
+       # @description
+       # Logs error level messages.
+       # @type
+       # supersonic.logger.error: (message: String)
+       # @define {String} message Message to log.
+       # @usageCoffeeScript
        # supersonic.logger.error("Something failed")
-       # ```
       ###
       error: streamsPerLogLevel.error.in
 
       ###
-       # @ngdoc method
-       # @name debug
+       # @category core
        # @module logger
-       # @param {String} message Debug message to log.
-       # @usage
-       # ```coffeescript
+       # @name debug
+       # @function
+       # @apiCall supersonic.logger.debug
+       # @description
+       # Logs debug level messages.
+       # @type
+       # supersonic.logger.debug: (message: String)
+       # @define {String} message Message to log.
+       # @usageCoffeeScript
        # supersonic.logger.debug("This information is here only for your debugging convenience")
-       # ```
       ###
       debug: streamsPerLogLevel.debug.in
     }
