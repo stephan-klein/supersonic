@@ -11,18 +11,21 @@ module.exports = (steroids, log) ->
    # @description
    # The native status bar shown on the top of the screen. The native status bar is displayed by default. It can be hidden and shown application wide.
   ###
-    
+  
   ###
    # @module statusBar
    # @name hide
    # @function
+   # @apiCall supersonic.app.statusBar.hide
    # @description
-   # Hides the native status bar application wide.
-   # @returns {Promise} Promise that is resolved when the status bar is hidden.
-   # @usage
-   # ```coffeescript
+   # Hides the statusBar application wide.
+   # @type
+   # supersonic.app.statusBar.hide: ()
+   # => Promise
+   # @returnsDescription
+   # [Promise](todo) that is resolved when the statusBar is hidden.
+   # @usageCoffeeScript
    # supersonic.app.statusBar.hide()
-   # ```
   ###
   hide: bug "hide", ->
     new Promise (resolve, reject) ->
@@ -35,26 +38,25 @@ module.exports = (steroids, log) ->
             reject()
         }
       )
-  
+
   ###
    # @module statusBar
-   # @name show
+   # @name hide
    # @function
+   # @apiCall supersonic.app.statusBar.show
    # @description
-   # Shows the native status bar application wide. If no parameters are given, the status bar text color is the default color (black on iOS 7).
-   # @param {string} style If set to "light" (shorthand), then the native status bar text color is light (white on iOS 7). Optional.
-   # @param {Object} options Options object with `style` property (verbose). Optional.
-   # @returns {Promise} Promise that is resolved when the status bar is shown.
-   # @usage
-   # ```coffeescript
+   # Shows the statusBar application wide.
+   # @type
+   # supersonic.app.statusBar.show: (style?: String)
+   # => Promise
+   # @define {String} style If set to "light" (shorthand), then the native status bar text color is light (white on iOS 7). Optional.
+   # @returnsDescription
+   # [Promise](todo) that is resolved when the statusBar is shown.
+   # @usageCoffeeScript
    # supersonic.app.statusBar.show()
-   # # Shorthand
-   # supersonic.app.statusBar.show("light")
-   # # Verbose
-   # options =
-   #  style: "light"
-   # supersonic.app.statusBar.show(options)
-   # ```
+   # @exampleCoffeeScript
+   # supersonic.app.statusBar.show("light").then ->
+   #  supersonic.logger.log "Status bar shown"
   ###
   show: bug "show", (options) ->
     style = if typeof options is "string"
