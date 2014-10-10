@@ -7,11 +7,17 @@ module.exports = (grunt)->
 
   grunt.extendConfig
     docs:
-      sources:
+      javascript:
         expand: true
-        cwd: ''
-        src: ['src/**/*.coffee', 'components/**/*.coffee']
+        cwd: "src/"
+        src: "**/*.coffee"
         dest: ""
+        ext: ""
+      components:
+        expand: true
+        cwd: "components/"
+        src: "**/*.coffee"
+        dest: "components/"
         ext: ""
 
   cleanUpDoxObject = (object)->
@@ -87,8 +93,6 @@ module.exports = (grunt)->
           betterObject.exampleCoffeeScript = tag.string
         when "apiCall"
           betterObject.apiCall = tag.string
-        when "attribute"
-          betterObject.attribute = tag.string
 
     betterObject
 
