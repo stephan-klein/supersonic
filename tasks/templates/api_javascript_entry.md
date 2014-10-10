@@ -62,7 +62,7 @@ header_sub_title: ""
       {{param.defaultValue}}
       </code>
     </td>
-    <td>{{param.description | markdownify}}</td>
+    <td>{{param.description}}</td>
   </tr>
     {% for property in param.properties %}
       <tr>
@@ -107,7 +107,7 @@ header_sub_title: ""
         {{return.type | xml_escape}}
         </code>
       </td>
-      <td>{{return.description | markdownify}}</td>
+      <td>{{return.description}}</td>
     </tr>
     {% for property in return.properties %}
       <tr>
@@ -117,7 +117,7 @@ header_sub_title: ""
           {{property.type | xml_escape}}
           </code>
         </td>
-        <td>{{property.description | markdownify}}</td>
+        <td>{{property.description}}</td>
       </tr>
     {% endfor %}
   {% endfor %}
