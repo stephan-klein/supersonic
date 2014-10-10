@@ -39,7 +39,7 @@ module.exports = (steroids, log) ->
    # @define {=>Number} acceleration.z Amount of acceleration on the z-axis. (in m/s^2)
    # @define {=>DOMTimeStamp} acceleration.timestamp Creation timestamp in milliseconds.
    # @usageCoffeeScript
-   # supersonic.device.accelerometer.watchAcceleration frequency 
+   # supersonic.device.accelerometer.watchAcceleration frequency
    # @exampleCoffeeScript
    # supersonic.device.accelerometer.watchAcceleration().onValue (acceleration) ->
    #  supersonic.logger.log('Acceleration X: '  + acceleration.x  + '\n' +
