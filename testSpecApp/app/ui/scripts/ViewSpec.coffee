@@ -1,30 +1,42 @@
-
 describe "supersonic.ui.view", ->
   it "should be defined", ->
     supersonic.ui.view.should.exist
 
-    view = {}
+  describe "view with route", ->
+    route = "ui#empty"
+    view = supersonic.ui.view route
 
-    describe "constructor", ->
-      it "should create a view", ->
-        view = supersonic.ui.view("/app/debug/DebugSpec.html")
-        view.location.should.exist
+    it "should parse route correctly", ->
+      view._getWebView().location.should.equal "http://localhost/app/ui/empty.html"
 
-    describe "preload", ->
-      it "should be defined", ->
-        view.preload.should.exist
-      # it "should preload", ->
-      #   view.preload().should.be.fulfilled
+    describe "getLocation()", ->
+      it "should be a function", ->
+        view.getLocation.should.exist
+        view.getLocation.should.be.a "function"
 
-    describe "getWebView", ->
-      it "should be defined", ->
-        view.getWebView.should.exist
-      it "should return WebView", ->
-        view.getWebView().should.exist
+      it "should return a String", ->
+        view.getLocation().should.be.a "string"
 
-    describe "setWidth", ->
-      it "should be defined", ->
-        view.setWidth.should.exist
-      it "should set width", ->
-        view.setWidth(150)
-        view.getWebView().widthOfDrawerInPixels.should.be.equal(150)
+      it "should return the given route", ->
+        view.getLocation().should.equal route
+
+    describe "_getWebView()", ->
+      it "should be a function", ->
+        view._getWebView.should.exist
+        view._getWebView.should.be.a "function"
+
+      it "should return an object", ->
+        view._getWebView().should.be.an "object"
+
+  describe "view with URL", ->
+    view = supersonic.ui.view("http://www.google.com")
+
+    it "should set location correctly", ->
+      view._getWebView().location.should.equal "http://www.google.com"
+
+  describe "view.start()", ->
+    it "should start a view with id test", ->
+      supersonic.ui.view("ui#empty").start("test").should.be.fulfilled
+
+    it "should stop a view with id test", ->
+      supersonic.ui.views.stop("test").should.be.fulfilled

@@ -31,7 +31,7 @@ module.exports = (steroids, log) ->
   ###
   show: (view, params = {})->
     new Promise (resolve, reject)->
-      params.view = view.getWebView()
+      params.view = view._getWebView()
       steroids.modal.show params, {
         onSuccess: ()->
           supersonic.logger.info "Modal view was shown"

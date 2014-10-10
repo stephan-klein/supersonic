@@ -28,16 +28,14 @@ module.exports = (steroids, log) ->
    # supersonic.ui.layer.push(v)
    # ```
   ###
-  push: (view)->
-    new Promise (resolve, reject)->
+  push: (view) ->
+    new Promise (resolve, reject) ->
       steroids.layers.push {
-          view: view.getWebView()
+          view: view._getWebView()
       }, {
-        onSuccess: ()->
-          supersonic.logger.info "New layer is shown"
+        onSuccess: ->
           resolve()
-        onFailure: (error)->
-          supersonic.logger.error "New layer was not shown due to an error #{error.errorDescription}"
+        onFailure: (error) ->
           reject()
       }
 
@@ -57,11 +55,9 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject)->
       steroids.layers.pop {}, {
         onSuccess: ()->
-          supersonic.logger.info "The layer was poppped"
           resolve()
         onFailure: (error)->
-          supersonic.logger.error "Popping the layer failes with this error: #{error.errorDescription}"
-          reject()
+          reject(error)
       }
 
   ###
@@ -77,13 +73,11 @@ module.exports = (steroids, log) ->
    # ```
   ###
   popAll: ()->
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.layers.popAll {}, {
         onSuccess: ()->
-          supersonic.logger.info "The layer was poppped"
           resolve()
         onFailure: (error)->
-          supersonic.logger.error "Popping the layer failes with this error: #{error.errorDescription}"
           reject()
       }
 

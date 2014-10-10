@@ -11,126 +11,70 @@ module.exports = (steroids, log) ->
    # @name view
    # @overview
    # @description
-   # Allows to create new View instances
+   # Views live at the heart of every Supersonic app. A View displays the HTML content of your app.
   ###
 
-  class View
+  ###
+   # @module ui
+   # @name view
+   # @function
+   # @apiCall supersonic.ui.view
+   # @description
+   # Creates a new view pointer with the route or URL given as the parameter.
+   # @type
+   # View: (
+   #  location: String
+   # ) => View
+   # @define {String} location A [route](todo) (e.g. `"cars#index"`) or URL (e.g. `"http://www.google.com"`) that the view points to.
+   # @returnsDescription
+   # Returns a `supersonic.ui.View` object pointing to the given location.
+   # @usageCoffeeScript
+   # supersonic.ui.view "cars#index"
+   # @exampleCoffeeScript
+   # # Routes are parsed automatically. The one below points to the HTML file at app/cars/views/index.html
+   # carsIndexView = supersonic.ui.view "cars#index"
+   #
+   # # URLs are detected and used as-is
+   # googleView = supersonic.ui.view "http://www.google.com"
+   #
+  ###
+
+  getView = (location)->
+    parsedLocation = parseRoute location
+    webView = new steroids.views.WebView
+      location: parsedLocation
+
+    view =
+      getLocation: -> location
+      _getWebView: -> webView
+
+    start = (id)->
+      supersonic.ui.views.start view, id
+
+    view.start = start
 
     ###
      # @module ui
-     # @name view
-     # @constructor
+     # @name View
+     # @class
      # @description
-     # Creates a new view
-     # @param {string} URL of a view
-     # @returns {Object} The created view object.
-     # @usage
-     # ```coffeescript
-     # supersonic.ui.view("http://www.google.com")
-     # ```
+     # A Supersonic View. A View is a pointer to a specific location (route or URL). A View can be passed as an argument to other API calls (like `supersonic.ui.navigate`).
+     # @type
+     # View: {
+     #   getLocation: () => String
+     #   start: (String) => StartedView
+     # }
+     # @define {Function} getLocation Returns the View's location String.
+     # @define {Function} start Shorthand for calling `supersonic.ui.start(view, id)` with this view.
     ###
-    constructor: (location, id) ->
-      # if this !instanceof View
-      #   return new View(location, id)
 
-      @location = location
-      # @id = id || location
+    view
 
-      supersonic.logger.info "'#{@location}' view was created"
+  parseRoute = (location) ->
+    if location.match /^[\w\-]+#[\w\-]+$/
+      routeParts = location.split "#"
+      "app/#{routeParts[0]}/#{routeParts[1]}.html"
+    else
+      location
 
-      @_webView = new steroids.views.WebView {
-        location: @location,
-        id: @id
-      }
-
-    _checkIfPreloaded: ()->
-      that = @
-      new Promise (resolve, reject) ->
-        steroids.getApplicationState {}, {
-          onSuccess: (state)->
-            loaded = false
-            state.preloads.forEach (p)->
-              loaded = loaded || (p.id.indexOf(that.location) != -1)
-
-            if !loaded
-              resolve(false)
-            else
-              resolve(true)
-
-          onFailure: ()->
-            supersonic.logger.error "Somethig went wrong with checking the applicaiton state"
-            reject()
-        }
-
-    # TODO: Maybe preloads whould happen in contructor by default?
-
-    ###
-     # @ngdoc method
-     # @name preload
-     # @module view
-     # @description
-     # Preloads a new
-     # @returns {Promise} A promise that will be resolved once the view has been preloaded.
-     # @usage
-     # ```coffeescript
-     # supersonic.ui.view("http://www.google.com").preload()
-     #
-     # v = supersonic.ui.view("http://www.google.com")
-     # v.preload()
-     # ```
-    ###
-    preload: () ->
-      that = @
-      new Promise (resolve, reject) ->
-        that._checkIfPreloaded().then (isPreloaded)->
-          if isPreloaded
-            supersonic.logger.info "View was already preloaded"
-            resolve()
-          else
-            params = {}
-            if that.id
-              params.id = that.id
-            that._webView.preload( params, {
-
-              onSuccess: ()->
-                supersonic.logger.info "View was preloaded"
-                resolve()
-
-              onFailure: ()->
-                supersonic.logger.error "Preloading was failed"
-                reject()
-            })
-
-    ###
-     # @module view
-     # @name setWidth
-     # @function
-     # @description
-     # Sets width of a view. Useful for showing as a drawer
-     # @returns {Object} View object
-     # @usage
-     # ```coffeescript
-     # view = supersonic.ui.view("http://www.google.com").setWidth(200)
-     # ```
-    ###
-    setWidth: (width)->
-      @getWebView().widthOfDrawerInPixels = width
-      return @
-
-    ###
-     # @module view
-     # @name getView
-     # @function
-     # @description
-     # Gets the WebView of a current view instance
-     # @returns {Object} WebView object
-     # @usage
-     # ```coffeescript
-     # supersonic.ui.view("http://www.google.com").getView()
-     # ```
-    ###
-    getWebView: ()->
-      return @_webView
-
-  return (location, id)->
-    return new View(location, id)
+  return getView
