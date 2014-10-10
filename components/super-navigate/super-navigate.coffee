@@ -2,28 +2,25 @@ SuperNavigatePrototype = Object.create HTMLElement.prototype
 ###
  # @category webComponent
  # @name super-navigate
+ # @component
  # @description
  # Navigates to a view.
- # @attribute action
- # @attribute url url or path to the window.location of the view to be shown as a modal.
- # @usage
- # ```html
- # <super-navigate action="click" url="http://google.com">Open Google</super-navigate>
- # ```
+ # @attribute action="click" The action used to trigger the transition.
+ # @attribute location The route or URL for the view to be shown.
+ # @usageHtml
+ # <super-navigate location="cars#index">Open Cars index</super-navigate>
+ # @exampleHtml
+ # # External URLs work too
+ # <super-navigate action="click" location="http://google.com">Open Google</super-navigate>
 ###
 SuperNavigatePrototype.createdCallback = ->
-  action = this.getAttribute "action"
+  action = this.getAttribute "action" || "click"
+  location = this.getAttribute "location"
 
-  if action
-
-    url = this.getAttribute "url"
-    if url
-      this.addEventListener action, ()->
-        view = supersonic.ui.view(url)
-        supersonic.ui.layer.push(view)
-
-    # TODO: 
-    # route = this.getAttribute "route" 
+  if location
+    this.addEventListener action, ()->
+      view = supersonic.ui.view(location)
+      supersonic.ui.layer.push(view)
 
 document.registerElement "super-navigate",
   prototype: SuperNavigatePrototype
