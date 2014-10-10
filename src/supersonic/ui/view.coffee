@@ -44,6 +44,15 @@ module.exports = (steroids, log) ->
     webView = new steroids.views.WebView
       location: parsedLocation
 
+    view =
+      getLocation: -> location
+      _getWebView: -> webView
+
+    start = (id)->
+      supersonic.ui.views.start view, id
+
+    view.start = start
+
     ###
      # @module ui
      # @name View
@@ -53,14 +62,13 @@ module.exports = (steroids, log) ->
      # @type
      # View: {
      #   getLocation: () => String
+     #   start: (String) => StartedView
      # }
-     # @define {Function => String} getLocation Returns the View's location String.
+     # @define {Function} getLocation Returns the View's location String.
+     # @define {Function} start Shorthand for calling `supersonic.ui.start(view, id)` with this view.
     ###
 
-    {
-      getLocation: -> location
-      _getWebView: -> webView
-    }
+    view
 
   parseRoute = (location) ->
     if location.match /^[\w\-]+#[\w\-]+$/

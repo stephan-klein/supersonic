@@ -3,11 +3,11 @@ describe "supersonic.ui.view", ->
     supersonic.ui.view.should.exist
 
   describe "view with route", ->
-    route = "debug#empty"
+    route = "ui#empty"
     view = supersonic.ui.view route
 
     it "should parse route correctly", ->
-      view._getWebView().location.should.equal "http://localhost/app/debug/empty.html"
+      view._getWebView().location.should.equal "http://localhost/app/ui/empty.html"
 
     describe "getLocation()", ->
       it "should be a function", ->
@@ -33,3 +33,10 @@ describe "supersonic.ui.view", ->
 
     it "should set location correctly", ->
       view._getWebView().location.should.equal "http://www.google.com"
+
+  describe "view.start()", ->
+    it "should start a view with id test", ->
+      supersonic.ui.view("ui#empty").start("test").should.be.fulfilled
+
+    it "should stop a view with id test", ->
+      supersonic.ui.views.stop("test").should.be.fulfilled
