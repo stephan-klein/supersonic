@@ -9,6 +9,12 @@ module.exports =
     testApp: "testApp/www"
     components: "components/*"
     docs: 'docs'
+    docsGruntOutputDirs: [
+      '<%= dir.docs %>/_data/components/'
+      '<%= dir.docs %>/_data/supersonic/'
+      '<%= dir.docs %>/api/components/'
+      '<%= dir.docs %>/api/supersonic/'
+    ]
   files:
     src: '<%= dir.src %>/**/*.coffee'
     test: '<%= dir.test %>/**/*Spec.coffee'
