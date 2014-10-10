@@ -18,7 +18,7 @@ describe "supersonic.ui.view", ->
         view.getLocation().should.be.a "string"
 
       it "should return the given route", ->
-        view.getLocation().should.equal
+        view.getLocation().should.equal route
 
     describe "_getWebView()", ->
       it "should be a function", ->
