@@ -114,8 +114,13 @@ module.exports = (steroids, log) ->
    # supersonic.ui.views.stop "carsShowView"
   ###
 
-  stop = (id) ->
+  stop = (viewOrId) ->
     new Promise (resolve, reject) ->
+      id = if viewOrId.constructor.name is "String"
+        viewOrId
+      else
+        viewOrId.getId()
+
       viewToUnload = new steroids.views.WebView
         location: "null"
         id: id
