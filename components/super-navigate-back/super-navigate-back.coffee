@@ -12,7 +12,7 @@ SuperNavigateBackPrototype = Object.create HTMLElement.prototype
  # <super-navigate-back>Go back</super-navigate-back>
 ###
 SuperNavigateBackPrototype.createdCallback = ->
-  action = @getAttribute "action" || "click"
+  action = @getAttribute("action") || "click"
 
   @addEventListener action, ->
     supersonic.ui.layer.pop()
