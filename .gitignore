@@ -36,7 +36,9 @@ env.json
 
 # Docs
 /docs/_data/supersonic/
+/docs/_data/components/
 /docs/api/supersonic/
+/docs/api/components/
 
 # Bower build artifacts
 /dist

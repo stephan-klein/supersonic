@@ -1,6 +1,7 @@
 [
   {
     "params": [],
+    "returns": [],
     "category": "webComponent",
     "name": "super-navigate-back",
     "description": "Navigates back to the previous view.",

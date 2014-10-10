@@ -1,6 +1,7 @@
 [
   {
     "params": [],
+    "returns": [],
     "category": "webComponent",
     "name": "super-show-modal",
     "description": "Shows a modal.",

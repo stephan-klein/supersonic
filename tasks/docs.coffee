@@ -9,8 +9,8 @@ module.exports = (grunt)->
     docs:
       sources:
         expand: true
-        cwd: ""
-        src: ["src/**/*.coffee", "components/**/*.coffee"]
+        cwd: ''
+        src: ['src/**/*.coffee', 'components/**/*.coffee']
         dest: ""
         ext: ""
 

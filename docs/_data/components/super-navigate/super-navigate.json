@@ -1,6 +1,7 @@
 [
   {
     "params": [],
+    "returns": [],
     "category": "webComponent",
     "name": "super-navigate",
     "description": "Navigates to a view.",
