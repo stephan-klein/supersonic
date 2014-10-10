@@ -7,7 +7,7 @@ describe "supersonic.ui.view", ->
     view = supersonic.ui.view route
 
     it "should parse route correctly", ->
-      view._getWebView().location.should.equal "http://localhost/app/debug/views/empty.html"
+      view._getWebView().location.should.equal "http://localhost/app/debug/empty.html"
 
     describe "getLocation()", ->
       it "should be a function", ->

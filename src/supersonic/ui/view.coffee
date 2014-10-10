@@ -65,7 +65,7 @@ module.exports = (steroids, log) ->
   parseRoute = (location) ->
     if location.match /^[\w\-]+#[\w\-]+$/
       routeParts = location.split "#"
-      "app/#{routeParts[0]}/views/#{routeParts[1]}.html"
+      "app/#{routeParts[0]}/#{routeParts[1]}.html"
     else
       location
 
