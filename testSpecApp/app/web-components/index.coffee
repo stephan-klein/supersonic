@@ -8,3 +8,8 @@ importsLoaded = new Promise (resolve) ->
 clickElement = (id)->
   element = document.getElementById id
   element.click()
+
+fireTouchEvent = (obj, evt) ->
+  evObj = document.createEvent "TouchEvent"
+  evObj.initUIEvent evt, true, false
+  obj.dispatchEvent evObj

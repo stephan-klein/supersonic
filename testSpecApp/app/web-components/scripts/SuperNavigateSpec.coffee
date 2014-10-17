@@ -10,7 +10,6 @@ fireWhenLayerDidChangeTwice = (done) ->
   fireWhenLayerDidChange ->
     fireWhenLayerDidChange done
 
-
 describe "<super-navigate>", ->
   @timeout 4000
   it "should navigate by clicking on element with route", (done) ->
@@ -26,3 +25,8 @@ describe "<super-navigate>", ->
     elem = document.getElementById "super-navigate-change-location"
     elem.setAttribute "location", "web-components#super-navigate-back"
     elem.click()
+
+  it "should navigate with a custom touchstart action", (done) ->
+    fireWhenLayerDidChangeTwice done
+    elem = document.getElementById "super-navigate-touchstart"
+    fireTouchEvent elem, "touchstart"

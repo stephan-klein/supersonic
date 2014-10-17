@@ -1,0 +1,13 @@
+<script>
+window.addEventListener("HTMLImportsLoaded", function() {
+  evObj = document.createEvent("TouchEvent");
+  evObj.initUIEvent("touchstart", true, false);
+  document.getElementById("hide-modal").dispatchEvent(evObj);
+});
+</script>
+
+<super-hide-modal
+  id="hide-modal"
+  action="touchstart">
+  Hide modal
+</super-hide-modal>
