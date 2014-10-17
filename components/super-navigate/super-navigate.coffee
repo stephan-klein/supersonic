@@ -10,11 +10,14 @@ SuperNavigatePrototype = Object.create HTMLElement.prototype
  # @usageHtml
  # <super-navigate location="cars#index" action="click">Open Cars index</super-navigate>
  # @exampleHtml
- # # External URLs work too.
+ # <!-- The action attribute is optional -->
+ # <super-navigate location="cars#index">Open Cars index</super-navigate>
+ #
+ # <!-- External URLs work too. -->
  # <super-navigate location="http://google.com">Open Google</super-navigate>
  #
- # # "click" is the default action
- # <super-navigate location="cars#show">Show car</super-navigate>
+ # <!-- The default action can be overridden -->
+ # <super-navigate location="cars#show" action="touchmove">Show car</super-navigate>
 ###
 SuperNavigatePrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
