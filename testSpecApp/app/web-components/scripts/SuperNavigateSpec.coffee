@@ -13,7 +13,7 @@ describe "<super-navigate>", ->
       fireOnceOnLayersChange done
     clickElement "super-navigate-route"
 
-  it "should open an URL", (done) ->
+  it "should navigate with an URL", (done) ->
     fireOnceOnLayersChange ->
       fireOnceOnLayersChange done
     clickElement "super-navigate-url"

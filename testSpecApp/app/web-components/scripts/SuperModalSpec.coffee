@@ -11,7 +11,7 @@ fireAfterModalDidHide = (done) ->
     steroids.modal.off "didclose", hideListener
     done()
 
-describe "<super-modal-show>", ->
+describe "<super-show-modal> and <super-hide-modal>", ->
   @timeout 4000
   it "should show modal by clicking on element with route", (done) ->
     fireAfterModalDidShow ->
