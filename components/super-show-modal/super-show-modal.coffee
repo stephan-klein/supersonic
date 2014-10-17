@@ -17,13 +17,13 @@ SuperShowModalPrototype = Object.create HTMLElement.prototype
  # <super-show-modal location="meeting#details">Show meeting details</super-location>
 ###
 SuperShowModalPrototype.createdCallback = ->
-  action = @getAttribute("action") || null
+  action = @getAttribute("action") || "click"
   location = @getAttribute "location"
 
   if location
     @addEventListener action, ->
       view = supersonic.ui.view(location)
-      supersonic.ui.modal.show(view)
+      supersonic.ui.modal.show view
 
 document.registerElement "super-show-modal",
   prototype: SuperShowModalPrototype
