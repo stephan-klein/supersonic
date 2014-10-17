@@ -1,5 +1,6 @@
 dox = require "dox"
 _ = require "lodash"
+path = require "path"
 
 module.exports = (grunt)->
 
@@ -7,19 +8,25 @@ module.exports = (grunt)->
 
   grunt.extendConfig
     docs:
-      sources:
+      javascript:
         expand: true
         cwd: "src/"
         src: "**/*.coffee"
         dest: ""
         ext: ""
+      component:
+        expand: true
+        cwd: "components/"
+        src: "**/*.coffee"
+        dest: "components/"
+        ext: ""
+        rename: (dest, matchedSrcPath) ->
+          betterSrcPath = matchedSrcPath.split("/")[0]
+          betterSrcPath = path.join betterSrcPath, "index"
+          return path.join(dest, betterSrcPath)
 
   cleanUpDoxObject = (object)->
-    betterObject =
-      params: []
-      returns: []
-
-    parseDefineTag = (defineTag)->
+    parseDefineTag = (defineTag) ->
       nameArray = defineTag.name.split "="
       betterName = nameArray[0]
       defaultValue = nameArray[1] || null
@@ -39,6 +46,18 @@ module.exports = (grunt)->
         properties: []
       }
 
+    parseAttributeTag = (attributeTag) ->
+      nameArray = attributeTag.name.split "="
+      betterName = nameArray[0]
+      defaultValue = nameArray[1] || null
+
+      {
+        name: betterName
+        defaultValue: defaultValue
+        description: attributeTag.description
+        children: []
+      }
+
     getNamespaceFromTag = (betterTag)->
       namespace = betterTag.name.split(".")[0]
       findTarget = if betterTag.returns
@@ -48,6 +67,11 @@ module.exports = (grunt)->
 
       _.find findTarget, (tagName)->
         tagName.name is namespace
+
+    betterObject =
+      params: []
+      returns: []
+      attributes: []
 
     for tag in object.tags
       switch tag.type
@@ -63,6 +87,11 @@ module.exports = (grunt)->
               betterObject.returns.push betterTag
             else
               betterObject.params.push betterTag
+        when "attribute"
+          betterTag = parseAttributeTag tag
+          betterObject.attributes.push betterTag
+        when "syntax"
+          betterObject.syntax = tag.string
         when "type"
           betterObject.type = tag.typeString
         when "description"
@@ -85,6 +114,10 @@ module.exports = (grunt)->
           betterObject.usageCoffeeScript = tag.string
         when "exampleCoffeeScript"
           betterObject.exampleCoffeeScript = tag.string
+        when "usageHtml"
+          betterObject.usageHtml = tag.string
+        when "exampleHtml"
+          betterObject.exampleHtml = tag.string
         when "apiCall"
           betterObject.apiCall = tag.string
 
@@ -107,14 +140,11 @@ module.exports = (grunt)->
     markdownDestPath = "docs/api/#{file.dest}.md"
     jsonDestPath = "docs/_data/#{file.dest}.json"
 
-    methodString = filePath.substr 0, filePath.lastIndexOf "."
-    methodString = methodString.replace /\//g, "."
-    methodString = methodString.replace "src.", ""
-
+    methodString = file.dest.replace /\//g, "."
     {filePath, jsonDestPath, markdownDestPath, methodString}
 
   grunt.registerMultiTask "docs", "Get comments from src/*. to docs/_data/*.json", ->
-    @files.forEach (file) ->
+    @files.forEach (file) =>
       { filePath
         jsonDestPath
         markdownDestPath
@@ -130,7 +160,8 @@ module.exports = (grunt)->
 
       writeArrayToJson(cleanedUpArray, jsonDestPath)
 
-      templatePath = "tasks/templates/api_entry.md"
+      documentType = @nameArgs.split(":")[1]
+      templatePath = "tasks/templates/api_#{documentType}_entry.md"
       template = grunt.file.read templatePath
       markdownOutput = grunt.util._.template(template) {
           module:

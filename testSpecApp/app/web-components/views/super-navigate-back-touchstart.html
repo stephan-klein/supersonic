@@ -1,0 +1,13 @@
+<script>
+window.addEventListener("HTMLImportsLoaded", function() {
+  evObj = document.createEvent("TouchEvent");
+  evObj.initUIEvent("touchstart", true, false);
+  document.getElementById("go-back").dispatchEvent(evObj);
+});
+</script>
+
+<super-navigate-back
+  action="touchstart"
+  id="go-back">
+  Go back
+</super-navigate-back>

@@ -14,7 +14,7 @@ module.exports = (steroids, log) ->
    # @description
    #  Provides access to the device's accelerometer. The accelerometer is a motion sensor that detects the change (delta) in movement relative to the current device orientation, in three dimensions along the x, y, and z axis.
   ###
-    
+
   ###
    # @module accelerometer
    # @name watchAcceleration
@@ -58,7 +58,7 @@ module.exports = (steroids, log) ->
         )
         ->
           window.navigator.accelerometer.clearWatch watchId
-  
+
   ###
    # @module accelerometer
    # @name getAcceleration

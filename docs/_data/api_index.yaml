@@ -2,69 +2,81 @@
   href: "#"
   subpages:
     - name: getLaunchURL
-      href: app/getLaunchURL
+      href: supersonic/app/getLaunchURL
     - name: openURL
-      href: app/openURL
+      href: supersonic/app/openURL
     - name: sleep
-      href: app/sleep
+      href: supersonic/app/sleep
     - name: splashscreen
-      href: app/splashscreen
+      href: supersonic/app/splashscreen
     - name: statusBar
-      href: app/statusBar
+      href: supersonic/app/statusBar
 
 - name: Core
   href: "#"
   subpages:
     - name: debug
-      href: core/debug
+      href: supersonic/core/debug
     - name: logger
-      href: core/logger
+      href: supersonic/core/logger
 
 - name: Device
   href: "#"
   id: device
   subpages:
     - name: accelerometer
-      href: device/accelerometer
+      href: supersonic/device/accelerometer
     - name: compass
-      href: device/compass
+      href: supersonic/device/compass
     - name: geolocation
-      href: device/geolocation
+      href: supersonic/device/geolocation
     - name: platform
-      href: device/platform
+      href: supersonic/device/platform
     - name: vibrate
-      href: device/vibrate
+      href: supersonic/device/vibrate
 
 - name: Media
   href: "#"
   subpages:
     - name: audio
-      href: media/audio
+      href: supersonic/media/audio
     - name: camera
-      href: media/camera
+      href: supersonic/media/camera
 
 - name: Notification
   href: "#"
   subpages:
     - name: alert
-      href: notification/alert
+      href: supersonic/notification/alert
     - name: confirm
-      href: notification/confirm
+      href: supersonic/notification/confirm
     - name: prompt
-      href: notification/prompt
+      href: supersonic/notification/prompt
 
 - name: Native UI
   href: "#"
   subpages:
     - name: Drawers
-      href: ui/drawer
+      href: supersonic/ui/drawer
     - name: Layers
-      href: ui/layer
+      href: supersonic/ui/layer
     - name: Modal
-      href: ui/modal
+      href: supersonic/ui/modal
     - name: Navigation bar
-      href: ui/navigation-bar
+      href: supersonic/ui/navigation-bar
     - name: Navigation bar button
-      href: ui/navigation-button
+      href: supersonic/ui/navigation-button
     - name: Views
-      href: ui/view
+      href: supersonic/ui/view
+
+- name: Components
+  href: "#"
+  subpages:
+    - name: super-navigate
+      href: components/super-navigate
+    - name: super-navigate-back
+      href: components/super-navigate-back
+    - name: super-show-modal
+      href: components/super-show-modal
+    - name: super-hide-modal
+      href: components/super-hide-modal
