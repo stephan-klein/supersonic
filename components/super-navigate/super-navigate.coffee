@@ -21,10 +21,10 @@ SuperNavigatePrototype = Object.create HTMLElement.prototype
 ###
 SuperNavigatePrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
-  location = @getAttribute "location"
 
-  if location
-    @addEventListener action, ->
+  @addEventListener action, =>
+    location = @getAttribute "location"
+    if location
       view = supersonic.ui.view location
       supersonic.ui.layer.push view
 

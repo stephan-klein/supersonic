@@ -21,10 +21,10 @@ SuperShowModalPrototype = Object.create HTMLElement.prototype
 ###
 SuperShowModalPrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
-  location = @getAttribute "location"
 
-  if location
-    @addEventListener action, ->
+  @addEventListener action, =>
+    location = @getAttribute "location"
+    if location
       view = supersonic.ui.view(location)
       supersonic.ui.modal.show view
 
