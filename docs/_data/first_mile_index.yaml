@@ -1,46 +1,56 @@
-- name: Setup
-  href: "#"
-  id: setup
+- name: Your First App in 5 minutes
   subpages:
     - name: Installation
-      id: installation
-    - name: Steroids CLI
-      id: steroids-cli
-    - name: Migrate Steroids projects
-      id: migrating-existing-projects
+    - name: Creating a New Project
+    - name: Connecting Your Device
+    - name: Making Changes
+    - name: Debugging
+    - name: Distributing Your App
 
-- name: Basics
-  href: "#"
-  id: basics
+- name: App Logic and Structure
   subpages:
-    - name: Hello World
-      id: hello-world
-    - name: Connect Screen
-      id: connect-screen
+    - name: Overview
+    - name: Model-View-Controller Architecture
+    - name: App Logic in the Controller
+    - name: Generating a New Module
+    - name: App Configuration
 
-- name: Under the hood
-  href: "#"
-  id: under-the-hood
+- name: Navigation
   subpages:
-    - name: app structure
-      id: app-structure
-    - name: supersonic promises
-      id: promises
-    - name: Supersonic Web Components
-      id: web-components
+    - name: Overview
+    - name: Routes and Navigation
+    - name: Layer Stack
+    - name: Modals
 
-- name: Beyond a web app
-  href: "#"
-  id: beyond-a-web-app
+- name: Declarative UI
   subpages:
-    - name: Steroids APIs
-      id: steroids-apis
-    - name: Cordova APIs
-      id: cordova-apis
+    - name: Overview
+    - name: Building a Something
+    - name: Navigation Bar
+    - name: Tabs
+    - name: Drawer
 
-- name: My First App
-  href: "#"
-  id: my-first-app
+- name: Device Access
   subpages:
-    - name: Sample App
-      id: cool
+    - name: Overview
+    - name: Accessing Camera
+    - name: Geolocation
+    - name: Push Notifications
+
+- name: Data
+  subpages:
+    - name: Overview
+    - name: Adding Data to Your App
+    - name: Showing and Creating Data
+    - name: Authentication and Login
+    - name: Uploading Files
+    - name: Integrating a Custom API
+
+- name: Releasing to App Stores
+  subpages:
+    - name: Overview
+    - name: Using the Build Service
+    - name: Build Service Configuration (iOS)
+    - name: Build Service Configuration (Android)
+    - name: Publishing to App Store
+    - name: Publishing to Google Play
