@@ -250,7 +250,7 @@ var ionicSite = (function(){
     if(!activeSection.length || !devicePreview) return;
 
     var title = activeSection.find('h1,h2,h3').first();
-    var newTitle = "Ionic Components";
+    var newTitle = "Supersonic Documentation";
     activeId = activeSection.attr('id');
     if(title.length) {
       newTitle = title.text() + " - " + newTitle;

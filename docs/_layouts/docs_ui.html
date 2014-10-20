@@ -1,0 +1,43 @@
+---
+layout: docs
+sections:
+  - name: Overview
+  - name: Navigation
+  - name: Components
+  - name: Views
+  - name: App
+    subsections:
+      - name: Splashscreen
+      - name:
+---
+<div class="col-md-2 col-sm-3 aside-menu">
+
+  <div class="docked-menu">
+    {% for section in page.sections %}
+    {% assign section_id = section.name | slugify %}
+    <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
+      <li class="menu-title">
+        <a href="/ui/{{section_id}}">{{section.name}}</a>
+        {% if page.section_id == section_id %}
+        {% for subsection in page.subsections %}
+        <li class="menu-section">
+          <a href="/ui/{{section_id}}/{{subsection.name | slugify}}/" class="api-section">
+            {{subsection.name}}
+          </a>
+          <ul>
+            <li>trololol</li>
+            <li>7roollol</li>
+        </li>
+        {% endfor %}
+        {% endif %}
+      </li>
+    </ul>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+<div class="col-md-10 col-sm-9 main-content">
+  {{ content }}
+</div>

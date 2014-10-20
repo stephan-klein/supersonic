@@ -4,6 +4,11 @@ title: Supersonic Documentation
 header_title: Supersonic Navigation
 header_sub_title: Learn how Supersonic handles navigation.
 section_id: navigation
+subsections:
+  - name: Overview
+  - name: Routes and Navigation
+  - name: Layer Stack
+  - name: Modals
 ---
 
 ## Overview

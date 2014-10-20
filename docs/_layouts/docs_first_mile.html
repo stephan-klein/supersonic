@@ -1,55 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    {% include meta_tags.html %}
-    <title>{{page.title}} - Supersonic Framework</title>
-    {% include head_includes.html %}
-  </head>
+---
+layout: docs
+sections:
+  - name: Your First App in 5 minutes
+  - name: App Logic and Structure
+  - name: Navigation
+  - name: Declarative UI
+  - name: Device Access
+  - name: Data
+  - name: Releasing to App Stores
+---
 
-  <body class="docs docs-page {{page.body_extra_css_classes}}">
+<div class="col-md-2 col-sm-3 aside-menu">
 
-    {% include header.html %}
+  <div class="docked-menu">
+    {% for section in page.sections %}
+    {% assign section_id = section.name | slugify %}
+    <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
+      <li class="menu-title">
+        <a href="/first-mile/{{section_id}}">{{section.name}}</a>
+      </li>
+      {% if page.section_id == section_id %}
+      {% for subsection in page.subsections %}
+      <li class="menu-section">
+        <a href="/first-mile/{{section_id}}/#{{subsection.name | slugify}}" class="api-section">
+          {{subsection.name}}
+        </a>
+      </li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+    {% endfor %}
 
-    <div class="container content-container">
+  </div>
 
-      <div class="row">
+</div>
 
-        <div class="col-md-2 col-sm-3 aside-menu">
-
-          <div class="docked-menu">
-            {% for section in site.data.first_mile_index %}
-            {% assign section_id = section.name | slugify %}
-            <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
-              <li class="menu-title">
-                <a href="/first-mile/{{section_id}}">{{section.name}}</a>
-                <ul>
-                  {% for subpage in section.subpages %}
-                  <li class="menu-section">
-                    <a href="/first-mile/{{section_id}}/{{subpage.name | slugify}}/" class="api-section">
-                      {{subpage.name}}
-                    </a>
-                  </li>
-                  {% endfor %}
-                </ul>
-              </li>
-            </ul>
-            {% endfor %}
-
-          </div>
-
-        </div>
-
-        <div class="col-md-10 col-sm-9 main-content">
-          {{ content }}
-        </div>
-
-      </div>
-
-    </div>
-
-    {% include footer.html %}
-
-    {% include base_scripts.html %}
-
-  </body>
-</html>
+<div class="col-md-10 col-sm-9 main-content">
+  {{ content }}
+</div>

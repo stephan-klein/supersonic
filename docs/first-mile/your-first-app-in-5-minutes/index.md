@@ -4,6 +4,13 @@ title: Supersonic Documentation
 header_title: Supersonic First Mile
 header_sub_title: Learn how to build your first app in 5 minutes.
 section_id: your-first-app-in-5-minutes
+subsections:
+  - name: Installation
+  - name: Creating a New Project
+  - name: Connecting Your Device
+  - name: Making Changes
+  - name: Debugging
+  - name: Distributing Your App
 ---
 
 ## Overview

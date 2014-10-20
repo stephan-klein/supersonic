@@ -1,0 +1,29 @@
+---
+layout: docs
+sections:
+  - name: Overview
+  - name: Angular.js
+  - name: Web Components
+  - name: Promises
+  - name: Streams
+---
+
+<div class="col-md-2 col-sm-3 aside-menu">
+
+  <div class="docked-menu">
+    {% for section in page.sections %}
+    {% assign section_id = section.name | slugify %}
+    <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
+      <li class="menu-title">
+        <a href="/core/{{section_id}}">{{section.name}}</a>
+      </li>
+    </ul>
+    {% endfor %}
+
+  </div>
+
+</div>
+
+<div class="col-md-10 col-sm-9 main-content">
+  {{ content }}
+</div>
