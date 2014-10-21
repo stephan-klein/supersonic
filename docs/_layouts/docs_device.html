@@ -5,17 +5,15 @@ sections:
   - name: Overview
   - name: Device APIs
     subsections:
-    - name: Overview
     - name: Accelerometer
     - name: Compass
     - name: Geolocation
   - name: Media APIs
     subsections:
-    - name: Overview
     - name: Camera
   - name: Push Notifications
     subsections:
-    - name: Overview
+
 ---
 <div class="col-md-2 col-sm-3 aside-menu">
 
@@ -26,10 +24,13 @@ sections:
       <li class="menu-title">
         <a href="/device{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
         {% if page.section_id == section_id %}
+        <li class="menu-section {% if page.subsection_id == 'overview' %}active{% endif %}">
+          <a href="/device/{{section_id}}" class="api-section">Overview</a>
+        </li>
         {% for subsection in section.subsections %}
         {% assign subsection_id = subsection.name | slugify %}
         <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
-          <a href="/device/{{section_id}}{% unless subsection_id == 'overview' %}/{{subsection_id}}{% endunless %}" class="api-section">
+          <a href="/device/{{section_id}}/{{subsection_id}}" class="api-section">
             {{subsection.name}}
           </a>
           <ul>
