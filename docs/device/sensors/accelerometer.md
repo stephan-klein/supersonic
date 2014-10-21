@@ -1,5 +1,5 @@
 ---
-layout: docs_device_access
+layout: docs_device
 title: Supersonic Documentation
 header_title: Accelerometer
 header_sub_title: Device acceleration.

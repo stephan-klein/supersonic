@@ -1,7 +1,10 @@
 ---
 layout: docs
+docs_section_id: first-mile
+title: Supersonic First Mile
+header_title: Supersonic First Mile
 sections:
-  - name: Overview
+  - name: Start building with Supersonic
   - name: Your First App in 5 minutes
   - name: App Logic and Structure
   - name: Navigation
@@ -13,12 +16,12 @@ sections:
 
 <div class="col-md-2 col-sm-3 aside-menu">
 
-  <div class="docked-menu">
+  <div class="docked-menu first-mile-menu">
     {% for section in page.sections %}
     {% assign section_id = section.name | slugify %}
-    <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
+    <ol class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
       <li class="menu-title">
-        <a href="/first-mile{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
+        <a href="/first-mile{% unless section_id == 'start-building-with-supersonic' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
       </li>
       {% if page.section_id == section_id %}
       {% for subsection in page.subsections %}
@@ -29,7 +32,7 @@ sections:
       </li>
       {% endfor %}
       {% endif %}
-    </ul>
+    </ol>
     {% endfor %}
 
   </div>

@@ -1,17 +1,11 @@
 ---
 layout: docs
+docs_section_id: device
 sections:
   - name: Overview
-  - name: Device
-    subsections:
-      - name: Platform
-      - name: Vibrate
-  - name: Media
-    subsections:
-      - name: Audio
-      - name: Camera
+  - name: Device APIs
+  - name: Media APIs
   - name: Push Notifications
-  - name: Sensors
 ---
 <div class="col-md-2 col-sm-3 aside-menu">
 
@@ -20,11 +14,11 @@ sections:
     {% assign section_id = section.name | slugify %}
     <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
       <li class="menu-title">
-        <a href="/device-access{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
+        <a href="/device{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
         {% if page.section_id == section_id %}
         {% for subsection in page.subsections %}
         <li class="menu-section">
-          <a href="/device-access/{{section_id}}/#{{subsection.name | slugify}}" class="api-section">
+          <a href="/device/{{section_id}}/#{{subsection.name | slugify}}" class="api-section">
             {{subsection.name}}
           </a>
           <ul>

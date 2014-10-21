@@ -6,13 +6,13 @@
   <div class="news">
     <div class="container">
       <div class="row">
-        <ul class="nav nav-pills" style="top: 5px !important; margin-left:205px;">
-          <li><a href="/first-mile">First Mile</a>
-          <li><a href="/ui">UI</a>
-          <li><a href="/data">Data</a>
-          <li><a href="/device-access">Device Access</a>
-          <li><a href="/core">Core</a>
-          <li><a href="/tooling">Tooling</a>
+        <ul class="nav nav-pills docs-header">
+          {% for docs_section in page.docs_sections %}
+            {% assign docs_section_id = docs_section.name | slugify %}
+            <li {% if page.docs_section_id == docs_section_id %}class="active"{% endif %}>
+              <a href="/{{docs_section_id | slugify}}">{{docs_section.name}}</a>
+            </li>
+          {% endfor %}
         </ul>
       </div>
     </div>

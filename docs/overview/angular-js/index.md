@@ -1,5 +1,5 @@
 ---
-layout: docs_core
+layout: docs_overview
 title: Supersonic Documentation
 header_title: Supersonic App Logic and Structure
 header_sub_title: Learn how Supersonic integrates with AngularJS
