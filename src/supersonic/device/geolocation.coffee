@@ -14,7 +14,7 @@ module.exports = (steroids, log) ->
    # @description
    # Provides access to location data based on the device's GPS sensor or inferred from network signals.
   ###
-    
+
   ###
    # @module geolocation
    # @name watchPosition
@@ -23,13 +23,13 @@ module.exports = (steroids, log) ->
    # @description
    # Returns a stream of position updates.
    # @type
-   # supersonic.device.geolocation.watchPosition: (
-   #  options?: {
-   #   enableHighAccuracy?: Boolean
-   #  }
+   # supersonic.device.geolocation.watchPosition : (
+   #   options?: {
+   #     enableHighAccuracy?: Boolean
+   #   }
    # ) => Stream: {
-   #  coord: Object,
-   #  timestamp: Date
+   #   coord: Object,
+   #   timestamp: Date
    # }
    # @define {Object} options={} Optional options object.
    # @define {Boolean} options.enableHighAccuracy=true Provides a hint that the application needs the best possible results. By default, the device attempts to retrieve a position using network-based methods. Setting this property to true tells the framework to use more accurate methods, such as satellite positioning.
@@ -48,12 +48,15 @@ module.exports = (steroids, log) ->
    # supersonic.device.geolocation.watchPosition options
    # @exampleCoffeeScript
    # supersonic.device.geolocation.watchPosition().onValue (position) ->
-   #  steroids.logger.log('Latitude: '  + position.coords.latitude  + '\n' +
-   #                      'Longitude: ' + position.coords.longitude + '\n' +
-   #                      'Timestamp: ' + position.timestamp)
+   #   steroids.logger.log
+   #     """
+   #     Latitude: #{position.coords.latitude}
+   #     Longitude: #{position.coords.longitude}
+   #     Timestamp: #{position.timestamp}
+   #     """
   ###
   watchPosition = (options = {}) ->
-  
+
     options.enableHighAccuracy ?= true
 
     Bacon.fromPromise(deviceready).flatMap ->
@@ -65,7 +68,7 @@ module.exports = (steroids, log) ->
         )
         ->
           window.navigator.geolocation.clearWatch watchId
-  
+
   ###
    # @module geolocation
    # @name getPosition
@@ -74,11 +77,11 @@ module.exports = (steroids, log) ->
    # @description
    # Returns device's current position.
    # @type
-   # supersonic.device.compass.geolocation.getPosition: ()
-   # => Promise: {
-   #  coord: Object,
-   #  timestamp: Date
-   # }
+   # supersonic.device.compass.geolocation.getPosition : () =>
+   #   Promise: {
+   #     coord: Object,
+   #     timestamp: Date
+   #   }
    # @returnsDescription [Promise](todo) is resolved to the next available position data. Will wait for data for an indeterminate time; use a timeout if required.
    # @define {=>Object} position Position object.
    # @define {=>Object} position.coord  A set of geographic coordinates.
@@ -94,9 +97,12 @@ module.exports = (steroids, log) ->
    # supersonic.device.geolocation.getPosition()
    # @exampleCoffeeScript
    # supersonic.device.geolocation.getPosition().then (position) ->
-   #  steroids.logger.log('Latitude: '  + position.coords.latitude  + '\n' +
-   #                      'Longitude: ' + position.coords.longitude + '\n' +
-   #                      'Timestamp: ' + position.timestamp)
+   #   steroids.logger.log
+   #     """
+   #     Latitude: #{position.coords.latitude}
+   #     Longitude: #{position.coords.longitude}
+   #     Timestamp: #{position.timestamp}
+   #     """
   ###
   getPosition = (options = {}) ->
     new Promise (resolve) ->

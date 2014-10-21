@@ -23,15 +23,18 @@ module.exports = (steroids, log) ->
    # @description
    # Returns a stream of acceleration updates.
    # @type
-   # supersonic.device.accelerometer.watchAcceleration: (
-   #   frequency?: Integer
+   # supersonic.device.accelerometer.watchAcceleration : (
+   #   options?: {
+   #     frequency?: Integer
+   #   }
    # ) => Stream: {
    #   x: Number,
    #   y: Number,
    #   z: Number,
    #   timestamp: DOMTimeStamp
    # }
-   # @define {Integer} frequency=40 Update interval in milliseconds.
+   # @define {Object} options={} Optional options object.
+   # @define {Integer} options.frequency=40 Update interval in milliseconds.
    # @returnsDescription [Stream](todo) of acceleration objects with the following properties.
    # @define {=>Object} acceleration Acceleration object.
    # @define {=>Number} acceleration.x Amount of acceleration on the x-axis. (in m/s^2)
@@ -39,16 +42,24 @@ module.exports = (steroids, log) ->
    # @define {=>Number} acceleration.z Amount of acceleration on the z-axis. (in m/s^2)
    # @define {=>DOMTimeStamp} acceleration.timestamp Creation timestamp in milliseconds.
    # @usageCoffeeScript
-   # supersonic.device.accelerometer.watchAcceleration frequency
+   # supersonic.device.accelerometer.watchAcceleration options
    # @exampleCoffeeScript
-   # supersonic.device.accelerometer.watchAcceleration().onValue (acceleration) ->
-   #   supersonic.logger.log('Acceleration X: '  + acceleration.x  + '\n' +
-   #                         'Acceleration Y: ' + acceleration.y + '\n' +
-   #                         'Acceleration Z: ' + acceleration.z + '\n' +
-   #                         'Timestamp: ' + acceleration.timestamp)
+   # options =
+   #   frequency: 60
+   #
+   # supersonic.device.accelerometer.watchAcceleration(options).onValue (acceleration) ->
+   #   supersonic.logger.log
+   #     """
+   #     Acceleration X: #{acceleration.x}
+   #     Acceleration Y: #{acceleration.y}
+   #     Acceleration Z: #{acceleration.z}
+   #     Timestamp: #{acceleration.timestamp}
+   #     """
   ###
-  watchAcceleration = (frequency = 40) ->
-    options = { frequency }
+  watchAcceleration = (options = {}) ->
+    accelerationOptions =
+      frequency: options?.frequency? || 40
+
     Bacon.fromPromise(deviceready).flatMap ->
       Bacon.fromBinder (sink) ->
         watchId = window.navigator.accelerometer.watchAcceleration(
@@ -67,13 +78,13 @@ module.exports = (steroids, log) ->
    # @description
    # Returns device's current acceleration.
    # @type
-   # supersonic.device.accelerometer.getAcceleration: ()
-   # => Promise: {
-   #  x: Number,
-   #  y: Number,
-   #  z: Number,
-   #  timestamp: DOMTimeStamp
-   # }
+   # supersonic.device.accelerometer.getAcceleration : () =>
+   #   Promise: {
+   #     x: Number,
+   #     y: Number,
+   #     z: Number,
+   #     timestamp: DOMTimeStamp
+   #   }
    # @returnsDescription [Promise](todo) is resolved to the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.
    # @define {=>Object} acceleration Acceleration object.
    # @define {=>Number} acceleration.x Amount of acceleration on the x-axis. (in m/s^2)
@@ -84,10 +95,13 @@ module.exports = (steroids, log) ->
    # supersonic.device.accelerometer.getAcceleration()
    # @exampleCoffeeScript
    # supersonic.device.accelerometer.getAcceleration().then (acceleration) ->
-   #  supersonic.logger.log('Acceleration X: '  + acceleration.x  + '\n' +
-   #              'Acceleration Y: ' + acceleration.y + '\n' +
-   #              'Acceleration Z: ' + acceleration.z + '\n' +
-   #              'Timestamp: ' + acceleration.timestamp)
+   #   supersonic.logger.log
+   #     """
+   #     Acceleration X: #{acceleration.x}
+   #     Acceleration Y: #{acceleration.y}
+   #     Acceleration Z: #{acceleration.z}
+   #     Timestamp: #{acceleration.timestamp}
+   #     """
   ###
   getAcceleration = bug "getAcceleration", ->
     new Promise (resolve) ->
