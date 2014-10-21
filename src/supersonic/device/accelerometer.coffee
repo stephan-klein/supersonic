@@ -42,10 +42,10 @@ module.exports = (steroids, log) ->
    # supersonic.device.accelerometer.watchAcceleration frequency
    # @exampleCoffeeScript
    # supersonic.device.accelerometer.watchAcceleration().onValue (acceleration) ->
-   #  supersonic.logger.log('Acceleration X: '  + acceleration.x  + '\n' +
-   #                        'Acceleration Y: ' + acceleration.y + '\n' +
-   #                        'Acceleration Z: ' + acceleration.z + '\n' +
-   #                        'Timestamp: ' + acceleration.timestamp)
+   #   supersonic.logger.log('Acceleration X: '  + acceleration.x  + '\n' +
+   #                         'Acceleration Y: ' + acceleration.y + '\n' +
+   #                         'Acceleration Z: ' + acceleration.z + '\n' +
+   #                         'Timestamp: ' + acceleration.timestamp)
   ###
   watchAcceleration = (frequency = 40) ->
     options = { frequency }

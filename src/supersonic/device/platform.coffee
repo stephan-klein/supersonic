@@ -16,9 +16,9 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.device.platform: ()
    # => Promise {
-   #  name: String,
-   #  version: String,
-   #  model: String
+   #   name: String,
+   #   version: String,
+   #   model: String
    # }
    # @returnsDescription [Promise](todo) is resolved to the name and version of the operating system and the model of the device.
    # @define {=>Object} platform Platform object.
