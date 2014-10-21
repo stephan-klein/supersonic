@@ -6,4 +6,6 @@ header_sub_title: Learn how to access native device features with Supersonic.
 section_id: overview
 ---
 
-Here be data and dragons.
+# Supersonic Device
+
+Learn how to access native device features with Supersonic.

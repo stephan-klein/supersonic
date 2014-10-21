@@ -1,14 +1,14 @@
 ---
 layout: docs_device
-header_title: Compass
-header_sub_title: Device compass.
+header_title: Vibrate
+header_sub_title: Vibrates the device.
 section_id: device-apis
-subsection_id: compass
+subsection_id: vibrate
 methods:
-  - name: watchHeading
-  - name: getHeading
+  - name: vibrate
 ---
-{% assign methods = site.data.supersonic.device.compass %}
+
+{% assign methods = site.data.supersonic.device.vibrate %}
 
 <section class="docs-section" id="{{page.subsection_id}}">
 

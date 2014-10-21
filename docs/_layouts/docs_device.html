@@ -8,12 +8,11 @@ sections:
     - name: Accelerometer
     - name: Compass
     - name: Geolocation
+    - name: Platform Information
+    - name: Vibrate
   - name: Media APIs
     subsections:
-    - name: Camera
-  - name: Push Notifications
-    subsections:
-
+    - name: Camera and Photo Library
 ---
 <div class="col-md-2 col-sm-3 aside-menu">
 
@@ -33,11 +32,13 @@ sections:
           <a href="/device/{{section_id}}/{{subsection_id}}" class="api-section">
             {{subsection.name}}
           </a>
+          {% if page.subsection_id == subsection_id %}
           <ul>
             {% for method in page.methods %}
-            <li><a href="/device-access/{{section_id}}/#{{subsection_id}}-{{method.name}}">{{method.name}}</a>
+            <li><a href="/device-access/{{section_id}}/#{{method.name}}">{{method.name}}</a>
             {% endfor %}
           </ul>
+          {% endif %}
         </li>
         {% endfor %}
         {% endif %}
