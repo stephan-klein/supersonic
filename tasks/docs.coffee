@@ -120,6 +120,8 @@ module.exports = (grunt)->
           betterObject.exampleHtml = tag.string
         when "apiCall"
           betterObject.apiCall = tag.string
+        when "class"
+          betterObject.class = true
 
     betterObject
 

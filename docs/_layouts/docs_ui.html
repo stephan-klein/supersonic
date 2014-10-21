@@ -3,28 +3,82 @@ layout: docs
 docs_section_id: ui-and-navigation
 sections:
   - name: Overview
+  - name: Components
+    subsections:
+      - name: Navigation Bar
+        properties:
+          - name: Overview
+          - name: Title
+          - name: Title Image
+          - name: Buttons
+          - name: Image Buttons
+          - name: Back Button
+      - name: Buttons
+        propeties:
+          - name: Block
+          - name: Full Width
+          - name: Different Sizes
+          - name: Outlined
+          - name: Clear
+          - name: Icons
+
+      - name: List
+        properties:
+          - name: Divider
+          - name: Icons
+          - name: Buttons
+          - name: Avatars
+          - name: Thumbnails
+          - name: Inset Lists
+
+      - name: Cards
+        properties:
+          - name: Headers & Footers
+          - name: Lists
+          - name: Images
+          - name: Showcase
+
+      - name: Forms
+        properties:
+          - name: Placeholder Labels
+          - name: Inline Lables
+          - name: Stacked Labels
+          - name: Floating Labels
+          - name: Inset Forms
+          - name: Inset Inputs
+          - name: Input Icons
+          - name: Header Inputs
+
+      - name: Toggle
+      - name: Checkbox
+      - name: Radio Buttons
+      - name: Range
+      - name: Select
+
+      - name: Grid
+        properties:
+          - name: Even Colums
+          - name: Explicit Column Sized
+          - name: Offset Columns
+          - name: Vertically Aligned
+          - name: Responsive Grid
+
+      - name: Utility
+        properties:
+          - name: Colors
+          - name: Icons
+          - name: Padding
+
   - name: Navigation
     subsections:
-      - name: Overview
       - name: Layer Stack
-      - name: Modal Views
+      - name: Using Modals
       - name: Drawers
       - name: Tabs
       - name: Animations
       - name: Opening External URLs
-  - name: Components
-    subsections:
-      - name: Overview
-      - name: Navigation Bar
-      - name: Buttons
-      - name: List
-      - name: Cards
-      - name: Forms
-      - name: Grid
-      - name: Utility
   - name: Views
     subsections:
-      - name: Overview
       - name: View
       - name: Persitent views
       - name: Starting and stopping views
@@ -45,11 +99,22 @@ sections:
       <li class="menu-title">
         <a href="/ui-and-navigation{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
         {% if page.section_id == section_id %}
+        <li class="menu-section {% if page.name == 'index.md' %}active{% endif %}">
+          <a href="/ui-and-navigation/{{section_id}}" class="api-section">Overview</a>
+        </li>
         {% for subsection in section.subsections %}
-        <li class="menu-section">
-          <a href="/ui-and-navigation/{{section_id}}/{{subsection.name | slugify}}" class="api-section">
+        {% assign subsection_id = subsection.name | slugify %}
+        <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
+          <a href="/ui-and-navigation/{{section_id}}/{{subsection_id}}" class="api-section">
             {{subsection.name}}
           </a>
+          {% if page.subsection_id == subsection_id %}
+          <ul>
+            {% for method in page.methods %}
+            <li><a href="/ui-and-navigation/{{section_id}}/#{{method.name}}">{{method.name}}</a>
+            {% endfor %}
+          </ul>
+          {% endif %}
         </li>
         {% endfor %}
         {% endif %}
