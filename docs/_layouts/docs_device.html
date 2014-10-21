@@ -4,8 +4,18 @@ docs_section_id: device
 sections:
   - name: Overview
   - name: Device APIs
+    subsections:
+    - name: Overview
+    - name: Accelerometer
+    - name: Compass
+    - name: Geolocation
   - name: Media APIs
+    subsections:
+    - name: Overview
+    - name: Camera
   - name: Push Notifications
+    subsections:
+    - name: Overview
 ---
 <div class="col-md-2 col-sm-3 aside-menu">
 
@@ -16,14 +26,15 @@ sections:
       <li class="menu-title">
         <a href="/device{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
         {% if page.section_id == section_id %}
-        {% for subsection in page.subsections %}
-        <li class="menu-section">
-          <a href="/device/{{section_id}}/#{{subsection.name | slugify}}" class="api-section">
+        {% for subsection in section.subsections %}
+        {% assign subsection_id = subsection.name | slugify %}
+        <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
+          <a href="/device/{{section_id}}{% unless subsection_id == 'overview' %}/{{subsection_id}}{% endunless %}" class="api-section">
             {{subsection.name}}
           </a>
           <ul>
-            {% for method in subsection.methods %}
-            <li><a href="/device-access/{{section_id}}/#{{subsection.name | slugify}}-{{method.name}}">{{method.name}}</a>
+            {% for method in page.methods %}
+            <li><a href="/device-access/{{section_id}}/#{{subsection_id}}-{{method.name}}">{{method.name}}</a>
             {% endfor %}
           </ul>
         </li>

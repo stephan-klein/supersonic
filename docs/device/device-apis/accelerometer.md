@@ -3,12 +3,11 @@ layout: docs_device
 title: Supersonic Documentation
 header_title: Accelerometer
 header_sub_title: Device acceleration.
-section_id: sensors
-subsections:
-- name: Accelerometer
-  methods:
-    - name: watchAcceleration
-    - name: getAcceleration
+section_id: device-apis
+subsection_id: accelerometer
+methods:
+  - name: watchAcceleration
+  - name: getAcceleration
 ---
 
 <section class="docs-section" id="accelerometer">
