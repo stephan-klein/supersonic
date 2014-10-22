@@ -22,4 +22,4 @@ deploy:
     secure: jRbh4bvZc5E80B8/jM+fjSfN3xeHddVdmUWkU2PW9EegQLc1G5Q6lxxKwxD2mj8nJ62WKS8rCXXbZu8KXhWkGkIkNA0AS+Qy5+Z3QDO0dCkc+flCmcUqKcT+5v3aAJv0peK04njWl2vJ6THbAdmnO6VluAuNudqVLjWC8qlckQ8=
   skip_cleanup: true
   acl: public_read
-  local_dir: docs/site_
+  local_dir: docs/_site

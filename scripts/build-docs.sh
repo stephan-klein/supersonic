@@ -4,3 +4,4 @@ gem install jekyll
 grunt compile-docs
 cd docs
 jekyll build
+cd ..
