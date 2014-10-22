@@ -149,18 +149,14 @@ module.exports = (grunt)->
 
   getStringsFromFile = (file) ->
     filePath = file.src[0]
-    markdownDestPath = "docs/api/#{file.dest}.md"
     jsonDestFolderPath = "docs/_data/#{file.dest}/"
-
-    methodString = file.dest.replace /\//g, "."
-    {filePath, jsonDestFolderPath, markdownDestPath, methodString}
+    {filePath, jsonDestFolderPath}
 
   grunt.registerMultiTask "docs", "Get comments from src/*. to docs/_data/*.json", ->
     @files.forEach (file) =>
       { filePath
         jsonDestFolderPath
-        markdownDestPath
-        methodString } = getStringsFromFile(file)
+        } = getStringsFromFile(file)
 
       coffee = grunt.file.read filePath
 
@@ -171,16 +167,3 @@ module.exports = (grunt)->
       cleanedUpArray = cleanUpDoxArray(doxArray)
 
       writeArrayToJson(cleanedUpArray, jsonDestFolderPath)
-
-      # documentType = @nameArgs.split(":")[1]
-      # templatePath = "tasks/templates/api_#{documentType}_entry.md"
-      # template = grunt.file.read templatePath
-      # markdownOutput = grunt.util._.template(template) {
-      #     module:
-      #       version: "nightly"
-      #       versionHref: "#"
-      #       name: "Lol"
-      #       path: methodString
-      #   }
-      #
-      # grunt.file.write markdownDestPath, markdownOutput
