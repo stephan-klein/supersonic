@@ -140,7 +140,12 @@ module.exports = (grunt)->
       grunt.file.write fileDestination, prettyJSON
 
     for method in cleanedUpArray
-      writeMethodToJson "#{method.name}.json", method
+      methodName = if method.overview
+        "overview.json"
+      else
+        "#{method.name}.json"
+
+      writeMethodToJson methodName, method
 
   getStringsFromFile = (file) ->
     filePath = file.src[0]
