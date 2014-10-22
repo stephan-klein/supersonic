@@ -7,13 +7,17 @@ subsection_id: platform-information
 methods:
   - name: platform
 ---
+<section class="docs-section" id="platform-information">
 
-{% assign methods = site.data.supersonic.device.platform %}
+# Platform Information
 
-<section class="docs-section" id="{{page.subsection_id}}">
+The [supersonic.device.platform](#platform) API call gives you information about the device platform.
 
-# {{page.header_title}}
+## API Reference
 
-{% include api_bentry.md methods=methods %}
+<section class="docs-section" id="platform">
+{% assign platform = site.data.supersonic.device.platform.platform %}
+{% include api_method.md method=platform %}
+</section>
 
 </section>

@@ -8,12 +8,22 @@ methods:
   - name: watchHeading
   - name: getHeading
 ---
-{% assign methods = site.data.supersonic.device.compass %}
+<section class="docs-section" id="compass">
 
-<section class="docs-section" id="{{page.subsection_id}}">
+# Compass
 
-# {{page.header_title}}
+{{ site.data.supersonic.device.compass.overview.description }}
 
-{% include api_bentry.md methods=methods %}
+## API Reference
+
+<section class="docs-section" id="watchHeading">
+{% assign watchHeading = site.data.supersonic.device.compass.watchHeading %}
+{% include api_method.md method=watchHeading %}
+</section>
+
+<section class="docs-section" id="getHeading">
+{% assign getHeading = site.data.supersonic.device.compass.getHeading %}
+{% include api_method.md method=getHeading %}
+</section>
 
 </section>

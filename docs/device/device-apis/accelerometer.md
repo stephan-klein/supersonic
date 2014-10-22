@@ -9,12 +9,23 @@ methods:
   - name: getAcceleration
 ---
 
-{% assign methods = site.data.supersonic.device.accelerometer %}
+<section class="docs-section" id="accelerometer">
 
-<section class="docs-section" id="{{page.subsection_id}}">
+# Accelerometer
 
-# {{page.header_title}}
+{{ site.data.supersonic.device.accelerometer.overview.description }}
 
-{% include api_bentry.md methods=methods %}
+## API Reference
+
+<section class="docs-section" id="watchAcceleration">
+{% assign watchAcceleration = site.data.supersonic.device.accelerometer.watchAcceleration %}
+{% include api_method.md method=watchAcceleration %}
+</section>
+
+<section class="docs-section" id="getAcceleration">
+{% assign getAcceleration = site.data.supersonic.device.accelerometer.getAcceleration %}
+{% include api_method.md method=getAcceleration %}
+</section>
+
 
 </section>

@@ -9,12 +9,22 @@ methods:
   - name: getPosition
 ---
 
-{% assign methods = site.data.supersonic.device.geolocation %}
+<section class="docs-section" id="geolocation">
 
-<section class="docs-section" id="{{page.subsection_id}}">
+# Geolocation
 
-# {{page.header_title}}
+{{ site.data.supersonic.device.geolocation.overview.description }}
 
-{% include api_bentry.md methods=methods %}
+## API Reference
+
+<section class="docs-section" id="watchPosition">
+{% assign watchPosition = site.data.supersonic.device.geolocation.watchPosition %}
+{% include api_method.md method=watchPosition %}
+</section>
+
+<section class="docs-section" id="getPosition">
+{% assign getPosition = site.data.supersonic.device.geolocation.getPosition %}
+{% include api_method.md method=getPosition %}
+</section>
 
 </section>

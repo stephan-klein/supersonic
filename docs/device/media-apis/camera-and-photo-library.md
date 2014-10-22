@@ -9,12 +9,21 @@ methods:
   - name: getFromPhotoLibrary
 ---
 
-{% assign methods = site.data.supersonic.media.camera %}
+<section class="docs-section" id="camera">
 
-<section class="docs-section" id="{{page.subsection_id}}">
+# Camera
+{{ site.data.supersonic.media.camera.overview.description }}
 
-# {{page.header_title}}
+## API Reference
 
-{% include api_bentry.md methods=methods %}
+<section class="docs-section" id="takePicture">
+{% assign takePicture = site.data.supersonic.media.camera.takePicture %}
+{% include api_method.md method=takePicture %}
+</section>
+
+<section class="docs-section" id="getFromPhotoLibrary">
+{% assign getFromPhotoLibrary = site.data.supersonic.media.camera.getFromPhotoLibrary %}
+{% include api_method.md method=getFromPhotoLibrary %}
+</section>
 
 </section>

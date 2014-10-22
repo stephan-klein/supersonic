@@ -4,16 +4,18 @@ header_title: Vibrate
 header_sub_title: Vibrates the device.
 section_id: device-apis
 subsection_id: vibrate
-methods:
-  - name: vibrate
 ---
 
-{% assign methods = site.data.supersonic.device.vibrate %}
+<section class="docs-section" id="vibrate">
 
-<section class="docs-section" id="{{page.subsection_id}}">
+# Vibrate
 
-# {{page.header_title}}
+Sometimes you just need to make your phone buzz.
 
-{% include api_bentry.md methods=methods %}
+## API Reference
+
+{% assign vibrate = site.data.supersonic.device.vibrate.vibrate %}
+{% include api_method.md method=vibrate %}
+
 
 </section>
