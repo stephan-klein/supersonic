@@ -15,7 +15,7 @@ before_deploy:
 deploy:
   provider: s3
   bucket:
-    "s3://supersonic.testgyver.com"
+    "supersonic.testgyver.com"
   secret_access_key:
     secure: wd6S9nMLBbWJs0hB2jS8sovUdKq2uV0VOJVzy4GtoV+i3DkPoeZeHRXmFylFQ+W2tJ2LJTAKaYNcumH9TXyqA3X/kKvLmAoXGZPyg2UyxHc+ndLT9UL/BUDV+RhFTK4iwrjxPkMaaXbolkBeYUyojUGCep2e2iw/q23zAZNhsvg=
   access_key_id:
