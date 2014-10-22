@@ -15,33 +15,25 @@ module.exports = (steroids, log) ->
   ###
    # @module screen
    # @name setAllowedRotations
+   # @apiCall supersonic.ui.screen.setAllowedRotations
    # @function
+   # @type
+   # setAllowedRotations : (
+   #   orientations: Array<String>
+   #) => Promise
    # @description
    # Determine which of the four possible screen rotations are enabled on your device. By default all rotations are allowed, with the exception of custom builds where the build settings have been used to lock the app into a certain rotation scheme. Modals are not affected by setting allowed rotations in other views and conversely setting allowed rotations in a modal does not affect the rest of the app.
-   # @params {Array} orientations Shorthand. Possible values "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight".
-   # @params {Object} options Verbose. Options object with an `orientations` property (Array of accepted rotations)
-   # @returns {Promise} Promise that is resolved when the allowed rotations are set.
-   # @usage
-   # ```coffeescript
-   # # Shorthand:
-   # supersonic.ui.screen.setAllowedRotations(["landscapeLeft"])
-   # # Verbose:
-   # options =
-   #  orientations: ["portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight"]
-   # supersonic.ui.screen.setAllowedRotations(options)
-   # ```
+   # @define {Array<String>} rotations Allowed rotations. Possible values are `"portrait"`, `"portraitUpsideDown"`, `"landscapeLeft"` and `"landscapeRight"`.
+   # @returnsDescription
+   # Returns a Promise that is resolved when the allowed rotations are set.
+   # @usageCoffeeScript
+   # supersonic.ui.screen.setAllowedRotations(rotations)
   ###
-  setAllowedRotations: bug "setAllowedRotations", (options) ->
-    orientations = if options instanceof Array
-      options
-    else if options?.orientations?
-      options.orientations
-    else
-
+  setAllowedRotations: bug "setAllowedRotations", (rotations) ->
     new Promise (resolve, reject) ->
       steroids.screen.setAllowedRotations(
         {
-          allowedRotations: orientations
+          allowedRotations: rotations
         }
         {
           onSuccess: resolve

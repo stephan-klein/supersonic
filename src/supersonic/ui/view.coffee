@@ -22,7 +22,7 @@ module.exports = (steroids, log) ->
    # @description
    # Creates a new view pointer with the route or URL given as the parameter.
    # @type
-   # View: (
+   # view : (
    #  location: String
    # ) => View
    # @define {String} location A [route](todo) (e.g. `"cars#index"`) or URL (e.g. `"http://www.google.com"`) that the view points to.
