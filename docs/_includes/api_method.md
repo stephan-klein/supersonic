@@ -1,5 +1,5 @@
 {% assign method = include.method %}
-## {{method.apiCall}}{% if method.function %}(){% endif %}
+## API Reference: {{method.apiCall}}{% if method.function %}(){% endif %}
 
 {{method.description}}
 
@@ -69,7 +69,7 @@
 
 {% if method.returnsDescription %}
 #### Returns
-{{ method.returnsDescription }}
+{{ method.returnsDescription | markdownify }}
 
 {% if method.returns.size > 0 %}
 <table class="table" style="margin:0;">
@@ -89,7 +89,7 @@
         {{return.type | xml_escape}}
         </code>
       </td>
-      <td>{{return.description}}</td>
+      <td>{{return.description | markdownify}}</td>
     </tr>
     {% for property in return.properties %}
       <tr>
@@ -99,7 +99,7 @@
           {{property.type | xml_escape}}
           </code>
         </td>
-        <td>{{property.description}}</td>
+        <td>{{property.description | markdownify}}</td>
       </tr>
     {% endfor %}
   {% endfor %}

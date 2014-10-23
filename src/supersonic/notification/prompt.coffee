@@ -11,7 +11,7 @@ Promise = require 'bluebird'
  # @description
  # Displays a native prompt dialog.
  # @type
- # supersonic.notification.prompt: (
+ # supersonic.notification.prompt : (
  #   title?: String,
  #   options?: {
  #     message?: String,

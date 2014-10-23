@@ -4,7 +4,9 @@ docs_section_id: overview
 title: Supersonic Overview
 header_title: Supersonic Overview
 sections:
-  - name: What is Supersonic?
+  - name: Overview
+    subsections:
+    - name: Native Bridge
   - name: Angular.js
   - name: Web Components
   - name: Promises
@@ -18,11 +20,30 @@ sections:
     {% assign section_id = section.name | slugify %}
     <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
       <li class="menu-title">
-        <a href="/overview/{{section_id}}">{{section.name}}</a>
+        <a href="/overview{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
+        {% if page.section_id == section_id %}
+        <li class="menu-section {% if page.name == 'index.md' %}active{% endif %}">
+          <a href="/overview/{{section_id}}" class="api-section">Overview</a>
+        </li>
+        {% for subsection in section.subsections %}
+        {% assign subsection_id = subsection.name | slugify %}
+        <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
+          <a href="/overview/{{section_id}}/{{subsection_id}}" class="api-section">
+            {{subsection.name}}
+          </a>
+          {% if page.subsection_id == subsection_id %}
+          <ul>
+            {% for method in page.methods %}
+            <li><a href="/overview/{{section_id}}/#{{method.name}}">{{method.name}}</a>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+        {% endif %}
       </li>
     </ul>
     {% endfor %}
-
   </div>
 
 </div>

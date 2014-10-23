@@ -4,7 +4,7 @@ header_title: Supersonic Views
 header_sub_title: Learn how to use Views.
 section_id: views
 subsection_id: view
-methods:
+topics:
   - name: WebView
   - name: view
   - name: View

@@ -4,7 +4,7 @@ header_title: Rotations
 header_sub_title: Learn how to make your app rotate to different rotations.
 section_id: app
 subsection_id: dialogs
-methods:
+topics:
   - name: Alert
   - name: Confirm
   - name: Prompt
