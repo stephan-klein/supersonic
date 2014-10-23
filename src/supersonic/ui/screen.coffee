@@ -27,7 +27,13 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # Returns a Promise that is resolved when the allowed rotations are set.
    # @usageCoffeeScript
-   # supersonic.ui.screen.setAllowedRotations(rotations)
+   # supersonic.ui.screen.setAllowedRotations rotations
+   # @usageJavaScript
+   # supersonic.ui.screen.setAllowedRotations(rotations);
+   # @exampleCoffeeScript
+   # supersonic.ui.screen.setAllowedRotations ["landscapeLeft", "landscapeRight"]
+   # @exampleJavaScript
+   # supersonic.ui.screen.setAllowedRotations(["landscapeLeft", "landscapeRight"]);
   ###
   setAllowedRotations: bug "setAllowedRotations", (rotations) ->
     new Promise (resolve, reject) ->

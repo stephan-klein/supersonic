@@ -44,7 +44,7 @@
       {{param.defaultValue}}
       </code>
     </td>
-    <td>{{param.description}}</td>
+    <td>{{param.description | markdownify}}</td>
   </tr>
     {% for property in param.properties %}
       <tr>
