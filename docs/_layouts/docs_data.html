@@ -9,24 +9,7 @@ sections:
 <div class="col-md-2 col-sm-3 aside-menu">
 
   <div class="docked-menu">
-    {% for section in page.sections %}
-    {% assign section_id = section.name | slugify %}
-    <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
-      <li class="menu-title">
-        <a href="/ui{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
-        {% if page.section_id == section_id %}
-        {% for subsection in section.subsections %}
-        <li class="menu-section">
-          <a href="/ui/{{section_id}}/{{subsection.name | slugify}}" class="api-section">
-            {{subsection.name}}
-          </a>
-        </li>
-        {% endfor %}
-        {% endif %}
-      </li>
-    </ul>
-    {% endfor %}
-
+    {% include docs_menu.html tab_name="data-management" %}
   </div>
 
 </div>
