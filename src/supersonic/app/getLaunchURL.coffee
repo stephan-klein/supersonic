@@ -1,7 +1,15 @@
 Promise = require 'bluebird'
 
-module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.app"
+module.exports = (steroids) ->
+  getParsedParamsFromURL = (url)->
+    query = url.substring(url.indexOf("?") + 1)
+    result = {}
+
+    for part in query.split "&"
+      item = part.split "="
+      result[item[0]] = decodeURIComponent item[1]
+
+    result
 
   ###
    # @category core
@@ -12,23 +20,34 @@ module.exports = (steroids, log) ->
    # @description
    # Returns the string that was used to launch the application with URL scheme.
    # @type
-   # supersonic.app.getLaunchURL: ()
-   # => Promise launchURL: String
+   # supersonic.app.getLaunchURL : () =>
+   #   {
+   #     launchURL: String,
+   #     params: Object
+   #   }
    # @returnsDescription
-   # Returns a [Promise](todo) that is resolved with the launch URL string as an argument when the application was launched using an URL schema.
-   # @define {=>String} launchURL The launch URL.
+   # Returns an object that contains the launch URL and its parsed params. If the app hadn't been opened via its URL scheme, the returned object is `null`.
+   # @define {=>String} launchURL The full URL that was used to launch this app.
+   # @define {=>Object} params An object containing the parameters parsed from the URL string. Contains an empty object if no parameters were present on the launch URL.
+   # @define {=>Object} params.param An object whose key matches the parameter name and value its value, e.g. `"password=monkey"` produces an object `{password: "monkey"}`
    # @usageCoffeeScript
    # supersonic.app.getLaunchURL()
+   # @usageJavaScript
+   # supersonic.app.getLaunchURL()
    # @exampleCoffeeScript
-   # supersonic.app.getLaunchURL().then (launchURL) ->
-   #  steroids.logger.log "Launch URL: #{launchURL}"
+   # urlObject = supersonic.app.getLaunchURL()
+   # steroids.logger.log urlObject.params
+   # @exampleJavaScript
+   # var urlObject = supersonic.app.getLaunchURL();
+   # steroids.logger.log(urlObject.params);
   ###
-  getLaunchURL = bug "getLaunchURL", ->
-    new Promise (resolve, reject) ->
-      launchURL = steroids.app.getLaunchURL()
-      if launchURL?
-        resolve launchURL
-      else
-        reject()
+
+  getLaunchURL = ->
+    launchURL = steroids.app.getLaunchURL()
+    if launchURL?
+      launchURL: launchURL
+      params: getParsedParamsFromURL launchURL
+    else
+      null
 
   return getLaunchURL

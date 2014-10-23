@@ -10,18 +10,41 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.app.openURL
    # @description
-   # Launches browser to open the URL or any external application with that applications URL scheme.
+   # Launches a browser to open the given URL, or the external application matching the URL scheme.
    # @type
-   # supersonic.app.openURL: (URL: String)
-   # => Promise
-   # @define {String} URL URL to be opened. URLs starting with "http(s)://" will be opened in the device's browser.
+   # supersonic.app.openURL : (URL: String) =>
+   #   Promise
+   # @define {String} URL The URL to be opened. URLs starting with "http(s)://" will be opened in the device's default browser.
    # @returnsDescription
-   # [Promise](todo) that is resolved when the application is resumed.
+   # Promise that is resolved when the URL is opened. The promise is rejected if the URL scheme could not be found among the URL schemes registered by the device's apps.
    # @usageCoffeeScript
    # supersonic.app.openURL URL
+   # @usageJavaScript
+   # supersonic.app.openURL(URL);
    # @exampleCoffeeScript
+   # # Launch the default web browser
+   # supersonic.app.openURL "http://www.google.com"
+   #
+   # # Launch an external app
    # supersonic.app.openURL("otherapp://?foo=1&bar=2").then ->
-   #  supersonic.logger.log "Application resumed"
+   #   supersonic.logger.log "URL successfully opened"
+   #
+   # # Invalid schemes result in a rejected promise
+   # supersonic.app.openURL("doesnotexist://).then ->
+   #   supersonic.logger.log "Could not open URL"
+   # @exampleJavaScript
+   # // Launch the default web browser
+   # supersonic.app.openURL("http://www.google.com");
+   #
+   # // Launch an external app
+   # supersonic.app.openURL("otherapp://?foo=1&bar=2").then(function() {
+   #   supersonic.logger.log("External app successfully opened");
+   # });
+   #
+   # // Invalid schemes result in a rejected promise
+   # supersonic.app.openURL("doesnotexist://").then(function() {
+   #   supersonic.logger.log("Could not open URL");
+   # });
   ###
   openURL = bug "openURL", (url) ->
     # Trying to open with null will crash the app
@@ -31,11 +54,9 @@ module.exports = (steroids, log) ->
       steroids.openURL(
         { url: url }
         {
-          onSuccess: ->
-            document.addEventListener "resume", resolve
+          onSuccess: resolve
           onFailure: reject
         }
       )
-
 
   return openURL

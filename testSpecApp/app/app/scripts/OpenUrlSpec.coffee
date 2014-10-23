@@ -2,19 +2,15 @@ describe "supersonic.app.openURL", ->
   it "should be defined", ->
     supersonic.app.openURL.should.exist
 
-  it "should open Apple Maps", ->
+  it "should open Apple Maps", (done)->
     @timeout 10000
 
     url = "maps://?daddr=San+Francisco,+CA&saddr=cupertino"
 
     supersonic.app.openURL(url).should.be.fulfilled
 
-  it "should open Google Maps", ->
-    @timeout 10000
-
-    url = "geo:42,2?z=8"
-
-    supersonic.app.openURL(url).should.be.fulfilled
+    document.addEventListener "resume", ->
+      done()
 
   it "should not open dolanz://", ->
     supersonic.app.openURL("dolanz://").should.be.rejected
