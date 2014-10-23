@@ -3,6 +3,7 @@ layout: docs_ui
 header_title: Rotations
 header_sub_title: Learn how to make your app rotate to different rotations.
 section_id: app
+subsection_id: rotations
 ---
 
 # Rotations

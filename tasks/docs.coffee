@@ -114,6 +114,10 @@ module.exports = (grunt)->
           betterObject.usageCoffeeScript = tag.string
         when "exampleCoffeeScript"
           betterObject.exampleCoffeeScript = tag.string
+        when "usageJavaScript"
+          betterObject.usageJavaScript = tag.string
+        when "exampleJavaScript"
+          betterObject.exampleJavaScript = tag.string
         when "usageHtml"
           betterObject.usageHtml = tag.string
         when "exampleHtml"

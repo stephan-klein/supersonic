@@ -11,7 +11,7 @@ Promise = require 'bluebird'
  # @description
  # Shows a native confirm dialog.
  # @type
- # supersonic.notification.confirm: (
+ # supersonic.notification.confirm : (
  #   title?: String,
  #   options?: {
  #     message?: String,
@@ -27,15 +27,32 @@ Promise = require 'bluebird'
  # @define {=>Integer} buttonIndex Index of the button tapped by the user.
  # @usageCoffeeScript
  # supersonic.notification.confirm "Are you awesome?", options
+ # @usageJavaScript
+ # supersonic.notification.confirm("Are you awesome?", options);
  # @exampleCoffeeScript
- # supersonic.notification.confirm("Are you awesome?", {
+ # options =
  #   message: "Please reply honestly, now."
  #   buttonLabels: ["Yes", "No"]
- # }).then (index)->
- #  if result.index is 0
- #    supersonic.logger.log "User is awesome!"
- #  else
- #    supersonic.logger.log "User wasn't awesome. :("
+ #
+ # supersonic.notification.confirm("Are you awesome?", options).then (index)->
+ #   if result.index is 0
+ #     supersonic.logger.log "User is awesome!"
+ #   else
+ #     supersonic.logger.log "User wasn't awesome. :("
+ # @exampleJavaScript
+ # options = {
+ #   message: "Please reply honestly, now.",
+ #   buttonLabels: ["Yes", "No"]
+ # };
+ #
+ # supersonic.notification.confirm("Are you awesome?", options).then(function(index) {
+ #   if (result.index === 0) {
+ #     supersonic.logger.log("User is awesome!");
+ #   } else {
+ #     supersonic.logger.log("User wasn't awesome. :(");
+ #   }
+ # });
+
 ###
 module.exports = (title, options = {}) ->
 

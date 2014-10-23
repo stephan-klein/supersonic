@@ -31,13 +31,26 @@ Promise = require 'bluebird'
  # @define {=>String} result.input String inputted by user.
  # @usageCoffeeScript
  # supersonic.notification.prompt "Type something!", options
+ # @usageJavaScript
+ # supersonic.notification.prompt("Type something!", options);
  # @exampleCoffeeScript
- # supersonic.notification.prompt("Colorize text", {
+ # options =
  #   title: "Please type some text and click on the desired color"
  #   buttonLabels: ["Blue", "Red", "Yellow"]
  #   defaultText: "Type here"
- # }).then (result)->
+ #
+ # supersonic.notification.prompt("Colorize text", options).then (result)->
  #   supersonic.logger.log "User clicked button number #{result.buttonIndex} with text #{result.input}"
+ # @exampleJavaScript
+ # var options = {
+ #   title: "Please type some text and click on the desired color",
+ #   buttonLabels: ["Blue", "Red", "Yellow"],
+ #   defaultText: "Type here"
+ # };
+
+ # supersonic.notification.prompt("Colorize text", options).then(function(result) {
+ #   supersonic.logger.log("User clicked button number " + result.buttonIndex + " with text " + result.input);
+ # });
 ###
 module.exports = (title, options = {}) ->
 

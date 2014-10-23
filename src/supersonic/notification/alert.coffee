@@ -11,7 +11,7 @@ Promise = require 'bluebird'
  # @description
  # Shows a native alert dialog.
  # @type
- # supersonic.notification.alert: (
+ # supersonic.notification.alert : (
  #   title?: String,
  #   options?: {
  #     message?: String,
@@ -26,12 +26,24 @@ Promise = require 'bluebird'
  # [Promise](todo), resolved when the the button in the alert dialog is tapped.
  # @usageCoffeeScript
  # supersonic.notification.alert "Who's awesome? You're awesome!", options
+ # @usageJavaScript
+ # supersonic.notification.alert("Who's awesome? You're awesome!", options);
  # @exampleCoffeeScript
- # supersonic.notification.alert("Custom title!", {
+ # options =
  #   message: "A longer message with \n\n\n\nmultiple lines."
  #   buttonLabel: "Close"
- # }).then ->
+ #
+ # supersonic.notification.alert("Custom title!", options).then ->
  #   supersonic.logger.log "Alert closed."
+ # @exampleJavaScript
+ # var options = {
+ #   message: "A longer message with \n\n\n\nmultiple lines.",
+ #   buttonLabel: "Close"
+ # };
+ #
+ # supersonic.notification.alert("Custom title!", options).then(function() {
+ #   supersonic.logger.log("Alert closed.");
+ # });
 ###
 
 module.exports = (title, options = {}) ->
