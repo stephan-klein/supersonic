@@ -48,12 +48,13 @@ module.exports = (steroids, log) ->
    # supersonic.device.geolocation.watchPosition options
    # @exampleCoffeeScript
    # supersonic.device.geolocation.watchPosition().onValue (position) ->
-   #   steroids.logger.log
+   #   steroids.logger.log(
    #     """
    #     Latitude: #{position.coords.latitude}
    #     Longitude: #{position.coords.longitude}
    #     Timestamp: #{position.timestamp}
    #     """
+   #   )
   ###
   watchPosition = (options = {}) ->
 
@@ -97,12 +98,13 @@ module.exports = (steroids, log) ->
    # supersonic.device.geolocation.getPosition()
    # @exampleCoffeeScript
    # supersonic.device.geolocation.getPosition().then (position) ->
-   #   steroids.logger.log
+   #   steroids.logger.log(
    #     """
    #     Latitude: #{position.coords.latitude}
    #     Longitude: #{position.coords.longitude}
    #     Timestamp: #{position.timestamp}
    #     """
+   #   )
   ###
   getPosition = (options = {}) ->
     new Promise (resolve) ->

@@ -17,6 +17,8 @@ module.exports = (steroids, log) ->
    # supersonic.device.vibrate : ()
    # @usageCoffeeScript
    # supersonic.device.vibrate()
+   # @usageJavaScript
+   # supersonic.device.vibrate();
   ###
 
   vibrate = ->

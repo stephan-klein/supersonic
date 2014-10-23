@@ -29,12 +29,13 @@ module.exports = (steroids, log) ->
    # supersonic.device.platform()
    # @exampleCoffeeScript
    # supersonic.device.platform().then (platform) ->
-   #   steroids.logger.log
+   #   steroids.logger.log(
    #     """
    #     Name: #{platform.name}
    #     Version: #{platform.version}
    #     Model: #{platform.model}
    #     """
+   #   )
   ###
   platform = ->
     deviceready.then ->

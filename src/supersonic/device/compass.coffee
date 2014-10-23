@@ -47,13 +47,14 @@ module.exports = (steroids, log) ->
    # supersonic.device.compass.watchHeading options
    # @exampleCoffeeScript
    # supersonic.device.compass.watchHeading().onValue (heading) ->
-   #   supersonic.logger.log
+   #   supersonic.logger.log(
    #     """
    #     Magnetic heading: #{heading.magneticHeading}
    #     True heading: #{heading.trueHeading}
    #     Heading accuracy: #{heading.headingAccuracy}
    #     Timestamp: #{heading.timestamp}
    #     """
+   #   )
   ###
   watchHeading = (options = {}) ->
     compassOptions =
@@ -95,13 +96,14 @@ module.exports = (steroids, log) ->
    # supersonic.device.compass.getHeading()
    # @exampleCoffeeScript
    # supersonic.device.compass.getHeading().then (heading) ->
-   #   steroids.logger.log
+   #   steroids.logger.log(
    #     """
    #     Magnetic heading: #{heading.magneticHeading}
    #     True heading: #{heading.trueHeading}
    #     Heading accuracy: #{heading.headingAccuracy}
    #     Timestamp: #{heading.timestamp}
    #     """
+   #   )
   ###
   getHeading = ->
     new Promise (resolve) ->

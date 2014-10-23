@@ -4,27 +4,24 @@ header_title: Geolocation
 header_sub_title: Device geolocation.
 section_id: device-apis
 subsection_id: geolocation
-methods:
+topics:
   - name: watchPosition
+    method: true
   - name: getPosition
+    method: true
 ---
-
-<section class="docs-section" id="geolocation">
-
 # Geolocation
 
 {{ site.data.supersonic.device.geolocation.overview.description }}
 
 ## API Reference
 
-<section class="docs-section" id="watchPosition">
-{% assign watchPosition = site.data.supersonic.device.geolocation.watchPosition %}
-{% include api_method.md method=watchPosition %}
+<section class="docs-section" id="watchposition">
+{% assign method = site.data.supersonic.device.geolocation.watchPosition %}
+{% include api_method.md method=method %}
 </section>
 
-<section class="docs-section" id="getPosition">
-{% assign getPosition = site.data.supersonic.device.geolocation.getPosition %}
-{% include api_method.md method=getPosition %}
-</section>
-
+<section class="docs-section" id="getposition">
+{% assign method = site.data.supersonic.device.geolocation.getPosition %}
+{% include api_method.md method=method %}
 </section>

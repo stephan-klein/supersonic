@@ -34,8 +34,16 @@ sections:
           </a>
           {% if page.subsection_id == subsection_id %}
           <ul>
-            {% for method in page.methods %}
-            <li><a href="/device-access/{{section_id}}/#{{method.name}}">{{method.name}}</a>
+            {% for topic in page.topics %}
+            <li>
+              <a href="/device-access/{{section_id}}/#{{topic.name | slugify}}">
+                {% if topic.method %}
+                  ↳ <code>{{topic.name}}()</code>
+                {% else %}
+                  {{topic.name}}
+                {% endif %}
+              </a>
+            </li>
             {% endfor %}
           </ul>
           {% endif %}

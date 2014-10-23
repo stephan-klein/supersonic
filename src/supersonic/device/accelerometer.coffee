@@ -43,18 +43,21 @@ module.exports = (steroids, log) ->
    # @define {=>DOMTimeStamp} acceleration.timestamp Creation timestamp in milliseconds.
    # @usageCoffeeScript
    # supersonic.device.accelerometer.watchAcceleration options
+   # @usageJavaScript
+   # supersonic.device.accelerometer.watchAcceleration(options);
    # @exampleCoffeeScript
    # options =
    #   frequency: 60
    #
    # supersonic.device.accelerometer.watchAcceleration(options).onValue (acceleration) ->
-   #   supersonic.logger.log
+   #   supersonic.logger.log(
    #     """
    #     Acceleration X: #{acceleration.x}
    #     Acceleration Y: #{acceleration.y}
    #     Acceleration Z: #{acceleration.z}
    #     Timestamp: #{acceleration.timestamp}
    #     """
+   #   )
   ###
   watchAcceleration = (options = {}) ->
     accelerationOptions =
@@ -95,13 +98,14 @@ module.exports = (steroids, log) ->
    # supersonic.device.accelerometer.getAcceleration()
    # @exampleCoffeeScript
    # supersonic.device.accelerometer.getAcceleration().then (acceleration) ->
-   #   supersonic.logger.log
+   #   supersonic.logger.log(
    #     """
    #     Acceleration X: #{acceleration.x}
    #     Acceleration Y: #{acceleration.y}
    #     Acceleration Z: #{acceleration.z}
    #     Timestamp: #{acceleration.timestamp}
    #     """
+   #   )
   ###
   getAcceleration = bug "getAcceleration", ->
     new Promise (resolve) ->
