@@ -37,9 +37,6 @@
 
 - name: Media
   href: "#"
-  subpages:
-    - name: audio
-      href: supersonic/media/audio
     - name: camera
       href: supersonic/media/camera
 

@@ -12,10 +12,6 @@ plugins sucks.
 
 We wrapped the core dialogs and promisified them. Nothing more, just the simple goods.
 
-## Audio
-
-Play audio.
-
 ## Camera
 
 Use the camera!
