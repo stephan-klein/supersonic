@@ -37,6 +37,7 @@
 
 - name: Media
   href: "#"
+  subpages:
     - name: camera
       href: supersonic/media/camera
 
