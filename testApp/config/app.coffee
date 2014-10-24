@@ -1,7 +1,4 @@
 module.exports =
-  steroids:
-    schemaVersion: "2.0.0"
-
   app:
     name: "Supersonic testApp"
     version: "0.1.0"
@@ -21,8 +18,3 @@ module.exports =
     enableViewportScale: false # kinda harmful?
     enablePopGestureRecognition: true
     allowInlineMediaPlayback: true
-
-  keyboard:
-    shrinksView: false
-    hideAccessoryBar: false
-    displayRequiresUserAction: true

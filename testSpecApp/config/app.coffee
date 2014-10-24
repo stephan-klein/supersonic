@@ -21,8 +21,3 @@ module.exports =
     enableViewportScale: false # kinda harmful?
     enablePopGestureRecognition: true
     allowInlineMediaPlayback: true
-
-  keyboard:
-    shrinksView: false
-    hideAccessoryBar: false
-    displayRequiresUserAction: true
