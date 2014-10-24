@@ -8,18 +8,3 @@ after_success:
 env:
   global:
   - secure: tDCKyLn5IICgj4wdoi4e56oEClpr6LUVnpGOtxVAFoDoeisKoITLPjKiW3VWSdY1c9m4vCyYEeHyTu0lz67fo4NLyNq/45Ma9TnHsbKNuIlDgrC8to5hNxCENoZ4/kW2A57wr6zpuZeMNwMYoz6PaPBOtdg0IHtPjDV2zZcKRhU=
-
-before_deploy:
-  "./scripts/build-docs.sh"
-
-deploy:
-  provider: s3
-  bucket:
-    "supersonic.testgyver.com"
-  secret_access_key:
-    secure: wd6S9nMLBbWJs0hB2jS8sovUdKq2uV0VOJVzy4GtoV+i3DkPoeZeHRXmFylFQ+W2tJ2LJTAKaYNcumH9TXyqA3X/kKvLmAoXGZPyg2UyxHc+ndLT9UL/BUDV+RhFTK4iwrjxPkMaaXbolkBeYUyojUGCep2e2iw/q23zAZNhsvg=
-  access_key_id:
-    secure: jRbh4bvZc5E80B8/jM+fjSfN3xeHddVdmUWkU2PW9EegQLc1G5Q6lxxKwxD2mj8nJ62WKS8rCXXbZu8KXhWkGkIkNA0AS+Qy5+Z3QDO0dCkc+flCmcUqKcT+5v3aAJv0peK04njWl2vJ6THbAdmnO6VluAuNudqVLjWC8qlckQ8=
-  skip_cleanup: true
-  acl: public_read
-  local_dir: docs/_site
