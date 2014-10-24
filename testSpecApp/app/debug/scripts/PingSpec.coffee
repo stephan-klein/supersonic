@@ -1,7 +1,6 @@
-
 describe "supersonic.debug.ping", ->
   it "should be defined", ->
-    expect( supersonic.debug.ping ).to.exist
+    supersonic.debug.ping.should.exist
 
   it "should pong", ->
-    expect( supersonic.debug.ping() ).to.eventually.equal "Pong!"
+    supersonic.debug.ping().should.eventually.equal "Pong!"
