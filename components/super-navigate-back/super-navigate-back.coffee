@@ -1,7 +1,7 @@
 SuperNavigateBackPrototype = Object.create HTMLElement.prototype
 ###
  # @category webComponent
- # @name <super-navigate-back>
+ # @name super-navigate-back
  # @component
  # @description
  # Navigates back to the previous view. Uses `supersonic.ui.layer.pop()` internally.

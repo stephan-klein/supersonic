@@ -3,15 +3,12 @@ _ = require "lodash"
 path = require "path"
 
 module.exports = (grunt)->
-
-  #grunt.loadNpmTasks "grunt-extend-config"
-
   grunt.extendConfig
-    docs:
+    "docs-json":
       javascript:
         expand: true
-        cwd: ""
-        src: ["src/**/*.coffee", "components/**/*.coffee"]
+        cwd: "src/"
+        src: "**/*.coffee"
         dest: ""
         ext: ""
       component:
@@ -21,8 +18,7 @@ module.exports = (grunt)->
         dest: "components/"
         ext: ""
         rename: (dest, matchedSrcPath) ->
-          betterSrcPath = matchedSrcPath.split("/")[0]
-          betterSrcPath = path.join betterSrcPath, "index"
+          betterSrcPath = matchedSrcPath.split("/")[1]
           return path.join(dest, betterSrcPath)
 
   cleanUpDoxObject = (object)->
@@ -156,7 +152,7 @@ module.exports = (grunt)->
     jsonDestFolderPath = "docs/_data/#{file.dest}/"
     {filePath, jsonDestFolderPath}
 
-  grunt.registerMultiTask "docs", "Get comments from src/*. to docs/_data/*.json", ->
+  grunt.registerMultiTask "docs-json", "Get comments from src/*. to docs/_data/*.json", ->
     @files.forEach (file) =>
       { filePath
         jsonDestFolderPath

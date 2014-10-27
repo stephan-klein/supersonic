@@ -1,7 +1,7 @@
 SuperNavigatePrototype = Object.create HTMLElement.prototype
 ###
  # @category webComponent
- # @name <super-navigate>
+ # @name super-navigate
  # @component
  # @description
  # Navigates to a view. Uses `supersonic.ui.layer.push` internally.

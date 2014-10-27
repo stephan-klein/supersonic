@@ -1,7 +1,7 @@
 SuperHideModalPrototype = Object.create HTMLElement.prototype
 ###
  # @category webComponent
- # @name <super-hide-modal>
+ # @name super-hide-modal
  # @component
  # @description
  # Hides an open modal on screen. Uses `supersonic.ui.modal.hide()` internally.
