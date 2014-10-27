@@ -8,9 +8,9 @@
       <div class="row">
         <ul class="nav nav-pills docs-header">
           {% for docs_section in page.docs_sections %}
-            {% assign docs_section_id = docs_section.name | slugify %}
-            <li {% if page.docs_section_id == docs_section_id %}class="active"{% endif %}>
-              <a href="/{{docs_section_id | slugify}}">{{docs_section.name}}</a>
+            {% assign docs_tab_id = docs_section.name | slugify %}
+            <li {% if page.docs_tab_id == docs_tab_id %}class="active"{% endif %}>
+              <a href="/{{docs_tab_id}}">{{docs_section.name}}</a>
             </li>
           {% endfor %}
         </ul>

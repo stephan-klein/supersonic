@@ -1,8 +1,0 @@
-- name: Core Settings
-  id: core
-
-- name: Declaring your App Structure
-  id: structure
-
-- name: Grunt Build Script
-  id: grunt

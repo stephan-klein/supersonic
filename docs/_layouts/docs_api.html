@@ -1,45 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    {% include meta_tags.html %}
-    <title>{{page.title}} - Supersonic Framework</title>
-    {% include head_includes.html %}
-  </head>
+---
+layout: docs
+docs_tab_id: api-reference
+sections:
+  - name: App
+    subpages:
+      - name: getLaunchURL
+        href: supersonic/app/getLaunchURL
+      - name: openURL
+        href: supersonic/app/openURL
+      - name: sleep
+        href: supersonic/app/sleep
+      - name: splashscreen
+        href: supersonic/app/splashscreen
+      - name: statusBar
+        href: supersonic/app/statusBar
 
-  <body class="docs docs-page {{page.body_extra_css_classes}}">
+  - name: Debug
+    subpages:
+      - name: debug
+        href: supersonic/core/debug
+      - name: logger
+        href: supersonic/core/logger
 
-    {% include header.html %}
+  - name: Device
+    subpages:
+      - name: accelerometer
+        href: supersonic/device/accelerometer
+      - name: compass
+        href: supersonic/device/compass
+      - name: geolocation
+        href: supersonic/device/geolocation
+      - name: platform
+        href: supersonic/device/platform
+      - name: vibrate
+        href: supersonic/device/vibrate
 
-    <div class="container content-container">
+  - name: Media
+    href: "#"
+    subpages:
+      - name: camera
+        href: supersonic/media/camera
 
-      <div class="row">
+  - name: Notification
+    subpages:
+      - name: alert
+        href: supersonic/notification/alert
+      - name: confirm
+        href: supersonic/notification/confirm
+      - name: prompt
+        href: supersonic/notification/prompt
 
-        <div class="col-md-2 col-sm-3 aside-menu">
+  - name: Native UI
+    href: "#"
+    subpages:
+      - name: Drawers
+        href: supersonic/ui/drawer
+      - name: Layers
+        href: supersonic/ui/layer
+      - name: Modal
+        href: supersonic/ui/modal
+      - name: Navigation bar
+        href: supersonic/ui/navigation-bar
+      - name: Navigation bar button
+        href: supersonic/ui/navigation-button
+      - name: Views
+        href: supersonic/ui/view
 
-          <div>
-            <ul class="nav left-menu active-menu">
-              <li class="menu-title">
-                <a href="/api">
-                  API docs
-                </a>
-              </li>
-              {% include api_menu.html %}
-            </ul>
-          </div>
+  - name: Web Components
+    subpages:
+      - name: super-navigate
+        href: components/super-navigate
+      - name: super-navigate-back
+        href: components/super-navigate-back
+      - name: super-show-modal
+        href: components/super-show-modal
+      - name: super-hide-modal
+        href: components/super-hide-modal
+---
+<div class="col-md-2 col-sm-3 aside-menu">
 
-        </div>
+  <div class="docked-menu">
+    {% include docs_menu.html tab_name="api-reference" %}
+  </div>
 
-        <div class="col-md-10 col-sm-9 main-content">
-          {{ content }}
-        </div>
+</div>
 
-      </div>
-
-    </div>
-
-    {% include footer.html %}
-
-    {% include base_scripts.html %}
-
-  </body>
-</html>
+<div class="col-md-10 col-sm-9 main-content">
+  {{ content }}
+</div>
