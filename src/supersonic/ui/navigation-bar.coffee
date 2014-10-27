@@ -182,3 +182,36 @@ module.exports = (steroids, log) ->
           supersonic.logger.error "Could not set the navigation bar inline style: #{error.errorDescription}"
           reject()
       }
+
+  ###
+   # @module ui.navigationBar
+   # @name setStyleId
+   # @description
+   # Sets style ID for navigation bar.
+   # @apiCall supersonic.ui.navigationBar.setStyleId
+   # @function
+   # @type
+   # setStyleId: (
+   #   id
+   # ) => Promise
+   # @define id="" The style ID as a string.
+   # @returns {Promise} A promise that will be resolved after the navigation bar style ID is set.
+   # @usageCoffeeScript
+   # supersonic.ui.navigationBar.setStyleId("the-button").then ()->
+   #   supersonic.logger.log "Navigation bar style ID was set."
+   # @usageJavaScript
+   # supersonic.ui.navigationBar.setStyleId("the-button").then(function() {
+   #   supersonic.logger.log("Navigation bar style ID was set.");
+   # });
+   #
+  ###
+  setStyleId: (styleId)->
+    new Promise (resolve, reject)->
+      steroids.view.navigationBar.setStyleId styleId, {
+        onSuccess: ()->
+          supersonic.logger.info "Navigation bar style ID was set"
+          resolve()
+        onFailure: (error)->
+          supersonic.logger.error "Could not set the navigation bar style ID: #{error.errorDescription}"
+          reject()
+      }
