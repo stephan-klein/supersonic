@@ -3,11 +3,8 @@ _ = require "lodash"
 path = require "path"
 
 module.exports = (grunt)->
-
-  #grunt.loadNpmTasks "grunt-extend-config"
-
   grunt.extendConfig
-    docs:
+    "docs-json":
       javascript:
         expand: true
         cwd: ""
@@ -21,8 +18,7 @@ module.exports = (grunt)->
         dest: "components/"
         ext: ""
         rename: (dest, matchedSrcPath) ->
-          betterSrcPath = matchedSrcPath.split("/")[0]
-          betterSrcPath = path.join betterSrcPath, "index"
+          betterSrcPath = matchedSrcPath.split("/")[1]
           return path.join(dest, betterSrcPath)
 
   cleanUpDoxObject = (object)->
@@ -156,12 +152,13 @@ module.exports = (grunt)->
     jsonDestFolderPath = "docs/_data/#{file.dest}/"
     {filePath, jsonDestFolderPath}
 
-  grunt.registerMultiTask "docs", "Get comments from src/*. to docs/_data/*.json", ->
+  grunt.registerMultiTask "docs-json", "Get comments from src/*. to docs/_data/*.json", ->
     @files.forEach (file) =>
       { filePath
         jsonDestFolderPath
         } = getStringsFromFile(file)
 
+      console.log jsonDestFolderPath
       coffee = grunt.file.read filePath
 
       doxArray = dox.parseCommentsCoffee(coffee)
@@ -171,3 +168,7 @@ module.exports = (grunt)->
       cleanedUpArray = cleanUpDoxArray(doxArray)
 
       writeArrayToJson(cleanedUpArray, jsonDestFolderPath)
+
+  grunt.registerMultiTask "markdown", "Generate API reference markdown from docs/_data/*.json", ->
+    @files.forEach (file) =>
+      console.log file

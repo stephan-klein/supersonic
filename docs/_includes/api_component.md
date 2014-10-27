@@ -1,6 +1,6 @@
 {% assign component = include.component %}
 
-## {{component.name | xml_escape}}
+## &lt;{{component.name}}&gt;
 
 {{component.description | markdownify }}
 

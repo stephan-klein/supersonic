@@ -18,5 +18,5 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'compile-docs', [
     'clean:docs'
-    'docs'
+    'docs-json'
   ]
