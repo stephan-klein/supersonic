@@ -14,15 +14,19 @@
  #
  # </super-navbar>
 ###
-onStyleChanged = (node)->
+onStyleChanged = (node) ->
   if node.isHidden()
     node.hide()
   else
     node.show()
 
-observer = new MutationObserver (mutations)->
-  for mutation in mutations when mutation.type is "attributes" or mutation.attributeName in ["style", "class"]
-    onStyleChanged(mutation.target)
+observer = new MutationObserver (mutations) ->
+  for mutation in mutations
+    # Check attributes
+    if mutation.type is "attributes"
+      # Class changed
+      if mutation.attributeName is "class"
+        mutation.target.class = mutation.target.getAttribute("class")
 
 ###
 CREATE ELEMENT
@@ -35,7 +39,7 @@ DEFINE PROPERTIES
 ###
 
 Object.defineProperty SuperNavbarPrototype, "title",
-  set: (title)->
+  set: (title) ->
     this._title = title
     this.onTitleChanged()
 
@@ -43,13 +47,23 @@ Object.defineProperty SuperNavbarPrototype, "title",
     this._title
 
 Object.defineProperty SuperNavbarPrototype, "buttons",
-  set: (buttons)->
+  set: (buttons) ->
     this.setButtons buttons
+
   get: ->
     {
       left: this._leftButtons
       right: this._rightButtons
     }
+
+Object.defineProperty SuperNavbarPrototype, "class",
+  set: (className) ->
+    className = "" if not className
+    this._class = className
+    this.onClassNameChanged()
+
+  get: ->
+    this._class
 
 ###
 DEFINE METHODS
@@ -140,6 +154,9 @@ SuperNavbarPrototype.onTitleChanged = ->
 SuperNavbarPrototype.onButtonsChanged = ->
   this._updateButtons() unless this.isHidden()
 
+SuperNavbarPrototype.onClassNameChanged = ->
+  supersonic.ui.navigationBar.setClass(this._class) unless this.isHidden()
+
 # What is the difference between attached and created?
 SuperNavbarPrototype.attachedCallback = ->
   # Initiate button arrays
@@ -150,6 +167,9 @@ SuperNavbarPrototype.attachedCallback = ->
   this._backButtonAllowed = true
   this._backButton = undefined
 
+  # Style
+  this.class = this.getAttribute("class")
+
   # Observe attributes style and class
   observerConfiguration =
     attributes: true
@@ -159,6 +179,7 @@ SuperNavbarPrototype.attachedCallback = ->
 
   onStyleChanged this
   this.onButtonsChanged()
+  this.onClassNameChanged()
 
 SuperNavbarPrototype.createdCallback = ->
   #console.log "Navigation bar createCallback"

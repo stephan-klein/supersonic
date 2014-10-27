@@ -31,7 +31,7 @@ module.exports = (steroids, log) ->
    # @returns {Promise} A promise that will be resolved after the navigation bar is shown.
    # @usageCoffeeScript
    # supersonic.ui.navigationBar.show({ animated: false }).then ()->
-   #   supersonic.logger.log "Navigation bar shown without animation.
+   #   supersonic.logger.log "Navigation bar shown without animation."
    # @usageJavaScript
    # supersonic.ui.navigationBar.show({ animated: false }).then(function() {
    #   supersonic.logger.log("Navigation bar shown without animation.");
@@ -114,5 +114,38 @@ module.exports = (steroids, log) ->
           resolve()
         onFailure: ()->
           supersonic.logger.error "Updating the navigation bar chashed"
+          reject()
+      }
+
+  ###
+   # @module ui.navigationBar
+   # @name setClass
+   # @description
+   # Adds a CSS class name to the navigation bar.
+   # @apiCall supersonic.ui.navigationBar.setClass
+   # @function
+   # @type
+   # setClass: (
+   #   className
+   # ) => Promise
+   # @define className={} A string of one or more CSS class names.
+   # @returns {Promise} A promise that will be resolved after the navigation bar is shown.
+   # @usageCoffeeScript
+   # supersonic.ui.navigationBar.setClass("my-class").then ()->
+   #   supersonic.logger.log "Navigation bar class was set."
+   # @usageJavaScript
+   # supersonic.ui.navigationBar.setClass("my-class").then(function() {
+   #   supersonic.logger.log("Navigation bar class was set.");
+   # });
+   #
+  ###
+  setClass: (className)->
+    new Promise (resolve, reject)->
+      steroids.view.navigationBar.setStyleClass className, {
+        onSuccess: ()->
+          supersonic.logger.info "Navigation bar class was set"
+          resolve()
+        onFailure: (error)->
+          supersonic.logger.error "Could not set the navigation bar class name: #{error.errorDescription}"
           reject()
       }
