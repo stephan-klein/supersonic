@@ -21,9 +21,12 @@ observer = new MutationObserver (mutations) ->
       # Class changed
       if mutation.attributeName is "class"
         mutation.target.class = mutation.target.getAttribute("class")
-      # Class changed
+      # Style changed
       if mutation.attributeName is "style"
         mutation.target.style = mutation.target.getAttribute("style")
+      # ID changed
+      if mutation.attributeName is "id"
+        mutation.target.id = mutation.target.getAttribute("id")
 
 ###
 CREATE ELEMENT
@@ -190,18 +193,18 @@ SuperNavbarPrototype.attachedCallback = ->
 
   # Style
   this.class = this.getAttribute("class")
+  this.id = this.getAttribute("id")
   this.style = this.getAttribute("style")
 
   # Observe attributes style and class
   observerConfiguration =
     attributes: true
-    attributeFilter: ["style", "class"]
+    attributeFilter: ["style", "class", "id"]
 
   observer.observe this, observerConfiguration
 
+  # Base buttons
   this.onButtonsChanged()
-  this.onClassNameChanged()
-  this.onInlineStyleChanged()
 
   if this.isHidden()
     this.hide()
