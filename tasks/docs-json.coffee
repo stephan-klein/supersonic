@@ -7,8 +7,8 @@ module.exports = (grunt)->
     "docs-json":
       javascript:
         expand: true
-        cwd: ""
-        src: ["src/**/*.coffee", "components/**/*.coffee"]
+        cwd: "src/"
+        src: "**/*.coffee"
         dest: ""
         ext: ""
       component:
@@ -158,7 +158,6 @@ module.exports = (grunt)->
         jsonDestFolderPath
         } = getStringsFromFile(file)
 
-      console.log jsonDestFolderPath
       coffee = grunt.file.read filePath
 
       doxArray = dox.parseCommentsCoffee(coffee)
@@ -168,7 +167,3 @@ module.exports = (grunt)->
       cleanedUpArray = cleanUpDoxArray(doxArray)
 
       writeArrayToJson(cleanedUpArray, jsonDestFolderPath)
-
-  grunt.registerMultiTask "markdown", "Generate API reference markdown from docs/_data/*.json", ->
-    @files.forEach (file) =>
-      console.log file
