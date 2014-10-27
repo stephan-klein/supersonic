@@ -128,8 +128,8 @@ module.exports = (steroids, log) ->
    # setClass: (
    #   className
    # ) => Promise
-   # @define className={} A string of one or more CSS class names.
-   # @returns {Promise} A promise that will be resolved after the navigation bar is shown.
+   # @define className="" A string of one or more CSS class names.
+   # @returns {Promise} A promise that will be resolved after the navigation class is set.
    # @usageCoffeeScript
    # supersonic.ui.navigationBar.setClass("my-class").then ()->
    #   supersonic.logger.log "Navigation bar class was set."
@@ -147,5 +147,38 @@ module.exports = (steroids, log) ->
           resolve()
         onFailure: (error)->
           supersonic.logger.error "Could not set the navigation bar class name: #{error.errorDescription}"
+          reject()
+      }
+
+  ###
+   # @module ui.navigationBar
+   # @name setStyle
+   # @description
+   # Adds inline CSS styling to navigation bar.
+   # @apiCall supersonic.ui.navigationBar.setStyle
+   # @function
+   # @type
+   # setStyle: (
+   #   inlineCssString
+   # ) => Promise
+   # @define inlineCssString="" A string of inline CSS styling.
+   # @returns {Promise} A promise that will be resolved after the navigation bar style is set.
+   # @usageCoffeeScript
+   # supersonic.ui.navigationBar.setStyle("background-color: #ff0000;").then ()->
+   #   supersonic.logger.log "Navigation bar style was set."
+   # @usageJavaScript
+   # supersonic.ui.navigationBar.setStyle("background-color: #ff0000;").then(function() {
+   #   supersonic.logger.log("Navigation bar style was set.");
+   # });
+   #
+  ###
+  setStyle: (inlineCssString)->
+    new Promise (resolve, reject)->
+      steroids.view.navigationBar.setStyleCSS inlineCssString, {
+        onSuccess: ()->
+          supersonic.logger.info "Navigation bar inline style was set"
+          resolve()
+        onFailure: (error)->
+          supersonic.logger.error "Could not set the navigation bar inline style: #{error.errorDescription}"
           reject()
       }

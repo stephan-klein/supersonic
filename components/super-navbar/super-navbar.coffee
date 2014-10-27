@@ -27,6 +27,9 @@ observer = new MutationObserver (mutations) ->
       # Class changed
       if mutation.attributeName is "class"
         mutation.target.class = mutation.target.getAttribute("class")
+      # Class changed
+      if mutation.attributeName is "style"
+        mutation.target.style = mutation.target.getAttribute("style")
 
 ###
 CREATE ELEMENT
@@ -64,6 +67,15 @@ Object.defineProperty SuperNavbarPrototype, "class",
 
   get: ->
     this._class
+
+Object.defineProperty SuperNavbarPrototype, "style",
+  set: (inlineStyle) ->
+    inlineStyle = "" if not inlineStyle
+    this._style = inlineStyle
+    this.onInlineStyleChanged()
+
+  get: ->
+    this._style
 
 ###
 DEFINE METHODS
@@ -157,6 +169,9 @@ SuperNavbarPrototype.onButtonsChanged = ->
 SuperNavbarPrototype.onClassNameChanged = ->
   supersonic.ui.navigationBar.setClass(this._class) unless this.isHidden()
 
+SuperNavbarPrototype.onInlineStyleChanged = ->
+  supersonic.ui.navigationBar.setStyle(this._style) unless this.isHidden()
+
 # What is the difference between attached and created?
 SuperNavbarPrototype.attachedCallback = ->
   # Initiate button arrays
@@ -169,6 +184,7 @@ SuperNavbarPrototype.attachedCallback = ->
 
   # Style
   this.class = this.getAttribute("class")
+  this.style = this.getAttribute("style")
 
   # Observe attributes style and class
   observerConfiguration =
