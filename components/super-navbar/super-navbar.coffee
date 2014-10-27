@@ -1,6 +1,6 @@
 ###
  # @category webComponent
- # @name <super-navbar>
+ # @name super-navbar
  # @component
  # @description
  # Component used to display a view-specific native navbar. Navbar can contain super-navbar-title and super-navbar-button components.

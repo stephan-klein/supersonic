@@ -1,6 +1,6 @@
 ###
  # @category webComponent
- # @name <super-navbar-title>
+ # @name super-navbar-title
  # @component
  # @description
  # Component used to add title on app navigation bar. Must be a child of <super-navbar>.

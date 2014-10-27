@@ -1,6 +1,6 @@
 ###
  # @category webComponent
- # @name <super-navbar-button>
+ # @name super-navbar-button
  # @component
  # @description
  # A button that will be displayed on the view navbar.
