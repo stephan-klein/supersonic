@@ -45,7 +45,6 @@ Object.defineProperty SuperNavbarPrototype, "title",
 Object.defineProperty SuperNavbarPrototype, "buttons",
   set: (buttons)->
     this.setButtons buttons
-
   get: ->
     {
       left: this._leftButtons
@@ -66,7 +65,7 @@ SuperNavbarPrototype.show = ->
   supersonic.ui.navigationBar.show()
 
 SuperNavbarPrototype.hide = ->
-  steroids.view.navigationBar.hide()
+  supersonic.ui.navigationBar.hide()
 
 # Navbar title
 
@@ -84,18 +83,18 @@ SuperNavbarPrototype.addButton = (button, side="left") ->
   if side is "right" then this._rightButtons.push button
   else this._leftButtons.push button
   # Update buttons on UI
-  this._updateButtons()
+  this.onButtonsChanged()
 
 SuperNavbarPrototype.updateButton = (button) ->
   # First check the left side for the button reference
   for candidate, idx in this._leftButtons when candidate is button
     this._leftButtons[idx] = button
-    this._updateButtons()
+    this.onButtonsChanged()
     return
   # Check right side for the reference
   for candidate, idx in this._rightButtons when candidate is button
     this._rightButtons[idx] = button
-    this._updateButtons()
+    this.onButtonsChanged()
     return
 
 SuperNavbarPrototype.changeButtonSide = (button, side="left") ->
@@ -104,7 +103,7 @@ SuperNavbarPrototype.changeButtonSide = (button, side="left") ->
 
 SuperNavbarPrototype.removeButton = (button) ->
   this._removeButtonSilently button
-  this._updateButtons()
+  this.onButtonsChanged()
 
 SuperNavbarPrototype._removeButtonSilently = (button) ->
   # First check the left side for the button reference
@@ -120,10 +119,9 @@ SuperNavbarPrototype._removeButtonSilently = (button) ->
 SuperNavbarPrototype.setButtons = (buttons) ->
   this._leftButtons = buttons.left
   this._rightButtons = buttons.right
-  this._updateButtons()
+  this.onButtonsChanged()
 
 SuperNavbarPrototype._updateButtons = ->
-  return if this.isHidden()
   # Set base for options
   options =
     buttons:
@@ -138,6 +136,9 @@ DEFINE CALLBACKS
 
 SuperNavbarPrototype.onTitleChanged = ->
   this.updateNavBarTitle() unless this.isHidden()
+
+SuperNavbarPrototype.onButtonsChanged = ->
+  this._updateButtons() unless this.isHidden()
 
 # What is the difference between attached and created?
 SuperNavbarPrototype.attachedCallback = ->
@@ -157,6 +158,7 @@ SuperNavbarPrototype.attachedCallback = ->
   observer.observe this, observerConfiguration
 
   onStyleChanged this
+  this.onButtonsChanged()
 
 SuperNavbarPrototype.createdCallback = ->
   #console.log "Navigation bar createCallback"
@@ -165,7 +167,7 @@ SuperNavbarPrototype.detachedCallback = ->
   #console.log "Navigation bar detachedCallback"
   observer.disconnect()
   # Hide the navbar when this node leaves the DOM
-  steroids.view.navigationBar.hide()
+  supersonic.ui.navigationBar.hide()
 
 ###
 REGISTER ELEMENT
