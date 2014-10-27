@@ -71,6 +71,15 @@ Object.defineProperty SuperNavbarPrototype, "style",
   get: ->
     this._style
 
+Object.defineProperty SuperNavbarPrototype, "id",
+  set: (styleId) ->
+    styleId = "" if not styleId
+    this._styleId = styleId
+    this.onStyleIdChanged()
+
+  get: ->
+    this._styleId
+
 ###
 DEFINE METHODS
 ###
@@ -165,6 +174,9 @@ SuperNavbarPrototype.onClassNameChanged = ->
 
 SuperNavbarPrototype.onInlineStyleChanged = ->
   supersonic.ui.navigationBar.setStyle(this._style) unless this.isHidden()
+
+SuperNavbarPrototype.onStyleIdChanged = ->
+  supersonic.ui.navigationBar.setStyleId(this._styleId) unless this.isHidden()
 
 # What is the difference between attached and created?
 SuperNavbarPrototype.attachedCallback = ->
