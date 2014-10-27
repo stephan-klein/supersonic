@@ -1,7 +1,7 @@
 SuperShowModalPrototype = Object.create HTMLElement.prototype
 ###
  # @category webComponent
- # @name <super-show-modal>
+ # @name super-show-modal
  # @component
  # @description
  # Shows a modal. Uses `supersonic.ui.modal.show` internally.
