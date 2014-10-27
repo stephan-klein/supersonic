@@ -14,12 +14,6 @@
  #
  # </super-navbar>
 ###
-onStyleChanged = (node) ->
-  if node.isHidden()
-    node.hide()
-  else
-    node.show()
-
 observer = new MutationObserver (mutations) ->
   for mutation in mutations
     # Check attributes
@@ -193,9 +187,14 @@ SuperNavbarPrototype.attachedCallback = ->
 
   observer.observe this, observerConfiguration
 
-  onStyleChanged this
   this.onButtonsChanged()
   this.onClassNameChanged()
+  this.onInlineStyleChanged()
+
+  if this.isHidden()
+    this.hide()
+  else
+    this.show()
 
 SuperNavbarPrototype.createdCallback = ->
   #console.log "Navigation bar createCallback"
