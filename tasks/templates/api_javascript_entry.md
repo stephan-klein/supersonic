@@ -2,6 +2,8 @@
 layout: "docs_api"
 title: Supersonic API reference
 header_sub_title: <%= method.apiCall %>
+section_id: <%= section %>
+subsection_id: <%= subsection %>
 ---
 
 {% assign method = <%= liquidDataPath %> %}

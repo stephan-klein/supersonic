@@ -26,6 +26,9 @@ module.exports = (grunt)->
       apiMethod = JSON.parse grunt.file.read file.src[0]
       liquidDataPath = getLiquidDataPath(file.src[0])
 
+      section = liquidDataPath.split(".")[3]
+      subsection = liquidDataPath.split(".")[4]
+
       templateType = if apiMethod.overview
         "overview"
       else
@@ -36,6 +39,8 @@ module.exports = (grunt)->
       markdownOutput = grunt.util._.template(template) {
         liquidDataPath: liquidDataPath
         method: apiMethod
+        section: section
+        subsection: subsection
       }
 
       grunt.file.write file.dest, markdownOutput

@@ -3,84 +3,86 @@ layout: docs
 docs_tab_id: api-reference
 sections:
   - name: App
-    subpages:
+    subsections:
       - name: getLaunchURL
-        href: supersonic/app/getLaunchURL
+        topics:
+          - name: getLaunchURL
       - name: openURL
-        href: supersonic/app/openURL
+        topics:
+          - name: openURL
       - name: sleep
-        href: supersonic/app/sleep
+        topics:
+          - name: disable
+          - name: enable
       - name: splashscreen
-        href: supersonic/app/splashscreen
+        topics:
+          - name: hide
+          - name: show
       - name: statusBar
-        href: supersonic/app/statusBar
+        topics:
+          - name: hide
 
-  - name: Debug
-    subpages:
+  - name: Core
+    subsections:
       - name: debug
-        href: supersonic/core/debug
+        topics:
+          - name: ping
       - name: logger
-        href: supersonic/core/logger
+        topics:
+          - name: debug
+          - name: error
+          - name: info
+          - name: warn
 
   - name: Device
-    subpages:
+    subsections:
       - name: accelerometer
-        href: supersonic/device/accelerometer
+        topics:
+          - name: getAcceleration
+          - name: watchAcceleration
       - name: compass
-        href: supersonic/device/compass
+        topics:
+          - name: getHeading
+          - name: watchHeading
       - name: geolocation
-        href: supersonic/device/geolocation
+        topics:
+          - name: getPosition
+          - name: watchPosition
       - name: platform
-        href: supersonic/device/platform
+        topics:
+          - name: platform
       - name: vibrate
-        href: supersonic/device/vibrate
 
   - name: Media
-    href: "#"
-    subpages:
+    subsections:
       - name: camera
-        href: supersonic/media/camera
 
   - name: Notification
-    subpages:
+    subsections:
       - name: alert
-        href: supersonic/notification/alert
       - name: confirm
-        href: supersonic/notification/confirm
       - name: prompt
-        href: supersonic/notification/prompt
 
   - name: Native UI
-    href: "#"
-    subpages:
-      - name: Drawers
-        href: supersonic/ui/drawer
-      - name: Layers
-        href: supersonic/ui/layer
-      - name: Modal
-        href: supersonic/ui/modal
-      - name: Navigation bar
-        href: supersonic/ui/navigation-bar
-      - name: Navigation bar button
-        href: supersonic/ui/navigation-button
-      - name: Views
-        href: supersonic/ui/view
+    subsections:
+      - name: drawer
+      - name: layers
+      - name: modal
+      - name: navigationBar
+      - name: view
+      - name: views
 
   - name: Web Components
-    subpages:
+    subsections:
       - name: super-navigate
-        href: components/super-navigate
       - name: super-navigate-back
-        href: components/super-navigate-back
       - name: super-show-modal
-        href: components/super-show-modal
       - name: super-hide-modal
-        href: components/super-hide-modal
 ---
 <div class="col-md-2 col-sm-3 aside-menu">
 
   <div class="docked-menu">
-    {% include docs_menu.html tab_name="api-reference" %}
+    {% include api_menu.html %}
   </div>
 
 </div>
