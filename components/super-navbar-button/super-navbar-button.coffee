@@ -24,10 +24,11 @@
 ###
 observer = new MutationObserver (mutations) ->
   for mutation in mutations
-    # If the mutation is for children in this element
+    # If content changed
     if mutation.type is "childList"
-      mutation.target.updateOnNavbar mutation.target
-    # If side changed
+      mutation.target._setButtonTitle()
+      mutation.target.updateOnNavbar()
+    # If attribute changed
     if mutation.type is "attributes"
       console.log "mutation", mutation
       # Side
@@ -36,9 +37,8 @@ observer = new MutationObserver (mutations) ->
         mutation.target.updatePositionOnNavbar()
         return
       # On-tap
-      if mutation.attributeName is "on-tap"
-        mutation.target._onTapOrig = mutation.target.getAttribute("on-tap")
-        mutation.target._button.onTap = new Function(mutation.target._onTapOrig)
+      if mutation.attributeName is "location"
+        mutation.target._setButtonAction()
         mutation.target.updateOnNavbar()
         return
 
@@ -63,29 +63,34 @@ Object.defineProperty SuperNavbarButtonPrototype, "side",
 DEFINE METHODS
 ###
 
-SuperNavbarButtonPrototype._callNavbar = (cmd) ->
-  # Check for parent element existence
-  if this.parentNode.nodeName == "SUPER-NAVBAR"
-    cmd()
-  else
-    # Oops, we have a malformed DOM
-    throw new Error "Component super-navbar-button must be an immediate child of super-navbar component"
-
 SuperNavbarButtonPrototype.addToNavbar = ->
-  this._callNavbar () =>
-    @parentNode.addButton @_button, @_side
+  this._parent.addButton @_button, @_side
 
 SuperNavbarButtonPrototype.updatePositionOnNavbar = ->
-  this._callNavbar () =>
-    @parentNode.changeButtonSide @_button, @_side
+  this._parent.changeButtonSide @_button, @_side
 
 SuperNavbarButtonPrototype.removeFromNavbar = ->
-  this._callNavbar () =>
-    @parentNode.removeButton @_button
+  this._parent.removeButton @_button
 
 SuperNavbarButtonPrototype.updateOnNavbar = ->
-  this._callNavbar () =>
-    @parentNode.updateButton @_button
+  this._parent.updateButton @_button
+
+###
+INTERNAL METHODS
+###
+
+SuperNavbarButtonPrototype._setButtonAction = ->
+  if this.getAttribute("location") and this.getAttribute("location").match(/.+#.+/i)
+    view = supersonic.ui.view this.getAttribute("location")
+    view.start()
+    this._button.onTap = () ->
+      supersonic.ui.layer.push view
+  else
+    this._button.onTap = () =>
+      this.click()
+
+SuperNavbarButtonPrototype._setButtonTitle = ->
+  this._button.title = this.textContent
 
 ###
 DEFINE CALLBACKS
@@ -93,28 +98,30 @@ DEFINE CALLBACKS
 
 # When a new element is detected in the DOM
 SuperNavbarButtonPrototype.createdCallback = ->
+  # Check for parent element existence
+  if this.parentNode.nodeName != "SUPER-NAVBAR"
+    throw new Error "Component super-navbar-button must be an immediate child of super-navbar component"
+    return
+  this._parent = this.parentNode
+
   # Which things to observe
   observerConfiguration =
     childList: true
     attributes: true
-    attributeFilter: ["style", "class", "side", "on-tap", "ng-click"]
+    attributeFilter: ["style", "class", "side", "location"]
   observer.observe this, observerConfiguration
 
   # Set side
   this._side = this.getAttribute("side")
-  this._onTap = () =>
-    this.click();
 
-  if this.getAttribute("location") and this.getAttribute("location").match(/.+#.+/i)
-    view = supersonic.ui.view this.getAttribute("location")
-    view.start()
-    this._onTap = () ->
-      supersonic.ui.layer.push view
+  # Create button object
+  this._button = new supersonic.ui.navigationButton()
 
-  # Create the button object
-  this._button = new supersonic.ui.navigationButton
-    title: this.textContent
-    onTap: this._onTap
+  # Location vs click callback
+  this._setButtonAction()
+
+  # Set button title
+  this._setButtonTitle()
 
   # Initiate by adding to navbar
   this.addToNavbar()
@@ -123,6 +130,8 @@ SuperNavbarButtonPrototype.createdCallback = ->
   #onContentChanged this
 
 SuperNavbarButtonPrototype.detachedCallback = ->
+  # Remvoe button from navbar
+  this.removeFromNavbar()
   # Dispose of observer
   observer.disconnect()
 
