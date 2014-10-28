@@ -36,7 +36,6 @@ SuperNavigatePrototype.createdCallback = ->
     location = @getAttribute "location"
     if location
       webview = supersonic.ui.view location
-      console.log webview
       return supersonic.ui.layer.push(webview)
         .catch (error) ->
           throw new Error "Failed to push view: #{error}"
