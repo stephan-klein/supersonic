@@ -5,7 +5,7 @@ chai.use require 'chai-as-promised'
 steroids = require '../../src/supersonic/mock/steroids'
 window = require '../../src/supersonic/mock/window'
 logger = require('../../src/supersonic/core/logger')(steroids, window)
-splashscreen = require('../../src/supersonic/app/splashscreen')(steroids, logger)
+splashscreen = require('../../src/supersonic/core/app/splashscreen')(steroids, logger)
 
 describe "supersonic.app.splashscreen.show", ->
   it "should exist", ->

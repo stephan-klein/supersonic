@@ -5,7 +5,7 @@ chai.use require 'chai-as-promised'
 steroids = require '../../src/supersonic/mock/steroids'
 window = require '../../src/supersonic/mock/window'
 logger = require('../../src/supersonic/core/logger')(steroids, window)
-views = require('../../src/supersonic/ui/views')(steroids, logger)
+views = require('../../src/supersonic/core/ui/views')(steroids, logger)
 
 describe "supersonic.ui.views", ->
   it "should exist", ->

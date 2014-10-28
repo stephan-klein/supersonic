@@ -5,7 +5,7 @@ chai.use require 'chai-as-promised'
 steroids = require '../../src/supersonic/mock/steroids'
 window = require '../../src/supersonic/mock/window'
 logger = require('../../src/supersonic/core/logger')(steroids, window)
-compass = require('../../src/supersonic/device/compass')(steroids, logger)
+compass = require('../../src/supersonic/core/device/compass')(steroids, logger)
 
 describe "supersonic.device.compass", ->
   it "should exist", ->

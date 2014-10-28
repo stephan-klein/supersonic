@@ -1,3 +1,3 @@
-describe "supersonic.notification.vibrate", ->
+describe "supersonic.device.vibrate", ->
   it "should be defined", ->
-    supersonic.notification.vibrate.should.exist
+    supersonic.device.vibrate.should.exist

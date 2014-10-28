@@ -10,8 +10,8 @@ module.exports =
     components: "components/*"
     docs: 'docs'
     docsGruntOutputDirs: [
-      '<%= dir.docs %>/_data/components/'
-      '<%= dir.docs %>/_data/supersonic/'
+      '<%= dir.docs %>/_data/'
+      '<%= dir.docs %>/api-reference/nightly/'
     ]
   files:
     src: '<%= dir.src %>/**/*.coffee'
