@@ -1,4 +1,39 @@
-resource = require 'steroids-data/lib/steroids/data/resource'
+data = require 'ag-data'
+
+module.exports = (window) ->
+  createModel = switch
+    when window?.ag?.data?.resources then (name) ->
+      try
+        data.loadResourceBundle(window.ag.data.resources).createModel name
+      catch err
+        throw new Error "Could not load model #{name}: #{err}"
+    else (name) ->
+      throw new Error "No cloud resources available"
+
+  {
+    ###
+     # @category core
+     # @module data
+     # @name model
+     # @function
+     # @apiCall supersonic.data.model
+     # @description
+     # Allows access to cloud resources you have configured for your app through Steroids Connect.
+     # @type
+     # model: (
+     #   name: String
+     # ) => Model
+     # @define {String} name The name of a configured cloud resource
+     # @exampleCoffeeScript
+     # Task = supersonic.data.model 'task'
+     # takeOutTheTrash = new Task {
+     #   description: "Take out the trash"
+     # }
+     # takeOutTheTrash.save()
+    ###
+    model: createModel
+  }
+
 ###
  # @category core
  # @module data
@@ -13,7 +48,6 @@ resource = require 'steroids-data/lib/steroids/data/resource'
  # @define {Function} findAll returns a collection of resources
  # @define {Function} find returns a resource by a specific id
 ###
-model
 ###
  # @category core
  # @module data
@@ -84,27 +118,3 @@ model
  #   if task.done
  #     task.delete()
 ###
-
-module.exports = {
-  ###
-   # @category core
-   # @module data
-   # @name model
-   # @function
-   # @apiCall supersonic.data.model
-   # @description
-   # Allows access to cloud resources you have configured for your app through Steroids Connect.
-   # @type
-   # model: (
-   #   name: String
-   # ) => Model
-   # @define {String} name The name of a configured cloud resource
-   # @exampleCoffeeScript
-   # Task = supersonic.data.model 'task'
-   # takeOutTheTrash = new Task {
-   #   description: "Take out the trash"
-   # }
-   # takeOutTheTrash.save()
-  ###
-  model
-}
