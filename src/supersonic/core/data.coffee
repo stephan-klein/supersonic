@@ -1,13 +1,22 @@
 data = require 'ag-data'
 
-module.exports = (window) ->
+module.exports = (logger, window) ->
   createModel = switch
-    when window?.ag?.data?.resources then (name) ->
+    when window?.ag?.data?
       try
-        data.loadResourceBundle(window.ag.data.resources).createModel name
+        bundle = data.loadResourceBundle(window.ag.data)
+        (name) ->
+          try
+            bundle.createModel name
+          catch err
+            logger.error "Tried to access cloud resource '#{name}', but it was unavailable"
+            throw new Error "Could not load model #{name}: #{err}"
       catch err
-        throw new Error "Could not load model #{name}: #{err}"
+        logger.error "Could not load configured cloud resource bundle: #{err}"
+        ->
+          throw new Error "Tried to access cloud resource, but the configured cloud resource bundle could not be loaded"
     else (name) ->
+      logger.error "Tried to access a cloud resource, but none have been configured"
       throw new Error "No cloud resources available"
 
   {
