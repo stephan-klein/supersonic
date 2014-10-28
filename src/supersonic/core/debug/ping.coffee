@@ -28,7 +28,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log(response);
    # });
   ###
-  ping: bug "ping", ->
+  ping = bug "ping", ->
     new Promise (resolve, reject) ->
       steroids.device.ping(
         {}
@@ -39,3 +39,5 @@ module.exports = (steroids, log) ->
             reject()
         }
       )
+
+  return ping

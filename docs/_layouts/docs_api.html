@@ -5,11 +5,9 @@ sections:
   - name: App
     subsections:
       - name: getLaunchURL
-        topics:
-          - name: getLaunchURL
+        method: true
       - name: openURL
-        topics:
-          - name: openURL
+        method: true
       - name: sleep
         topics:
           - name: disable
@@ -21,18 +19,24 @@ sections:
       - name: statusBar
         topics:
           - name: hide
+          - name: show
 
-  - name: Core
+
+  - name: Debug
+    subsections:
+      - name: ping
+        method: true
+
+  - name: Logger
     subsections:
       - name: debug
-        topics:
-          - name: ping
-      - name: logger
-        topics:
-          - name: debug
-          - name: error
-          - name: info
-          - name: warn
+        method: true
+      - name: error
+        method: true
+      - name: info
+        method: true
+      - name: warn
+        method: true
 
   - name: Device
     subsections:
@@ -49,22 +53,25 @@ sections:
           - name: getPosition
           - name: watchPosition
       - name: platform
-        topics:
-          - name: platform
+        method: true
       - name: vibrate
+        method: true
 
   - name: Media
     subsections:
       - name: camera
-
-  - name: Notification
-    subsections:
-      - name: alert
-      - name: confirm
-      - name: prompt
+        topics:
+          - name: takePicture
+          - name: getFromPhotoLibrary
 
   - name: Native UI
+    id: ui
     subsections:
+      - name: dialog
+        topics:
+          - name: alert
+          - name: confirm
+          - name: prompt
       - name: drawer
       - name: layers
       - name: modal
@@ -73,6 +80,7 @@ sections:
       - name: views
 
   - name: Web Components
+    id: components
     subsections:
       - name: super-navigate
       - name: super-navigate-back

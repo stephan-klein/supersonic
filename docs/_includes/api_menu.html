@@ -1,20 +1,35 @@
 {% for section in page.sections %}
-{% assign section_id = section.name | slugify %}
+{% unless section.id %}
+  {% assign section_id = section.name | slugify %}
+{% else %}
+  {% assign section_id = section.id %}
+{% endunless %}
+
+{% if section_id == "components" %}
+  {% assign main_namespace = "" %}
+{% else %}
+  {% assign main_namespace = "core/" %}
+{% endif %}
+
 <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
   <li class="menu-title">
-    <a href="/api-reference/nightly/{{section_id}}">{{section.name}}</a>
+    <a href="/api-reference/nightly/{{main_namespace}}{{section_id}}">{{section.name}}</a>
     {% if page.section_id == section_id %}
       {% for subsection in section.subsections %}
         {% assign subsection_id = subsection.name | slugify %}
         <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
-          <a href="/api-reference/nightly/{{section_id}}/{{subsection_id}}" class="api-section">
-            {{subsection.name}}
+          <a href="/api-reference/nightly/{{main_namespace}}{{section_id}}/{{subsection_id}}" class="api-section">
+            {% if subsection.method %}
+              <code>{{subsection.name}}()</code>
+            {% else %}
+              {{subsection.name}}
+            {% endif %}
           </a>
           {% if page.subsection_id == subsection_id %}
             <ul>
               {% for topic in subsection.topics %}
               <li>
-                <a href="/api-reference/nightly/{{section_id}}/{{subsection_id}}/{{topic.name | slugify}}">
+                <a href="/api-reference/nightly/{{main_namespace}}{{section_id}}/{{subsection_id}}/{{topic.name | slugify}}">
                   ↳ <code>{{topic.name}}()</code>
                 </a>
               </li>

@@ -18,7 +18,7 @@ module.exports = (grunt)->
         expand: true
         cwd: "tasks/templates/docs-index/"
         src: "**/*.md"
-        dest: "docs/api-reference/nightly/core/"
+        dest: "docs/api-reference/nightly/"
 
   getLiquidDataPath = (filePath)->
     liquidDataPath = filePath.replace "docs/_data/", "site.data."

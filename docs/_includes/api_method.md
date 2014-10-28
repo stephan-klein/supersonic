@@ -107,11 +107,16 @@
 {% endif %}
 {% endif %}
 
+{% if method.exampleCoffeeScript %}
 ### Full example CoffeeScript
 ```coffeescript
 {{method.exampleCoffeeScript}}
 ```
+{% endif %}
+
+{% if method.exampleJavaScript %}
 ### Full example JavaScript
 ```javascript
 {{method.exampleJavaScript}}
 ```
+{% endif %}

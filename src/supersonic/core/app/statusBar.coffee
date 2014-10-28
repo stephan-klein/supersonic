@@ -11,7 +11,7 @@ module.exports = (steroids, log) ->
    # @description
    # The native status bar shown on the top of the screen. The native status bar is displayed by default. It can be hidden and shown application wide.
   ###
-  
+
   ###
    # @module statusBar
    # @name hide
@@ -41,7 +41,7 @@ module.exports = (steroids, log) ->
 
   ###
    # @module statusBar
-   # @name hide
+   # @name show
    # @function
    # @apiCall supersonic.app.statusBar.show
    # @description
@@ -77,5 +77,3 @@ module.exports = (steroids, log) ->
             reject()
         }
       )
-    
-      
