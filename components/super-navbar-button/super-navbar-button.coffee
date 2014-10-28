@@ -5,7 +5,8 @@
  # @description
  # A button that will be displayed on the view navbar.
  # @attribute side="left" Used to set button position on navbar. Allowed values are "left" and "right".
- # @attribute location="moduleName#viewName" Simple way to use Supersonic UI navigation with your navbar button. If this is not set, any attached "click" callback will be used instead.
+ # @attribute location="moduleName#viewName" Simple way to use Supersonic UI navigation with your navbar button. Can contain a route or a URL. If neither this of view-id is set, any attached "click" callback will be used instead.
+ # @attribute view-id The ID of a preloaded web view. Configure view IDs in config/structure.coffee. If view-id is set, location will be ignored.
  # @usageHtml
  # <super-navbar-button location="moduleName#viewName" side="left">Title<super-navbar-button>
  # @exampleHtml
@@ -80,14 +81,31 @@ INTERNAL METHODS
 ###
 
 SuperNavbarButtonPrototype._setButtonAction = ->
-  if this.getAttribute("location") and this.getAttribute("location").match(/.+#.+/i)
-    view = supersonic.ui.view this.getAttribute("location")
-    view.start()
-    this._button.onTap = () ->
-      supersonic.ui.layer.push view
-  else
-    this._button.onTap = () =>
-      this.click()
+
+  # Check if view-id is set
+  viewId = @getAttribute "view-id"
+  if viewId
+    @_button.onTap = () ->
+      supersonic.ui.views.find(viewId)
+        .then (webview) ->
+          supersonic.ui.layer.push(webview)
+        .catch (error) ->
+          throw new Error "Failed to push view: #{error}"
+    return
+
+  # Check if location is set
+  location = @getAttribute "location"
+  if location
+    webview = supersonic.ui.view location
+    @_button.onTap = () ->
+      supersonic.ui.layer.push(webview)
+        .catch (error) ->
+          throw new Error "Failed to push view: #{error}"
+    return
+
+  # Default action: trigger click on the DOM element
+  @_button.onTap = () =>
+    @click()
 
 SuperNavbarButtonPrototype._setButtonTitle = ->
   this._button.title = this.textContent
@@ -108,7 +126,7 @@ SuperNavbarButtonPrototype.createdCallback = ->
   observerConfiguration =
     childList: true
     attributes: true
-    attributeFilter: ["style", "class", "side", "location"]
+    attributeFilter: ["style", "class", "side", "location", "view-id"]
   observer.observe this, observerConfiguration
 
   # Set side
