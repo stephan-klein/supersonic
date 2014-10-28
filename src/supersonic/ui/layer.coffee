@@ -31,7 +31,7 @@ module.exports = (steroids, log) ->
   push: (view) ->
     new Promise (resolve, reject) ->
       steroids.layers.push {
-          view: view._getWebView()
+        view: view._getWebView()
       }, {
         onSuccess: ->
           resolve()
