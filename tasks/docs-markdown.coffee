@@ -1,4 +1,3 @@
-dox = require "dox"
 _ = require "lodash"
 path = require "path"
 
@@ -14,6 +13,12 @@ module.exports = (grunt)->
         rename: (dest, matchedSrcPath) ->
           betterSrcPath = matchedSrcPath.replace "overview", "index"
           return path.join dest, betterSrcPath
+    copy:
+      "docs-index":
+        expand: true
+        cwd: "tasks/templates/docs-index/"
+        src: "**/*.md"
+        dest: "docs/api-reference/nightly/"
 
   getLiquidDataPath = (filePath)->
     liquidDataPath = filePath.replace "docs/_data/", "site.data."
@@ -43,3 +48,5 @@ module.exports = (grunt)->
       }
 
       grunt.file.write file.dest, markdownOutput
+
+    grunt.task.run "copy:docs-index"
