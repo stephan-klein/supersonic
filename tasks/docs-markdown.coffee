@@ -25,9 +25,8 @@ module.exports = (grunt)->
     @files.forEach (file) =>
       apiMethod = JSON.parse grunt.file.read file.src[0]
       liquidDataPath = getLiquidDataPath(file.src[0])
-
-      section = liquidDataPath.split(".")[3]
-      subsection = liquidDataPath.split(".")[4]
+      section = liquidDataPath.split(".")[3]?.toLowerCase()
+      subsection = liquidDataPath.split(".")[4]?.toLowerCase()
 
       templateType = if apiMethod.overview
         "overview"

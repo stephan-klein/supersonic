@@ -135,21 +135,27 @@ module.exports = (grunt)->
 
   writeArrayToJson = (cleanedUpArray, folderPath) ->
     writeMethodToJson = (fileName, method) ->
-      fileDestination = path.join folderPath, fileName
+      fileDestination = if fileName is null
+        "#{folderPath}.json"
+      else
+        path.join folderPath, fileName
+
       prettyJSON = JSON.stringify method, undefined, 2
       grunt.file.write fileDestination, prettyJSON
 
     for method in cleanedUpArray
-      methodName = if method.overview
+      methodFileName = if cleanedUpArray.length is 1
+        null
+      else if method.overview
         "overview.json"
       else
         "#{method.name}.json"
 
-      writeMethodToJson methodName, method
+      writeMethodToJson methodFileName, method
 
   getStringsFromFile = (file) ->
     filePath = file.src[0]
-    jsonDestFolderPath = "docs/_data/#{file.dest}/"
+    jsonDestFolderPath = "docs/_data/#{file.dest}"
     {filePath, jsonDestFolderPath}
 
   grunt.registerMultiTask "docs-json", "Get comments from src/*. to docs/_data/*.json", ->
