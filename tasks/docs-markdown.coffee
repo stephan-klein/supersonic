@@ -4,9 +4,9 @@ path = require "path"
 module.exports = (grunt)->
   grunt.extendConfig
     "docs-markdown":
-      all:
+      core:
         expand: true
-        cwd: "docs/_data/supersonic/"
+        cwd: "docs/_data/"
         src: "**/*.json"
         dest: "docs/api-reference/nightly/"
         ext: ".md"
@@ -18,7 +18,7 @@ module.exports = (grunt)->
         expand: true
         cwd: "tasks/templates/docs-index/"
         src: "**/*.md"
-        dest: "docs/api-reference/nightly/"
+        dest: "docs/api-reference/nightly/core/"
 
   getLiquidDataPath = (filePath)->
     liquidDataPath = filePath.replace "docs/_data/", "site.data."

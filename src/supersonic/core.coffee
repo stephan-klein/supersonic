@@ -13,12 +13,12 @@ logger = require('./core/logger')(steroids, global)
 module.exports = {
   logger
   debug: require('./core/debug')(steroids, logger)
-  app: require('./app')(steroids, logger)
-  media: require('./media')(steroids, logger)
-  notification: require('./notification')
-  device: require('./device')(steroids, logger)
-  ui: require('./ui')(steroids, logger)
-  data: require './data'
+  app: require('./core/app')(steroids, logger)
+  media: require('./core/media')(steroids, logger)
+  notification: require('./core/notification')
+  device: require('./core/device')(steroids, logger)
+  ui: require('./core/ui')(steroids, logger)
+  data: require './core/data'
 }
 
 # Export to window as global if we're in the browser

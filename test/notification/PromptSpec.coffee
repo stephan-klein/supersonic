@@ -2,7 +2,7 @@ chai = require('chai')
 chai.should()
 chai.use require 'chai-as-promised'
 
-prompt = require('../../src/supersonic/notification/prompt')
+prompt = require('../../src/supersonic/core/notification/prompt')
 
 describe "supersonic.notification.prompt", ->
   it "should exist", ->

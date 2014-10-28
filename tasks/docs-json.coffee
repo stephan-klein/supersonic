@@ -5,9 +5,9 @@ path = require "path"
 module.exports = (grunt)->
   grunt.extendConfig
     "docs-json":
-      javascript:
+      core:
         expand: true
-        cwd: "src/"
+        cwd: "src/supersonic/"
         src: "**/*.coffee"
         dest: ""
         ext: ""

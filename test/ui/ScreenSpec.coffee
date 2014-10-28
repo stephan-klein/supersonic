@@ -5,7 +5,7 @@ chai.use require 'chai-as-promised'
 steroids = require '../../src/supersonic/mock/steroids'
 window = require '../../src/supersonic/mock/window'
 logger = require('../../src/supersonic/core/logger')(steroids, window)
-screen = require('../../src/supersonic/ui/screen')(steroids, logger)
+screen = require('../../src/supersonic/core/ui/screen')(steroids, logger)
 
 describe "supersonic.ui.screen.setAllowedRotations", ->
   it "should exist", ->
