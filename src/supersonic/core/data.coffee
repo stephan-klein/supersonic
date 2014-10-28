@@ -1,6 +1,11 @@
 data = require 'ag-data'
 
 module.exports = (logger, window) ->
+  ###
+  Connect ag-data to a resource bundle from window.ag.datasuch that errors
+  are correctly wrapped and logged. Notably, if window.ag.data exists but
+  does not define a valid bundle, an error will be logged without interaction.
+  ###
   createModel = switch
     when window?.ag?.data?
       try
@@ -9,14 +14,14 @@ module.exports = (logger, window) ->
           try
             bundle.createModel name
           catch err
-            logger.error "Tried to access cloud resource '#{name}', but it was unavailable"
+            logger.error "Tried to access cloud resource '#{name}', but it is not a configured resource"
             throw new Error "Could not load model #{name}: #{err}"
       catch err
         logger.error "Could not load configured cloud resource bundle: #{err}"
         ->
-          throw new Error "Tried to access cloud resource, but the configured cloud resource bundle could not be loaded"
+          throw new Error "Tried to access a cloud resource, but the configured cloud resource bundle could not be loaded"
     else (name) ->
-      logger.error "Tried to access a cloud resource, but none have been configured"
+      logger.error "Tried to access a cloud resource, but no resources have been configured"
       throw new Error "No cloud resources available"
 
   {
