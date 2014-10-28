@@ -40,6 +40,6 @@ The [supersonic.ui.screen.setAllowedRotations](#setAllowedRotations) API call al
 
 </section>
 <section class="docs-section" id="setallowedrotation">
-{% assign method = site.data.supersonic.ui.screen.setAllowedRotations %}
+{% assign method = site.data.core.ui.screen.setAllowedRotations %}
 {% include api_method.md method=method %}
 </section>

@@ -13,6 +13,6 @@ topics:
 Sometimes you just need to make your phone buzz.
 
 <section class="docs-section" id="vibrate">
-{% assign vibrate = site.data.supersonic.device.vibrate.vibrate %}
+{% assign vibrate = site.data.core.device.vibrate.vibrate %}
 {% include api_method.md method=vibrate %}
 </section>

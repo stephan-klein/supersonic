@@ -12,15 +12,15 @@ topics:
 ---
 # Compass
 
-{{ site.data.supersonic.device.compass.overview.description }}
+{{ site.data.core.device.compass.overview.description }}
 
 <section class="docs-section" id="watchheading">
-{% assign method = site.data.supersonic.device.compass.watchHeading %}
+{% assign method = site.data.core.device.compass.watchHeading %}
 {% include api_method.md method=method %}
 </section>
 
 <section class="docs-section" id="getheading">
-{% assign method = site.data.supersonic.device.compass.getHeading %}
+{% assign method = site.data.core.device.compass.getHeading %}
 {% include api_method.md method=method %}
 </section>
 

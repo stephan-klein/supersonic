@@ -15,6 +15,6 @@ The [supersonic.device.platform](#platform) API call gives you information about
 ## API Reference
 
 <section class="docs-section" id="platform">
-{% assign method = site.data.supersonic.device.platform.platform %}
+{% assign method = site.data.core.device.platform.platform %}
 {% include api_method.md method=method %}
 </section>
