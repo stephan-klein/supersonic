@@ -12,25 +12,23 @@ data = (resourceBundle = null) ->
   })
 
 describe "supersonic.data", ->
-  describe "model", ->
-    it "should be a function", ->
-      data().model.should.be.a 'function'
-
-  describe "when no resources are configured", ->
-    describe "model", ->
-      it "should always fail", ->
-        (-> data().model 'foo').should.throw Error, /no cloud resources/i
 
   it "accepts a resource bundle from window.ag.data", ->
     data({})
 
-  describe "when the resource bundle is empty", ->
-    describe "model", ->
+  describe "model", ->
+    it "should be a function", ->
+      data().model.should.be.a 'function'
+
+    describe "when no resources are configured", ->
+      it "should always fail", ->
+        (-> data().model 'foo').should.throw Error, /no cloud resources/i
+
+    describe "when the resource bundle is empty", ->
       it "should always fail", ->
         (-> data({}).model 'foo').should.throw Error, /could not load(.*)bundle/i
 
-  describe "when the resource bundle has a resource", ->
-    describe "model", ->
+    describe "when the resource bundle has a resource", ->
       it "should return a Model class", ->
         data({
           options:
@@ -41,8 +39,7 @@ describe "supersonic.data", ->
         .model('foo')
         .should.include.keys ['find', 'findAll']
 
-  describe "when a resource by the given name has not been defined", ->
-    describe "model", ->
+    describe "when a resource by the given name has not been defined", ->
       it "should fail", ->
         (->
           data({
