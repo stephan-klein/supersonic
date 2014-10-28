@@ -1,17 +1,17 @@
 Promise = require 'bluebird'
 
-{deviceready} = require '../events'
+{deviceready} = require '../../events'
 
 ###
- # @category core
- # @module notification
+ # @category ui
+ # @module dialog
  # @name confirm
  # @function
- # @apiCall supersonic.notification.confirm
+ # @apiCall supersonic.ui.dialog.confirm
  # @description
  # Shows a native confirm dialog.
  # @type
- # supersonic.notification.confirm : (
+ # supersonic.ui.dialog.confirm : (
  #   title?: String,
  #   options?: {
  #     message?: String,
@@ -26,15 +26,15 @@ Promise = require 'bluebird'
  # Returns a [Promise](todo). Once the confirm dialog is dismissed (by tapping on one of the buttons), the promise resolves with the index of the button tapped.
  # @define {=>Integer} buttonIndex Index of the button tapped by the user.
  # @usageCoffeeScript
- # supersonic.notification.confirm "Are you awesome?", options
+ # supersonic.ui.dialog.confirm "Are you awesome?", options
  # @usageJavaScript
- # supersonic.notification.confirm("Are you awesome?", options);
+ # supersonic.ui.dialog.confirm("Are you awesome?", options);
  # @exampleCoffeeScript
  # options =
  #   message: "Please reply honestly, now."
  #   buttonLabels: ["Yes", "No"]
  #
- # supersonic.notification.confirm("Are you awesome?", options).then (index)->
+ # supersonic.ui.dialog.confirm("Are you awesome?", options).then (index)->
  #   if result.index is 0
  #     supersonic.logger.log "User is awesome!"
  #   else
@@ -45,7 +45,7 @@ Promise = require 'bluebird'
  #   buttonLabels: ["Yes", "No"]
  # };
  #
- # supersonic.notification.confirm("Are you awesome?", options).then(function(index) {
+ # supersonic.ui.dialog.confirm("Are you awesome?", options).then(function(index) {
  #   if (result.index === 0) {
  #     supersonic.logger.log("User is awesome!");
  #   } else {

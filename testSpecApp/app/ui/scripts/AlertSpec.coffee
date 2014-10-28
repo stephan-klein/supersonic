@@ -1,15 +1,15 @@
-describe "supersonic.notification.alert", ->
+describe "supersonic.ui.dialog.alert", ->
   it "should be defined", ->
-    supersonic.notification.alert.should.exist
+    supersonic.ui.dialog.alert.should.exist
 
   it "should present an alert", ->
-    supersonic.notification.alert().should.be.fulfilled
+    supersonic.ui.dialog.alert().should.be.fulfilled
 
   it "should present an alert with null params", ->
-    supersonic.notification.alert(null).should.be.fulfilled
+    supersonic.ui.dialog.alert(null).should.be.fulfilled
 
   it "should present an alert with custom title", ->
-    supersonic.notification.alert("Custom Title").should.be.fulfilled
+    supersonic.ui.dialog.alert("Custom Title").should.be.fulfilled
 
   it "should present an alert with title string and options object as params", ->
 
@@ -18,4 +18,4 @@ describe "supersonic.notification.alert", ->
       message: "Custom message"
       buttonLabel: "Close"
 
-    supersonic.notification.alert(title, options).should.be.fulfilled
+    supersonic.ui.dialog.alert(title, options).should.be.fulfilled

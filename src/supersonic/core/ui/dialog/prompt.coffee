@@ -1,17 +1,17 @@
 Promise = require 'bluebird'
 
-{deviceready} = require '../events'
+{deviceready} = require '../../events'
 
 ###
- # @category core
- # @module notification
+ # @category ui
+ # @module dialog
  # @name prompt
  # @function
- # @apiCall supersonic.notification.prompt
+ # @apiCall supersonic.ui.dialog.prompt
  # @description
  # Displays a native prompt dialog.
  # @type
- # supersonic.notification.prompt : (
+ # supersonic.ui.dialog.prompt : (
  #   title?: String,
  #   options?: {
  #     message?: String,
@@ -30,16 +30,16 @@ Promise = require 'bluebird'
  # @define {=>Integer} result.buttonIndex Index of the button tapped by the user.
  # @define {=>String} result.input String inputted by user.
  # @usageCoffeeScript
- # supersonic.notification.prompt "Type something!", options
+ # supersonic.ui.dialog.prompt "Type something!", options
  # @usageJavaScript
- # supersonic.notification.prompt("Type something!", options);
+ # supersonic.ui.dialog.prompt("Type something!", options);
  # @exampleCoffeeScript
  # options =
  #   title: "Please type some text and click on the desired color"
  #   buttonLabels: ["Blue", "Red", "Yellow"]
  #   defaultText: "Type here"
  #
- # supersonic.notification.prompt("Colorize text", options).then (result)->
+ # supersonic.ui.dialog.prompt("Colorize text", options).then (result)->
  #   supersonic.logger.log "User clicked button number #{result.buttonIndex} with text #{result.input}"
  # @exampleJavaScript
  # var options = {
@@ -48,7 +48,7 @@ Promise = require 'bluebird'
  #   defaultText: "Type here"
  # };
 
- # supersonic.notification.prompt("Colorize text", options).then(function(result) {
+ # supersonic.ui.dialog.prompt("Colorize text", options).then(function(result) {
  #   supersonic.logger.log("User clicked button number " + result.buttonIndex + " with text " + result.input);
  # });
 ###

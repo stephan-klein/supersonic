@@ -20,7 +20,6 @@ module.exports = (angular) ->
         debug: qifyAll supersonic.debug
         app: qifyAll supersonic.app
         media: qifyAll supersonic.media
-        notification: qifyAll supersonic.notification
         device: supersonicDevice
         ui: supersonic.ui
       }

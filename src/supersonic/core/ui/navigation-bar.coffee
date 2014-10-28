@@ -95,7 +95,7 @@ module.exports = (steroids, log) ->
    # leftButton = new supersonic.ui.navigationButton({
    #   title: "Left"
    #   onTap: ()->
-   #     supersonic.notification.alert "Left button tapped"
+   #     supersonic.ui.dialog.alert "Left button tapped"
    # supersonic.ui.navigationBar.update({
    #   overrideBackButton: true,
    #   buttons: {

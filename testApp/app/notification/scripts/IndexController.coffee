@@ -25,7 +25,7 @@ angular
     ]
 
     $scope.testAlert = (title, options) ->
-      supersonic.notification.alert(title, options).then ->
+      supersonic.ui.dialog.alert(title, options).then ->
         $scope.dismissedAlerts++
 
     $scope.confirms = [
@@ -56,7 +56,7 @@ angular
     ]
 
     $scope.testConfirm = (title, options) ->
-      supersonic.notification.confirm(title, options).then (index) ->
+      supersonic.ui.dialog.confirm(title, options).then (index) ->
         $scope.confirms[index]++
 
     $scope.buttonIndex = undefined
@@ -85,6 +85,6 @@ angular
     ]
 
     $scope.testPrompt = (title, options) ->
-      supersonic.notification.prompt(title, options).then (result) ->
+      supersonic.ui.dialog.prompt(title, options).then (result) ->
         $scope.buttonIndex = result.buttonIndex
         $scope.input = result.input

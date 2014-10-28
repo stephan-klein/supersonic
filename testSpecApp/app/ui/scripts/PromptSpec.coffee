@@ -1,15 +1,15 @@
-describe "supersonic.notification.prompt", ->
+describe "supersonic.ui.dialog.prompt", ->
   it "should be defined", ->
-    supersonic.notification.prompt.should.exist
+    supersonic.ui.dialog.prompt.should.exist
 
   it "should present a prompt", ->
-    supersonic.notification.prompt().should.be.fulfilled
+    supersonic.ui.dialog.prompt().should.be.fulfilled
 
   it "should present a prompt with null params", ->
-    supersonic.notification.prompt(null).should.be.fulfilled
+    supersonic.ui.dialog.prompt(null).should.be.fulfilled
 
   it "should present a prompt with title as param", ->
-    supersonic.notification.prompt("Please type").should.be.fulfilled
+    supersonic.ui.dialog.prompt("Please type").should.be.fulfilled
 
   it "should present a prompt with title string and options object params", ->
     title = "I'm a Custom Prompt!"
@@ -18,4 +18,4 @@ describe "supersonic.notification.prompt", ->
       buttonLabels: ["Yay","NO!"]
       defaultText: "Default text"
 
-    supersonic.notification.prompt(title, options).should.be.fulfilled
+    supersonic.ui.dialog.prompt(title, options).should.be.fulfilled
