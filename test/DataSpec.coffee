@@ -27,7 +27,7 @@ describe "supersonic.data", ->
   describe "when the resource bundle is empty", ->
     describe "model", ->
       it "should always fail", ->
-        (-> data({}).model 'foo').should.throw Error, /could not be loaded/i
+        (-> data({}).model 'foo').should.throw Error, /could not load(.*)bundle/i
 
   describe "when the resource bundle has a resource", ->
     describe "model", ->
@@ -40,3 +40,16 @@ describe "supersonic.data", ->
         })
         .model('foo')
         .should.include.keys ['find', 'findAll']
+
+  describe "when a resource by the given name has not been defined", ->
+    describe "model", ->
+      it "should fail", ->
+        (->
+          data({
+            options:
+              baseUrl: "http://example.com"
+            resources:
+              foo: schema: fields: bar: {}
+          })
+          .model('bar')
+        ).should.throw Error, /could not load model/i
