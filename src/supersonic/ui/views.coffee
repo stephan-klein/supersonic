@@ -149,6 +149,10 @@ module.exports = (steroids, log) ->
     ###
     {
       getId: -> id
+      _getWebView: ->
+        new steroids.views.WebView
+          id: id
+          location: ""
     }
 
   isStarted = (id) ->
