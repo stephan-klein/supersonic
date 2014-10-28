@@ -2,7 +2,7 @@ data = require 'ag-data'
 
 module.exports = (logger, window) ->
   ###
-  Connect ag-data to a resource bundle from window.ag.datasuch that errors
+  Connect ag-data to a resource bundle from window.ag.data such that errors
   are correctly wrapped and logged. Notably, if window.ag.data exists but
   does not define a valid bundle, an error will be logged without interaction.
   ###
