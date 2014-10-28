@@ -13,8 +13,16 @@ data = (resourceBundle = null) ->
 
 describe "supersonic.data", ->
 
+  mockResourceBundle =
+    options:
+      baseUrl: "http://example.com"
+    resources:
+      foo: schema: fields: bar: {}
+
   it "accepts a resource bundle from window.ag.data", ->
-    data({})
+    (->
+      data(mockResourceBundle)
+    ).should.not.throw
 
   describe "model", ->
     it "should be a function", ->
@@ -30,23 +38,13 @@ describe "supersonic.data", ->
 
     describe "when the resource bundle has a resource", ->
       it "should return a Model class", ->
-        data({
-          options:
-            baseUrl: "http://example.com"
-          resources:
-            foo: schema: fields: bar: {}
-        })
+        data(mockResourceBundle)
         .model('foo')
         .should.include.keys ['find', 'findAll']
 
     describe "when a resource by the given name has not been defined", ->
       it "should fail", ->
         (->
-          data({
-            options:
-              baseUrl: "http://example.com"
-            resources:
-              foo: schema: fields: bar: {}
-          })
+          data(mockResourceBundle)
           .model('bar')
         ).should.throw Error, /could not load model/i
