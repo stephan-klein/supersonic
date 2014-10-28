@@ -1,2 +1,4 @@
 _site
+_data/core
+_data/components
 api-reference/nightly
