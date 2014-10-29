@@ -1,3 +1,3 @@
 angular
   .module('data')
-  .constant('TaskResource', supersonic.data.resource 'task')
+  .constant('Task', supersonic.data.model 'task')

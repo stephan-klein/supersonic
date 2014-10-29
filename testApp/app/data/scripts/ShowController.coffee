@@ -1,14 +1,14 @@
 angular
   .module('data')
-  .controller("ShowController", ($scope, TaskResource)->
+  .controller("ShowController", ($scope, Task)->
 
-      $scope.task = {}
+      $scope.task = null
       $scope.showSpinner = true
 
       # Fetch an object based on id
       fetchResource = ->
         $scope.showSpinner = true
-        TaskResource.find(steroids.view.params.id).then (task)->
+        Task.find(steroids.view.params.id).then (task)->
           $scope.$apply ->
             $scope.task = task
             $scope.showSpinner = false
@@ -16,9 +16,9 @@ angular
       steroids.data.reactive.whenVisible.onValue ->
         fetchResource()
 
-      $scope.remove = (id)->
+      $scope.remove = ->
         $scope.showSpinner = true
-        TaskResource.remove(id).then ->
+        $scope.task.delete.then ->
           steroids.layers.pop()
 
       $scope.showEditModal = (id)->

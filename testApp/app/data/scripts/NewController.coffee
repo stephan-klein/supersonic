@@ -1,12 +1,12 @@
 angular
   .module('data')
-  .controller("NewController", ($scope, TaskResource)->
+  .controller("NewController", ($scope, Task)->
 
-    $scope.task = {}
+    $scope.task = new Task
 
     $scope.submitForm = ->
       $scope.showSpinner = true
-      TaskResource.create($scope.task).then ->
+      $scope.task.save().then ->
         steroids.modal.hide()
 
     $scope.cancel = ->

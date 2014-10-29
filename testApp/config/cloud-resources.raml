@@ -1,0 +1,112 @@
+#%RAML 0.8
+title: Steroids Data
+mediaType: application/json
+baseUri: http://rest-api.testgyver.com/v1
+
+traits:
+  - securedBySteroidsApiKey:
+      headers:
+        steroidsApiKey:
+          type: string
+          example: identificationhashgoeshere
+          default: 28e8afec12e2e21c4a59c6895ce2b51186a52e2bb989d51eb774caafa32d96de
+        steroidsAppId:
+          type: integer
+          example: 1234
+          default: 11638
+
+schemas:
+  - tasks: '{"$schema":"http://json-schema.org/schema","title":"task collection","type":"object","properties":{"object":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical task representation","properties":{"ACL":{"type":"object"},"app_user_object_uid":{"type":"string"},"completed":{"type":"boolean"},"created_at":{"type":"string"},"description":{"type":"string"},"published":{"type":"boolean"},"tags":{"type":"array"},"uid":{"type":"string"},"updated_at":{"type":"string"},"_version":{"type":"string"}},"required":[]}}}}'
+  - task: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical task representation","properties":{"object":{"type":"object","properties":{"ACL":{"type":"object"},"app_user_object_uid":{"type":"string"},"completed":{"type":"boolean"},"created_at":{"type":"string"},"description":{"type":"string"},"published":{"type":"boolean"},"tags":{"type":"array"},"uid":{"type":"string"},"updated_at":{"type":"string"},"_version":{"type":"string"}},"required":[]}}}'
+
+resourceTypes:
+  - built_io_collection:
+      usage: This resourceType should be used for any collection of items
+      is: [ securedBySteroidsApiKey ]
+      get:
+        description: |
+          {
+            "action": "collection"
+          }
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "objects"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>> # e.g cars
+      post:
+        description: |
+          {
+            "action": "create",
+            "rootKey": "object"
+          }
+        body:
+          application/json:
+            schema: <<resourcePathName | !singularize>>
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "object"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName | !singularize>> # e.g. car
+
+  - built_io_member:
+      usage: This resourceType should be used for any built.io item
+      is: [ securedBySteroidsApiKey ]
+      get:
+        description: |
+          {
+            "action": "find"
+          }
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "object"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>> # e.g. car
+      put:
+        description: |
+          {
+            "action": "update",
+            "rootKey": "object"
+          }
+        body:
+          application/json:
+            schema: <<resourcePathName | !singularize>>
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "object"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>>
+      delete:
+        description: |
+          {
+            "action": "remove"
+          }
+        responses:
+          200:
+
+
+/task:
+  description: |
+    {
+      "resourceName": "task",
+      "identifierKey": "uid"
+    }
+  type: built_io_collection
+  /{id}:
+    type: built_io_member
+

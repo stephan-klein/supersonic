@@ -1,19 +1,19 @@
 angular
   .module('data')
-  .controller("EditController", ($scope, TaskResource)->
+  .controller("EditController", ($scope, Task)->
 
     $scope.task = {}
     $scope.showSpinner = true
 
     # Fetch an object based on id from the database
-    TaskResource.find(steroids.view.params.id).then (task)->
+    Task.find(steroids.view.params.id).then (task)->
       $scope.$apply ->
         $scope.task = task
         $scope.showSpinner = false
 
     $scope.submitForm = ->
       $scope.showSpinner = true
-      TaskResource.update($scope.task.id, $scope.task).then ->
+      $scope.task.save().then ->
         steroids.modal.hide()
 
     $scope.cancel = ->

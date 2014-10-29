@@ -2,7 +2,7 @@
   <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
   <div ng-hide="showSpinner">
     <ul class="list">
-      <li class="item item-icon-right" ng-click="open(task.id)" ng-repeat="task in tasks">
+      <li class="item item-icon-right" ng-click="open(task.uid)" ng-repeat="task in tasks">
         <span ng-bind="task.description"></span>
         <i class="icon ion-ios7-arrow-right"></i>
       </li>

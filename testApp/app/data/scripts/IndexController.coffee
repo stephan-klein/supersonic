@@ -1,6 +1,6 @@
 angular
   .module('data')
-  .controller("IndexController", ($scope, TaskResource)->
+  .controller("IndexController", ($scope, Task)->
 
     $scope.tasks = []
     $scope.showSpinner = true
@@ -16,7 +16,7 @@ angular
 
     fetchResources = ->
       $scope.showSpinner = true
-      TaskResource.findAll().then (tasks)->
+      Task.findAll().then (tasks) ->
         $scope.$apply ->
           $scope.tasks = tasks
           $scope.showSpinner = false
