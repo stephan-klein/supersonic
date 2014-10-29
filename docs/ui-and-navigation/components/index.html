@@ -46,50 +46,98 @@ body_extra_css_classes: device-preview-page
 </div>
 
 
-<!-- Navigation Bar
+<!-- Native Components
   ================================================== -->
-<section class="docs-section active" id="navigation-bar">
-
-  <h3 class="title"><a href="#navigation-bar">Navigation Bar</a></h3>
-
-  <p>
-    Navigation bar is a native UI component that is enabled by including the <code>&lt;super-navbar&gt;</code> element on your page. It contains a title label, set by the <code>&lt;super-navbar-title&gt;</code> child element.
-  </p>
-
-{% highlight html %}
-<super-navbar>
-  <super-navbar-title>Awesome App</super-navbar-title>
-</super-navbar>
-{% endhighlight %}
-
-  <h4>Usage with AngularJS</h4>
+<section class="docs-section active" id="native-components">
+  <h3 class="title"><a href="#native-componets">Native Components</a></h3>
 
   <p>
-    The navigation bar works beautifully with AngularJS data binding.
+    Supersonic provides you with a huge bunch of CSS components – just look at the list on the left! However, there are some components that you would traditionally implement via HTML5 in a hybrid app that are <strong>fully native</strong> in Supersonic.
   </p>
 
-{% highlight html %}
-<super-navbar>
-  <super-navbar ng-bind="navBarTitle"></super-navbar-title>
-</super-navbar>
-
-<div class="list">
-  <label class="item item-input">
-    <input type="text" class="text" ng-model="navBarTitle" />
-  </label>
-</div>
-{% endhighlight %}
-
-  <p class="advanced-panel">
-    <em>*</em>
-    <a href="http://sandbox.testgyver.com/sandboxes/373" target="_blank">See the live demo on Sandbox</a>
+  <p>
+    You can still style native components with CSS and some of them are even available as as special HTML element. However, there's a bunch of differences you need to know about, so we've put more extensive docs under a different section: see <a href="/ui-and-navigation/native-components">Native Components</a> for more.
   </p>
 
-  <div class="doc-example ionic">
+  <p>
+    For convenience, we've listed below the UI components that are implemented natively in Supersonic.
+  </p>
+
+  <div class="doc-example">
     <div class="bar bar-header bar-positive">
-      <div class="h1 title">Awesome App</div>
+      <div class="h1 title">I'm native</div>
+    </div>
+    <div class="content has-header padding">
+      <h1>I'm HTML5!</h1>
+      <p>I'm a paragraph with a <a href="#">link</a>!</p>
     </div>
   </div>
+
+</section>
+
+<section class="docs-section" id="native-components-navigation-bar">
+
+  <h3 class="title"><a href="#native-components-navigation-bar">Navigation Bar</a></h3>
+
+  <p>
+    Instead of a header element done with HTML5, Supersonic has a native navigation bar. The navigation bar can have title text and images, as well as custom buttons with callbacks. It also manages your navigation stack automatically, providing you with an automatic "Back" button as you move deeper into your navigation hierarchy.
+  </p>
+
+  <p>
+    Read more in the <a href="/ui-and-navigation/native-components/navigation-bar">Navigation Bar documentation</a>!
+  </p>
+
+{% highlight html %}
+<super-navbar>
+  <super-navbar-title>I'm native!</super-navbar-title>
+</super-navbar>
+{% endhighlight %}
+
+</section>
+
+<section class="docs-section" id="native-components-tab-bar">
+
+  <h3 class="title"><a href="#native-components-tab-bar">Tab Bar</a></h3>
+
+  <p>
+    Supersonic implements a fully native tab bar. You define it declaratively in your app's config files, and each tab contains its own HTML document. This means switching between them is instantaneous.
+  </p>
+
+  <p>
+    Read more in the <a href="/ui-and-navigation/native-components/tab-bar">Tab Bar documentation</a>!
+  </p>
+
+  <p>
+    <strong>Note:</strong> you can still use the CSS tabs as elements inside your HTML content, but they shouldn't be used for main navigation. See <a href="#tabs">tabs</a> for more information.
+  </p>
+
+</section>
+
+<section class="docs-section" id="native-components-drawer">
+
+  <h3 class="title"><a href="#native-components-drawer">Drawer</a></h3>
+
+  <p>
+    Supersonic implements a fully native drawer or side menu. It is a container that is revealed either via JavaScript or by swiping your finger across the screen. It is defined  declaratively in your app's config files. A drawer contains its own HTML document, meaning you can customize it fully.
+  </p>
+
+  <p>
+    Read more in the <a href="/ui-and-navigation/native-components/drawer">Drawer documentation</a>!
+  </p>
+
+</section>
+
+<section class="docs-section" id="native-components-animations">
+
+  <h3 class="title"><a href="#native-components-animations">Animations</a></h3>
+
+  <p>
+    In addition to CSS animations, Supersonic implements native animations that can be used to mask changes to the DOM.
+  </p>
+
+  <p>
+    Read more in the <a href="/ui-and-navigation/native-components/animation">Native Animations documentation</a>!
+  </p>
 
 </section>
 
@@ -102,6 +150,22 @@ body_extra_css_classes: device-preview-page
   <p>
     The content area in Supersonic equals your whole HTML document: there's no need for a separate <code>content</code> class or similar. This is possible because the navigation bar and tab bar are rendered on the native side, always in the right location.
   </p>
+
+{% highlight html %}
+<super-navbar>
+  <super-navbar-title>Content</super-navbar-title>
+</super-navbar>
+
+<div class="padding">
+  <h1>I'm an H1!</h1>
+  <h2>I'm an H2!</h2>
+  <h3>I'm an H3!</h3>
+  <h4>I'm an H4!</h4>
+  <h5>I'm an H5!</h5>
+  <h6>I'm an H6!</h6>
+  <p>I'm a paragraph with a <a href="#">link</a>!</p>
+</div>
+{% endhighlight %}
 
   <div class="doc-example">
     <div class="bar bar-header">
@@ -119,6 +183,203 @@ body_extra_css_classes: device-preview-page
   </div>
 
 </section>
+
+<!-- HTML Header
+  ================================================== -->
+<section class="docs-section active" id="html-header">
+
+  <h3 class="title"><a href="#html-header">HTML Header</a></h3>
+
+  <p class="advanced-panel">
+    <strong>Note:</strong> Since native components are superior in most use cases, HTML footers and headers will not work as intended by default. To make them work, you need to add a <code>fix-body-position</code> class to your <code>&lt;body&gt;</code> element, and then wrap your content inside a <code>&lt;div class="content"&gt;</code> tag. Read more in the guide:<br><a href="/ui-and-navigation/native-components/html-headers-and-footers">HTML Headers and Footers</a>
+  </p>
+
+  <p>
+    Headers are fixed regions at the top of a screen that can contain
+    a title label, and <a href="#buttons-headers-footers">left/right buttons</a> for navigation or to carry out various actions.
+  </p>
+
+  <p>Headers come in a variety of default <a href="#colors">color options</a>:</p>
+
+  <div class="ionic ionic-example">
+    <div class="bar bar-header bar-light"><div class="h1 title">bar-light</div></div>
+  </div>
+{% highlight html %}
+<div class="bar bar-header bar-light">
+  <h1 class="title">bar-light</h1>
+</div>
+{% endhighlight %}
+
+  <div class="ionic ionic-example">
+    <div class="bar bar-header bar-stable"><div class="h1 title">bar-stable</div></div>
+  </div>
+{% highlight html %}
+<div class="bar bar-header bar-stable">
+  <h1 class="title">bar-stable</h1>
+</div>
+{% endhighlight %}
+
+  <div class="ionic ionic-example">
+    <div class="bar bar-header bar-positive"><div class="h1 title">bar-positive</div></div>
+  </div>
+{% highlight html %}
+<div class="bar bar-header bar-positive">
+  <h1 class="title">bar-positive</h1>
+</div>
+{% endhighlight %}
+
+  <div class="ionic ionic-example">
+    <div class="bar bar-header bar-calm"><div class="h1 title">bar-calm</div></div>
+  </div>
+{% highlight html %}
+<div class="bar bar-header bar-calm">
+  <h1 class="title">bar-calm</h1>
+</div>
+{% endhighlight %}
+
+  <div class="ionic ionic-example">
+    <div class="bar bar-header bar-balanced"><div class="h1 title">bar-balanced</div></div>
+  </div>
+{% highlight html %}
+<div class="bar bar-header bar-balanced">
+  <h1 class="title">bar-balanced</h1>
+</div>
+{% endhighlight %}
+
+  <div class="ionic ionic-example">
+    <div class="bar bar-header bar-energized"><div class="h1 title">bar-energized</div></div>
+  </div>
+{% highlight html %}
+<div class="bar bar-header bar-energized">
+  <h1 class="title">bar-energized</h1>
+</div>
+{% endhighlight %}
+
+  <div class="ionic ionic-example">
+    <div class="bar bar-header bar-assertive"><div class="h1 title">bar-assertive</div></div>
+  </div>
+{% highlight html %}
+<div class="bar bar-header bar-assertive">
+  <h1 class="title">bar-assertive</h1>
+</div>
+{% endhighlight %}
+
+  <div class="ionic ionic-example">
+    <div class="bar bar-header bar-royal"><div class="h1 title">bar-royal</div></div>
+  </div>
+{% highlight html %}
+<div class="bar bar-header bar-royal">
+  <h1 class="title">bar-royal</h1>
+</div>
+{% endhighlight %}
+
+  <div class="ionic ionic-example">
+    <div class="bar bar-header bar-dark"><div class="h1 title">bar-dark</div></div>
+  </div>
+{% highlight html %}
+<div class="bar bar-header bar-dark">
+  <h1 class="title">bar-dark</h1>
+</div>
+{% endhighlight %}
+
+  <div class="doc-example ionic">
+    <div class="bar bar-header">
+      <div class="h1 title">Header</div>
+    </div>
+  </div>
+
+</section>
+
+
+
+<!-- Sub Header
+  ================================================== -->
+<section class="docs-section" id="html-header-subheader">
+
+  <h3 class="title"><a href="#html-header-subheader">Sub Header</a></h3>
+
+  <p class="advanced-panel">
+    <strong>Note:</strong> Since native components are superior in most use cases, HTML footers and headers will not work as intended by default. To make them work, you need to add a <code>fix-body-position</code> class to your <code>&lt;body&gt;</code> element, and then wrap your content inside a <code>&lt;div class="content"&gt;</code> tag. Read more in the guide:<br><a href="/ui-and-navigation/native-components/html-headers-and-footers">HTML Headers and Footers</a>
+  </p>
+
+  <p>
+    A secondary HTML header bar can be placed below the primary HTML header bar. There are quite a few more ways to customize Headers. Have a look at
+    <a href="#button-bar">Button Bars</a> to get other ideas on how it could be used.
+  </p>
+{% highlight html %}
+<div class="bar bar-header">
+  <h1 class="title">Header</h1>
+</div>
+<div class="bar bar-subheader">
+  <h2 class="title">Sub Header</h2>
+</div>
+{% endhighlight %}
+
+  <div class="doc-example ionic">
+    <div class="bar bar-header">
+      <div class="h1 title">Header</div>
+    </div>
+    <div class="bar bar-subheader bar-secondary">
+      <div class="h2 title">Sub Header</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- HTML Footer
+  ================================================== -->
+<section class="docs-section" id="html-footer">
+
+  <h3 class="title"><a href="#html-footer">HTML Footer</a></h3>
+
+  <p class="advanced-panel">
+    <strong>Note:</strong> Since native components are superior in most use cases, HTML footers and headers will not work as intended by default. To make them work, you need to add a <code>fix-body-position</code> class to your <code>&lt;body&gt;</code> element, and then wrap your content inside a <code>&lt;div class="content"&gt;</code> tag. Read more in the guide:<br><a href="/ui-and-navigation/native-components/html-headers-and-footers">HTML Headers and Footers</a>
+  </p>
+
+  <p>
+    Footers are regions at the bottom of a screen that can contain various types of content.
+  </p>
+
+{% highlight html %}
+<div class="bar bar-footer bar-balanced">
+  <div class="title">Footer</div>
+</div>
+{% endhighlight %}
+
+  <p>
+    Footers have the same color options as the headers, just use <code>bar-footer</code> instead of <code>bar-header</code>. If a title is present in the footer, any buttons will automatically be placed on the correct side of the title in relation to how the markup was written, such as:
+  </p>
+
+{% highlight html %}
+<div class="bar bar-footer">
+  <button class="button button-clear">Left</button>
+  <div class="title">Title</div>
+  <button class="button button-clear">Right</button>
+</div>
+{% endhighlight %}
+
+  <p>
+    Additionally, if no title is present and a right side button is required, you'll need to add
+    <code>pull-right</code> to the right side button, such as:
+  </p>
+
+{% highlight html %}
+<div class="bar bar-footer">
+  <button class="button button-clear pull-right">Right</button>
+</div>
+{% endhighlight %}
+
+  <div class="doc-example ionic">
+    <div class="bar bar-header">
+      <div class="h1 title">Header</div>
+    </div>
+    <div class="bar bar-footer bar-balanced">
+      <div class="title">Footer</div>
+    </div>
+  </div>
+
+</section>
+
 
 <!-- Buttons
   ================================================== -->
@@ -200,9 +461,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Block Buttons
   ================================================== -->
-<section class="docs-section" id="block-buttons">
+<section class="docs-section" id="buttons-block">
 
-  <h3 class="title"><a href="#block-buttons">Block Buttons</a></h3>
+  <h3 class="title"><a href="#buttons-block">Block Buttons</a></h3>
   <p>
     Adding <code>button-block</code> to a button applies <code>display: block</code> display.
     A block button will however go 100% of its parent's width.
@@ -239,9 +500,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Full Width Block Buttons
   ================================================== -->
-<section class="docs-section" id="full-buttons">
+<section class="docs-section" id="buttons-full-width">
 
-  <h3 class="title"><a href="#full-buttons">Full Width Block Buttons</a></h3>
+  <h3 class="title"><a href="#buttons-full-width">Full Width Block Buttons</a></h3>
   <p>
     Adding <code>button-full</code> to a button not only applies <code>display: block</code>,
     but also removes borders on the left and right, and any border-radius which may be applied.
@@ -278,9 +539,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Button Sizes
   ================================================== -->
-<section class="docs-section" id="button-sizes">
+<section class="docs-section" id="buttons-different-sizes">
 
-  <h3 class="title"><a href="#button-sizes">Different Sizes</a></h3>
+  <h3 class="title"><a href="#buttons-different-sizes">Different Sizes</a></h3>
   <p>
     Adding <code>button-large</code> to a button makes it larger, adding <code>button-small</code>
     makes it smaller.
@@ -336,9 +597,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Outlined Buttons
   ================================================== -->
-<section class="docs-section" id="outlined-buttons">
+<section class="docs-section" id="buttons-outlined">
 
-  <h3 class="title"><a href="#outlined-buttons">Outlined Buttons</a></h3>
+  <h3 class="title"><a href="#buttons-outlined">Outlined Buttons</a></h3>
 
   <p>
     Use <code>button-outline</code> to apply an outline button style, which also
@@ -396,9 +657,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Clear Buttons
   ================================================== -->
-<section class="docs-section" id="clear-buttons">
+<section class="docs-section" id="buttons-clear">
 
-  <h3 class="title"><a href="#clear-buttons">Clear Buttons</a></h3>
+  <h3 class="title"><a href="#buttons-clear">Clear Buttons</a></h3>
 
   <p>
     Add <code>button-clear</code> to remove the border and make the text stand out.
@@ -455,9 +716,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Icon Buttons
   ================================================== -->
-<section class="docs-section" id="icon-buttons">
+<section class="docs-section" id="buttons-icons">
 
-  <h3 class="title"><a href="#icon-buttons">Icon Buttons</a></h3>
+  <h3 class="title"><a href="#buttons-icons">Icon Buttons</a></h3>
 
   <p>
     Icons can easily be added to any button by using either the built in Ionicons, or
@@ -523,9 +784,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Button Bar
   ================================================== -->
-<section class="docs-section" id="button-bar">
+<section class="docs-section" id="buttons-button-bar">
 
-  <h3 class="title"><a href="#button-bar">Button Bar</a></h3>
+  <h3 class="title"><a href="#buttons-button-bar">Button Bar</a></h3>
   <p>
     Buttons can also be easily grouped together using the <code>button-bar</code> classname.
     In this example, a button bar was added to the default header bar, as well as in the main content area of the screen.
@@ -634,9 +895,6 @@ body_extra_css_classes: device-preview-page
   <p>
     The list view is a very versitile and powerful component. List views support various interaction modes such as editing, swipe to edit, drag to reorder, and pull to refresh.
   </p>
-  <p>
-    For more power you can use Ionic's AngularJS directives. Check out the <a href="/docs/api/directive/ionList/">AngularJS list docs</a> to get more detailed information.
-  </p>
 
 
 {% highlight html %}
@@ -703,9 +961,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- List Dividers
   ================================================== -->
-<section class="docs-section" id="item-dividers">
+<section class="docs-section" id="list-divider">
 
-  <h3 class="title"><a href="#item-dividers">List Dividers</a></h3>
+  <h3 class="title"><a href="#list-divider">List Dividers</a></h3>
 
   <p>
     List items can also be dividers to organize and group the list items. Use the <code>item-divider</code>
@@ -790,9 +1048,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- List Icons
   ================================================== -->
-<section class="docs-section" id="item-icons">
+<section class="docs-section" id="list-icons">
 
-  <h3 class="title"><a href="#item-icons">List Icons</a></h3>
+  <h3 class="title"><a href="#list-icons">List Icons</a></h3>
 
   <p>
     Lists can have icons assigned either to the left and/or right side of each list item,
@@ -925,9 +1183,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Item Buttons
   ================================================== -->
-<section class="docs-section" id="item-buttons">
+<section class="docs-section" id="list-buttons">
 
-  <h3 class="title"><a href="#item-buttons">List Buttons</a></h3>
+  <h3 class="title"><a href="#list-buttons">List Buttons</a></h3>
 
   <p>
     Use <code>item-button-right</code> or <code>item-button-left</code> to place a
@@ -976,9 +1234,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Item Avatars
   ================================================== -->
-<section class="docs-section" id="item-avatars">
+<section class="docs-section" id="list-avatars">
 
-  <h3 class="title"><a href="#item-avatars">Item Avatars</a></h3>
+  <h3 class="title"><a href="#list-avatars">Item Avatars</a></h3>
 
   <p>
     Item avatars are essentially a showcase of an image larger than an icon, but smaller than a thumbnail.
@@ -1061,9 +1319,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Item Thumbnails
   ================================================== -->
-<section class="docs-section" id="item-thumbnails">
+<section class="docs-section" id="list-thumbnails">
 
-  <h3 class="title"><a href="#item-thumbnails">Item Thumbnails</a></h3>
+  <h3 class="title"><a href="#list-thumbnails">Item Thumbnails</a></h3>
 
   <p>
     Item Thumbnails are essentially a showcase of an image larger than an icon, and will often span/define the entire height of the list item. To create a thumbnail styled item, use the <code>item-thumbnail-left</code> to have it align on the left, and <code>item-thumbnail-right</code> for the right side.
@@ -1082,10 +1340,6 @@ body_extra_css_classes: device-preview-page
 
 </div>
 {% endhighlight %}
-
-  <p>
-    <a href="http://codepen.io/ionic/pen/isfAJ">Quick ng-repeat demo</a>
-  </p>
 
   <div class="doc-example ionic">
     <div class="bar bar-header">
@@ -1137,9 +1391,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Inset Lists
   ================================================== -->
-<section class="docs-section" id="list-inset">
+<section class="docs-section" id="list-inset-lists">
 
-  <h3 class="title"><a href="#list-inset">Inset Lists</a></h3>
+  <h3 class="title"><a href="#list-inset-lists">Inset Lists</a></h3>
 
   <p>
     Lists can also be inset inside their container, instead of going full width. The main difference
@@ -1242,9 +1496,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Cards Headers/Footers
   ================================================== -->
-<section class="docs-section" id="card-headers-footers">
+<section class="docs-section" id="cards-headers-footers">
 
-  <h3 class="title"><a href="#card-headers-footers">Card Headers and Footers</a></h3>
+  <h3 class="title"><a href="#cards-headers-footers">Card Headers and Footers</a></h3>
 
   <p>
     Cards can be customized similarly to how you would fill a normal screen. For example, a card can easily have Headers and Footers placed inside of them. Add the <code>item-divider</code> classname above or below the content within the <code>card</code> element.
@@ -1291,9 +1545,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Card Lists
   ================================================== -->
-<section class="docs-section" id="card-lists">
+<section class="docs-section" id="cards-lists">
 
-  <h3 class="title"><a href="#card-lists">Card Lists</a></h3>
+  <h3 class="title"><a href="#cards-lists">Card Lists</a></h3>
 
   <p>
     Use the <code>list card</code> classname to create a card with lists.
@@ -1364,9 +1618,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Card Images
   ================================================== -->
-<section class="docs-section" id="card-images">
+<section class="docs-section" id="cards-images">
 
-  <h3 class="title"><a href="#card-images">Card Images</a></h3>
+  <h3 class="title"><a href="#cards-images">Card Images</a></h3>
 
   <p>
     Images look great in cards, and can be combined with lists and other elements.
@@ -1427,9 +1681,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Card Showcase
   ================================================== -->
-<section class="docs-section" id="card-showcase">
+<section class="docs-section" id="cards-showcase">
 
-  <h3 class="title"><a href="#card-showcase">Card Showcase</a></h3>
+  <h3 class="title"><a href="#cards-showcase">Card Showcase</a></h3>
 
   <p>
     Here is a showcase of a card using several different items. It begins with the <code>list card</code> element, utilizing the <code>item-avatar</code> list item, an <code>item-body</code> element for images and text, and a footer with the <code>item-divider</code> classname.
@@ -1538,7 +1792,7 @@ body_extra_css_classes: device-preview-page
     associated label.
   </p>
   <p>
-    Ionic prefers to create the <code>item-input</code> out of the <code>&lt;label&gt;</code> element
+    Supersonic prefers to create the <code>item-input</code> out of the <code>&lt;label&gt;</code> element
     so that when any part of the row is tapped then the underlying input receives focus.
   </p>
   <p>
@@ -1774,9 +2028,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Inset Forms
   ================================================== -->
-<section class="docs-section" id="inset-forms">
+<section class="docs-section" id="forms-inset-forms">
 
-  <h3 class="title"><a href="#inset-forms">Inset Forms</a></h3>
+  <h3 class="title"><a href="#forms-inset-forms">Inset Forms</a></h3>
 
   <p>
     By default each input item will fill 100% of the width of its parent element (the list).
@@ -1822,9 +2076,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Item Input Inset
   ================================================== -->
-<section class="docs-section" id="item-input-inset">
+<section class="docs-section" id="forms-inset-inputs">
 
-  <h3 class="title"><a href="#item-input-inset">Inset Inputs</a></h3>
+  <h3 class="title"><a href="#forms-inset-inputs">Inset Inputs</a></h3>
 
   <p>
     Using <code>list-inset</code> will inset the entire list, whereas placing <code>item-input-inset</code>
@@ -1874,9 +2128,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Input Icons
   ================================================== -->
-<section class="docs-section" id="input-icons">
+<section class="docs-section" id="forms-input-icons">
 
-  <h3 class="title"><a href="#input-icons">Input Icons</a></h3>
+  <h3 class="title"><a href="#forms-input-icons">Input Icons</a></h3>
 
   <p>
     Icons can be easily added to the left of an <code>item-input</code> input. Simply add an
@@ -1914,9 +2168,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Header Inputs
   ================================================== -->
-<section class="docs-section" id="bar-inputs">
+<section class="docs-section" id="forms-header-inputs">
 
-  <h3 class="title"><a href="#bar-inputs">Header Inputs</a></h3>
+  <h3 class="title"><a href="#forms-header-inputs">Header Inputs</a></h3>
 
   <p>
     Inputs can also be placed in headers, along with buttons to submit or cancel the form.
@@ -1958,7 +2212,7 @@ body_extra_css_classes: device-preview-page
 
   <p>
     A toggle technically is the same thing as an HTML checkbox input,
-    except it looks different and is easier to use on a touch device. Ionic prefers
+    except it looks different and is easier to use on a touch device. Supersonic prefers
     to wrap the checkbox input with the <code>&lt;label&gt;</code> in order
     to make the entire toggle easy to tap or drag.
   </p>
@@ -2091,7 +2345,7 @@ body_extra_css_classes: device-preview-page
     <code>item</code> for each item.
   </p>
   <p>
-    Ionic prefers to use the <code>&lt;label&gt;</code> element for a checkbox
+    Supersonic prefers to use the <code>&lt;label&gt;</code> element for a checkbox
     item in order to make the entire checkbox tappable.
   </p>
   <p>
@@ -2177,7 +2431,7 @@ body_extra_css_classes: device-preview-page
     The <code>radio-icon</code> class is used to designate when to show and hide the icon element.
   </p>
   <p>
-    Ionic prefers to use the <code>&lt;label&gt;</code> element for a radio item in order to make the
+    Supersonic prefers to use the <code>&lt;label&gt;</code> element for a radio item in order to make the
     entire area tappable.
   </p>
 
@@ -2271,7 +2525,7 @@ body_extra_css_classes: device-preview-page
   <h3 class="title"><a href="#range">Range</a></h3>
 
   <p>
-    This is a Range. Ranges can be themed to any default Ionic color, and used in various other elements such as a list item or card.
+    This is a Range. Ranges can be themed to any default Supersonic color, and used in various other elements such as a list item or card.
   </p>
 
 {% highlight html %}
@@ -2359,7 +2613,7 @@ body_extra_css_classes: device-preview-page
   <h3 class="title"><a href="#select">Select</a></h3>
 
   <p>
-    Ionic's select is styled so its appearance is prettied up relative to the
+    Supersonic's select is styled so its appearance is prettied up relative to the
     browser's default style. However, when the select elements is opened,
     the default behavior on how to select one of the options is still managed
     by the browser.
@@ -2474,8 +2728,8 @@ body_extra_css_classes: device-preview-page
   <h3 class="title"><a href="#grid">Grid</a></h3>
 
   <p>
-    Ionic's grid system is different than most because of its use of the <a href="http://www.w3.org/TR/css3-flexbox/">CSS Flexible Box Layout Module</a> standard.
-    The advantage here is that the devices that Ionic supports, all support <a href="http://caniuse.com/flexbox">flexbox</a>.
+    Supersonic's grid system is different than most because of its use of the <a href="http://www.w3.org/TR/css3-flexbox/">CSS Flexible Box Layout Module</a> standard.
+    The advantage here is that the devices that Supersonic supports, all support <a href="http://caniuse.com/flexbox">flexbox</a>.
   </p>
 
   <p>
@@ -2580,9 +2834,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Grid: Evenly Spaced Columns
   ================================================== -->
-<section class="docs-section" id="grid-even">
+<section class="docs-section" id="grid-even-columns">
 
-  <h3 class="title"><a href="#grid-even">Grid: Evenly Spaced Columns</a></h3>
+  <h3 class="title"><a href="#grid-even-columns">Grid: Evenly Spaced Columns</a></h3>
 
   <p>
     By default every <code>col</code> added inside a <code>row</code> will automatically receive an equal amount of the available area. Notice in the code below that no sizes are specified anywhere in the classnames, yet each of the five columns in this example will each evenly take up 20% of the available width (thank you flexbox).
@@ -2635,11 +2889,11 @@ body_extra_css_classes: device-preview-page
 
 <!-- Grid: Explicit Column Sizes
   ================================================== -->
-<section class="docs-section" id="grid-explicit">
+<section class="docs-section" id="grid-explicit-column-sizes">
 
-  <h3 class="title"><a href="#grid-explicit">Grid: Explicit Column Sizes</a></h3>
+  <h3 class="title"><a href="#grid-explicit-column-sizes">Grid: Explicit Column Sizes</a></h3>
   <p>
-    You <em>can</em> explicitly state the size of a column if for example you'd want specific columns to be larger than the others in the same row. By default each column will evenly take up the available area, but in the case where a column should be a certain size, Ionic's grid uses a percent system (in contrast to a locked in 12 column grid).
+    You <em>can</em> explicitly state the size of a column if for example you'd want specific columns to be larger than the others in the same row. By default each column will evenly take up the available area, but in the case where a column should be a certain size, Supersonic's grid uses a percent system (in contrast to a locked in 12 column grid).
   </p>
   <p>
     An advantage with this grid system is that you only have to state the percentage for the column that needs it, and the others will still evenly divide up the available areas.
@@ -2775,9 +3029,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Grid: Offset Columns
   ================================================== -->
-<section class="docs-section" id="grid-offset">
+<section class="docs-section" id="grid-offset-columns">
 
-  <h3 class="title"><a href="#grid-offset">Grid: Offset Columns</a></h3>
+  <h3 class="title"><a href="#grid-offset-columns">Grid: Offset Columns</a></h3>
   <p>
     Columns can also be offset from the left. We'll let the code and demo speak for itself.
   </p>
@@ -2890,9 +3144,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Grid: Vertically Aligned Columns
   ================================================== -->
-<section class="docs-section" id="grid-vertically-align">
+<section class="docs-section" id="grid-vertically-aligned">
 
-  <h3 class="title"><a href="#grid-vertically-align">Grid: Vertically Align Columns</a></h3>
+  <h3 class="title"><a href="#grid-vertically-aligned">Grid: Vertically Align Columns</a></h3>
   <p>
     Another trick up flexbox's sleeve is the ability to easily vertically
     align columns. Vertical alignment includes top, center and bottom, and can be applied to every column in a row, or to specific columns.
@@ -3033,9 +3287,9 @@ body_extra_css_classes: device-preview-page
 
 <!-- Responsive Grid
   ================================================== -->
-<section class="docs-section" id="grid-responsive">
+<section class="docs-section" id="grid-responsive-grid">
 
-  <h3 class="title"><a href="#grid-responsive">Responsive Grid</a></h3>
+  <h3 class="title"><a href="#grid-responsive-grid">Responsive Grid</a></h3>
   <p>
     There may be cases where a row of columns will not fit nicely in the available area.
     The responsive classes can be used to turn each column in a row into its own row at
@@ -3129,7 +3383,7 @@ body_extra_css_classes: device-preview-page
   <h2><a href="#utility">Utility</a></h2>
 
   <p>
-    Ionic comes with a handful of utility classes to help quickly style your design. Each are optional.
+    Supersonic comes with a handful of utility classes to help quickly style your design. Each are optional.
   </p>
 
 </section>
@@ -3138,28 +3392,24 @@ body_extra_css_classes: device-preview-page
 
 <!-- Colors
   ================================================== -->
-<section class="docs-section" id="colors">
+<section class="docs-section" id="utility-colors">
 
-  <h3 class="title"><a href="#colors">Colors</a></h3>
+  <h3 class="title"><a href="#utility-colors">Colors</a></h3>
 
   <p>
-    Ionic comes with a set of colors to start with, but as a general rule <strong>colors are meant to be overridden</strong>. We prefer saying that Ionic provides a recommended naming convention for your colors, swatches, themes, etc.
+    Supersonic comes with a set of colors to start with, but as a general rule <strong>colors are meant to be overridden</strong>. We prefer saying that Supersonic provides a recommended naming convention for your colors, swatches, themes, etc.
   </p>
 
   <p>
-    Utility colors are added to help set a naming convention. You'll notice Ionic purposely does not use words like "red" or "blue", but instead have colors which represent an emotion or generic theme.
+    Utility colors are added to help set a naming convention. You'll notice Supersonic purposely does not use words like "red" or "blue", but instead have colors which represent an emotion or generic theme.
   </p>
 
   <p>
-    Let's be realistic, assigning colors is one of the easier tasks in CSS, and each app will have different requirements for colors. Ionic's goal is to provide a clean system to build on top of and maintain, and stays away from dictating how each app chooses to color its custom design.
+    Let's be realistic, assigning colors is one of the easier tasks in CSS, and each app will have different requirements for colors. Supersonic's goal is to provide a clean system to build on top of and maintain, and stays away from dictating how each app chooses to color its custom design.
   </p>
 
   <p>
-    To customize the colors you can simply override those coming from the <code>ionic.css</code> CSS file. Additionally, since Ionic is built using <a href="http://sass-lang.com/">Sass</a>, for more power and flexibility you could also <a href="/tutorials/customizing-ionic-with-sass/">modify and extend the color variables</a> within the <code>_variables.scss</code> file.
-  </p>
-
-  <p class="advanced-panel">
-    <em>*</em> For more flexibility, you can <a href="/tutorials/customizing-ionic-with-sass/">Customize Ionic With Sass</a>
+    To customize the colors you can simply override those coming from the <code>ionic.css</code> CSS file. Additionally, since Supersonic is built using <a href="http://sass-lang.com/">Sass</a>, for more power and flexibility you could also <a href="/overview/customizing-supersonic/sass/">modify and extend the color variables</a> within the <code>_variables.scss</code> file.
   </p>
 
   <div class="doc-example ionic">
@@ -3216,12 +3466,12 @@ body_extra_css_classes: device-preview-page
 
 <!-- Icons
   ================================================== -->
-<section class="docs-section" id="icons">
+<section class="docs-section" id="utility-icons">
 
-  <h3 class="title"><a href="#icons">Icons</a></h3>
+  <h3 class="title"><a href="#utility-icons">Icons</a></h3>
 
   <p>
-    Ionic also comes with its own free and open-sourced icon font, <a href="http://ionicons.com/">Ionicons</a>, with over 500 icons to choose from.
+    Supersonic also comes with its own free and open-sourced icon font, <a href="http://ionicons.com/">Ionicons</a>, with over 500 icons to choose from.
   </p>
 
   <p>
@@ -3237,7 +3487,7 @@ body_extra_css_classes: device-preview-page
   </p>
 
   <p>
-    Note: Ionic is certainly not restricted to using only the Ionicons icon pack, so please feel free to use any icons you wish.
+    Note: Supersonic is certainly not restricted to using only the Ionicons icon pack, so please feel free to use any icons you wish.
   </p>
 
   <div class="doc-example ionic">
@@ -3247,7 +3497,7 @@ body_extra_css_classes: device-preview-page
     <div class="content has-header padding">
 
       <ul class="ionicons-demo">
-        <li class="ion-ionic" data-pack="default" data-tags="badass, framework, sexy, hawt"></li>
+        <li class="ion-Supersonic" data-pack="default" data-tags="badass, framework, sexy, hawt"></li>
         <li class="ion-arrow-up-a" data-pack="default" data-tags=""></li>
         <li class="ion-arrow-right-a" data-pack="default" data-tags=""></li>
         <li class="ion-arrow-down-a" data-pack="default" data-tags=""></li>
@@ -3342,12 +3592,12 @@ body_extra_css_classes: device-preview-page
 
 <!-- Padding
   ================================================== -->
-<section class="docs-section" id="padding">
+<section class="docs-section" id="utility-padding">
 
-  <h3 class="title"><a href="#padding">Padding</a></h3>
+  <h3 class="title"><a href="#utility-padding">Padding</a></h3>
 
   <p>
-    Many components in Ionic purposely have both padding and margin reset set to zero.
+    Many components in Supersonic purposely have both padding and margin reset set to zero.
     In many instances apps will have components bleed to the edge of the screen,
     and by starting each component at zero developers can easily control padding and margins throughout the app.
   </p>

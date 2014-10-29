@@ -5,25 +5,31 @@ sections:
   - name: Overview
   - name: Components
     subsections:
-      - name: Navigation Bar
-        properties:
-          - name: Overview
-          - name: Title
-          - name: Title Image
-          - name: Buttons
-          - name: Image Buttons
-          - name: Back Button
+      - name: Native Components
+        topics:
+          - name: Navigation Bar
+          - name: Tab Bar
+          - name: Drawer
+          - name: Animations
+
+      - name: Content
+      - name: HTML Header
+        topics:
+          - name: Subheader
+      - name: HTML Footer
+
       - name: Buttons
-        propeties:
+        topics:
           - name: Block
           - name: Full Width
           - name: Different Sizes
           - name: Outlined
           - name: Clear
           - name: Icons
+          - name: Button Bar
 
       - name: List
-        properties:
+        topics:
           - name: Divider
           - name: Icons
           - name: Buttons
@@ -32,16 +38,16 @@ sections:
           - name: Inset Lists
 
       - name: Cards
-        properties:
+        topics:
           - name: Headers & Footers
           - name: Lists
           - name: Images
           - name: Showcase
 
       - name: Forms
-        properties:
+        topics:
           - name: Placeholder Labels
-          - name: Inline Lables
+          - name: Inline Labels
           - name: Stacked Labels
           - name: Floating Labels
           - name: Inset Forms
@@ -56,19 +62,22 @@ sections:
       - name: Select
 
       - name: Grid
-        properties:
+        topics:
           - name: Even Colums
-          - name: Explicit Column Sized
+          - name: Explicit Column Sizes
           - name: Offset Columns
           - name: Vertically Aligned
           - name: Responsive Grid
 
       - name: Utility
-        properties:
+        topics:
           - name: Colors
           - name: Icons
           - name: Padding
 
+  - name: Native Components
+    subsections:
+    - name: Navigation Bar
   - name: Navigation
     subsections:
       - name: Layer Stack
@@ -95,7 +104,7 @@ sections:
 <div class="col-md-2 col-sm-3 aside-menu">
 
   <div class="docked-menu">
-    {% include docs_menu.html tab_name="ui-and-navigation" %}
+    {% include ui_menu.html tab_name="ui-and-navigation" %}
   </div>
 
 </div>
