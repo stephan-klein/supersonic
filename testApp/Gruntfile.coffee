@@ -15,7 +15,7 @@ module.exports = (grunt) ->
     copy:
       "supersonic-dist":
         src: "../dist/**/*"
-        dest: "bower_components/supersonic/dist/"
+        dest: "bower_components/supersonic/"
     shell:
       "supersonic-build":
         command: "grunt build"
