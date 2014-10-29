@@ -18,7 +18,7 @@ angular
 
       $scope.remove = ->
         $scope.showSpinner = true
-        $scope.task.delete.then ->
+        $scope.task.delete().then ->
           steroids.layers.pop()
 
       $scope.showEditModal = (id)->
