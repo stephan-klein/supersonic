@@ -122,6 +122,8 @@ module.exports = (grunt)->
           betterObject.apiCall = tag.string
         when "class"
           betterObject.class = true
+        when "component"
+          betterObject.component = true
 
     betterObject
 

@@ -43,15 +43,8 @@ observer = new MutationObserver (mutations) ->
         mutation.target.updateOnNavbar()
         return
 
-###
-CREATE ELEMENT
-###
-
 SuperNavbarButtonPrototype = Object.create HTMLElement.prototype
 
-###
-DEFINE PROPERTIES
-###
 
 Object.defineProperty SuperNavbarButtonPrototype, "side",
   set: (side) ->
@@ -59,10 +52,6 @@ Object.defineProperty SuperNavbarButtonPrototype, "side",
 
   get: ->
     this._side
-
-###
-DEFINE METHODS
-###
 
 SuperNavbarButtonPrototype.addToNavbar = ->
   this._parent.addButton @_button, @_side
@@ -75,10 +64,6 @@ SuperNavbarButtonPrototype.removeFromNavbar = ->
 
 SuperNavbarButtonPrototype.updateOnNavbar = ->
   this._parent.updateButton @_button
-
-###
-INTERNAL METHODS
-###
 
 SuperNavbarButtonPrototype._setButtonAction = ->
 
@@ -110,9 +95,6 @@ SuperNavbarButtonPrototype._setButtonAction = ->
 SuperNavbarButtonPrototype._setButtonTitle = ->
   this._button.title = this.textContent
 
-###
-DEFINE CALLBACKS
-###
 
 # When a new element is detected in the DOM
 SuperNavbarButtonPrototype.createdCallback = ->
@@ -152,10 +134,6 @@ SuperNavbarButtonPrototype.detachedCallback = ->
   this.removeFromNavbar()
   # Dispose of observer
   observer.disconnect()
-
-###
-REGISTER ELEMENT
-###
 
 document.registerElement "super-navbar-button",
   prototype: SuperNavbarButtonPrototype

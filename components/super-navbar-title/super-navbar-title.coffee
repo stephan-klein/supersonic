@@ -26,15 +26,7 @@ observer = new MutationObserver (mutations)->
     if mutation.type is "childList"
       onContentChanged(mutation.target)
 
-###
-CREATE ELEMENT
-###
-
 SuperNavbarTitlePrototype = Object.create HTMLElement.prototype
-
-###
-DEFINE METHODS
-###
 
 SuperNavbarTitlePrototype.setParentTitle = (title)->
   # Check for parent element existence
@@ -44,10 +36,6 @@ SuperNavbarTitlePrototype.setParentTitle = (title)->
   else
     # Oops, we have a malformed DOM
     throw new Error "Component super-navbar-title must be an immediate child of super-navbar component"
-
-###
-DEFINE CALLBACKS
-###
 
 # When a new element is detected in the DOM
 SuperNavbarTitlePrototype.createdCallback = ->
@@ -64,10 +52,6 @@ SuperNavbarTitlePrototype.createdCallback = ->
 SuperNavbarTitlePrototype.detachedCallback = ->
   # Dispose of observer
   observer.disconnect()
-
-###
-REGISTER ELEMENT
-###
 
 document.registerElement "super-navbar-title",
   prototype: SuperNavbarTitlePrototype

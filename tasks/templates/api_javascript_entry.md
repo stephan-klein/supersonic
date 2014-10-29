@@ -1,7 +1,7 @@
 ---
 layout: "docs_api"
 title: Supersonic API reference
-header_sub_title: <%= method.apiCall %>
+header_sub_title: <%= entry.apiCall %>
 section_id: <%= section %>
 subsection_id: <%= subsection %>
 ---

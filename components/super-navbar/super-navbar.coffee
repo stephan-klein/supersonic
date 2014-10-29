@@ -28,15 +28,7 @@ observer = new MutationObserver (mutations) ->
       if mutation.attributeName is "id"
         mutation.target.id = mutation.target.getAttribute("id")
 
-###
-CREATE ELEMENT
-###
-
 SuperNavbarPrototype = Object.create HTMLElement.prototype
-
-###
-DEFINE PROPERTIES
-###
 
 Object.defineProperty SuperNavbarPrototype, "title",
   set: (title) ->
@@ -82,10 +74,6 @@ Object.defineProperty SuperNavbarPrototype, "id",
 
   get: ->
     this._styleId
-
-###
-DEFINE METHODS
-###
 
 # Methods for navbar visibility
 
@@ -162,10 +150,6 @@ SuperNavbarPrototype._updateButtons = ->
   # Update UI
   supersonic.ui.navigationBar.update options
 
-###
-DEFINE CALLBACKS
-###
-
 SuperNavbarPrototype.onTitleChanged = ->
   this.updateNavBarTitle() unless this.isHidden()
 
@@ -219,10 +203,6 @@ SuperNavbarPrototype.detachedCallback = ->
   observer.disconnect()
   # Hide the navbar when this node leaves the DOM
   supersonic.ui.navigationBar.hide()
-
-###
-REGISTER ELEMENT
-###
 
 document.registerElement "super-navbar",
   prototype: SuperNavbarPrototype
