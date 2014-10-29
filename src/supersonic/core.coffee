@@ -17,7 +17,7 @@ module.exports = {
   media: require('./core/media')(steroids, logger)
   device: require('./core/device')(steroids, logger)
   ui: require('./core/ui')(steroids, logger)
-  data: require('./core/data')(global)
+  data: require('./core/data')(logger, global)
 }
 
 # Export to window as global if we're in the browser
