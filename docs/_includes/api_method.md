@@ -3,14 +3,18 @@
 
 {{method.description}}
 
+{% if method.usageCoffeeScript %}
 ### Basic usage CoffeeScript
 ```coffeescript
 {{method.usageCoffeeScript}}
 ```
+{% endif %}
+{% if method.usageJavaScript %}
 ### Basic usage JavaScript
 ```javascript
 {{method.usageJavaScript}}
 ```
+{% endif %}
 
 {% if method.type %}
 ### Type Signature
