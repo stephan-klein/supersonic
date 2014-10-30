@@ -75,20 +75,6 @@ module.exports = (logger, window) ->
 ###
 ###
  # @namespace core.data
- # @name Collection.save
- # @function
- # @type
- # Collection.save: () => Promise
- # @description
- # Persist all resources in this collection
- # @exampleCoffeeScript
- # supersonic.data.model('task').findAll().then (tasks) ->
- #   for task in tasks
- #     task.completed = true
- #   tasks.save()
-###
-###
- # @namespace core.data
  # @name Model.find
  # @function
  # @type
@@ -98,6 +84,51 @@ module.exports = (logger, window) ->
  # @exampleCoffeeScript
  # supersonic.data.model('task').find(123).then (task) ->
  #   console.log task.description
+###
+###
+ # @namespace core.data
+ # @name Collection
+ # @class
+ # @description
+ # A Supersonic Data Collection class. Represents a collection of resources (instances of `supersonic.data.Resource`) fetched from the cloud backend.
+ # @type
+ # Collection: {
+ #   save: () => Promise
+ # }
+ # @methods save
+ # @define {Function} save Persist all resources in this collection.
+###
+###
+ # @namespace core.data
+ # @name Collection.save
+ # @function
+ # @type
+ # Collection.save: () => Promise
+ # @description
+ # Persist all resources in this collection.
+ # @returnDescription
+ # A promise that resolves once all the resources in the collection have been perisisted to the cloud backend.
+ # @exampleCoffeeScript
+ # supersonic.data.model('task').findAll().then (tasks) ->
+ #   for task in tasks
+ #     task.completed = true
+ #   tasks.save().then ->
+ #     supersonic.logger.log "All tasks saved!"
+###
+###
+ # @namespace core.data
+ # @name Resource
+ # @class
+ # @description
+ # A Supersonic Data Resource class. Represents a single resource fetched from the cloud backend.
+ # @type
+ # Collection: {
+ #   save: () => Promise
+ #   delete: () => Promise
+ # }
+ # @methods save delete
+ # @define {Function} save Persist the data in this resource to the cloud backend.
+ # @define {Function} delete Remove this resource from the cloud backend.
 ###
 ###
  # @namespace core.data

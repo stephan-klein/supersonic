@@ -17,7 +17,6 @@
     <tr>
       <th>Name</th>
       <th>Type</th>
-      <th>Default value</th>
       <th>Details</th>
     </tr>
   </thead>
@@ -28,11 +27,6 @@
     <td class="highlight">
       <code class="language-coffeescript" data-lang="coffeescript">
       {{param.type | xml_escape}}
-      </code>
-    </td>
-    <td class="highlight">
-      <code class="language-coffeescript" data-lang="coffeescript">
-      {{param.defaultValue}}
       </code>
     </td>
     <td>{{param.description | markdownify}}</td>
