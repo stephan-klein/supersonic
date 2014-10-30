@@ -43,7 +43,6 @@ module.exports = (grunt)->
 
       templatePath = "tasks/templates/api_#{templateType}_entry.md"
       template = grunt.file.read templatePath
-      console.log apiEntry.name
       markdownOutput = grunt.util._.template(template) {
         liquidDataPath: liquidDataPath
         entry: apiEntry
