@@ -4,7 +4,7 @@ SuperNavigateBackPrototype = Object.create HTMLElement.prototype
  # @name super-navigate-back
  # @component
  # @description
- # Navigates back to the previous view. Uses `supersonic.ui.layer.pop()` internally.
+ # Navigates back to the previous view. Uses `supersonic.ui.layers.pop()` internally.
  # @attribute action="click" The action used to trigger the transition.
  # @usageHtml
  # <super-navigate-back action="click">Go back</super-navigate-back>
@@ -19,7 +19,7 @@ SuperNavigateBackPrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
 
   @addEventListener action, ->
-    supersonic.ui.layer.pop()
+    supersonic.ui.layers.pop()
 
 document.registerElement "super-navigate-back",
   prototype: SuperNavigateBackPrototype

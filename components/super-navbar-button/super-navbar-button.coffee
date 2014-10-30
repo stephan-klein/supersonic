@@ -73,7 +73,7 @@ SuperNavbarButtonPrototype._setButtonAction = ->
     @_button.onTap = () ->
       supersonic.ui.views.find(viewId)
         .then (webview) ->
-          supersonic.ui.layer.push(webview)
+          supersonic.ui.layers.push(webview)
         .catch (error) ->
           throw new Error "Failed to push view: #{error}"
     return
@@ -83,7 +83,7 @@ SuperNavbarButtonPrototype._setButtonAction = ->
   if location
     webview = supersonic.ui.view location
     @_button.onTap = () ->
-      supersonic.ui.layer.push(webview)
+      supersonic.ui.layers.push(webview)
         .catch (error) ->
           throw new Error "Failed to push view: #{error}"
     return

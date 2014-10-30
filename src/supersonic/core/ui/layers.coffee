@@ -24,7 +24,7 @@ module.exports = (steroids, log) ->
    # @usage
    # ```coffeescript
    # v = supersonic.ui.view("http://www.google.com")
-   # supersonic.ui.layer.push(v)
+   # supersonic.ui.layers.push(v)
    # ```
   ###
   push: (view) ->
@@ -47,7 +47,7 @@ module.exports = (steroids, log) ->
    # @returns {Promise}
    # @usage
    # ```coffeescript
-   # supersonic.ui.layer.pop()
+   # supersonic.ui.layers.pop()
    # ```
   ###
   pop: ()->
@@ -68,7 +68,7 @@ module.exports = (steroids, log) ->
    # @returns {Promise}
    # @usage
    # ```coffeescript
-   # supersonic.ui.layer.popAll()
+   # supersonic.ui.layers.popAll()
    # ```
   ###
   popAll: ()->
@@ -90,7 +90,7 @@ module.exports = (steroids, log) ->
    # @returns {Promise}
    # @usage
    # ```coffeescript
-   # supersonic.ui.layer.showInitial()
+   # supersonic.ui.layers.showInitial()
    # ```
   ###
   showInitial: (params)->
@@ -116,7 +116,7 @@ module.exports = (steroids, log) ->
    # @returns {Promise}
    # @usage
    # ```coffeescript
-   # supersonic.ui.layer.hideInitial()
+   # supersonic.ui.layers.hideInitial()
    # ```
   ###
   hideInitial: (params)->

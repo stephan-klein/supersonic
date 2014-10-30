@@ -3,7 +3,7 @@ angular
   .controller 'OtherController', ($scope, $q, supersonic) ->
 
     $scope.hideInitialView = ()->
-      supersonic.ui.layer.hideInitial()
+      supersonic.ui.layers.hideInitial()
 
     $scope.asModal = (url)->
       v = supersonic.ui.view(url)

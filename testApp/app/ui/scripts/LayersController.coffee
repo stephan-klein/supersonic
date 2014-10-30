@@ -5,13 +5,13 @@ angular
 
     $scope.navigateTo = (url)->
       v = supersonic.ui.view(url, "myView")
-      supersonic.ui.layer.push(v).then ()->
+      supersonic.ui.layers.push(v).then ()->
         supersonic.logger.log "promise works"
 
     $scope.pop = ()->
-      supersonic.ui.layer.pop().then ()->
+      supersonic.ui.layers.pop().then ()->
         supersonic.logger.log "promise works"
 
     $scope.popAll = ()->
-      supersonic.ui.layer.popAll().then ()->
+      supersonic.ui.layers.popAll().then ()->
         supersonic.logger.log "promise works"
