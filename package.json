@@ -63,9 +63,9 @@
     }
   },
   "dependencies": {
+    "ag-data": "^0.2.5",
     "baconjs": "^0.7.23",
     "bluebird": "^2.3.4",
-    "coffee-script": "^1.8.0",
-    "steroids-data": "^3.5.1"
+    "coffee-script": "^1.8.0"
   }
 }
