@@ -177,10 +177,9 @@ module.exports = (steroids, log) ->
 
 
 
-  show: (view, options={})->
+  show: (view, side)->
     new Promise (resolve, reject)->
       webView = view._getWebView()
-      if options.side?
       params[side] = webView
       steroids.drawers.update params
       steroids.drawers.show {
