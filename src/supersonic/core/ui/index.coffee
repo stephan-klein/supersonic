@@ -10,3 +10,4 @@ module.exports = (steroids, log) ->
   navigationButton: require("./navigation-button")(steroids, log)
   screen: require("./screen")(steroids, log)
   dialog: require("./dialog")
+  initialView: require("./initialView")(steroids, log)
