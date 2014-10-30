@@ -26,7 +26,7 @@ module.exports = (grunt)->
     if apiEntry.class
       sanitizedFileName = "#{sanitizedFileName}-class"
     if apiEntry.overview
-      sanitizedFileName = "#{sanitizedFileName}.overview"
+      sanitizedFileName = "#{sanitizedFileName}.index"
     "site.data.#{apiEntry.namespace}.#{sanitizedFileName}"
 
   getClassMethodPaths = (apiEntry, liquidDataPath) ->

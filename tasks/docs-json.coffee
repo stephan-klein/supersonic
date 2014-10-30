@@ -148,7 +148,7 @@ module.exports = (grunt)->
       entryFileName = if cleanedUpArray.length is 1
         null
       else if entry.overview
-        "overview.json"
+        "index.json"
       else if entry.class
         "#{entry.name}-class.json"
       else
