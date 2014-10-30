@@ -5,7 +5,7 @@ header_sub_title: <%= entry.name %> overview
 section_id: <%= section %>
 subsection_id: <%= subsection %>
 ---
-{% assign method = <%= liquidDataPath %> %}
+{% assign entry = <%= liquidDataPath %> %}
 # {{entry.name}}
 
 {{entry.description}}
