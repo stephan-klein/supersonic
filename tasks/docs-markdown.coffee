@@ -33,6 +33,7 @@ module.exports = (grunt)->
     classMethodPaths = []
     if apiEntry.methods?.length > 0
       for method in apiEntry.methods
+        dataPathNamespace = #{}
         methodPath = "site.data.#{apiEntry.namespace}.#{apiEntry.name}-#{method}"
         classMethodPaths.push methodPath
 

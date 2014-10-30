@@ -6,7 +6,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.device.platform"
 
   ###
-   # @namespace core.device
+   # @namespace supersonic.device
    # @name platform
    # @function
    # @apiCall supersonic.device.platform

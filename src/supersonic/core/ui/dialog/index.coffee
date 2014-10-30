@@ -1,7 +1,7 @@
 Promise = require 'bluebird'
 
 ###
- # @namespace core.ui
+ # @namespace supersonic.ui
  # @name dialog
  # @overview
  # @description The `supersonic.ui.dialog.*` namespace provides you with APIs for presenting different kinds of dialogs for the user.

@@ -5,14 +5,14 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.ui.drawer"
 
   ###
-   # @namespace core.ui
+   # @namespace supersonic.ui
    # @name drawer
    # @overview
    # @description The `supersonic.ui.drawer` namespace provides methods to work with drawers.
   ###
 
   ###
-   # @namespace core.ui.drawer
+   # @namespace supersonic.ui.drawer
    # @name init
    # @function
    # @description
@@ -57,7 +57,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @namespace core.ui.drawer
+   # @namespace supersonic.ui.drawer
    # @name open
    # @function
    # @description
@@ -87,7 +87,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @namespace core.ui.drawer
+   # @namespace supersonic.ui.drawer
    # @name close
    # @function
    # @description
@@ -110,7 +110,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @namespace core.ui.drawer
+   # @namespace supersonic.ui.drawer
    # @name updateOptions
    # @function
    # @description

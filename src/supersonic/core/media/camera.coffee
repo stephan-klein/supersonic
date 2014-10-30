@@ -3,7 +3,7 @@ Promise = require 'bluebird'
 {deviceready} = require '../events'
 
 ###
- # @namespace core.media
+ # @namespace supersonic.media
  # @name camera
  # @overview
  # @description
@@ -14,7 +14,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.media.camera"
 
   ###
-   # @namespace core.media.camera
+   # @namespace supersonic.media.camera
    # @name takePicture
    # @function
    # @apiCall supersonic.media.camera.takePicture
@@ -116,7 +116,7 @@ module.exports = (steroids, log) ->
       )
 
   ###
-   # @namespace core.media.camera
+   # @namespace supersonic.media.camera
    # @name getFromPhotoLibrary
    # @function
    # @apiCall supersonic.media.camera.getFromPhotoLibrary

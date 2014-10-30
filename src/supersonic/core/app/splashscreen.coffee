@@ -4,7 +4,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.app.splashscreen"
 
   ###
-   # @namespace core.app
+   # @namespace supersonic.app
    # @name splashscreen
    # @overview
    # @description
@@ -12,7 +12,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @namespace core.app.splashscreen
+   # @namespace supersonic.app.splashscreen
    # @name show
    # @function
    # @apiCall supersonic.app.splashscreen.show
@@ -39,7 +39,7 @@ module.exports = (steroids, log) ->
       )
 
   ###
-   # @namespace core.app.splashscreen
+   # @namespace supersonic.app.splashscreen
    # @name hide
    # @function
    # @apiCall supersonic.app.splashscreen.hide

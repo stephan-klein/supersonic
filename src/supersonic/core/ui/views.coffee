@@ -4,7 +4,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.ui.views"
 
   ###
-   # @namespace core.ui
+   # @namespace supersonic.ui
    # @name views
    # @overview
    # @description
@@ -12,7 +12,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @namespace core.ui.views
+   # @namespace supersonic.ui.views
    # @name find
    # @function
    # @apiCall supersonic.ui.views.find
@@ -39,7 +39,7 @@ module.exports = (steroids, log) ->
       createStartedView(id)
 
   ###
-   # @namespace core.ui.views
+   # @namespace supersonic.ui.views
    # @name start
    # @function
    # @apiCall supersonic.ui.views.start
@@ -93,7 +93,7 @@ module.exports = (steroids, log) ->
         }
 
   ###
-   # @namespace core.ui.views
+   # @namespace supersonic.ui.views
    # @name stop
    # @function
    # @apiCall supersonic.ui.views.stop
@@ -135,7 +135,7 @@ module.exports = (steroids, log) ->
 
   createStartedView = (id) ->
     ###
-     # @namespace core.ui
+     # @namespace supersonic.ui
      # @name StartedView
      # @class
      # @description

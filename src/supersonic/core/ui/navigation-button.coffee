@@ -6,7 +6,7 @@ module.exports = (steroids, log) ->
   # bug = log.debuggable "supersonic.ui.navigationButton"
 
   ###
-   # @namespace core.ui
+   # @namespace supersonic.ui
    # @name navigationButton
    # @overview
    # @description
@@ -16,7 +16,7 @@ module.exports = (steroids, log) ->
   class Button
 
     ###
-     # @namespace core.ui.navigationButton
+     # @namespace supersonic.ui.navigationButton
      # @name view
      # @constructor
      # @description

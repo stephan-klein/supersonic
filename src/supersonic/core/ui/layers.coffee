@@ -6,7 +6,7 @@ module.exports = (steroids, log) ->
   # bug = log.debuggable "supersonic.ui.layers"
 
   ###
-   # @namespace core.ui
+   # @namespace supersonic.ui
    # @name layers
    # @overview
    # @description
@@ -14,7 +14,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @namespace core.ui.layers
+   # @namespace supersonic.ui.layers
    # @name push
    # @function
    # @description
@@ -49,7 +49,7 @@ module.exports = (steroids, log) ->
       }
 
   ###
-   # @namespace core.ui.layers
+   # @namespace supersonic.ui.layers
    # @name pop
    # @function
    # @description
@@ -71,7 +71,7 @@ module.exports = (steroids, log) ->
       }
 
   ###
-   # @namespace core.ui.layers
+   # @namespace supersonic.ui.layers
    # @name popAll
    # @function
    # @description

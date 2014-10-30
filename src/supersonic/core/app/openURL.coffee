@@ -4,7 +4,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.app"
 
   ###
-   # @namespace core.app
+   # @namespace supersonic.app
    # @name openURL
    # @function
    # @apiCall supersonic.app.openURL

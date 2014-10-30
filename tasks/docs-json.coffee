@@ -11,6 +11,9 @@ module.exports = (grunt)->
         src: "**/*.coffee"
         dest: ""
         ext: ""
+        rename: (dest, matchedSrcPath) ->
+          betterSrcPath = matchedSrcPath.replace "core", "supersonic"
+          return path.join dest, betterSrcPath
       component:
         expand: true
         cwd: "components/"
@@ -19,7 +22,7 @@ module.exports = (grunt)->
         ext: ""
         rename: (dest, matchedSrcPath) ->
           betterSrcPath = matchedSrcPath.split("/")[1]
-          return path.join(dest, betterSrcPath)
+          return path.join dest, betterSrcPath
 
   cleanUpDoxObject = (object)->
     parseDefineTag = (defineTag) ->

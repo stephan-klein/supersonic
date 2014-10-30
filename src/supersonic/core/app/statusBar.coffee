@@ -4,7 +4,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.app.statusBar"
 
   ###
-   # @namespace core.app
+   # @namespace supersonic.app
    # @name statusBar
    # @overview
    # @description
@@ -12,7 +12,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @namespace core.app.statusBar
+   # @namespace supersonic.app.statusBar
    # @name hide
    # @function
    # @apiCall supersonic.app.statusBar.hide
@@ -39,7 +39,7 @@ module.exports = (steroids, log) ->
       )
 
   ###
-   # @namespace core.app.statusBar
+   # @namespace supersonic.app.statusBar
    # @name show
    # @function
    # @apiCall supersonic.app.statusBar.show

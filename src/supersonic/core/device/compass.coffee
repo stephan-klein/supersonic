@@ -7,7 +7,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.device.compass"
 
   ###
-   # @namespace core.device
+   # @namespace supersonic.device
    # @name compass
    # @overview
    # @description
@@ -15,7 +15,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @namespace core.device.compass
+   # @namespace supersonic.device.compass
    # @name watchHeading
    # @function
    # @apiCall supersonic.device.compass.watchHeading

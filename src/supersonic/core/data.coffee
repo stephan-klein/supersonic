@@ -24,7 +24,7 @@ module.exports = (logger, window) ->
 
   {
     ###
-     # @namespace core.data
+     # @namespace supersonic.data
      # @name model
      # @function
      # @apiCall supersonic.data.model
@@ -46,7 +46,7 @@ module.exports = (logger, window) ->
   }
 
 ###
- # @namespace core.data
+ # @namespace supersonic.data
  # @name Model
  # @class
  # @description
@@ -61,7 +61,7 @@ module.exports = (logger, window) ->
  # @define {Function} find returns a resource by a specific id
 ###
 ###
- # @namespace core.data
+ # @namespace supersonic.data
  # @name Model.findAll
  # @function
  # @type
@@ -74,7 +74,7 @@ module.exports = (logger, window) ->
  #      console.log task.description
 ###
 ###
- # @namespace core.data
+ # @namespace supersonic.data
  # @name Model.find
  # @function
  # @type
@@ -86,7 +86,7 @@ module.exports = (logger, window) ->
  #   console.log task.description
 ###
 ###
- # @namespace core.data
+ # @namespace supersonic.data
  # @name Collection
  # @class
  # @description
@@ -99,7 +99,7 @@ module.exports = (logger, window) ->
  # @define {Function} save Persist all resources in this collection.
 ###
 ###
- # @namespace core.data
+ # @namespace supersonic.data
  # @name Collection.save
  # @function
  # @type
@@ -116,7 +116,7 @@ module.exports = (logger, window) ->
  #     supersonic.logger.log "All tasks saved!"
 ###
 ###
- # @namespace core.data
+ # @namespace supersonic.data
  # @name Resource
  # @class
  # @description
@@ -131,7 +131,7 @@ module.exports = (logger, window) ->
  # @define {Function} delete Remove this resource from the cloud backend.
 ###
 ###
- # @namespace core.data
+ # @namespace supersonic.data
  # @name Resource.save
  # @function
  # @type
@@ -144,7 +144,7 @@ module.exports = (logger, window) ->
  #   task.save()
 ###
 ###
- # @namespace core.data
+ # @namespace supersonic.data
  # @name Resource.delete
  # @function
  # @type

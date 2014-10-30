@@ -6,7 +6,7 @@ module.exports = (steroids, log) ->
   # bug = log.debuggable "supersonic.ui.view"
 
   ###
-   # @namespace core.ui
+   # @namespace supersonic.ui
    # @name view
    # @overview
    # @description
@@ -14,7 +14,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @namespace core.ui
+   # @namespace supersonic.ui
    # @name view
    # @function
    # @apiCall supersonic.ui.view
@@ -53,7 +53,7 @@ module.exports = (steroids, log) ->
     view.start = start
 
     ###
-     # @namespace core.ui
+     # @namespace supersonic.ui
      # @name View
      # @class
      # @description

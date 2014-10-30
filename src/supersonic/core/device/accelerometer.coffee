@@ -7,7 +7,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.device.accelerometer"
 
   ###
-   # @namespace core.device
+   # @namespace supersonic.device
    # @name accelerometer
    # @overview
    # @description
@@ -15,7 +15,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @namespace core.device.accelerometer
+   # @namespace supersonic.device.accelerometer
    # @name watchAcceleration
    # @function
    # @apiCall supersonic.device.accelerometer.watchAcceleration
@@ -73,7 +73,7 @@ module.exports = (steroids, log) ->
           window.navigator.accelerometer.clearWatch watchId
 
   ###
-   # @namespace core.device.accelerometer
+   # @namespace supersonic.device.accelerometer
    # @name getAcceleration
    # @function
    # @apiCall supersonic.device.accelerometer.getAcceleration
