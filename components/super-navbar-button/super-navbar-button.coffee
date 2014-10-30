@@ -115,7 +115,7 @@ SuperNavbarButtonPrototype.createdCallback = ->
   this._side = this.getAttribute("side")
 
   # Create button object
-  this._button = new supersonic.ui.navigationButton()
+  this._button = new supersonic.ui.NavigationBarButton()
 
   # Location vs click callback
   this._setButtonAction()

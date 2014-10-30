@@ -15,12 +15,12 @@ angular
         supersonic.logger.log "promise works"
 
     $scope.update = ()->
-      leftButton = new supersonic.ui.navigationButton({
+      leftButton = new supersonic.ui.NavigationBarButton({
         title: "Left"
         onTap: ()->
           alert "left"
       })
-      rightButton = new supersonic.ui.navigationButton({
+      rightButton = new supersonic.ui.NavigationBarButton({
         title: "Right"
         onTap: ()->
           alert "right"
@@ -36,7 +36,7 @@ angular
         supersonic.logger.log "promise works"
 
     $scope.update2 = ()->
-      leftButton = new supersonic.ui.navigationButton({
+      leftButton = new supersonic.ui.NavigationBarButton({
         title: "New"
         onTap: ()->
           alert "New left"
