@@ -6,8 +6,7 @@ module.exports = (steroids, log) ->
   # bug = log.debuggable "supersonic.ui.modal"
 
   ###
-   # @category core
-   # @module ui
+   # @namespace core.ui
    # @name modal
    # @overview
    # @description
@@ -15,7 +14,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @module modal
+   # @namespace core.ui.modal
    # @name show
    # @function
    # @description
@@ -42,7 +41,7 @@ module.exports = (steroids, log) ->
     }
 
   ###
-   # @module modal
+   # @namespace core.ui.modal
    # @name hide
    # @function
    # @description
@@ -69,7 +68,7 @@ module.exports = (steroids, log) ->
     }
 
   ###
-   # @module modal
+   # @namespace core.ui.modal
    # @name hideAll
    # @function
    # @description

@@ -4,16 +4,15 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.app.splashscreen"
 
   ###
-   # @category core
-   # @module app
+   # @namespace core.app
    # @name splashscreen
    # @overview
    # @description
    # The splashscreen is shown in the application startup. The initial splashscreen is hidden automatically after 3 seconds on iOS and on the pageload event on Android. Allows the user to hide and show the splashscreen programmitically. The splashscreen is defined in your project's build configuration.
   ###
-  
+
   ###
-   # @module splashscreen
+   # @namespace core.app.splashscreen
    # @name show
    # @function
    # @apiCall supersonic.app.splashscreen.show
@@ -38,9 +37,9 @@ module.exports = (steroids, log) ->
             reject()
         }
       )
-      
+
   ###
-   # @module splashscreen
+   # @namespace core.app.splashscreen
    # @name hide
    # @function
    # @apiCall supersonic.app.splashscreen.hide

@@ -3,8 +3,7 @@ Promise = require 'bluebird'
 module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.debug"
   ###
-   # @category core
-   # @module debug
+   # @namespace core.debug
    # @name ping
    # @function
    # @apiCall supersonic.debug.ping

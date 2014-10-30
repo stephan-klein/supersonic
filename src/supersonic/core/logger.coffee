@@ -92,16 +92,14 @@ module.exports = (steroids, window) ->
         )
 
       ###
-       # @category core
-       # @module core
+       # @namespace core
        # @name logger
        # @overview
        # @description Log messages directly to web console.
       ###
 
       ###
-       # @category core
-       # @module logger
+       # @namespace core.logger
        # @name info
        # @function
        # @apiCall supersonic.logger.info
@@ -116,8 +114,7 @@ module.exports = (steroids, window) ->
       info: streamsPerLogLevel.info.in
 
       ###
-       # @category core
-       # @module logger
+       # @namespace core.logger
        # @name warn
        # @function
        # @apiCall supersonic.logger.warn
@@ -132,8 +129,7 @@ module.exports = (steroids, window) ->
       warn: streamsPerLogLevel.warn.in
 
       ###
-       # @category core
-       # @module logger
+       # @namespace core.logger
        # @name error
        # @function
        # @apiCall supersonic.logger.error
@@ -148,8 +144,7 @@ module.exports = (steroids, window) ->
       error: streamsPerLogLevel.error.in
 
       ###
-       # @category core
-       # @module logger
+       # @namespace core.logger
        # @name debug
        # @function
        # @apiCall supersonic.logger.debug

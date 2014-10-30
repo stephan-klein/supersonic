@@ -5,8 +5,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.ui.navigationBar"
 
   ###
-   # @category core
-   # @module ui
+   # @namespace core.ui
    # @name navigationBar
    # @overview
    # @description
@@ -14,7 +13,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @module ui.navigationBar
+   # @namespace core.ui.navigationBar
    # @name show
    # @description
    # Shows the native navigation bar for the current view.
@@ -53,12 +52,12 @@ module.exports = (steroids, log) ->
       }
 
   ###
-   # @module navigationBar
+   # @namespace core.ui.navigationBar
    # @name hide
    # @function
    # @description
    # Hides the native navigation bar for the current view.
-   # @signature
+   # @type
    # hide: (
    #   options?:
    #     animated?: Boolean
@@ -82,7 +81,7 @@ module.exports = (steroids, log) ->
       }
 
   ###
-   # @module navigationBar
+   # @namespace core.ui.navigationBar
    # @name update
    # @function
    # @description
@@ -118,7 +117,7 @@ module.exports = (steroids, log) ->
       }
 
   ###
-   # @module ui.navigationBar
+   # @namespace core.ui.navigationBar
    # @name setClass
    # @description
    # Adds a CSS class name to the navigation bar.
@@ -151,7 +150,7 @@ module.exports = (steroids, log) ->
       }
 
   ###
-   # @module ui.navigationBar
+   # @namespace core.ui.navigationBar
    # @name setStyle
    # @description
    # Adds inline CSS styling to navigation bar.
@@ -184,7 +183,7 @@ module.exports = (steroids, log) ->
       }
 
   ###
-   # @module ui.navigationBar
+   # @namespace core.ui.navigationBar
    # @name setStyleId
    # @description
    # Sets style ID for navigation bar.

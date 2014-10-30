@@ -1,20 +1,20 @@
 Promise = require 'bluebird'
 
 {deviceready} = require '../events'
+
 ###
-   # @category core
-   # @module media
-   # @name camera
-   # @overview
-   # @description
-   # Provides access to the device's default camera application and photo library.
-  ###
+ # @namespace core.media
+ # @name camera
+ # @overview
+ # @description
+ # Provides access to the device's default camera application and photo library.
+###
 
 module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.media.camera"
 
   ###
-   # @module camera
+   # @namespace core.media.camera
    # @name takePicture
    # @function
    # @apiCall supersonic.media.camera.takePicture
@@ -116,7 +116,7 @@ module.exports = (steroids, log) ->
       )
 
   ###
-   # @module camera
+   # @namespace core.media.camera
    # @name getFromPhotoLibrary
    # @function
    # @apiCall supersonic.media.camera.getFromPhotoLibrary

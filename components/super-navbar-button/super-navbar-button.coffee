@@ -1,5 +1,5 @@
 ###
- # @category webComponent
+ # @namespace components
  # @name super-navbar-button
  # @component
  # @description

@@ -1,6 +1,6 @@
 SuperHideModalPrototype = Object.create HTMLElement.prototype
 ###
- # @category webComponent
+ # @namespace components
  # @name super-hide-modal
  # @component
  # @description

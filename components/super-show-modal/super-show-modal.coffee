@@ -1,6 +1,6 @@
 SuperShowModalPrototype = Object.create HTMLElement.prototype
 ###
- # @category webComponent
+ # @namespace components
  # @name super-show-modal
  # @component
  # @description

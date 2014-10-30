@@ -4,8 +4,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.ui.views"
 
   ###
-   # @category core
-   # @module ui
+   # @namespace core.ui
    # @name views
    # @overview
    # @description
@@ -13,7 +12,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @module ui
+   # @namespace core.ui.views
    # @name find
    # @function
    # @apiCall supersonic.ui.views.find
@@ -40,7 +39,7 @@ module.exports = (steroids, log) ->
       createStartedView(id)
 
   ###
-   # @module ui
+   # @namespace core.ui.views
    # @name start
    # @function
    # @apiCall supersonic.ui.views.start
@@ -94,7 +93,7 @@ module.exports = (steroids, log) ->
         }
 
   ###
-   # @module ui
+   # @namespace core.ui.views
    # @name stop
    # @function
    # @apiCall supersonic.ui.views.stop
@@ -136,13 +135,13 @@ module.exports = (steroids, log) ->
 
   createStartedView = (id) ->
     ###
-     # @module ui
+     # @namespace core.ui
      # @name StartedView
      # @class
      # @description
      # Pointer to a started Supersonic View. A StartedView points to a specific stared
      # @type
-     # View: {
+     # StartedView: {
      #   getId: () => String
      # }
      # @define {Function} getId Returns the ID of the the StartedView.

@@ -3,8 +3,7 @@ Promise = require 'bluebird'
 {deviceready} = require '../../events'
 
 ###
- # @category ui
- # @module dialog
+ # @namespace core.ui.dialog
  # @name confirm
  # @function
  # @apiCall supersonic.ui.dialog.confirm

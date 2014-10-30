@@ -1,11 +1,9 @@
 data = require 'ag-data'
 
 module.exports = (logger, window) ->
-  ###
-  Connect ag-data to a resource bundle from window.ag.data such that errors
-  are correctly wrapped and logged. Notably, if window.ag.data exists but
-  does not define a valid bundle, an error will be logged without interaction.
-  ###
+  # Connect ag-data to a resource bundle from window.ag.data such that errors
+  # are correctly wrapped and logged. Notably, if window.ag.data exists but
+  # does not define a valid bundle, an error will be logged without interaction.
   createModel = switch
     when window?.ag?.data?
       try
@@ -26,8 +24,7 @@ module.exports = (logger, window) ->
 
   {
     ###
-     # @category core
-     # @module data
+     # @namespace core.data
      # @name model
      # @function
      # @apiCall supersonic.data.model
@@ -49,9 +46,9 @@ module.exports = (logger, window) ->
   }
 
 ###
- # @category core
- # @module data
+ # @namespace core.data
  # @name Model
+ # @class
  # @description
  # A Supersonic Data Model class. Provides access to a specific cloud resource through a fluent interface.
  # @type
@@ -59,12 +56,12 @@ module.exports = (logger, window) ->
  #   findAll: () => Promise Collection
  #   find: (id) => Promise Resource
  # }
+ # @methods find findAll
  # @define {Function} findAll returns a collection of resources
  # @define {Function} find returns a resource by a specific id
 ###
 ###
- # @category core
- # @module data
+ # @namespace core.data
  # @name Model.findAll
  # @function
  # @type
@@ -77,12 +74,11 @@ module.exports = (logger, window) ->
  #      console.log task.description
 ###
 ###
- # @category core
- # @module data
+ # @namespace core.data
  # @name Collection.save
  # @function
  # @type
- # collection.save: () => Promise
+ # Collection.save: () => Promise
  # @description
  # Persist all resources in this collection
  # @exampleCoffeeScript
@@ -92,8 +88,7 @@ module.exports = (logger, window) ->
  #   tasks.save()
 ###
 ###
- # @category core
- # @module data
+ # @namespace core.data
  # @name Model.find
  # @function
  # @type
@@ -105,8 +100,7 @@ module.exports = (logger, window) ->
  #   console.log task.description
 ###
 ###
- # @category core
- # @module data
+ # @namespace core.data
  # @name Resource.save
  # @function
  # @type
@@ -119,8 +113,7 @@ module.exports = (logger, window) ->
  #   task.save()
 ###
 ###
- # @category core
- # @module data
+ # @namespace core.data
  # @name Resource.delete
  # @function
  # @type

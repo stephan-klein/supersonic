@@ -5,15 +5,14 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.ui.drawer"
 
   ###
-   # @category core
-   # @module ui
+   # @namespace core.ui
    # @name drawer
    # @overview
    # @description Module of methods to work with drawers
   ###
 
   ###
-   # @module drawer
+   # @namespace core.ui.drawer
    # @name asLeft
    # @function
    # @description
@@ -33,7 +32,7 @@ module.exports = (steroids, log) ->
         resolve()
 
   ###
-   # @module drawer
+   # @namespace core.ui.drawer
    # @name asRight
    # @function
    # @description
@@ -53,7 +52,7 @@ module.exports = (steroids, log) ->
         resolve()
 
   ###
-   # @module drawer
+   # @namespace core.ui.drawer
    # @name show
    # @function
    # @description
@@ -98,7 +97,7 @@ module.exports = (steroids, log) ->
       }
 
   ###
-   # @module drawer
+   # @namespace core.ui.drawer
    # @name setOptions
    # @function
    # @description

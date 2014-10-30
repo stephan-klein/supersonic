@@ -1,5 +1,5 @@
 {% assign method = include.method %}
-## API Reference: {{method.apiCall}}{% if method.function %}(){% endif %}
+## API Reference: {{method.namespace}}.{{method.name}}()
 
 {{method.description}}
 

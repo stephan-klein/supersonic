@@ -7,8 +7,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.device.geolocation"
 
   ###
-   # @category core
-   # @module device
+   # @namespace core.device
    # @name geolocation
    # @overview
    # @description
@@ -16,7 +15,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @module geolocation
+   # @namespace core.device.geolocation
    # @name watchPosition
    # @function
    # @apiCall supersonic.device.geolocation.watchPosition
@@ -71,7 +70,7 @@ module.exports = (steroids, log) ->
           window.navigator.geolocation.clearWatch watchId
 
   ###
-   # @module geolocation
+   # @namespace core.device.geolocation
    # @name getPosition
    # @function
    # @apiCall supersonic.device.geolocation.getPosition

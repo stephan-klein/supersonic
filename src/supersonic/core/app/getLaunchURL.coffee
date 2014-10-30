@@ -12,8 +12,7 @@ module.exports = (steroids) ->
     result
 
   ###
-   # @category core
-   # @module app
+   # @namespace core.app
    # @name getLaunchURL
    # @function
    # @apiCall supersonic.app.getLaunchURL

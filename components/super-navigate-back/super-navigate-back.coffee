@@ -1,6 +1,6 @@
 SuperNavigateBackPrototype = Object.create HTMLElement.prototype
 ###
- # @category webComponent
+ # @namespace components
  # @name super-navigate-back
  # @component
  # @description

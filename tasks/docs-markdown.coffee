@@ -21,23 +21,35 @@ module.exports = (grunt)->
         src: "**/*.md"
         dest: "docs/api-reference/nightly/"
 
-  getLiquidDataPath = (filePath)->
-    liquidDataPath = filePath.replace "docs/_data/", "site.data."
-    liquidDataPath = liquidDataPath.replace /\//g, "."
-    liquidDataPath = liquidDataPath.replace ".json", ""
-    liquidDataPath
+  getLiquidDataPath = (apiEntry) ->
+    sanitizedFileName = apiEntry.name.replace ".", "-"
+    if apiEntry.class
+      sanitizedFileName = "#{sanitizedFileName}-class"
+    "site.data.#{apiEntry.namespace}.#{sanitizedFileName}"
+
+  getClassMethodPaths = (apiEntry, liquidDataPath) ->
+    classMethodPaths = []
+    if apiEntry.methods?.length > 0
+      for method in apiEntry.methods
+        methodPath = "site.data.#{apiEntry.namespace}.#{apiEntry.name}-#{method}"
+        classMethodPaths.push methodPath
+
+    classMethodPaths
 
   grunt.registerMultiTask "docs-markdown", "Generate API reference markdown from docs/_data/*.json", ->
     @files.forEach (file) =>
       apiEntry = JSON.parse grunt.file.read file.src[0]
-      liquidDataPath = getLiquidDataPath(file.src[0])
+      liquidDataPath = getLiquidDataPath(apiEntry)
       section = liquidDataPath.split(".")[3]?.toLowerCase()
       subsection = liquidDataPath.split(".")[4]?.toLowerCase()
+      classMethodPaths = getClassMethodPaths apiEntry
 
       templateType = if apiEntry.overview
         "overview"
       else if apiEntry.component
         "component"
+      else if apiEntry.class
+        "class"
       else
         "javascript"
 
@@ -48,6 +60,7 @@ module.exports = (grunt)->
         entry: apiEntry
         section: section
         subsection: subsection
+        classMethodPaths: classMethodPaths
       }
 
       grunt.file.write file.dest, markdownOutput

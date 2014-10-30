@@ -4,8 +4,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.app.sleep"
 
   ###
-   # @category core
-   # @module app
+   # @namespace core.app
    # @name sleep
    # @overview
    # @description
@@ -13,7 +12,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @module sleep
+   # @namespace core.app.sleep
    # @name disable
    # @function
    # @apiCall supersonic.app.sleep.disable
@@ -36,9 +35,9 @@ module.exports = (steroids, log) ->
             resolve()
         }
       )
-  
+
   ###
-   # @module sleep
+   # @namespace core.app.sleep
    # @name enable
    # @function
    # @apiCall supersonic.app.sleep.enable
@@ -61,4 +60,3 @@ module.exports = (steroids, log) ->
             resolve()
         }
       )
-      

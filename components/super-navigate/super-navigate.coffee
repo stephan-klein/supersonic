@@ -1,6 +1,6 @@
 SuperNavigatePrototype = Object.create HTMLElement.prototype
 ###
- # @category webComponent
+ # @namespace components
  # @name super-navigate
  # @component
  # @description

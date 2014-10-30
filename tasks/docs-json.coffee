@@ -71,6 +71,20 @@ module.exports = (grunt)->
 
     for tag in object.tags
       switch tag.type
+        when "overview"
+          betterObject.overview = true
+        when "function"
+          betterObject.function = true
+        when "class"
+          betterObject.class = true
+        when "component"
+          betterObject.component = true
+        when "name"
+          betterObject.name = tag.string
+        when "namespace"
+          betterObject.namespace = tag.string
+        when "apiCall"
+          betterObject.apiCall = tag.string
         when "define"
           betterTag = parseDefineTag tag
           namespaceObject = getNamespaceFromTag betterTag
@@ -86,24 +100,15 @@ module.exports = (grunt)->
         when "attribute"
           betterTag = parseAttributeTag tag
           betterObject.attributes.push betterTag
-        when "syntax"
-          betterObject.syntax = tag.string
+        when "methods"
+          methodsArray = tag.string.split " "
+          betterObject.methods = methodsArray
         when "type"
           betterObject.type = tag.typeString
         when "description"
           betterObject.description = tag.string
         when "returnsDescription"
           betterObject.returnsDescription = tag.string
-        when "name"
-          betterObject.name = tag.string
-        when "usage"
-          betterObject.usage = tag.string
-        when "overview"
-          betterObject.overview = true
-        when "category"
-          betterObject.category = tag.string
-        when "function"
-          betterObject.function = true
         when "signature"
           betterObject.signature = tag.string
         when "usageCoffeeScript"
@@ -118,12 +123,6 @@ module.exports = (grunt)->
           betterObject.usageHtml = tag.string
         when "exampleHtml"
           betterObject.exampleHtml = tag.string
-        when "apiCall"
-          betterObject.apiCall = tag.string
-        when "class"
-          betterObject.class = true
-        when "component"
-          betterObject.component = true
 
     betterObject
 
@@ -136,24 +135,27 @@ module.exports = (grunt)->
     cleanedUpArray
 
   writeArrayToJson = (cleanedUpArray, folderPath) ->
-    writeMethodToJson = (fileName, method) ->
+    writeEntryToJson = (fileName, entry) ->
       fileDestination = if fileName is null
         "#{folderPath}.json"
       else
         path.join folderPath, fileName
 
-      prettyJSON = JSON.stringify method, undefined, 2
+      prettyJSON = JSON.stringify entry, undefined, 2
       grunt.file.write fileDestination, prettyJSON
 
-    for method in cleanedUpArray
-      methodFileName = if cleanedUpArray.length is 1
+    for entry in cleanedUpArray
+      entryFileName = if cleanedUpArray.length is 1
         null
-      else if method.overview
+      else if entry.overview
         "overview.json"
+      else if entry.class
+        "#{entry.name}-class.json"
       else
-        "#{method.name}.json"
+        sanitizedName = entry.name.replace ".", "-"
+        "#{sanitizedName}.json"
 
-      writeMethodToJson methodFileName, method
+      writeEntryToJson entryFileName, entry
 
   getStringsFromFile = (file) ->
     filePath = file.src[0]

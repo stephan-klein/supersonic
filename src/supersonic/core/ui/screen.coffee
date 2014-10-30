@@ -4,8 +4,7 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.ui.screen"
 
   ###
-   # @category core
-   # @module ui
+   # @namespace core.ui
    # @name screen
    # @overview
    # @description
@@ -13,7 +12,7 @@ module.exports = (steroids, log) ->
   ###
 
   ###
-   # @module screen
+   # @namespace core.ui.screen
    # @name setAllowedRotations
    # @apiCall supersonic.ui.screen.setAllowedRotations
    # @function
@@ -48,7 +47,7 @@ module.exports = (steroids, log) ->
       )
 
   ###
-   # @module screen
+   # @namespace core.ui.screen
    # @name rotateTo
    # @function
    # @description
