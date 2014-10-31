@@ -80,6 +80,7 @@ module.exports = (grunt)->
         classMethodPaths: classMethodPaths
       }
 
-      grunt.file.write file.dest, markdownOutput
+      lowerCaseDest = file.dest.toLowerCase()
+      grunt.file.write lowerCaseDest, markdownOutput
 
     grunt.task.run "copy:docs-index"
