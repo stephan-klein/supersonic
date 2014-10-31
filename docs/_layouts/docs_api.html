@@ -35,22 +35,6 @@ sections:
         class: true
         id: resource-class
 
-  - name: Debug
-    subsections:
-      - name: ping
-        method: true
-
-  - name: Logger
-    subsections:
-      - name: debug
-        method: true
-      - name: error
-        method: true
-      - name: info
-        method: true
-      - name: warn
-        method: true
-
   - name: Device
     subsections:
       - name: accelerometer
@@ -68,6 +52,17 @@ sections:
       - name: platform
         method: true
       - name: vibrate
+        method: true
+
+  - name: Logger
+    subsections:
+      - name: debug
+        method: true
+      - name: error
+        method: true
+      - name: info
+        method: true
+      - name: warn
         method: true
 
   - name: Media

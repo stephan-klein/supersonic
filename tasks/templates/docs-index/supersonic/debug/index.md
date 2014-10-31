@@ -6,3 +6,5 @@ section_id: debug
 ---
 
 # API Reference: supersonic.debug.*
+
+The `supersonic.debug.*` namespace provides methods for debugging your app.
