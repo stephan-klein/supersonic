@@ -13,6 +13,7 @@ module.exports = (grunt)->
         ext: ""
         rename: (dest, matchedSrcPath) ->
           betterSrcPath = matchedSrcPath.replace "core", "supersonic"
+          betterSrcPath = betterSrcPath.toLowerCase()
           return path.join dest, betterSrcPath
       component:
         expand: true
@@ -22,6 +23,7 @@ module.exports = (grunt)->
         ext: ""
         rename: (dest, matchedSrcPath) ->
           betterSrcPath = matchedSrcPath.split("/")[1]
+          betterSrcPath = betterSrcPath.toLowerCase()
           return path.join dest, betterSrcPath
 
   cleanUpDoxObject = (object)->
@@ -152,9 +154,11 @@ module.exports = (grunt)->
       entryFileName = if entry.overview
         "index.json"
       else if entry.class
-        "#{entry.name}-class.json"
+        sanitizedName = entry.name.toLowerCase()
+        "#{sanitizedName}-class.json"
       else
         sanitizedName = entry.name.replace ".", "-"
+        sanitizedName = sanitizedName.toLowerCase()
         "#{sanitizedName}.json"
 
       writeEntryToJson entryFileName, entry
