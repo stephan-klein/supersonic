@@ -8,7 +8,7 @@ module.exports = (grunt)->
         expand: true
         cwd: "docs/_data/"
         src: "**/*.json"
-        dest: "docs/api-reference/nightly/"
+        dest: "docs/api-reference/stable/"
         ext: ".md"
         rename: (dest, matchedSrcPath) ->
           betterSrcPath = matchedSrcPath.replace "overview", "index"
@@ -19,7 +19,7 @@ module.exports = (grunt)->
         expand: true
         cwd: "tasks/templates/docs-index/"
         src: "**/*.md"
-        dest: "docs/api-reference/nightly/"
+        dest: "docs/api-reference/stable/"
 
   getLiquidDataPath = (apiEntry) ->
     sanitizedFileName = apiEntry.name.replace ".", "-"

@@ -11,7 +11,7 @@ module.exports =
     docs: 'docs'
     docsGruntOutputDirs: [
       '<%= dir.docs %>/_data/'
-      '<%= dir.docs %>/api-reference/nightly/'
+      '<%= dir.docs %>/api-reference/stable/'
     ]
   files:
     src: '<%= dir.src %>/**/*.coffee'

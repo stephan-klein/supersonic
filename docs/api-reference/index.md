@@ -1,6 +1,6 @@
 ---
 layout: "docs_api"
-version: "nightly"
+version: "stable"
 versionHref: "#"
 section_id: supersonic-js
 
