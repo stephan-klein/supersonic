@@ -8,7 +8,7 @@ module.exports = (steroids, log) ->
   ###
    # @namespace supersonic.ui
    # @name NavigationBarButton
-   # @function
+   # @class
    # @description
    # A navigation bar button, for use with `supersonic.ui.navigationBar.update`.
    # @usageJavaScript

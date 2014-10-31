@@ -139,8 +139,9 @@ module.exports = (grunt)->
 
   writeArrayToJson = (cleanedUpArray, folderPath) ->
     writeEntryToJson = (fileName, entry) ->
-      fileDestination = if fileName is null
-        "#{folderPath}.json"
+      fileDestination = if cleanedUpArray.length is 1
+        betterFolderPath = folderPath.slice 0, folderPath.lastIndexOf "/"
+        path.join betterFolderPath, fileName
       else
         path.join folderPath, fileName
 
@@ -148,9 +149,7 @@ module.exports = (grunt)->
       grunt.file.write fileDestination, prettyJSON
 
     for entry in cleanedUpArray
-      entryFileName = if cleanedUpArray.length is 1
-        null
-      else if entry.overview
+      entryFileName = if entry.overview
         "index.json"
       else if entry.class
         "#{entry.name}-class.json"
