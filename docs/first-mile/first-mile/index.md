@@ -15,10 +15,12 @@ subsections:
 <section class="docs-section" id="overview">
 ## Overview
 
-In this tutorial, we will be going through the few simple steps needed to get an app running on your device. This section will take 5-10 minutes to complete, and the end result will look like this:
+In this tutorial, we will be going through the few simple steps needed to get an app running on your device. This section will take 5-10 minutes to complete, and you will learn:
 
-<img src="http://placehold.it/600x300">
-</section>
+  - How to create a new Supersonic application
+  - That Supersonic apps mix native and HTML UI components in an awesome way
+  - How to make changes to your Supersonic application
+  - How to navigate to different views in your app
 
 <section class="docs-section" id="installation">
 ## Installation
@@ -52,21 +54,44 @@ Next, head back to the terminal to run your app. In your project folder (`myProj
 steroids connect
 ```
 
-###Connecting with an actual device
+This starts the Steroids Development Server. Among other things, it ensures that changes you make to your project are displayed in the actual devices.
 
-The Steroids² CLI will compile your project and then open up a new browser window with a prominently displayed QR code:
+### Connecting with an Actual Device
+
+After compiling your project, the Steroids CLI will open up the Connect Screen in a new browser window. The Connect Screen has plenty of features, but for now, focus on the QR code that is shown on the first page:
 
 <img src="http://placehold.it/600x300">
 
-Now, to run your app in a real device, all you have to do is open the AppGyver Scanner you downloaded previously and scan the displayed QR code. The Scanner app will then download the required files and start your app.
+*Connect screen QR code.*
 
-In this view, the most interesting bits are at the top and bottom of the screen. At the top you see a native navigation bar with a title text. At the bottom, there is a tab bar with two tabs, `index` and `settings`. Feel free to click the `settings` tab and play around with the buttons and sliders you see there.
+To run your app on a real device, all you have to do is open the AppGyver Scanner you downloaded previously and scan the displayed QR code. The Scanner app will then download the required files, establish a connection with the Steroids Development Server and start your app.
+</section>
+
+<section>
+## Introduction to Native UI Components
+<img src="http://placehold.it/600x300">
+
+*A fresh Supersonic project running on a device.*
+
+The app starts in the view pictured above. Most of the content on the screen is just plain HTML and CSS. However, the top and bottom of the screen contain native components: a **native navigation bar** and a **native tab bar**.
+
+Try rotating your device to see how the components smoothly realign themselves. You can rest assured the components stay in their correct places no matter what!
+
+<img src="http://placehold.it/600x300">
+
+*The native components realign themselves when the device is rotated.*
+
+The native components also mean that we don't have to use any JavaScript hacks for scrolling. Try scrolling the view: it's smooth as butter, and if you scroll past the edge of the page, you get the native effects: rubber-band on iOS and the blue highlight on Android.
+
+Next, try switching between the tabs. As you can see, the view changes instantaneously. This is possible because each tab is its own HTML document (wrapped inside its own WebView "browser" instance – more on this later), and switching between them is handled by native UI code.
+
+The tabs live on even when they're not active. Go to the Settings tab, change the position of some of the sliders, and scroll down a bit. Switch to the Index tab and back again. The state is maintained perfectly, because nothing is done to the Settings tab itself – it is just hidden from view by the native UI code.
 </section>
 
 <section class="docs-section" id="making-changes">
-## 2.5 Making Changes
+## Making Changes
 
-With your app up and running, we're ready to make some changes. Open the `myProject/app/common/views/gettin-started.html` file in your editor of choice and change the contents of the file to be:
+With your app up and running, we're ready to make some changes. Open the `myProject/app/common/views/gettin-started.html` file in your editor of choice. Find the `<super-navbar>` element and change the title text:
 
 ```html
 <super-navbar>
@@ -74,28 +99,30 @@ With your app up and running, we're ready to make some changes. Open the `myProj
     Hello World!
   </super-navbar-title>
 </super-navbar>
-
-<div class="padding">
-  <super-navigate location="common#getting-started">
-    <button class="button button-block button-positive">Go to getting started</button>
-  </super-navigate>
-</div>
 ```
-This does two things: it changes the title of the navigation bar to "Hello World!", and it adds a `<super-navigate>` element to the actual view body. `<super-navigate>` elements can be used to control navigation in your app, with this particular element taking you to the `app/common/views/getting-started.html` page.
+Save the file. The Steroids Development Server automatically notices that a file has changed and refreshes your project. You'll see the navigation bar update with your new title.
 
-After saving the file you still need to push the changes to the test device. To do so, simply go to the terminal window running `steroids connect` and press Enter. The Scanner app will then automatically reload the app and display the new content. You will see the navigation bar has changed color, and the button we created inside `<super-navigate>` has appeared. Click the button to trigger a navigation to a new page. You will see the new view animate into view, and a back button appear on the navigation bar, which you can use to navigate back to the original view. Congratulations, you have created the first functionality for your app!
+## Navigating to Another View
 
-For further reading on the navigation bar or the `<super-navigate>` element, head over to the docs:
+Below the `<super-navbar>` element, you will notice two buttons wrapped by another custom HTML element, `<super-navigate>`. The `<super-navigate>` element provides an easy way for you to declaratively set up the navigation structure of your app: when any of its child elements (the `<button>` in this case) are tapped, the app will navigate to the target view. (In this case, the target view is determined by the `view-id` attribute – you'll learn more about this in the following tutorials!)
 
-  - [navigation bar](http://supersonic.testgyver.com/api-reference/nightly/components/super-navbar/)
-  - [super-navigate](http://supersonic.testgyver.com/api-reference/nightly/components/super-navigate/)
+Try it out! Tap either of the buttons on your device. You will see the new view animate into view, and a back button appear on the navigation bar.
+
+The new view, again, is running inside its own native WebView container, so the view below will continue to happily exist, execute JavaScript and maintain state. The navigation stack is maintained automatically by the native side. Clicking on the back button will animate the view away and reveal the original view beneath.
+
+For further reading on the navigation bar or the `<super-navigate>` element, see the followin guides:
+
+  - [Navigation Bar](/ui-and-navigation/native-components/navigation-bar/)
+  - [super-navigate](/ui-and-navigation/navigation/declarative-navigation/)
 </section>
 
-##Done
+## Done!
 
-In this section we've covered the basics of app development, by now you know how to:
+In this section we've covered the basics of Supersonic App Development. By now you know:
 
-  - Create a Steroids app
-  - Edit your app
+  - How to create a new Supersonic application
+  - That Supersonic apps mix native and HTML UI components in an awesome way
+  - How to make changes to your Supersonic application
+  - How to navigate to different views in your app
 
-With these skills, you have grasped the core of developing Supersonic apps! Once you're ready, dive into the Second mile to learn more essential skills, like debugging your app, as well as a deeper insight into how a Supersonic app really works.
+With these skills, you have grasped the core of developing Supersonic apps! Once you're ready, dive into the [Second mile](/first-mile/second-mile/) tutorial to learn more essential skills, like debugging your app, as well as a deeper insight into how a Supersonic app really works.
