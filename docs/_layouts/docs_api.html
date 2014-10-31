@@ -115,19 +115,20 @@ sections:
           - name: setStyleId
       - name: NavigationBarButton
         class: true
+        id: navigationbarbutton-class
       - name: StartedView
-        methods:
-          - name: getId
+        class: true
+        id: startedview-class
       - name: view
         method: true
       - name: View
         class: true
         id: view-class
-        methods:
-          - start
       - name: views
         methods:
           - name: find
+          - name: start
+          - name: stop
 
 
   - name: Web Components

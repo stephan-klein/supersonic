@@ -57,8 +57,8 @@ module.exports = (logger, window) ->
  #   find: (id) => Promise Resource
  # }
  # @methods find findAll
- # @define {Function} findAll returns a collection of resources
- # @define {Function} find returns a resource by a specific id
+ # @define {Function} findAll Returns a collection of resources.
+ # @define {Function} find Returns a resource by a specific id.
 ###
 ###
  # @namespace supersonic.data

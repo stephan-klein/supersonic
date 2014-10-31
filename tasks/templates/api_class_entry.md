@@ -9,7 +9,9 @@ subsection_id: <%= subsection %>
 {% assign class = <%= liquidDataPath %> %}
 {% include api_class.md class=class %}
 
+<% if(classMethodPaths.length > 0) {%>
 ## Class Methods
+<% } %>
 
 <% _.each(classMethodPaths, function(methodPath) { %>
 {% assign method = <%= methodPath %> %}

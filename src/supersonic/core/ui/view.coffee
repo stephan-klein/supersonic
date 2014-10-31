@@ -8,20 +8,11 @@ module.exports = (steroids, log) ->
   ###
    # @namespace supersonic.ui
    # @name view
-   # @overview
-   # @description
-   # Views live at the heart of every Supersonic app. A View displays the HTML content of your app.
-  ###
-
-  ###
-   # @namespace supersonic.ui
-   # @name view
    # @function
-   # @apiCall supersonic.ui.view
    # @description
    # Creates a new view pointer with the route or URL given as the parameter.
    # @type
-   # view : (
+   # view: (
    #  location: String
    # ) => View
    # @define {String} location A [route](todo) (e.g. `"cars#index"`) or URL (e.g. `"http://www.google.com"`) that the view points to.
@@ -51,21 +42,6 @@ module.exports = (steroids, log) ->
       supersonic.ui.views.start view, id
 
     view.start = start
-
-    ###
-     # @namespace supersonic.ui
-     # @name View
-     # @class
-     # @description
-     # A Supersonic View. A View is a pointer to a specific location (route or URL). A View can be passed as an argument to other API calls (like `supersonic.ui.navigate`).
-     # @type
-     # View: {
-     #   getLocation: () => String
-     #   start: (String) => StartedView
-     # }
-     # @define {Function} getLocation Returns the View's location String.
-     # @define {Function} start Shorthand for calling `supersonic.ui.start(view, id)` with this view.
-    ###
 
     view
 

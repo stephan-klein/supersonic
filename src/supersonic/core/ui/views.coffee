@@ -17,7 +17,7 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.ui.views.find
    # @description
-   # Get a started (or persistent) view by its ID.
+   # Get a [started](/ui-and-navigation/views/started-views/) (or [persistent](/ui-and-navigation/views/persistent-views/)) view by its ID.
    # @type
    # supersonic.ui.views.find: (
    #  id: String
@@ -44,7 +44,7 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.ui.views.start
    # @description
-   # Start a View in the background, allowing it to remain running even when not in the layer stack.
+   # Start a View in the background, allowing it to remain running even when it's not in a navigation stack or used in a drawer. Read more in the [Started Views guide](/ui-and-navigation/views/started-views/).
    # @type
    # supersonic.ui.views.start: (
    #  view: View|String
@@ -98,7 +98,7 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.ui.views.stop
    # @description
-   # Stop a StartedView running in the background. It will be destroyed and any memory used freed.
+   # Stop a StartedView running in the background. It will be destroyed and any memory used freed. A StartedView that is in the [navigation stack](/ui-and-navigation/navigation/navigation-stack/) cannot be stopped.
    # @type
    # supersonic.ui.views.stop: (
    #  id: String
@@ -134,18 +134,7 @@ module.exports = (steroids, log) ->
       }
 
   createStartedView = (id) ->
-    ###
-     # @namespace supersonic.ui
-     # @name StartedView
-     # @class
-     # @description
-     # Pointer to a started Supersonic View. A StartedView points to a specific stared
-     # @type
-     # StartedView: {
-     #   getId: () => String
-     # }
-     # @define {Function} getId Returns the ID of the the StartedView.
-    ###
+
     {
       getId: -> id
       _getWebView: ->
