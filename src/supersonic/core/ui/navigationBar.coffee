@@ -234,7 +234,7 @@ module.exports = (steroids, log) ->
    # @name setStyleId
    # @function
    # @description
-   # Sets a CSS style ID for navigation bar. Any previous ID will be overridden. **Note:** At the moment, setting a CSS style ID for the navigation bar affects the whole navigation stack, not just the current view.
+   # Sets a CSS style id for navigation bar. Any previous id will be overridden. **Note:** At the moment, setting a CSS style id for the navigation bar affects the whole navigation stack, not just the current view.
    # @apiCall supersonic.ui.navigationBar.setStyleId
    # @usageJavaScript
    # supersonic.ui.navigationBar.setStyleId(id);
@@ -242,15 +242,15 @@ module.exports = (steroids, log) ->
    # setStyleId: (
    #   id: String
    # ) => Promise
-   # @define {String} id="" The style ID to set.
+   # @define {String} id="" The style id to set.
    # @returnsDescription
-   # A promise that will be resolved after the navigation bar style ID is set.
+   # A promise that will be resolved after the navigation bar style id is set.
    # @exampleCoffeeScript
    # supersonic.ui.navigationBar.setStyleId("the-button").then ()->
-   #   supersonic.logger.log "Navigation bar style ID was set."
+   #   supersonic.logger.log "Navigation bar style id was set."
    # @exampleJavaScript
    # supersonic.ui.navigationBar.setStyleId("the-button").then(function() {
-   #   supersonic.logger.log("Navigation bar style ID was set.");
+   #   supersonic.logger.log("Navigation bar style id was set.");
    # });
    #
   ###
@@ -258,9 +258,9 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.setStyleId styleId, {
         onSuccess: ()->
-          supersonic.logger.info "Navigation bar style ID was set"
+          supersonic.logger.info "Navigation bar style id was set"
           resolve()
         onFailure: (error)->
-          supersonic.logger.error "Could not set the navigation bar style ID: #{error.errorDescription}"
+          supersonic.logger.error "Could not set the navigation bar style id: #{error.errorDescription}"
           reject()
       }

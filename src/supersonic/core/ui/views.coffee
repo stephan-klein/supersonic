@@ -17,12 +17,12 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.ui.views.find
    # @description
-   # Get a [started](/ui-and-navigation/views/started-views/) (or [persistent](/ui-and-navigation/views/persistent-views/)) view by its ID.
+   # Get a [started](/ui-and-navigation/views/started-views/) (or [persistent](/ui-and-navigation/views/persistent-views/)) view by its id.
    # @type
    # supersonic.ui.views.find: (
    #  id: String
    # ) => Promise startedView: StartedView
-   # @define {String} id A string matching the ID of a started view.
+   # @define {String} id A string matching the id of a started view.
    # @returnsDescription
    # [Promise](todo) that resolves with a StartedView object if the find operation was successful, or rejects if the given id didn't match any started views.
    # @define {StartedView} startedView The StartedView object matching the id given as a parameter.
@@ -151,7 +151,7 @@ module.exports = (steroids, log) ->
 
       testView.preload {}, {
         onSuccess: ->
-          # View with that ID didn't exist, so unload immediately.
+          # View with that id didn't exist, so unload immediately.
           testView.unload {}, {
             onSuccess: ->
               reject()

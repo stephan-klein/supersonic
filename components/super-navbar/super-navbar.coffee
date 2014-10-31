@@ -24,7 +24,7 @@ observer = new MutationObserver (mutations) ->
       # Style changed
       if mutation.attributeName is "style"
         mutation.target.style = mutation.target.getAttribute("style")
-      # ID changed
+      # id changed
       if mutation.attributeName is "id"
         mutation.target.id = mutation.target.getAttribute("id")
 

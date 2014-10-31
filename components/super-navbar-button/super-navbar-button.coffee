@@ -6,7 +6,7 @@
  # A button that will be displayed on the view navbar.
  # @attribute side="left" Used to set button position on navbar. Allowed values are "left" and "right".
  # @attribute location="moduleName#viewName" Simple way to use Supersonic UI navigation with your navbar button. Can contain a route or a URL. If neither this of view-id is set, any attached "click" callback will be used instead.
- # @attribute view-id The ID of a preloaded web view. Configure view IDs in config/structure.coffee. If view-id is set, location will be ignored.
+ # @attribute view-id The id of a preloaded web view. Configure view ids in config/structure.coffee. If view-id is set, location will be ignored.
  # @usageHtml
  # <super-navbar-button location="moduleName#viewName" side="left">Title<super-navbar-button>
  # @exampleHtml

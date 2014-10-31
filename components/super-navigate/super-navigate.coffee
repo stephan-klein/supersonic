@@ -6,7 +6,7 @@ SuperNavigatePrototype = Object.create HTMLElement.prototype
  # @description
  # Navigates to a view. Uses `supersonic.ui.layers.push` internally.
  # @attribute location The route or URL for the view to be shown. Either location or view-id must be set.
- # @attribute view-id The ID of a preloaded web view. Configure view IDs in config/structure.coffee. If view-id is set, location will be ignored.
+ # @attribute view-id The id of a preloaded web view. Configure view ids in config/structure.coffee. If view-id is set, location will be ignored.
  # @attribute action="click" The action used to trigger the transition.
  # @usageHtml
  # <super-navigate location="cars#index" action="click">Open Cars index</super-navigate>
@@ -24,7 +24,7 @@ SuperNavigatePrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
 
   @addEventListener action, =>
-    # By pre-loaded view ID
+    # By pre-loaded view id
     viewId = @getAttribute "view-id"
     if viewId
       return supersonic.ui.views.find(viewId)
