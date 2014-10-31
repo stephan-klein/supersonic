@@ -60,12 +60,13 @@ The Steroids² CLI will compile your project and then open up a new browser wind
 
 Now, to run your app in a real device, all you have to do is open the AppGyver Scanner you downloaded previously and scan the displayed QR code. The Scanner app will then download the required files and start your app.
 
+In this view, the most interesting bits are at the top and bottom of the screen. At the top you see a native navigation bar with a title text. At the bottom, there is a tab bar with two tabs, `index` and `settings`. Feel free to click the `settings` tab and play around with the buttons and sliders you see there.
 </section>
 
 <section class="docs-section" id="making-changes">
 ## 2.5 Making Changes
 
-With your app up and running, we're ready to make some changes. Open the `myProject/app/common/views/index.html` file in your editor of choice and change the contents of the file to be:
+With your app up and running, we're ready to make some changes. Open the `myProject/app/common/views/gettin-started.html` file in your editor of choice and change the contents of the file to be:
 
 ```html
 <super-navbar>
@@ -75,15 +76,14 @@ With your app up and running, we're ready to make some changes. Open the `myProj
 </super-navbar>
 
 <div class="padding">
-  <super-navigate location="getting-started">
-    <li class="item item-icon-right">
-      Go to index.html
-    </li>
+  <super-navigate location="common#getting-started">
+    <button class="button button-block button-positive">Go to getting started</button>
   </super-navigate>
 </div>
 ```
+This does two things: it changes the title of the navigation bar to "Hello World!", and it adds a `<super-navigate>` element to the actual view body. `<super-navigate>` elements can be used to control navigation in your app, with this particular element taking you to the `app/common/views/getting-started` html page. Both the navigation bar and super-navigate elements will be covered in more detail in a later chapter, so don't worry about the details of their implementation for now.
 
-After saving the file you still need to push the changes to the test device. To do so, simply go to the terminal window running `steroids connect` and press Enter. The Scanner app will then automatically reload the app and display the new content. You will see two fresh components in the app, a navigation bar and a button. Click the button to trigger a navigation to a new page, you will see the new view animate into view, and a back button appear on the navigation bar, which you can use to navigate back to the original view. Congratulations, your app now has functionality!
+After saving the file you still need to push the changes to the test device. To do so, simply go to the terminal window running `steroids connect` and press Enter. The Scanner app will then automatically reload the app and display the new content. You will see the navigation bar has changed color, and the button we created inside `<super-navigate>` has appeared. Click the button to trigger a navigation to a new page. You will see the new view animate into view, and a back button appear on the navigation bar, which you can use to navigate back to the original view. Congratulations, you have created the first functionality for your app!
 </section>
 
 ##Done
