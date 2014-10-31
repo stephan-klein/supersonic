@@ -1,19 +1,19 @@
 SuperHideModalPrototype = Object.create HTMLElement.prototype
 ###
  # @namespace components
- # @name super-hide-modal
+ # @name super-modal-hide
  # @component
  # @description
  # Hides an open modal on screen. Uses `supersonic.ui.modal.hide()` internally.
  # @attribute action="click" The action used to trigger the transition.
  # @usageHtml
- # <super-hide-modal action="click">Hide modal</super-hide-modal>
+ # <super-modal-hide action="click">Hide modal</super-modal-hide>
  # @exampleHtml
  # <!-- The action attribute is optional -->
- # <super-hide-modal>Go back</super-hide-modal>
+ # <super-modal-hide>Go back</super-modal-hide>
  #
  # <!-- The default action can be overridden -->
- # <super-hide-modal action="touchmove">Hide modal</super-hide-modal>
+ # <super-modal-hide action="touchmove">Hide modal</super-modal-hide>
 ###
 SuperHideModalPrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
@@ -21,5 +21,5 @@ SuperHideModalPrototype.createdCallback = ->
   @addEventListener action, ->
     supersonic.ui.modal.hide()
 
-document.registerElement "super-hide-modal",
+document.registerElement "super-modal-hide",
   prototype: SuperHideModalPrototype

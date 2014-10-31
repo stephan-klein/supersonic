@@ -16,23 +16,23 @@ fireAfterModalDidHideAndShow = (done) ->
     fireAfterModalDidHide ->
       done()
 
-describe "<super-show-modal> and <super-hide-modal>", ->
+describe "<super-modal-show> and <super-modal-hide>", ->
   @timeout 4000
   it "should show modal by clicking on element with route", (done) ->
     fireAfterModalDidHideAndShow done
-    clickElement "super-show-modal-route"
+    clickElement "super-modal-show-route"
 
   it "should show modal with an URL", (done) ->
     fireAfterModalDidHideAndShow done
-    clickElement "super-show-modal-url"
+    clickElement "super-modal-show-url"
 
   it "should show modal after changing element's location attribute", (done) ->
     fireAfterModalDidHideAndShow done
-    elem = document.getElementById "super-show-modal-change-location"
-    elem.setAttribute "location", "web-components#super-hide-modal"
+    elem = document.getElementById "super-modal-show-change-location"
+    elem.setAttribute "location", "web-components#super-modal-hide"
     elem.click()
 
   it "should navigate with a custom touchstart action", (done) ->
     fireAfterModalDidHideAndShow done
-    elem = document.getElementById "super-show-modal-touchstart"
+    elem = document.getElementById "super-modal-show-touchstart"
     fireTouchEvent elem, "touchstart"
