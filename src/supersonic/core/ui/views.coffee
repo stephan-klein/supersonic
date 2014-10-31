@@ -48,10 +48,10 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.views.start: (
    #  view: View|String
-   #  id?: String
+   #  id: String
    # ) => Promise startedView: StartedView
    # @define {View|String} view The View that will be started in the background. Alternatively, you can directly pass a location string.
-   # @define {String} id=view.location The id that will be used to access the started view. If no id is given, the location string of the View to start will be used as the id.
+   # @define {String} id The id that will be used to access the StartedView. Cannot contain the `#` character.
    # @returnsDescription
    # [Promise](todo) that resolves with a StartedView object. If the id is already in use by another StartedView, the promise will be rejected.
    # @define {StartedView} startedView The StartedView object referencing the View running in the background.
@@ -79,6 +79,16 @@ module.exports = (steroids, log) ->
         supersonic.ui.view(view)
       else
         view
+
+      unless id?
+        error =
+          errorDescription: "Missing id parameter"
+        reject error
+
+      if id.match /#+/
+        error =
+          errorDescription: "Cannot use the # character in ids"
+        reject error
 
       isStarted(id).then( ->
         error =

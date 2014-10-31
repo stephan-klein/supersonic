@@ -49,3 +49,13 @@ describe "supersonic.ui.views", ->
 
     it "should fail to stop a view with id dolan", ->
       supersonic.ui.views.stop("dolan").should.be.rejected
+
+    it "should fail to start a view without id parameter", ->
+      view = supersonic.ui.view "ui#empty"
+      supersonic.ui.views.start(view).should.be.rejected
+
+    it "should fail to start a view with an id that contains #", ->
+      view = supersonic.ui.view "ui#empty"
+      supersonic.ui.views.start(view, "#myAwesomeId").should.be.rejected
+      supersonic.ui.views.start(view, "my#AwesomeId").should.be.rejected
+      supersonic.ui.views.start(view, "myAwesomeId#").should.be.rejected
