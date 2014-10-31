@@ -9,15 +9,15 @@ sections:
       - name: openURL
         method: true
       - name: sleep
-        topics:
+        methods:
           - name: disable
           - name: enable
       - name: splashscreen
-        topics:
+        methods:
           - name: hide
           - name: show
       - name: statusBar
-        topics:
+        methods:
           - name: hide
           - name: show
 
@@ -25,12 +25,15 @@ sections:
     subsections:
       - name: Collection
         class: true
+        id: collection-class
       - name: model
         method: true
       - name: Model
         class: true
+        id: model-class
       - name: Resource
         class: true
+        id: resource-class
 
   - name: Debug
     subsections:
@@ -51,15 +54,15 @@ sections:
   - name: Device
     subsections:
       - name: accelerometer
-        topics:
+        methods:
           - name: getAcceleration
           - name: watchAcceleration
       - name: compass
-        topics:
+        methods:
           - name: getHeading
           - name: watchHeading
       - name: geolocation
-        topics:
+        methods:
           - name: getPosition
           - name: watchPosition
       - name: platform
@@ -70,7 +73,7 @@ sections:
   - name: Media
     subsections:
       - name: camera
-        topics:
+        methods:
           - name: takePicture
           - name: getFromPhotoLibrary
 
@@ -78,32 +81,32 @@ sections:
     id: ui
     subsections:
       - name: dialog
-        topics:
+        methods:
           - name: alert
           - name: confirm
           - name: prompt
       - name: drawer
-        topics:
+        methods:
           - name: init
           - name: close
           - name: open
           - name: updateOptions
       - name: initialView
-        topics:
+        methods:
           - name: show
           - name: dismiss
       - name: layers
-        topics:
+        methods:
           - name: push
           - name: pop
           - name: popAll
       - name: modal
-        topics:
+        methods:
           - name: show
           - name: hide
           - name: hideAll
       - name: navigationBar
-        topics:
+        methods:
           - name: show
           - name: hide
           - name: update
@@ -112,8 +115,20 @@ sections:
           - name: setStyleId
       - name: NavigationBarButton
         class: true
+      - name: StartedView
+        methods:
+          - name: getId
       - name: view
+        method: true
+      - name: View
+        class: true
+        id: view-class
+        methods:
+          - start
       - name: views
+        methods:
+          - name: find
+
 
   - name: Web Components
     id: components

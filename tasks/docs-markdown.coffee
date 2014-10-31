@@ -46,6 +46,8 @@ module.exports = (grunt)->
       apiEntry.name.toLowerCase()
     else
       namespaceArray[2].toLowerCase()
+    if apiEntry.class
+      subsection = "#{subsection}-class"
     {section, subsection}
 
   grunt.registerMultiTask "docs-markdown", "Generate API reference markdown from docs/_data/*.json", ->
