@@ -2,7 +2,7 @@ describe "supersonic.ui.layers", ->
   it "should be defined", ->
     supersonic.ui.layers.should.exist
 
-    layer = supersonic.ui.layers
+    layers = supersonic.ui.layers
 
     view = supersonic.ui.view "ui#empty"
 
