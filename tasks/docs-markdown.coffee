@@ -39,13 +39,18 @@ module.exports = (grunt)->
 
     classMethodPaths
 
+  getSections = (apiEntry) ->
+    namespaceArray = apiEntry.namespace.split(".")
+    section = namespaceArray[1]
+    subsection = if namespaceArray.length < 3
+      apiEntry.name.toLowerCase()
+    else
+      namespaceArray[2].toLowerCase()
+    {section, subsection}
+
   grunt.registerMultiTask "docs-markdown", "Generate API reference markdown from docs/_data/*.json", ->
     @files.forEach (file) =>
       apiEntry = JSON.parse grunt.file.read file.src[0]
-      liquidDataPath = getLiquidDataPath(apiEntry)
-      section = liquidDataPath.split(".")[3]?.toLowerCase()
-      subsection = liquidDataPath.split(".")[4]?.toLowerCase()
-      classMethodPaths = getClassMethodPaths apiEntry
 
       templateType = if apiEntry.overview
         "overview"
@@ -58,11 +63,18 @@ module.exports = (grunt)->
 
       templatePath = "tasks/templates/api_#{templateType}_entry.md"
       template = grunt.file.read templatePath
+
+      liquidDataPath = getLiquidDataPath apiEntry
+      {section, subsection} = getSections apiEntry
+      apiPath = "#{apiEntry.namespace}.#{apiEntry.name}"
+      classMethodPaths = getClassMethodPaths apiEntry
+
       markdownOutput = grunt.util._.template(template) {
-        liquidDataPath: liquidDataPath
         entry: apiEntry
+        liquidDataPath: liquidDataPath
         section: section
         subsection: subsection
+        apiPath: apiPath
         classMethodPaths: classMethodPaths
       }
 

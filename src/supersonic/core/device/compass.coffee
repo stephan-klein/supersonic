@@ -71,7 +71,7 @@ module.exports = (steroids, log) ->
           window.navigator.compass.clearWatch watchId
 
   ###
-   # @module compass
+   # @namespace supersonic.device.compass
    # @name getHeading
    # @function
    # @apiCall supersonic.device.compass.getHeading

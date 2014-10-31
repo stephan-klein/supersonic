@@ -18,7 +18,7 @@
       {% for subsection in section.subsections %}
         {% assign subsection_id = subsection.name | slugify %}
         <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
-          <a href="/api-reference/nightly/{{main_namespace}}{{section_id}}/{{subsection_id}}" class="api-section">
+          <a href="/api-reference/nightly/{{main_namespace}}{{section_id}}/{{subsection_id}}{% if subsection.class %}-class{% endif %}" class="api-section">
             {% if subsection.method %}
               <code>{{subsection.name}}()</code>
             {% else %}
@@ -29,7 +29,7 @@
             <ul>
               {% for topic in subsection.topics %}
               <li>
-                <a href="/api-reference/nightly/{{main_namespace}}{{section_id}}/{{subsection_id}}/{{topic.name | slugify}}">
+                <a href="/api-reference/nightly/{{main_namespace}}{{section_id}}/{{subsection_id}}/{{topic.name | slugify}}{% if topic.class %}-class{% endif %}">
                   ↳ <code>{{topic.name}}()</code>
                 </a>
               </li>
