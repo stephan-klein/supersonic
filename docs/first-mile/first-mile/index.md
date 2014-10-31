@@ -81,9 +81,14 @@ With your app up and running, we're ready to make some changes. Open the `myProj
   </super-navigate>
 </div>
 ```
-This does two things: it changes the title of the navigation bar to "Hello World!", and it adds a `<super-navigate>` element to the actual view body. `<super-navigate>` elements can be used to control navigation in your app, with this particular element taking you to the `app/common/views/getting-started` html page. Both the navigation bar and super-navigate elements will be covered in more detail in a later chapter, so don't worry about the details of their implementation for now.
+This does two things: it changes the title of the navigation bar to "Hello World!", and it adds a `<super-navigate>` element to the actual view body. `<super-navigate>` elements can be used to control navigation in your app, with this particular element taking you to the `app/common/views/getting-started.html` page.
 
 After saving the file you still need to push the changes to the test device. To do so, simply go to the terminal window running `steroids connect` and press Enter. The Scanner app will then automatically reload the app and display the new content. You will see the navigation bar has changed color, and the button we created inside `<super-navigate>` has appeared. Click the button to trigger a navigation to a new page. You will see the new view animate into view, and a back button appear on the navigation bar, which you can use to navigate back to the original view. Congratulations, you have created the first functionality for your app!
+
+For further reading on the navigation bar or the `<super-navigate>` element, head over to the docs:
+
+  - [navigation bar](http://supersonic.testgyver.com/api-reference/nightly/components/super-navbar/)
+  - [super-navigate](http://supersonic.testgyver.com/api-reference/nightly/components/super-navigate/)
 </section>
 
 ##Done
