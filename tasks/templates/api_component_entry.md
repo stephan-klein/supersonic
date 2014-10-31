@@ -3,7 +3,7 @@ layout: docs_api
 title: Supersonic API reference
 header_sub_title: <%= entry.name %>
 section_id: components
-subsection_id: <%= section %>
+subsection_id: <%= subsection %>
 ---
 
 {% assign component = <%= liquidDataPath %> %}

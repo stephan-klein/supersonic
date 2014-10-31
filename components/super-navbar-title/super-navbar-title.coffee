@@ -3,7 +3,7 @@
  # @name super-navbar-title
  # @component
  # @description
- # Component used to add title on app navigation bar. Must be a child of <super-navbar>.
+ # When used inside the `<super-navbar>` element, sets a title text on the view's navigation bar. Only text content is supported.
  # @usageHtml
  # <super-navbar-title>This is the title</super-navbar-title>
  # @exampleHtml

@@ -3,7 +3,7 @@
  # @name super-navbar
  # @component
  # @description
- # Component used to display a view-specific native navbar. Navbar can contain super-navbar-title and super-navbar-button components.
+ # Displays a view-specific [native navigation bar](/ui-and-navigation/native-components/navigation-bar/). To set a title text and buttons for the navigation bar, use the `<super-navbar-title>` and `<super-navbar-button>` components.
  # @usageHtml
  # <super-navbar></super-navbar>
  # @exampleHtml

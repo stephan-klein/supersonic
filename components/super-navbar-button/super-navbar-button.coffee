@@ -3,23 +3,28 @@
  # @name super-navbar-button
  # @component
  # @description
- # A button that will be displayed on the view navbar.
- # @attribute side="left" Used to set button position on navbar. Allowed values are "left" and "right".
- # @attribute location="moduleName#viewName" Simple way to use Supersonic UI navigation with your navbar button. Can contain a route or a URL. If neither this of view-id is set, any attached "click" callback will be used instead.
- # @attribute view-id The id of a preloaded web view. Configure view ids in config/structure.coffee. If view-id is set, location will be ignored.
+ # When used inside the `<super-navbar>` element, creates a button that will be displayed on the navigation bar. Only text content is supported for the button title.
  # @usageHtml
- # <super-navbar-button location="moduleName#viewName" side="left">Title<super-navbar-button>
+ # <super-navbar-button onclick="myfunction()" side="left">Title<super-navbar-button>
+ # @attribute side="left" Determines the position of the button on the navigation bar. Allowed values are "left" and "right". If multiple buttons are defined for one side, they will be displayed in order.
+ # @attribute onclick= When the native button is tapped, a `click` event is fired on the `<super-navbar-button>` element. This means you can use the `onclick` attribute, or any other framework or method that listens for `click` events.
+ # @attribute location A route or a URL that will be [navigated to](/ui-and-navigation/navigation/) when the button is tapped. **Note:** If `location` is set, a `click` event will not be fired when the button is tapped.
+ # @attribute view-id The id of a StartedView that will be [navigated to](/ui-and-navigation/navigation/) when the button is tapped. **Note:** If `view-id` is set, `location` will be ignored and a `click` event will not be fired when the button is tapped.
+
  # @exampleHtml
  # <super-navbar>
  #
- #   <!-- Button using Supersonic UI navigation -->
- #   <super-navbar-button location="moduleName#viewName">Title<super-navbar-button>
+ #   <!-- Button using routes -->
+ #   <super-navbar-button location="settings#index">Title<super-navbar-button>
  #
- #   <!-- Button using Angular callback -->
- #   <super-navbar-button ng-click="myFunction()">Title<super-navbar-button>
+ #   <!-- Button using a StartedView id -->
+ #   <super-navbar-button view-id="settingsView">Title<super-navbar-button>
  #
- #   <!-- Button on right side of navbar -->
- #   <super-navbar-button side="right">Title<super-navbar-button>
+ #   <!-- Button with an AngularJS callback -->
+ #   <super-navbar-button ng-click="myFunction()">Click me!<super-navbar-button>
+ #
+ #   <!-- Button on right side of the navigation bar -->
+ #   <super-navbar-button side="right">Settings<super-navbar-button>
  #
  # </super-navbar>
 ###
