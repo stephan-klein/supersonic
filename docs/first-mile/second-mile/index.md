@@ -10,9 +10,9 @@ subsections:
   - name: Debugging via Connect Screen
   - name: Model-View-Controller Architecture
   - name: Generating a New Module
+  - name: App Configuration
   - name: App Logic in the Controller
   - name: Access Device Hardware
-  - name: App Configuration
 ---
 <section class="docs-section" id="overview">
 ## Overview
@@ -79,38 +79,63 @@ The `common` module is the basis for all Supersonic apps. As the name suggests, 
 <section class="docs-section" id="generating-a-new-module">
 ## Generating a New Module
 
-Currently, our project only has a `common` module. We want to add a new feature to our app, so it makes sense to separate it from the `common` module. You can create a new module by
+Currently, our project only has a `common` module. We want to add a new feature to our app, so it makes sense to separate it from the `common` module. You can create a new module by running `steroids generate module <module-name>` in your project folder. Let's create a `camera` module. You will see that the following module is created for your project:
 
-* Use `steroids generate module` to create a scaffold for a new module
-* Link to guide to app build process
-* Default layout file is used
+```bash
+app/camera
+├── index.coffee
+├── scripts
+│   └── IndexController.coffee
+└── views
+    └── index.html
+```
 
-</section>
+In the module, the basic view and controller are created for you, as well as the `index.coffee` file, which declares the associated Angular module and its dependencies, which in this case is the `common` module. Unlike `common`, your newly generated module has no `layout.html` file. Instead, because we declared `common` as a dependency to this module, the layout file in `common` will be used.
 
-<section class="docs-section" id="app-logic-in-the-controller">
-## App Logic in the Controller
-
-* Add some simple JavaScript logic into the controller
-* Link to promise guide at core/promises.html
-</section>
-
-<section class="docs-section" id="layout-file">
-## Layout file
-
-* Shared layout file
 </section>
 
 <section class="docs-section" id="app-configuration">
 ## App Configuration
 
-* Settings in config/structure.coffee and config/app.coffee
+Next, you need to attach the new module to the rest of your app's views. Let's replace the second tab with our new module. Steroids projects have a special `config/` folder where we can define certain presets for our application, including the tabs that will be used. In `config/` there are two files with differing responsibilities:
+
+ - `app.coffee` contains general behaviour settings for your app. For further info on the settings therein, see the [app.coffee guide]().
+ - `structure.coffee` is used to define the initial configuration of your app's views. For further info on the settings therein, see the [structure.coffee guide]().
+
+For now, all you need is the `structure.coffee` file. In the file, you will see that a `tabs` property has been set, containing two views, `Index` and `Settings`. Change the tabs property to the following:
+
+```coffee
+tabs: [
+  {
+    title: "Index"
+    id: "index"
+    location: "common#getting-started"
+  }
+  {
+    title: "Camera"
+    id: "camera"
+    location: "camera#index"
+  }
+]
+```
+
+The key change is, the second tab now points to our new `camera` module. After the app refreshes on your device, you can check out the second tab to see that it has indeed updated.
+
+</section>
+<section class="docs-section" id="app-logic-in-the-controller">
+## App Logic in the Controller
+
+With the new module in place, we can add some logic to it. In the MVC-pattern, the app logic is placed in a Controller. When we generated our new module, an `IndexController.coffee` file was generated for us. It is empty by default, let's add a simple function to the Conroller (under the "#Controller functionality here" comment). Be aware that CoffeeScript is finicky about indentation, so you have to be careful to indent properly.
+
+```coffee
+angular
+  .module('camera')
+  .controller 'IndexController', ($scope, supersonic) ->
+    # Controller functionality here
+    $scope.takePicture = () ->
+      alert "Snap!"
+```
+
+`$scope.takePicture`
 </section>
 
-
-<section class="docs-section" id="distributing-your-app">
-## Distributing Your App
-
-An app isn't much good if you can't share it with someone. While you're developing your app, you can share your progress easily with a Cloud QR code, which can be scanned and run by anyone with the link and access to the AppGyver Scanner. To generate your first Cloud QR, go to the "Cloud Settings" tab in the browser and deploy your app to the AppGyver Cloud. After deploying, you will see a QR code generated on-screen. This is a cloud-based version of your app, which you can scan and preview just like a normal app, but it is not connected to your local development environment, so any new changes you make after the deploy will not update to the cloud app.
-
- To share your progress with your friends or co-workers, click on the "open cloud share page", which will open a new browser tab with the share QR code. Now you can just copy and paste this url to anyone you want to take a look at your app.
-</section>
