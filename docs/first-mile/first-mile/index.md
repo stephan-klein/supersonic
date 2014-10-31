@@ -9,7 +9,10 @@ subsections:
   - name: Installation
   - name: Creating a New Project
   - name: Connecting Your Device
+  - name: Introduction to Native UI Components
   - name: Making Changes
+  - name: Navigating to Another View
+  - name: Done!
 ---
 
 <section class="docs-section" id="overview">
@@ -67,7 +70,7 @@ After compiling your project, the Steroids CLI will open up the Connect Screen i
 To run your app on a real device, all you have to do is open the AppGyver Scanner you downloaded previously and scan the displayed QR code. The Scanner app will then download the required files, establish a connection with the Steroids Development Server and start your app.
 </section>
 
-<section>
+<section class="docs-section" id="introduction-to-native-ui-components">
 ## Introduction to Native UI Components
 <img src="http://placehold.it/600x300">
 
@@ -101,7 +104,9 @@ With your app up and running, we're ready to make some changes. Open the `myProj
 </super-navbar>
 ```
 Save the file. The Steroids Development Server automatically notices that a file has changed and refreshes your project. You'll see the navigation bar update with your new title.
+</section>
 
+<section class="docs-section" id="navigating-to-another-view">
 ## Navigating to Another View
 
 Below the `<super-navbar>` element, you will notice two buttons wrapped by another custom HTML element, `<super-navigate>`. The `<super-navigate>` element provides an easy way for you to declaratively set up the navigation structure of your app: when any of its child elements (the `<button>` in this case) are tapped, the app will navigate to the target view. (In this case, the target view is determined by the `view-id` attribute – you'll learn more about this in the following tutorials!)
@@ -116,6 +121,7 @@ For further reading on the navigation bar or the `<super-navigate>` element, see
   - [super-navigate](/ui-and-navigation/navigation/declarative-navigation/)
 </section>
 
+<section class="docs-section" id="done">
 ## Done!
 
 In this section we've covered the basics of Supersonic App Development. By now you know:
@@ -126,3 +132,4 @@ In this section we've covered the basics of Supersonic App Development. By now y
   - How to navigate to different views in your app
 
 With these skills, you have grasped the core of developing Supersonic apps! Once you're ready, dive into the [Second mile](/first-mile/second-mile/) tutorial to learn more essential skills, like debugging your app, as well as a deeper insight into how a Supersonic app really works.
+</section>
