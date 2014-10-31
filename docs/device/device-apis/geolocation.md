@@ -12,16 +12,16 @@ topics:
 ---
 # Geolocation
 
-{{ site.data.core.device.geolocation.overview.description }}
+{{ site.data.supersonic.device.geolocation.overview.description }}
 
 ## API Reference
 
 <section class="docs-section" id="watchposition">
-{% assign method = site.data.core.device.geolocation.watchPosition %}
+{% assign method = site.data.supersonic.device.geolocation.watchPosition %}
 {% include api_method.md method=method %}
 </section>
 
 <section class="docs-section" id="getposition">
-{% assign method = site.data.core.device.geolocation.getPosition %}
+{% assign method = site.data.supersonic.device.geolocation.getPosition %}
 {% include api_method.md method=method %}
 </section>

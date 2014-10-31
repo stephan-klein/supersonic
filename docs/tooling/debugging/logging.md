@@ -54,16 +54,16 @@ supersonic.logger.log(object);
 
 Be liberal with your use of `supersonic.logger` – it's a great tool for debugging!
 
-{% assign method = site.data.core.logger.info %}
+{% assign method = site.data.supersonic.logger.info %}
 {% include api_method.md method=method %}
 
-{% assign method = site.data.core.logger.debug %}
+{% assign method = site.data.supersonic.logger.debug %}
 {% include api_method.md method=method %}
 
-{% assign method = site.data.core.logger.warn %}
+{% assign method = site.data.supersonic.logger.warn %}
 {% include api_method.md method=method %}
 
-{% assign method = site.data.core.logger.error %}
+{% assign method = site.data.supersonic.logger.error %}
 {% include api_method.md method=method %}
 
 ## Automatic Logging

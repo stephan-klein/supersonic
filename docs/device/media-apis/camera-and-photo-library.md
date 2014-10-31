@@ -12,14 +12,14 @@ topics:
 ---
 # Camera
 
-{{ site.data.core.media.camera.overview.description }}
+{{ site.data.supersonic.media.camera.overview.description }}
 
 <section class="docs-section" id="takepicture">
-{% assign method = site.data.core.media.camera.takePicture %}
+{% assign method = site.data.supersonic.media.camera.takePicture %}
 {% include api_method.md method=method %}
 </section>
 
 <section class="docs-section" id="getfromphotolibrary">
-{% assign method = site.data.core.media.camera.getFromPhotoLibrary %}
+{% assign method = site.data.supersonic.media.camera.getFromPhotoLibrary %}
 {% include api_method.md method=method %}
 </section>

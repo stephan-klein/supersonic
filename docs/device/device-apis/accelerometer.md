@@ -13,14 +13,14 @@ topics:
 
 # Accelerometer
 
-{{ site.data.core.device.accelerometer.overview.description }}
+{{ site.data.supersonic.device.accelerometer.overview.description }}
 
 <section class="docs-section" id="watchacceleration">
-{% assign method = site.data.core.device.accelerometer.watchAcceleration %}
+{% assign method = site.data.supersonic.device.accelerometer.watchAcceleration %}
 {% include api_method.md method=method %}
 </section>
 
 <section class="docs-section" id="getacceleration">
-{% assign method = site.data.core.device.accelerometer.getAcceleration %}
+{% assign method = site.data.supersonic.device.accelerometer.getAcceleration %}
 {% include api_method.md method=method %}
 </section>

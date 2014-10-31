@@ -41,7 +41,7 @@ supersonic.app.openURL("sms:1-408-555-1212");
 </section>
 
 <section class="docs-section" id="openurl">
-{% assign method = site.data.core.app.openURL %}
+{% assign method = site.data.supersonic.app.openURL %}
 {% include api_method.md method=method %}
 </section>
 
@@ -90,6 +90,6 @@ would register your app for both `myawesomeapp://` and `myawesomeapp-dev://` URL
 </section>
 
 <section class="docs-section" id="getlaunchurl">
-{% assign method = site.data.core.app.getLaunchURL %}
+{% assign method = site.data.supersonic.app.getLaunchURL %}
 {% include api_method.md method=method %}
 </section>

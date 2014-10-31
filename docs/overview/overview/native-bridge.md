@@ -15,6 +15,6 @@ The native bridge works in an async fashion. The API call is triggered and passe
 The basic functionality of the native API bridge is demonstrated with the [supersonic.debug.ping](#ping) function, which simply returns a "Pong!" string after having made a round trip to the native side.
 
 <section class="docs-section" id="ping">
-{% assign method = site.data.core.core.debug.ping %}
+{% assign method = site.data.supersonic.core.debug.ping %}
 {% include api_method.md method=method %}
 </section>
