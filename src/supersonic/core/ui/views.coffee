@@ -33,9 +33,10 @@ module.exports = (steroids, log) ->
    # supersonic.ui.views.find("myCarsView").then (startedView) ->
    #   supersonic.logger.log "myCarsView location: #{startedView.getLocation()}"
   ###
-
   find = (id) ->
-    isStarted(id).then ->
+    isStartedView(id).then (started) ->
+      unless started
+        throw new Error "There was no started view by id '#{id}'"
       createStartedView(id)
 
   ###
