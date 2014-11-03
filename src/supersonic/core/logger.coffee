@@ -8,7 +8,7 @@ logMessageEnvelope = (window) -> (level) -> (message) ->
         JSON.stringify message
       catch e
         e.toString()
-    date: new Date().toString()
+    date: (new Date().getTime())
     level: level
     location: window.location.href
     screen_id: window.AG_SCREEN_ID
