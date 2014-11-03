@@ -25,9 +25,36 @@ describe "supersonic.ui.views", ->
     it "returns a list of views", ->
       views.getStartedViews().should.eventually.be.an 'array'
 
+    describe "when starting a view", ->
+      startedViewId = null
+      before ->
+        views.start("ui#empty", "this-view-should-be-added-to-list").then ->
+          startedViewId = "this-view-should-be-added-to-list"
+
+      after ->
+        views.stop startedViewId
+
+      it "grows to include thew new view's id", ->
+        views.getStartedViews().should.eventually.include startedViewId
+
   describe "isStartedView()", ->
     it "is a function", ->
       views.isStartedView.should.be.a 'function'
+
+    it "accepts an id and returns a boolean", ->
+      views.isStartedView("this-does-not-exist").should.eventually.equal false
+
+    describe "with a started view", ->
+      startedViewId = null
+      before ->
+        views.start("ui#empty", "this-view-should-exist").then ->
+          startedViewId = "this-view-should-exist"
+
+      after ->
+        views.stop(startedViewId)
+
+      it "returns true for the id once the view is started", ->
+        views.isStartedView(startedViewId).should.eventually.equal true
 
   describe "start, find, stop with view object", ->
     views = [supersonic.ui.view "ui#empty", "ui#empty"]

@@ -183,10 +183,11 @@ module.exports = (steroids, log) ->
   getStartedViews = ->
     getApplicationState().then (state) ->
       for preload in state.preloads
-        {
-        }
+        preload.id
 
-  isStartedView = ->
+  isStartedView = (id) ->
+    getStartedViews().then (ids) ->
+      id in ids
 
   {
     find: find
