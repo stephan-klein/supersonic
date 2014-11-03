@@ -85,11 +85,6 @@ module.exports = (steroids, log) ->
         view
 
       new Promise (resolve, reject) ->
-        unless id?
-          error =
-            errorDescription: "Missing id parameter"
-          reject error
-
         if id.match /#+/
           error =
             errorDescription: "Cannot use the # character in ids"
