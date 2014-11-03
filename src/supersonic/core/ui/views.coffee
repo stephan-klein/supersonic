@@ -143,26 +143,6 @@ module.exports = (steroids, log) ->
           location: ""
     }
 
-  isStarted = (id) ->
-    new Promise (resolve, reject) ->
-      testView = new steroids.views.WebView
-        location: "null"
-        id: id
-
-      testView.preload {}, {
-        onSuccess: ->
-          # View with that id didn't exist, so unload immediately.
-          testView.unload {}, {
-            onSuccess: ->
-              reject()
-          }
-        onFailure: (error) ->
-          if error.errorDescription is "A preloaded layer with this identifier already exists"
-            resolve()
-          else
-            reject()
-      }
-
   getApplicationState = ->
     new Promise (resolve, reject) ->
       steroids.getApplicationState {}, {
