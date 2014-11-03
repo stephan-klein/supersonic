@@ -75,27 +75,26 @@ module.exports = (steroids, log) ->
   ###
 
   start = (view, id) ->
-    new Promise (resolve, reject) ->
+    isStartedView(id).then (started) ->
+      if started
+        throw new Error "A view with id #{id} is already started."
+
       betterView = if view.constructor.name is "String"
         supersonic.ui.view(view)
       else
         view
 
-      unless id?
-        error =
-          errorDescription: "Missing id parameter"
-        reject error
+      new Promise (resolve, reject) ->
+        unless id?
+          error =
+            errorDescription: "Missing id parameter"
+          reject error
 
-      if id.match /#+/
-        error =
-          errorDescription: "Cannot use the # character in ids"
-        reject error
+        if id.match /#+/
+          error =
+            errorDescription: "Cannot use the # character in ids"
+          reject error
 
-      isStarted(id).then( ->
-        error =
-          errorDescription: "A view with id #{id} is already started."
-        reject error
-      ).catch ->
         betterView._getWebView().preload {id: id}, {
           onSuccess: ->
             resolve createStartedView(id)
