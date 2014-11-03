@@ -85,11 +85,6 @@ module.exports = (steroids, log) ->
         view
 
       new Promise (resolve, reject) ->
-        if id.match /#+/
-          error =
-            errorDescription: "Cannot use the # character in ids"
-          reject error
-
         betterView._getWebView().preload {id: id}, {
           onSuccess: ->
             resolve createStartedView(id)
