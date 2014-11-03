@@ -15,16 +15,16 @@
  # <super-navbar>
  #
  #   <!-- Button using routes -->
- #   <super-navbar-button location="settings#index">Title<super-navbar-button>
+ #   <super-navbar-button location="settings#index">Title</super-navbar-button>
  #
  #   <!-- Button using a StartedView id -->
- #   <super-navbar-button view-id="settingsView">Title<super-navbar-button>
+ #   <super-navbar-button view-id="settingsView">Title</super-navbar-button>
  #
  #   <!-- Button with an AngularJS callback -->
- #   <super-navbar-button ng-click="myFunction()">Click me!<super-navbar-button>
+ #   <super-navbar-button ng-click="myFunction()">Click me!</super-navbar-button>
  #
  #   <!-- Button on right side of the navigation bar -->
- #   <super-navbar-button side="right">Settings<super-navbar-button>
+ #   <super-navbar-button side="right">Settings</super-navbar-button>
  #
  # </super-navbar>
 ###
