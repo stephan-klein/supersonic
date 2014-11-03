@@ -173,7 +173,18 @@ module.exports = (steroids, log) ->
             reject()
       }
 
+  getApplicationState = ->
+    new Promise (resolve, reject) ->
+      steroids.getApplicationState {}, {
+        onSuccess: resolve
+        onFailure: reject
+      }
+
   getStartedViews = ->
+    getApplicationState().then (state) ->
+      for preload in state.preloads
+        {
+        }
 
   {
     find: find
