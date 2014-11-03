@@ -56,6 +56,28 @@ module.exports = (steroids, log) ->
    #   supersonic.ui.drawer.init leftDrawer
   ###
 
+  init: bug "init", (view, options)->
+    side = if options.side? then options.side else "right"
+    drawer_identifier = "#{side}-drawer"
+    webView = view._getWebView()
+    params = {}
+    params[side] = webView
+
+    view.start(drawer_identifier)
+      .then(
+        ->
+          (new Promise (resolve, reject) ->
+            steroids.drawers.update params,
+              onSuccess: resolve
+              onFailure: reject
+          ).catch (e)->
+            throw new Error("Unable to update drawers. Unknown error: #{e}")
+        (e) ->
+          throw new Error("View was already started. Remove drawer and unload view first.")
+      )
+
+
+
   ###
    # @namespace supersonic.ui.drawer
    # @name open
@@ -163,51 +185,51 @@ module.exports = (steroids, log) ->
    # });
   ###
 
-  asLeft: (view)->
-    new Promise (resolve, reject) =>
-      @show(view, 'left').then ->
-        resolve()
-
-  asRight: (view)->
-    new Promise (resolve, reject)->
-      @show(view, 'right').then ()->
-        resolve()
-
-
-
-
-
-  show: (view, side)->
-    new Promise (resolve, reject)->
-      webView = view._getWebView()
-      params[side] = webView
-      steroids.drawers.update params
-      steroids.drawers.show {
-        edge: steroids.screen.edges[side.toUpperCase()]
-      }, {
-        onSuccess: ()->
-          supersonic.logger.info "#{side} drawer should be shown"
-          resolve()
-        onFailure: ()->
-          supersonic.logger.error "#{side} drawer fails"
-          reject()
-      }
-
-  # TODO: Finish the method
-  hide: ()->
-    new Promise (resolve, reject)->
-      steroids.drawers.hide {
-      }, {
-        onSuccess: ()->
-          supersonic.logger.info "Drawer was hidden"
-          resolve()
-        onFailure: ()->
-          supersonic.logger.error "Hiding a drawer crached"
-          reject()
-      }
-
-
-  setOptions: (options)->
-    steroids.drawers.update {
-      options: options
-    }
+  # asLeft: (view)->
+  #   new Promise (resolve, reject) =>
+  #     @show(view, 'left').then ->
+  #       resolve()
+  #
+  # asRight: (view)->
+  #   new Promise (resolve, reject)->
+  #     @show(view, 'right').then ()->
+  #       resolve()
+  #
+  #
+  #
+  #
+  #
+  # show: (view, side)->
+  #   new Promise (resolve, reject)->
+  #     webView = view._getWebView()
+  #     params[side] = webView
+  #     steroids.drawers.update params
+  #     steroids.drawers.show {
+  #       edge: steroids.screen.edges[side.toUpperCase()]
+  #     }, {
+  #       onSuccess: ()->
+  #         supersonic.logger.info "#{side} drawer should be shown"
+  #         resolve()
+  #       onFailure: ()->
+  #         supersonic.logger.error "#{side} drawer fails"
+  #         reject()
+  #     }
+  #
+  # # TODO: Finish the method
+  # hide: ()->
+  #   new Promise (resolve, reject)->
+  #     steroids.drawers.hide {
+  #     }, {
+  #       onSuccess: ()->
+  #         supersonic.logger.info "Drawer was hidden"
+  #         resolve()
+  #       onFailure: ()->
+  #         supersonic.logger.error "Hiding a drawer crached"
+  #         reject()
+  #     }
+  #
+  #
+  # setOptions: (options)->
+  #   steroids.drawers.update {
+  #     options: options
+  #   }
