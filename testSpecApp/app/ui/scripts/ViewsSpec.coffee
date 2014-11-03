@@ -1,19 +1,22 @@
 describe "supersonic.ui.views", ->
-  it "should be defined", ->
-    supersonic.ui.views.should.exist
+  views = null
+  before ->
+    views = supersonic.ui.views
 
-  describe "start", ->
-    it "should be a function", ->
-      supersonic.ui.views.start.should.exist
-      supersonic.ui.views.start.should.be.a "function"
-  describe "find", ->
-    it "should be a function", ->
-      supersonic.ui.views.find.should.exist
+  it "is an object", ->
+    views.should.be.an 'object'
 
-  describe "stop", ->
-    it "should be a function", ->
-      supersonic.ui.views.stop.should.exist
-      supersonic.ui.views.stop.should.be.a "function"
+  describe "start()", ->
+    it "is a function", ->
+      views.start.should.be.a "function"
+
+  describe "find()", ->
+    it "is a function", ->
+      views.find.should.be.a 'function'
+
+  describe "stop()", ->
+    it "is a function", ->
+      views.stop.should.be.a "function"
 
   describe "start, find, stop with view object", ->
     views = [supersonic.ui.view "ui#empty", "ui#empty"]
