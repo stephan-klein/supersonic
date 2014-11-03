@@ -19,7 +19,7 @@ module.exports = (steroids) ->
    # @description
    # Returns the string that was used to launch the application with URL scheme.
    # @type
-   # supersonic.app.getLaunchURL : () =>
+   # supersonic.app.getLaunchURL: () =>
    #   {
    #     launchURL: String,
    #     params: Object
@@ -32,13 +32,21 @@ module.exports = (steroids) ->
    # @usageCoffeeScript
    # supersonic.app.getLaunchURL()
    # @usageJavaScript
-   # supersonic.app.getLaunchURL()
+   # var urlObject = supersonic.app.getLaunchURL();
    # @exampleCoffeeScript
    # urlObject = supersonic.app.getLaunchURL()
-   # steroids.logger.log urlObject.params
+   # if urlObject?
+   #   supersonic.logger.log "Got launch URL #{urlObject.launchURL} with params: #{urlObject.params}"
+   # else
+   #   supersonic.logger.error "Could not get a launch URL.")
+   #
    # @exampleJavaScript
    # var urlObject = supersonic.app.getLaunchURL();
-   # steroids.logger.log(urlObject.params);
+   # if (urlObject != null) {
+   #   supersonic.logger.log("Got launch URL " + urlObject.launchURL + " with params: " + urlObject.params);
+   # } else {
+   #   supersonic.logger.error("Could not get a launch URL.");
+   # }
   ###
 
   getLaunchURL = ->
