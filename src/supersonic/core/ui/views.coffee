@@ -186,9 +186,12 @@ module.exports = (steroids, log) ->
         {
         }
 
+  isStartedView = ->
+
   {
     find: find
     start: start
     stop: stop
     getStartedViews: getStartedViews
+    isStartedView: isStartedView
   }
