@@ -173,8 +173,11 @@ module.exports = (steroids, log) ->
             reject()
       }
 
+  getStartedViews = ->
+
   {
     find: find
     start: start
     stop: stop
+    getStartedViews: getStartedViews
   }

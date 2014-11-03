@@ -18,6 +18,10 @@ describe "supersonic.ui.views", ->
     it "is a function", ->
       views.stop.should.be.a "function"
 
+  describe "getStartedViews()", ->
+    it "is a function", ->
+      views.getStartedViews.should.be.a 'function'
+
   describe "start, find, stop with view object", ->
     views = [supersonic.ui.view "ui#empty", "ui#empty"]
 
