@@ -19,10 +19,10 @@ module.exports = (steroids, log) ->
    # @description
    # Disables the device automatic sleep for your app.
    # @type
-   # supersonic.app.sleep.disable: ()
-   # => Promise
+   # supersonic.app.sleep.disable: () =>
+   #   Promise
    # @returnsDescription
-   # [Promise](todo) that is resolved when the native side has successfully disabled sleep.
+   # A promise that is resolved when the native side has successfully disabled automatic sleep.
    # @usageCoffeeScript
    # supersonic.app.sleep.disable()
   ###
@@ -44,10 +44,10 @@ module.exports = (steroids, log) ->
    # @description
    # enables the device automatic sleep for your app.
    # @type
-   # supersonic.app.sleep.enable: ()
-   # => Promise
+   # supersonic.app.sleep.enable: () =>
+   #   Promise
    # @returnsDescription
-   # [Promise](todo) that is resolved when the native side has successfully enabled sleep.
+   # A promise that is resolved when the native side has successfully enabled automatic sleep.
    # @usageCoffeeScript
    # supersonic.app.sleep.enable()
   ###

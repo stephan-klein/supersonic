@@ -39,13 +39,13 @@ Promise = require 'bluebird'
  #   else
  #     supersonic.logger.log "User wasn't awesome. :("
  # @exampleJavaScript
- # options = {
+ # var options = {
  #   message: "Please reply honestly, now.",
  #   buttonLabels: ["Yes", "No"]
  # };
  #
  # supersonic.ui.dialog.confirm("Are you awesome?", options).then(function(index) {
- #   if (result.index === 0) {
+ #   if (index == 0) {
  #     supersonic.logger.log("User is awesome!");
  #   } else {
  #     supersonic.logger.log("User wasn't awesome. :(");

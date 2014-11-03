@@ -22,7 +22,7 @@ module.exports = (steroids, log) ->
    # @description
    # Returns a stream of acceleration updates.
    # @type
-   # supersonic.device.accelerometer.watchAcceleration : (
+   # supersonic.device.accelerometer.watchAcceleration: (
    #   options?: {
    #     frequency?: Integer
    #   }
@@ -57,6 +57,19 @@ module.exports = (steroids, log) ->
    #     Timestamp: #{acceleration.timestamp}
    #     """
    #   )
+   # @exampleJavaScript
+   # var options = {
+   #   frequency: 60
+   # }
+   #
+   # supersonic.device.accelerometer.watchAcceleration(options).onValue(function(acceleration) {
+   #   supersonic.logger.log(
+   #     "Acceleration X: " + acceleration.x + "\n" +
+   #     "Acceleration Y: " + acceleration.y + "\n" +
+   #     "Acceleration Z: " + acceleration.z + "\n" +
+   #     "Timestamp: " + acceleration.timestamp
+   #   );
+   # });
   ###
   watchAcceleration = (options = {}) ->
     accelerationOptions =
@@ -80,14 +93,14 @@ module.exports = (steroids, log) ->
    # @description
    # Returns device's current acceleration.
    # @type
-   # supersonic.device.accelerometer.getAcceleration : () =>
+   # supersonic.device.accelerometer.getAcceleration: () =>
    #   Promise: {
    #     x: Number,
    #     y: Number,
    #     z: Number,
    #     timestamp: DOMTimeStamp
    #   }
-   # @returnsDescription [Promise](todo) is resolved to the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.
+   # @returnsDescription A promise that is resolved with the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.
    # @define {=>Object} acceleration Acceleration object.
    # @define {=>Number} acceleration.x Amount of acceleration on the x-axis. (in m/s^2)
    # @define {=>Number} acceleration.y Amount of acceleration on the y-axis. (in m/s^2)
@@ -105,6 +118,15 @@ module.exports = (steroids, log) ->
    #     Timestamp: #{acceleration.timestamp}
    #     """
    #   )
+   # @exampleJavaScript
+   # supersonic.device.accelerometer.getAcceleration().then(function(acceleration) {
+   #   supersonic.logger.log(
+   #     "Acceleration X: " + acceleration.x + "\n" +
+   #     "Acceleration Y: " + acceleration.y + "\n" +
+   #     "Acceleration Z: " + acceleration.z + "\n" +
+   #     "Timestamp: " + acceleration.timestamp
+   #   );
+   # });
   ###
   getAcceleration = bug "getAcceleration", ->
     new Promise (resolve) ->

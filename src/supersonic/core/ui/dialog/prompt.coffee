@@ -62,6 +62,6 @@ module.exports = (title, options = {}) ->
     .then(->
       new Promise (resolve) ->
         navigator.notification.prompt msg, resolve, title, buttonLabels, defaultText
-    ).then (results) ->
-        buttonIndex: results.buttonIndex-1 # Cordova indexing starts at 1
-        input: results.input1
+    ).then (result) ->
+        buttonIndex: result.buttonIndex-1 # Cordova indexing starts at 1
+        input: result.input1

@@ -27,7 +27,7 @@ module.exports = (steroids, log) ->
    # ) => Promise
    # @define {View|StartedView} view A View or StartedView object to be pushed on top of the navigation stack.
    # @returnsDescription
-   # A promise that resolves once the push has started. If the view cannot be pushed, the promise is rejected.
+   # A promise that gets resolved once the push has started. If the view cannot be pushed, the promise is rejected.
    # @exampleJavaScript
    # var view = supersonic.ui.view("common#settings");
    # supersonic.ui.layers.push(view)
@@ -44,7 +44,7 @@ module.exports = (steroids, log) ->
         onSuccess: ->
           resolve()
         onFailure: (error) ->
-          reject()
+          reject(error)
       }
 
   ###
@@ -88,5 +88,5 @@ module.exports = (steroids, log) ->
         onSuccess: ()->
           resolve()
         onFailure: (error)->
-          reject()
+          reject(error)
       }

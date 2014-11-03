@@ -8,7 +8,7 @@ module.exports = (steroids, log) ->
    # @name statusBar
    # @overview
    # @description
-   # The native status bar shown on the top of the screen. The native status bar is displayed by default. It can be hidden and shown application wide.
+   # The native status bar shown on the top of the screen, showing network strength, battery percentage etc. All changes to the status bar take effect app-wide. You can determine the initial visibility of the status bar in the `config/app.coffee` file, read more in the [/ui-and-navigation/app/status-bar](Status Bar guide).
   ###
 
   ###
@@ -17,14 +17,16 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.app.statusBar.hide
    # @description
-   # Hides the statusBar application wide.
+   # Hides the status bar application wide.
    # @type
-   # supersonic.app.statusBar.hide: ()
-   # => Promise
+   # supersonic.app.statusBar.hide: () =>
+   #   Promise
    # @returnsDescription
-   # [Promise](todo) that is resolved when the statusBar is hidden.
+   # A promise that is resolved when the status bar is hidden.
    # @usageCoffeeScript
    # supersonic.app.statusBar.hide()
+   # @usageCoffeeScript
+   # supersonic.app.statusBar.hide();
   ###
   hide: bug "hide", ->
     new Promise (resolve, reject) ->
@@ -46,16 +48,26 @@ module.exports = (steroids, log) ->
    # @description
    # Shows the statusBar application wide.
    # @type
-   # supersonic.app.statusBar.show: (style?: String)
-   # => Promise
-   # @define {String} style If set to "light" (shorthand), then the native status bar text color is light (white on iOS 7). Optional.
+   # supersonic.app.statusBar.show: (style?: String) =>
+   #   Promise
+   # @define {String} style="default" **iOS-only.** Used to determine text color in the status bar (the status bar background color is the same as the native navigation bar background color). Valid values are:
+   # <ul>
+   #   <li>`"default"`: Show black text in status bar.</li>
+   #   <li>`"light"`: Show white text in status bar.</li>
+   # </ul>
    # @returnsDescription
-   # [Promise](todo) that is resolved when the statusBar is shown.
+   # A promise that is resolved when the status bar is shown.
    # @usageCoffeeScript
    # supersonic.app.statusBar.show()
+   # @usageJavaScript
+   # supersonic.app.statusBar.show();
    # @exampleCoffeeScript
    # supersonic.app.statusBar.show("light").then ->
-   #  supersonic.logger.log "Status bar shown"
+   #   supersonic.logger.log "Status bar shown"
+   # @exampleJavaScript
+   # supersonic.app.statuSBar.show("light").then(function(){
+   #   supersonic.logger.log("Status bar shown");
+   # });
   ###
   show: bug "show", (options) ->
     style = if typeof options is "string"

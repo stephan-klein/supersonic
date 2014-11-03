@@ -19,8 +19,8 @@ module.exports = (steroids, log) ->
    # @description
    # Shows the splashscreen programmatically.
    # @type
-   # supersonic.app.splashscreen.show: ()
-   # => Promise
+   # supersonic.app.splashscreen.show: () =>
+   #   Promise
    # @returnsDescription
    # [Promise](todo) that is resolved when the splashscreen is shown.
    # @usageCoffeeScript
@@ -46,8 +46,8 @@ module.exports = (steroids, log) ->
    # @description
    # Hides the splashscreen programmatically.
    # @type
-   # supersonic.app.splashscreen.hide: ()
-   # => Promise
+   # supersonic.app.splashscreen.hide: () =>
+   #   Promise
    # @returnsDescription
    # [Promise](todo) that is resolved when the splashscreen is hidden.
    # @usageCoffeeScript
