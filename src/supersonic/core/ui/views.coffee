@@ -186,8 +186,11 @@ module.exports = (steroids, log) ->
         preload.id
 
   isStartedView = (id) ->
-    getStartedViews().then (ids) ->
-      id in ids
+    if typeof id isnt 'string'
+      Promise.reject new Error "Given view id '#{id}' was of type '#{typeof id}', string expected"
+    else
+      getStartedViews().then (ids) ->
+        id in ids
 
   {
     find: find

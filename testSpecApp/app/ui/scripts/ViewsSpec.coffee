@@ -44,6 +44,9 @@ describe "supersonic.ui.views", ->
     it "accepts an id and returns a boolean", ->
       views.isStartedView("this-does-not-exist").should.eventually.equal false
 
+    it "rejects if the id is not a string", ->
+      views.isStartedView(123).should.be.rejected
+
     describe "with a started view", ->
       startedViewId = null
       before ->
