@@ -51,7 +51,7 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.show filteredParams, {
         onSuccess: ()->
-          supersonic.logger.info "Navigation bar was shown"
+          supersonic.logger.debug "Navigation bar was shown"
           resolve()
         onFailure: (error)->
           supersonic.logger.error "Could not show the navigation bar: #{error.errorDescription}"
@@ -88,7 +88,7 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.hide params, {
         onSuccess: ()->
-          supersonic.logger.info "Navigation bar was hidden"
+          supersonic.logger.debug "Navigation bar was hidden"
           resolve()
         onFailure: (error)->
           supersonic.logger.error "Hiding the navigation bar crashed due to the error: #{error.errorDescription}"
@@ -152,7 +152,7 @@ module.exports = (steroids, log) ->
       # debugger
       steroids.view.navigationBar.update params, {
         onSuccess: ()->
-          supersonic.logger.info "Navigation bar was updated"
+          supersonic.logger.debug "Navigation bar was updated"
           resolve()
         onFailure: ()->
           supersonic.logger.error "Updating the navigation bar chashed"
@@ -187,7 +187,7 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.setStyleClass className, {
         onSuccess: ()->
-          supersonic.logger.info "Navigation bar class was set"
+          supersonic.logger.debug "Navigation bar class was set"
           resolve()
         onFailure: (error)->
           supersonic.logger.error "Could not set the navigation bar class name: #{error.errorDescription}"
@@ -222,7 +222,7 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.setStyleCSS inlineCssString, {
         onSuccess: ()->
-          supersonic.logger.info "Navigation bar inline style was set"
+          supersonic.logger.debug "Navigation bar inline style was set"
           resolve()
         onFailure: (error)->
           supersonic.logger.error "Could not set the navigation bar inline style: #{error.errorDescription}"
@@ -258,7 +258,7 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.setStyleId styleId, {
         onSuccess: ()->
-          supersonic.logger.info "Navigation bar style id was set"
+          supersonic.logger.debug "Navigation bar style id was set"
           resolve()
         onFailure: (error)->
           supersonic.logger.error "Could not set the navigation bar style id: #{error.errorDescription}"

@@ -11,7 +11,7 @@ module.exports = (steroids, log) ->
    # @description
    # Launches a browser to open the given URL, or the external application matching the URL scheme.
    # @type
-   # supersonic.app.openURL : (URL: String) =>
+   # supersonic.app.openURL: (URL: String) =>
    #   Promise
    # @define {String} URL The URL to be opened. URLs starting with "http(s)://" will be opened in the device's default browser.
    # @returnsDescription
@@ -25,23 +25,23 @@ module.exports = (steroids, log) ->
    # supersonic.app.openURL "http://www.google.com"
    #
    # # Launch an external app
-   # supersonic.app.openURL("otherapp://?foo=1&bar=2").then ->
+   # supersonic.app.openURL("sms:1-408-555-121").then ->
    #   supersonic.logger.log "URL successfully opened"
    #
    # # Invalid schemes result in a rejected promise
-   # supersonic.app.openURL("doesnotexist://).then ->
+   # supersonic.app.openURL("doesnotexist://).catch ->
    #   supersonic.logger.log "Could not open URL"
    # @exampleJavaScript
    # // Launch the default web browser
    # supersonic.app.openURL("http://www.google.com");
    #
    # // Launch an external app
-   # supersonic.app.openURL("otherapp://?foo=1&bar=2").then(function() {
-   #   supersonic.logger.log("External app successfully opened");
+   # supersonic.app.openURL("sms:1-408-555-121").then(function() {
+   #   supersonic.logger.log("SMS app successfully opened");
    # });
    #
    # // Invalid schemes result in a rejected promise
-   # supersonic.app.openURL("doesnotexist://").then(function() {
+   # supersonic.app.openURL("doesnotexist://").catch(function() {
    #   supersonic.logger.log("Could not open URL");
    # });
   ###
