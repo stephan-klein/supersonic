@@ -26,10 +26,12 @@ module.exports = (steroids, log) ->
    #  view: View|StartedView
    #  options?:
    #    side: String
+   #    width: Integer
    # ) => Promise
    # @define {View|StartedView} view View or StartedView object to be shown as a drawer.
    # @define {Object} options Options object to define how the drawer will be shown.
    # @define {String} options.side="left" The side on which the drawer will be shown. Possible values are `left` and `right`
+   # @define {String} options.width=200 The width of drawer.
    # @returnsDescription
    # A promise that will be resolved once the drawer has been initialized.
    # @exampleJavaScript
@@ -48,6 +50,7 @@ module.exports = (steroids, log) ->
    # view = supersonic.ui.view "drawers#left"
    # options =
    #   side: left
+   #   width: 150
    #
    # supersonic.ui.drawer.show view, options
    #
@@ -58,25 +61,44 @@ module.exports = (steroids, log) ->
 
   init: bug "init", (view, options)->
     side = if options.side? then options.side else "right"
-    drawer_identifier = "#{side}-drawer"
-    webView = view._getWebView()
+
+    drawer_identifier = if view.getId?
+      view.getId()
+    else
+      "#{side}-drawer"
+
     params = {}
-    params[side] = webView
 
-    view.start(drawer_identifier)
+    _initStartedView = (startedView)->
+      webview = startedView._getWebView()
+
+      if options?.width?
+        webview.widthOfDrawerInPixels = options.width
+
+      params[side] = webview
+
+      (new Promise (resolve, reject) ->
+        steroids.drawers.update params,
+          onSuccess: resolve
+          onFailure: reject
+      ).catch (e)->
+        throw new Error(e.errorDescription)
+
+    supersonic.ui.views.find(drawer_identifier)
       .then(
+        (startedView)->
+          supersonic.logger.log "View was started, opening drawers"
+          _initStartedView startedView
         ->
-          (new Promise (resolve, reject) ->
-            steroids.drawers.update params,
-              onSuccess: resolve
-              onFailure: reject
-          ).catch (e)->
-            throw new Error("Unable to update drawers. Unknown error: #{e}")
-        (e) ->
-          throw new Error("View was already started. Remove drawer and unload view first.")
+          supersonic.logger.log "View was not started, starting and then opening drawers"
+          view.start(drawer_identifier)
+            .then(
+              (startedView)->
+                _initStartedView startedView
+              (e) ->
+                throw new Error(e.errorDescription)
+            )
       )
-
-
 
   ###
    # @namespace supersonic.ui.drawer
@@ -91,12 +113,8 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.drawer.open: (
    #  side?: String
-   #  options?:
-   #    width?: Integer
    # ) => Promise
    # @define {String} side=left The side of the drawer to be opened. Valid values are `left` and `right`.
-   # @define {Object} options Options object for defining the properties of the drawer to be opened.
-   # @define {Integer} options.width The width of the drawer in pixels.
    # @returnsDescription
    # A promise that will be resolved once the drawer has been opened. If there is no drawer initialized on the given side, the promise will be rejected.
    # @exampleJavaScript
@@ -107,6 +125,20 @@ module.exports = (steroids, log) ->
    # supersonic.ui.drawer.open("left").then ->
    #   supersonic.logger.debug "Drawer was shown"
   ###
+
+  open: bug "open", (side, options)->
+    edge = if side is "left"
+      steroids.screen.edges.LEFT
+    else
+      steroids.screen.edges.RIGHT
+
+    new Promise (resolve, reject)->
+      steroids.drawers.show {
+        edge: edge
+      }, {
+        onSuccess: resolve
+        onFailure: reject
+      }
 
   ###
    # @namespace supersonic.ui.drawer
@@ -130,6 +162,12 @@ module.exports = (steroids, log) ->
    # supersonic.ui.drawer.close().then ->
    #   supersonic.logger.debug "Drawer was closed"
   ###
+
+  close: bug "close", ->
+    new Promise (resolve, reject)->
+      steroids.drawers.hide {},
+        onSuccess: resolve
+        onFailure: reject
 
   ###
    # @namespace supersonic.ui.drawer
@@ -184,52 +222,38 @@ module.exports = (steroids, log) ->
    #   }
    # });
   ###
+  updateOptions: bug "updateOptions", (options)->
+    config = {}
 
-  # asLeft: (view)->
-  #   new Promise (resolve, reject) =>
-  #     @show(view, 'left').then ->
-  #       resolve()
-  #
-  # asRight: (view)->
-  #   new Promise (resolve, reject)->
-  #     @show(view, 'right').then ()->
-  #       resolve()
-  #
-  #
-  #
-  #
-  #
-  # show: (view, side)->
-  #   new Promise (resolve, reject)->
-  #     webView = view._getWebView()
-  #     params[side] = webView
-  #     steroids.drawers.update params
-  #     steroids.drawers.show {
-  #       edge: steroids.screen.edges[side.toUpperCase()]
-  #     }, {
-  #       onSuccess: ()->
-  #         supersonic.logger.info "#{side} drawer should be shown"
-  #         resolve()
-  #       onFailure: ()->
-  #         supersonic.logger.error "#{side} drawer fails"
-  #         reject()
-  #     }
-  #
-  # # TODO: Finish the method
-  # hide: ()->
-  #   new Promise (resolve, reject)->
-  #     steroids.drawers.hide {
-  #     }, {
-  #       onSuccess: ()->
-  #         supersonic.logger.info "Drawer was hidden"
-  #         resolve()
-  #       onFailure: ()->
-  #         supersonic.logger.error "Hiding a drawer crached"
-  #         reject()
-  #     }
-  #
-  #
-  # setOptions: (options)->
-  #   steroids.drawers.update {
-  #     options: options
-  #   }
+    if options?.animation?
+      animation_type = if typeof options.animation is "string"
+        options.animation
+      else
+        options.animation.type
+
+      animation = switch animation_type
+        when "slide" then steroids.drawers.defaultAnimations.SLIDE
+        when "slideAndScale" then steroids.drawers.defaultAnimations.SLIDE_AND_SCALE
+        when "swingingDoor" then steroids.drawers.defaultAnimations.SWINGING_DOOR
+        when "parallax" then steroids.drawers.defaultAnimations.PARALLAX
+
+      if options?.animation?.duration?
+        animation.duration = animation.reversedDuration = options.animation.duration
+
+      config.animation = animation
+
+    if options?.shadow?
+      config.showShadow = options.shadow
+
+    if options?.gestures?.open?
+      config.openGestures = options.gestures.open
+
+    if options?.gestures?.close?
+      config.closeGestures = options.gestures.close
+
+    supersonic.logger.log "WAT: #{JSON.stringify(config)}"
+
+    new Promise (resolve, reject)->
+      steroids.drawers.update options: config,
+        onSuccess: resolve
+        onFailure: reject
