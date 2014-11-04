@@ -44,7 +44,15 @@ module.exports =
     files: [
       '<%= files.src %>'
       'tasks/templates/'
+      'docs/_templates/'
     ]
     tasks: [
       'compile-docs'
+    ]
+  "docs-templates":
+    files: [
+      'docs/_templates/**/*'
+    ]
+    tasks: [
+      'docs-markdown'
     ]
