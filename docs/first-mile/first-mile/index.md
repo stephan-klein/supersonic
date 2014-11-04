@@ -103,7 +103,7 @@ With your app up and running, we're ready to make some changes. Open the `myProj
   </super-navbar-title>
 </super-navbar>
 ```
-Save the file. The Steroids Development Server automatically notices that a file has changed and refreshes your project. You'll see the navigation bar update with your new title.
+Save the file. The Steroids Development Server automatically notices that a file has changed and refreshes your project. You'll see the navigation bar update with your new title. The automatic updates are handled by a feature called LiveReload – read more in the [Local Development Flow guide](/tooling/steroids-cli/local-development-flow/).
 </section>
 
 <section class="docs-section" id="navigating-to-another-view">

@@ -6,8 +6,7 @@ header_sub_title: Learn the basics of modifying your app structure and logic
 section_id: second-mile
 subsections:
   - name: Overview
-  - name: Livereload
-  - name: Debugging via connect screen
+  - name: Basic Debugging
   - name: Model-View-Controller architecture
   - name: Generating a new module
   - name: App configuration
@@ -17,17 +16,19 @@ subsections:
 <section class="docs-section" id="overview">
 ## Overview
 
-In the previous section you created some simple functionality for your app just by using Supersonic web components. In this section you will create some simple logic for your app and learn to access the device hardware, such as the camera. Additionally, you will learn about what goes on behind the scenes in your app and how to access and change that information.
+In the previous section you created some simple functionality for your app just by using Supersonic web components. In this section you will:
+
+ - Learn to do some simple debugging
+ - Create some simple logic for your app
+ - Learn to access the device hardware, namely the camera
+ - Learn about what goes on behind the scenes in your app
+ - How to access and change that information.
+
+Let's get going!
 </section>
 
-<section class="docs-section" id="livereload">
-## Livereload
-
-You may have noticed already during the previous section, that sometimes your app seems to change instantaneously without any loading screens, while other times the entire app is reloaded, with the AppGyver loading screen shown. This is because of a feature called livereload, where the Steroids CLI watches your project files and pushes any updates it detects to the connected devices. There are two forms of reload: full reload and livereload. A full reload is triggered when you make any change to application configuration which is applied at startup via the `config/` folder in your app. A livereload can be executed when only the content files have changed. The CLI automatically detects which kind of reload is needed and executes it.
-</section>
-
-<section class="docs-section" id="debugging-via-connect-screen">
-## Debugging via connect screen
+<section class="docs-section" id="basic-debugging">
+## Basic Debugging
 
 Before adding any real logic, it is important to know how to debug your project. You are bound to make some mistakes when you develop, so learning how to detect them is key to a good development experience. Since we're working with a nearly empty app which has no errors, we'll have to cheat a little here. Let's make another change to `app/common/views/getting-started.html`. Add the following to the end of the file:
 
@@ -39,19 +40,21 @@ Before adding any real logic, it is important to know how to debug your project.
 
 Then, let your app refresh. At first glance nothing seems to be wrong, but problems aren't always immediately visible. Just to be sure, let's take a look at some of the logs that are available to us.
 
-###Connect window
+### Logs in Connect Screen
 
-You may have already noticed that the browser window from where you scan the app's QR code contains a few different tabs, accesible from the top right corner of the window. Go to the "Logs" tab. If you've closed the window at some point, you can re-open it by typing `qr` in the Steroids console. Immediately you will notice a familiar looking message:
+You may have already noticed that the Connect Screen (the browser window from where you scan the app's QR code) contains a few different tabs, accesible from the top right corner of the window. Go to the "Logs" tab. If you've closed the window at some point, you can re-open it by typing `qr` in the Steroids console. Immediately you will notice a familiar looking message:
 
 <img src="http://placehold.it/600x300">
 
-It's the message from the custom Error we just created, along with some debugging information, such as the device and view the Error occured in. You can use the tools at the top of the window to filter messages and clear the current log. Now that we have made a note of the error, let's clear the log and try again. Remove the `<script>` tag you just inserted and save the file. After the app refreshes, take another look at the "Logs" tab and you'll see that the error no longer occurs. Gongratulations, you've fixed your first bug!
+It's the message from the custom Error we just created, along with some debugging information, such as the device and view the Error occurred in. You can use the tools at the top of the window to filter messages and clear the current log.
 
-Besides detecting errors, you can explicitly send logs to the Steroids Connect window with `steroids.logger.log("Your-message-here")`, which can be extremely useful for tracking your application state when debugging. To read more about logging, head over to the [steroids.logger docs](/api-reference/stable/supersonic/logger/).
+Now that we have made a note of the error, let's clear the log and try again. Remove the `<script>` tag you just inserted and save the file. After the app refreshes, take another look at the "Logs" tab and you'll see that the error no longer occurs. Congratulations, you've fixed your first bug!
 
-###Platform-specific debugging
+Besides detecting errors, you can explicitly send logs to the Steroids Connect window with `steroids.logger.log("Your message here!")`, which can be extremely useful for tracking your application state when debugging. To read more about logging, head over to the [Logging guide](/tooling/debugging/logging/).
 
-Debugging via the connect screen is available on all devices. For more in-depth tools (such as network monitoring), there are platform-specific solutions available. To read about them, check out the links below.
+### Platform-specific debugging
+
+Debugging via the Connect Screen logs is available on all devices and operating systems. For more in-depth tools (such as network monitoring, JavaScript console, DOM inspector and more), there are platform-specific solutions available. To read about them, check out the links below:
 
   - [Debugging on iOS](/tooling/debugging/debugging-on-ios/)
   - [Debugging on Android](/debugging/debugging-on-android)
@@ -63,29 +66,32 @@ Debugging via the connect screen is available on all devices. For more in-depth 
 
 As a final preparation step, let's take a look at the basic structure for a Supersonic app. Supersonic apps follow a model-view-controller pattern by default. The `app/` folder houses your project's content files separated into modules.
 
-###Model
-The model of a module manages the data objects of that module. This means a model has no direct influence on the application's UI or logic, but it can be observed by the other components in the module, which will then handle any updates in the application data. In Supersonic projects the model will usually be provided by Supersonic Data (and/or the Angular `$scope` object), so don't worry about fully grasping the concept at this stage.
+### Model
+The model of a module manages the data objects of that module. This means a model has no direct influence on the application's UI or logic, but it can be observed by the other components in the module, which will then handle any updates in the application data. In Supersonic projects, the model will usually be provided by Supersonic Data (and/or the Angular `$scope` object), so don't worry about fully grasping the concept at this stage.
 
-###View
+### View
 The view is the outward-facing side of the application and the interface through which users can interact with the app. A view will generally handle gathering input from a user and displaying the results of the input.
 
-###Controller
+### Controller
 The controller is the glue between the view and model, and contains the bulk of the app logic. It is responsible for updating a view when the model changes, as well as updating the model based on user input.
 
-###Basic module
+### Basic module
 A module can contain several instances of the above file types, but generally it is useful to split your app into modules based on self-contained features. This will promote code readability (and reusability in future projects). Below is the basic structure of a Supersonic module as represented by the `common` module:
 
 ```bash
 .
 └── common
     ├── assets
+    ├── native-styles
     ├── stylesheets
     ├── views
     ├── scripts (controllers)
     └── (model)
 ```
 
-The `common` module is the basis for all Supersonic apps. As the name suggests, it can house components that are shared by the entire app. Generally this means the `layout.html` view, which is used as a building block for other views, and any general data models, such as users.
+The `common` module is the basis for all Supersonic apps. As the name suggests, it is used to house assets that are shared by the entire app (in the default project, it also houses the views). You can find things such as:
+
+ - `common/views/layout.html`, which is the layout file applied "around" all views
 
 >Note: If you wish to learn more about the MVC pattern and why you should use it, start by taking a look at the [Google primer](https://developer.chrome.com/apps/app_frameworks) on the subject.
 
@@ -199,6 +205,3 @@ $scope.takePicture = () ->
 
 Now, when you click the "Take picture" -button, the device camera is opened and you can snap a photo. There are a number of options you can pass to the `supersonic.media.camera.takePicture` method. To read more about them and other device APIs, see the [device docs](/device/).
 </section>
-
-
-
