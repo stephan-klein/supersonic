@@ -4,16 +4,24 @@ docs_tab_id: first-mile
 title: Supersonic First Mile
 header_title: Supersonic First Mile
 sections:
-  - name: First mile
-  - name: Second mile
-  - name: Third mile
+  - name: "First mile: App on device in 5 minutes"
+    id: first-mile
+  - name: "Second mile: Native CSS and Device APIs"
+    id: second-mile
+  - name: "Third mile: Adding Data from Backend"
+    id: third-mile
 ---
 
 <div class="col-md-2 col-sm-3 aside-menu">
 
-  <div class="docked-menu first-mile-menu">
+  <div class="docked-menu">
     {% for section in page.sections %}
-    {% assign section_id = section.name | slugify %}
+    {% unless section.id %}
+      {% assign section_id = section.name | slugify %}
+    {% else %}
+      {% assign section_id = section.id %}
+    {% endunless %}
+
     <ol class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
       <li class="menu-title">
         <a href="/first-mile{% unless section_id == 'start-building-with-supersonic' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
