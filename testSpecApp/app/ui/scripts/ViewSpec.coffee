@@ -40,6 +40,12 @@ describe "supersonic.ui.view", ->
       supersonic.ui.view('ui#empty').start().then (startedView) ->
         startedView.stop().should.be.fulfilled
 
+    describe "with an empty argument", ->
+      it "defaults the id to the location", ->
+        supersonic.ui.view('ui#empty').start().then (startedView) ->
+        startedView.getId().should.equal 'ui#empty'
+        startedView.stop()
+
     describe "with an argument", ->
       it "assigns the argument to the view's id", ->
         supersonic.ui.view('ui#empty').start('this-is-the-id').then (startedView) ->
