@@ -1,19 +1,30 @@
-<div ng-controller="ShowController" class="padding">
-  <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
-  <div ng-hide="showSpinner">
-    <h2 ng-bind="task.description"></h2>
-    
-    
-    
-     <p>done: <span ng-bind="task.done"></span></p> 
-    
+<div ng-controller="ShowController">
+  <super-navbar>
+    <super-navbar-title>
+      Show Task
+    </super-navbar-title>
+  </super-navbar>
 
-    <button ng-click="showEditModal(task.uid)" class="button button-block button-positive">
-      Edit
-    </button>
+  <div class="padding">
+    <div ng-show="showSpinner" ng-include="'_spinner.html'"></div>
+    <div ng-hide="showSpinner">
+      <h2 ng-bind="task.description"></h2>
+      
+      
+      
+       <p>done: <span ng-bind="task.done"></span></p> 
+      
 
-    <button ng-click="remove(task.uid)" class="button button-block button-negative">
-      Remove
-    </button>
+
+      <super-modal-show location="data#edit?id={{ task.id }}">
+        <button class="button button-block button-positive">
+          Edit
+        </button>
+      </super-modal-show>
+
+      <button ng-click="remove(task.id)" class="button button-block button-negative">
+        Remove
+      </button>
+    </div>
   </div>
 </div>

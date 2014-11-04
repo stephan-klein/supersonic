@@ -30,25 +30,21 @@ module.exports = (steroids, log) ->
   ###
 
   getView = (location)->
-    parsedLocation = parseRoute location
     webView = new steroids.views.WebView
-      location: parsedLocation
+      location: parseRoute location
 
-    view =
+    return view =
       getLocation: -> location
       _getWebView: -> webView
-
-    start = (id)->
-      supersonic.ui.views.start view, id
-
-    view.start = start
-
-    view
+      start: (id) ->
+        supersonic.ui.views.start view, (id || location)
 
   parseRoute = (location) ->
-    if location.match /^[\w\-]+#[\w\-]+$/
-      routeParts = location.split "#"
-      "app/#{routeParts[0]}/#{routeParts[1]}.html"
+    routePattern = /^([\w\-]+)#([\w\-]+)(\?.+)?$/
+    parts = routePattern.exec location
+    if parts?
+      [whole, module, view, query] = parts
+      "app/#{module}/#{view}.html#{query || ''}"
     else
       location
 

@@ -16,7 +16,7 @@ module.exports = {
   app: require('./core/app')(steroids, logger)
   media: require('./core/media')(steroids, logger)
   device: require('./core/device')(steroids, logger)
-  ui: require('./core/ui')(steroids, logger)
+  ui: require('./core/ui')(steroids, global, logger)
   data: require('./core/data')(logger, global)
 }
 
