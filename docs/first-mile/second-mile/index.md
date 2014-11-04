@@ -95,6 +95,8 @@ app/camera
 
 In the module, the basic view and controller are created for you, as well as the `index.coffee` file, which declares the associated Angular module and its dependencies, which in this case is the `common` module.
 
+To learn about the Supersonic app structure and working with a Model-View-Controller architecture, see the [Supersonic structure guide]().
+
 </section>
 <section class="docs-section" id="app-configuration">
 ## App configuration
