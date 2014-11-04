@@ -87,10 +87,8 @@ module.exports = (steroids, log) ->
     supersonic.ui.views.find(drawer_identifier)
       .then(
         (startedView)->
-          supersonic.logger.log "View was started, opening drawers"
           _initStartedView startedView
         ->
-          supersonic.logger.log "View was not started, starting and then opening drawers"
           view.start(drawer_identifier)
             .then(
               (startedView)->
