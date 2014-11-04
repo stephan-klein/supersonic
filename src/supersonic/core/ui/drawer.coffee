@@ -251,8 +251,6 @@ module.exports = (steroids, log) ->
     if options?.gestures?.close?
       config.closeGestures = options.gestures.close
 
-    supersonic.logger.log "WAT: #{JSON.stringify(config)}"
-
     new Promise (resolve, reject)->
       steroids.drawers.update options: config,
         onSuccess: resolve
