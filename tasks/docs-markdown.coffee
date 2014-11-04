@@ -15,9 +15,9 @@ module.exports = (grunt)->
           return path.join dest, betterSrcPath
 
     copy:
-      "docs-index":
+      "docs-templates":
         expand: true
-        cwd: "tasks/templates/docs-index/"
+        cwd: "docs/_templates/api-reference/"
         src: "**/*.md"
         dest: "docs/api-reference/stable/"
 
@@ -83,4 +83,4 @@ module.exports = (grunt)->
       lowerCaseDest = file.dest.toLowerCase()
       grunt.file.write lowerCaseDest, markdownOutput
 
-    grunt.task.run "copy:docs-index"
+    grunt.task.run "copy:docs-templates"

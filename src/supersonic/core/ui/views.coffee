@@ -33,9 +33,10 @@ module.exports = (steroids, log) ->
    # supersonic.ui.views.find("myCarsView").then (startedView) ->
    #   supersonic.logger.log "myCarsView location: #{startedView.getLocation()}"
   ###
-
   find = (id) ->
-    isStarted(id).then ->
+    isStartedView(id).then (started) ->
+      unless started
+        throw new Error "There was no started view by id '#{id}'"
       createStartedView(id)
 
   ###
@@ -74,27 +75,16 @@ module.exports = (steroids, log) ->
   ###
 
   start = (view, id) ->
-    new Promise (resolve, reject) ->
+    isStartedView(id).then (started) ->
+      if started
+        throw new Error "A view with id #{id} is already started."
+
       betterView = if view.constructor.name is "String"
         supersonic.ui.view(view)
       else
         view
 
-      unless id?
-        error =
-          errorDescription: "Missing id parameter"
-        reject error
-
-      if id.match /#+/
-        error =
-          errorDescription: "Cannot use the # character in ids"
-        reject error
-
-      isStarted(id).then( ->
-        error =
-          errorDescription: "A view with id #{id} is already started."
-        reject error
-      ).catch ->
+      new Promise (resolve, reject) ->
         betterView._getWebView().preload {id: id}, {
           onSuccess: ->
             resolve createStartedView(id)
@@ -153,28 +143,29 @@ module.exports = (steroids, log) ->
           location: ""
     }
 
-  isStarted = (id) ->
+  getApplicationState = ->
     new Promise (resolve, reject) ->
-      testView = new steroids.views.WebView
-        location: "null"
-        id: id
-
-      testView.preload {}, {
-        onSuccess: ->
-          # View with that id didn't exist, so unload immediately.
-          testView.unload {}, {
-            onSuccess: ->
-              reject()
-          }
-        onFailure: (error) ->
-          if error.errorDescription is "A preloaded layer with this identifier already exists"
-            resolve()
-          else
-            reject()
+      steroids.getApplicationState {}, {
+        onSuccess: resolve
+        onFailure: reject
       }
+
+  getStartedViews = ->
+    getApplicationState().then (state) ->
+      for preload in state.preloads
+        preload.id
+
+  isStartedView = (id) ->
+    if typeof id isnt 'string'
+      Promise.reject new Error "Given view id '#{id}' was of type '#{typeof id}', string expected"
+    else
+      getStartedViews().then (ids) ->
+        id in ids
 
   {
     find: find
     start: start
     stop: stop
+    getStartedViews: getStartedViews
+    isStartedView: isStartedView
   }

@@ -5,7 +5,9 @@
   {% assign section_id = section.id %}
 {% endunless %}
 
-{% if section_id == "components" %}
+{% assign version = "stable/" %}
+
+{% if section_id == "components" or section_id == "cordova" %}
   {% assign main_namespace = "" %}
 {% else %}
   {% assign main_namespace = "supersonic/" %}
@@ -13,7 +15,7 @@
 
 <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
   <li class="menu-title">
-    <a href="/api-reference/stable/{{main_namespace}}{{section_id}}">{{section.name}}</a>
+    <a href="/api-reference/{{version}}{{main_namespace}}{{section_id}}">{{section.name}}</a>
     {% if page.section_id == section_id %}
       {% for subsection in section.subsections %}
         {% if subsection.id %}
@@ -22,7 +24,7 @@
           {% assign subsection_id = subsection.name | slugify %}
         {% endif %}
         <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
-          <a href="/api-reference/stable/{{main_namespace}}{{section_id}}/{{subsection_id}}" class="api-section">
+          <a href="/api-reference/{{version}}{{main_namespace}}{{section_id}}/{{subsection_id}}" class="api-section">
             {% if subsection.method %}
               <code>{{subsection.name}}()</code>
             {% else %}
@@ -32,9 +34,14 @@
           {% if page.subsection_id == subsection_id %}
             <ul>
               {% for method in subsection.methods %}
-              <li>
-                <a href="/api-reference/stable/{{main_namespace}}{{section_id}}/{{subsection_id}}/{{method.name | slugify}}">
-                  ↳ <code>{{method.name}}()</code>
+              {% assign method_id = method.name | slugify %}
+              <li class="{% if page.method_id == method_id %}active{% endif %}">
+                <a href="/api-reference/{{version}}{{main_namespace}}{{section_id}}/{{subsection_id}}/{{method_id}}">
+                  {% if method.class %}
+                    {{method.name}}
+                  {% else %}
+                    ↳ <code>{{method.name}}()</code>
+                  {% endif %}
                 </a>
               </li>
               {% endfor %}
