@@ -35,9 +35,13 @@ describe "supersonic.ui.view", ->
         supersonic.ui.view('foo#bar?qux=trol')
           ._getWebView().location.should.match /foo\/bar\.html\?qux=trol$/
 
-  describe "view.start()", ->
-    it "should start a view with id test", ->
-      supersonic.ui.view("ui#empty").start("test").should.be.fulfilled
+  describe "start()", ->
+    it "returns a started view that can be stopped", ->
+      supersonic.ui.view('ui#empty').start().then (startedView) ->
+        startedView.stop().should.be.fulfilled
 
-    it "should stop a view with id test", ->
-       supersonic.ui.views.stop("test").should.be.fulfilled
+    describe "with an argument", ->
+      it "assigns the argument to the view's id", ->
+        supersonic.ui.view('ui#empty').start('this-is-the-id').then (startedView) ->
+          startedView.getId().should.equal 'this-is-the-id'
+          startedView.stop()
