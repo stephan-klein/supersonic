@@ -137,6 +137,7 @@ module.exports = (steroids, log) ->
 
     {
       getId: -> id
+      stop: -> stop id
       _getWebView: ->
         new steroids.views.WebView
           id: id
