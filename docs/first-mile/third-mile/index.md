@@ -68,12 +68,12 @@ Let's create a new resource with the name `superheroes` for our awesome superher
 
 Now, you can click on the "Add Data" button to add an actual entry to the database. Let's add a few characters – you can copypaste the data below:
 
-<table>
-  <th>
-    <td>Name</td>
-    <td>Alter Ego</td>
-    <td>Publisher</td>
-  </th>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Alter Ego</th>
+    <th>Publisher</th>
+  </tr>
   <tr>
     <td>Superman</td>
     <td>Clark Kent</td>
