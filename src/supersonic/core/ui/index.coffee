@@ -1,8 +1,8 @@
 Promise = require 'bluebird'
 
-module.exports = (steroids, log) ->
+module.exports = (steroids, global, log) ->
   view: require("./view")(steroids, log)
-  views: require("./views")(steroids, log)
+  views: require("./views")(steroids, global, log)
   layers: require("./layers")(steroids, log)
   drawer: require("./drawer")(steroids, log)
   modal: require("./modal")(steroids, log)

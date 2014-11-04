@@ -1,6 +1,7 @@
 Promise = require 'bluebird'
+current = require './views/current'
 
-module.exports = (steroids, log) ->
+module.exports = (steroids, global, log) ->
   bug = log.debuggable "supersonic.ui.views"
 
   ###
@@ -169,4 +170,5 @@ module.exports = (steroids, log) ->
     stop: stop
     getStartedViews: getStartedViews
     isStartedView: isStartedView
+    current: current(global, log)
   }
