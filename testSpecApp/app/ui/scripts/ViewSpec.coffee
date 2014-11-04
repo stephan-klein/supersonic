@@ -36,18 +36,23 @@ describe "supersonic.ui.view", ->
           ._getWebView().location.should.match /foo\/bar\.html\?qux=trol$/
 
   describe "start()", ->
+    view = null
+    beforeEach ->
+      view = supersonic.ui.view("ui#empty?#{Math.random()}")
+
     it "returns a started view that can be stopped", ->
-      supersonic.ui.view('ui#empty').start().then (startedView) ->
+      view.start().then (startedView) ->
         startedView.stop().should.be.fulfilled
 
     describe "with an empty argument", ->
       it "defaults the id to the location", ->
-        supersonic.ui.view('ui#empty').start().then (startedView) ->
-        startedView.getId().should.equal 'ui#empty'
-        startedView.stop()
+        view.start().then (startedView) ->
+          startedView.getId().should.equal view.getLocation()
+          startedView.stop()
 
     describe "with an argument", ->
       it "assigns the argument to the view's id", ->
-        supersonic.ui.view('ui#empty').start('this-is-the-id').then (startedView) ->
-          startedView.getId().should.equal 'this-is-the-id'
+        id = "this-is-the-id-#{Math.random()}"
+        view.start(id).then (startedView) ->
+          startedView.getId().should.equal id
           startedView.stop()
