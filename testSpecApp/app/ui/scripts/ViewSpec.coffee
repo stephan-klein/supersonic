@@ -31,6 +31,10 @@ describe "supersonic.ui.view", ->
         supersonic.ui.view('foo#bar')
           ._getWebView().location.should.equal "http://localhost/app/foo/bar.html"
 
+      it "should have a query string of the route has one", ->
+        supersonic.ui.view('foo#bar?qux=trol')
+          ._getWebView().location.should.match /foo\/bar\.html\?qux=trol$/
+
   describe "view.start()", ->
     it "should start a view with id test", ->
       supersonic.ui.view("ui#empty").start("test").should.be.fulfilled
