@@ -1,42 +1,39 @@
 describe "supersonic.ui.view", ->
-  it "should be defined", ->
-    supersonic.ui.view.should.exist
+  it "is a function", ->
+    supersonic.ui.view.should.be.a 'function'
 
-  describe "view with route", ->
-    route = "ui#empty"
-    view = supersonic.ui.view route
+  it "accepts a url", ->
+    supersonic.ui.view('http://example.com').should.be.an 'object'
 
-    it "should parse route correctly", ->
-      view._getWebView().location.should.equal "http://localhost/app/ui/empty.html"
+  it "accepts a route", ->
+    supersonic.ui.view("foo#bar").should.be.an 'object'
 
-    describe "getLocation()", ->
-      it "should be a function", ->
-        view.getLocation.should.exist
-        view.getLocation.should.be.a "function"
+  describe "getLocation()", ->
+    describe "with a url", ->
+      it "should return the url", ->
+        supersonic.ui.view('http://example.com')
+          .getLocation().should.equal 'http://example.com'
 
-      it "should return a String", ->
-        view.getLocation().should.be.a "string"
+    describe "with a route", ->
+      it "should return the route", ->
+        supersonic.ui.view("foo#bar")
+          .getLocation().should.equal 'foo#bar'
 
-      it "should return the given route", ->
-        view.getLocation().should.equal route
+  describe "_getWebView()", ->
+    it "is a function", ->
+      supersonic.ui.view('foo#bar')._getWebView.should.be.a 'function'
 
-    describe "_getWebView()", ->
-      it "should be a function", ->
-        view._getWebView.should.exist
-        view._getWebView.should.be.a "function"
+    it "returns an object with a location", ->
+      supersonic.ui.view('foo#bar')._getWebView().location.should.be.a 'string'
 
-      it "should return an object", ->
-        view._getWebView().should.be.an "object"
-
-  describe "view with URL", ->
-    view = supersonic.ui.view("http://www.google.com")
-
-    it "should set location correctly", ->
-      view._getWebView().location.should.equal "http://www.google.com"
+    describe "with a route", ->
+      it "should have a url parsed from the route", ->
+        supersonic.ui.view('foo#bar')
+          ._getWebView().location.should.equal "http://localhost/app/foo/bar.html"
 
   describe "view.start()", ->
     it "should start a view with id test", ->
       supersonic.ui.view("ui#empty").start("test").should.be.fulfilled
 
     it "should stop a view with id test", ->
-      supersonic.ui.views.stop("test").should.be.fulfilled
+       supersonic.ui.views.stop("test").should.be.fulfilled
