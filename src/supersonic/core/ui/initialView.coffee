@@ -1,6 +1,7 @@
 Promise = require("bluebird")
 
 module.exports = (steroids, log) ->
+  bug = log.debuggable "supersonic.ui.initialView"
 
   ###
    # @namespace supersonic.ui
@@ -27,18 +28,11 @@ module.exports = (steroids, log) ->
    # A promise that is resolved when the Initial View starts to dismiss. If there the Initial View is not present on the screen, the promise will be rejected.
   ###
 
-  show: (params)->
-    if !params
-      params = {}
+  show: bug "show", (params={})->
     new Promise (resolve, reject)->
-      steroids.initialView.show(params,{
-        onSuccess: ()->
-          supersonic.logger.info "Initial view was shown"
-          resolve()
-        onFailure: ()->
-          supersonic.logger.error "Showing of an initial view was failed"
-          reject()
-        })
+      steroids.initialView.show params
+        onSuccess: resolve
+        onFailure: reject
 
   ###
    # @namespace supersonic.ui.initialView
@@ -56,16 +50,8 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the Initial View starts to dismiss. If there the Initial View is not present on the screen, the promise will be rejected.
   ###
-  dismiss: (params)->
-    if !params
-      params = {}
+  dismiss: bug "dismiss", (params={})->
     new Promise (resolve, reject)->
-      steroids.initialView.dismiss(params, {
-        onSuccess: ()->
-          supersonic.logger.info "Initial view was hidden"
-          resolve()
-        onFailure: ()->
-          supersonic.logger.error "Hiding of an initial view was failed"
-          reject()
-
-        })
+      steroids.initialView.dismiss params,
+        onSuccess: resolve
+        onFailure: reject
