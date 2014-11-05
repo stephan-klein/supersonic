@@ -10,6 +10,6 @@
     "chai": "^1.9.1",
     "angular-mocks": "1.2.26",
     "bluebird": "^2.3.2",
-    "platform": "Polymer/platform#0.4.1"
+    "webcomponentsjs": "0.4.2"
   }
 }
