@@ -144,7 +144,7 @@ Building the app takes a few moments, after which you'll get an e-mail with a li
 [appgyver-cloud]: http://cloud.appgyver.com
 [app-permissions]: /tooling/build-settings/configuring-app-permissions
 [cloud-deploy]: /tooling/build-settings/deploying-to-cloud
-[custom-plugin-config]: /tooling/build-settings/configuring-custom-plugins
+[custom-plugin-config]: /tooling/plugins/configuring-custom-plugins
 [custom-url-scheme-guide]: /tooling/build-settings/custom-url-schemes
 [xcode]: https://developer.apple.com/xcode/
 </section>

@@ -170,7 +170,7 @@ You can also see your build history and download earlier builds by clicking on t
 [apple-devices-list]: https://developer.apple.com/account/ios/device/deviceList.action
 [apple-provisioning-list]: https://developer.apple.com/account/ios/profile/profileList.action
 [cloud-deploy]: /tooling/build-settings/deploying-to-cloud
-[custom-plugin-config]: /tooling/build-settings/configuring-custom-plugins
+[custom-plugin-config]: /tooling/plugins/configuring-custom-plugins
 [custom-url-scheme-guide]: /tooling/build-settings/custom-url-schemes
 [debug-build-guide]: /tooling/build-settings/building-a-debug-build
 [ios-build-types]: /tooling/build-settings/ios-build-types
