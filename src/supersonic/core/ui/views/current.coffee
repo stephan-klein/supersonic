@@ -4,8 +4,20 @@ events = require '../../events'
 module.exports = (log) ->
 
   whenVisible = (f) ->
-    events.visibility.filter((v) -> v).onValue ->
-      setTimeout f, 0
+    whenHidden = null
+    events
+      .visibility
+      .map((visible) ->
+        if visible
+          ->
+            whenHidden = f()
+        else
+          ->
+            whenHidden?()
+            whenHidden = null
+      )
+      .onValue (notify) ->
+        setTimeout notify, 0
 
   {
     visibility: events.visibility
