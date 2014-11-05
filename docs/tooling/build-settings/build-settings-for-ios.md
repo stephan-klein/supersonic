@@ -13,6 +13,7 @@ subsection_id: build-settings-for-ios
 
 * [Configuring custom plugins for your app][custom-plugin-config]
 * [Building a Debug build][debug-build-guide]
+* [iOS build types][ios-build-types]
 
 The AppGyver Build Service lets you create an IPA package of your application that you can distribute either ad hoc or submit to the Apple App Store.
 
@@ -172,5 +173,6 @@ You can also see your build history and download earlier builds by clicking on t
 [custom-plugin-config]: /tooling/build-settings/configuring-custom-phonegap-plugins
 [custom-url-scheme-guide]: /tooling/build-settings/custom-url-schemes
 [debug-build-guide]: /tooling/build-settings/building-a-debug-build
+[ios-build-types]: /tooling/build-settings/ios-build-types
 [testflight]: http://www.testflightapp.com
 </section>

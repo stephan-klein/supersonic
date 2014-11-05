@@ -137,14 +137,14 @@ After you're done, click Update Settings. Then, you can use the Build an Ad Hoc 
 Building the app takes a few moments, after which you'll get an e-mail with a link to the downloadable APK. You can also see your build history and download earlier builds by clicking on the Show Build History button.
 
 [android-build-types]: /tooling/build-settings/android-build-types
-[appgyver-cloud]: http://cloud.appgyver.com
-[cloud-deploy]: /tooling/build-settings/deploy-to-cloud
-[custom-plugin-config]: /tooling/build-settings/configuring-custom-plugins
-[app-permissions]: /tooling/build-settings/configuring-app-permissions
 [android-dev-cert]: http://developer.android.com/tools/publishing/app-signing.html#cert
 [android-dev-ninepatch]: http://developer.android.com/guide/topics/graphics/2d-graphics.html#nine-patch
 [android-dev-orientation]: http://developer.android.com/reference/android/R.attr.html#screenOrientation
 [android-sdk]: http://developer.android.com/sdk/index.html
-[xcode]: https://developer.apple.com/xcode/
+[appgyver-cloud]: http://cloud.appgyver.com
+[app-permissions]: /tooling/build-settings/configuring-app-permissions
+[cloud-deploy]: /tooling/build-settings/deploy-to-cloud
+[custom-plugin-config]: /tooling/build-settings/configuring-custom-plugins
 [custom-url-scheme-guide]: /tooling/build-settings/using-custom-url-schemes
+[xcode]: https://developer.apple.com/xcode/
 </section>
