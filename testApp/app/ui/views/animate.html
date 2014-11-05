@@ -7,6 +7,18 @@
 
   <div class="padding">
     <ul class="list">
+      <li class="item" ng-repeat="animation in animations">
+        <button
+          class="button button-block"
+          ng-click="animate(animation)">
+          {{animation}}
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="padding">
+    <ul class="list">
       <li class="item">
         <button
           class="button button-block"

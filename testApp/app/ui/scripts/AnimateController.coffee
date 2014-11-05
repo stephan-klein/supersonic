@@ -1,6 +1,23 @@
 angular
   .module('ui')
   .controller 'AnimateController', ($scope, $q, supersonic) ->
+    $scope.animations = [
+      "curlDown"
+      "curlUp"
+      "fade"
+      "flipHorizontalFromRight"
+      "flipHorizontalFromLeft"
+      "flipVerticalFromTop"
+      "flipVerticalFromBottom"
+      "slideFromTop"
+      "slideFromRight"
+      "slideFromLeft"
+      "slideFromBottom"
+    ]
+
+    $scope.animate = (animation)->
+      supersonic.ui.animate(animation, {duration: 1.0}).perform()
+
 
     $scope.testPromises = ->
       supersonic.ui.animate("slideFromRight", {duration: 5.0})
