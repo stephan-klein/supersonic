@@ -1,3 +1,4 @@
+Bacon = require 'baconjs'
 data = require 'ag-data'
 
 module.exports = (logger, window) ->
@@ -22,6 +23,10 @@ module.exports = (logger, window) ->
       logger.error "Tried to access a cloud resource, but no resources have been configured"
       throw new Error "No cloud resources available"
 
+  shouldAutoupdate = Bacon.once true
+  autoupdate = (f) ->
+    shouldAutoupdate.onValue f
+
   {
     ###
      # @namespace supersonic.data
@@ -43,6 +48,19 @@ module.exports = (logger, window) ->
      # takeOutTheTrash.save()
     ###
     model: createModel
+
+    ###
+     # @namespace supersonic.data
+     # @name autoupdate
+     # @function
+     # @apiCall supersonic.data.autoupdate
+     # @description
+     # Listen for cues on when to update data in views
+     # @exampleCoffeescript
+     # supersonic.data.autoupdate ->
+     #   updateView()
+    ###
+    autoupdate: autoupdate
   }
 
 ###
