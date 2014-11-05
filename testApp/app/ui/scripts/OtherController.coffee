@@ -2,8 +2,8 @@ angular
   .module('ui')
   .controller 'OtherController', ($scope, $q, supersonic) ->
 
-    $scope.hideInitialView = ()->
-      supersonic.ui.layers.hideInitial()
+    $scope.showInitialView = ()->
+      supersonic.ui.initialView.show()
 
     $scope.asModal = (url)->
       v = supersonic.ui.view(url)

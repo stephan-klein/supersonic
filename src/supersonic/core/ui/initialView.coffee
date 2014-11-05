@@ -30,7 +30,7 @@ module.exports = (steroids, log) ->
 
   show: bug "show", (params={})->
     new Promise (resolve, reject)->
-      steroids.initialView.show params
+      steroids.initialView.show params,
         onSuccess: resolve
         onFailure: reject
 

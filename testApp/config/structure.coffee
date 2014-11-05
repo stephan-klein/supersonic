@@ -16,9 +16,9 @@ module.exports =
     }
   ]
 
-  # initialView:
-  #   id: "initialView"
-  #   location: "common#index"
+  initialView:
+    id: "initialView"
+    location: "initial#start"
 
   # drawers:
   #   left:
