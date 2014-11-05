@@ -6,3 +6,9 @@ describe "supersonic.data.autoupdate", ->
     new Promise((resolve) ->
       supersonic.data.autoupdate resolve
     ).should.be.fulfilled
+
+  it "should not trigger on current tick", ->
+    triggered = false
+    supersonic.data.autoupdate ->
+      triggered = true
+    triggered.should.be.false
