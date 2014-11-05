@@ -19,7 +19,7 @@
   "ignore": [
   ],
   "dependencies": {
-    "platform": "Polymer/platform#0.4.1",
+    "webcomponentsjs": "0.4.2",
     "steroids-js": "3.x"
   }
 }
