@@ -18,7 +18,10 @@ module.exports =
 
     visibilityState.changes
       .map((event) ->
-        event.target?.visibilityState
+        if event.detail?.visibilityState?
+          event.detail.visibilityState
+        else
+          event.target?.visibilityState
       )
       .toProperty(visibilityState.defaultState)
       .map((stateString) ->

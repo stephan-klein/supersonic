@@ -33,7 +33,7 @@ describe "supersonic.ui.views.current", ->
     describe "unsubscribing", ->
       afterEach ->
         document.dispatchEvent new CustomEvent 'visibilitychange', {
-          visibilitystate: 'visible'
+          detail: visibilityState: 'visible'
         }
 
       it "will accept an unsubscribe function from the listener for signaling invisibility", (done) ->
@@ -43,6 +43,5 @@ describe "supersonic.ui.views.current", ->
         ).should.be.fulfilled.and.notify(done)
 
         document.dispatchEvent new CustomEvent 'visibilitychange', {
-          visibilitystate: 'hidden'
+          detail: visibilityState: 'hidden'
         }
-
