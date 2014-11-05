@@ -143,7 +143,7 @@ Building the app takes a few moments, after which you'll get an e-mail with a li
 [android-sdk]: http://developer.android.com/sdk/index.html
 [appgyver-cloud]: http://cloud.appgyver.com
 [app-permissions]: /tooling/build-settings/configuring-app-permissions
-[cloud-deploy]: /tooling/build-settings/deploy-to-cloud
+[cloud-deploy]: /tooling/build-settings/deploying-to-cloud
 [custom-plugin-config]: /tooling/build-settings/configuring-custom-plugins
 [custom-url-scheme-guide]: /tooling/build-settings/using-custom-url-schemes
 [xcode]: https://developer.apple.com/xcode/

@@ -84,6 +84,6 @@ After the build is complete, download and install the Debug IPA file on your dev
 
 [safari-web-inspector-guide]: /tooling/debugging/debugging-on-ios
 [ios-build-settings-guide]: /tooling/build-settings/build-settings-for-ios
-[cloud-deploy-guide]: /tooling/build-settings/deploy-to-cloud
+[cloud-deploy-guide]: /tooling/build-settings/deploying-to-cloud
 
 </section>

@@ -169,7 +169,7 @@ You can also see your build history and download earlier builds by clicking on t
 [apple-dev]: http://developer.apple.com
 [apple-devices-list]: https://developer.apple.com/account/ios/device/deviceList.action
 [apple-provisioning-list]: https://developer.apple.com/account/ios/profile/profileList.action
-[cloud-deploy]: /tooling/build-settings/deploy-to-cloud
+[cloud-deploy]: /tooling/build-settings/deploying-to-cloud
 [custom-plugin-config]: /tooling/build-settings/configuring-custom-phonegap-plugins
 [custom-url-scheme-guide]: /tooling/build-settings/custom-url-schemes
 [debug-build-guide]: /tooling/build-settings/building-a-debug-build
