@@ -6,18 +6,20 @@ header_sub_title: Learn the basics of modifying your app structure and logic
 section_id: second-mile
 subsections:
   - name: Overview
+  - name: Styling your app
   - name: Basic Debugging
-  - name: Model-View-Controller architecture
-  - name: Generating a new module
+  - name: Supersonic modules
   - name: App configuration
   - name: App logic in the controller
   - name: Access device hardware
+  - name: Allergic to modules and CoffeeScript?
 ---
 <section class="docs-section" id="overview">
 ## Overview
 
 In the previous section you created some simple functionality for your app just by using Supersonic web components. In this section you will:
 
+ - Learn how to style your app
  - Learn to do some simple debugging
  - Create some simple logic for your app
  - Learn to access the device hardware, namely the camera
@@ -25,8 +27,23 @@ In the previous section you created some simple functionality for your app just 
  - How to access and change that information.
 
 Let's get going!
-</section>
 
+</section>
+<section class="docs-section" id="styling-your-app">
+
+# Styling your app
+
+While the `<body>` content of your views can be styled with regular CSS just like any HTML content, the native UI elements such as the navigation and tab bars can be styled with a special CSS file, which is platform-specific. The files are located in the `app/common/native-styles/` folder. Open up the file name corresponding to the platform you are currently running the app on and find the `navigation-bar` selector. Change the contents to the following:
+
+```css
+navigation-bar {
+  background-color: #27ae60;
+}
+```
+
+After saving the document, your navigation bar will update to a nice green color. If you explore the CSS file further, you'll notice some basic selectors have already been laid out for you, feel free to play around with the values and see how they affect the app. For a more in-depth look at native styling, see the [native styles documentation](/native-styles).
+
+</section>
 <section class="docs-section" id="basic-debugging">
 ## Basic Debugging
 
@@ -42,7 +59,7 @@ Then, let your app refresh. At first glance nothing seems to be wrong, but probl
 
 ### Logs in Connect Screen
 
-You may have already noticed that the Connect Screen (the browser window from where you scan the app's QR code) contains a few different tabs, accesible from the top right corner of the window. Go to the "Logs" tab. If you've closed the window at some point, you can re-open it by typing `qr` in the Steroids console. Immediately you will notice a familiar looking message:
+You may have already noticed that the Connect Screen (the browser window from where you scan the app's QR code) contains a few different tabs, accesible from the top right corner of the window. Go to the "Logs" tab. If you've closed the window at some point, you can re-open it by typing `c` in the Steroids console. Immediately you will notice a familiar looking message:
 
 <img src="http://placehold.it/600x300">
 
@@ -59,48 +76,13 @@ Debugging via the Connect Screen logs is available on all devices and operating 
   - [Debugging on iOS](/tooling/debugging/debugging-on-ios/)
   - [Debugging on Android](/debugging/debugging-on-android)
   - [Debugging Best Practices](/tooling/debugging/best-practices/)
-</section>
-
-<section class="docs-section" id="model-view-controller-architecture">
-## Model-View-Controller architecture
-
-As a final preparation step, let's take a look at the basic structure for a Supersonic app. Supersonic apps follow a model-view-controller pattern by default. The `app/` folder houses your project's content files separated into modules.
-
-### Model
-The model of a module manages the data objects of that module. This means a model has no direct influence on the application's UI or logic, but it can be observed by the other components in the module, which will then handle any updates in the application data. In Supersonic projects, the model will usually be provided by Supersonic Data (and/or the Angular `$scope` object), so don't worry about fully grasping the concept at this stage.
-
-### View
-The view is the outward-facing side of the application and the interface through which users can interact with the app. A view will generally handle gathering input from a user and displaying the results of the input.
-
-### Controller
-The controller is the glue between the view and model, and contains the bulk of the app logic. It is responsible for updating a view when the model changes, as well as updating the model based on user input.
-
-### Basic module
-A module can contain several instances of the above file types, but generally it is useful to split your app into modules based on self-contained features. This will promote code readability (and reusability in future projects). Below is the basic structure of a Supersonic module as represented by the `common` module:
-
-```bash
-.
-└── common
-    ├── assets
-    ├── native-styles
-    ├── stylesheets
-    ├── views
-    ├── scripts (controllers)
-    └── (model)
-```
-
-The `common` module is the basis for all Supersonic apps. As the name suggests, it is used to house assets that are shared by the entire app (in the default project, it also houses the views). You can find things such as:
-
- - `common/views/layout.html`, which is the layout file applied "around" all views
-
->Note: If you wish to learn more about the MVC pattern and why you should use it, start by taking a look at the [Google primer](https://developer.chrome.com/apps/app_frameworks) on the subject.
 
 </section>
+<section class="docs-section" id="supersonic-modules">
 
-<section class="docs-section" id="generating-a-new-module">
-## Generating a new module
+## Supersonic modules
 
-Currently, our project only has a `common` module. We want to add a new feature to our app, so it makes sense to separate it from the `common` module. You can create a new module by running `steroids generate module <module-name>` in your project folder. Let's create a `camera` module. You will see that the following module is created for your project:
+By default, Supersonic apps are made up of modules, which contain the HTML and script files for a certain portion of your app functionality. Currently, our project only has a `common` module, which is a sort of shared space for all of our app content. We want to add a new feature to our app, so it makes sense to separate it from the `common` module. You can create a new module by running `steroids generate module <module-name>` in your project folder. Let's create a `camera` module. You will see that the following module is created for your project:
 
 ```bash
 app/camera
@@ -113,29 +95,9 @@ app/camera
 
 In the module, the basic view and controller are created for you, as well as the `index.coffee` file, which declares the associated Angular module and its dependencies, which in this case is the `common` module.
 
-### Building views from view partials
-
-Unlike `common`, your newly generated module has no `layout.html` file. Instead, the only HTML file, `index.html` looks like the following:
-
-```html
-<div ng-controller="IndexController">
-
-  <super-navbar>
-    <super-navbar-title>
-      Index
-    </super-navbar-title>
-  </super-navbar>
-
-  <div class="padding">
-    <h1>Pow! Here's your fresh module!</h1>
-  </div>
-
-</div>
-```
-There is no `<html>`, `<head>` or `<body>` tag declared in the file, just a `<div>` with some content. This is known as a view partial. To make it a valid HTML document (and above all a functioning Supersonic view), we need to attach it to a special layout file, which contains all of the missing declarations. When compiling your app, the Steroids CLI looks for a `layout.html` file in the module and attaches all view partials to that layout. Since the new module does not contain one, you could create a `layout.html` and specify the scripts and stylesheets that should be paired with this view partial, but there is an easier way. The `common` module already contains a layout file (located at `app/common/views/layout.html`), which has all the basic dependecies of your project declared, such as `supersonic.js`, `steroids.js` and `cordova.js`. Because we declared `common` as a dependency to this module, the Steroids CLI will also scan that module for layouts and use the one it finds to template your views in the camera module as well.
+To learn about the Supersonic app structure and working with a Model-View-Controller architecture, see the [Supersonic structure guide]().
 
 </section>
-
 <section class="docs-section" id="app-configuration">
 ## App configuration
 
@@ -167,7 +129,7 @@ The key change is, the second tab now points to our new `camera` module. After t
 <section class="docs-section" id="app-logic-in-the-controller">
 ## App logic in the controller
 
-With the new module in place, we can add some logic to it. In the MVC-pattern, the app logic is placed in a controller. When we generated our new module, an `IndexController.coffee` file was generated for us. It is empty by default, let's add a simple function to the Conroller (under the "#Controller functionality here" comment). Be aware that CoffeeScript is finicky about indentation, so you have to be careful to indent properly.
+With the new module in place, we can add some logic to it. When we generated our new module, an `IndexController.coffee` file was generated for us. It is empty by default, but let's add a simple function to the Conroller (under the "#Controller functionality here" comment). Be aware that CoffeeScript is finicky about indentation, so you have to be careful to indent properly.
 
 ```coffee
 angular
@@ -178,7 +140,7 @@ angular
       alert "Snap!"
 ```
 
-`takePicture` is a simple function that is attached to the Angular `$scope`, which is a special object that acts as a link between the application views and data model. By attaching `takePicture` to `$scope`, we are able to reference it in any view that shares the same $scope as the `IndexController`.
+`takePicture` is a simple function that is attached to the Angular `$scope`, which is a special object that acts as a link between the application views and data. By attaching `takePicture` to `$scope`, we are able to reference it in any view that shares the same `$scope` as the `IndexController`.
 
 ### Access app logic from your view
 
@@ -188,20 +150,56 @@ Now that we have a basic function defined, we want to provide a way to trigger i
 <button class="button button-block button-positive" ng-click="takePicture()">Take picture</button>
 ```
 
-Now we've defined a button "Take picture", and attached the previously created `takePicture` function to it via an `ng-click` handler. `ng-click` is a variation of a basic `onclick` handler in that it automatically detects and utilises the `$scope` object. This way, `ng-click` knows to look for `$scope.takePicture` instead of just `takePicture`, as a regular `onclick` handler would. Working with `$scope` might seem convoluted at first, but it will become second nature to you as you progress through the tutorials.
-
-Having defined the button and saved the document, your app should refresh and display the new button. If you click it, the alert you defined in `IndexController` will pop up on the screen. Tying together your app views and logic is as simple as that!
+This creates a button and attaches the previously created `takePicture` function to it via an `ng-click` handler. `ng-click` is a variation of a basic `onclick` handler that automatically detects and utilises the `$scope` object. Having defined the button and saved the document, your app should refresh and display the new button. If you click it, the alert you defined in `IndexController` will pop up on the screen. Tying together your app views and logic is as simple as that!
 
 </section>
 <section class="docs-section" id="access-device-hardware">
 ## Access device hardware
 
-As you may have guessed, the button we defined is intended to take a picture with the device camera. To achieve that, we need to access the device hardware. Supersonic provides access to a wide range of device APIs, such as geolocation, accelerometer and media APIs such as the microphone and camera. You can also find extended support via plugins, but for now the default camera API is more than enough. Change your `$scope.takePicture` to the following:
+To actually take a picture, we need to access the device hardware. Supersonic provides access to a wide range of device APIs such as geolocation and accelerometer, and media APIs such as the microphone and camera. You can also find extended support via plugins, but for now the default camera API is more than enough. Change your `$scope.takePicture` to the following:
 
 ```coffeescript
 $scope.takePicture = () ->
   supersonic.media.camera.takePicture()
 ```
 
-Now, when you click the "Take picture" -button, the device camera is opened and you can snap a photo. There are a number of options you can pass to the `supersonic.media.camera.takePicture` method. To read more about them and other device APIs, see the [device docs](/device/).
+Now, when you click the "Take picture" -button, the device camera is opened and you can snap a photo. Because we will most likely want to work with the photo after we take it, let's modify the `takePicture` method a little further by adding:
+
+```coffeescript
+$scope.imageSrc = undefined
+
+$scope.takePicture = () ->
+  supersonic.media.camera.takePicture(
+    options:
+      userFilesPath: "myPhoto.jpg"
+  )
+  .then( (imageSrc) ->
+    $scope.imageSrc = imageSrc
+    $scope.apply()
+  )
+```
+
+Now, also add the following to the `app/camera/views/index.html`, under the previously defined `<button>` element:
+
+```html
+<img ng-show="imageSrc" ng-src="{% raw %}{{imageSrc}}{% endraw %}" alt="pic here" />
+```
+
+Save both files and you'll see that after you take a picture, it is displayed in the camera view. To read more about them and other device APIs, see the [device docs](/device/).
+</section>
+
+<section class="docs-section" id="allergic-to-modules-and-coffeescript">
+##Allergic to modules and CoffeeScript?
+
+We strive to make the development experience as smooth as possible and through our collective experience have landed on a set of what in our minds is best development practices. This includes the use of CoffeeScript and Angular. Of course you may not agree with us, in which case you are free to utilise any framework you want.
+
+To work outside the modular app structure, you can place any assets in the `app/common/assets/` folder. The files in that folder will be copied to the application and accessible via their path relative to the `assets` folder (so e.g. `app/common/assets/views/hello.html` would be `views/hello.html` when accessed within your app).
+
+To work with plain JavaScript, you can just create your files in the `assets` folder as described above, or embed it straight into the CoffeeScript files by surrounding your JavaScript with backticks ( \` ):
+
+```coffeescript
+  dolan = `function() {
+    alert("Hey dolan!")
+  }`
+```
 </section>
