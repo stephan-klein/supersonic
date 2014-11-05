@@ -18,6 +18,7 @@ observer = new MutationObserver (mutations) ->
   for mutation in mutations
     # Check attributes
     if mutation.type is "attributes"
+
       # Class changed
       if mutation.attributeName is "class"
         mutation.target.class = mutation.target.getAttribute("class")
@@ -27,6 +28,9 @@ observer = new MutationObserver (mutations) ->
       # id changed
       if mutation.attributeName is "id"
         mutation.target.id = mutation.target.getAttribute("id")
+
+      if mutation.attributeName is "title"
+        mutation.target.onTitleChanged()
 
 SuperNavbarPrototype = Object.create HTMLElement.prototype
 
@@ -87,13 +91,27 @@ SuperNavbarPrototype.show = ->
 SuperNavbarPrototype.hide = ->
   supersonic.ui.navigationBar.hide()
 
+# Update navbar
+SuperNavbarPrototype.updateNavBar = ->
+  options = {}
+  # Set base for options
+  options.title = @getTitleForUpdate()
+  options.buttons =
+    left: this._leftButtons
+    right: this._rightButtons
+  # Update UI
+  supersonic.ui.navigationBar.update options
+
 # Navbar title
 
-SuperNavbarPrototype.updateNavBarTitle = ->
+SuperNavbarPrototype.getTitleForUpdate = ->
   if this.title? && this.title.length is 0
     this.title = " " # hack for not being able to clear the title with empty string
+  return this.title
+
+SuperNavbarPrototype.updateNavBarTitle = ->
   options =
-    title: this.title
+    title: @getTitleForUpdate()
   supersonic.ui.navigationBar.update(options)
 
 # Methods for navbar buttons
@@ -183,16 +201,14 @@ SuperNavbarPrototype.attachedCallback = ->
   # Observe attributes style and class
   observerConfiguration =
     attributes: true
-    attributeFilter: ["style", "class", "id"]
+    attributeFilter: ["style", "class", "id", "title"]
 
   observer.observe this, observerConfiguration
-
-  # Base buttons
-  this.onButtonsChanged()
 
   if this.isHidden()
     this.hide()
   else
+    this.updateNavBar()
     this.show()
 
 SuperNavbarPrototype.createdCallback = ->
