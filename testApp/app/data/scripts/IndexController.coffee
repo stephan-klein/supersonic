@@ -1,18 +1,13 @@
 angular
   .module('data')
   .controller("IndexController", ($scope, Task) ->
-
-    $scope.tasks = []
+    $scope.tasks = null
     $scope.showSpinner = true
 
-    fetchResources = ->
-      $scope.showSpinner = true
-      Task.findAll().then (tasks)->
+    supersonic.ui.views.current.whenVisible ->
+      Task.all().whenChanged (tasks)->
         $scope.$apply ->
           $scope.tasks = tasks
           $scope.showSpinner = false
 
-    # Trigger data refresh when this view becomes visible
-    supersonic.ui.views.current.whenVisible ->
-      fetchResources()
   )

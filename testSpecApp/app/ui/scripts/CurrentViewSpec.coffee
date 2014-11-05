@@ -23,3 +23,25 @@ describe "supersonic.ui.views.current", ->
       new Promise((resolve) ->
         currentView.whenVisible resolve
       ).should.be.fulfilled
+
+    it "should not trigger on current tick", ->
+      triggered = false
+      currentView.whenVisible ->
+        triggered = true
+      triggered.should.equal false
+
+    describe "unsubscribing", ->
+      afterEach ->
+        document.dispatchEvent new CustomEvent 'visibilitychange', {
+          detail: visibilityState: 'visible'
+        }
+
+      it "will accept an unsubscribe function from the listener for signaling invisibility", (done) ->
+        new Promise((resolve) ->
+          currentView.whenVisible ->
+            resolve
+        ).should.be.fulfilled.and.notify(done)
+
+        document.dispatchEvent new CustomEvent 'visibilitychange', {
+          detail: visibilityState: 'hidden'
+        }
