@@ -164,6 +164,17 @@ module.exports = (steroids, global, log) ->
       getStartedViews().then (ids) ->
         id in ids
 
+  parseRoute = (location, options={}) ->
+    routePattern = /^([\w\-]+)#([\w\-]+)(\?.+)?$/
+    parts = routePattern.exec location
+    if parts?
+      [whole, module, view, query] = parts
+      path = "app/#{module}/#{view}.html#{query || ''}"
+      path = "#{options.prefix}#{path}" if options.prefix?
+      path
+    else
+      location
+
   {
     find: find
     start: start
@@ -171,4 +182,5 @@ module.exports = (steroids, global, log) ->
     getStartedViews: getStartedViews
     isStartedView: isStartedView
     current: current(global, log)
+    _parseRoute: parseRoute
   }

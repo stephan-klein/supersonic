@@ -1,0 +1,16 @@
+<div ng-controller="TabBarController">
+
+  <div class="padding">
+    <ul class="list">
+      <li class="item" ng-repeat="method in methods">
+        <button
+          class="button button-block"
+          ng-click="run(method)">
+          {{method}}
+        </button>
+      </li>
+    </ul>
+  </div>
+
+
+</div>

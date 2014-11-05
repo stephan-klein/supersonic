@@ -31,21 +31,12 @@ module.exports = (steroids, log) ->
 
   getView = (location)->
     webView = new steroids.views.WebView
-      location: parseRoute location
+      location: supersonic.ui.views._parseRoute(location)
 
     return view =
       getLocation: -> location
       _getWebView: -> webView
       start: (id) ->
         supersonic.ui.views.start view, (id || location)
-
-  parseRoute = (location) ->
-    routePattern = /^([\w\-]+)#([\w\-]+)(\?.+)?$/
-    parts = routePattern.exec location
-    if parts?
-      [whole, module, view, query] = parts
-      "app/#{module}/#{view}.html#{query || ''}"
-    else
-      location
 
   return getView
