@@ -1,8 +1,6 @@
 Bacon = require 'baconjs'
 data = require 'ag-data'
 
-events = require './events'
-
 module.exports = (logger, window) ->
   # Connect ag-data to a resource bundle from window.ag.data such that errors
   # are correctly wrapped and logged. Notably, if window.ag.data exists but
@@ -25,16 +23,6 @@ module.exports = (logger, window) ->
       logger.error "Tried to access a cloud resource, but no resources have been configured"
       throw new Error "No cloud resources available"
 
-  # Hook an event listener that triggers every 10 seconds when the current view is visible
-  autoupdate = (f) ->
-    events.visibility.flatMapLatest((visible) ->
-      if visible
-        Bacon.interval(10000, true).startWith true
-      else
-        Bacon.never()
-    ).onValue ->
-      setTimeout f, 0
-
   {
     ###
      # @namespace supersonic.data
@@ -56,19 +44,6 @@ module.exports = (logger, window) ->
      # takeOutTheTrash.save()
     ###
     model: createModel
-
-    ###
-     # @namespace supersonic.data
-     # @name autoupdate
-     # @function
-     # @apiCall supersonic.data.autoupdate
-     # @description
-     # Listen for cues on when to update data in views.
-     # @exampleCoffeescript
-     # supersonic.data.autoupdate ->
-     #   updateView()
-    ###
-    autoupdate: autoupdate
   }
 
 ###
