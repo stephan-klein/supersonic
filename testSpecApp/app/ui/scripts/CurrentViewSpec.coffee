@@ -23,3 +23,9 @@ describe "supersonic.ui.views.current", ->
       new Promise((resolve) ->
         currentView.whenVisible resolve
       ).should.be.fulfilled
+
+    it "should not trigger on current tick", ->
+      triggered = false
+      currentView.whenVisible ->
+        triggered = true
+      triggered.should.equal false
