@@ -5,7 +5,16 @@ describe 'supersonic.angular.superscope', ->
 
   it 'can be $watched', (done) ->
     inject (superscope) ->
-      superscope.foo = 'bar'
       new Promise((resolve) ->
         superscope.$watch 'foo', resolve
       ).should.eventually.equal('bar').and.notify done
+      superscope.$apply ->
+        superscope.foo = 'bar'
+
+  it 'is isolated from rootScope', (done) ->
+    inject ($rootScope, superscope) ->
+      (new Promise (resolve) ->
+        superscope.$watch 'foo', resolve
+      ).timeout(100).should.be.rejected.and.notify done
+      $rootScope.$apply ->
+        $rootScope.foo = 'bar'
