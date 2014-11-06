@@ -28,7 +28,7 @@ module.exports = (steroids, log) ->
   ###
   show: bug "show", ->
     new Promise (resolve, reject)->
-      steroids.Tabs.show {},
+      steroids.tabBar.show {},
         onSuccess: resolve
         onFailure: reject
 
@@ -48,7 +48,7 @@ module.exports = (steroids, log) ->
   ###
   hide: bug "hide", ->
     new Promise (resolve, reject)->
-      steroids.Tabs.hide {},
+      steroids.tabBar.hide {},
         onSuccess: resolve
         onFailure: reject
 
@@ -70,7 +70,7 @@ module.exports = (steroids, log) ->
   ###
   update: bug "update", (tabsArray)->
     new Promise (resolve, reject)->
-      steroids.Tabs.update tabs: tabsArray,
+      steroids.tabBar.update tabs: tabsArray,
         onSuccess: resolve
         onFailure: reject
 
@@ -101,7 +101,7 @@ module.exports = (steroids, log) ->
     tabs = (handleRoutes(tab) for tab in tabsArray)
 
     new Promise (resolve, reject)->
-      steroids.Tabs.replace tabs: tabs,
+      steroids.tabBar.replace tabs: tabs,
         onSuccess: resolve
         onFailure: reject
 
@@ -123,7 +123,7 @@ module.exports = (steroids, log) ->
   ###
   select: bug "select", (tabIndex)->
     new Promise (resolve, reject)->
-      steroids.Tabs.selectTab index: tabIndex,
+      steroids.tabBar.selectTab index: tabIndex,
         onSuccess: resolve
         onFailure: reject
 
@@ -147,7 +147,7 @@ module.exports = (steroids, log) ->
     unless typeof config is "object" and Object.keys(config).length
       throw new Error "Could not update current tab without configuration object"
     new Promise (resolve, reject)->
-      steroids.Tabs.currentTab.update config,
+      steroids.tabBar.currentTab.update config,
         onSuccess: resolve
         onFailure: reject
 
@@ -169,7 +169,7 @@ module.exports = (steroids, log) ->
   ###
   setStyleClass: bug "setStyleClass", (className)->
     new Promise (resolve, reject)->
-      steroids.Tabs.setStyleClass className,
+      steroids.tabBar.setStyleClass className,
         onSuccess: resolve
         onFailure: reject
 
@@ -192,7 +192,7 @@ module.exports = (steroids, log) ->
   ###
   setStyleId: bug "setStyleId", (id)->
     new Promise (resolve, reject)->
-      steroids.Tabs.setStyleId id,
+      steroids.tabBar.setStyleId id,
         onSuccess: resolve
         onFailure: reject
 
@@ -215,6 +215,6 @@ module.exports = (steroids, log) ->
   ###
   setStyleCSS: bug "setStyleCSS", (css)->
     new Promise (resolve, reject)->
-      steroids.Tabs.setStyleCSS css,
+      steroids.tabBar.setStyleCSS css,
         onSuccess: resolve
         onFailure: reject
