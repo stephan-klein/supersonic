@@ -3,7 +3,7 @@ supersonic = require '../core'
 module.exports = (angular) ->
   angular
     .module('supersonic.device', [])
-    .service('supersonicDevice', (qify) ->
+    .service('supersonicDevice', (qify, $q) ->
 
       decorate = (object, decorator) ->
         result = {}
@@ -28,6 +28,8 @@ module.exports = (angular) ->
 
           platform: qify device.platform
 
-          vibrate: device.vibrate
+          vibrate: qify device.vibrate
+
+          ready: $q.when device.ready
         }
     )

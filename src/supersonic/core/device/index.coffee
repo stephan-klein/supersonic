@@ -6,3 +6,4 @@ module.exports = (steroids, log) ->
   compass: require("./compass")(steroids, log)
   platform: require("./platform")(steroids, log)
   vibrate: require("./vibrate")(steroids, log)
+  ready: require("./ready")(steroids, log)

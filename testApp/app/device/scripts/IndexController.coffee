@@ -114,3 +114,9 @@ angular
     $scope.testVibrate = () ->
       supersonic.device.vibrate().then ->
         $scope.vibrations++
+
+    $scope.deviceReady = ->
+      supersonic.device.ready.then ->
+        alert "Yep."
+      , ->
+        alert "Nope."
