@@ -74,7 +74,7 @@ describe "supersonic.data.channel", ->
         ).timeout(100).should.be.rejected.and.notify done
         channel.publish 'message'
 
-    describe.skip "cross-view message passing", ->
+    describe "cross-view message passing", ->
       startedView = null
       beforeEach ->
         supersonic.ui
@@ -85,10 +85,9 @@ describe "supersonic.data.channel", ->
       afterEach ->
         startedView.stop()
 
-      it "can publish a message that will be received by another view", (done) ->
+      it "can subscribe to messages published by another view", (done) ->
         channel = supersonic.data.channel(channelName)
-        channel.publish 'bar'
         new Promise((resolve) ->
-          channel.inbound.skip(1).onValue resolve
-        ).should.eventually.equal('bar').and.notify done
+          channel.subscribe resolve
+        ).should.eventually.equal('Ping!').and.notify done
 
