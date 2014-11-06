@@ -98,7 +98,7 @@ SuperNavbarButtonPrototype._setButtonAction = ->
     @click()
 
 SuperNavbarButtonPrototype._setButtonTitle = ->
-  this._button.title = this.textContent
+  this._button.title = this.textContent.trim()
 
 
 # When a new element is detected in the DOM

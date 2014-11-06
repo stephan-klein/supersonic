@@ -3,11 +3,11 @@ layout: docs_tooling
 header_title: Install a build onto your device
 header_sub_title: Learn how to get your app from the Build Service on to your device.
 section_id: build-settings
-subsection_id: install-onto-device
+subsection_id: installing-onto-device
 ---
-<section class="docs-section" id="install-onto-device">
+<section class="docs-section" id="installing-onto-device">
 
-# Install onto device
+# Installing onto device
 
 In order to test a custom build you've downloaded from the [Build Service](https://cloud.appgyver.com), you have to install it onto your device.
 

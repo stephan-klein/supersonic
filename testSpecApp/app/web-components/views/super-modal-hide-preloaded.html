@@ -1,0 +1,9 @@
+<script>
+window.addEventListener("HTMLImportsLoaded", function() {
+  supersonic.ui.views.current.whenVisible(function() {
+    document.getElementById("hide-modal").click()
+  });
+});
+</script>
+
+<super-modal-hide id="hide-modal">Hide modal</super-modal-hide>

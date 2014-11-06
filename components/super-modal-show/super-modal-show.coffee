@@ -1,4 +1,4 @@
-SuperShowModalPrototype = Object.create HTMLElement.prototype
+SuperModalShowPrototype = Object.create HTMLElement.prototype
 ###
  # @namespace components
  # @name super-modal-show
@@ -19,14 +19,26 @@ SuperShowModalPrototype = Object.create HTMLElement.prototype
  # <!-- The default action can be overridden -->
  # <super-modal-show location="meeting#details" action="touchmove">Show meeting details</super-modal-show>
 ###
-SuperShowModalPrototype.createdCallback = ->
+SuperModalShowPrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
 
   @addEventListener action, =>
+    viewId = @getAttribute "view-id"
+    if viewId
+      return supersonic.ui.views.find(viewId)
+        .then (view) ->
+          supersonic.ui.modal.show(view)
+        .catch (error) ->
+          throw new Error "Failed to push view: #{error}"
+
     location = @getAttribute "location"
     if location
-      view = supersonic.ui.view(location)
-      supersonic.ui.modal.show view
+      view = supersonic.ui.view location
+      return supersonic.ui.modal.show(view)
+        .catch (error) ->
+          throw new Error "Failed to push view: #{error}"
+
+    throw new Error "Either view-id or location must be set"
 
 document.registerElement "super-modal-show",
-  prototype: SuperShowModalPrototype
+  prototype: SuperModalShowPrototype

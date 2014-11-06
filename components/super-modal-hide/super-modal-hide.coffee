@@ -1,4 +1,4 @@
-SuperHideModalPrototype = Object.create HTMLElement.prototype
+SuperModalHidePrototype = Object.create HTMLElement.prototype
 ###
  # @namespace components
  # @name super-modal-hide
@@ -15,11 +15,11 @@ SuperHideModalPrototype = Object.create HTMLElement.prototype
  # <!-- The default action can be overridden -->
  # <super-modal-hide action="touchmove">Hide modal</super-modal-hide>
 ###
-SuperHideModalPrototype.createdCallback = ->
+SuperModalHidePrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
 
   @addEventListener action, ->
     supersonic.ui.modal.hide()
 
 document.registerElement "super-modal-hide",
-  prototype: SuperHideModalPrototype
+  prototype: SuperModalHidePrototype
