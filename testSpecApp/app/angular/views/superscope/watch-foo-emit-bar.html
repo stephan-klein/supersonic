@@ -2,10 +2,11 @@
 <script>
 angular.module('supersonic.superscope.watch-foo-emit-bar', [
   'supersonic.superscope'
-]).controller('WatchFooEmitBarController', (superscope) ->
-  superscope.$watch 'foo', (foo) ->
-    superscope.bar = foo
-)
+]).controller('WatchFooEmitBarController', function (superscope) {
+  // superscope.$watch('foo', function (foo) {
+  //  superscope.bar = foo;
+  // });
+});
 </script>
 
 <div ng-app="supersonic.superscope.watch-foo-emit-bar">
