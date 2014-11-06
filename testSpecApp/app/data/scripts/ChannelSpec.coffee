@@ -5,10 +5,6 @@ describe "supersonic.data.channel", ->
   it "accepts a channel name and returns a channel", ->
     supersonic.data.channel('foo').name.should.equal 'foo'
 
-  describe "publish()", ->
-    it "is a function", ->
-      supersonic.data.channel('foo').publish.should.be.a 'function'
-
   describe "subscribe()", ->
     it "is a function", ->
       supersonic.data.channel('foo').subscribe.should.be.a 'function'
@@ -39,3 +35,18 @@ describe "supersonic.data.channel", ->
         channel.subscribe ->
           @reply('bar')
         channel.inbound.push 'message'
+
+  describe "publish()", ->
+    it "is a function", ->
+      supersonic.data.channel('foo').publish.should.be.a 'function'
+
+    describe "intra-view message passing", (done) ->
+      it "allows other channel instances with the same name to subscribe to messages", ->
+        producer = supersonic.data.channel 'foo'
+        consumer = supersonic.data.channel 'foo'
+
+        new Promise((resolve) ->
+          consumer.subscribe resolve
+        ).should.eventually.equal('message').and.notify done
+        
+        producer.publish 'message'
