@@ -68,6 +68,10 @@ Running testApp and testSpecApp requires [devroids](https://github.com/AppGyver/
 * Clone [devroids](https://github.com/AppGyver/devroids) repo, install its dependencies (npm install) and run `npm link`.
 * Use devroids as you would use steroids.
 
+Installing dependencies:
+
+    bower install
+
 ### Generating documentation
 
 Supersonic documentation is generated in a two-step process. A grunt task extracts metadata from source files. The docs are then presented along with the metadata by a jekyll server.
