@@ -77,7 +77,7 @@ module.exports = (steroids, log) ->
 
   ###
    # @namespace supersonic.ui.tabBar
-   # @name hide
+   # @name replace
    # @function
    # @description
    # Replaces the tab bar
