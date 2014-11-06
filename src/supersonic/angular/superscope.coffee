@@ -1,6 +1,8 @@
 module.exports = (angular) ->
   angular
     .module('supersonic.superscope', [])
-    .service('superscope', ($rootScope) ->
-      $rootScope.$new()
+    .provider('superscope', ($rootScopeProvider) ->
+      {
+        $get: $rootScopeProvider.$get
+      }
     )

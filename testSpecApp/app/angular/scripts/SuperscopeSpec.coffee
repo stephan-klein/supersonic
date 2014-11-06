@@ -18,3 +18,16 @@ describe 'supersonic.angular.superscope', ->
       ).timeout(100).should.be.rejected.and.notify done
       $rootScope.$apply ->
         $rootScope.foo = 'bar'
+
+  it 'is a singleton instance', ->
+    Promise.join(
+      new Promise (resolve) ->
+        inject (superscope) ->
+          resolve superscope
+      new Promise (resolve) ->
+        inject (superscope) ->
+          resolve superscope
+    ).spread (first, second) ->
+      first.should.equal second
+
+
