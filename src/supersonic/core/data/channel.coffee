@@ -6,7 +6,9 @@ module.exports = (window) ->
       @outbound.push value
 
     subscribe: (listener) =>
-      @inbound.onValue listener
+      @inbound.onValue listener.bind {
+        reply: @publish
+      }
 
   return createChannel = (name) ->
     new PubSubChannel name

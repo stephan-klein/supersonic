@@ -20,3 +20,11 @@ describe "supersonic.data.channel", ->
         channel.subscribe resolve
       ).should.be.fulfilled.and.notify(done)
       channel.inbound.push 'message'
+
+    it "should run listener in a scope with reply()", (done) ->
+      channel = supersonic.data.channel 'foo'
+      channel.inbound = new Bacon.Bus
+      channel.subscribe ->
+        done asserting =>
+          @reply.should.be.a 'function'
+      channel.inbound.push 'message'
