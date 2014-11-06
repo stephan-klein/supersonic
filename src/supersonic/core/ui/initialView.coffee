@@ -28,9 +28,14 @@ module.exports = (steroids, log) ->
    # A promise that is resolved when the Initial View starts to dismiss. If there the Initial View is not present on the screen, the promise will be rejected.
   ###
 
-  show: bug "show", (params={})->
+  show: bug "show", (showAnimation="fade")->
+    animation = if typeof showAnimation is "string"
+      supersonic.ui.animate showAnimation
+    else
+      showAnimation
+
     new Promise (resolve, reject)->
-      steroids.initialView.show params,
+      steroids.initialView.show {animation},
         onSuccess: resolve
         onFailure: reject
 
@@ -50,8 +55,13 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the Initial View starts to dismiss. If there the Initial View is not present on the screen, the promise will be rejected.
   ###
-  dismiss: bug "dismiss", (params={})->
+  dismiss: bug "dismiss", (showAnimation="fade")->
+    animation = if typeof showAnimation is "string"
+      supersonic.ui.animate showAnimation
+    else
+      showAnimation
+
     new Promise (resolve, reject)->
-      steroids.initialView.dismiss params,
+      steroids.initialView.dismiss {animation},
         onSuccess: resolve
         onFailure: reject
