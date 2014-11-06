@@ -125,10 +125,10 @@ module.exports = (steroids, log) ->
   ###
 
   open: bug "open", (side, options)->
-    edge = if side is "left"
-      steroids.screen.edges.LEFT
-    else
+    edge = if side is "right"
       steroids.screen.edges.RIGHT
+    else
+      steroids.screen.edges.LEFT
 
     new Promise (resolve, reject)->
       steroids.drawers.show {
