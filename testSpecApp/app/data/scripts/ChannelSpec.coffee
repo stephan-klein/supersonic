@@ -18,7 +18,7 @@ describe "supersonic.data.channel", ->
       channel.inbound = new Bacon.Bus
       new Promise((resolve) ->
         channel.subscribe resolve
-      ).should.be.fulfilled.and.notify(done)
+      ).should.eventually.equal('message').and.notify(done)
       channel.inbound.push 'message'
 
     it "should run listener in a scope with reply()", (done) ->
@@ -28,3 +28,14 @@ describe "supersonic.data.channel", ->
         done asserting =>
           @reply.should.be.a 'function'
       channel.inbound.push 'message'
+
+    describe "reply()", ->
+      it "pipes to publish", (done) ->
+        channel = supersonic.data.channel 'foo'
+        channel.inbound = new Bacon.Bus
+        new Promise((resolve) ->
+          channel.publish = resolve
+        ).should.eventually.equal('bar').and.notify done
+        channel.subscribe ->
+          @reply('bar')
+        channel.inbound.push 'message'
