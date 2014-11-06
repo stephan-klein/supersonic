@@ -1,0 +1,15 @@
+
+<script>
+angular.module('supersonic.superscope.watch-foo-emit-bar', [
+  'supersonic.superscope'
+]).controller('WatchFooEmitBarController', (superscope) ->
+  superscope.$watch 'foo', (foo) ->
+    superscope.bar = foo
+)
+</script>
+
+<div ng-app="supersonic.superscope.watch-foo-emit-bar">
+  <div ng-controller="WatchFooEmitBarController">
+    This view watches superscope.foo and replies back with the same value in superscope.bar
+  </div>
+</div>
