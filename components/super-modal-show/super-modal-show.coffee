@@ -1,4 +1,4 @@
-SuperShowModalPrototype = Object.create HTMLElement.prototype
+SuperModalShowPrototype = Object.create HTMLElement.prototype
 ###
  # @namespace components
  # @name super-modal-show
@@ -19,7 +19,7 @@ SuperShowModalPrototype = Object.create HTMLElement.prototype
  # <!-- The default action can be overridden -->
  # <super-modal-show location="meeting#details" action="touchmove">Show meeting details</super-modal-show>
 ###
-SuperShowModalPrototype.createdCallback = ->
+SuperModalShowPrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
 
   @addEventListener action, =>
@@ -29,4 +29,4 @@ SuperShowModalPrototype.createdCallback = ->
       supersonic.ui.modal.show view
 
 document.registerElement "super-modal-show",
-  prototype: SuperShowModalPrototype
+  prototype: SuperModalShowPrototype
