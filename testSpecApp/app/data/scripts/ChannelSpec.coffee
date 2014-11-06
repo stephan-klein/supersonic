@@ -51,7 +51,14 @@ describe "supersonic.data.channel", ->
 
         producer.publish 'message'
 
-    describe "cross-view message passing", ->
+      it "will not feedback a published message to the same channel instance", (done) ->
+        channel = supersonic.data.channel 'foo'
+        new Promise((resolve) ->
+          channel.subscribe resolve
+        ).timeout(100).should.be.rejected.and.notify done
+        channel.publish 'message'
+
+    describe.skip "cross-view message passing", ->
       startedView = null
       channelName = "foo-#{Math.random()}"
       beforeEach ->
