@@ -48,5 +48,25 @@ describe "supersonic.data.channel", ->
         new Promise((resolve) ->
           consumer.subscribe resolve
         ).should.eventually.equal('message').and.notify done
-        
+
         producer.publish 'message'
+
+    describe "cross-view message passing", ->
+      startedView = null
+      channelName = "foo-#{Math.random()}"
+      beforeEach ->
+        supersonic.ui
+          .view("data#channel/pingback?channel=#{channelName}")
+          .start()
+          .then (view) ->
+            startedView = view
+      afterEach ->
+        startedView.stop()
+
+      it "can publish a message that will be received by another view", (done) ->
+        channel = supersonic.data.channel(channelName)
+        channel.publish 'bar'
+        new Promise((resolve) ->
+          channel.inbound.skip(1).onValue resolve
+        ).should.eventually.equal('bar').and.notify done
+
