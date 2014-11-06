@@ -34,6 +34,13 @@ or use the Supersonic API, e.g.
 ```coffeescript
 supersonic.ui.navigationBar.setStyleClass("awesome-nav-bar")
 ```
+
+For a more thorough look at the Supersonic styling APIs, head over to the docs:
+
+  - [navigation bar][navigation-bar-api]
+  - [tab bar][tab-bar-api]
+  - [navigation bar button][navigation-bar-button-api]
+
 ### Media Assets
 
 Media assets are accessed using the url function and must be contained within the Application's bundle or on the device filesystem. Resources in the application bundle can be accessed using bundle://, files on the device are acessessed using file://,  and resources in the device documents folder can be accessed using documents://.  If no protocol is specified, the resources will be searched for first in the documents folder then in the resource bundle.
@@ -77,25 +84,13 @@ In the example above, adding this snippet to `default.css` would send parse erro
 
 - _cache-styles_: `auto`, `none`, `all`, `minimize-styling`, and `cache-images`. Used to toggle caching and to set limits for those caches. This property accepts a comma-delimited list of the preceding values. Values are processed in order and are accumulated. `auto` is the same as `minimize-styling, cache-images`. `minimize-styling` tries to prevent styling of an element if its styling has not changed. `cache-images` caches images generated during styling to avoid unnecessary rendering on future stylings and to generally increase styling speeds. The default (and recommended) value is `auto`.
 
-- _image-cache-count_: [number]. Determines how many images we be retained in the image cache, assuming it has been turned on with `cache-styles`. If this is set to `0`, then there will be no upper limit to how many images live in the cache. The default value is `10`.
-
-- _image-cache-size_: [number]. Determines how many bytes of image data are retained in the image cache. A value of `0` indicates that there is no upper limit to how many bytes can live in the cache. Note that `image-cache-count` will still be honored. The default value is `0`.
-
-[Pixate-home]: http://www.pixate.com/
-[number-value]: /api/pixate/
-</section>
-default cache settings, and bump the image cache count to 100 images.
-
-### Configuration Properties
-
-- _parse-error-destination_: `none` or `console`. Setting it to `console` displays any parse errors in your project's CSS in the XCode console during debugging. The default value is `none`.
-
-- _cache-styles_: `auto`, `none`, `all`, `minimize-styling`, and `cache-images`. Used to toggle caching and to set limits for those caches. This property accepts a comma-delimited list of the preceding values. Values are processed in order and are accumulated. `auto` is the same as `minimize-styling, cache-images`. `minimize-styling` tries to prevent styling of an element if its styling has not changed. `cache-images` caches images generated during styling to avoid unnecessary rendering on future stylings and to generally increase styling speeds. The default (and recommended) value is `auto`.
-
 - _image-cache-count_: [number][number-value]. Determines how many images we be retained in the image cache, assuming it has been turned on with `cache-styles`. If this is set to `0`, then there will be no upper limit to how many images live in the cache. The default value is `10`.
 
 - _image-cache-size_: [number][number-value]. Determines how many bytes of image data are retained in the image cache. A value of `0` indicates that there is no upper limit to how many bytes can live in the cache. Note that `image-cache-count` will still be honored. The default value is `0`.
 
 [Pixate-home]: http://www.pixate.com/
-[number-value]: /api/pixate/
+[navigation-bar-api]:/api-reference/stable/supersonic/ui/navigationbar/
+[tab-bar-api]:/api-reference/stable/supersonic/ui/tabs/
+[navigation-bar-button-api]:/api-reference/stable/supersonic/ui/navigationbarbutton-class/
+
 </section>
