@@ -7,6 +7,10 @@ angular
       "showTabBar"
       "updateTabBar"
       "replaceTabBar"
+      "updateCurrentTab"
+      "setStyleClass"
+      "setStyleId"
+      "setStyleCSS"
     ]
 
     $scope.run = (method)->
@@ -46,3 +50,22 @@ angular
       supersonic.ui.tabBar.replace(tabsArray)
         .catch (err)->
           supersonic.logger.error "Could not replace tabs: #{JSON.stringify(err)}"
+
+    $scope.select = (tabIndex)->
+      supersonic.ui.tabBar.select(tabIndex)
+        .catch (err)->
+          supersonic.logger.error "Could not select tabs: #{JSON.stringify(err)}"
+
+    $scope.updateCurrentTab = ->
+      supersonic.ui.tabBar.updateCurrentTab
+        title: "Asteroids"
+        badge: "5"
+
+    $scope.setStyleClass = ->
+      supersonic.ui.tabBar.setStyleClass "greenbg"
+
+    $scope.setStyleId = ->
+      supersonic.ui.tabBar.setStyleId "graybg"
+
+    $scope.setStyleCSS = ->
+      supersonic.ui.tabBar.setStyleCSS "background-color: red;"

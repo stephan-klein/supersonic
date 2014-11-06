@@ -100,3 +100,107 @@ module.exports = (steroids, log) ->
       steroids.tabBar.replace tabs: tabs,
         onSuccess: resolve
         onFailure: reject
+
+  ###
+   # @namespace supersonic.ui.tabBar
+   # @name select
+   # @function
+   # @description
+   # Selects the tab bar
+   # @usageJavaScript
+   # supersonic.ui.tabBar.select(1);
+   # @type
+   # supersonic.ui.tabBar.select: (
+   # ) => Promise
+   # @returnsDescription
+   # A promise that is resolved when the tab bar has been selected. If tab bar could not be selected, the promise will be rejected.
+  ###
+  select: bug "select", (tabIndex)->
+    new Promise (resolve, reject)->
+      steroids.tabBar.selectTab index: tabIndex,
+        onSuccess: resolve
+        onFailure: reject
+
+  ###
+   # @namespace supersonic.ui.tabBar
+   # @name select
+   # @function
+   # @description
+   # Selects the tab bar
+   # @usageJavaScript
+   # supersonic.ui.tabBar.updateCurrentTab({title: "Hello"});
+   # @type
+   # supersonic.ui.tabBar.updateCurrentTab: (
+   # ) => Promise
+   # @returnsDescription
+   # A promise that is resolved when the current tab has been updated. If tab could not be updated, the promise will be rejected.
+  ###
+  updateCurrentTab: bug "updateCurrentTab", (config={})->
+    unless typeof config is "object" and Object.keys(config).length
+      throw new Error "Could not update current tab without configuration object"
+    new Promise (resolve, reject)->
+      steroids.tabBar.currentTab.update config,
+        onSuccess: resolve
+        onFailure: reject
+
+  ###
+   # @namespace supersonic.ui.tabBar
+   # @name setStyleClass
+   # @function
+   # @description
+   # Adds a CSS style class for the native tab bar.
+   # @usageJavaScript
+   # supersonic.ui.tabBar.setStyleClass("my-awesome-tabs");
+   # @type
+   # supersonic.ui.tabBar.setStyleClass: (
+   # ) => Promise
+   # @returnsDescription
+   # A promise that is resolved once the new style class has been set. If class could not be set, the promise will be rejected.
+  ###
+  setStyleClass: bug "setStyleClass", (className)->
+    new Promise (resolve, reject)->
+      steroids.tabBar.setStyleClass className,
+        onSuccess: resolve
+        onFailure: reject
+
+
+  ###
+   # @namespace supersonic.ui.tabBar
+   # @name setStyleId
+   # @function
+   # @description
+   # Adds a CSS style id for the native tab bar.
+   # @usageJavaScript
+   # supersonic.ui.tabBar.setStyleId("graybg");
+   # @type
+   # supersonic.ui.tabBar.setStyleClass: (
+   # ) => Promise
+   # @returnsDescription
+   # A promise that is resolved once the new style id has been set. If id could not be set, the promise will be rejected.
+  ###
+  setStyleId: bug "setStyleId", (id)->
+    new Promise (resolve, reject)->
+      steroids.tabBar.setStyleId id,
+        onSuccess: resolve
+        onFailure: reject
+
+
+  ###
+   # @namespace supersonic.ui.tabBar
+   # @name setStyleCSS
+   # @function
+   # @description
+   # Adds a CSS style id for the native tab bar.
+   # @usageJavaScript
+   # supersonic.ui.tabBar.setStyleCSS("background-color: red;");
+   # @type
+   # supersonic.ui.tabBar.setStyleCSS: (
+   # ) => Promise
+   # @returnsDescription
+   # A promise that is resolved once the new style css has been set. If style css could not be set, the promise will be rejected.
+  ###
+  setStyleCSS: bug "setStyleCSS", (css)->
+    new Promise (resolve, reject)->
+      steroids.tabBar.setStyleCSS css,
+        onSuccess: resolve
+        onFailure: reject

@@ -6,8 +6,6 @@
   *               Please follow https://github.com/AppGyver/steroids/issues/558
   **/
 
-
-
 /**************************************
  *  Navigation Bar
  *************************************/
@@ -60,4 +58,13 @@ tab-bar divider {
 /* Tab Bar top marker (Android Only) */
 tab-bar tab-bar-item marker-top:selected {
   background-color: #1596f7;
+}
+
+/* Custom stuff */
+tab-bar#graybg {
+  background-color: gray;
+}
+
+tab-bar.greenbg {
+  background-color: green;
 }
