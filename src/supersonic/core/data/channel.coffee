@@ -1,26 +1,40 @@
+Bacon = require 'baconjs'
+deepEqual = require 'deep-equal'
+
 module.exports = (window) ->
 
-  outboundBus = (name) ->
+  outboundBus = (channelName, sender) ->
     bus = new Bacon.Bus
 
     bus
       .map (message) ->
-        channel: name
+        channel: channelName
+        sender: sender
         message: message
       .onValue (data) ->
         window.postMessage data
 
     bus
 
-  inboundStream = (name) ->
+  inboundStream = (channelName, receiver) ->
     Bacon.fromEventTarget(window, "message")
-      .filter((event) -> event.data.channel is name)
+      .filter((event) ->
+        (event.data.channel is channelName) and !deepEqual(event.data.sender, receiver)
+      )
       .map((event) -> event.data.message)
+
+  nextId = do ->
+    id = 0
+    ->
+      ++id
 
   class PubSubChannel
     constructor: (@name) ->
-      @outbound = outboundBus @name
-      @inbound = inboundStream @name
+      @identity =
+        instance: nextId()
+        view: window.AG_WEBVIEW_UDID
+      @outbound = outboundBus @name, @identity
+      @inbound = inboundStream @name, @identity
 
     publish: (value) =>
       @outbound.push value

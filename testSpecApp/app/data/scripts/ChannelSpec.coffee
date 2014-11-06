@@ -3,7 +3,17 @@ describe "supersonic.data.channel", ->
     supersonic.data.channel.should.be.a 'function'
 
   it "accepts a channel name and returns a channel", ->
-    supersonic.data.channel('foo').name.should.equal 'foo'
+    supersonic.data.channel('foo').should.be.an 'object'
+
+  describe "identity", ->
+    it "is an object", ->
+      supersonic.data.channel('foo').identity.should.be.an 'object'
+
+    it "identifies the view and the channel instance within that view", ->
+      supersonic.data.channel('foo').identity.should.have.keys [
+        'view'
+        'instance'
+      ]
 
   describe "subscribe()", ->
     it "is a function", ->
