@@ -80,7 +80,7 @@ Supersonic documentation is generated in a two-step process. A grunt task extrac
     grunt compile-docs
     cd docs
     jekyll serve
-    open http://localhost:4000/api
+    open http://localhost:4000
 
 ### Publishing to bower
 
