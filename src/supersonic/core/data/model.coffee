@@ -5,6 +5,25 @@ module.exports = (logger, window) ->
   # Connect ag-data to a resource bundle from window.ag.data such that errors
   # are correctly wrapped and logged. Notably, if window.ag.data exists but
   # does not define a valid bundle, an error will be logged without interaction.
+  ###
+   # @namespace supersonic.data
+   # @name model
+   # @function
+   # @apiCall supersonic.data.model
+   # @description
+   # Allows access to cloud resources you have configured for your app through Steroids Connect.
+   # @type
+   # model: (
+   #   name: String
+   # ) => Model
+   # @define {String} name The name of a configured cloud resource
+   # @exampleCoffeeScript
+   # Task = supersonic.data.model 'task'
+   # takeOutTheTrash = new Task {
+   #   description: "Take out the trash"
+   # }
+   # takeOutTheTrash.save()
+  ###
   createModel = switch
     when window?.ag?.data?
       try
@@ -22,29 +41,6 @@ module.exports = (logger, window) ->
     else (name) ->
       logger.error "Tried to access a cloud resource, but no resources have been configured"
       throw new Error "No cloud resources available"
-
-  {
-    ###
-     # @namespace supersonic.data
-     # @name model
-     # @function
-     # @apiCall supersonic.data.model
-     # @description
-     # Allows access to cloud resources you have configured for your app through Steroids Connect.
-     # @type
-     # model: (
-     #   name: String
-     # ) => Model
-     # @define {String} name The name of a configured cloud resource
-     # @exampleCoffeeScript
-     # Task = supersonic.data.model 'task'
-     # takeOutTheTrash = new Task {
-     #   description: "Take out the trash"
-     # }
-     # takeOutTheTrash.save()
-    ###
-    model: createModel
-  }
 
 ###
  # @namespace supersonic.data
