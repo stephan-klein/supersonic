@@ -1,12 +1,12 @@
 angular
   .module('ui')
-  .controller 'TabBarController', ($scope, $q, supersonic) ->
+  .controller 'TabsController', ($scope, $q, supersonic) ->
 
     $scope.methods = [
-      "hideTabBar"
-      "showTabBar"
-      "updateTabBar"
-      "replaceTabBar"
+      "hideTabs"
+      "showTabs"
+      "updateTabs"
+      "replaceTabs"
       "updateCurrentTab"
       "setStyleClass"
       "setStyleId"
@@ -16,13 +16,13 @@ angular
     $scope.run = (method)->
       $scope[method]()
 
-    $scope.hideTabBar = ->
-      supersonic.ui.tabBar.hide()
+    $scope.hideTabs = ->
+      supersonic.ui.tabs.hide()
 
-    $scope.showTabBar = ->
-      supersonic.ui.tabBar.show()
+    $scope.showTabs = ->
+      supersonic.ui.tabs.show()
 
-    $scope.updateTabBar = ->
+    $scope.updateTabs = ->
       tabsArray = [
         {
           title: "Steroids"
@@ -32,11 +32,11 @@ angular
           title: "Telescope"
         }
       ]
-      supersonic.ui.tabBar.update(tabsArray)
+      supersonic.ui.tabs.update(tabsArray)
         .catch (err)->
           supersonic.logger.error "Could not update tabs: #{JSON.stringify(err)}"
 
-    $scope.replaceTabBar = ->
+    $scope.replaceTabs = ->
       tabsArray = [
         {
           title: "Index"
@@ -47,25 +47,25 @@ angular
           location: "http://www.appgyver.com"
         }
       ]
-      supersonic.ui.tabBar.replace(tabsArray)
+      supersonic.ui.tabs.replace(tabsArray)
         .catch (err)->
           supersonic.logger.error "Could not replace tabs: #{JSON.stringify(err)}"
 
     $scope.select = (tabIndex)->
-      supersonic.ui.tabBar.select(tabIndex)
+      supersonic.ui.tabs.select(tabIndex)
         .catch (err)->
           supersonic.logger.error "Could not select tabs: #{JSON.stringify(err)}"
 
     $scope.updateCurrentTab = ->
-      supersonic.ui.tabBar.updateCurrentTab
+      supersonic.ui.tabs.updateCurrentTab
         title: "Asteroids"
         badge: "5"
 
     $scope.setStyleClass = ->
-      supersonic.ui.tabBar.setStyleClass "greenbg"
+      supersonic.ui.tabs.setStyleClass "greenbg"
 
     $scope.setStyleId = ->
-      supersonic.ui.tabBar.setStyleId "graybg"
+      supersonic.ui.tabs.setStyleId "graybg"
 
     $scope.setStyleCSS = ->
-      supersonic.ui.tabBar.setStyleCSS "background-color: red;"
+      supersonic.ui.tabs.setStyleCSS "background-color: red;"

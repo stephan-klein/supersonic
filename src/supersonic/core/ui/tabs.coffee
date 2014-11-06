@@ -2,66 +2,66 @@ Promise = require 'bluebird'
 
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.ui.tabBar"
+  bug = log.debuggable "supersonic.ui.tabs"
 
   ###
    # @namespace supersonic.ui
-   # @name tabBar
+   # @name tabs
    # @overview
    # @description
    # Methods for showing and dismissing the tab bar.
   ###
 
   ###
-   # @namespace supersonic.ui.tabBar
+   # @namespace supersonic.ui.tabs
    # @name show
    # @function
    # @description
    # Shows the tab bar
    # @usageJavaScript
-   # supersonic.ui.tabBar.show();
+   # supersonic.ui.tabs.show();
    # @type
-   # supersonic.ui.tabBar.show: (
+   # supersonic.ui.tabs.show: (
    # ) => Promise
    # @returnsDescription
    # A promise that is resolved when the tab bar has been shown. If tab bar could not be shown, the promise will be rejected.
   ###
   show: bug "show", ->
     new Promise (resolve, reject)->
-      steroids.tabBar.show {},
+      steroids.Tabs.show {},
         onSuccess: resolve
         onFailure: reject
 
   ###
-   # @namespace supersonic.ui.tabBar
+   # @namespace supersonic.ui.tabs
    # @name hide
    # @function
    # @description
    # Hides the tab bar
    # @usageJavaScript
-   # supersonic.ui.tabBar.hide();
+   # supersonic.ui.tabs.hide();
    # @type
-   # supersonic.ui.tabBar.hide: (
+   # supersonic.ui.tabs.hide: (
    # ) => Promise
    # @returnsDescription
    # A promise that is resolved when the tab bar has been hidden. If tab bar could not be hidden, the promise will be rejected.
   ###
   hide: bug "hide", ->
     new Promise (resolve, reject)->
-      steroids.tabBar.hide {},
+      steroids.Tabs.hide {},
         onSuccess: resolve
         onFailure: reject
 
   ###
-   # @namespace supersonic.ui.tabBar
+   # @namespace supersonic.ui.tabs
    # @name hide
    # @function
    # @description
    # Updates the tab bar
    # @usageJavaScript
-   # supersonic.ui.tabBar.update([{title: "Hello", badge: "1"}]);
+   # supersonic.ui.tabs.update([{title: "Hello", badge: "1"}]);
    # @type
-   # supersonic.ui.tabBar.update: (
+   # supersonic.ui.tabs.update: (
    #  tabsArray: Array
    # ) => Promise
    # @define {Array<Object>} tabsArray An array of tab configurations: {title: "Hello", badge: "1"}
@@ -70,21 +70,21 @@ module.exports = (steroids, log) ->
   ###
   update: bug "update", (tabsArray)->
     new Promise (resolve, reject)->
-      steroids.tabBar.update tabs: tabsArray,
+      steroids.Tabs.update tabs: tabsArray,
         onSuccess: resolve
         onFailure: reject
 
 
   ###
-   # @namespace supersonic.ui.tabBar
+   # @namespace supersonic.ui.tabs
    # @name replace
    # @function
    # @description
    # Replaces the tab bar
    # @usageJavaScript
-   # supersonic.ui.tabBar.replace([{title: "Web", location: "http://www.google.com"}]);
+   # supersonic.ui.tabs.replace([{title: "Web", location: "http://www.google.com"}]);
    # @type
-   # supersonic.ui.tabBar.replace: (
+   # supersonic.ui.tabs.replace: (
    #  tabsArray: Array
    # ) => Promise
    # @define {Array<Object>} tabsArray An array of tab configurations: {title: "Hello", badge: "1", location: "myroute#index"}
@@ -101,20 +101,20 @@ module.exports = (steroids, log) ->
     tabs = (handleRoutes(tab) for tab in tabsArray)
 
     new Promise (resolve, reject)->
-      steroids.tabBar.replace tabs: tabs,
+      steroids.Tabs.replace tabs: tabs,
         onSuccess: resolve
         onFailure: reject
 
   ###
-   # @namespace supersonic.ui.tabBar
+   # @namespace supersonic.ui.tabs
    # @name select
    # @function
    # @description
    # Selects the tab bar
    # @usageJavaScript
-   # supersonic.ui.tabBar.select(1);
+   # supersonic.ui.tabs.select(1);
    # @type
-   # supersonic.ui.tabBar.select: (
+   # supersonic.ui.tabs.select: (
    #  tabIndex: Integer
    # ) => Promise
    # @define {Integer} tabIndex An index number of the tab to select. First tab from the left is 0, second one is 1 and so on.
@@ -123,20 +123,20 @@ module.exports = (steroids, log) ->
   ###
   select: bug "select", (tabIndex)->
     new Promise (resolve, reject)->
-      steroids.tabBar.selectTab index: tabIndex,
+      steroids.Tabs.selectTab index: tabIndex,
         onSuccess: resolve
         onFailure: reject
 
   ###
-   # @namespace supersonic.ui.tabBar
+   # @namespace supersonic.ui.tabs
    # @name updateCurrentTab
    # @function
    # @description
    # Selects the tab bar
    # @usageJavaScript
-   # supersonic.ui.tabBar.updateCurrentTab({title: "Hello"});
+   # supersonic.ui.tabs.updateCurrentTab({title: "Hello"});
    # @type
-   # supersonic.ui.tabBar.updateCurrentTab: (
+   # supersonic.ui.tabs.updateCurrentTab: (
    #  config: Object
    # ) => Promise
    # @define {Object} config An tab configuration object.
@@ -147,20 +147,20 @@ module.exports = (steroids, log) ->
     unless typeof config is "object" and Object.keys(config).length
       throw new Error "Could not update current tab without configuration object"
     new Promise (resolve, reject)->
-      steroids.tabBar.currentTab.update config,
+      steroids.Tabs.currentTab.update config,
         onSuccess: resolve
         onFailure: reject
 
   ###
-   # @namespace supersonic.ui.tabBar
+   # @namespace supersonic.ui.tabs
    # @name setStyleClass
    # @function
    # @description
    # Adds a CSS style class for the native tab bar.
    # @usageJavaScript
-   # supersonic.ui.tabBar.setStyleClass("my-awesome-tabs");
+   # supersonic.ui.tabs.setStyleClass("my-awesome-tabs");
    # @type
-   # supersonic.ui.tabBar.setStyleClass: (
+   # supersonic.ui.tabs.setStyleClass: (
    #  className: String
    # ) => Promise
    # @define {String} className Name of the class to set for tab bar.
@@ -169,21 +169,21 @@ module.exports = (steroids, log) ->
   ###
   setStyleClass: bug "setStyleClass", (className)->
     new Promise (resolve, reject)->
-      steroids.tabBar.setStyleClass className,
+      steroids.Tabs.setStyleClass className,
         onSuccess: resolve
         onFailure: reject
 
 
   ###
-   # @namespace supersonic.ui.tabBar
+   # @namespace supersonic.ui.tabs
    # @name setStyleId
    # @function
    # @description
    # Adds a CSS style id for the native tab bar.
    # @usageJavaScript
-   # supersonic.ui.tabBar.setStyleId("graybg");
+   # supersonic.ui.tabs.setStyleId("graybg");
    # @type
-   # supersonic.ui.tabBar.setStyleId: (
+   # supersonic.ui.tabs.setStyleId: (
    #  id: String
    # ) => Promise
    # @define {String} id Id of the class to set for tab bar.
@@ -192,21 +192,21 @@ module.exports = (steroids, log) ->
   ###
   setStyleId: bug "setStyleId", (id)->
     new Promise (resolve, reject)->
-      steroids.tabBar.setStyleId id,
+      steroids.Tabs.setStyleId id,
         onSuccess: resolve
         onFailure: reject
 
 
   ###
-   # @namespace supersonic.ui.tabBar
+   # @namespace supersonic.ui.tabs
    # @name setStyleCSS
    # @function
    # @description
    # Adds a CSS style id for the native tab bar.
    # @usageJavaScript
-   # supersonic.ui.tabBar.setStyleCSS("background-color: red;");
+   # supersonic.ui.tabs.setStyleCSS("background-color: red;");
    # @type
-   # supersonic.ui.tabBar.setStyleCSS: (
+   # supersonic.ui.tabs.setStyleCSS: (
    #  css: String
    # ) => Promise
    # @define {String} css Stylesheet to set for tab bar.
@@ -215,6 +215,6 @@ module.exports = (steroids, log) ->
   ###
   setStyleCSS: bug "setStyleCSS", (css)->
     new Promise (resolve, reject)->
-      steroids.tabBar.setStyleCSS css,
+      steroids.Tabs.setStyleCSS css,
         onSuccess: resolve
         onFailure: reject

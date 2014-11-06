@@ -10,6 +10,6 @@ module.exports = (steroids, log) ->
   navigationBar: require("./navigationBar")(steroids, log)
   NavigationBarButton: require("./NavigationBarButton")(steroids, log)
   screen: require("./screen")(steroids, log)
-  tabBar: require("./tabBar")(steroids, log)
+  tabs: require("./tabs")(steroids, log)
   dialog: require("./dialog")
   initialView: require("./initialView")(steroids, log)
