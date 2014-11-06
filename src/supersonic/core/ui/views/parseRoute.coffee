@@ -1,5 +1,5 @@
 module.exports = (location, options={}) ->
-  routePattern = /^([\w\-]+)#([\w\-]+)(\?.+)?$/
+  routePattern = /^([\w\-]+)#([\w\-\/]+)(\?.+)?$/
   parts = routePattern.exec location
   if parts?
     [whole, module, view, query] = parts
