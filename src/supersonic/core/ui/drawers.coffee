@@ -2,27 +2,27 @@ Promise = require 'bluebird'
 
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.ui.drawer"
+  bug = log.debuggable "supersonic.ui.drawers"
 
   ###
    # @namespace supersonic.ui
-   # @name drawer
+   # @name drawers
    # @overview
-   # @description The `supersonic.ui.drawer` namespace provides methods to work with drawers.
+   # @description The `supersonic.ui.drawers` namespace provides methods to work with drawers.
   ###
 
   ###
-   # @namespace supersonic.ui.drawer
+   # @namespace supersonic.ui.drawers
    # @name init
    # @function
    # @description
    # Initializes a View or a StartedView as a drawer on the given side.
    # @usageJavaScript
-   # supersonic.ui.drawer.init(view, options);
+   # supersonic.ui.drawers.init(view, options);
    # @usageCoffeeScript
-   # supersonic.ui.drawer.init view, options
+   # supersonic.ui.drawers.init view, options
    # @type
-   # supersonic.ui.drawer.init: (
+   # supersonic.ui.drawers.init: (
    #  view: View|StartedView
    #  options?:
    #    side: String
@@ -40,11 +40,11 @@ module.exports = (steroids, log) ->
    #   side: "left"
    # }
    #
-   # supersonic.ui.drawer.init(view, options);
+   # supersonic.ui.drawers.init(view, options);
    #
    # // You can also pass in a StartedView
    # supersonic.ui.views.find("leftDrawer").then( function(leftDrawer) {
-   #   supersonic.ui.drawer.init(leftDrawer);
+   #   supersonic.ui.drawers.init(leftDrawer);
    # });
    # @exampleCoffeeScript
    # view = supersonic.ui.view "drawers#left"
@@ -52,11 +52,11 @@ module.exports = (steroids, log) ->
    #   side: left
    #   width: 150
    #
-   # supersonic.ui.drawer.show view, options
+   # supersonic.ui.drawers.show view, options
    #
    # # You can also pass in a StartedView
    # supersonic.ui.views.find("leftDrawer").then (leftDrawer)->
-   #   supersonic.ui.drawer.init leftDrawer
+   #   supersonic.ui.drawers.init leftDrawer
   ###
 
   init: bug "init", (view, options)->
@@ -99,32 +99,32 @@ module.exports = (steroids, log) ->
       )
 
   ###
-   # @namespace supersonic.ui.drawer
+   # @namespace supersonic.ui.drawers
    # @name open
    # @function
    # @description
    # Opens the drawer on the given side.
    # @usageJavaScript
-   # supersonic.ui.drawer.open(side);
+   # supersonic.ui.drawers.open(side);
    # @usageCoffeeScript
-   # supersonic.ui.drawer.open side
+   # supersonic.ui.drawers.open side
    # @type
-   # supersonic.ui.drawer.open: (
+   # supersonic.ui.drawers.open: (
    #  side?: String
    # ) => Promise
    # @define {String} side=left The side of the drawer to be opened. Valid values are `left` and `right`.
    # @returnsDescription
    # A promise that will be resolved once the drawer has been opened. If there is no drawer initialized on the given side, the promise will be rejected.
    # @exampleJavaScript
-   # supersonic.ui.drawer.open("left").then( function() {
+   # supersonic.ui.drawers.open("left").then( function() {
    #   supersonic.logger.debug("Drawer was shown");
    # });
    # @exampleCoffeeScript
-   # supersonic.ui.drawer.open("left").then ->
+   # supersonic.ui.drawers.open("left").then ->
    #   supersonic.logger.debug "Drawer was shown"
   ###
 
-  open: bug "open", (side, options)->
+  open: bug "open", (side="left", options)->
     edge = if side is "right"
       steroids.screen.edges.RIGHT
     else
@@ -139,25 +139,25 @@ module.exports = (steroids, log) ->
       }
 
   ###
-   # @namespace supersonic.ui.drawer
+   # @namespace supersonic.ui.drawers
    # @name close
    # @function
    # @description
    # Closes an open drawer.
    # @usageJavaScript
-   # supersonic.ui.drawer.close();
+   # supersonic.ui.drawers.close();
    # @usageCoffeeScript
-   # supersonic.ui.drawer.close()
+   # supersonic.ui.drawers.close()
    # @type
-   # supersonic.ui.drawer.close: () => Promise
+   # supersonic.ui.drawers.close: () => Promise
    # @returnsDescription
    # A promise that will be resolved once the drawer has been closed. If there are no open drawers, the promise will be rejected.
    # @exampleJavaScript
-   # supersonic.ui.drawer.close().then( function() {
+   # supersonic.ui.drawers.close().then( function() {
    #   supersonic.logger.debug("Drawer was closed");
    # });
    # @exampleCoffeeScript
-   # supersonic.ui.drawer.close().then ->
+   # supersonic.ui.drawers.close().then ->
    #   supersonic.logger.debug "Drawer was closed"
   ###
 
@@ -168,15 +168,15 @@ module.exports = (steroids, log) ->
         onFailure: reject
 
   ###
-   # @namespace supersonic.ui.drawer
+   # @namespace supersonic.ui.drawers
    # @name updateOptions
    # @function
    # @description
    # Updates options for drawers.
    # @usageJavaScript
-   # supersonic.ui.drawer.updateOptions(options);
+   # supersonic.ui.drawers.updateOptions(options);
    # @type
-   # supersonic.ui.drawer.updateOptions: (
+   # supersonic.ui.drawers.updateOptions: (
    #   options:
    #     shadow: Boolean
    #     animation:
@@ -208,7 +208,7 @@ module.exports = (steroids, log) ->
    #   <li>`PanDrawerView`: Close the drawer by panning (swiping) anywhere in the drawer view.
    # </ul>
    # @exampleJavaScript
-   # supersonic.ui.drawer.updateOptions({
+   # supersonic.ui.drawers.updateOptions({
    #   shadow: true,
    #   animation: {
    #     type: "slide",

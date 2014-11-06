@@ -17,10 +17,32 @@
       <li class="item">
         <button
           class="button button-block"
+          ng-click="openLeft()">
+          Open Left Drawer
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
           ng-click="asRightDrawer('app/webComponents/drawerIndex2.html', 300)">
           Right Drawer
         </button>
       </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="openRight()">
+          Open Right Drawer
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="close()">
+          Close Drawer
+        </button>
+      </li>
+
     </ul>
   </div>
 

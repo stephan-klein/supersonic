@@ -5,7 +5,7 @@ module.exports = (steroids, log) ->
   view: require("./view")(steroids, log)
   views: require("./views")(steroids, log)
   layers: require("./layers")(steroids, log)
-  drawer: require("./drawer")(steroids, log)
+  drawers: require("./drawers")(steroids, log)
   modal: require("./modal")(steroids, log)
   navigationBar: require("./navigationBar")(steroids, log)
   NavigationBarButton: require("./NavigationBarButton")(steroids, log)

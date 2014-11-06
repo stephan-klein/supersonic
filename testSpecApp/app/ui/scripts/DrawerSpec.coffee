@@ -1,9 +1,9 @@
 
-describe "supersonic.ui.drawer", ->
+describe "supersonic.ui.drawers", ->
   it "should be defined", ->
-    supersonic.ui.drawer.should.exist
+    supersonic.ui.drawers.should.exist
 
-    dr = supersonic.ui.drawer
+    dr = supersonic.ui.drawers
 
     view = supersonic.ui.view("/app/debug/DebugSpec.html")
 

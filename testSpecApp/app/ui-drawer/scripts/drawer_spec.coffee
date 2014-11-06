@@ -1,8 +1,8 @@
-describe "supersonic.ui.drawer", ->
+describe "supersonic.ui.drawers", ->
   # THESE TESTS CAN ONLY BE RUN ONCE IN APP LIFECYCLE (BECAUSE NO DRAWER UNLOAD)
 
   it "should be defined", ->
-    supersonic.ui.drawer.should.exist
+    supersonic.ui.drawers.should.exist
 
   it "should be able to use started view", ->
     receivedMessage = new Promise (resolve) ->
@@ -15,13 +15,13 @@ describe "supersonic.ui.drawer", ->
     view.start("custom-id-left-drawer")
       .then(
         (startedView) ->
-          supersonic.ui.drawer.init(startedView, side: "left", width: 100)
+          supersonic.ui.drawers.init(startedView, side: "left", width: 100)
           receivedMessage.should.eventually.equal "custom"
       ).catch ->
         throw new Error "Cannot run tests twice for drawers in single app run"
 
   it "should be able to update options", ->
-    supersonic.ui.drawer.updateOptions(
+    supersonic.ui.drawers.updateOptions(
       shadow: false
       animation:
         type: "parallax"
@@ -40,12 +40,12 @@ describe "supersonic.ui.drawer", ->
 
       view = supersonic.ui.view("/app/ui-drawer/postback.html?msg=right")
 
-      supersonic.ui.drawer.init(view, side: "right").should.be.fulfilled
+      supersonic.ui.drawers.init(view, side: "right").should.be.fulfilled
       receivedMessage.should.eventually.equal "right"
 
     it "should not be able to init right again without custom id", ->
       view = supersonic.ui.view("/app/ui-drawer/postback.html?msg=right")
-      supersonic.ui.drawer.init(view, side: "right").should.be.rejectedWith("Cannot use a preloaded layer which is currently in use elsewhere in the application")
+      supersonic.ui.drawers.init(view, side: "right").should.be.rejectedWith("Cannot use a preloaded layer which is currently in use elsewhere in the application")
 
     it "should be able to init left drawer", ->
       receivedMessage = new Promise (resolve) ->
@@ -56,12 +56,12 @@ describe "supersonic.ui.drawer", ->
 
       view = supersonic.ui.view("/app/ui-drawer/postback.html?msg=left")
 
-      supersonic.ui.drawer.init(view, side: "left").should.be.fulfilled
+      supersonic.ui.drawers.init(view, side: "left").should.be.fulfilled
       receivedMessage.should.eventually.equal "left"
 
     it "should not be able to init left again without custom id", ->
       view = supersonic.ui.view("/app/ui-drawer/postback.html?msg=left")
-      supersonic.ui.drawer.init(view, side: "left").should.be.rejectedWith("Cannot use a preloaded layer which is currently in use elsewhere in the application")
+      supersonic.ui.drawers.init(view, side: "left").should.be.rejectedWith("Cannot use a preloaded layer which is currently in use elsewhere in the application")
 
   describe "opening and closing", ->
     it "should be able to show left drawer", (done) ->
@@ -69,7 +69,7 @@ describe "supersonic.ui.drawer", ->
         steroids.drawers.on "didshow", resolve
       ).should.be.fulfilled.and.notify done
 
-      supersonic.ui.drawer.open("left").should.be.fulfilled
+      supersonic.ui.drawers.open("left").should.be.fulfilled
 
 
 
@@ -78,7 +78,7 @@ describe "supersonic.ui.drawer", ->
         steroids.drawers.on "didclose", resolve
       ).should.be.fulfilled.and.notify done
 
-      supersonic.ui.drawer.close().should.be.fulfilled
+      supersonic.ui.drawers.close().should.be.fulfilled
 
 
     it "should be able to show right drawer", (done) ->
@@ -86,7 +86,7 @@ describe "supersonic.ui.drawer", ->
         steroids.drawers.on "didshow", resolve
       ).should.be.fulfilled.and.notify done
 
-      supersonic.ui.drawer.open("right").should.be.fulfilled
+      supersonic.ui.drawers.open("right").should.be.fulfilled
 
 
 
@@ -95,4 +95,4 @@ describe "supersonic.ui.drawer", ->
         steroids.drawers.on "didclose", resolve
       ).should.be.fulfilled.and.notify done
 
-      supersonic.ui.drawer.close().should.be.fulfilled
+      supersonic.ui.drawers.close().should.be.fulfilled
