@@ -11,7 +11,7 @@ describe 'supersonic.angular.superscope', ->
       superscope.$apply ->
         superscope.foo = 'bar'
 
-  it 'is isolated from rootScope', (done) ->
+  it.skip 'is isolated from rootScope', (done) ->
     inject ($rootScope, superscope) ->
       (new Promise (resolve) ->
         superscope.$watch 'foo', resolve
