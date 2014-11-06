@@ -32,7 +32,15 @@ describe "<super-modal-show> and <super-modal-hide>", ->
     elem.setAttribute "location", "web-components#super-modal-hide"
     elem.click()
 
-  it "should navigate with a custom touchstart action", (done) ->
+  it "should show modal with a custom touchstart action", (done) ->
     fireAfterModalDidHideAndShow done
     elem = document.getElementById "super-modal-show-touchstart"
     fireTouchEvent elem, "touchstart"
+
+  it "should show modal with a view-id", (done) ->
+    fireAfterModalDidHideAndShow ->
+      supersonic.ui.views.stop("super-modal-hide").then ->
+        done()
+
+    supersonic.ui.view("web-components#super-modal-hide-preloaded").start("super-modal-hide").then ->
+      clickElement "super-modal-show-id"

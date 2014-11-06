@@ -30,3 +30,11 @@ describe "<super-navigate>", ->
     fireWhenLayerDidChangeTwice done
     elem = document.getElementById "super-navigate-touchstart"
     fireTouchEvent elem, "touchstart"
+
+  it "should navigate with a view-id", (done) ->
+    fireWhenLayerDidChangeTwice ->
+      supersonic.ui.views.stop("super-navigate-back").then ->
+        done()
+
+    supersonic.ui.view("web-components#super-navigate-back-preloaded").start("super-navigate-back").then ->
+      clickElement "super-navigate-id"
