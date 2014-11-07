@@ -7,9 +7,6 @@
   <li class="menu-title">
     <a href="/{{include.tab_name}}{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
     {% if page.section_id == section_id %}
-    <li class="menu-section {% if page.subsection_id == 'overview' %}active{% endif %}">
-      <a href="/{{include.tab_name}}/{{section_id}}" class="api-section">Overview</a>
-    </li>
     {% for subsection in section.subsections %}
     {% assign subsection_id = subsection.name | slugify %}
     <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
