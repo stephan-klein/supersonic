@@ -120,3 +120,11 @@ angular
         alert "Yep."
       , ->
         alert "Nope."
+
+    $scope.offlineCount = 0
+    $scope.onlineCount = 0
+    $scope.listenOfflineAndOnline = ->
+      supersonic.device.network.whenOffline ->
+        $scope.offlineCount += 1
+      supersonic.device.network.whenOnline ->
+        $scope.onlineCount += 1

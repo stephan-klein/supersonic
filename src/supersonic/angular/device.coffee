@@ -3,7 +3,7 @@ supersonic = require '../core'
 module.exports = (angular) ->
   angular
     .module('supersonic.device', [])
-    .service('supersonicDevice', (qify, $q) ->
+    .service('supersonicDevice', (qify, $q, $timeout) ->
 
       decorate = (object, decorator) ->
         result = {}
@@ -14,6 +14,10 @@ module.exports = (angular) ->
           result[key] = value
 
         result
+
+      digestifyFunction = (apiFunction)->
+        (eventFunction)->
+          apiFunction(-> $timeout(eventFunction))
 
       do (device = supersonic.device) ->
         {
@@ -31,5 +35,9 @@ module.exports = (angular) ->
           vibrate: qify device.vibrate
 
           ready: $q.when device.ready
+
+          network: decorate device.network, (network) ->
+            whenOffline: digestifyFunction(network.whenOffline)
+            whenOnline: digestifyFunction(network.whenOnline)
         }
     )

@@ -21,6 +21,20 @@ module.exports =
       .toProperty()
       .skipDuplicates()
 
+  network: do ->
+    offlines = if document?
+      Bacon.fromEventTarget(document, "offline").map -> false
+    else
+      Bacon.once true
+    onlines = if document?
+      Bacon.fromEventTarget(document, "online").map -> true
+    else
+      Bacon.once true
+
+    offlines.merge(onlines)
+      .toProperty()
+      .skipDuplicates()
+
   visibility: do ->
     visibilityState = if document?
         changes: Bacon.fromEventTarget(document, 'visibilitychange')
