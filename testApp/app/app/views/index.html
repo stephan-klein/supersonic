@@ -63,4 +63,24 @@
     </ul>
   </div>
 
+  <div class="card padding">
+    <h1>whenPaused & whenResumed</h1>
+    <button
+      class="button button-block"
+      ng-click="setPausedAndResumedListeners()">
+      listen with whenPaused & whenResumed
+    </button>
+    <ul>
+      <li>Paused count: {{pausedCount}}</li>
+      <li>Resumed count: {{resumedCount}}</li>
+    </ul>
+    <button
+      class="button button-block"
+      ng-click="removePausedAndResumedListeners()">
+      Remove whenPaused & whenResumed listeners
+    </button>
+
+
+  </div>
+
 </div>

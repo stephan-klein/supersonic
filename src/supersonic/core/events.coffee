@@ -8,6 +8,19 @@ module.exports =
     else
       Promise.resolve()
 
+  background: do ->
+    pauses = if document?
+      Bacon.fromEventTarget(document, "pause").map -> true
+    else
+      Bacon.once true
+    resumes = if document?
+      Bacon.fromEventTarget(document, "resume").map -> false
+    else
+      Bacon.once true
+    pauses.merge(resumes)
+      .toProperty()
+      .skipDuplicates()
+
   visibility: do ->
     visibilityState = if document?
         changes: Bacon.fromEventTarget(document, 'visibilitychange')

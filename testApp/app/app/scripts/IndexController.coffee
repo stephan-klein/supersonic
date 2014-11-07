@@ -35,12 +35,7 @@ angular
     ]
 
     $scope.testGetLaunchURL = (options) ->
-      supersonic.app.getLaunchURL().then(
-        (launchURL) ->
-          $scope.launchURL = launchURL
-        (message) ->
-          alert "No launch URL available! \n\n #{JSON.stringify(message)}"
-    )
+      $scope.launchURL = supersonic.app.getLaunchURL()
 
     $scope.sleepDisabled = 0
     $scope.sleepEnabled = 0
@@ -115,3 +110,14 @@ angular
           alert "Could not hide status bar! \n\n #{JSON.stringify(message)}"
       )
 
+    $scope.pausedCount = 0
+    $scope.resumedCount = 0
+    pausedListener = null
+    resumedListener = null
+    $scope.setPausedAndResumedListeners = ->
+      pausedListener = supersonic.app.whenPaused -> $scope.pausedCount += 1
+      resumedListener = supersonic.app.whenResumed -> $scope.resumedCount += 1
+
+    $scope.removePausedAndResumedListeners = ->
+      pausedListener()
+      resumedListener()
