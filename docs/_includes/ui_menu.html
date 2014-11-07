@@ -5,7 +5,7 @@
 {% else %}
 <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
   <li class="menu-title">
-    <a href="/{{include.tab_name}}/{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
+    <a href="/{{include.tab_name}}{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
     {% if page.section_id == section_id %}
     {% for subsection in section.subsections %}
     {% assign subsection_id = subsection.name | slugify %}
