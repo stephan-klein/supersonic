@@ -18,6 +18,12 @@ topics:
     method: true
   - name: update
     method: true
+  - name: setClass
+    method: true
+  - name: setStyle
+    method: true
+  - name: setStyleId
+    method: true
 ---
 
 <section class="docs-section" id="overview">
@@ -135,5 +141,20 @@ Note that there are two namespaces:
 
 <section class="docs-section" id="update">
 {% assign method = site.data.supersonic.ui.navigationBar.update %}
+{% include api_method.md method=method %}
+</section>
+
+<section class="docs-section" id="setclass">
+{% assign method = site.data.supersonic.ui.navigationBar.setClass %}
+{% include api_method.md method=method %}
+</section>
+
+<section class="docs-section" id="setstyle">
+{% assign method = site.data.supersonic.ui.navigationBar.setStyle %}
+{% include api_method.md method=method %}
+</section>
+
+<section class="docs-section" id="setstyleid">
+{% assign method = site.data.supersonic.ui.navigationBar.setStyleId %}
 {% include api_method.md method=method %}
 </section>
