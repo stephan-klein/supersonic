@@ -1,23 +1,33 @@
+watchNextValue = (scope, watchExpression) ->
+  unregister = null
+  new Promise((resolve, reject) ->
+    unregister = scope.$watch watchExpression, (value) ->
+      if value?
+        resolve value
+      else
+        reject new Error 'no value'
+  ).timeout(100).finally unregister
+
 describe 'supersonic.angular.superscope', ->
   beforeEach module 'supersonic.superscope'
+  afterEach ->
+    inject (superscope) ->
+      superscope.clear()
+
   it 'should be accessible as an angular-injected service', inject (superscope) ->
     superscope.should.be.an.object
 
   it 'can be $watched', (done) ->
     inject (superscope) ->
-      new Promise((resolve) ->
-        superscope.$watch 'foo', resolve
-      ).should.eventually.equal('bar').and.notify done
+      watchNextValue(superscope, 'foo').should.eventually.equal('this-should-get-watched').and.notify done
       superscope.$apply ->
-        superscope.foo = 'bar'
+        superscope.foo = 'this-should-get-watched'
 
-  it.skip 'is isolated from rootScope', (done) ->
+  it 'is isolated from rootScope', (done) ->
     inject ($rootScope, superscope) ->
-      (new Promise (resolve) ->
-        superscope.$watch 'foo', resolve
-      ).timeout(100).should.be.rejected.and.notify done
+      watchNextValue(superscope, 'foo').should.be.rejected.and.notify done
       $rootScope.$apply ->
-        $rootScope.foo = 'bar'
+        $rootScope.foo = 'this-should-not-get-watched'
 
   it 'is a singleton instance', ->
     Promise.join(
@@ -41,11 +51,7 @@ describe 'supersonic.angular.superscope', ->
     it 'can be watched in another view', (done) ->
       inject (superscope) ->
         message = "#{Math.random()}"
-        new Promise((resolve) ->
-          superscope.$watch 'bar', (bar) ->
-            if bar?
-              resolve bar
-        ).should.eventually.equal(message).and.notify done
+        watchNextValue(superscope, 'bar').should.eventually.equal(message).and.notify done
         superscope.$apply ->
           superscope.foo = message
 
