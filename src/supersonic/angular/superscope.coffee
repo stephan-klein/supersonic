@@ -1,8 +1,9 @@
 Bacon = require 'baconjs'
 deepEqual = require 'deep-equal'
+Promise = require 'bluebird'
 
 seemsLegit = (key, value) ->
-  ((key.indexOf '$') isnt 0) and (key isnt 'this') and !('function' is typeof value)
+  ((key.indexOf '$') isnt 0) and (key isnt 'this') and ('function' isnt typeof value)
 
 module.exports = (angular) ->
   angular
@@ -17,8 +18,8 @@ module.exports = (angular) ->
       superscopeUpdates = new Bacon.Bus
       channel.outbound.plug do ->
         superscopeUpdates
-          # Only try and send updates every 1000 milliseconds
-          .debounceImmediate(1000)
+          # Only try and send updates every N milliseconds
+          .debounceImmediate(100)
           # Filter contents from superscope down to what seems legit
           .map((superscope) ->
             values = {}
@@ -31,7 +32,6 @@ module.exports = (angular) ->
 
       superscope = superRootScope
       superscope.$watch ->
-        console.log "Ding!"
         # Watch superscope on every digest loop iteration and feed the state to a bus
         superscopeUpdates.push superscope
 
@@ -44,13 +44,19 @@ module.exports = (angular) ->
         for key, value of freshSuperscope
           superscope[key] = value
 
-        supersonic.$digest()
+        superscope.$digest()
 
-      superscope.clear = ->
+      # Hide clear on the object
+      clear = ->
         for own key, value of superscope when seemsLegit(key, value)
           delete superscope[key]
 
         superscope.$digest()
+
+      Object.defineProperty superscope, 'clear', {
+        enumerable: false
+        get: -> clear
+      }
 
       superscope
     )

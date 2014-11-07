@@ -1,4 +1,4 @@
-watchNextValue = (scope, watchExpression) ->
+watchNextValue = (scope, watchExpression, timeout = 200) ->
   unregister = null
   new Promise((resolve, reject) ->
     unregister = scope.$watch watchExpression, (value) ->
@@ -6,13 +6,15 @@ watchNextValue = (scope, watchExpression) ->
         resolve value
       else
         reject new Error 'no value'
-  ).timeout(100).finally unregister
+  ).timeout(timeout).finally unregister
 
 describe 'supersonic.angular.superscope', ->
   beforeEach module 'supersonic.superscope'
-  afterEach ->
+  afterEach (done) ->
     inject (superscope) ->
       superscope.clear()
+      # Let angular do its magic for this tick
+      setTimeout done, 100
 
   it 'should be accessible as an angular-injected service', inject (superscope) ->
     superscope.should.be.an.object
@@ -42,16 +44,16 @@ describe 'supersonic.angular.superscope', ->
 
   describe 'cross-view state', ->
     startedView = null
-    beforeEach ->
+    beforeEach (done) ->
+      @timeout 5000
       supersonic.ui.view('angular#superscope/watch-foo-emit-bar').start().then (view) ->
         startedView = view
-    afterEach ->
-      startedView.stop()
-
+        done()
     it 'can be watched in another view', (done) ->
+      @timeout 5000
       inject (superscope) ->
         message = "#{Math.random()}"
-        watchNextValue(superscope, 'bar').should.eventually.equal(message).and.notify done
+        watchNextValue(superscope, 'bar', 2000).should.eventually.equal(message).and.notify done
         superscope.$apply ->
           superscope.foo = message
 

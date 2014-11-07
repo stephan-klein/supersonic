@@ -3,9 +3,11 @@
 angular.module('supersonic.superscope.watch-foo-emit-bar', [
   'supersonic.superscope'
 ]).controller('WatchFooEmitBarController', function (superscope) {
-  // superscope.$watch('foo', function (foo) {
-  //  superscope.bar = foo;
-  // });
+  superscope.$watch('foo', function (foo) {
+    if (foo) {
+      superscope.bar = foo;
+    }
+  });
 });
 </script>
 
