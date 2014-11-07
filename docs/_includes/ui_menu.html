@@ -20,6 +20,8 @@
           <a href="/{{include.tab_name}}/{{section_id}}/#{{topic.name | slugify}}">
             {% if topic.method %}
               ↳ <code>{{topic.name}}()</code>
+            {% elsif topic.component %}
+              <code>&lt;{{topic.name}}&gt;</code>
             {% else %}
               {{topic.name}}
             {% endif %}
