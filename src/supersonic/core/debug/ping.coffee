@@ -1,7 +1,8 @@
 Promise = require 'bluebird'
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.debug"
+  s = superify 'supersonic.debug', log
   ###
    # @namespace supersonic.debug
    # @name ping
@@ -27,7 +28,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log(response);
    # });
   ###
-  ping = bug "ping", ->
+  ping = s.promiseF "ping", ->
     new Promise (resolve, reject) ->
       steroids.device.ping(
         {}
@@ -35,7 +36,7 @@ module.exports = (steroids, log) ->
           onSuccess: ->
             resolve "Pong!"
           onFailure: ->
-            reject()
+            reject new Error "Did not pong :("
         }
       )
 
