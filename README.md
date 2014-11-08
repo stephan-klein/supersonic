@@ -48,6 +48,7 @@ For the rest of the story, check out the [Supersonic manual](http://supersonic.t
 Installing dependencies:
 
     npm install
+    npm install grunt-cli -g
 
 Running tests:
 
