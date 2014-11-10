@@ -85,7 +85,7 @@ Tapping the button fires a click event on the `<super-navbar-button>` element th
 
 ```html
 <super-navbar>
-  <super-navbar-button ng-click="buttonTapped">
+  <super-navbar-button ng-click="buttonTapped()">
     Tap me
   </super-navbar-button>
   <super-navbar-title>

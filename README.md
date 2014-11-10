@@ -83,6 +83,10 @@ Supersonic documentation is generated in a two-step process. A grunt task extrac
     jekyll serve
     open http://localhost:4000
 
+For a build-and-watch-for-changes loop, use:
+
+    grunt watch:docs
+
 ### Publishing to bower
 
 This repository is set up with [Travis CI](https://magnum.travis-ci.com/AppGyver/supersonic). On each push to a branch that has passing unit tests, the continuous integration server will prepare a bower distributable version. That distributable will be deployed to [supersonic-bower](https://github.com/AppGyver/supersonic-bower) in an identically named branch, where it is installable via bower.
