@@ -1,8 +1,8 @@
 Promise = require 'bluebird'
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.app.statusBar"
-
+  s = superify 'supersonic.app.statusBar', log
   ###
    # @namespace supersonic.app
    # @name statusBar
@@ -25,10 +25,10 @@ module.exports = (steroids, log) ->
    # A promise that is resolved when the status bar is hidden.
    # @usageCoffeeScript
    # supersonic.app.statusBar.hide()
-   # @usageCoffeeScript
+   # @usageJavaScript
    # supersonic.app.statusBar.hide();
   ###
-  hide: bug "hide", ->
+  hide: s.promiseF "hide", ->
     new Promise (resolve, reject) ->
       steroids.statusBar.hide(
         {}
@@ -69,7 +69,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log("Status bar shown");
    # });
   ###
-  show: bug "show", (options) ->
+  show: s.promiseF "show", (options) ->
     style = if typeof options is "string"
       options
     else if options?.style?

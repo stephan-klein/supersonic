@@ -147,6 +147,21 @@ angular
           alert "Could not hide status bar! \n\n #{JSON.stringify(message)}"
       )
 
+    $scope.testHideAndShowStatusBarWithCallbacks = ->
+      supersonic.app.statusBar.hide
+        onSuccess: ->
+          $scope.statusBarHidden++
+          showStatusBar()
+        onFailure: (message) ->
+          alert "Could not hide statusBar! \n\n #{JSON.stringify(message)}"
+
+    showStatusBar = ->
+      supersonic.app.statusBar.show
+        onSuccess: ->
+          $scope.statusBarShown++
+        onFailure: (message) ->
+          alert "Could not show statusBar! \n\n #{JSON.stringify(message)}"
+
     $scope.pausedCount = 0
     $scope.resumedCount = 0
     pausedListener = null
