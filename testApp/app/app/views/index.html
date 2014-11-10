@@ -49,6 +49,9 @@
     <button class="button button-block" ng-repeat="test in showAndHideSplashscreenTests"  ng-click="testShowAndHideSplashscreen(test.options)">
       {{test.title}}
     </button>
+    <button class="button button-block" ng-click="testShowAndHideSplashscreenWithCallbacks()">
+      Show And Hide Splashscreen With Callbacks
+    </button>
     <ul>
       <li>Splashscreen shown: {{splashscreenShown}}</li>
       <li>Splashscreen hidden: {{splashscreenHidden}}</li>
