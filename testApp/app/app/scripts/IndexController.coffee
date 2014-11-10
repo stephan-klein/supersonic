@@ -59,6 +59,21 @@ angular
         supersonic.app.sleep.enable().then ->
          $scope.sleepEnabled++
 
+    $scope.testDisableAndEnableSleepWithCallbacks = ->
+      supersonic.app.sleep.disable
+        onSuccess: ->
+          $scope.sleepDisabled++
+          enableSleep()
+        onFailure: (message) ->
+          alert "Could not disable sleep! \n\n #{JSON.stringify(message)}"
+
+    enableSleep = ->
+      supersonic.app.sleep.enable
+        onSuccess: ->
+          $scope.sleepEnabled++
+        onFailure: (message) ->
+          alert "Could not enable sleep! \n\n #{JSON.stringify(message)}"
+
     $scope.splashscreenShown = 0
     $scope.splashscreenHidden = 0
 
