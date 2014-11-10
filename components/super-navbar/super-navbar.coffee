@@ -32,52 +32,59 @@ observer = new MutationObserver (mutations) ->
       if mutation.attributeName is "title"
         mutation.target.onTitleChanged()
 
+      if mutation.target.isHidden()
+        mutation.target.hide()
+      else
+        mutation.target.show()
+
 SuperNavbarPrototype = Object.create HTMLElement.prototype
+
+lazyUpdate = null
 
 Object.defineProperty SuperNavbarPrototype, "title",
   set: (title) ->
-    this._title = title
-    this.onTitleChanged()
+    @_title = title
+    @onTitleChanged()
 
   get: ->
-    this._title
+    @_title
 
 Object.defineProperty SuperNavbarPrototype, "buttons",
   set: (buttons) ->
-    this.setButtons buttons
+    @setButtons buttons
 
   get: ->
     {
-      left: this._leftButtons
-      right: this._rightButtons
+      left: @_leftButtons
+      right: @_rightButtons
     }
 
 Object.defineProperty SuperNavbarPrototype, "class",
   set: (className) ->
     className = "" if not className
-    this._class = className
-    this.onClassNameChanged()
+    @_class = className
+    @onClassNameChanged()
 
   get: ->
-    this._class
+    @_class
 
 Object.defineProperty SuperNavbarPrototype, "style",
   set: (inlineStyle) ->
     inlineStyle = "" if not inlineStyle
-    this._style = inlineStyle
-    this.onInlineStyleChanged()
+    @_style = inlineStyle
+    @onInlineStyleChanged()
 
   get: ->
-    this._style
+    @_style
 
 Object.defineProperty SuperNavbarPrototype, "id",
   set: (styleId) ->
     styleId = "" if not styleId
-    this._styleId = styleId
-    this.onStyleIdChanged()
+    @_styleId = styleId
+    @onStyleIdChanged()
 
   get: ->
-    this._styleId
+    @_styleId
 
 # Methods for navbar visibility
 
@@ -97,106 +104,106 @@ SuperNavbarPrototype.updateNavBar = ->
   # Set base for options
   options.title = @getTitleForUpdate()
   options.buttons =
-    left: this._leftButtons
-    right: this._rightButtons
+    left: @_leftButtons
+    right: @_rightButtons
   # Update UI
-  supersonic.ui.navigationBar.update options
+
+  if lazyUpdate?
+    clearTimeout lazyUpdate
+    lazyUpdate = null
+
+  lazyUpdate = setTimeout ->
+    supersonic.ui.navigationBar.update options
+  , 20
 
 # Navbar title
 
 SuperNavbarPrototype.getTitleForUpdate = ->
-  if this.title? && this.title.length is 0
-    this.title = " " # hack for not being able to clear the title with empty string
-  return this.title
+  if @title? && @title.length is 0
+    @title = " " # hack for not being able to clear the title with empty string
+  return @title
 
 SuperNavbarPrototype.updateNavBarTitle = ->
-  options =
-    title: @getTitleForUpdate()
-  supersonic.ui.navigationBar.update(options)
+  @updateNavBar()
 
 # Methods for navbar buttons
 
 SuperNavbarPrototype.addButton = (button, side="left") ->
   # Figure out the side where to add button
-  if side is "right" then this._rightButtons.push button
-  else this._leftButtons.push button
+  if side is "right" then @_rightButtons.push button
+  else @_leftButtons.push button
   # Update buttons on UI
-  this.onButtonsChanged()
+  @onButtonsChanged()
 
 SuperNavbarPrototype.updateButton = (button) ->
   # First check the left side for the button reference
-  for candidate, idx in this._leftButtons when candidate is button
-    this._leftButtons[idx] = button
-    this.onButtonsChanged()
+  for candidate, idx in @_leftButtons when candidate is button
+    @_leftButtons[idx] = button
+    @onButtonsChanged()
     return
   # Check right side for the reference
-  for candidate, idx in this._rightButtons when candidate is button
-    this._rightButtons[idx] = button
-    this.onButtonsChanged()
+  for candidate, idx in @_rightButtons when candidate is button
+    @_rightButtons[idx] = button
+    @onButtonsChanged()
     return
 
 SuperNavbarPrototype.changeButtonSide = (button, side="left") ->
-  this._removeButtonSilently button
-  this.addButton button, side
+  @_removeButtonSilently button
+  @addButton button, side
 
 SuperNavbarPrototype.removeButton = (button) ->
-  this._removeButtonSilently button
-  this.onButtonsChanged()
+  @_removeButtonSilently button
+  @onButtonsChanged()
 
 SuperNavbarPrototype._removeButtonSilently = (button) ->
   # First check the left side for the button reference
-  for candidate, idx in this._leftButtons when candidate is button
-    this._leftButtons.splice idx, 1
+  for candidate, idx in @_leftButtons when candidate is button
+    @_leftButtons.splice idx, 1
     return
   # Check right side for the reference
-  for candidate, idx in this._rightButtons when candidate is button
-    this._rightButtons.splice idx, 1
+  for candidate, idx in @_rightButtons when candidate is button
+    @_rightButtons.splice idx, 1
     return
 
 # Batch set function
 SuperNavbarPrototype.setButtons = (buttons) ->
-  this._leftButtons = buttons.left
-  this._rightButtons = buttons.right
-  this.onButtonsChanged()
+  @_leftButtons = buttons.left
+  @_rightButtons = buttons.right
+  @onButtonsChanged()
 
 SuperNavbarPrototype._updateButtons = ->
-  # Set base for options
-  options =
-    buttons:
-      left: this._leftButtons
-      right: this._rightButtons
-  # Update UI
-  supersonic.ui.navigationBar.update options
+  @updateNavBar()
+
 
 SuperNavbarPrototype.onTitleChanged = ->
-  this.updateNavBarTitle() unless this.isHidden()
+  @updateNavBarTitle() unless @isHidden()
 
 SuperNavbarPrototype.onButtonsChanged = ->
-  this._updateButtons() unless this.isHidden()
+  @_updateButtons() unless @isHidden()
 
 SuperNavbarPrototype.onClassNameChanged = ->
-  supersonic.ui.navigationBar.setClass(this._class) unless this.isHidden()
+  supersonic.ui.navigationBar.setClass(@_class) unless @isHidden()
 
 SuperNavbarPrototype.onInlineStyleChanged = ->
-  supersonic.ui.navigationBar.setStyle(this._style) unless this.isHidden()
+  supersonic.ui.navigationBar.setStyle(@_style) unless @isHidden()
 
 SuperNavbarPrototype.onStyleIdChanged = ->
-  supersonic.ui.navigationBar.setStyleId(this._styleId) unless this.isHidden()
+  supersonic.ui.navigationBar.setStyleId(@_styleId) unless @isHidden()
 
 # What is the difference between attached and created?
 SuperNavbarPrototype.attachedCallback = ->
   # Initiate button arrays
-  this._leftButtons = []
-  this._rightButtons = []
+  @_leftButtons = []
+  @_rightButtons = []
 
   # Back button settings
-  this._backButtonAllowed = true
-  this._backButton = undefined
+  @_backButtonAllowed = true
+  @_backButton = undefined
 
   # Style
-  this.class = this.getAttribute("class")
-  this.id = this.getAttribute("id")
-  this.style = this.getAttribute("style")
+  @class = @getAttribute("class")
+  @id = @getAttribute("id")
+  @style = @getAttribute("style")
 
   # Observe attributes style and class
   observerConfiguration =
@@ -205,11 +212,11 @@ SuperNavbarPrototype.attachedCallback = ->
 
   observer.observe this, observerConfiguration
 
-  if this.isHidden()
-    this.hide()
+  if @isHidden()
+    @hide()
   else
-    this.updateNavBar()
-    this.show()
+    @updateNavBar()
+    @show()
 
 SuperNavbarPrototype.createdCallback = ->
   #console.log "Navigation bar createCallback"
