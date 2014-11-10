@@ -26,6 +26,13 @@ angular
           alert "Could not open URL! \n\n #{JSON.stringify(message)}"
       )
 
+    $scope.testOpenURLWithCallback = ->
+      supersonic.app.openURL "http://appgyver.com",
+        onSuccess: ->
+          $scope.successfulOpens++
+        onFailure: (message) ->
+          alert "Could not open URL! \n\n #{JSON.stringify(message)}"
+
     $scope.launchURL = undefined
 
     $scope.getLaunchURLTests = [
