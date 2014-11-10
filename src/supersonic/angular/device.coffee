@@ -39,5 +39,9 @@ module.exports = (angular) ->
           network: decorate device.network, (network) ->
             whenOffline: digestifyFunction(network.whenOffline)
             whenOnline: digestifyFunction(network.whenOnline)
+
+          buttons:
+            back: decorate device.buttons.back, (back)->
+              whenPressed: digestifyFunction(back.whenPressed)
         }
     )

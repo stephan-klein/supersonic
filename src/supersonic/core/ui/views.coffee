@@ -35,6 +35,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log "myCarsView location: #{startedView.getLocation()}"
   ###
   find = (id) ->
+    supersonic.logger.debug "Finding view with id #{id}"
     isStartedView(id).then (started) ->
       unless started
         throw new Error "There was no started view by id '#{id}'"
@@ -148,7 +149,22 @@ module.exports = (steroids, log) ->
   getApplicationState = ->
     new Promise (resolve, reject) ->
       steroids.getApplicationState {}, {
-        onSuccess: resolve
+        onSuccess: (state)->
+          supersonic.logger.debug "Received application state for preloads: #{typeof state.preloads} -> #{state.preloads}"
+          if typeof state.preloads is "string"
+            breloads = JSON.parse(state.preloads)
+            state.preloads = []
+            for breload in breloads
+              idMatch = breload.match(/id=(\S*),/)
+              locationMatch = breload.match(/location=(\S*),/)
+              uuidMatch = breload.match(/uuid=(\S*)/)
+              state.preloads.push
+                id: if idMatch? then idMatch[1] else null
+                location: if locationMatch? then locationMatch[1] else null
+                uuid: if uuidMatch? then uuidMatch[1] else null
+          console.log state
+          supersonic.logger.debug state
+          resolve state
         onFailure: reject
       }
 
@@ -162,6 +178,7 @@ module.exports = (steroids, log) ->
       Promise.reject new Error "Given view id '#{id}' was of type '#{typeof id}', string expected"
     else
       getStartedViews().then (ids) ->
+        supersonic.logger.debug "Preloaded views: #{JSON.stringify(ids)}"
         id in ids
 
   parseRoute = (location, options={}) ->
