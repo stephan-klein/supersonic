@@ -99,6 +99,21 @@ angular
           alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
       )
 
+    $scope.testShowAndHideSplashscreenWithCallbacks = ->
+      supersonic.app.splashscreen.show
+        onSuccess: ->
+          $scope.splashscreenShown++
+          hideSplashscreen()
+        onFailure: (message) ->
+          alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
+
+    hideSplashscreen = ->
+      supersonic.app.splashscreen.hide
+        onSuccess: ->
+          $scope.splashscreenHidden++
+        onFailure: (message) ->
+          alert "Could not hide splashscreen! \n\n #{JSON.stringify(message)}"
+
     $scope.statusBarHidden = 0
     $scope.statusBarShown = 0
 
