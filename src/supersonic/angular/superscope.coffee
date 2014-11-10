@@ -19,16 +19,22 @@ initChannel = ->
   channel ||= supersonic.data.channel '$superscope'
 
   channel.subscribe (freshSuperscope) ->
-    superscope.$apply ->
-      # If something was unset in fresh, unset it here
-      for own key, value of superscope when seemsLegit(key, value) and !freshSuperscope[key]?
-        delete superscope[key]
+    fn = ->
+      #TODO re-enable?
+      # # If something was unset in fresh, unset it here
+      # for own key, value of superscope when seemsLegit(key, value) and !freshSuperscope[key]?
+      #   delete superscope[key]
 
       # Copy all the incoming values to superscope - they're guaranteed to be legit
       for key, value of freshSuperscope
         superscope[key] = value
 
       lastReceivedSuperScope = freshSuperscope
+
+    if superscope.$root.$$phase == "$apply" || superscope.$root.$$phase == "$digest"
+      fn()
+    else
+      superscope.$apply fn
 
   return channel
 
@@ -54,9 +60,14 @@ initSuperScope = (superRootScope)->
 
   # Hide clear on the object
   clear = ->
-    superscope.$apply ->
+    fn = ->
       for own key, value of superscope when seemsLegit(key, value)
         delete superscope[key]
+
+    if superscope.$root.$$phase == "$apply" || superscope.$root.$$phase == "$digest"
+      fn()
+    else
+      superscope.$apply fn
 
   Object.defineProperty superscope, 'clear', {
     enumerable: false
