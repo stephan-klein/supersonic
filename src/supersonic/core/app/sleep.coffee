@@ -2,7 +2,7 @@ Promise = require 'bluebird'
 superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  s = superify 'supersonic.app', log
+  s = superify 'supersonic.app.sleep', log
   ###
    # @namespace supersonic.app
    # @name sleep
