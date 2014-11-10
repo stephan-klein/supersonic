@@ -17,3 +17,11 @@ describe "supersonic.app.openURL", ->
 
   it "should not open null", ->
     supersonic.app.openURL(null).should.be.rejected
+
+  describe "callbacks", ->
+
+    it "should call onFailure", (done) ->
+
+      supersonic.app.openURL "dolanz://",
+        onFailure: ->
+          done()

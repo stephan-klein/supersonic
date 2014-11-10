@@ -1,7 +1,8 @@
 Promise = require 'bluebird'
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.app"
+  s = superify 'supersonic.app', log
 
   ###
    # @namespace supersonic.app
@@ -45,7 +46,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log("Could not open URL");
    # });
   ###
-  openURL = bug "openURL", (url) ->
+  openURL = s.promiseF "openURL", (url) ->
     # Trying to open with null will crash the app
     return Promise.reject("URL is undefined") unless url?
 
