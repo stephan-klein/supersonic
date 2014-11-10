@@ -9,7 +9,7 @@ module.exports = (steroids, log) ->
    # @name views
    # @overview
    # @description
-   # The `supersonic.ui.views` namespace contains funcitons for manipulating and accessing View objects.
+   # The `supersonic.ui.views` namespace contains functions for manipulating and accessing View objects.
   ###
 
   ###
@@ -164,17 +164,6 @@ module.exports = (steroids, log) ->
       getStartedViews().then (ids) ->
         id in ids
 
-  parseRoute = (location, options={}) ->
-    routePattern = /^([\w\-]+)#([\w\-]+)(\?.+)?$/
-    parts = routePattern.exec location
-    if parts?
-      [whole, module, view, query] = parts
-      path = "app/#{module}/#{view}.html#{query || ''}"
-      path = "#{options.prefix}#{path}" if options.prefix?
-      path
-    else
-      location
-
   {
     find: find
     start: start
@@ -182,5 +171,4 @@ module.exports = (steroids, log) ->
     getStartedViews: getStartedViews
     isStartedView: isStartedView
     current: current(log)
-    _parseRoute: parseRoute
   }

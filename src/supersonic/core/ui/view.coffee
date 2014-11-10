@@ -1,5 +1,5 @@
 Promise = require 'bluebird'
-
+parseRoute = require './views/parseRoute'
 
 module.exports = (steroids, log) ->
   # TODO: add bug later
@@ -31,7 +31,7 @@ module.exports = (steroids, log) ->
 
   getView = (location)->
     webView = new steroids.views.WebView
-      location: supersonic.ui.views._parseRoute(location)
+      location: parseRoute location
 
     return view =
       getLocation: -> location
