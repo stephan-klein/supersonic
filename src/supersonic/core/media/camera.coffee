@@ -200,7 +200,6 @@ module.exports = (steroids, log) ->
    #   // Do something with the image URI
    # });
   ###
-  ###
   getFromPhotoLibrary = s.promiseF "getFromPhotoLibrary", (options = {}) ->
 
     getCameraOptions = ->
