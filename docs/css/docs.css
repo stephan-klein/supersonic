@@ -346,3 +346,9 @@ ul.docs-header li.active a {
   margin-right: 1rem;
   text-align: center;
 }
+
+.disabled {
+  background-color: #bdc3c7;
+  pointer-events: none;
+  cursor: default;
+}

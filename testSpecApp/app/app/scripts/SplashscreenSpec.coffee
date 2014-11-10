@@ -11,3 +11,17 @@ describe "supersonic.app.splashscreen", ->
   it "should hide splashscreen", ->
     @timeout 5000
     supersonic.app.splashscreen.hide().should.be.fulfilled
+
+  describe "callbacks", ->
+
+    it "should call onSuccess when splashscreen is shown", (done) ->
+
+      supersonic.app.splashscreen.show
+        onSuccess: ->
+          done()
+
+    it "should call onSuccess when splashscreen is hidden", (done) ->
+      @timeout 5000
+      supersonic.app.splashscreen.hide
+        onSuccess: ->
+          done()

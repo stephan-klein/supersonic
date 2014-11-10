@@ -1,7 +1,8 @@
 Promise = require 'bluebird'
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.app.splashscreen"
+  s = superify 'supersonic.app.splashscreen', log
 
   ###
    # @namespace supersonic.app
@@ -25,8 +26,10 @@ module.exports = (steroids, log) ->
    # [Promise](todo) that is resolved when the splashscreen is shown.
    # @usageCoffeeScript
    # supersonic.app.splashscreen.show()
+   # @usageJavaScript
+   # supersonic.app.splashscreen.show();
   ###
-  show: bug "show", ->
+  show: s.promiseF "show", ->
     new Promise (resolve, reject) ->
       steroids.splashscreen.show(
         {}
@@ -52,8 +55,10 @@ module.exports = (steroids, log) ->
    # [Promise](todo) that is resolved when the splashscreen is hidden.
    # @usageCoffeeScript
    # supersonic.app.splashscreen.hide()
+   # @usageJavaScript
+   # supersonic.app.splashscreen.hide();
   ###
-  hide: bug "hide", ->
+  hide: s.promiseF "hide", ->
     new Promise (resolve, reject) ->
       steroids.splashscreen.hide(
         {}

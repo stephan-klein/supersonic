@@ -8,3 +8,5 @@ module.exports = (steroids, log) ->
   platform: require("./platform")(steroids, log)
   vibrate: require("./vibrate")(steroids, log)
   ready: require("./ready")(steroids, log)
+  buttons:
+    back: require("./buttons/back")(steroids, log)
