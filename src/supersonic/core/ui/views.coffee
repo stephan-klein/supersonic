@@ -9,7 +9,7 @@ module.exports = (steroids, log) ->
    # @name views
    # @overview
    # @description
-   # The `supersonic.ui.views` namespace contains funcitons for manipulating and accessing View objects.
+   # The `supersonic.ui.views` namespace contains functions for manipulating and accessing View objects.
   ###
 
   ###
