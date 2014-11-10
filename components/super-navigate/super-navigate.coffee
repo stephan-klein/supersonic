@@ -31,6 +31,7 @@ SuperNavigatePrototype.createdCallback = ->
     if viewId
       return supersonic.ui.views.find(viewId)
         .then (webview) ->
+          supersonic.logger.debug "Pushing preloaded webview #{viewId}"
           supersonic.ui.layers.push(webview)
         .catch (error) ->
           throw new Error "Failed to push view: #{error}"

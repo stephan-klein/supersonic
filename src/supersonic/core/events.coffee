@@ -34,6 +34,7 @@ module.exports =
     offlines.merge(onlines)
       .toProperty()
       .skipDuplicates()
+      
 
   visibility: do ->
     visibilityState = if document?

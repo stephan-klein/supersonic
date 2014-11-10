@@ -16,6 +16,22 @@
           select second tab
         </button>
       </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="listenTabChanges()">
+          Start listening tab change events
+        </button>
+        <div>tabs.whenWillChange count: {{willChangeCount}}</div>
+        <div>tabs.whenDidChange count: {{didChangeCount}}</div>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="stopListeningTabChanges()">
+          Stop listening tab change events
+        </button>
+      </li>
     </ul>
   </div>
 

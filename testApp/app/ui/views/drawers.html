@@ -42,6 +42,24 @@
           Close Drawer
         </button>
       </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="listenChanges()">
+          Start listening drawer events
+        </button>
+        <div>drawer.whenWillShow count: {{willShowCount}}</div>
+        <div>drawer.whenDidShow count: {{didShowCount}}</div>
+        <div>drawer.whenWillClose count: {{willCloseCount}}</div>
+        <div>drawer.whenDidClose count: {{didCloseCount}}</div>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="stopListeningChanges()">
+          Stop listening drawer events
+        </button>
+      </li>
 
     </ul>
   </div>
