@@ -16,4 +16,6 @@ If you now look at the Data Browser in the Connect Screen again, you'll see that
 
 ## usage
 
+Some nice examples here...
+
 See more [/stable/supersonic/data/](/stable/supersonic/data/)
