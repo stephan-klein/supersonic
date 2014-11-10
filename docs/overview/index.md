@@ -6,10 +6,13 @@ header_sub_title: Learn how the Supersonic Framework is constructed and the core
 section_id: overview
 ---
 
-## What is Supersonic?
+# What is Supersonic?
 
-## Repo structure
+AppGyver Steroids provides a wonderful layer for integrating your HTML5 application with native device capabilities. What we found from developing applications on Steroids is that you need more. Supersonic delivers the missing pieces: you'll be able to write HTML using default CSS components that are delightful to look at, use Web Components that map your HTML to fully native interfaces, and access native APIs with more ease than ever.
+
+Supersonic is framework agnostic. It's a library consisting of CSS, Javascript and Web Components, which you can use with your framework of choice. However, Supersonic comes with a bundle that integrates with Angular.js by Google for even more awesomeness.
 
 ## Contributing
 
-## ETC
+[https://github.com/AppGyver/supersonic](https://github.com/AppGyver/supersonic)
+
