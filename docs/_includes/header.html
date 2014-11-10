@@ -10,7 +10,7 @@
           {% for docs_section in page.docs_sections %}
             {% assign docs_tab_id = docs_section.name | slugify %}
             <li {% if page.docs_tab_id == docs_tab_id %}class="active"{% endif %}>
-              <a href="/{{docs_tab_id}}">{{docs_section.name}}</a>
+              <a href="/{{docs_tab_id}}" {% if docs_section.disabled %} class="disabled" {% endif %} >{{docs_section.name}}</a>
             </li>
           {% endfor %}
         </ul>
