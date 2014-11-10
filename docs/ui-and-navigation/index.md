@@ -29,6 +29,12 @@ Supersonic provides two ways to define your navigation structure. You can use Su
 ## Views
 
 Each Supersonic app consists of one or more views. Views can be created and destroyed on the fly, or started and then persisted, keeping them available at a moments notice. Learn about views in the [views guide][views].
+
+## Interview communication
+
+To effectively use the Supersonic Multi-Page App architecture, you need to be able to share data between various parts of your application. Since a MPA is split into multiple separate WebViews, the techniques used are slightly different – but still awesome.
+ Learn about different kind of solutions to share data between different views from [inter view communication guide][communication].
+
 </section>
 
 [navigation]: /ui-and-navigation/navigation
@@ -36,3 +42,8 @@ Each Supersonic app consists of one or more views. Views can be created and dest
 [native-components]: /ui-and-navigation/native-components
 [styling-native-components]: /ui-and-navigation/styling-native-components
 [views]: /ui-and-navigation/views
+[communication]: /ui-and-navigation/communication
+
+
+
+
