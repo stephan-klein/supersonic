@@ -11,7 +11,7 @@
       <li class="item">
         <button
           class="button button-block"
-          ng-click="navigateTo('http://google.com')">
+          ng-click="navigateTo()">
           Navigate to Google
         </button>
       </li>
@@ -27,6 +27,27 @@
           class="button button-block"
           ng-click="popAll()">
           Pop all the layers
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="navigateToWithCallback()">
+          Navigate to Google with Callback
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="popWithCallback()">
+          Pop the layer With Callback
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="popAllWithCallback()">
+          Pop all the layers With Callback
         </button>
       </li>
     </ul>
