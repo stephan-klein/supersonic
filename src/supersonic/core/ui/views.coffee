@@ -155,13 +155,19 @@ module.exports = (steroids, log) ->
             breloads = JSON.parse(state.preloads)
             state.preloads = []
             for breload in breloads
-              idMatch = breload.match(/id=(\S*),/)
-              locationMatch = breload.match(/location=(\S*),/)
-              uuidMatch = breload.match(/uuid=(\S*)/)
-              state.preloads.push
-                id: if idMatch? then idMatch[1] else null
-                location: if locationMatch? then locationMatch[1] else null
-                uuid: if uuidMatch? then uuidMatch[1] else null
+              # support string value of preload item..
+              if typeof breload is "string"
+                idMatch = breload.match(/id=(\S*),/)
+                locationMatch = breload.match(/location=(\S*),/)
+                uuidMatch = breload.match(/uuid=(\S*)/)
+                state.preloads.push
+                  id: if idMatch? then idMatch[1] else null
+                  location: if locationMatch? then locationMatch[1] else null
+                  uuid: if uuidMatch? then uuidMatch[1] else null
+              else
+                # and support string value of preload
+                state.preloads.push breload
+
           console.log state
           supersonic.logger.debug state
           resolve state
