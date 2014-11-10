@@ -54,8 +54,8 @@ There are essentially three situations when you need to request a build from the
 
 So the general development workflow is based heavily around using Scanners and the QR code, but some special cases and the final release process require a separate build. The build setup process differs somewhat depending on which platform you are using, follow the links below to see how to set up builds for Android and iOS platforms.
 
- - [Build settings for Android][android-build-guide]
- - [Build settings for iOS][ios-build-guide]
+- [Build settings for Android][android-build-guide]
+- [Build settings for iOS][ios-build-guide]
 
 </section>
 <section class="docs-section" id="installing-onto-device">
@@ -69,10 +69,12 @@ For full instructions on installing your app onto a device, see [this guide][ins
 Publishing to app stores requires that you build an app store version of your app and go through the required setup in the respective store pages.
 
 For Android:
+
 1. Build a Google Play build from the [Build Service][build-service]. The resulting `.apk` will be the app you publish to the Play Store.
 2. Go through the [Google launch checklist](http://developer.android.com/distribute/tools/launch-checklist.html) and upload your app to the store.
 
 For iOS:
+
 1. Build a Distribution -> App Store build of your app. Unlike other build types, you will receive a `.zip` file as the result of your build. You need to use the entire `.zip` when uploading to the App Store, and you cannot test the App Store build beforehand.
 2. Go through the [Apple submission guide](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/SubmittingYourApp/SubmittingYourApp.html#//apple_ref/doc/uid/TP40012582-CH9-SW1)
 
