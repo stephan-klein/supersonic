@@ -35,6 +35,9 @@
     <button class="button button-block" ng-repeat="test in disableAndEnableSleepTests"  ng-click="testDisableAndEnableSleep(test.options)">
       {{test.title}}
     </button>
+    <button class="button button-block" ng-click="testDisableAndEnableSleepWithCallbacks()">
+      Disable And Enable Sleep With Callbacks
+    </button>
     <ul>
       <li>Sleep disabled: {{sleepDisabled}}</li>
       <li>Sleep enabled: {{sleepEnabled}}</li>

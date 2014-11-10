@@ -1,8 +1,8 @@
 Promise = require 'bluebird'
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.app.sleep"
-
+  s = superify 'supersonic.app.sleep', log
   ###
    # @namespace supersonic.app
    # @name sleep
@@ -25,8 +25,10 @@ module.exports = (steroids, log) ->
    # A promise that is resolved when the native side has successfully disabled automatic sleep.
    # @usageCoffeeScript
    # supersonic.app.sleep.disable()
+   # @usageJavaScript
+   # supersonic.app.sleep.disable();
   ###
-  disable: bug "disable", ->
+  disable: s.promiseF "disable", ->
     new Promise (resolve) ->
       steroids.device.disableSleep(
         {}
@@ -50,8 +52,10 @@ module.exports = (steroids, log) ->
    # A promise that is resolved when the native side has successfully enabled automatic sleep.
    # @usageCoffeeScript
    # supersonic.app.sleep.enable()
+   # @usageJavaScript
+   # supersonic.app.sleep.enable();
   ###
-  enable: bug "enable", ->
+  enable: s.promiseF "enable", ->
     new Promise (resolve) ->
       steroids.device.enableSleep(
         {}

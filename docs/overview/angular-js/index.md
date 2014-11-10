@@ -20,8 +20,11 @@ myController = ($scope) ->
 
 A HTML view can then render the value of a variable in `$scope` by using the double mustache -syntax:
 
+
 ```html
-<h1>Hello { {text}}</h1>
+{% raw %}
+<h1>Hello {{text}}</h1>
+{% endraw %}
 ```
 
 Varibales in `$scope` can also be bound to form controls such as an input field, and all the changes in data caused by the user typing to the form would be propagated to controllers and other parts of view.

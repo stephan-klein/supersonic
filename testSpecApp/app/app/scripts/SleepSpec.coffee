@@ -9,3 +9,17 @@ describe "supersonic.app.sleep", ->
 
   it "should enable sleep", ->
     supersonic.app.sleep.enable().should.be.fulfilled
+
+  describe "callbacks", ->
+
+    it "should call onSuccess when sleep is disabled", (done) ->
+
+      supersonic.app.sleep.disable
+        onSuccess: ->
+          done()
+
+    it "should call onSuccess when sleep is enabled", (done) ->
+
+      supersonic.app.sleep.enable
+        onSuccess: ->
+          done()
