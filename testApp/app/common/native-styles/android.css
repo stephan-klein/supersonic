@@ -53,3 +53,12 @@ navigation-bar back-bar-button {
   color: #ffffff;
   font-size: 16px;
 }
+
+/* Custom stuff */
+tab-bar#graybg {
+  background-color: gray;
+}
+
+tab-bar.greenbg {
+  background-color: green;
+}

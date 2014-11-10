@@ -20,8 +20,8 @@ module.exports = (steroids, log) ->
    # supersonic.device.vibrate();
   ###
 
-  vibrate = ->
+  vibrate = (ms=1000)->
     deviceready.then ->
-      navigator.notification.vibrate()
+      navigator.notification.vibrate(ms)
 
   return vibrate
