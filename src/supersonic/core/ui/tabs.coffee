@@ -1,9 +1,5 @@
 Promise = require 'bluebird'
 
-Bacon = require 'baconjs'
-
-
-
 module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.ui.tabs"
 
