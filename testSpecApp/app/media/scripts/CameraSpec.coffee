@@ -19,4 +19,26 @@ describe "supersonic.media.camera", ->
         targetWidth: 200
         targetHeight: 200
       supersonic.media.camera.getFromPhotoLibrary(options).should.eventually.deep.be.a('string')
+
+  describe "callbacks", ->
+
+    it "should call onSuccess when picture is taken", (done) ->
+      @timeout 10000
+
+      options =
+        targetWidth: 200
+        targetHeight: 200
+      supersonic.media.camera.takePicture options,
+        onSuccess: ->
+          done()
+
+    it "should call onSuccess when picture is chosen", (done) ->
+      @timeout 10000
+
+      options =
+        targetWidth: 200
+        targetHeight: 200
+      supersonic.media.camera.getFromPhotoLibrary options,
+        onSuccess: ->
+          done()
   
