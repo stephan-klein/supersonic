@@ -1,9 +1,9 @@
 Promise = require 'bluebird'
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  # TODO: add bug later
-  # bug = log.debuggable "supersonic.ui.layers"
-
+  s = superify 'supersonic.ui.layers', log
+  
   ###
    # @namespace supersonic.ui
    # @name layers
@@ -36,7 +36,7 @@ module.exports = (steroids, log) ->
    #   supersonic.ui.layers.push(startedView)
    # });
   ###
-  push: (view) ->
+  push: s.promiseF "push", (view) ->
     new Promise (resolve, reject) ->
       steroids.layers.push {
         view: view._getWebView()
@@ -60,7 +60,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that gets resolved once the view starts to pop. If the view cannot be popped (i.e. there is only the root view in the navigation stack), the promise is rejected. Note that a popped view only lives on for a very short time before it is purged from the app's memory, so be careful to not do too complex things with the promise. It is different if you are popping a StartedView, since it will remain running outside the navigation stack.
   ###
-  pop: ()->
+  pop: s.promiseF "pop", ()->
     new Promise (resolve, reject)->
       steroids.layers.pop {}, {
         onSuccess: ()->
@@ -82,7 +82,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that gets resolved once the views start to pop. If there are no views to pop (i.e. there is only the root view in the navigation stack), the promise is rejected. Note that popped views only live on for a very short time before they are purged from the app's memory, so be careful to not do too complex things with the promise. It is different if you are popping StartedViews, since they will remain running outside the navigation stack.
   ###
-  popAll: ()->
+  popAll: s.promiseF "popAll", ()->
     new Promise (resolve, reject) ->
       steroids.layers.popAll {}, {
         onSuccess: ()->

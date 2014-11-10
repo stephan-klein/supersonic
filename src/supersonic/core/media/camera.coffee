@@ -1,5 +1,5 @@
 Promise = require 'bluebird'
-
+superify = require '../superify'
 {deviceready} = require '../events'
 
 ###
@@ -11,7 +11,7 @@ Promise = require 'bluebird'
 ###
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.media.camera"
+  s = superify 'supersonic.media.camera', log
 
   ###
    # @namespace supersonic.media.camera
@@ -61,6 +61,8 @@ module.exports = (steroids, log) ->
    # @define {=>String} result Image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
    # @usageCoffeeScript
    # supersonic.media.camera.takePicture options
+   # @usageJavaScript
+   # supersonic.media.camera.takePicture(options);
    # @exampleCoffeeScript
    # options =
    #   quality: 50
@@ -71,8 +73,20 @@ module.exports = (steroids, log) ->
    #   saveToPhotoAlbum: true
    # supersonic.media.camera.takePicture(options).then (result) ->
    #   # Do something with the image URI
+   # @exampleJavaScript
+   # var options = {
+   #   quality: 50,
+   #   allowEdit: true,
+   #   targetWidth: 300,
+   #   targetHeight: 300,
+   #   encodingType: "png",
+   #   saveToPhotoAlbum: true
+   # };
+   # supersonic.media.camera.takePicture(options).then( function(result){
+   #   // Do something with the image URI
+   # });
   ###
-  takePicture = (options = {}) ->
+  takePicture = s.promiseF "takePicture", (options = {}) ->
 
     getCameraOptions = ->
       destinationType = if options?.destinationType?
@@ -163,6 +177,8 @@ module.exports = (steroids, log) ->
    # @define {=>String} result Image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
    # @usageCoffeeScript
    # supersonic.media.camera.getFromPhotoLibrary options
+   # @usageJavaScript
+   # supersonic.media.camera.getFromPhotoLibrary(options);
    # @exampleCoffeeScript
    # options =
    #   quality: 50
@@ -172,8 +188,19 @@ module.exports = (steroids, log) ->
    #   encodingType: "png"
    # supersonic.media.camera.getFromPhotoLibrary(options).then (result) ->
    #   # Do something with the image URI
+   # @exampleJavaScript
+   # var options = {
+   #   quality: 50,
+   #   allowEdit: true,
+   #   targetWidth: 300,
+   #   targetHeight: 300,
+   #   encodingType: "png",
+   # };
+   # supersonic.media.camera.getFromPhotoLibrary(options).then( function(result){
+   #   // Do something with the image URI
+   # });
   ###
-  getFromPhotoLibrary = (options = {}) ->
+  getFromPhotoLibrary = s.promiseF "getFromPhotoLibrary", (options = {}) ->
 
     getCameraOptions = ->
       destinationType = if options?.destinationType?

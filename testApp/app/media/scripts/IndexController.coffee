@@ -37,6 +37,16 @@ angular
           $scope.picturePath = "http://localhost/#{file.name}"
         )
 
+    $scope.testTakePictureWithCallbacks = ->
+      options =
+        targetWidth: 100
+        targetHeight: 100
+      supersonic.media.camera.takePicture options,
+        onSuccess: (imageURI) ->
+          $scope.pictureURL = imageURI
+        onFailure: (message) ->
+          alert "Could not take a picture! \n\n #{JSON.stringify(message)}"
+
     moveFileToUserFiles = (imageURI) ->
       deferred = $q.defer()
 
@@ -101,3 +111,14 @@ angular
         .then( (file) ->
           $scope.fromLibraryPath = "http://localhost/#{file.name}"
         )
+
+
+    $scope.testGetFromPhotoLibraryWithCallbacks = ->
+      options =
+        targetWidth: 100
+        targetHeight: 100
+      supersonic.media.camera.getFromPhotoLibrary options,
+        onSuccess: (imageURI) ->
+          $scope.fromLibraryURL = imageURI
+        onFailure: (message) ->
+          alert "Could not get a picture! \n\n #{JSON.stringify(message)}"
