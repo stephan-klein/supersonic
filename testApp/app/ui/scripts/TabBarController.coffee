@@ -1,6 +1,6 @@
 angular
   .module('ui')
-  .controller 'TabsController', ($scope, $q, supersonic) ->
+  .controller 'TabsController', ($scope, $q, $timeout, supersonic) ->
 
     $scope.methods = [
       "hideTabs"
@@ -22,6 +22,7 @@ angular
     $scope.showTabs = ->
       supersonic.ui.tabs.show()
 
+    $scope.tabsUpdatedCount = 0
     $scope.updateTabs = ->
       tabsArray = [
         {
@@ -33,6 +34,8 @@ angular
         }
       ]
       supersonic.ui.tabs.update(tabsArray)
+        .then ->
+          $scope.tabsUpdatedCount += 1
         .catch (err)->
           supersonic.logger.error "Could not update tabs: #{JSON.stringify(err)}"
 
@@ -69,3 +72,21 @@ angular
 
     $scope.setStyleCSS = ->
       supersonic.ui.tabs.setStyleCSS "background-color: red;"
+
+    $scope.willChangeCount = 0
+    $scope.didChangeCount = 0
+    $scope.willChangeListener = null
+    $scope.didChangeListener = null
+    $scope.listenTabChanges = ->
+      $scope.willChangeListener = supersonic.ui.tabs.whenWillChange ->
+        $timeout ->
+          $scope.willChangeCount += 1
+      $scope.didChangeListener = supersonic.ui.tabs.whenDidChange ->
+        $timeout ->
+          $scope.didChangeCount += 1
+
+    $scope.stopListeningTabChanges = ->
+      $scope.willChangeListener() if $scope.willChangeListener?
+      $scope.didChangeListener() if $scope.didChangeListener?
+      $scope.willChangeListener = null
+      $scope.didChangeListener = null

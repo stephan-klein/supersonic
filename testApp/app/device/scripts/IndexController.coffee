@@ -1,6 +1,6 @@
 angular
   .module('device')
-  .controller 'IndexController', ($scope, supersonic) ->
+  .controller 'IndexController', ($scope, $timeout, supersonic) ->
 
     $scope.watchPosition = undefined
 
@@ -128,3 +128,15 @@ angular
         $scope.offlineCount += 1
       supersonic.device.network.whenOnline ->
         $scope.onlineCount += 1
+
+    $scope.backButtonListener = null
+    $scope.backButtonPressedCount = 0
+    $scope.overrideBackButton = ->
+      supersonic.logger.debug "Setting whenPressed.."
+      console.log supersonic.device.buttons.back.whenPressed
+      $scope.backButtonListener = supersonic.device.buttons.back.whenPressed ->
+        $scope.backButtonPressedCount += 1
+
+    $scope.removeBackButtonListener = ->
+      $scope.backButtonListener() if $scope.backButtonListener?
+      $scope.backButtonListener = null

@@ -116,4 +116,21 @@
     </ul>
   </div>
 
+  <div class="card padding">
+    <h1>back button tests</h1>
+    <button
+      class="button button-block"
+      ng-click="overrideBackButton()">
+      Override backbutton event
+    </button>
+    <ul>
+      <li>Backbutton count: {{backButtonPressedCount}}</li>
+    </ul>
+    <button
+      class="button button-block"
+      ng-click="removeBackButtonListener()">
+      Remove backbutton event
+    </button>
+  </div>
+
 </div>
