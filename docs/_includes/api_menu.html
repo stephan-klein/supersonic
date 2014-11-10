@@ -26,7 +26,7 @@
         <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
           <a href="/api-reference/{{version}}{{main_namespace}}{{section_id}}/{{subsection_id}}" class="api-section">
             {% if subsection.method %}
-              <code>{{subsection.name}}()</code>
+              ↳ <code>{{subsection.name}}()</code>
             {% else %}
               {{subsection.name}}
             {% endif %}
