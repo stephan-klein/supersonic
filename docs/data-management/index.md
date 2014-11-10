@@ -15,5 +15,3 @@ The ingredients of the data access are:
  - supersonic.data API
  - three way data binding
  - generic backend integrations
-
- See the third mile for setting up data base and API docs for further info on accessing data from device.
