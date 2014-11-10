@@ -66,6 +66,8 @@
     "ag-data": "^0.3.0",
     "baconjs": "^0.7.23",
     "bluebird": "^2.3.4",
-    "coffee-script": "^1.8.0"
+    "coffee-script": "^1.8.0",
+    "sinon": "~1.11.1",
+    "sinon-chai": "~2.6.0"
   }
 }

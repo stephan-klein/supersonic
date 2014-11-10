@@ -10,7 +10,6 @@ module.exports = (angular) ->
   supersonicApp(angular)
   supersonicDevice(angular)
 
-
   angular
     .module('supersonic', [
       'supersonic.helpers'

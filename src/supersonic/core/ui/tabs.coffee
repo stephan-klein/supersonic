@@ -1,5 +1,8 @@
 Promise = require 'bluebird'
 
+Bacon = require 'baconjs'
+
+
 
 module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.ui.tabs"
@@ -218,3 +221,45 @@ module.exports = (steroids, log) ->
       steroids.tabBar.setStyleCSS css,
         onSuccess: resolve
         onFailure: reject
+
+
+  ###
+   # @namespace supersonic.ui.tabs
+   # @name whenWillChange
+   # @function
+   # @apiCall supersonic.ui.tabs.whenWillChange
+   # @description
+   # Detect when tabs will change
+   # @type
+   # supersonic.ui.tabs.whenWillChange: () => unsubscribe: Function
+   # @define {Function} unsubscribe Stop listening
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.whenWillChange()
+   # @exampleCoffeeScript
+   # supersonic.ui.tabs.whenWillChange().then (structure)->
+   #   steroids.logger.log("Tab structure #{JSON.stringify(structure)}")
+  ###
+  whenWillChange: (f)->
+    id = steroids.tabBar.on "willchange", f
+    ->
+      steroids.tabBar.off "willchange", id
+  ###
+   # @namespace supersonic.ui.tabs
+   # @name whenDidChange
+   # @function
+   # @apiCall supersonic.ui.tabs.whenDidChange
+   # @description
+   # Detect when tabs did change
+   # @type
+   # supersonic.ui.tabs.whenDidChange: () => unsubscribe: Function
+   # @define {Function} unsubscribe Stop listening
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.whenDidChange()
+   # @exampleCoffeeScript
+   # supersonic.ui.tabs.whenDidChange().then (structure)->
+   #   steroids.logger.log("Tabs structure online #{JSON.stringify(structure)}")
+  ###
+  whenDidChange: (f)->
+    id = steroids.tabBar.on "didchange", f
+    ->
+      steroids.tabBar.off "didchange", id
