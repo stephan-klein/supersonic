@@ -66,6 +66,9 @@
       ng-click="testHideAndShowStatusBar(test.options)">
       {{test.title}}
     </button>
+    <button class="button button-block" ng-click="testHideAndShowStatusBarWithCallbacks()">
+      Hide And Show Status Bar With Callbacks
+    </button>
     <ul>
       <li>Status bar hidden: {{statusBarHidden}}</li>
       <li>Status bar shown: {{statusBarShown}}</li>

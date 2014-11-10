@@ -25,3 +25,16 @@ describe "supersonic.app.statusBar", ->
       it "should show status bar with an object param", ->
         supersonic.app.statusBar.show(style: "light").should.be.fulfilled
 
+  describe "callbacks", ->
+
+    it "should call onSuccess when status bar is hidden", (done) ->
+
+      supersonic.app.statusBar.hide
+        onSuccess: ->
+          done()
+
+    it "should call onSuccess when status bar is shown", (done) ->
+      supersonic.app.statusBar.show
+        onSuccess: ->
+          done()
+
