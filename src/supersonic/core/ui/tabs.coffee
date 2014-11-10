@@ -232,8 +232,8 @@ module.exports = (steroids, log) ->
    # @usageCoffeeScript
    # supersonic.ui.tabs.whenWillChange()
    # @exampleCoffeeScript
-   # supersonic.ui.tabs.whenWillChange().then (structure)->
-   #   steroids.logger.log("Tab structure #{JSON.stringify(structure)}")
+   # supersonic.ui.tabs.whenWillChange().then ()->
+   #   steroids.logger.log("Tab will change")
   ###
   whenWillChange: (f)->
     id = steroids.tabBar.on "willchange", f
@@ -252,8 +252,8 @@ module.exports = (steroids, log) ->
    # @usageCoffeeScript
    # supersonic.ui.tabs.whenDidChange()
    # @exampleCoffeeScript
-   # supersonic.ui.tabs.whenDidChange().then (structure)->
-   #   steroids.logger.log("Tabs structure online #{JSON.stringify(structure)}")
+   # supersonic.ui.tabs.whenDidChange().then ()->
+   #   steroids.logger.log("Tabs did change")
   ###
   whenDidChange: (f)->
     id = steroids.tabBar.on "didchange", f

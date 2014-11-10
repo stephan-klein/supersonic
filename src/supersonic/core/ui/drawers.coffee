@@ -60,6 +60,7 @@ module.exports = (steroids, log) ->
   ###
 
   init: bug "init", (view, options)->
+    throw new Error("Android does not support enabling drawers on runtime.") if steroids.nativeBridge.constructor.name is "FreshAndroidBridge"
     side = if options.side? then options.side else "right"
 
     drawer_identifier = if view.getId?
@@ -253,3 +254,92 @@ module.exports = (steroids, log) ->
       steroids.drawers.update options: config,
         onSuccess: resolve
         onFailure: reject
+
+  ###
+   # @namespace supersonic.ui.drawers
+   # @name whenWillShow
+   # @function
+   # @apiCall supersonic.ui.drawers.whenWillShow
+   # @description
+   # Detect when drawer will show
+   # @type
+   # supersonic.ui.drawers.whenWillShow: () => unsubscribe: Function
+   # @define {Function} unsubscribe Stop listening
+   # @usageCoffeeScript
+   # supersonic.ui.drawers.whenWillShow()
+   # @exampleCoffeeScript
+   # supersonic.ui.drawers.whenWillShow().then ->
+   #   steroids.logger.log("Drawers will show")
+  ###
+  whenWillShow: (f)->
+    id = steroids.drawers.on "willshow", f
+    ->
+      steroids.drawers.off "willshow", id
+
+  ###
+   # @namespace supersonic.ui.drawers
+   # @name whenDidShow
+   # @function
+   # @apiCall supersonic.ui.drawers.whenDidShow
+   # @description
+   # Detect when drawer did show
+   # @type
+   # supersonic.ui.drawers.whenDidShow: () => unsubscribe: Function
+   # @define {Function} unsubscribe Stop listening
+   # @usageCoffeeScript
+   # supersonic.ui.drawers.whenDidShow()
+   # @exampleCoffeeScript
+   # supersonic.ui.drawers.whenDidShow().then ->
+   #   steroids.logger.log("Drawers did show")
+  ###
+  whenDidShow: (f)->
+    id = steroids.drawers.on "didshow", f
+    ->
+      steroids.drawers.off "didshow", id
+
+
+
+
+
+
+  ###
+   # @namespace supersonic.ui.drawers
+   # @name whenWillClose
+   # @function
+   # @apiCall supersonic.ui.drawers.whenWillClose
+   # @description
+   # Detect when drawer will close
+   # @type
+   # supersonic.ui.drawers.whenWillClose: () => unsubscribe: Function
+   # @define {Function} unsubscribe Stop listening
+   # @usageCoffeeScript
+   # supersonic.ui.drawers.whenWillClose()
+   # @exampleCoffeeScript
+   # supersonic.ui.drawers.whenWillClose().then ->
+   #   steroids.logger.log("Drawers will close")
+  ###
+  whenWillClose: (f)->
+    id = steroids.drawers.on "willclose", f
+    ->
+      steroids.drawers.off "willclose", id
+
+  ###
+   # @namespace supersonic.ui.drawers
+   # @name whenDidClose
+   # @function
+   # @apiCall supersonic.ui.drawers.whenDidClose
+   # @description
+   # Detect when drawer did close
+   # @type
+   # supersonic.ui.drawers.whenDidClose: () => unsubscribe: Function
+   # @define {Function} unsubscribe Stop listening
+   # @usageCoffeeScript
+   # supersonic.ui.drawers.whenDidClose()
+   # @exampleCoffeeScript
+   # supersonic.ui.drawers.whenDidClose().then ->
+   #   steroids.logger.log("Drawers did close")
+  ###
+  whenDidClose: (f)->
+    id = steroids.drawers.on "didclose", f
+    ->
+      steroids.drawers.off "didclose", id

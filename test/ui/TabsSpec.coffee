@@ -34,6 +34,7 @@ describe "supersonic.ui.tabs", ->
       did.should.have.been.called
 
       another_unsub = tabs.whenWillChange another_will
+
       another_will.should.not.have.been.called
 
       steroids.__trigger_event "steroids.tabBar.on", "willchange", {}

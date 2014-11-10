@@ -2,17 +2,22 @@ module.exports = do ->
 
   callbacks = {}
 
+  uniqueId = (length=8) ->
+    id = ""
+    id += Math.random().toString(36).substr(2) while id.length < length
+    id.substr 0, length
+
   fakeEvent = (namespace) ->
     unless callbacks[namespace]?
       callbacks[namespace] = {}
 
     (event_name, f)->
-      cbObj = {id: (new Date()).getTime(), fn: f}
+      cbObj = {id: uniqueId(), fn: f}
       if callbacks[namespace][event_name]?
         callbacks[namespace][event_name].push cbObj
       else
         callbacks[namespace][event_name] = [cbObj]
-      console.log "Added #{event_name}", callbacks[namespace][event_name]
+
       return cbObj.id
 
   removeEvent = (namespace)->
@@ -23,7 +28,7 @@ module.exports = do ->
   triggerEvent = (namespace, event_name, argz...)->
     cbs = callbacks[namespace][event_name]
     if cbs?
-      console.log "Triggering fake event #{namespace}: #{event_name} callbacks (#{cbs.length})"
+      #console.log "Triggering fake event #{namespace}: #{event_name} callbacks (#{cbs.length})"
       for cb in cbs
         cb.fn.apply(null, argz)
 
@@ -37,3 +42,6 @@ module.exports = do ->
   tabBar:
     on: fakeEvent("steroids.tabBar.on")
     off: removeEvent("steroids.tabBar.on")
+  drawers:
+    on: fakeEvent("steroids.drawers.on")
+    off: removeEvent("steroids.drawers.on")
