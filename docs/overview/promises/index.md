@@ -10,8 +10,6 @@ section_id: promises
 
 Since webviews are an asynchronous platform, the various events happening in the web view such as button clicks, data arriving from the backend etc, are handled in callback functions. Quite often callbacks have to be deeply nested, and this can easily result as an 'callback hell', that makes it hard to follow application logic and troublesome to implement error handling.
 
-
-
 A promise is a proxy object for an event that is not necessary happened. A success and failure callback functions can be given to a promise, and once the promise is _resolved_ (i.e. the 'promised' event happens succesfully) or _rejected_ (the 'promised' event fails), the corresponding callback is called.
 
 Most of the Supersonic core API's return a promise. Callback functions can be added to a promise with the method `then`. The first parameter is a success calback that gets called if promise is resolved, the optinonal second parameter is called if promise is rejected (i.e. event is successfull).
