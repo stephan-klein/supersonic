@@ -13,6 +13,9 @@
       ng-click="testTakePicture(test.options)">
       {{test.title}}
     </button>
+    <button class="button button-block" ng-click="testTakePictureWithCallbacks()">
+      Take A Picture With Callbacks
+    </button>
     <ul>
       <li>picture URL: {{pictureURL}}</li>
     </ul>
@@ -26,6 +29,9 @@
       ng-repeat="test in getFromPhotoLibraryTests"
       ng-click="testGetFromPhotoLibrary(test.options)">
       {{test.title}}
+    </button>
+    <button class="button button-block" ng-click="testGetFromPhotoLibraryWithCallbacks()">
+      Get From Photo Library With Callbacks
     </button>
     <ul>
       <li>picture URL: {{fromLibraryURL}}</li>
