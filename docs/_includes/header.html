@@ -1,9 +1,31 @@
-<div class="header horizontal-gradient">
-  <div class="container">
-    <h3>{% if page.header_title %}{{ page.header_title }}{% else %}{{ page.title }}{% endif %}</h3>
-    <h4>{% if page.header_sub_title %}{{ page.header_sub_title}}{% else %}How to get the most out of Supersonic.{% endif %}</h4>
+<!-- Blue header -->
+
+<div class="container-fluid ag__docs__header bg-blue text-white">
+  <div class="row">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-xs-12 supersonic-logo">
+          <!--<img src="//s3.amazonaws.com/appgyver.assets/global-assets/images/appgyver-universal-logos/supersonic-logo-wide-light.svg" width="100%" alt="">-->
+          SuperSonic
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <h3 class="text-white">{% if page.header_title %}{{ page.header_title }}{% else %}{{ page.title }}{% endif %}</h3>
+          <p class="lead text-white">{% if page.header_sub_title %}{{ page.header_sub_title}}{% else %}How to get the most out of Supersonic.{% endif %}</p>
+        </div>
+      </div>
+
+    </div>
   </div>
-  <div class="news">
+</div>
+
+<!-- Dark blue header -->
+
+<div class="container-fluid bg-blue-dark">
+  <div class="row">
     <div class="container">
       <div class="row">
         <ul class="nav nav-pills docs-header">
