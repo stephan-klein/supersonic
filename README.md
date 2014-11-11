@@ -78,6 +78,7 @@ Installing dependencies:
 Supersonic documentation is generated in a two-step process. A grunt task extracts metadata from source files. The docs are then presented along with the metadata by a jekyll server.
 
     gem install jekyll
+    gem install redcarpet -v 3.1.2
     grunt compile-docs
     cd docs
     jekyll serve
