@@ -20,12 +20,21 @@ module.exports = (steroids, log) ->
    # Returns a `supersonic.ui.View` object pointing to the given location.
    # @usageCoffeeScript
    # supersonic.ui.view "cars#index"
+   # @usageJavaScript
+   # supersonic.ui.view("cars#index");
    # @exampleCoffeeScript
    # # Routes are parsed automatically. The one below points to the HTML file at app/cars/views/index.html
    # carsIndexView = supersonic.ui.view "cars#index"
    #
    # # URLs are detected and used as-is
    # googleView = supersonic.ui.view "http://www.google.com"
+   #
+   # @exampleJavaScript
+   # // Routes are parsed automatically. The one below points to the HTML file at app/cars/views/index.html
+   # var carsIndexView = supersonic.ui.view("cars#index");
+   #
+   # // URLs are detected and used as-is
+   # var googleView = supersonic.ui.view("http://www.google.com");
    #
   ###
 
