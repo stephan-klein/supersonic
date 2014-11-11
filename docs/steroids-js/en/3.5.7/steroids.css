@@ -1,0 +1,172 @@
+a {
+  color: black;
+}
+
+#header h1,
+#header h1 a {
+  color:white !important;
+  text-shadow:1px 2px 2px black !important;
+}
+
+#header h1#nonmobile a {
+  font-size: 14px;
+}
+
+h1#mobile {
+  display: none;
+}
+
+hr {
+  display:block !important;
+}
+
+/* CORDOVA STYLE FIX*/
+
+#cordova-wrapper {
+  position:relative;
+  height:100%;
+  min-width:1090px;
+}
+
+/* TOP STRIPE STYLES */
+
+div.topstripe {
+  color: white;
+  background: url('img/top_stripe/stripe_bg.png');
+  height:84px;
+  min-width:940px;
+}
+
+div.topbar_container {
+  max-width:940px;
+  float:center;
+  margin-left:auto;
+  margin-right:auto;
+  min-width:940px;
+  min-height:84px;
+}
+
+.menu_image {
+  float:left;
+}
+
+div.menu_buttons {
+  float: right;
+  margin-top: 3px;
+}
+
+a.blue {
+  color: #00b6ff !important;
+}
+
+a.menu-link {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #888;
+  font-weight:400;
+  padding:0px 15px;
+  font-size: 18px;
+  line-height:78px;
+  text-shadow: 0px 2px 1px rgba(255,255,255,0.5);
+}
+
+a.menu-link:hover {
+  color:#00AEEF;
+  text-decoration:none;
+}
+
+a.menu-link#active {
+  color:#00AEEF;
+}
+
+div.header_shadow {
+  background-image: url("img/top_stripe/header_bg_transparent.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+  min-width: 940px;
+  min-height:48px;
+}
+
+/* SERVICE MENU STYLES */
+
+.service_menu_container {
+  float:center;
+  margin-left:auto;
+  margin-right:auto;
+  max-width:940px;
+  min-width:940px;
+}
+
+div.service_menu {
+  height: 39px;
+  width: 100%;
+  min-width:1170px;
+  background-color: #363636;
+  padding-top:4px;
+}
+
+div.service_content {
+  color: #bcbcbc;
+  text-transform: uppercase;
+  margin-left:-10px;
+}
+
+div.submenu-link-container {
+  margin-right: 40px;
+  float: left;
+  height: 39px;
+  max-height: 39px;
+  display:block;
+  line-height:18px;
+}
+
+div.submenu-link-container#active a {
+  font-weight: 600;
+  color: white;
+}
+
+div.submenu-link-container a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #bcbcbc;
+  text-decoration: none;
+  padding-top: 8px;
+  display:block;
+  text-shadow:none;
+}
+
+div.submenu-link-container a:hover {
+  color: #bcbcbc;
+}
+
+/* Hide top bar in mobile */
+
+@media only screen and (max-device-width: 1024px) {
+  .topstripe {
+    display: none;
+  }
+
+  .service_menu {
+    display: none;
+  }
+
+  h1#mobile {
+    display: block;
+    text-align: left;
+    margin-left: 20px;
+  }
+
+  h1#mobile a {
+    font-size: 15px;
+  }
+
+  h1#nonmobile {
+    display: none;
+  }
+
+  #cordova-wrapper {
+    min-width: 0px;
+    height: auto;
+    position:static;
+  }
+}

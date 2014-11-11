@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+--><html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+        <meta name="generator" content="joDoc">
+        <link href="//s3.amazonaws.com/appgyver.assets/global-assets/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+        <title>AppGyver Steroids API Documentation</title>
+
+        <!-- AppGyver fonts -->
+        <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/aa8407d2-1212-415a-8e54-031ff8ee71fe.css">
+        <link type="text/css" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
+        <link rel="stylesheet" type="text/css" href="steroids.css">
+        <link rel="stylesheet" type="text/css" href="service_menu.css">
+        <link rel="stylesheet" type="text/css" href="prettify/prettify.css">
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="https://s3.amazonaws.com/appgyver.assets/topbar.js" type="text/javascript"></script>
+
+    </head>
+    <body class="appgyver-x">
+
+      <div class="clear" style="margin-bottom: 50px;"></div>
+
+        <div id="cordova-wrapper">
+
+          <div id="header">
+              <h1 id="nonmobile"><a href="index.html"><strong>AppGyver Steroids</strong> API Documentation</a></h1>
+              <h1 id="mobile"><a href="index.html"><strong>AppGyver Steroids</strong> API Docs</a></h1>
+              <small>
+                  <select><optgroup label="English" value="en">
+<option value="stable">stable</option>
+<option value="edge">edge</option>
+<option value="3.5.7">3.5.7</option>
+<option value="3.5.5">3.5.5</option>
+<option selected value="3.5.3">3.5.3</option>
+<option value="3.5.1">3.5.1</option>
+<option value="3.5.0">3.5.0</option>
+<option value="3.1.9">3.1.9</option>
+</optgroup></select>
+              </small>
+          </div>
+          <div id="subheader">
+              <h1>FileEntry</h1>
+              <small><select><option value="FileEntry">FileEntry</option>
+<option value="FileEntry_properties">      - Properties</option>
+<option value="FileEntry_methods">      - Methods</option>
+<option value="FileEntry_getmetadata">      - getMetadata</option>
+<option value="FileEntry_moveto">      - moveTo</option>
+<option value="FileEntry_copyto">      - copyTo</option>
+<option value="FileEntry_tourl">      - toURL</option>
+<option value="FileEntry_remove">      - remove</option>
+<option value="FileEntry_getparent">      - getParent</option>
+<option value="FileEntry_createwriter">      - createWriter</option>
+<option value="FileEntry_file">      - file</option></select></small>
+          </div>
+
+          <div id="sidebar">
+              <div class="vertical_divider"></div>
+          <h1>Steroids 3.5.3 API Reference</h1>
+<ul>
+<li><a href="steroids_Steroids%20Analytics%20and%20Log_index.md.html#Steroids%C2%A0Analytics%C2%A0and%C2%A0Log">Steroids Analytics and Log</a></li>
+<li><a href="steroids_Steroids%20App%20and%20Device_index.md.html#Steroids%C2%A0App%C2%A0and%C2%A0Device">Steroids App and Device</a></li>
+<li><a href="steroids_Steroids%20Config_index.md.html#Steroids%C2%A0Config">Steroids Config</a></li>
+<li><a href="steroids_Steroids%20Events_index.md.html#Steroids%C2%A0Events">Steroids Events</a></li>
+<li><a href="steroids_Steroids%20File%20System_index.md.html#Steroids%C2%A0File%C2%A0System">Steroids File System</a></li>
+<li><a href="steroids_Steroids%20Media_index.md.html#Steroids%C2%A0Media">Steroids Media</a></li>
+<li><a href="steroids_Steroids%20Views_index.md.html#Steroids%C2%A0Views">Steroids Views</a></li>
+<li><a href="steroids_Steroids%20UI%20Components_index.md.html#Steroids%C2%A0UI%C2%A0Components">Steroids UI Components</a></li>
+</ul>
+<h1>Cordova 3.5.0 API Reference</h1>
+<ul>
+<li><a href="cordova_accelerometer_accelerometer.md.html#Accelerometer">Accelerometer</a></li>
+<li><a href="cordova_camera_camera.md.html#Camera">Camera</a></li>
+<li><a href="cordova_media_capture_capture.md.html#Capture">Capture</a></li>
+<li><a href="cordova_compass_compass.md.html#Compass">Compass</a></li>
+<li><a href="cordova_connection_connection.md.html#Connection">Connection</a></li>
+<li><a href="cordova_contacts_contacts.md.html#Contacts">Contacts</a></li>
+<li><a href="cordova_device_device.md.html#Device">Device</a></li>
+<li><a href="cordova_events_events.md.html#Events">Events</a></li>
+<li><a href="cordova_file_file.md.html#File">File</a></li>
+<li><a href="cordova_file_filetransfer_filetransfer.md.html#FileTransfer">FileTransfer</a></li>
+<li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
+<li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
+<li><a href="cordova_media_media.md.html#Media">Media</a></li>
+<li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
+</ul>
+<h1>Guides</h1>
+<ul><li><a href="_index.html">Keyword Index</a></li></ul>
+</div>
+
+          <div id="scrollable">
+              <div id="content">
+                  <h1><a name="FileEntry">FileEntry</a></h1>
+
+<p>Represents a file on a file system, as defined in the <a class="external" href="http://www.w3.org/TR/file-system-api/">W3C Directories and Systems</a> specification. Further examples can be found in the <a class="external" href="http://www.html5rocks.com/en/tutorials/file/filesystem/">html5Rocks fileSystem tutorial</a>.</p>
+
+<h2><a name="FileEntry_properties">Properties</a></h2>
+
+<ul>
+<li><p><strong>isFile</strong>: Always <code>true</code>. <em>(boolean)</em></p></li>
+<li><p><strong>isDirectory</strong>: Always <code>false</code>. <em>(boolean)</em></p></li>
+<li><p><strong>name</strong>: The name of the <code><a href="cordova_file_fileentry_fileentry.md.html#FileEntry">FileEntry</a></code>, excluding the path leading to it. <em>(DOMString)</em></p></li>
+<li><p><strong>fullPath</strong>: The full absolute path from the root to the <code><a href="cordova_file_fileentry_fileentry.md.html#FileEntry">FileEntry</a></code>. <em>(DOMString)</em></p></li>
+</ul>
+
+<h2><a name="FileEntry_methods">Methods</a></h2>
+
+<ul>
+<li><p><strong>getMetadata</strong>: Look up metadata about a file.</p></li>
+<li><p><strong>moveTo</strong>: Move a file to a different location on the file system.</p></li>
+<li><p><strong>copyTo</strong>: Copy a file to a different location on the file system.</p></li>
+<li><p><strong>toURL</strong>: Return a URL that can be used to locate a file.</p></li>
+<li><p><strong>remove</strong>: Delete a file.</p></li>
+<li><p><strong>getParent</strong>: Look up the parent directory.</p></li>
+<li><p><strong>createWriter</strong>: Creates a <code><a href="cordova_file_filewriter_filewriter.md.html#FileWriter">FileWriter</a></code> object that can be used to write to a file.</p></li>
+<li><p><strong>file</strong>: Creates a <code><a href="cordova_file_file.md.html#File">File</a></code> object containing file properties.</p></li>
+</ul>
+
+<h2><a name="FileEntry_getmetadata">getMetadata</a></h2>
+
+<p>Look up metadata about a file.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+<li><p><strong>successCallback (required)</strong>: A callback that is passed a <code><a href="cordova_file_metadata_metadata.md.html#Metadata">Metadata</a></code> object. <em>(Function)</em></p></li>
+<li><p><strong>errorCallback</strong>: A callback that executes if an error occurs when retrieving the <code><a href="cordova_file_metadata_metadata.md.html#Metadata">Metadata</a></code>. Invoked with a <code><a href="cordova_file_fileerror_fileerror.md.html#FileError">FileError</a></code> object. <em>(Function)</em></p></li>
+</ul>
+
+<p><strong>Quick Example</strong></p>
+
+<pre class="prettyprint"><code>function success(metadata) {
+    console.log("Last Modified: " + metadata.modificationTime);
+}
+
+function fail(error) {
+    alert(error.code);
+}
+
+// Request the metadata object for this entry
+entry.getMetadata(success, fail);
+</code></pre>
+
+<h2><a name="FileEntry_moveto">moveTo</a></h2>
+
+<p>Move a file to a different location on the file system. An error
+results if the app attempts to:</p>
+
+<ul>
+<li><p>move a file into its parent if a name different from its current one isn't provided;</p></li>
+<li><p>move a file to a path occupied by a directory;</p></li>
+</ul>
+
+<p>In addition, moving a file on top of an existing file attempts to
+delete and replace that file.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+<li><p><strong>parent (required)</strong>: The parent directory to which to move the file. <em>(<a href="cordova_file_directoryentry_directoryentry.md.html#DirectoryEntry">DirectoryEntry</a>)</em></p></li>
+<li><p><strong>newName</strong>: The new name of the file. Defaults to the current name if unspecified. <em>(DOMString)</em></p></li>
+<li><p><strong>successCallback</strong>: A callback that is passed the new file's <code><a href="cordova_file_fileentry_fileentry.md.html#FileEntry">FileEntry</a></code> object. <em>(Function)</em></p></li>
+<li><p><strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to move the file.  Invoked with a <code><a href="cordova_file_fileerror_fileerror.md.html#FileError">FileError</a></code> object. <em>(Function)</em></p></li>
+</ul>
+
+<p><strong>Quick Example</strong></p>
+
+<pre class="prettyprint"><code>function success(entry) {
+    console.log("New Path: " + entry.fullPath);
+}
+
+function fail(error) {
+    alert(error.code);
+}
+
+function moveFile(entry) {
+    var parent = document.getElementById('parent').value,
+        parentName = parent.substring(parent.lastIndexOf('/')+1),
+        parentEntry = new <a href="cordova_file_directoryentry_directoryentry.md.html#DirectoryEntry">DirectoryEntry</a>(parentName, parent);
+
+    // move the file to a new directory and rename it
+    entry.moveTo(parentEntry, "newFile.txt", success, fail);
+}
+</code></pre>
+
+<h2><a name="FileEntry_copyto">copyTo</a></h2>
+
+<p>Copy a file to a new location on the file system.  An error results if
+the app attempts to:</p>
+
+<ul>
+<li>copy a file into its parent if a name different from its current one is not provided.</li>
+</ul>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+<li><p><strong>parent (required)</strong>: The parent directory to which to copy the file. <em>(<a href="cordova_file_directoryentry_directoryentry.md.html#DirectoryEntry">DirectoryEntry</a>)</em></p></li>
+<li><p><strong>newName</strong>: The new name of the file. Defaults to the current name if unspecified. <em>(DOMString)</em></p></li>
+<li><p><strong>successCallback</strong>: A callback that is passed the new file's <code><a href="cordova_file_fileentry_fileentry.md.html#FileEntry">FileEntry</a></code> object. <em>(Function)</em></p></li>
+<li><p><strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to copy the file.  Invoked with a <code><a href="cordova_file_fileerror_fileerror.md.html#FileError">FileError</a></code> object. <em>(Function)</em></p></li>
+</ul>
+
+<p><strong>Quick Example</strong></p>
+
+<pre class="prettyprint"><code>function win(entry) {
+    console.log("New Path: " + entry.fullPath);
+}
+
+function fail(error) {
+    alert(error.code);
+}
+
+function copyFile(entry) {
+    var parent = document.getElementById('parent').value,
+        parentName = parent.substring(parent.lastIndexOf('/')+1),
+        parentEntry = new <a href="cordova_file_directoryentry_directoryentry.md.html#DirectoryEntry">DirectoryEntry</a>(parentName, parent);
+
+    // copy the file to a new directory and rename it
+    entry.copyTo(parentEntry, "file.copy", success, fail);
+}
+</code></pre>
+
+<h2><a name="FileEntry_tourl">toURL</a></h2>
+
+<p>Returns a URL that can be used to locate the file.</p>
+
+<p><strong>Quick Example</strong></p>
+
+<pre class="prettyprint"><code>// Request the URL for this entry
+var fileURL = entry.toURL();
+console.log(fileURL);
+</code></pre>
+
+<h3>iOS quirks</h3>
+
+<p>Attempting to access the the file directly via <code>fileEntry.toURL()</code> in a WebView that is served via <code>localhost</code> will result in a CORS issue on iOS. Instead, to access the file you have to first move it into the read-writable portion of the application files.</p>
+
+<h2><a name="FileEntry_remove">remove</a></h2>
+
+<p>Deletes a file.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+<li><p><strong>successCallback (required)</strong>: A callback that executes after the file has been deleted.  Invoked with no parameters. <em>(Function)</em></p></li>
+<li><p><strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to delete the file.  Invoked with a <code><a href="cordova_file_fileerror_fileerror.md.html#FileError">FileError</a></code> object. <em>(Function)</em></p></li>
+</ul>
+
+<p><strong>Quick Example</strong></p>
+
+<pre class="prettyprint"><code>function success(entry) {
+    console.log("Removal succeeded");
+}
+
+function fail(error) {
+    alert('Error removing file: ' + error.code);
+}
+
+// remove the file
+entry.remove(success, fail);
+</code></pre>
+
+<h2><a name="FileEntry_getparent">getParent</a></h2>
+
+<p>Look up the parent <code><a href="cordova_file_directoryentry_directoryentry.md.html#DirectoryEntry">DirectoryEntry</a></code> containing the file.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+<li><p><strong>successCallback (required)</strong>: A callback that is passed the file's parent <code><a href="cordova_file_directoryentry_directoryentry.md.html#DirectoryEntry">DirectoryEntry</a></code>. <em>(Function)</em></p></li>
+<li><p><strong>errorCallback</strong>: A callback that executes if an error occurs when attempting to retrieve the parent <code><a href="cordova_file_directoryentry_directoryentry.md.html#DirectoryEntry">DirectoryEntry</a></code>.  Invoked with a <code><a href="cordova_file_fileerror_fileerror.md.html#FileError">FileError</a></code> object. <em>(Function)</em></p></li>
+</ul>
+
+<p><strong>Quick Example</strong></p>
+
+<pre class="prettyprint"><code>function success(parent) {
+    console.log("Parent Name: " + parent.name);
+}
+
+function fail(error) {
+    alert(error.code);
+}
+
+// Get the parent <a href="cordova_file_directoryentry_directoryentry.md.html#DirectoryEntry">DirectoryEntry</a>
+entry.getParent(success, fail);
+</code></pre>
+
+<h2><a name="FileEntry_createwriter">createWriter</a></h2>
+
+<p>Create a <code><a href="cordova_file_filewriter_filewriter.md.html#FileWriter">FileWriter</a></code> object associated with the file represented by the <code><a href="cordova_file_fileentry_fileentry.md.html#FileEntry">FileEntry</a></code>.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+<li><p><strong>successCallback (required)</strong>: A callback that is passed a <code><a href="cordova_file_filewriter_filewriter.md.html#FileWriter">FileWriter</a></code> object. <em>(Function)</em></p></li>
+<li><p><strong>errorCallback</strong>: A callback that executes if an error occurs while attempting to create the <a href="cordova_file_filewriter_filewriter.md.html#FileWriter">FileWriter</a>.  Invoked with a <code><a href="cordova_file_fileerror_fileerror.md.html#FileError">FileError</a></code> object. <em>(Function)</em></p></li>
+</ul>
+
+<p><strong>Quick Example</strong></p>
+
+<pre class="prettyprint"><code>function success(writer) {
+    writer.write("Some text to the file");
+}
+
+function fail(error) {
+    alert(error.code);
+}
+
+// create a <a href="cordova_file_filewriter_filewriter.md.html#FileWriter">FileWriter</a> to write to the file
+entry.createWriter(success, fail);
+</code></pre>
+
+<h2><a name="FileEntry_file">file</a></h2>
+
+<p>Return a <code><a href="cordova_file_file.md.html#File">File</a></code> object that represents the current state of the file
+that this <code><a href="cordova_file_fileentry_fileentry.md.html#FileEntry">FileEntry</a></code> represents.</p>
+
+<p><strong>Parameters:</strong></p>
+
+<ul>
+<li><p><strong>successCallback (required)</strong>: A callback that is passed a <code><a href="cordova_file_file.md.html#File">File</a></code> object. <em>(Function)</em></p></li>
+<li><p><strong>errorCallback</strong>: A callback that executes if an error occurs when creating the <code><a href="cordova_file_file.md.html#File">File</a></code> object, such as when the file no longer exists.  Invoked with a <code><a href="cordova_file_fileerror_fileerror.md.html#FileError">FileError</a></code> object. <em>(Function)</em></p></li>
+</ul>
+
+<p><strong>Quick Example</strong></p>
+
+<pre class="prettyprint"><code>function success(file) {
+    console.log("<a href="cordova_file_file.md.html#File">File</a> size: " + file.size);
+}
+
+function fail(error) {
+    alert("Unable to retrieve file properties: " + error.code);
+}
+
+// obtain properties of a file
+entry.file(success, fail);
+</code></pre>
+
+              </div>
+          </div>
+
+        </div>
+
+        <!-- Functionality and Syntax Highlighting -->
+        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript" src="prettify/prettify.js"></script>
+    </body>
+</html>

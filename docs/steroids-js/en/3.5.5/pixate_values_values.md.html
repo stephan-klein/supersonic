@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+--><html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+        <meta name="generator" content="joDoc">
+        <link href="//s3.amazonaws.com/appgyver.assets/global-assets/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+        <title>AppGyver Steroids API Documentation</title>
+
+        <!-- AppGyver fonts -->
+        <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/aa8407d2-1212-415a-8e54-031ff8ee71fe.css">
+        <link type="text/css" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
+        <link rel="stylesheet" type="text/css" href="steroids.css">
+        <link rel="stylesheet" type="text/css" href="service_menu.css">
+        <link rel="stylesheet" type="text/css" href="prettify/prettify.css">
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="https://s3.amazonaws.com/appgyver.assets/topbar.js" type="text/javascript"></script>
+
+    </head>
+    <body class="appgyver-x">
+
+      <div class="clear" style="margin-bottom: 50px;"></div>
+
+        <div id="cordova-wrapper">
+
+          <div id="header">
+              <h1 id="nonmobile"><a href="index.html"><strong>AppGyver Steroids</strong> API Documentation</a></h1>
+              <h1 id="mobile"><a href="index.html"><strong>AppGyver Steroids</strong> API Docs</a></h1>
+              <small>
+                  <select><optgroup label="English" value="en">
+<option value="stable">stable</option>
+<option value="edge">edge</option>
+<option value="3.5.7">3.5.7</option>
+<option selected value="3.5.5">3.5.5</option>
+<option value="3.5.3">3.5.3</option>
+<option value="3.5.1">3.5.1</option>
+<option value="3.5.0">3.5.0</option>
+<option value="3.1.9">3.1.9</option>
+</optgroup></select>
+              </small>
+          </div>
+          <div id="subheader">
+              <h1>Values</h1>
+              <small></small>
+          </div>
+
+          <div id="sidebar">
+              <div class="vertical_divider"></div>
+          <h1>Steroids 3.5.5 API Reference</h1>
+<ul>
+<li><a href="steroids_Steroids%20Log_index.md.html#Steroids%C2%A0Log">Steroids Log</a></li>
+<li><a href="steroids_Steroids%20App%20and%20Device_index.md.html#Steroids%C2%A0App%C2%A0and%C2%A0Device">Steroids App and Device</a></li>
+<li><a href="steroids_Steroids%20Config_index.md.html#Steroids%C2%A0Config">Steroids Config</a></li>
+<li><a href="steroids_Steroids%20Events_index.md.html#Steroids%C2%A0Events">Steroids Events</a></li>
+<li><a href="steroids_Steroids%20File%20System_index.md.html#Steroids%C2%A0File%C2%A0System">Steroids File System</a></li>
+<li><a href="steroids_Steroids%20Media_index.md.html#Steroids%C2%A0Media">Steroids Media</a></li>
+<li><a href="steroids_Steroids%20Views_index.md.html#Steroids%C2%A0Views">Steroids Views</a></li>
+<li><a href="steroids_Steroids%20UI%20Components_index.md.html#Steroids%C2%A0UI%C2%A0Components">Steroids UI Components</a></li>
+</ul>
+<h1>Cordova 3.5.1 API Reference</h1>
+<ul>
+<li><a href="cordova_accelerometer_accelerometer.md.html#Accelerometer">Accelerometer</a></li>
+<li><a href="cordova_camera_camera.md.html#Camera">Camera</a></li>
+<li><a href="cordova_media_capture_capture.md.html#Capture">Capture</a></li>
+<li><a href="cordova_compass_compass.md.html#Compass">Compass</a></li>
+<li><a href="cordova_connection_connection.md.html#Connection">Connection</a></li>
+<li><a href="cordova_contacts_contacts.md.html#Contacts">Contacts</a></li>
+<li><a href="cordova_device_device.md.html#Device">Device</a></li>
+<li><a href="cordova_events_events.md.html#Events">Events</a></li>
+<li><a href="cordova_file_file.md.html#File">File</a></li>
+<li><a href="cordova_file_filetransfer_filetransfer.md.html#FileTransfer">FileTransfer</a></li>
+<li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
+<li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
+<li><a href="cordova_media_media.md.html#Media">Media</a></li>
+<li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
+</ul>
+<h1>Pixate styling reference</h1>
+<ul>
+<li><a href="pixate_controls_controls.md.html#Controls">Controls</a></li>
+<li><a href="pixate_selectors_selectors.md.html#Selectors">Selectors</a></li>
+<li><a href="pixate_values_values.md.html#Values">Values</a></li>
+</ul>
+<h1>Guides</h1>
+<ul><li><a href="_index.html">Keyword Index</a></li></ul>
+</div>
+
+          <div id="scrollable">
+              <div id="content">
+                  <h1><a name="Values">Values</a></h1>
+
+<p>Below is a list of value types supported by Freestyle.</p>
+
+<h3>Angle<a name="angle"></a>
+</h3>
+
+<p>An angle is a number followed by one of the following units: deg, rad, grad. Note that there must be no whitespace between the number and its unit. Zero values face horizontally to the right and then rotate counter-clockwise as the value increases.</p>
+
+<h3>Blend Modes<a name="blend_modes"></a>
+</h3>
+
+<p>Below is a list of blend modes as defined by iOS. For a complete description of each mode, visit the <a class="external" href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CGContext/index.html#//apple_ref/doc/c_ref/CGBlendMode">Apple developer center</a>.</p>
+
+<ul>
+<li>clear</li>
+<li>color</li>
+<li>color-burn</li>
+<li>color-dodge</li>
+<li>copy</li>
+<li>darken</li>
+<li>destination-atop</li>
+<li>destination-in</li>
+<li>destination-out</li>
+<li>destination-over</li>
+<li>difference</li>
+<li>exclusion</li>
+<li>hard-light</li>
+<li>hue</li>
+<li>lighten</li>
+<li>luminosity</li>
+<li>multiply</li>
+<li>normal</li>
+<li>overlay</li>
+<li>plus-darker</li>
+<li>plus-lighter</li>
+<li>saturation</li>
+<li>screen</li>
+<li>soft-light</li>
+<li>source-atop</li>
+<li>source-in</li>
+<li>source-out</li>
+<li>xor</li>
+</ul>
+
+<h3>Color<a name="color"></a>
+</h3>
+
+<p>A color is defined as a 3- or 6-digit hexadecimal number, as an SVG named color, or using any of the following color functions: rgb, rgba, hsl, hsla, hsb, or hsba. When using a hexadecimal number, each digit in a 3-digit hex number and each pair of digits in a 6-digit hex number correspond to an rgb color. The digits define each channel in order: red, green, then blue. For a list of named colors and their values, see <a class="external" href="http://www.w3.org/TR/css3-color/#svg-color">SVG named colors</a>.</p>
+
+<pre class="prettyprint"><code>color                 ::= &lt;named-color&gt;
+                        |  &lt;hex-color&gt;
+                        |  &lt;rgb-color&gt;
+                        |  &lt;hsl-color&gt;
+                        |  &lt;hsb-color&gt;
+
+named-color           ::= // See link above for names and values.
+
+hex-color             ::= #&lt;hex-digit&gt;{3} |  #&lt;hex-digit&gt;{6}
+
+rgb-color             ::= rgb(&lt;byte-or-percent&gt; [, &lt;byte-or-percent&gt;]{2}])
+                        |  rgba(&lt;byte-or-percent&gt; [, &lt;byte-or-percent&gt;]{2}, &lt;unit-or-percent&gt;])
+                        |  rgba(&lt;named-color&gt;, &lt;unit-or-percent&gt;)
+                        |  rgba(&lt;hex-color&gt;, &lt;unit-or-percent&gt;)
+
+hsl-color             ::= hsl(&lt;angle-or-percent&gt;, &lt;byte-or-percent&gt;, &lt;byte-or-percent&gt;)
+                        |  hsla(&lt;angle-or-percent&gt;, &lt;byte-or-percent&gt;, &lt;byte-or-percent&gt;, &lt;unit-or-percent&gt;)
+
+hsb-color             ::= hsb(&lt;angle-or-percent&gt;, &lt;byte-or-percent&gt;, &lt;byte-or-percent&gt;)
+                        |  hsba(&lt;angle-or-percent&gt;, &lt;byte-or-percent&gt;, &lt;byte-or-percent&gt;, &lt;unit-or-percent&gt;)
+
+hex-digit             ::= 'a' - 'f' | 'A' - 'F' | '0' - '9'
+
+byte-or-percentage    ::= 0 - 255 | &lt;percentage&gt;
+
+unit-or-percentage    ::= 0.0 - 1.0 | &lt;percentage&gt;
+
+angle-or-percentage   ::= &lt;radian&gt; | &lt;gradian&gt; | &lt;degree&gt;
+
+percentage            ::= &lt;number&gt;%
+
+radian                ::= &lt;number&gt;rad
+
+gradian               ::= &lt;number&gt;grad
+
+degree                ::= &lt;number&gt;deg
+
+number                ::= // See http://www.w3.org/TR/css3-values/#numbers`&lt;/pre&gt;
+</code></pre>
+
+<h3>Inset<a name="inset"></a>
+</h3>
+
+<p>Insets are used to specify offsets for end-caps. This allows images to be resized while preserving the size of certain parts of the content. This is useful for button images, for example. If a single value is specified, it is used for top, right, bottom, and left insets. If two values are specified, the first number is used for the top and  bottom insets, and the second number is used for the right and left insets. If three values are specified, the first numbers is used for the top inset, the second number is used for the right and left insets, and the third number is used for bottom inset. If four values are specified, they indicate the top, right, bottom, and left values, in that order.</p>
+
+<pre class="prettyprint"><code>&lt;inset&gt;       ::= &lt;inset-value&gt; [,? &lt;inset-value&gt;]{3}
+&lt;inset-value&gt; ::= &lt;number&gt; | &lt;length&gt;`&lt;/pre&gt;
+</code></pre>
+
+<h3>Length<a name="length"></a>
+</h3>
+
+<p>A length is a number followed by one of the following units: <code>px</code>, <code>cm</code>, <code>mm</code>, <code>in</code>, <code>pt</code>, <code>pc</code>, <code>dpx</code>. Note that there must be no whitespace between the number and its unit.</p>
+
+<p>Freestyle provides the device pixel unit, <code>dpx</code>, as an extension.  This could be used, for example, to generate the thinnest possible line on a given device.</p>
+
+<h3>Number<a name="number"></a>
+</h3>
+
+<p>A number is an integer or floating point value. A number may optionally start with a minus sign, '-', or a plus sign, '+'. For an integer, the first digit must be in the range of 1 to 9, inclusive. Zero or more digits may follow. A floating point number starts with zero or more digits followed by a period, '.', followed by one or more digits. This can be summarized with the following regular expression:</p>
+
+<pre class="prettyprint"><code>`[-+]?([0-9]*\.[0-9]+|[0-9]+)`
+</code></pre>
+
+<h3>Padding<a name="padding"></a>
+</h3>
+
+<p>Padding is used to create empty space within the border of a content of a region. If a single value is specified, it is used for <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code> <code>padding</code>. If two values are specified, the first number is used for the <code>top</code> and <code>bottom</code> padding, and the second number is used for the <code>right</code> and <code>left</code> padding. If three values are specified, the first number is used for the <code>top</code> padding, the second number is used for the <code>right</code> and <code>left</code> padding, and the third number is used for <code>bottom</code> padding. If four values are specified, they indicate the <code>top</code>, <code>right</code>, <code>bottom</code>, and <code>left</code> values, in that order.</p>
+
+<pre class="prettyprint"><code>&lt;padding&gt;       ::= &lt;padding-value&gt; [,? &lt;padding-value&gt;]{3}
+&lt;pading-value&gt;  ::= &lt;number&gt; | &lt;length&gt;`&lt;/pre&gt;
+</code></pre>
+
+<h3>Paint<a name="paint"></a>
+</h3>
+
+<p>Paints are used to specify how geometry is filled and how a geometry's stroke is filled. A paint may be a solid color or a linear gradient. Paints include an optional blending mode which defaults to 'normal' when not specified. More than one paint may be applied to geometry using a comma-delimited list of paints.</p>
+
+<pre class="prettyprint"><code>paints              ::= &lt;paint&gt; [, &lt;paint&gt;]*
+paint               ::= [&lt;color&gt; | &lt;linear-gradient&gt; | &lt;radial-gradient&gt;] &lt;blend-mode&gt;?
+linear-gradient     ::= linear-gradient([&lt;gradient-angle&gt; ,]? &lt;color&gt; [, &lt;color&gt;]*)
+                      |  linear-gradient([&lt;gradient-angle&gt; ,]? &lt;color&gt; &lt;percentage&gt; [, &lt;color&gt; &lt;percentage&gt;]*)
+gradient-angle      ::= &lt;angle&gt; | &lt;gradient-direction&gt;
+gradient-direction  ::= top | top left | left top | top right | right top | right
+                      |  bottom | bottom right | right bottom | bottom left | left bottom | left
+
+radial-gradient     ::= radial-gradient(&lt;color&gt; [, &lt;color&gt;]*)
+                      |  radial-gradient(&lt;color&gt; &lt;percentage&gt; [, &lt;color&gt; &lt;percentage&gt;]*)`&lt;/pre&gt;
+</code></pre>
+
+<p>NOTE: Freestyle's CSS implementation does not support the full radial gradient syntax.</p>
+
+<h3>Percentage<a name="percentage"></a>
+</h3>
+
+<p>A percentage is a number followed by a percent sign, <code>%</code>. Note that there must be no whitespace between the number and the percent sign.</p>
+
+<h3>Shadow<a name="shadow"></a>
+</h3>
+
+<p>A shadow is to define inner and outer shadows in box-shadow properties. A shadow may be offset in any direction, and may include a blur amount and a color.</p>
+
+<pre class="prettyprint"><code>&lt;shadow&gt;          ::= inset? &lt;h-offset&gt; &lt;v-offset&gt; [&lt;blur-radius&gt; &lt;spread-distance&gt;?]? &lt;color&gt;
+&lt;h-offset&gt;        ::= &lt;length&gt;
+&lt;v-offset&gt;        ::= &lt;length&gt;
+&lt;blur-radius&gt;     ::= &lt;length&gt;
+&lt;spread-distance&gt; ::= &lt;length&gt;
+</code></pre>
+
+<h3>Shape<a name="shape"></a>
+</h3>
+
+<p>A shape is used to define the contour of the background of a control. If the value is not specified, then the default value will be <code>rectangle</code>.</p>
+
+<pre class="prettyprint"><code>::= rectangle | ellipse | arrow-button-left | arrow-button-right
+</code></pre>
+
+<h3>Size<a name="size"></a>
+</h3>
+
+<p>A size consists of a width <code>&lt;length&gt;</code> followed by whitespace and a height <code>&lt;length&gt;</code>. If only one number is specified, then its value will be used for both the width and height values.</p>
+
+<pre class="prettyprint"><code>&lt;size&gt;       ::= &lt;size-value&gt; [,? &lt;size-value&gt;]?
+&lt;size-value&gt; ::= &lt;length&gt; | &lt;number&gt;`&lt;/pre&gt;
+</code></pre>
+
+<h3>String<a name="string"></a>
+</h3>
+
+<p>A string is composed of a single-quote or double-quote, zero or more characters, ending with a matching quote type as was used to start the string. Carriage returns and newlines are not allowed in the content of the string.</p>
+
+<pre class="prettyprint"><code>"This is a double-quoted string"
+'This is a single-quoted string'
+</code></pre>
+
+<p>NOTE: The current implementation successfully scans escape sequences, but they are not post-processed. For example, <code>abc\000A def</code> is a valid string, but the <code>\000A</code> escape sequence will not be expanded to a newline.</p>
+
+<h3>Transform<a name="transform"></a>
+</h3>
+
+<p>A transform value consists of one-or-more <a class="external" href="http://www.w3.org/TR/SVG/coords.html#TransformAttribute">SVG transforms</a> separated by whitespace. Supported transforms are <code>translate</code>, <code>scale</code>, <code>rotate</code>, <code>skewX</code>, <code>skewY</code>, and <code>matrix</code>.</p>
+
+<pre class="prettyprint"><code>&lt;transforms&gt; ::= &lt;transform&gt;+
+&lt;transform&gt;  ::= &lt;translate&gt; | &lt;scale&gt; | &lt;rotate&gt; | &lt;skewX&gt; | &lt;skewY&gt; | &lt;matrix&gt;
+&lt;translate&gt;  ::= translate(&lt;number&gt; [,? &lt;number&gt;]?)
+&lt;scale&gt;      ::= scale(&lt;number&gt; [,? &lt;number&gt;]?)
+&lt;rotate&gt;     ::= rotate(&lt;number&gt; [,? &lt;number&gt; ,? &lt;number&gt;]?)
+&lt;skewX&gt;      ::= skewX(&lt;number&gt;)
+&lt;skewY&gt;      ::= skewY(&lt;number&gt;)
+&lt;matrix&gt;     ::= matrix(number&gt; [,? &lt;number&gt;]{5})
+</code></pre>
+
+<h3>URL<a name="url"></a>
+</h3>
+
+<p>URLs are specified using the <code>url</code> function. This function expects a single <code>&lt;string&gt;</code> value. The quotes may be omitted. The referenced resource must be available within your application bundle or the device's documentation folder.</p>
+
+              </div>
+          </div>
+
+        </div>
+
+        <!-- Functionality and Syntax Highlighting -->
+        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript" src="prettify/prettify.js"></script>
+    </body>
+</html>

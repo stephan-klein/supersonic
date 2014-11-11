@@ -15,7 +15,7 @@
 
 <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
   <li class="menu-title">
-    <a href="/api-reference/{{version}}{{main_namespace}}{{section_id}}">{{section.name}}</a>
+    <a href="/supersonic/api-reference/{{version}}{{main_namespace}}{{section_id}}">{{section.name}}</a>
     {% if page.section_id == section_id %}
       {% for subsection in section.subsections %}
         {% if subsection.id %}
@@ -24,7 +24,7 @@
           {% assign subsection_id = subsection.name | slugify %}
         {% endif %}
         <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
-          <a href="/api-reference/{{version}}{{main_namespace}}{{section_id}}/{{subsection_id}}" class="api-section">
+          <a href="/supersonic/api-reference/{{version}}{{main_namespace}}{{section_id}}/{{subsection_id}}" class="api-section">
             {% if subsection.method %}
               ↳ <code>{{subsection.name}}()</code>
             {% else %}
@@ -36,7 +36,7 @@
               {% for method in subsection.methods %}
               {% assign method_id = method.name | slugify %}
               <li class="{% if page.method_id == method_id %}active{% endif %}">
-                <a href="/api-reference/{{version}}{{main_namespace}}{{section_id}}/{{subsection_id}}/{{method_id}}">
+                <a href="/supersonic/api-reference/{{version}}{{main_namespace}}{{section_id}}/{{subsection_id}}/{{method_id}}">
                   {% if method.class %}
                     {{method.name}}
                   {% else %}
