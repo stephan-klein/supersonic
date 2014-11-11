@@ -179,7 +179,7 @@ pre {
 }
 
 pre, code {
-  font-family: "Adelle W01 Regular" !important;
+  font-family: monospace !important;
   font-size: 14px !important;
 }
 
