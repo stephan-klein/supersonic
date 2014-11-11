@@ -9,6 +9,8 @@ module.exports =
     testApp: "testApp/www"
     components: "components/*"
     docs: 'docs'
+    docsCSS: 'docs/css'
+    docsFonts: 'docs/fonts'
     docsGruntOutputDirs: [
       '<%= dir.docs %>/_data/'
       '<%= dir.docs %>/api-reference/stable/'
