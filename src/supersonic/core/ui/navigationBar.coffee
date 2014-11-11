@@ -1,8 +1,8 @@
 Promise = require 'bluebird'
-
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.ui.navigationBar"
+  s = superify 'supersonic.ui.navigationBar', log
 
   ###
    # @namespace supersonic.ui
@@ -44,7 +44,7 @@ module.exports = (steroids, log) ->
    # });
    #
   ###
-  show: (params = {})->
+  show: s.promiseF "show", (params = {})->
     filteredParams =
       animated: params.animated
 
@@ -80,7 +80,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.debug("Navigation bar hidden without animation.");
    # });
   ###
-  hide: (params = {})->
+  hide: s.promiseF "hide", (params = {})->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.hide params, {
         onSuccess: resolve
@@ -139,9 +139,8 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.navigationBar.update options
   ###
-  update: (params)->
+  update: s.promiseF "update", (params)->
     new Promise (resolve, reject)->
-      # debugger
       steroids.view.navigationBar.update params, {
         onSuccess: resolve
         onFailure: reject
@@ -171,7 +170,7 @@ module.exports = (steroids, log) ->
    # });
    #
   ###
-  setClass: (className)->
+  setClass: s.promiseF "setClass", (className)->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.setStyleClass className, {
         onSuccess: resolve
@@ -202,7 +201,7 @@ module.exports = (steroids, log) ->
    # });
    #
   ###
-  setStyle: (inlineCssString)->
+  setStyle: s.promiseF "setStyle", (inlineCssString)->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.setStyleCSS inlineCssString, {
         onSuccess: resolve
@@ -234,7 +233,7 @@ module.exports = (steroids, log) ->
    # });
    #
   ###
-  setStyleId: (styleId)->
+  setStyleId: s.promiseF "setStyleId", (styleId)->
     new Promise (resolve, reject)->
       steroids.view.navigationBar.setStyleId styleId, {
         onSuccess: resolve

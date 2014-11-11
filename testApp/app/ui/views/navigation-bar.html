@@ -17,6 +17,13 @@
       <li class="item">
         <button
           class="button button-block"
+          ng-click="hideWithCallback()">
+          Hide the Navigation Bar with Callback
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
           ng-click="show()">
           Show the Navigation Bar
         </button>
@@ -25,21 +32,35 @@
         <button
           class="button button-block"
           ng-click="show2()">
-          Show the Navigation Bar and change title
+          Show the Navigation Bar with an Animation
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="showWithCallback()">
+          Show the Navigation Bar with Callback
         </button>
       </li>
       <li class="item">
         <button
           class="button button-block"
           ng-click="update()">
-          Update the Navigation Bar with a left and a right button (override back button)
+          Update the Navigation Bar with a title and a left and a right button (override back button)
         </button>
       </li>
       <li class="item">
         <button
           class="button button-block"
           ng-click="update2()">
-          Update the Navigation Bar with a left button only (override back button)
+          Update the Navigation Bar with left buttons only 
+        </button>
+      </li>
+      <li class="item">
+        <button
+          class="button button-block"
+          ng-click="updateWithCallback()">
+          Update the Navigation Bar with a title and callback
         </button>
       </li>
     </ul>

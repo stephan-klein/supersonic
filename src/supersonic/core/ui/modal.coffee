@@ -1,10 +1,9 @@
 Promise = require 'bluebird'
-
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  # TODO: add bug later
-  # bug = log.debuggable "supersonic.ui.modal"
-
+  s = superify 'supersonic.ui.modal', log
+  
   ###
    # @namespace supersonic.ui
    # @name modal
@@ -40,16 +39,14 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.modal.show(modalView, options);
   ###
-  show: (view, params = {})->
+  show: s.promiseF "show", (view, params = {})->
     new Promise (resolve, reject)->
       params.view = view._getWebView()
       steroids.modal.show params, {
         onSuccess: ()->
-          supersonic.logger.info "Modal view was shown"
           resolve()
         onFailure: (error)->
-          supersonic.logger.error "Showing a modal view has crashed with the error: #{error.errorDescription}"
-          reject()
+          reject(error)
     }
 
   ###
@@ -76,16 +73,13 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.modal.hide(options);
   ###
-  hide: (params = {})->
+  hide: s.promiseF "hide", (params = {})->
     new Promise (resolve, reject)->
-      # debugger
       steroids.modal.hide params, {
         onSuccess: ()->
-          supersonic.logger.info "Modal view was hidden"
           resolve()
         onFailure: (error)->
-          supersonic.logger.error "Hiding a modal view has crashed with the error: #{error.errorDescription}"
-          reject()
+          reject(error)
     }
 
   ###
@@ -113,13 +107,11 @@ module.exports = (steroids, log) ->
    # supersonic.ui.modal.hideAll(options);
   ###
 
-  hideAll: (params = {})->
+  hideAll: s.promiseF "hideAll", (params = {})->
     new Promise (resolve, reject)->
       steroids.modal.hideAll params, {
         onSuccess: ()->
-          supersonic.logger.info "All the modals were hidden"
           resolve()
         onFailure: (error)->
-          supersonic.logger.error "Hiding all the modals has crashed with the error: #{error.errorDescription}"
-          reject()
+          reject(error)
     }
