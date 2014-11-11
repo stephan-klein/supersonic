@@ -2,6 +2,21 @@
  * CONTAINER
  *********************************/
 
+body {
+  font-family: "Proxima N W01 Reg";
+}
+
+a {
+  color: #00b5ff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #00b5ff;
+}
+
 .container-fluid {
   padding-left: 15px !important;
   padding-right: 15px !important;
@@ -129,9 +144,58 @@
   content: "hei";
 }
 
+/***************************************************
+ * CONTENT AREA
+ **************************************************/
 
+.ag__docs__content {
 
+}
 
+.ag__docs__content h1 {
+  font-family: "Proxima N W01 Smbd";
+}
+
+.ag__docs__content h2 {
+  font-family: "Proxima N W01 Reg";
+  margin-top: 0px;
+}
+
+.ag__docs__content * + h2 {
+  margin-top: 40px;
+}
+
+.ag__docs__content,
+.ag__docs__content p {
+  font-family: "Proxima N W01 Reg";
+  font-size: 16px;
+}
+
+.ag__docs__content a {
+  color: #00b5ff !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ag__docs__content a:hover {
+  text-decoration: underline;
+  color: #00b5ff !important;
+}
+
+pre {
+  background: #f3f3f3 !important;
+  border: none;
+  padding: 10px 40px;
+}
+
+pre, code {
+  font-family: "Adelle W01 Regular" !important;
+  font-size: 14px !important;
+}
+
+p + p {
+  margin-top: 25px;
+}
 
 
 
