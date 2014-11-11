@@ -1,8 +1,9 @@
 Promise = require 'bluebird'
 current = require './views/current'
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.ui.views"
+  s = superify 'supersonic.ui.views', log
 
   ###
    # @namespace supersonic.ui
@@ -34,7 +35,7 @@ module.exports = (steroids, log) ->
    # supersonic.ui.views.find("myCarsView").then (startedView) ->
    #   supersonic.logger.log "myCarsView location: #{startedView.getLocation()}"
   ###
-  find = (id) ->
+  find = s.promiseF "find", (id) ->
     supersonic.logger.debug "Finding view with id #{id}"
     isStartedView(id).then (started) ->
       unless started
@@ -76,7 +77,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log "bananasIndex id: #{bananasIndex.getId()}"
   ###
 
-  start = (view, id) ->
+  start = s.promiseF "start", (view, id) ->
     isStartedView(id).then (started) ->
       if started
         throw new Error "A view with id #{id} is already started."
@@ -115,7 +116,7 @@ module.exports = (steroids, log) ->
    # supersonic.ui.views.stop "carsShowView"
   ###
 
-  stop = (viewOrId) ->
+  stop = s.promiseF "stop", (viewOrId) ->
     new Promise (resolve, reject) ->
       id = if viewOrId.constructor.name is "String"
         viewOrId
@@ -153,12 +154,12 @@ module.exports = (steroids, log) ->
         onFailure: reject
       }
 
-  getStartedViews = ->
+  getStartedViews = s.promiseF "getStartedViews", ->
     getApplicationState().then (state) ->
       for preload in state.preloads
         preload.id
 
-  isStartedView = (id) ->
+  isStartedView = s.promiseF "isStartedView", (id) ->
     if typeof id isnt 'string'
       Promise.reject new Error "Given view id '#{id}' was of type '#{typeof id}', string expected"
     else
