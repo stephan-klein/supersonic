@@ -45,3 +45,15 @@ describe "supersonic.ui.views.current", ->
         document.dispatchEvent new CustomEvent 'visibilitychange', {
           detail: visibilityState: 'hidden'
         }
+
+  describe "whenHidden", ->
+    it "is a function", ->
+      currentView.whenHidden.should.be.a 'function'
+
+    it "accepts a listener that is called when the view is hidden", (done)->
+      currentView.whenHidden ->
+        done()
+
+      document.dispatchEvent new CustomEvent 'visibilitychange', {
+        detail: visibilityState: 'hidden'
+      }
