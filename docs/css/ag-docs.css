@@ -198,8 +198,41 @@ p {
   margin-bottom: 30px;
 }
 
+/***************************************************
+ * ASIDE MENUS
+ **************************************************/
 
+.ag__docs__left-menu {
 
+}
 
+.ag__docs__left-menu li a {
+  font-family: "Proxima N W01 Reg";
+}
+
+.ag__docs__left-menu li.menu-title a {
+  font-family: "Proxima N W01 Smbd";
+}
+
+.ag__docs__left-menu.active-menu li.menu-title a {
+  color: black !important;
+}
+
+.ag__docs__left-menu li.active > a {
+  color: #00b5ff !important;
+  border: none !important;
+}
+
+.ag__docs__left-menu li {
+  padding-left: 20px;
+}
+
+.ag__docs__left-menu li.menu-title {
+  padding-left: 0px;
+}
+
+.ag__docs__left-menu li ul {
+  padding-left: 0px;
+}
 
 
