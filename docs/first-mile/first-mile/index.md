@@ -15,6 +15,7 @@ subsections:
   - name: Done!
 ---
 
+
 <section class="docs-section" id="overview">
 ## Overview
 
@@ -25,11 +26,15 @@ In this tutorial, we will be going through the few simple steps needed to get an
   - How to make changes to your Supersonic application
   - How to navigate to different views in your app
 
+</section>
+
+
 <section class="docs-section" id="installation">
 ## Installation
 
 Before we move forward, you need to install the Steroids² tooling. Head on over to our [Install Wizard](https://academy.appgyver.com/installwizard) page and follow the instructions there.
 </section>
+
 
 <section class="docs-section" id="creating-a-new-project">
 ## Creating a New Project
@@ -42,6 +47,7 @@ steroids create myProject
 
 The Steroids² CLI will create a basic project in the `myProject/` folder and install some required dependencies like the `steroids.js` and `supersonic.js` libraries. Feel free to poke around for a little while, but the app structure will be better explained in a later chapter.
 </section>
+
 
 <section class="docs-section" id="connecting-your-device">
 ## Connecting Your Device
@@ -70,6 +76,7 @@ After compiling your project, the Steroids CLI will open up the Connect Screen i
 To run your app on a real device, all you have to do is open the AppGyver Scanner you downloaded previously and scan the displayed QR code. The Scanner app will then download the required files, establish a connection with the Steroids Development Server and start your app.
 </section>
 
+
 <section class="docs-section" id="introduction-to-native-ui-components">
 ## Introduction to Native UI Components
 <img src="http://placehold.it/600x300">
@@ -91,6 +98,7 @@ Next, try switching between the tabs. As you can see, the view changes instantan
 The tabs live on even when they're not active. Go to the Settings tab, change the position of some of the sliders, and scroll down a bit. Switch to the Index tab and back again. The state is maintained perfectly, because nothing is done to the Settings tab itself – it is just hidden from view by the native UI code.
 </section>
 
+
 <section class="docs-section" id="making-changes">
 ## Making Changes
 
@@ -106,6 +114,7 @@ With your app up and running, we're ready to make some changes. Open the `myProj
 Save the file. The Steroids Development Server automatically notices that a file has changed and refreshes your project. You'll see the navigation bar update with your new title. The automatic updates are handled by a feature called LiveReload – read more in the [Local Development Flow guide](/tooling/steroids-cli/local-development-flow/).
 </section>
 
+
 <section class="docs-section" id="navigating-to-another-view">
 ## Navigating to Another View
 
@@ -119,7 +128,9 @@ For further reading on the navigation bar or the `<super-navigate>` element, see
 
   - [Navigation Bar](/ui-and-navigation/native-components/navigation-bar/)
   - [super-navigate](/ui-and-navigation/navigation/declarative-navigation/)
+
 </section>
+
 
 <section class="docs-section" id="done">
 ## Done!

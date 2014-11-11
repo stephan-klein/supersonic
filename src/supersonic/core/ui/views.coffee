@@ -149,28 +149,7 @@ module.exports = (steroids, log) ->
   getApplicationState = ->
     new Promise (resolve, reject) ->
       steroids.getApplicationState {}, {
-        onSuccess: (state)->
-          supersonic.logger.debug "Received application state for preloads: #{typeof state.preloads} -> #{state.preloads}"
-          if typeof state.preloads is "string"
-            breloads = JSON.parse(state.preloads)
-            state.preloads = []
-            for breload in breloads
-              # support string value of preload item..
-              if typeof breload is "string"
-                idMatch = breload.match(/id=(\S*),/)
-                locationMatch = breload.match(/location=(\S*),/)
-                uuidMatch = breload.match(/uuid=(\S*)/)
-                state.preloads.push
-                  id: if idMatch? then idMatch[1] else null
-                  location: if locationMatch? then locationMatch[1] else null
-                  uuid: if uuidMatch? then uuidMatch[1] else null
-              else
-                # and support string value of preload
-                state.preloads.push breload
-
-          console.log state
-          supersonic.logger.debug state
-          resolve state
+        onSuccess: resolve
         onFailure: reject
       }
 
@@ -184,7 +163,6 @@ module.exports = (steroids, log) ->
       Promise.reject new Error "Given view id '#{id}' was of type '#{typeof id}', string expected"
     else
       getStartedViews().then (ids) ->
-        supersonic.logger.debug "Preloaded views: #{JSON.stringify(ids)}"
         id in ids
 
   {

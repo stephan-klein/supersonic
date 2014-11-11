@@ -1,0 +1,37 @@
+/**********************************
+ * CONTAINER
+ *********************************/
+
+.container-fluid {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+/**********************************
+ * HEADER
+ *********************************/
+
+.ag__docs__header {
+  padding: 40px 0px;
+}
+
+.ag__docs__header .supersonic-logo {
+  font-family: "Proxima N W01 Bold";
+  font-size: 50px;
+  line-height: 100%;
+  padding-bottom: 30px;
+}
+
+.ag__docs__header h3 {
+  text-transform: uppercase;
+  font-family: "Proxima N W01 Smbd";
+  margin-bottom: 6px;
+}
+
+.ag__docs__header p.lead {
+  font-family: "Adelle W01 Light";
+  font-size: 16px;
+  margin-bottom: 0px;
+  line-height: 28px;
+  color: rgba(255, 255, 255, 0.9);
+}
