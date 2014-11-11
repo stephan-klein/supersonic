@@ -1,8 +1,9 @@
 Promise = require("bluebird")
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.ui.initialView"
-
+  s = superify 'supersonic.ui.initialView', log
+  
   ###
    # @namespace supersonic.ui
    # @name initialView
@@ -28,7 +29,7 @@ module.exports = (steroids, log) ->
    # A promise that is resolved when the Initial View starts to dismiss. If there the Initial View is not present on the screen, the promise will be rejected.
   ###
 
-  show: bug "show", (showAnimation="fade")->
+  show: s.promiseF "show", (showAnimation="fade")->
     animation = if typeof showAnimation is "string"
       supersonic.ui.animate showAnimation
     else
@@ -55,7 +56,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the Initial View starts to dismiss. If there the Initial View is not present on the screen, the promise will be rejected.
   ###
-  dismiss: bug "dismiss", (showAnimation="fade")->
+  dismiss: s.promiseF "dismiss", (showAnimation="fade")->
     animation = if typeof showAnimation is "string"
       supersonic.ui.animate showAnimation
     else
