@@ -179,7 +179,7 @@ pre {
 }
 
 pre, code {
-  font-family: "Adelle W01 Regular" !important;
+  font-family: monospace !important;
   font-size: 14px !important;
 }
 
@@ -237,4 +237,88 @@ p {
   height: 100%;
 }
 
+/***************************************************
+ * SITE FOOTER
+ **************************************************/
 
+.ag__docs__footer {
+  position: relative;
+  z-index: 100;
+  background: #30384a;
+  color: #C7CACD;
+  font-size: 15px;
+  padding-top: 60px;
+}
+
+.ag__docs__footer h3 {
+  color:  #ebebed;
+  font-family: "Proxima N W01 Reg";
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.ag__docs__footer  ul {
+  font-family: "Adelle W01 Light";
+  list-style: none;
+  padding: 0px;
+  font-size: 13px;
+  line-height: 180%;
+  margin-bottom: 40px;
+}
+
+
+.ag__docs__footer a,
+.ag__docs__footer a:link {
+  color: #adb0b5;
+  text-decoration: none;
+}
+
+.ag__docs__footer a:hover,
+.ag__docs__footer a:link:hover {
+  color: #d6d6db;
+  text-decoration: none;
+}
+
+.ag__docs__footer .btn-brand {
+  background: #00b5ff;
+}
+
+.ag__docs__footer .btn-brand:hover,
+.ag__docs__footer .btn-brand:focus,
+.ag__docs__footer .btn-brand:active,
+.ag__docs__footer .btn-brand.active {
+  background: #1abdff;
+}
+
+.ag__docs__footer .social-icon {
+  margin-top: 4px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.ag__docs__footer .social-icon img {
+  display: inline-block;
+}
+
+.ag__docs__footer .btn-mailinglist {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.ag__docs__footer .btn-mailinglist img {
+  display: inline-block;
+  height: 26px;
+}
+
+.ag__docs__footer .ag-footer-copy-notice {
+  margin-top: 20px;
+  background: #1a1f27;
+  color: #828791;
+  font-size: 13px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.ag__docs__footer .btn-mailinglist * {
+  color: #828791;
+}
