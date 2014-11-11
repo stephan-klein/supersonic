@@ -35,3 +35,106 @@
   line-height: 28px;
   color: rgba(255, 255, 255, 0.9);
 }
+
+/**********************************
+ * HEADER NAVIGATION
+ *********************************/
+
+.ag__docs__header-nav {
+}
+
+.ag__docs__header-nav a {
+  position: relative;
+  background: transparent !important;
+  font-size: 14px;
+  line-height: 100%;
+  font-family: "Proxima N W01 Reg";
+  padding: 4px 40px 2px 40px;
+  color: #adb0b5;
+  opacity: 1 !important;
+}
+
+.ag__docs__header-nav a .nav-pointer {
+  display: none;
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  margin-left: -8px;
+  width: 16px;
+  height: 16px;
+  border: 8px solid transparent;
+  border-top: 8px solid #30384a;
+}
+
+.ag__docs__header-nav li:first-child a {
+  padding-left: 0px;
+}
+
+.ag__docs__header-nav li.active a {
+  color: white !important;
+}
+
+.ag__docs__header-nav li.active a .nav-pointer {
+  display: block;
+}
+
+.ag__docs__header-nav li:first-child a .nav-pointer {
+  margin-left: -12px;
+}
+
+/***************************************************
+ * HEADER NAVIGATION RESPONSIVENESS
+ **************************************************/
+
+@media (min-width: 1000px) {
+
+  .ag__docs__header-nav-bigscreen {
+    display: block;
+  }
+
+  .ag__docs__header-nav-smallscreen {
+    display: none;
+  }
+
+}
+
+@media (max-width: 999px) {
+
+  .ag__docs__header-nav-bigscreen {
+    display: none;
+  }
+
+  .ag__docs__header-nav-smallscreen {
+    display: block;
+  }
+
+}
+
+.ag__docs__header-nav-smallscreen {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.ag__docs__header-nav-smallscreen select {
+  background-color: #59616e;
+  color: #d6d6db;
+  border-color: #454d5c !important;
+  font-family: "Proxima N W01 Reg";
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.ag__docs__header-nav-smallscreen select option::before {
+  content: "hei";
+}
+
+
+
+
+
+
+
+
+
+
