@@ -14,6 +14,17 @@ module.exports =
       .pipe(concat("supersonic.css"))
       .pipe(gulp.dest("#{buildConfig.dir.dist}/css"))
 
+  sassDocs: ->
+    gulp.src("#{buildConfig.dir.sass}/ionicons/ionicons.scss")
+      .pipe(sass())
+      .pipe(concat("supersonic-icons.css"))
+      .pipe(gulp.dest("#{buildConfig.dir.docsCSS}/"))
+
+  fontsDocs: ->
+    gulp.src("#{buildConfig.dir.fonts}/*")
+      .pipe(gulp.dest("#{buildConfig.dir.docsFonts}/"))
+
+
   # TODO: This does in no way need to be a gulp task
   fonts: ->
     gulp.src("#{buildConfig.dir.fonts}/*")
