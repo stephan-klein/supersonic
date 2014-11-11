@@ -36,7 +36,6 @@ observer = new MutationObserver (mutations) ->
       mutation.target.updateOnNavbar()
     # If attribute changed
     if mutation.type is "attributes"
-      console.log "mutation", mutation
       # Side
       if mutation.attributeName is "side"
         mutation.target._side = mutation.target.getAttribute("side")
@@ -53,28 +52,28 @@ SuperNavbarButtonPrototype = Object.create HTMLElement.prototype
 
 Object.defineProperty SuperNavbarButtonPrototype, "side",
   set: (side) ->
-    this._side = side
+    @_side = side
 
   get: ->
-    this._side
+    @_side
 
 SuperNavbarButtonPrototype.addToNavbar = ->
-  this._parent.addButton @_button, @_side
+  @parentNode.addButton @_button, @_side
 
 SuperNavbarButtonPrototype.updatePositionOnNavbar = ->
-  this._parent.changeButtonSide @_button, @_side
+  @parentNode.changeButtonSide @_button, @_side
 
 SuperNavbarButtonPrototype.removeFromNavbar = ->
-  this._parent.removeButton @_button
+  @parentNode.removeButton @_button
 
 SuperNavbarButtonPrototype.updateOnNavbar = ->
-  this._parent.updateButton @_button
+  @parentNode.updateButton @_button
 
 SuperNavbarButtonPrototype._setButtonAction = ->
 
   # Check if view-id is set
   viewId = @getAttribute "view-id"
-  if viewId
+  if viewId?
     @_button.onTap = () ->
       supersonic.ui.views.find(viewId)
         .then (webview) ->
@@ -85,7 +84,7 @@ SuperNavbarButtonPrototype._setButtonAction = ->
 
   # Check if location is set
   location = @getAttribute "location"
-  if location
+  if location?
     webview = supersonic.ui.view location
     @_button.onTap = () ->
       supersonic.ui.layers.push(webview)
@@ -98,45 +97,42 @@ SuperNavbarButtonPrototype._setButtonAction = ->
     @click()
 
 SuperNavbarButtonPrototype._setButtonTitle = ->
-  this._button.title = this.textContent.trim()
-
+  @_button.title = @textContent.trim()
 
 # When a new element is detected in the DOM
 SuperNavbarButtonPrototype.createdCallback = ->
   # Check for parent element existence
-  if this.parentNode.nodeName != "SUPER-NAVBAR"
+  if @parentNode.nodeName != "SUPER-NAVBAR"
     throw new Error "Component super-navbar-button must be an immediate child of super-navbar component"
     return
-  this._parent = this.parentNode
 
+SuperNavbarButtonPrototype.attachedCallback = ->
   # Which things to observe
   observerConfiguration =
     childList: true
     attributes: true
     attributeFilter: ["style", "class", "side", "location", "view-id"]
-  observer.observe this, observerConfiguration
+  observer.observe @, observerConfiguration
 
   # Set side
-  this._side = this.getAttribute("side")
+  @_side = @getAttribute("side")
 
   # Create button object
-  this._button = new supersonic.ui.NavigationBarButton()
+  @_button = new supersonic.ui.NavigationBarButton()
 
   # Location vs click callback
-  this._setButtonAction()
+  @_setButtonAction()
 
   # Set button title
-  this._setButtonTitle()
+  @_setButtonTitle()
 
   # Initiate by adding to navbar
-  this.addToNavbar()
+  @addToNavbar()
 
-  # Trigger an initial event
-  #onContentChanged this
 
 SuperNavbarButtonPrototype.detachedCallback = ->
-  # Remvoe button from navbar
-  this.removeFromNavbar()
+  # Remove button from navbar
+  @removeFromNavbar()
   # Dispose of observer
   observer.disconnect()
 

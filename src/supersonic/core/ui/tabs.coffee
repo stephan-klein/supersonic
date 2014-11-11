@@ -1,5 +1,8 @@
 Promise = require 'bluebird'
 
+parseRoute = require './views/parseRoute'
+
+
 module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.ui.tabs"
 
@@ -93,7 +96,7 @@ module.exports = (steroids, log) ->
   replace: bug "replace", (tabsArray)->
 
     handleRoutes = (tab)->
-      tab.location = supersonic.ui.views._parseRoute tab.location, {prefix: "http://localhost/"}
+      tab.location = parseRoute tab.location, {prefix: "http://localhost/"}
       tab
 
     # support for routing

@@ -8,7 +8,7 @@ section_id: web-components
 
 # Supersonic uses Web Components
 
-Some of the native componets of Supersonic, such as the application navigation bar has been implemented as Web components:
+Some of the native componets of Supersonic, such as the application [navigation bar](ui-and-navigation/native-components/navigation-bar/) has been implemented as Web components:
 
 ```html
 <super-navbar>
@@ -18,9 +18,9 @@ Some of the native componets of Supersonic, such as the application navigation b
 </super-navbar>
 ```
 
-Web components is a set of rather recent techonologies (such as custom elements, shadow DOM, HTML templates) that makes it possible to package and distribute reusable custom components. From users point of view web components works just like oridinary HTML elements.
+Web components is a set of rather recent techonologies (such as custom elements, shadow DOM, HTML templates) that makes it possible to package and distribute reusable custom web components. From users point of view web components works just like oridinary HTML elements.
 
-Not all the browsers support all the technologies behind web components. [Polymer](https://www.polymer-project.org/) is a framework by Google that provides necessary polyfills sothat Web components can be utilized also at the the nonsupported browsers.
+Not all the browsers support all the technologies enabling the use of web components. [Polymer](https://www.polymer-project.org/) is a framework by Google that provides necessary polyfills so that Web components can be utilized also at the the nonsupported browsers. Supersonic uses Polymer to ensure the usability of web components in all the supported platforms.
 
 Learn more about webcomponents
 
