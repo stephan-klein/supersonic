@@ -186,6 +186,7 @@ pre {
   background: #f3f3f3 !important;
   border: none;
   padding: 10px 40px;
+  margin-bottom: 30px;
 }
 
 pre, code {
@@ -193,8 +194,8 @@ pre, code {
   font-size: 14px !important;
 }
 
-p + p {
-  margin-top: 25px;
+p {
+  margin-bottom: 30px;
 }
 
 
