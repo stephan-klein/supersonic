@@ -1,8 +1,8 @@
 Promise = require 'bluebird'
-
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.ui.drawers"
+  s = superify 'supersonic.ui.drawers', log
 
   ###
    # @namespace supersonic.ui
@@ -52,14 +52,14 @@ module.exports = (steroids, log) ->
    #   side: left
    #   width: 150
    #
-   # supersonic.ui.drawers.show view, options
+   # supersonic.ui.drawers.init view, options
    #
    # # You can also pass in a StartedView
    # supersonic.ui.views.find("leftDrawer").then (leftDrawer)->
    #   supersonic.ui.drawers.init leftDrawer
   ###
 
-  init: bug "init", (view, options)->
+  init: s.promiseF "init", (view, options)->
     throw new Error("Android does not support enabling drawers on runtime.") if steroids.nativeBridge.constructor.name is "FreshAndroidBridge"
     side = if options.side? then options.side else "right"
 
@@ -125,7 +125,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.debug "Drawer was shown"
   ###
 
-  open: bug "open", (side="left", options)->
+  open: s.promiseF "open", (side="left", options)->
     edge = if side is "right"
       steroids.screen.edges.RIGHT
     else
@@ -162,7 +162,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.debug "Drawer was closed"
   ###
 
-  close: bug "close", ->
+  close: s.promiseF "close", ->
     new Promise (resolve, reject)->
       steroids.drawers.hide {},
         onSuccess: resolve
@@ -221,7 +221,7 @@ module.exports = (steroids, log) ->
    #   }
    # });
   ###
-  updateOptions: bug "updateOptions", (options)->
+  updateOptions: s.promiseF "updateOptions", (options)->
     config = {}
 
     if options?.animation?

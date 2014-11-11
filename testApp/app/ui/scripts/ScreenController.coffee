@@ -30,3 +30,17 @@ angular
         .then supersonic.ui.screen.rotateTo options.orientation
         .catch (error) ->
           alert "Error: #{JSON.stringify error}"
+
+    $scope.setAllowedRotationsAndRotateWithCallBacks = ->
+      supersonic.ui.screen.setAllowedRotations ["landscapeLeft", "portrait"],
+        onSuccess: ->
+          rotate()
+        onFailure: (error) ->
+          alert "Error: #{JSON.stringify error}"
+
+    rotate = ->
+      supersonic.ui.screen.rotateTo "portrait",
+        onSuccess: ->
+          supersonic.logger.log "Rotated to portrait"
+        onFailure: (error) ->
+          alert "Error: #{JSON.stringify error}"

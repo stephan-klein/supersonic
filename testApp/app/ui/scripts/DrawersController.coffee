@@ -20,13 +20,30 @@ angular
 
 
     $scope.openLeft = ->
-      supersonic.ui.drawers.open()
+      supersonic.ui.drawers.open
+        onSuccess: ->
+          supersonic.logger.log "Left draver opened with a callback"
+        onFailure: (error) ->
+          alert "Error: #{JSON.stringify error}"
 
     $scope.openRight = ->
       supersonic.ui.drawers.open("right")
 
     $scope.close = ->
       supersonic.ui.drawers.close()
+
+    $scope.updateOptions = ->
+      options =
+        shadow: true,
+        animation: 
+          type: "slide"
+          duration: 1.0
+
+      supersonic.ui.drawers.updateOptions options,
+        onSuccess: ->
+          supersonic.logger.log "Dravers updated"
+        onFailure: (error) ->
+          alert "Error: #{JSON.stringify error}"
 
     $scope.willShowCount = 0
     $scope.didShowCount = 0
