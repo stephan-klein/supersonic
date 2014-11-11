@@ -10,4 +10,12 @@ angular
       supersonic.ui.modal.show(v, {
         disableAnimation: true
       }).then ()->
-        supersonic.logger.log "promise works"
+        supersonic.logger.log "Modal shown"
+
+    $scope.asModalWithCallback = (url)->
+      v = supersonic.ui.view(url)
+      supersonic.ui.modal.show v,
+        onSuccess: -> 
+          supersonic.logger.log "Modal shown with this callback"
+        onFailure: ->
+          supersonic.logger.log "Modal could not be shown"
