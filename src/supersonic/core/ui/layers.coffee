@@ -3,7 +3,7 @@ superify = require '../superify'
 
 module.exports = (steroids, log) ->
   s = superify 'supersonic.ui.layers', log
-  
+
   ###
    # @namespace supersonic.ui
    # @name layers

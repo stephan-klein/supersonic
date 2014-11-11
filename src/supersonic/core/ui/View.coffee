@@ -27,6 +27,10 @@ module.exports = (steroids, log) ->
     _webView: null
 
     constructor: (@options={})->
+      if @options.constructor?.name == "String"
+        @options =
+          location: @options
+
       @options.location = parseRoute(@options.location)
       @_webView = new steroids.views.WebView @options
 
@@ -44,7 +48,7 @@ module.exports = (steroids, log) ->
 
     setId: (newId)->
       new Promise (resolve, reject) =>
-        isStarted.then (started)->
+        isStarted.then (started)=>
           unless started
             @_webView.id = newId
             resolve(newId)
@@ -52,24 +56,24 @@ module.exports = (steroids, log) ->
             reject new Error "Cannot change View identifier after it has been started. Stop the View first and then change the identifier."
 
     getLocation: ->
-      _webView.location
+      @_webView.location
 
     start: ->
       new Promise (resolve, reject) =>
-        _webView.preload {},
+        @_webView.preload {},
           onSuccess: -> resolve view
           onFailure: reject #TODO
 
     stop: ->
       new Promise (resolve, reject) =>
-        _webView.unload {},
+        @_webView.unload {},
           onSuccess: -> resolve view
           onFailure: reject #TODO
 
     on: (event, callback)->
       new Promise (resolve, reject) =>
         try
-          handlerId = _webView.on(event, callback)
+          handlerId = @_webView.on(event, callback)
           resolve(handlerId)
         catch e
           reject e
@@ -77,7 +81,7 @@ module.exports = (steroids, log) ->
     off: (event, eventHandlerId)->
       new Promise (resolve, reject) =>
         try
-          _webView.off(event, eventHandlerId)
+          @_webView.off(event, eventHandlerId)
           resolve()
         catch e
           reject e

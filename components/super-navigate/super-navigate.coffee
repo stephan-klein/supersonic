@@ -26,7 +26,8 @@ SuperNavigatePrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
 
   @addEventListener action, =>
-    viewId = @getAttribute "view-id" || @getAttribute "location"
+    viewId = @getAttribute "view-id"
+    viewId ?= @getAttribute "location"
 
     unless viewId?
       # None set, error
