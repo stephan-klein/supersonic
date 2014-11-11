@@ -25,6 +25,10 @@ module.exports = (grunt)->
     sanitizedFileName = apiEntry.name.replace ".", "-"
     if apiEntry.class
       sanitizedFileName = "#{sanitizedFileName}-class"
+      # DOLAN FIX FOR DATA
+      # TODO: UNIFY CODE CONVENTIONS AND MODIFY GRUNT TASK ACCORDINGLY
+      if apiEntry.namespace == "supersonic.data"
+        sanitizedFileName = "model.#{sanitizedFileName}"
     if apiEntry.overview
       sanitizedFileName = "#{sanitizedFileName}.index"
     "site.data.#{apiEntry.namespace}.#{sanitizedFileName}"
@@ -34,7 +38,12 @@ module.exports = (grunt)->
     if apiEntry.methods?.length > 0
       for method in apiEntry.methods
         dataPathNamespace = #{}
-        methodPath = "site.data.#{apiEntry.namespace}.#{apiEntry.name}-#{method}"
+        # DOLAN FIX FOR DATA
+        # TODO: UNIFY CODE CONVENTIONS AND MODIFY GRUNT TASK ACCORDINGLY
+        if apiEntry.namespace == "supersonic.data"
+          methodPath = "site.data.#{apiEntry.namespace}.model.#{apiEntry.name}-#{method}"
+        else
+          methodPath = "site.data.#{apiEntry.namespace}.#{apiEntry.name}-#{method}"
         classMethodPaths.push methodPath
 
     classMethodPaths
