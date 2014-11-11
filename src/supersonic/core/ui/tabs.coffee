@@ -2,9 +2,10 @@ Promise = require 'bluebird'
 
 parseRoute = require './views/parseRoute'
 
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.ui.tabs"
+  s = superify 'supersonic.ui.tabs', log
 
   ###
    # @namespace supersonic.ui
@@ -28,7 +29,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the tab bar has been shown. If tab bar could not be shown, the promise will be rejected.
   ###
-  show: bug "show", ->
+  show: s.promiseF "show", ->
     new Promise (resolve, reject)->
       steroids.tabBar.show {},
         onSuccess: resolve
@@ -48,7 +49,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the tab bar has been hidden. If tab bar could not be hidden, the promise will be rejected.
   ###
-  hide: bug "hide", ->
+  hide: s.promiseF "hide", ->
     new Promise (resolve, reject)->
       steroids.tabBar.hide {},
         onSuccess: resolve
@@ -70,7 +71,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the tab bar has been updated. If tab bar could not be updated, the promise will be rejected.
   ###
-  update: bug "update", (tabsArray)->
+  update: s.promiseF "update", (tabsArray)->
     new Promise (resolve, reject)->
       steroids.tabBar.update tabs: tabsArray,
         onSuccess: resolve
@@ -93,7 +94,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the tab bar has been replaced. If tab bar could not be replaced, the promise will be rejected.
   ###
-  replace: bug "replace", (tabsArray)->
+  replace: s.promiseF "replace", (tabsArray)->
 
     handleRoutes = (tab)->
       tab.location = parseRoute tab.location, {prefix: "http://localhost/"}
@@ -123,7 +124,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the tab bar has been selected. If tab bar could not be selected, the promise will be rejected.
   ###
-  select: bug "select", (tabIndex)->
+  select: s.promiseF "select", (tabIndex)->
     new Promise (resolve, reject)->
       steroids.tabBar.selectTab index: tabIndex,
         onSuccess: resolve
@@ -145,7 +146,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the current tab has been updated. If tab could not be updated, the promise will be rejected.
   ###
-  updateCurrentTab: bug "updateCurrentTab", (config={})->
+  updateCurrentTab: s.promiseF "updateCurrentTab", (config={})->
     unless typeof config is "object" and Object.keys(config).length
       throw new Error "Could not update current tab without configuration object"
     new Promise (resolve, reject)->
@@ -169,7 +170,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved once the new style class has been set. If class could not be set, the promise will be rejected.
   ###
-  setStyleClass: bug "setStyleClass", (className)->
+  setStyleClass: s.promiseF "setStyleClass", (className)->
     new Promise (resolve, reject)->
       steroids.tabBar.setStyleClass className,
         onSuccess: resolve
@@ -192,7 +193,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved once the new style id has been set. If id could not be set, the promise will be rejected.
   ###
-  setStyleId: bug "setStyleId", (id)->
+  setStyleId: s.promiseF "setStyleId", (id)->
     new Promise (resolve, reject)->
       steroids.tabBar.setStyleId id,
         onSuccess: resolve
@@ -215,7 +216,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved once the new style css has been set. If style css could not be set, the promise will be rejected.
   ###
-  setStyleCSS: bug "setStyleCSS", (css)->
+  setStyleCSS: s.promiseF "setStyleCSS", (css)->
     new Promise (resolve, reject)->
       steroids.tabBar.setStyleCSS css,
         onSuccess: resolve

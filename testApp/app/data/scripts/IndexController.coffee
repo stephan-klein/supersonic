@@ -7,6 +7,7 @@ angular
     supersonic.ui.views.current.whenVisible ->
       Task.all().whenChanged (tasks)->
         $scope.$apply ->
+          window.TASKIT = tasks
           $scope.tasks = tasks
           $scope.showSpinner = false
 
