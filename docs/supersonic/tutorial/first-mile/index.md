@@ -73,17 +73,17 @@ This starts the Steroids Development Server. Among other things, it ensures that
 
 After compiling your project, the Steroids CLI will open up the Connect Screen in a new browser window. The Connect Screen has plenty of features, but for now, focus on the QR code that is shown on the first page:
 
-<img src="http://placehold.it/600x300">
+<img src="/img/tutorial/Steroids_connect_index.png" style="width:75%;">
 
 *Connect screen QR code.*
 
-To run your app on a real device, all you have to do is open the AppGyver Scanner you downloaded previously and scan the displayed QR code. The Scanner app will then download the required files, establish a connection with the Steroids Development Server and start your app.
+To run your app on a real device, all you have to do is open the AppGyver Scanner you installed previously and scan the displayed QR code. The Scanner app will then download the required files, establish a connection with the Steroids Development Server and start your app.
 </section>
 
 
 <section class="docs-section" id="introduction-to-native-ui-components">
 ## Introduction to Native UI Components
-<img src="http://placehold.it/600x300">
+<img src="/img/tutorial/example_app_index.png" style="width:25%;">
 
 *A fresh Supersonic project running on a device.*
 
@@ -91,7 +91,7 @@ The app starts in the view pictured above. Most of the content on the screen is 
 
 Try rotating your device to see how the components smoothly realign themselves. You can rest assured the components stay in their correct places no matter what!
 
-<img src="http://placehold.it/600x300">
+<img src="/img/tutorial/example_app_rotated.png" style="width:75%;">
 
 *The native components realign themselves when the device is rotated.*
 
@@ -106,7 +106,7 @@ The tabs live on even when they're not active. Go to the Settings tab, change th
 <section class="docs-section" id="making-changes">
 ## Making Changes
 
-With your app up and running, we're ready to make some changes. Open the `myProject/app/common/views/gettin-started.html` file in your editor of choice. Find the `<super-navbar>` element and change the title text:
+With your app up and running, we're ready to make some changes. Open the `myProject/app/example/views/gettin-started.html` file in your editor of choice. Find the `<super-navbar>` element and change the title text:
 
 ```html
 <super-navbar>
@@ -128,7 +128,7 @@ Try it out! Tap either of the buttons on your device. You will see the new view 
 
 The new view, again, is running inside its own native WebView container, so the view below will continue to happily exist, execute JavaScript and maintain state. The navigation stack is maintained automatically by the native side. Clicking on the back button will animate the view away and reveal the original view beneath.
 
-For further reading on the navigation bar or the `<super-navigate>` element, see the followin guides:
+For further reading on the navigation bar or the `<super-navigate>` element, see the following guides:
 
   - [Navigation Bar][nav-bar]
   - [super-navigate][super-navigate]
@@ -149,7 +149,7 @@ In this section we've covered the basics of Supersonic App Development. By now y
 With these skills, you have grasped the core of developing Supersonic apps! Once you're ready, dive into the [Second mile][second-mile] tutorial to learn more essential skills, like debugging your app, as well as a deeper insight into how a Supersonic app really works.
 </section>
 
-[cli-dev-flow]: /steroids/
+[cli-dev-flow]: /steroids/cli/steroids-cli/local-development-flow/
 [nav-bar]: /supersonic/guides/ui/native-components/navigation-bar
-[super-navigate]: /supersonic/guides/ui/navigation/declarative-navigation
+[super-navigate]: /supersonic/guides/navigation/declarative-navigation
 [second-mile]: /supersonic/tutorial/second-mile
