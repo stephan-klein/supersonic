@@ -23,17 +23,6 @@ bindFactory = (superscope)->
         superscope.$apply fn
 
     superscope.$watch property, (newValue, oldValue)->
-      # see https://docs.angularjs.org/api/ng/type/$rootScope.Scope
-      #
-      # After a watcher is registered with the scope, the listener fn is called
-      # asynchronously (via $evalAsync) to initialize the watcher.
-      # In rare cases, this is undesirable because the listener is called when
-      # the result of watchExpression didn't change. To detect this scenario
-      # within the listener fn, you can compare the newVal and oldVal.
-      # If these two values are identical (===) then the listener was called due
-      # to initialization."
-      return if deepEqual(newValue,oldValue)
-
       fn = ->
         scope[property] = newValue
 
@@ -46,4 +35,4 @@ bindFactory = (superscope)->
 module.exports = (angular) ->
   angular
   .module 'supersonic.bind', ['supersonic.superscope']
-  .service 'supersonicBind', (superscope)-> bindFactory(superscope)
+  .service 'supersonicBind', bindFactory
