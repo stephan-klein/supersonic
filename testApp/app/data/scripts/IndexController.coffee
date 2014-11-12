@@ -1,6 +1,6 @@
 angular
   .module('data')
-  .controller("IndexController", ($scope, Task) ->
+  .controller("IndexController", ($scope, Task, supersonic) ->
     $scope.tasks = null
     $scope.showSpinner = true
 
@@ -10,5 +10,12 @@ angular
           window.TASKIT = tasks
           $scope.tasks = tasks
           $scope.showSpinner = false
+
+    supersonic.data.channel("events").subscribe (message)->
+      alert "Received message! #{message}"
+
+    $scope.sendChannelMessage = ->
+      supersonic.data.channel('events').publish('you would not believe what just happened')
+
 
   )

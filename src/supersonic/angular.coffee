@@ -29,5 +29,6 @@ module.exports = (angular) ->
         media: qifyAll supersonic.media
         device: supersonicDevice
         ui: supersonic.ui
+        data: supersonic.data
       }
     )
