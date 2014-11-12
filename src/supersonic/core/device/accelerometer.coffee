@@ -39,7 +39,7 @@ module.exports = (steroids, log) ->
    # @define {=>Number} acceleration.x Amount of acceleration on the x-axis. (in m/s^2)
    # @define {=>Number} acceleration.y Amount of acceleration on the y-axis. (in m/s^2)
    # @define {=>Number} acceleration.z Amount of acceleration on the z-axis. (in m/s^2)
-   # @define {=>DOMTimeStamp} acceleration.timestamp Creation timestamp in milliseconds.
+   # @define {=>Date} acceleration.timestamp Creation timestamp for acceleration.
    # @usageCoffeeScript
    # supersonic.device.accelerometer.watchAcceleration options
    # @usageJavaScript
@@ -78,7 +78,10 @@ module.exports = (steroids, log) ->
     Bacon.fromPromise(deviceready).flatMap ->
       Bacon.fromBinder (sink) ->
         watchId = window.navigator.accelerometer.watchAcceleration(
-          (acceleration) -> sink new Bacon.Next acceleration
+          (acceleration) ->
+            DOMTimeStamp = acceleration.timestamp
+            acceleration.timestamp = new Date DOMTimeStamp
+            sink new Bacon.Next acceleration
           (error) -> sink new Bacon.Error error
           options
         )
@@ -105,7 +108,7 @@ module.exports = (steroids, log) ->
    # @define {=>Number} acceleration.x Amount of acceleration on the x-axis. (in m/s^2)
    # @define {=>Number} acceleration.y Amount of acceleration on the y-axis. (in m/s^2)
    # @define {=>Number} acceleration.z Amount of acceleration on the z-axis. (in m/s^2)
-   # @define {=>DOMTimeStamp} acceleration.timestamp Creation timestamp in milliseconds.
+   # @define {=>Date} acceleration.timestamp Creation timestamp for acceleration.
    # @usageCoffeeScript
    # supersonic.device.accelerometer.getAcceleration()
    # @exampleCoffeeScript
