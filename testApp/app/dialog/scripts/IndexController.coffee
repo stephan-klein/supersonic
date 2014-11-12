@@ -1,5 +1,5 @@
 angular
-  .module('notification')
+  .module('dialog')
   .controller 'IndexController', ($scope, supersonic) ->
     $scope.dismissedAlerts = 0
 
