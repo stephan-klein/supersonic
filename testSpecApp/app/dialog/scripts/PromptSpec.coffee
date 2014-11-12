@@ -19,3 +19,10 @@ describe "supersonic.ui.dialog.prompt", ->
       defaultText: "Default text"
 
     supersonic.ui.dialog.prompt(title, options).should.be.fulfilled
+
+  describe "callbacks", ->
+
+    it "should call onSuccess", (done) ->
+      supersonic.ui.dialog.prompt
+        onSuccess: ->
+          done()

@@ -18,3 +18,10 @@ describe "supersonic.ui.dialog.confirm", ->
       buttonLabels: ["Yay","NO!","third"]
 
     supersonic.ui.dialog.confirm(title, options).should.be.fulfilled
+
+  describe "callbacks", ->
+
+    it "should call onSuccess", (done) ->
+      supersonic.ui.dialog.confirm
+        onSuccess: ->
+          done()

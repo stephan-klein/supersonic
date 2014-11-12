@@ -1,4 +1,3 @@
-Promise = require 'bluebird'
 
 ###
  # @namespace supersonic.ui
@@ -8,7 +7,7 @@ Promise = require 'bluebird'
 ###
 
 
-module.exports =
-  alert: require("./alert")
-  confirm: require("./confirm")
-  prompt: require("./prompt")
+module.exports = (steroids, log) ->
+  alert: require("./alert")(steroids, log)
+  confirm: require("./confirm")(steroids, log)
+  prompt: require("./prompt")(steroids, log)

@@ -28,3 +28,10 @@ describe "supersonic.ui.dialog.alert", ->
 
     dismissNextAlert()
     supersonic.ui.dialog.alert(title, options).should.be.fulfilled
+
+  describe "callbacks", ->
+
+    it "should call onSuccess", (done) ->
+      supersonic.ui.dialog.alert
+        onSuccess: ->
+          done()

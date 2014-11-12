@@ -9,7 +9,7 @@ module.exports = (steroids, log) ->
   tabs: require("./tabs")(steroids, log)
 
   modal: require("./modal")(steroids, log)
-  dialog: require("./dialog")
+  dialog: require("./dialog")(steroids, log)
   initialView: require("./initialView")(steroids, log)
 
   navigationBar: require("./navigationBar")(steroids, log)

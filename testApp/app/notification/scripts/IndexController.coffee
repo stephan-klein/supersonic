@@ -28,6 +28,14 @@ angular
       supersonic.ui.dialog.alert(title, options).then ->
         $scope.dismissedAlerts++
 
+    $scope.testAlertWithCallback = ->
+      supersonic.ui.dialog.alert
+        onSuccess: ->
+          $scope.$apply ->
+            $scope.dismissedAlerts++
+        onFailure: ->
+          supersonic.logger.log "Showing an alert failed"
+
     $scope.confirms = [
       0
       0
@@ -59,6 +67,14 @@ angular
       supersonic.ui.dialog.confirm(title, options).then (index) ->
         $scope.confirms[index]++
 
+    $scope.testConfirmWithCallback = ->
+      supersonic.ui.dialog.confirm
+        onSuccess: (index) ->
+          $scope.$apply ->
+            $scope.confirms[index]++
+        onFailure: ->
+          supersonic.logger.log "Showing a confirm dialog failed"
+
     $scope.buttonIndex = undefined
     $scope.input = undefined
 
@@ -88,3 +104,12 @@ angular
       supersonic.ui.dialog.prompt(title, options).then (result) ->
         $scope.buttonIndex = result.buttonIndex
         $scope.input = result.input
+
+    $scope.testPromptWithCallback = ->
+      supersonic.ui.dialog.prompt
+        onSuccess: (result) ->
+          $scope.$apply ->
+            $scope.buttonIndex = result.buttonIndex
+            $scope.input = result.input
+        onFailure: ->
+          supersonic.logger.log "Showing a prompt dialog failed"
