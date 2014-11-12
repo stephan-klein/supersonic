@@ -25,6 +25,7 @@
   -moz-osx-font-smoothing: grayscale; }
 
 .super-spin, .super-loading-a, .super-loading-b, .super-loading-c, .super-loading-d, .super-looping, .super-refreshing, .super-ios7-reloading {
+  visibility: hidden;
   -webkit-animation: spin 1s infinite linear;
   -moz-animation: spin 1s infinite linear;
   -o-animation: spin 1s infinite linear;

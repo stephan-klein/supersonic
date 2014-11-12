@@ -239,7 +239,10 @@ $slide-in-up-function: cubic-bezier(.1, .7, .1, 1);
 // -------------------------------
 
 @-webkit-keyframes spin {
-  100% { -webkit-transform: rotate(360deg); }
+  100% {
+    visibility: visible;
+    -webkit-transform: rotate(360deg);
+  }
 }
 @-moz-keyframes spin {
   100% { -moz-transform: rotate(360deg); }
