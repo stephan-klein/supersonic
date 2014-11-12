@@ -11,7 +11,6 @@ describe "supersonic.device.accelerometer", ->
     a.z.should.be.defined
     a.z.should.be.a "number"
     a.timestamp.should.be.defined
-    a.timestamp.should.be.a "number"
 
   checkReasonableValues = (a) ->
     reasonableThreshold = 15
