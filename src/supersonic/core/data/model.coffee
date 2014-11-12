@@ -23,6 +23,12 @@ module.exports = (logger, window) ->
    #   description: "Take out the trash"
    # }
    # takeOutTheTrash.save()
+   # @exampleJavaScript
+   # var Task = supersonic.data.model('task');
+   # takeOutTheTrash = new Task({
+   #   description: "Take out the trash"
+   # });
+   # takeOutTheTrash.save();
   ###
   createModel = switch
     when window?.ag?.data?
@@ -104,6 +110,12 @@ module.exports = (logger, window) ->
  # supersonic.data.model('task').findAll().then (tasks) ->
  #   for task in tasks
  #      console.log task.description
+ # @exampleJavaScript
+ # supersonic.data.model('task').findAll().then( function(tasks) {
+ #   for (var i = 0; i < tasks.length; i++) {
+ #     console.log(tasks[i].description);
+ #   }
+ # });
 ###
 ###
  # @namespace supersonic.data
@@ -116,6 +128,10 @@ module.exports = (logger, window) ->
  # @exampleCoffeeScript
  # supersonic.data.model('task').find(123).then (task) ->
  #   console.log task.description
+ # @exampleJavaScript
+ # supersonic.data.model('task').find(123).then( function(task) {
+ #   console.log(task.description);
+ # });
 ###
 ###
  # @namespace supersonic.data
@@ -146,6 +162,15 @@ module.exports = (logger, window) ->
  #     task.completed = true
  #   tasks.save().then ->
  #     supersonic.logger.log "All tasks saved!"
+ # @exampleJavaScript
+ # supersonic.data.model('task').findAll().then( function(tasks) {
+ #   for (var i = 0; i < tasks.length; i++) {
+ #     tasks[i].completed = true;
+ #   }
+ #   tasks.save().then( function() {
+ #     supersonic.logger.log("All tasks saved!");
+ #   });
+ # });
 ###
 ###
  # @namespace supersonic.data
@@ -174,6 +199,11 @@ module.exports = (logger, window) ->
  # supersonic.data.model('task').find(123).then (task) ->
  #   task.done = true
  #   task.save()
+ # @exampleJavaScript
+ # supersonic.data.model('task').find(123).then( function(task) {
+ #   task.done = true;
+ #   task.save();
+ # });
 ###
 ###
  # @namespace supersonic.data
@@ -187,4 +217,10 @@ module.exports = (logger, window) ->
  # supersonic.data.model('task').find(123).then (task) ->
  #   if task.done
  #     task.delete()
+ # @exampleCoffeeScript
+ # supersonic.data.model('task').find(123).then( function(task) {
+ #   if (task.done) {
+ #     task.delete();
+ #   }
+ # });
 ###
