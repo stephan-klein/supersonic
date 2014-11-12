@@ -45,6 +45,10 @@ With your brand-new Steroids² CLI running, head on over to your terminal app of
 steroids create myProject
 ```
 
+You will then be prompted to make some selections regarding your project type. To follow this tutorial, choose Multi-Page application (MPA) and CoffeeScript for your project configuration. Using these defaults, your project will utilise `Angular.js` to create the MPA structure and create your project's script files using CoffeeScript.
+
+>Note: Even though we recommend using Angular, Supersonic is framework agnostic. If you prefer a different framework, choose Single-Page application when prompted for application type, and create the app structure yourself.
+
 The Steroids² CLI will create a basic project in the `myProject/` folder and install some required dependencies like the `steroids.js` and `supersonic.js` libraries. Feel free to poke around for a little while, but the app structure will be better explained in a later chapter.
 </section>
 
