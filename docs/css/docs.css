@@ -353,6 +353,10 @@ ul.docs-header li.active a {
   cursor: default;
 }
 
+.tutorial-image {
+  width:75%;
+}
+
 /*
 Breadcrumb navigation
 */
