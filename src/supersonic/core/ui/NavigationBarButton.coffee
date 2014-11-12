@@ -31,12 +31,12 @@ module.exports = (steroids, log) ->
   ###
 
   class NavigationBarButton
-    constructor: (params)->
+    constructor: (options)->
       btn = new steroids.buttons.NavigationBarButton()
-      for key of params
-        btn[key] = params[key]
+      for key of options
+        btn[key] = options[key]
       return btn
 
 
-  return (params)->
-    new NavigationBarButton(params)
+  return (options)->
+    new NavigationBarButton(options)
