@@ -33,38 +33,43 @@
 
 @-moz-keyframes spin {
   0% {
+    visibility: visible;
     -moz-transform: rotate(0deg); }
 
   100% {
-    -moz-transform: rotate(359deg); } }
+    -moz-transform: rotate(360deg); } }
 
 @-webkit-keyframes spin {
   0% {
+    visibility: visible;
     -webkit-transform: rotate(0deg); }
 
   100% {
-    -webkit-transform: rotate(359deg); } }
+    -webkit-transform: rotate(360deg); } }
 
 @-o-keyframes spin {
   0% {
+    visibility: visible;
     -o-transform: rotate(0deg); }
 
   100% {
-    -o-transform: rotate(359deg); } }
+    -o-transform: rotate(360deg); } }
 
 @-ms-keyframes spin {
   0% {
+    visibility: visible;
     -ms-transform: rotate(0deg); }
 
   100% {
-    -ms-transform: rotate(359deg); } }
+    -ms-transform: rotate(360deg); } }
 
 @keyframes spin {
   0% {
+    visibility: visible;
     transform: rotate(0deg); }
 
   100% {
-    transform: rotate(359deg); } }
+    transform: rotate(360deg); } }
 
 .super-loading-a {
   -webkit-animation-timing-function: steps(8, start);
