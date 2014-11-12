@@ -17,6 +17,6 @@ The ingredients of the data access are:
  - three way data binding
  - generic backend integrations
 
- Start your journey to Supersonic data by reading [how to configure Appgyver Sandbox Database](/data-management/setting-up-appgyver-database/) for your app. Then go and see hoe to [access data from your app](/data-management/accessing-data-from-device/).
+ Start your journey to Supersonic data by reading [how to configure AppGyver Sandbox Database](/data-management/setting-up-appgyver-database/) for your app. Then go and see how to [access data from your app](/data-management/accessing-data-from-device/).
 
 </section>

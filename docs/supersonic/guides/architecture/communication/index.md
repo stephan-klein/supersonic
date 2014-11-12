@@ -13,7 +13,7 @@ The Supersonic Multi-Page App architecture differs from Single-Page App architec
 
 This means that you cannot create "global" JavaScript variables, that singletons such as AngularJS services are not unique (since the code is loaded multiple times, once per WebView, and AngularJS maintains the service singleton separately for each ng-app instance), and so on.
 
-However, Supersonic has implemented certain ways that overcome these limitations and let you do everything a Single-Page App could do. There various thechniques for cross-view communication so you can certainly find a fitting solution for all your use cases!
+However, Supersonic has implemented certain ways that overcome these limitations and let you do everything a Single-Page App could do. There various techniques for cross-view communication so you can certainly find a fitting solution for all your use cases!
 
 ## publish subscribe channel
 
@@ -22,7 +22,7 @@ Perhaps the easiest way for cross-view communication is the Supersonic
 
 There can be any number of channels in one app. Each  channel is identified by a string (the channel name). A channel is accessed with the method `supersonic.data.channel('name_of_the_channel')`.
 
-A vebview can _publish_ a message to a channel (called 'public_announcements') as follws:
+A WebView can _publish_ a message to a channel (called 'public_announcements') as follows:
 
 ```js
 message =
@@ -61,7 +61,7 @@ It is extremely easy to keep the rendered view and model data in sync by utilizi
 {% endraw %}
 ```
 
-If one types text to the input field, the text is automatically rendered within the div as it is typed.  Controller can get hold to the typed data through scope variable `$scope.message`.
+If one types text to the input field, the text is automatically rendered within the div as it is typed.  Controller can get hold of the typed data through scope variable `$scope.message`.
 
 However the Angular two-way data binding works only within one WebView. If you have another WebView with the following template, it does not get updated when data changes in the first WebView:
 
@@ -77,9 +77,9 @@ However the Angular two-way data binding works only within one WebView. If you h
 {% endraw %}
 ```
 
-Supersonic provides _superscope_ which makes it possible to keep synch variables within two or more different WebViews.
+Supersonic provides _superscope_ which makes it possible to keep sync variables within two or more different WebViews.
 
-You bind a variable in the local scope of the first webview to the superscope as follows:
+You bind a variable in the local scope of the first WebView to the superscope as follows:
 
 ```js
 angular
@@ -135,11 +135,11 @@ Now the controller can load the corresponding object form database using [supers
 
 ## window.postMessage
 
-If any of the above presented higher level API's that Supersonic provides do not match to your usecase, there are still a pair of more lower abstraction level mechanisms for cross-view comminication.
+If any of the above presented higher level API's that Supersonic provides do not match to your usecase, there are still a pair of more lower abstraction level mechanisms for cross-view communication.
 
 Supersonic implements the [window.postMessage API](https://developer.mozilla.org/en-US/docs/Web/API/Window.postMessage) to enable communication between different WebViews. The basic usage is simple: a WebView calls the `window.postMessage()` function with a certain message. The message event is broadcasted to all other WebViews, who can receive it by listening to the `window` `message` event.
 
-As an example, we have the following code in one webview:
+As an example, we have the following code in one WebView:
 
 ```js
 broadcastMessage (msg) ->

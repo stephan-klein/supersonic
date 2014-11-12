@@ -9,27 +9,13 @@ section_id: setting-up-appgyver-database
 
 AppGyver's Sandbox Database, is a simple database that's meant to be used to rapidly bootstrap your app development. It's not meant for production use, but to save you the hassle of setting up a data backend when you start developing your app.
 
-Database can be initialized either through connect screen or by Steroids CLI.
 
-## Deloying application to cloud
+## Deloying application to cloud and initializing the database
 
-Before data can be added, app should be deployed to to the AppGyver
-Cloud. Deployment can be from the "Cloud" tab of Connect screen by pressing "Deploy to cloud" or from command line as follows:
+Steroids Sandbox database is initialized by pressing "Initialize"
+from the "Data" tab of Connect screen. If application is not yet deployed to cloud a deployment is also made at the database initialization.
 
-```bash
-$ steroids deploy
-```
-
-## Initializing the database
-
-After cloud deployment the Steroids Sandbox database can be initialized.
-from "Data" tab of Connect screen by pressing "'Initialize'" or from command line:
-
-```bash
-$ steroids data init
-```
-
-## Definig resources
+## Defining resources
 
 After initialization you will see AppGyver Sandbox Database as a configured provider.
 
@@ -45,7 +31,7 @@ The documents in the defined resource can be browsed and edited with "Data brows
 
 After generating resources, the "Generate Scaffold" tab allows one to generate CRUD application scaffold for the defined resource.
 
-See [Third mile: adding data from backend](/supersonic/tutorial/third-mile/) for more on configuring the Appgyver Sandbod Database and
+See [Third mile: adding data from backend](/supersonic/tutorial/third-mile/) for more on configuring the AppGyver Sandbox Database and
  [Fourth mile: app architecture](/supersonic/tutorial/fourth-mile/) on description of the scaffolded CRUD app structure.
 
 Once you have the data configured, you can move to section [accessing data from device](data-management/accessing-data-from-device/).

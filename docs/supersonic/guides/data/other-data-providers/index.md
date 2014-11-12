@@ -8,6 +8,6 @@ section_id: other-data-providers
 
 # Other providers
 
-Besides the AppGyver Database, supersonic provides an easy way to integrate application to various kinds of backends such as Parse, Build IO, Kimono or any custom REST backend.
+Besides the AppGyver Database, Supersonic provides an easy way to integrate application to various kinds of backends such as Parse, Build IO, Kimono or any custom REST backend.
 
-Data providers are defined using the Connect Screen. More info later.
+Support for these integrations will be ready in couple of weeks, so stay tuned!

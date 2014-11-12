@@ -14,7 +14,7 @@ The [supersonic.data](api-reference/stable/supersonic/data/) namespace includes 
 
 ## supersonic.data
 
-In the following we demonstrate how supersonic data makes it joufully easy to manipulate resources in AppGyver Sandbox Database in a clean, object-oriented way.
+In the following we demonstrate how supersonic data makes it joyfully easy to manipulate resources in AppGyver Sandbox Database in a clean, object-oriented way.
 
 Code snippets in above assume that the application has a resource `Beer` with two `string` fields `name` and `brewery`, and an `integer` field `brewed_since` configured.
 
@@ -26,7 +26,7 @@ Beer = supersonic.data.model('Beer')
 
 ## Getting data from the server
 
-The call `supersonic.data.model('Beer')` returns a [supersonic.data.Model](/api-reference/stable/supersonic/data/model/model-class/) class, that profides methods of accessing the data of the resource.
+The call `supersonic.data.model('Beer')` returns a [supersonic.data.Model](/api-reference/stable/supersonic/data/model/model-class/) class, that provides methods to accessing the data of the resource.
 
 The entire collection can be achieved by a [promise](/overview/promises/) returning function `findAll` of the Model class:
 
@@ -84,13 +84,13 @@ Beer.all().whenChanged (beers) ->
     console.log "#{beer.name} by #{beer.brewery} brewed since #{beer.brewed_since}"
 ```
 
-Any time there are changes in data, the registered callback function is called. So with Angular's databinding and magical touch of Supersonic data one can easily build applications where the data of _all_ the users is keep in sync all the time!
+Any time there are changes in data, the registered callback function is called. So with Angular's databinding and magical touch of Supersonic data one can easily build applications where the data of _all_ the users is kept in sync all the time!
 
 See more form [Steroids.data API](/api-reference/stable/supersonic/data/model/model-class/).
 
 # Model instances
 
-Method `find` of the Model class can be used to get a single object based on the identifier field:
+Method `find` in the Model class can be used to get a single object based on the identifier field:
 
 ```js
 Beer.find("123").then (beer) ->

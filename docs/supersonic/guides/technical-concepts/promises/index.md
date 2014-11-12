@@ -15,7 +15,7 @@ _Promise_ is a proxy object for an event that is not necessary yet happened. A s
 
 Most of the Supersonic core API's return a promise. Callback functions can be added to a promise with the method `then`. The first parameter to `then` is a success callback that gets called if promise is resolved, the optinonal second parameter is called if promise is rejected.
 
-In a simple scenario, use of an API that returns promise does not differ much from usage of a API call that takes a callback as parameter. In the following example Supersonic [dialog][dialog-api] is opened. Dialog returns a promise, that resolves with he user inputed value:
+In a simple scenario, use of an API that returns promise does not differ much from usage of a API call that takes a callback as parameter. In the following example Supersonic [dialog][dialog-api] is opened. Dialog returns a promise, that resolves with the user inputed value:
 
 ```js
 myController = ($scope, supersonic) ->

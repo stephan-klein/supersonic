@@ -9,7 +9,7 @@ section_id: angular-js
 
 ## Angular.JS
 
-[Angular JS](https://angularjs.org/) is an open source Javascript MVC-framework developed and maintained by Google. Angular allows a declarative style of building the UI by making it possible to extend HTML vocabulary. Angular makes it easy to build modularized applications where the DOM manipulations sre fully separated from application logic. This results code that is easily testable and extendable.
+[Angular JS](https://angularjs.org/) is an open source Javascript MVC-framework developed and maintained by Google. Angular allows a declarative style of building the UI by making it possible to extend HTML vocabulary. Angular makes it easy to build modularized applications where the DOM manipulations are fully separated from application logic. This results code that is easily testable and extendable.
 
 Perhaps the most famous feature of Angular is the _two-way data binding_
 that makes it extremely easy to keep view layer and data in synch. Controller functions get access to view through a special Angular service called `$scope` that can be injected to any controller:
@@ -46,7 +46,7 @@ myController = ($scope, supersonic) ->
       $scope.answer = "No"
 ```
 
-In a nonangularized environment one should explicitly ask Angular to run the `$digest`-loop by calling `$scope.$apply()` in order to get model updates propagated to the whole app.
+In a non-angularized environment one should explicitly ask Angular to run the `$digest`-loop by calling `$scope.$apply()` in order to get model updates propagated to the whole app.
 
 ## Learn more
 
