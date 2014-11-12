@@ -5,7 +5,9 @@ angular
     $scope.currentId = null
     supersonic.bind $scope, "currentId"
 
+    view = new supersonic.ui.View "angular#bindTest"
+    view.start().catch ->
+      # already started, don't care
+
     $scope.testBind = ->
       $scope.currentId = "#{Math.random()}"
-      supersonic.ui.views.find("angular#bindTest").then (view)->
-        supersonic.ui.layers.push view

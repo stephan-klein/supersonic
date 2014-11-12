@@ -11,7 +11,7 @@ angular
           $scope.showSpinner = false
 
     supersonic.data.channel("events").subscribe (message)->
-      alert "Received message! #{message}"
+      supersonic.ui.dialog.alert "Received message! #{message}"
 
     $scope.sendChannelMessage = ->
       supersonic.data.channel('events').publish('you would not believe what just happened')

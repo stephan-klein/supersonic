@@ -42,21 +42,26 @@ initSuperScope = (superRootScope)->
   channel ||= initChannel()
   superscope = superRootScope
 
-  watchedValue = {}
+  oldWatchedValue = {}
+  newWatchedValue = {}
+  acualWatchedValue = 0 #TODO: watch does not understand objects as values, but understands integers
   superscope.$watch ->
-    values = {}
     for own key, value of superscope when seemsLegit(key, value)
-      values[key] = value
+      newWatchedValue[key] = value
 
-    return if deepEqual(watchedValue, values)
+    unless deepEqual(oldWatchedValue, newWatchedValue)
+      acualWatchedValue++
+    else
+      acualWatchedValue
 
-    watchedValue = values
+  , -> # do not use angular provided newValue and oldValue, we are not interested in an incrementing counter
+    return if deepEqual(newWatchedValue, oldWatchedValue)
 
-  , (newValue, oldValue)->
-    return unless newValue? #WTF
-    return if deepEqual(lastReceivedSuperScope, newValue)
+    unless deepEqual(lastReceivedSuperScope, newWatchedValue) # do not feedback loop superscope changes that were just received from channel
+      angular.copy newWatchedValue, lastReceivedSuperScope # get ready for next round of feedback loop
+      channel.publish(newWatchedValue)
 
-    channel.publish(newValue)
+    angular.copy newWatchedValue, oldWatchedValue # get ready for next round of diffs
 
   # Hide clear on the object
   clear = ->

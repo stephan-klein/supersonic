@@ -44,8 +44,4 @@ module.exports =
       id: "app-index"
       location: "app#index"
     }
-    {
-      id: "angular#bindTest"
-      location: "angular#bindTest"
-    }
   ]
