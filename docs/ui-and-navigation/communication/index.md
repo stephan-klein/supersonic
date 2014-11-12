@@ -14,6 +14,40 @@ This means that you cannot create "global" JavaScript variables, that singletons
 
 However, Supersonic has implemented certain HTML5 standards and other functionalities that overcome these limitations and let you do everything a Single-Page App could do.
 
+## publish subscribe channel
+
+Perhaps the easiest way for cross-view communication is the Supersonic
+[publish-subscribe](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) messaging channel.
+
+There can be any number of channels in one app. Each  channel is identified by a string (the channel name). A channel is accessed with the method `supersonic.data.channel('name_of_the_channel')`.
+
+A vebview can _publish_ a message to a channel (called 'public_announcements') as follws:
+
+```js
+message =
+  sender: "beers#create"
+  contet: "a new beer brewed"
+
+supersonic.data.channel('public_announcements').publish(data)
+```
+
+Published message can be any JavaScript object. Message is recieved by _all_ the webviews who have _subscribed_ for the same channel by registering a callback function to the channel:
+
+```js
+  supersonic.data.channel('public_announcements').subscribe (message) ->
+    console.log "recieved a message #{message}"
+```
+
+See the [API reference](/api-reference/stable/supersonic/data/channel/)
+
+## superscope
+
+```js
+```
+
+```js
+```
+
 ## view parameters
 
 A frequenly occuring pattern in an app is the need to navigate from the list of a document collection to the page of a single document.
@@ -85,19 +119,3 @@ Hint: to save objects to `localStorage`, you can use `JSON.stringify(object)` to
 
 An important difference to browser apps is that the user won't have access to developer tools for your WebViews. Thus, they cannot manipulate `localStorage` directly – everything you save there remains, even over app updates (of course, cleaning the app cache will empty `localStorage` also).
 
-## publish subscribe channel
-
-```js
-```
-
-```js
-```
-
-
-## superscope
-
-```js
-```
-
-```js
-```
