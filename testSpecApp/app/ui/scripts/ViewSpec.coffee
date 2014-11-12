@@ -1,58 +1,44 @@
-describe "supersonic.ui.view", ->
-  it "is a function", ->
-    supersonic.ui.view.should.be.a 'function'
-
+describe "supersonic.ui.View", ->
   it "accepts a url", ->
-    supersonic.ui.view('http://example.com').should.be.an 'object'
+    view = new supersonic.ui.View 'http://example.com'
+    view.should.be.an 'object'
+    view.getLocation().should.equal 'http://example.com'
 
   it "accepts a route", ->
-    supersonic.ui.view("foo#bar").should.be.an 'object'
-
-  describe "getLocation()", ->
-    describe "with a url", ->
-      it "should return the url", ->
-        supersonic.ui.view('http://example.com')
-          .getLocation().should.equal 'http://example.com'
-
-    describe "with a route", ->
-      it "should return the route", ->
-        supersonic.ui.view("foo#bar")
-          .getLocation().should.equal 'foo#bar'
-
-  describe "_getWebView()", ->
-    it "is a function", ->
-      supersonic.ui.view('foo#bar')._getWebView.should.be.a 'function'
-
-    it "returns an object with a location", ->
-      supersonic.ui.view('foo#bar')._getWebView().location.should.be.a 'string'
-
-    describe "with a route", ->
-      it "should have a url parsed from the route", ->
-        supersonic.ui.view('foo#bar')
-          ._getWebView().location.should.equal "http://localhost/app/foo/bar.html"
-
-      it "should have a query string of the route has one", ->
-        supersonic.ui.view('foo#bar?qux=trol')
-          ._getWebView().location.should.match /foo\/bar\.html\?qux=trol$/
+    view = new supersonic.ui.View 'foo#bar'
+    view.should.be.an 'object'
+    view.getLocation().should.equal 'http://localhost/app/foo/bar.html'
 
   describe "start()", ->
-    view = null
-    beforeEach ->
-      view = supersonic.ui.view("ui#empty?#{Math.random()}")
 
-    it "returns a started view that can be stopped", ->
-      view.start().then (startedView) ->
-        startedView.stop().should.be.fulfilled
+    it "returns a started view that can be stopped", (done)->
+      view = new supersonic.ui.View "ui#empty?#{Math.random()}"
+      view.start()
+      .then ->
+        view.stop()
+      .then ->
+        done()
 
     describe "with an empty argument", ->
-      it "defaults the id to the location", ->
-        view.start().then (startedView) ->
-          startedView.getId().should.equal view.getLocation()
-          startedView.stop()
+      it "defaults the id to the location", (done)->
+        view = new supersonic.ui.View "ui#empty?#{Math.random()}"
+        view.start().then ->
+          view.getId().should.equal view.getLocation()
+        .then ->
+          view.stop()
+        .then ->
+          done()
 
     describe "with an argument", ->
-      it "assigns the argument to the view's id", ->
+      it "assigns the argument to the view's id", (done)->
         id = "this-is-the-id-#{Math.random()}"
-        view.start(id).then (startedView) ->
-          startedView.getId().should.equal id
-          startedView.stop()
+
+        view = new supersonic.ui.View "ui#empty?#{Math.random()}"
+        view.setId(id).then ->
+          view.start()
+        .then ->
+          view.getId().should.equal id
+        .then ->
+          view.stop()
+        .then ->
+          done()

@@ -29,7 +29,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that gets resolved with the provided View instance once the push has started. If the view cannot be pushed, the promise is rejected.
    # @exampleJavaScript
-   # var view = supersonic.ui.view("common#settings");
+   # var view = new supersonic.ui.View("common#settings");
    # supersonic.ui.layers.push(view)
    #
    # supersonic.ui.views.find("settingsView").then( function() {
@@ -38,7 +38,7 @@ module.exports = (steroids, log) ->
   ###
   push: s.promiseF "push", (viewOrId) ->
     new Promise (resolve, reject) ->
-      supersonic.ui.views.get(viewOrId)
+      supersonic.ui.views.find(viewOrId)
       .then (view)->
         steroids.layers.push
           view: view._webView

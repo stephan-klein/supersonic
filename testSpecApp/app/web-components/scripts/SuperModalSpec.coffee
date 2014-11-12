@@ -18,6 +18,7 @@ fireAfterModalDidHideAndShow = (done) ->
 
 describe "<super-modal-show> and <super-modal-hide>", ->
   @timeout 4000
+
   it "should show modal by clicking on element with route", (done) ->
     fireAfterModalDidHideAndShow done
     clickElement "super-modal-show-route"
@@ -38,9 +39,11 @@ describe "<super-modal-show> and <super-modal-hide>", ->
     fireTouchEvent elem, "touchstart"
 
   it "should show modal with a view-id", (done) ->
+    view = new supersonic.ui.View "web-components#super-modal-hide-preloaded"
+
     fireAfterModalDidHideAndShow ->
-      supersonic.ui.views.stop("super-modal-hide").then ->
+      view.stop().then ->
         done()
 
-    supersonic.ui.view("web-components#super-modal-hide-preloaded").start("super-modal-hide").then ->
+    view.start("super-modal-hide").then ->
       clickElement "super-modal-show-id"

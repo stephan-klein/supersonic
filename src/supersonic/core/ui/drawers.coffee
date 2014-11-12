@@ -59,45 +59,33 @@ module.exports = (steroids, log) ->
    #   supersonic.ui.drawers.init leftDrawer
   ###
 
-  init: s.promiseF "init", (view, options)->
-    throw new Error("Android does not support enabling drawers on runtime.") if steroids.nativeBridge.constructor.name is "FreshAndroidBridge"
-    side = if options.side? then options.side else "right"
+  init: s.promiseF "init", (view, options={})->
+    new Promise (resolve, reject)->
+      if steroids.nativeBridge.constructor.name is "FreshAndroidBridge"
+        reject new Error "Android does not support enabling drawers on runtime."
+        return
 
-    drawer_identifier = if view.getId?
-      view.getId()
-    else
-      "#{side}-drawer"
+      _doInit = (drawerView)->
+        params = {}
+        webview = drawerView._webView
+        side = if options.side? then options.side else "right"
 
-    params = {}
+        if options?.width?
+          webview.widthOfDrawerInPixels = options.width
 
-    _initStartedView = (startedView)->
-      webview = startedView._getWebView()
+        params[side] = webview
 
-      if options?.width?
-        webview.widthOfDrawerInPixels = options.width
-
-      params[side] = webview
-
-      (new Promise (resolve, reject) ->
         steroids.drawers.update params,
           onSuccess: resolve
-          onFailure: reject
-      ).catch (e)->
-        throw new Error(e.errorDescription)
+          onFailure: (error)->
+            reject new Error error.errorMessage
 
-    supersonic.ui.views.find(drawer_identifier)
-      .then(
-        (startedView)->
-          _initStartedView startedView
-        ->
-          view.start(drawer_identifier)
-            .then(
-              (startedView)->
-                _initStartedView startedView
-              (e) ->
-                throw new Error(e.errorDescription)
-            )
-      )
+      view.isStarted().then (started)->
+        if started
+          _doInit(view)
+        else
+          view.start().then ->
+            _doInit(view)
 
   ###
    # @namespace supersonic.ui.drawers

@@ -41,12 +41,11 @@ module.exports = (steroids, log) ->
   ###
   show: s.promiseF "show", (viewOrId, options = {})->
     new Promise (resolve, reject)->
-      supersonic.ui.views.get(viewOrId)
+      supersonic.ui.views.find(viewOrId)
       .then (view)->
         options.view = view._webView
         steroids.modal.show options,
-          onSuccess: ()->
-            resolve()
+          onSuccess: resolve
           onFailure: (error)->
             reject(error)
 
@@ -77,8 +76,7 @@ module.exports = (steroids, log) ->
   hide: s.promiseF "hide", (options = {})->
     new Promise (resolve, reject)->
       steroids.modal.hide options, {
-        onSuccess: ()->
-          resolve()
+        onSuccess: resolve
         onFailure: (error)->
           reject(error)
     }
@@ -111,8 +109,7 @@ module.exports = (steroids, log) ->
   hideAll: s.promiseF "hideAll", (options = {})->
     new Promise (resolve, reject)->
       steroids.modal.hideAll options, {
-        onSuccess: ()->
-          resolve()
+        onSuccess: resolve
         onFailure: (error)->
           reject(error)
     }

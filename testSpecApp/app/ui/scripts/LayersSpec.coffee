@@ -4,7 +4,7 @@ describe "supersonic.ui.layers", ->
 
     layers = supersonic.ui.layers
 
-    view = supersonic.ui.view "ui#empty"
+    view = new supersonic.ui.View "ui#empty"
 
     describe "push", ->
       it "should be defined", ->

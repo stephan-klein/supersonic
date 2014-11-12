@@ -12,14 +12,8 @@ describe "supersonic.data.channel", ->
     supersonic.data.channel(channelName).should.be.an 'object'
 
   describe "identity", ->
-    it "is an object", ->
-      supersonic.data.channel(channelName).identity.should.be.an 'object'
-
-    it "identifies the view and the channel instance within that view", ->
-      supersonic.data.channel(channelName).identity.should.have.keys [
-        'view'
-        'instance'
-      ]
+    it "is a string", ->
+      supersonic.data.channel(channelName).identity.should.be.a 'string'
 
   describe "subscribe()", ->
     it "is a function", ->
@@ -76,14 +70,18 @@ describe "supersonic.data.channel", ->
 
     describe "cross-view message passing", ->
       startedView = null
-      beforeEach ->
-        supersonic.ui
-          .view("data#channel/pingback?channel=#{channelName}")
-          .start()
-          .then (view) ->
+
+      beforeEach (done)->
+        supersonic.ui.views.find("data#channel/pingback?channel=#{channelName}").then (view)->
+          view.start()
+          .then ->
             startedView = view
-      afterEach ->
-        startedView.stop()
+            done()
+
+      afterEach (done)->
+        startedView.stop().then ->
+          startedView = null
+          done()
 
       it "can subscribe to messages published by another view", (done) ->
         channel = supersonic.data.channel(channelName)

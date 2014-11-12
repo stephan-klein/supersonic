@@ -13,15 +13,21 @@ module.exports = (steroids, log) ->
    # The `supersonic.ui.views` namespace contains functions for manipulating and accessing View objects.
   ###
 
+  getApplicationState = ->
+    new Promise (resolve, reject) ->
+      steroids.getApplicationState {},
+        onSuccess: resolve
+        onFailure: reject
+
   ###
    # @namespace supersonic.ui.views
-   # @name get
+   # @name find
    # @function
-   # @apiCall supersonic.ui.views.get
+   # @apiCall supersonic.ui.views.find
    # @description
    # Get a new view instance by a view identifier. Identifiers can be custom IDs, routes, or URLs.
    # @type
-   # supersonic.ui.views.get: (
+   # supersonic.ui.views.find: (
    #  id: String
    # ) => Promise view: View
    # @define {String} id A string matching the identifier of a view.
@@ -47,7 +53,16 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject) ->
       if viewOrId.constructor.name is "View"
         resolve viewOrId
-      else
+        return
+
+      getApplicationState().then (state)->
+        for preload in state.preloads
+          if preload.id == viewOrId
+            resolve new View
+              id: preload.id
+              location: preload.startURL
+            return
+
         resolve new View viewOrId
 
   ###
@@ -75,7 +90,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log "carsShowView id: #{carsShowView.getId()}"
    #
    # # With View object
-   # view = supersonic.ui.views.get("cars#edit")
+   # view = supersonic.ui.views.find("cars#edit")
    # supersonic.ui.views.start("cars#edit").then (carsEditView) ->
    #   # The id is "cars#edit"
    #   supersonic.logger.log "carsEditView id: #{carsEditView.getId()}"
@@ -99,7 +114,7 @@ module.exports = (steroids, log) ->
    # });
   ###
   start =  s.promiseF "start", (viewOrId)->
-    supersonic.ui.views.get(viewOrId)
+    supersonic.ui.views.find(viewOrId)
     .then (view)->
       view.start()
 
@@ -127,12 +142,12 @@ module.exports = (steroids, log) ->
    # supersonic.ui.views.stop("carsShowView");
   ###
   stop = s.promiseF "stop", (viewOrId) ->
-    supersonic.ui.views.get(viewOrId)
+    supersonic.ui.views.find(viewOrId)
     .then (view)->
       view.stop()
 
   {
-    get: get
+    find: find
     start: start
     stop: stop
     current: require('./views/current')(log)
