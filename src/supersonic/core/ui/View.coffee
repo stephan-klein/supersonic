@@ -25,37 +25,36 @@ module.exports = (steroids, log) ->
 
   class View
     _webView: null
-    _originalLocation: null
+    id: null
 
     constructor: (@options={})->
       if @options.constructor?.name == "String"
         @options =
           location: @options
 
-      @_originalLocation = @options.location
-      @options.location = parseRoute(@options.location)
-
-      @_webView = new steroids.views.WebView @options
-
-      @isStarted().then (started)->
-        if started
-          @_webView.id = @_originalLocation
+      @id = @options.id ? @options.location
+      location = parseRoute(@options.location)
+      @_webView = new steroids.views.WebView
+        id: @options.id
+        location: location
 
     isStarted: ->
       new Promise (resolve, reject) =>
         getApplicationState().then (state)=>
-          if @getId() in (preload.id for preload in state.preloads)
+          if @id in (preload.id for preload in state.preloads)
+            @_webView.id = @id # mark WebView started
             resolve true
           else
             resolve false
 
     getId: ->
-      @_webView.id ? @_originalLocation
+      @id
 
     setId: (newId)->
       new Promise (resolve, reject) =>
         @isStarted().then (started)=>
           unless started
+            @id = newId
             @_webView.id = newId
             resolve(newId)
           else
@@ -68,7 +67,9 @@ module.exports = (steroids, log) ->
       preload = (webView)->
         new Promise (resolve, reject) ->
           webView.preload {},
-            onSuccess: resolve
+            onSuccess: ->
+              @id = webView.id # mark started
+              resolve()
             onFailure: (error)->
               reject new Error error.errorDescription
 
@@ -76,6 +77,7 @@ module.exports = (steroids, log) ->
         @setId(newId).then =>
           preload(@_webView)
       else
+        @_webView.id = @id
         preload(@_webView)
 
     stop: ->

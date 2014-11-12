@@ -78,7 +78,7 @@ module.exports = (steroids, log) ->
         steroids.drawers.update params,
           onSuccess: resolve
           onFailure: (error)->
-            reject new Error error.errorMessage
+            reject new Error error.errorDescription
 
       view.isStarted().then (started)->
         if started
@@ -284,11 +284,6 @@ module.exports = (steroids, log) ->
     id = steroids.drawers.on "didshow", f
     ->
       steroids.drawers.off "didshow", id
-
-
-
-
-
 
   ###
    # @namespace supersonic.ui.drawers

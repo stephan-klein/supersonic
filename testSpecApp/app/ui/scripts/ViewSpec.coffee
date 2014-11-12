@@ -20,10 +20,11 @@ describe "supersonic.ui.View", ->
         done()
 
     describe "with an empty argument", ->
-      it "defaults the id to the location", (done)->
-        view = new supersonic.ui.View "ui#empty?#{Math.random()}"
+      it "works", (done)->
+        id = "ui#empty?#{Math.random()}"
+        view = new supersonic.ui.View id
         view.start().then ->
-          view.getId().should.equal view.getLocation()
+          view.getId().should.equal id
         .then ->
           view.stop()
         .then ->
@@ -34,9 +35,7 @@ describe "supersonic.ui.View", ->
         id = "this-is-the-id-#{Math.random()}"
 
         view = new supersonic.ui.View "ui#empty?#{Math.random()}"
-        view.setId(id).then ->
-          view.start()
-        .then ->
+        view.start(id).then ->
           view.getId().should.equal id
         .then ->
           view.stop()

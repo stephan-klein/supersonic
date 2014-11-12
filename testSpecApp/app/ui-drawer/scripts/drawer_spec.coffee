@@ -13,7 +13,7 @@ describe "supersonic.ui.drawers", ->
 
     view = new supersonic.ui.View "/app/ui-drawer/postback.html?msg=custom"
     view.start("custom-id-left-drawer").then ->
-      supersonic.ui.drawers.init(view, side: "left", width: 100)
+      supersonic.ui.drawers.init(view, side: "left", width: 100).should.be.fulfilled
       receivedMessage.should.eventually.equal "custom"
 
   it "should be able to update options", ->
@@ -26,7 +26,7 @@ describe "supersonic.ui.drawers", ->
 
   describe "opening unstarted views", ->
 
-    it "should be able to init right drawer", (done)->
+    it "should be able to init right drawer", ->
       receivedMessage = new Promise (resolve) ->
         listener = (e) ->
           supersonic.logger.log "Received message: #{JSON.stringify(e.data)}"
@@ -37,8 +37,7 @@ describe "supersonic.ui.drawers", ->
       view = new supersonic.ui.View "/app/ui-drawer/postback.html?msg=right"
 
       supersonic.ui.drawers.init(view, side: "right").should.be.fulfilled
-      receivedMessage.should.eventually.equal("right").then ->
-        done()
+      receivedMessage.should.eventually.equal "right"
 
     it "should not be able to init right again without custom id", ->
       view = new supersonic.ui.View "/app/ui-drawer/postback.html?msg=right"
