@@ -238,15 +238,16 @@ $slide-in-up-function: cubic-bezier(.1, .7, .1, 1);
 // Spin
 // -------------------------------
 
-@-webkit-keyframes spin {
-  100% { -webkit-transform: rotate(360deg); }
-}
-@-moz-keyframes spin {
-  100% { -moz-transform: rotate(360deg); }
-}
-@keyframes spin {
-  100% { transform: rotate(360deg); }
-}
+// This causes black animation flashing when animating views. Also it is not needed if 360deg is done in icon animations anyways.
+// @-webkit-keyframes spin {
+//   100% {-webkit-transform: rotate(360deg);}
+// }
+// @-moz-keyframes spin {
+//   100% {-moz-transform: rotate(360deg);}
+// }
+// @keyframes spin {
+//   100% {transform: rotate(360deg);}
+// }
 
 .no-animation {
   > .ng-enter, &.ng-enter, > .ng-leave, &.ng-leave {
