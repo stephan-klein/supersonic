@@ -68,6 +68,13 @@ module.exports = (window) ->
    # # WebView two
    # supersonic.data.channel('events').subscribe (message) ->
    #   @reply 'well, what happened?'
+   # @exampleJavaScript
+   # // WebView one
+   # supersonic.data.channel('events').publish('you would not believe what just happened');
+   # // WebView two
+   # supersonic.data.channel('events').subscribe( function(message) {
+   #   this.reply('well, what happened?');
+   # });
   ###
   return createChannel = (name) ->
     new PubSubChannel name

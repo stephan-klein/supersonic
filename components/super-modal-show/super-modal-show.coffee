@@ -24,21 +24,15 @@ SuperModalShowPrototype.createdCallback = ->
 
   @addEventListener action, =>
     viewId = @getAttribute "view-id"
-    if viewId
-      return supersonic.ui.views.find(viewId)
-        .then (view) ->
-          supersonic.ui.modal.show(view)
-        .catch (error) ->
-          throw new Error "Failed to push view: #{error}"
+    viewId ?= @getAttribute "location"
 
-    location = @getAttribute "location"
-    if location
-      view = supersonic.ui.view location
-      return supersonic.ui.modal.show(view)
-        .catch (error) ->
-          throw new Error "Failed to push view: #{error}"
+    unless viewId?
+      # None set, error
+      throw new Error "Either view-id or location must be set for a super-modal-show element"
 
-    throw new Error "Either view-id or location must be set"
+    supersonic.ui.modal.show(viewId)
+    .catch (error) ->
+      throw new Error "Failed to open modal: #{error}"
 
 document.registerElement "super-modal-show",
   prototype: SuperModalShowPrototype

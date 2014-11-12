@@ -68,14 +68,17 @@ describe 'supersonic.angular.superscope', ->
         startedView = view
         done()
 
-      supersonic.ui.views.find(childViewId)
-      .then resolve
-      .catch (err)->
-        console.log err.message
-        if err.message.match /There was no started view/
-          supersonic.ui.view(childViewId).start()
-          .then ->
-            setTimeout resolve, 2000 # wait for child view dom
+      supersonic.ui.views.find(childViewId).then (view)->
+        view.isStarted().then (started)->
+          if started
+            view.stop().then ->
+              view.start()
+          else
+            view.start()
+        .then ()->
+          setTimeout ->
+            resolve(view)
+          , 2000 # wait for child view dom
 
     afterEach (done) ->
       supersonic.ui.views.stop(childViewId)

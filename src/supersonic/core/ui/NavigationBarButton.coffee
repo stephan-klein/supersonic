@@ -24,19 +24,19 @@ module.exports = (steroids, log) ->
    # var options = {
    #   title: "Settings",
    #   onTap: function() {
-   #     supersonic.ui.view("common#settings").navigateTo();
+   #     supersonic.ui.layers.push("common#settings")
    #   }
    #
    # var button = new supersonic.ui.NavigationBarButton(options)
   ###
 
   class NavigationBarButton
-    constructor: (params)->
+    constructor: (options)->
       btn = new steroids.buttons.NavigationBarButton()
-      for key of params
-        btn[key] = params[key]
+      for key of options
+        btn[key] = options[key]
       return btn
 
 
-  return (params)->
-    new NavigationBarButton(params)
+  return (options)->
+    new NavigationBarButton(options)

@@ -32,22 +32,22 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the modal starts to show. If there modal cannot be shown (e.g. the view is invalid), the promise is rejected.
    # @exampleJavaScript
-   # var modalView = supersonic.ui.view("common#modal");
+   # var modalView = new supersonic.ui.View("common#modal");
    # var options = {
    #   animate: true
    # }
    #
    # supersonic.ui.modal.show(modalView, options);
   ###
-  show: s.promiseF "show", (view, params = {})->
+  show: s.promiseF "show", (viewOrId, options = {})->
     new Promise (resolve, reject)->
-      params.view = view._getWebView()
-      steroids.modal.show params, {
-        onSuccess: ()->
-          resolve()
-        onFailure: (error)->
-          reject(error)
-    }
+      supersonic.ui.views.find(viewOrId)
+      .then (view)->
+        options.view = view._webView
+        steroids.modal.show options,
+          onSuccess: resolve
+          onFailure: (error)->
+            reject(error)
 
   ###
    # @namespace supersonic.ui.modal
@@ -73,11 +73,10 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.modal.hide(options);
   ###
-  hide: s.promiseF "hide", (params = {})->
+  hide: s.promiseF "hide", (options = {})->
     new Promise (resolve, reject)->
-      steroids.modal.hide params, {
-        onSuccess: ()->
-          resolve()
+      steroids.modal.hide options, {
+        onSuccess: resolve
         onFailure: (error)->
           reject(error)
     }
@@ -107,11 +106,10 @@ module.exports = (steroids, log) ->
    # supersonic.ui.modal.hideAll(options);
   ###
 
-  hideAll: s.promiseF "hideAll", (params = {})->
+  hideAll: s.promiseF "hideAll", (options = {})->
     new Promise (resolve, reject)->
-      steroids.modal.hideAll params, {
-        onSuccess: ()->
-          resolve()
+      steroids.modal.hideAll options, {
+        onSuccess: resolve
         onFailure: (error)->
           reject(error)
     }

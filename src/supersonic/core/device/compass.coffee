@@ -3,8 +3,10 @@ Bacon = require 'baconjs'
 
 {deviceready} = require '../events'
 
+superify = require '../superify'
+
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.device.compass"
+  s = superify 'supersonic.device.compass', log
 
   ###
    # @namespace supersonic.device
@@ -44,6 +46,8 @@ module.exports = (steroids, log) ->
    # @define {=>Date} heading.timestamp Creation timestamp for heading.
    # @usageCoffeeScript
    # supersonic.device.compass.watchHeading options
+   # @usageJavaScript
+   # supersonic.device.compass.watchHeading(options);
    # @exampleCoffeeScript
    # supersonic.device.compass.watchHeading().onValue (heading) ->
    #   supersonic.logger.log(
@@ -54,8 +58,17 @@ module.exports = (steroids, log) ->
    #     Timestamp: #{heading.timestamp}
    #     """
    #   )
+   # @exampleJavaScript
+   # supersonic.device.compass.watchHeading().onValue( function(heading) {
+   #   supersonic.logger.log(
+   #     "Magnetic heading: " + heading.magneticHeading + "\n" +
+   #     "True heading: " + heading.trueHeading + "\n" +
+   #     "Heading accuracy: " + heading.headingAccuracy + "\n" +
+   #     "Timestamp: " + heading.timestamp
+   #   );
+   # });
   ###
-  watchHeading = (options = {}) ->
+  watchHeading = s.streamF "watchHeading", (options = {}) ->
     compassOptions =
       frequency: options?.frequency? || 100
       filter: options?.filter? || null
@@ -96,6 +109,8 @@ module.exports = (steroids, log) ->
    # @define {=>Date} heading.timestamp heading.timestamp Creation timestamp for heading.
    # @usageCoffeeScript
    # supersonic.device.compass.getHeading()
+   # @usageJavaScript
+   # supersonic.device.compass.getHeading();
    # @exampleCoffeeScript
    # supersonic.device.compass.getHeading().then (heading) ->
    #   steroids.logger.log(
@@ -106,8 +121,17 @@ module.exports = (steroids, log) ->
    #     Timestamp: #{heading.timestamp}
    #     """
    #   )
+   # @exampleJavaScript
+   # supersonic.device.compass.getHeading().then( function(heading) {
+   #   supersonic.logger.log(
+   #     "Magnetic heading: " + heading.magneticHeading + "\n" +
+   #     "True heading: " + heading.trueHeading + "\n" +
+   #     "Heading accuracy: " + heading.headingAccuracy + "\n" +
+   #     "Timestamp: " + heading.timestamp
+   #   );
+   # });
   ###
-  getHeading = ->
+  getHeading = s.promiseF "getHeading", ->
     new Promise (resolve) ->
       watchHeading().take(1).onValue resolve
 

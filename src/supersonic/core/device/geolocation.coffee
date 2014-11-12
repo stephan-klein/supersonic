@@ -3,8 +3,10 @@ Bacon = require 'baconjs'
 
 {deviceready} = require '../events'
 
+superify = require '../superify'
+
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.device.geolocation"
+  s = superify 'supersonic.device.geolocation', log
 
   ###
    # @namespace supersonic.device
@@ -45,6 +47,8 @@ module.exports = (steroids, log) ->
    # @define {=>Date} position.timestamp Creation timestamp for coords.
    # @usageCoffeeScript
    # supersonic.device.geolocation.watchPosition options
+   # @usageJavaScript
+   # supersonic.device.geolocation.watchPosition(options);
    # @exampleCoffeeScript
    # supersonic.device.geolocation.watchPosition().onValue (position) ->
    #   steroids.logger.log(
@@ -54,8 +58,16 @@ module.exports = (steroids, log) ->
    #     Timestamp: #{position.timestamp}
    #     """
    #   )
+   # @exampleJavaScript
+   # supersonic.device.geolocation.watchPosition().onValue( function(position) {
+   #   steroids.logger.log(
+   #     "Latitude: " + position.coords.latitude + "\n" +
+   #     "Longitude: " + position.coords.longitude + "\n" +
+   #     "Timestamp: " + position.timestamp
+   #   );
+   # });
   ###
-  watchPosition = (options = {}) ->
+  watchPosition = s.streamF "watchPosition", (options = {}) ->
 
     options.enableHighAccuracy ?= true
 
@@ -95,6 +107,8 @@ module.exports = (steroids, log) ->
    # @define {=>Date} position.timestamp Creation timestamp for coords.
    # @usageCoffeeScript
    # supersonic.device.geolocation.getPosition()
+   # @usageJavaScript
+   # supersonic.device.geolocation.getPosition();
    # @exampleCoffeeScript
    # supersonic.device.geolocation.getPosition().then (position) ->
    #   steroids.logger.log(
@@ -104,8 +118,16 @@ module.exports = (steroids, log) ->
    #     Timestamp: #{position.timestamp}
    #     """
    #   )
+   # @exampleJavaScript
+   # supersonic.device.geolocation.getPosition().then( function(position) {
+   #   steroids.logger.log(
+   #     "Latitude: " + position.coords.latitude + "\n" +
+   #     "Longitude: " + position.coords.longitude + "\n" +
+   #     "Timestamp: " + position.timestamp
+   #   );
+   # });
   ###
-  getPosition = (options = {}) ->
+  getPosition = s.promiseF "getPosition", (options = {}) ->
     new Promise (resolve) ->
       watchPosition(options).take(1).onValue resolve
 

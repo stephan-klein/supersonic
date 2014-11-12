@@ -15,6 +15,14 @@ angular
         $scope.$apply ->
           $scope.watchPosition = position.timestamp
 
+    $scope.testWatchPositionWithCallback = ->
+      supersonic.device.geolocation.watchPosition
+        onSuccess: (position) ->
+          $scope.$apply ->
+            $scope.watchPosition = position.timestamp
+        onFailure: (error) ->
+          alert "Error: #{JSON.stringify error}"
+
     $scope.latestPosition = undefined
 
     $scope.getPositionTests = [
@@ -26,6 +34,13 @@ angular
     $scope.testGetPosition = (options) ->
       supersonic.device.geolocation.getPosition().then (position) ->
         $scope.latestPosition = position.timestamp
+
+    $scope.testGetPositionWithCallback = ->
+      supersonic.device.geolocation.getPosition
+        onSuccess: (position) ->
+          $scope.latestPosition = position.timestamp
+        onFailure: (error) ->
+          alert "Error: #{JSON.stringify error}"
 
     $scope.watchAcceleration = undefined
 
@@ -40,6 +55,14 @@ angular
         $scope.$apply ->
           $scope.watchAcceleration = acceleration.timestamp
 
+    $scope.testWatchAccelerationWithCallback = ->
+      supersonic.device.accelerometer.watchAcceleration
+        onSuccess: (acceleration) ->
+          $scope.$apply ->
+            $scope.watchAcceleration = acceleration.timestamp
+        onFailure: (error) ->
+          alert "Error: #{JSON.stringify error}"
+
     $scope.latestAcceleration = undefined
 
     $scope.getAccelerationTests = [
@@ -51,6 +74,13 @@ angular
     $scope.testGetAcceleration = (options) ->
       supersonic.device.accelerometer.getAcceleration().then (acceleration) ->
         $scope.latestAcceleration = acceleration.timestamp
+
+    $scope.testGetAccelerationWithCallback = ->
+      supersonic.device.accelerometer.getAcceleration
+        onSuccess: (acceleration) ->
+          $scope.latestAcceleration = acceleration.timestamp
+        onFailure: (error) ->
+          alert "Error: #{JSON.stringify error}"
 
     $scope.watchHeading = undefined
 
@@ -76,6 +106,14 @@ angular
         $scope.$apply ->
           $scope.watchHeading = heading.timestamp
 
+    $scope.testWatchHeadingWithCallback = ->
+      supersonic.device.compass.watchHeading
+        onSuccess: (heading) ->
+          $scope.$apply ->
+            $scope.watchHeading = heading.timestamp
+        onFailure: (error) ->
+          alert "Error: #{JSON.stringify error}"
+
     $scope.latestHeading = undefined
 
     $scope.getHeadingTests = [
@@ -87,6 +125,13 @@ angular
     $scope.testGetHeading = (options) ->
       supersonic.device.compass.getHeading().then (heading) ->
         $scope.latestHeading = heading.timestamp
+
+    $scope.testGetHeadingWithCallback = ->
+      supersonic.device.compass.getHeading
+        onSuccess: (heading) ->
+          $scope.latestHeading = heading.timestamp
+        onFailure: (error) ->
+          alert "Error: #{JSON.stringify error}"
 
     $scope.platformName = undefined
     $scope.platformVersion = undefined

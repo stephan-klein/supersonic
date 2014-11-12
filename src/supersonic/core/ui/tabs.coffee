@@ -95,16 +95,12 @@ module.exports = (steroids, log) ->
    # A promise that is resolved when the tab bar has been replaced. If tab bar could not be replaced, the promise will be rejected.
   ###
   replace: s.promiseF "replace", (tabsArray)->
-
-    handleRoutes = (tab)->
-      tab.location = parseRoute tab.location, {prefix: "http://localhost/"}
-      tab
-
     # support for routing
-    tabs = (handleRoutes(tab) for tab in tabsArray)
+    for tab in tabsArray
+      tab.location = parseRoute tab.location, {prefix: "http://localhost/"}
 
     new Promise (resolve, reject)->
-      steroids.tabBar.replace tabs: tabs,
+      steroids.tabBar.replace tabs: tabsArray,
         onSuccess: resolve
         onFailure: reject
 

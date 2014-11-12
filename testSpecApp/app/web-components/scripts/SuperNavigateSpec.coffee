@@ -36,5 +36,6 @@ describe "<super-navigate>", ->
       supersonic.ui.views.stop("super-navigate-back").then ->
         done()
 
-    supersonic.ui.view("web-components#super-navigate-back-preloaded").start("super-navigate-back").then ->
+    view = new supersonic.ui.View "web-components#super-navigate-back-preloaded"
+    view.start("super-navigate-back").then ->
       clickElement "super-navigate-id"

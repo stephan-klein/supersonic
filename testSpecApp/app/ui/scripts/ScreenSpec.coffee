@@ -8,7 +8,7 @@ describe "supersonic.ui.screen", ->
       supersonic.ui.screen.setAllowedRotations(["portrait", "portraitUpsideDown"]).should.be.fulfilled
 
   describe "rotateTo", ->
-    
+
     it "should rotate to portraitUpsideDown", ->
       supersonic.ui.screen.rotateTo("portraitUpsideDown").should.be.fulfilled
 
