@@ -49,7 +49,9 @@ If you open your app project in a text editor, you'll notice we have a new Super
 
 Save the document, and your app will update with just the index page of our Superhero app:
 
-See [Third mile: adding data from backend](/first-mile/third-mile/) for more.
+See [Third mile: adding data from backend](/first-mile/third-mile/) for more on configuring the Appgyver Sandbod Database.
+
+Once you have the data configured, you can move to section [accessing data from device](data-management/accessing-data-from-device/).
 
 ## Using Steroids CLI to define database to your application
 
@@ -67,8 +69,6 @@ Next, let's initialize Steroids Data for your app. Run:
 $ steroids data init
 ```
 
-This will provision a SandboxDB for your app, as well as install the `supersonic.data.js` library via Bower.
-
 ### Adding a resource
 
 Next up, we need to define one or more resources for your app. A resource (e.g. car) contains several columns (e.g. model, year, type, used) that define the schema for your data. Additionally, each column has a data type: string, number, integer, date or boolean.
@@ -81,7 +81,7 @@ $ steroids data resources:add car model:string year:integer type:string used:boo
 
 The resource schema is created in your app's SandboxDB with the given column names and column types.
 
-You'll also notice that a www/cloud.raml file is created – this defines the schema for your whole SandboxDB. It will get updated as you add/remove resources, and is consumed by the Steroids Data JS library for use in your app.
+You'll also notice that a `config/cloud-resources.raml` file is created – this defines the schema for your whole SandboxDB. It will get updated as you add/remove resources, and is consumed by the Steroids Data JS library for use in your app.
 
 ### Removing a resource
 
@@ -128,5 +128,7 @@ $ steroids data reset
 ```
 
 Note that this removes all data in your SandboxDB and cannot be undone, so beware!
+
+Once you have the data configured, you can move to section [accessing data from device](data-management/accessing-data-from-device/).
 
 </section>

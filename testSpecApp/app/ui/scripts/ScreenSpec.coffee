@@ -12,6 +12,10 @@ describe "supersonic.ui.screen", ->
     it "should rotate to portraitUpsideDown", ->
       supersonic.ui.screen.rotateTo("portraitUpsideDown").should.be.fulfilled
 
-    it "should rotate to portrait", ->
+  describe "callbacks", ->
+
+    it "should call onSuccess after rotating to portrait", (done) ->
       @timeout 7000
-      supersonic.ui.screen.rotateTo("portrait").should.be.fulfilled
+      supersonic.ui.screen.rotateTo "portrait",
+        onSuccess: ->
+          done()

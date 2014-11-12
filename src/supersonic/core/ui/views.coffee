@@ -1,8 +1,9 @@
 Promise = require 'bluebird'
 current = require './views/current'
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.ui.views"
+  s = superify 'supersonic.ui.views', log
 
   ###
    # @namespace supersonic.ui
@@ -30,11 +31,19 @@ module.exports = (steroids, log) ->
    # @usageCoffeeScript
    # supersonic.ui.views.find("myCarsView").then (startedView) ->
    #   supersonic.logger.log "myCarsView location: #{startedView.getLocation()}"
+   # @usageJavaScript
+   # supersonic.ui.views.find("myCarsView").then( function(startedView) {
+   #   supersonic.logger.log("myCarsView location: " + startedView.getLocation());
+   # });
    # @exampleCoffeeScript
    # supersonic.ui.views.find("myCarsView").then (startedView) ->
    #   supersonic.logger.log "myCarsView location: #{startedView.getLocation()}"
+   # @exampleJavaScript
+   # supersonic.ui.views.find("myCarsView").then( function(startedView) {
+   #   supersonic.logger.log("myCarsView location: " + startedView.getLocation());
+   # });
   ###
-  find = (id) ->
+  find = s.promiseF "find", (id) ->
     supersonic.logger.debug "Finding view with id #{id}"
     isStartedView(id).then (started) ->
       unless started
@@ -60,6 +69,8 @@ module.exports = (steroids, log) ->
    # @define {StartedView} startedView The StartedView object referencing the View running in the background.
    # @usageCoffeeScript
    # supersonic.ui.views.start "cars#show"
+   # @usageJavaScript
+   # supersonic.ui.views.start("cars#show");
    # @exampleCoffeeScript
    # # With shorthand
    # supersonic.ui.views.start("cars#show", "carsShowView").then (carsShowView) ->
@@ -74,9 +85,26 @@ module.exports = (steroids, log) ->
    # supersonic.ui.views.start("bananas#index").then (bananasIndex) ->
    #   # The id is "bananas#index"
    #   supersonic.logger.log "bananasIndex id: #{bananasIndex.getId()}"
+   # @exampleJavaScript
+   # // With shorthand
+   # supersonic.ui.views.start("cars#show", "carsShowView").then( function(carsShowView) {
+   #   supersonic.logger.log("carsShowView id: " + carsShowView.getId());
+   # });
+   #
+   # // With View object
+   # var view = supersonic.ui.views("cars#edit");
+   # supersonic.ui.views.start("cars#edit", "carsEditView").then( function(carsEditView) {
+   #   supersonic.logger.log("carsEditView id: " + carsEditView.getId());
+   # });
+   #
+   # // The second id param is optional
+   # supersonic.ui.views.start("bananas#index").then( function(bananasIndex) {
+   #   // The id is "bananas#index"
+   #   supersonic.logger.log("bananasIndex id: " + bananasIndex.getId());
+   # });
   ###
 
-  start = (view, id) ->
+  start = s.promiseF "start", (view, id) ->
     isStartedView(id).then (started) ->
       if started
         throw new Error "A view with id #{id} is already started."
@@ -111,11 +139,15 @@ module.exports = (steroids, log) ->
    # [Promise](todo) that resolves after the StartedView matching the id has been stopped. If no StartedView matching the id can be found.
    # @usageCoffeeScript
    # supersonic.ui.views.stop "carsShowView"
+   # @usageJavaScript
+   # supersonic.ui.views.stop("carsShowView");
    # @exampleCoffeeScript
    # supersonic.ui.views.stop "carsShowView"
+   # @exampleJavaScript
+   # supersonic.ui.views.stop("carsShowView");
   ###
 
-  stop = (viewOrId) ->
+  stop = s.promiseF "stop", (viewOrId) ->
     new Promise (resolve, reject) ->
       id = if viewOrId.constructor.name is "String"
         viewOrId
@@ -153,12 +185,12 @@ module.exports = (steroids, log) ->
         onFailure: reject
       }
 
-  getStartedViews = ->
+  getStartedViews = s.promiseF "getStartedViews", ->
     getApplicationState().then (state) ->
       for preload in state.preloads
         preload.id
 
-  isStartedView = (id) ->
+  isStartedView = s.promiseF "isStartedView", (id) ->
     if typeof id isnt 'string'
       Promise.reject new Error "Given view id '#{id}' was of type '#{typeof id}', string expected"
     else

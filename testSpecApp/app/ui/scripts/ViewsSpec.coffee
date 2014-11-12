@@ -57,6 +57,20 @@ describe "supersonic.ui.views", ->
       it "grows to include thew new view's id", ->
         views.getStartedViews().should.eventually.include startedViewId
 
+    describe "callbacks", ->
+      startedViewId = null
+      before ->
+        views.start("ui#empty", "this-view-should-be-added-to-list").then ->
+          startedViewId = "this-view-should-be-added-to-list"
+
+      after ->
+        views.stop startedViewId
+
+      it "should call onSuccess", (done) ->
+        views.getStartedViews
+          onSuccess: ->
+            done()
+
   describe "isStartedView()", ->
     it "is a function", ->
       views.isStartedView.should.be.a 'function'
@@ -79,6 +93,20 @@ describe "supersonic.ui.views", ->
       it "returns true for the id once the view is started", ->
         views.isStartedView(startedViewId).should.eventually.equal true
 
+    describe "callbacks", ->
+      startedViewId = null
+      before ->
+        views.start("ui#empty", "this-view-should-exist").then ->
+          startedViewId = "this-view-should-exist"
+
+      after ->
+        views.stop(startedViewId)
+
+      it "should call onSuccess", (done) ->
+        views.isStartedView startedViewId,
+          onSuccess: ->
+            done()
+
   describe "start, find, stop with view object", ->
     views = [supersonic.ui.view "ui#empty", "ui#empty"]
 
@@ -97,4 +125,28 @@ describe "supersonic.ui.views", ->
 
       it "should stop a started view with id test", ->
         supersonic.ui.views.stop("test").should.be.fulfilled
+
+  describe "callbacks", ->
+    views = [supersonic.ui.view "ui#empty", "ui#empty"]
+
+    for view in views
+      it "should call onSuccess after starting a view with id test", (done) ->
+        supersonic.ui.views.start view, "test",
+          onSuccess: ->
+            done()
+
+      it "should call onFailure when failing to start another view with id test", (done) ->
+        supersonic.ui.views.start view, "test",
+          onFailure: ->
+            done()
+
+      it "should call onSuccess after finding a started view with id test", (done) ->
+        supersonic.ui.views.find "test",
+          onSuccess: ->
+            done()
+
+      it "should call onSuccess after stopping a started view with id test", (done) ->
+        supersonic.ui.views.stop "test",
+          onSuccess: ->
+            done()
 

@@ -18,7 +18,7 @@
 
           <div class="docked-menu">
             {% for section in site.data.supersonic_index %}
-            <ul class="nav left-menu {% if page.section_id == section.id %}active-menu{% endif %}">
+            <ul class="nav left-menu ag__docs__left-menu {% if page.section_id == section.id %}active-menu{% endif %}">
               <li class="menu-title">
                 <a href="/supersonic/{{section.id}}">{{section.name}}</a>
                 {% if page.section_id == section.id %}
@@ -32,7 +32,7 @@
 
         </div>
 
-        <div class="col-md-10 col-sm-9 main-content">
+        <div class="col-md-10 col-sm-9 ag__docs__content">
           {{ content }}
         </div>
 

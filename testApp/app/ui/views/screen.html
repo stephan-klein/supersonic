@@ -13,10 +13,12 @@
       ng-click="testSetAllowedRotationsAndRotate(test.options)">
       {{test.title}}
     </button>
-    <ul>
-      <li>Allowed Rotations: {{allowedRotations}}</li>
-
-    </ul>
+    <button
+      class="button button-block"
+      ng-click="setAllowedRotationsAndRotateWithCallBacks()"
+      >
+      Set Allowed Rotations And Rotate to Portrait With CallBacks
+    </button>
   </div>
 
 </div>

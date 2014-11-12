@@ -43,20 +43,55 @@ module.exports = (logger, window) ->
       throw new Error "No cloud resources available"
 
 ###
- # @namespace supersonic.data
- # @name Model
- # @class
- # @description
- # A Supersonic Data Model class. Provides access to a specific cloud resource through a fluent interface.
- # @type
- # Model: {
- #   findAll: () => Promise Collection
- #   find: (id) => Promise Resource
- # }
- # @methods find findAll
- # @define {Function} findAll Returns a collection of resources.
- # @define {Function} find Returns a resource by a specific id.
+# @namespace supersonic.data
+# @name Model
+# @class
+# @description
+# A Supersonic Data Model class. Provides access to a specific cloud resource through a fluent interface.
+# @type
+# Model: {
+#   all: (queryParams, options) => Object
+#   findAll: (queryParams) => Promise Collection
+#   find: (id) => Promise Resource
+# }
+# @methods all find findAll
+# @define {Function} all Retruns an object with properties for accessing a stream of updates to the Collection data.
+# @define {Function} findAll Returns a collection of resources.
+# @define {Function} find Returns a resource by a specific id.
 ###
+###
+# @namespace supersonic.data
+# @name Model.all
+# @function
+# @type
+# all: (
+#   queryParams?: Object
+#   options?:
+#      interval?: Integer
+# ) =>
+#   whenChanged: (Collection) =>
+#     unsubscribe: Function
+# @description
+# Acccess a stream of updates to the Collection data matching the query given to the function
+# @define {Object} queryParams An object...
+# @define {Object} options An optional options object.
+# @define {Integer} options.interval An integer defining how often the backend is polled for new data.
+# @returnsDescription
+# An object with the `whenChanged` property, which accepts a recurring callback function that gets triggered when new data is available.
+# @returns {Function} whenChanged Called with a Collection matching the original query. Called when new data is available. Returns a function that can be used to unsubsribe from the update stream.
+# @returns {Function} whenChanged.unsubscribe Call this function to stop listening for data changes.
+# @exampleCoffeeScript
+# unsubscribe = supersonic.data.model('task').all(queryParameters, options).whenChanged (updatedTasks)->
+#   supersonic.logger.log "First element of updated Task collection: ", updatedTasks[0]
+# @exampleJavaScript
+# var unsubscribe = supersonic.data.model('task').all(queryParameters, options).whenChanged( function(updatedTasks) {
+#   supersonic.logger.log("First element of updated Task collection: ", updatedTasks[0]);
+# });
+#
+# // Later on, we can unsusbcribe the listener
+# unsubscribe();
+###
+
 ###
  # @namespace supersonic.data
  # @name Model.findAll

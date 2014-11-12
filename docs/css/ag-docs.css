@@ -2,6 +2,21 @@
  * CONTAINER
  *********************************/
 
+body {
+  font-family: "Proxima N W01 Reg";
+}
+
+a:link {
+  color: #00b5ff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:link:hover {
+  text-decoration: underline;
+  color: #00b5ff;
+}
+
 .container-fluid {
   padding-left: 15px !important;
   padding-right: 15px !important;
@@ -34,4 +49,276 @@
   margin-bottom: 0px;
   line-height: 28px;
   color: rgba(255, 255, 255, 0.9);
+}
+
+/**********************************
+ * HEADER NAVIGATION
+ *********************************/
+
+.ag__docs__header-nav {
+}
+
+.ag__docs__header-nav a {
+  position: relative;
+  background: transparent !important;
+  font-size: 14px;
+  line-height: 100%;
+  font-family: "Proxima N W01 Reg";
+  padding: 4px 40px 2px 40px;
+  color: #adb0b5;
+  opacity: 1 !important;
+}
+
+.ag__docs__header-nav a .nav-pointer {
+  display: none;
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  margin-left: -8px;
+  width: 16px;
+  height: 16px;
+  border: 8px solid transparent;
+  border-top: 8px solid #30384a;
+}
+
+.ag__docs__header-nav li:first-child a {
+  padding-left: 0px;
+}
+
+.ag__docs__header-nav li.active a {
+  color: white !important;
+}
+
+.ag__docs__header-nav li.active a .nav-pointer {
+  display: block;
+}
+
+.ag__docs__header-nav li:first-child a .nav-pointer {
+  margin-left: -12px;
+}
+
+/***************************************************
+ * HEADER NAVIGATION RESPONSIVENESS
+ **************************************************/
+
+@media (min-width: 1000px) {
+
+  .ag__docs__header-nav-bigscreen {
+    display: block;
+  }
+
+  .ag__docs__header-nav-smallscreen {
+    display: none;
+  }
+
+}
+
+@media (max-width: 999px) {
+
+  .ag__docs__header-nav-bigscreen {
+    display: none;
+  }
+
+  .ag__docs__header-nav-smallscreen {
+    display: block;
+  }
+
+}
+
+.ag__docs__header-nav-smallscreen {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.ag__docs__header-nav-smallscreen select {
+  background-color: #59616e;
+  color: #d6d6db;
+  border-color: #454d5c !important;
+  font-family: "Proxima N W01 Reg";
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.ag__docs__header-nav-smallscreen select option::before {
+  content: "hei";
+}
+
+/***************************************************
+ * CONTENT AREA
+ **************************************************/
+
+.ag__docs__content {
+
+}
+
+.ag__docs__content h1 {
+  font-family: "Proxima N W01 Smbd";
+}
+
+.ag__docs__content h2 {
+  font-family: "Proxima N W01 Reg";
+  margin-top: 0px;
+}
+
+.ag__docs__content * + h2 {
+  margin-top: 40px;
+}
+
+.ag__docs__content,
+.ag__docs__content p {
+  font-family: "Proxima N W01 Reg";
+  font-size: 16px;
+}
+
+pre {
+  background: #f3f3f3 !important;
+  border: none;
+  padding: 10px 40px;
+  margin-bottom: 30px;
+}
+
+pre, code {
+  font-family: monospace !important;
+  font-size: 14px !important;
+}
+
+p {
+  margin-bottom: 30px;
+}
+
+/***************************************************
+ * ASIDE MENUS
+ **************************************************/
+
+.ag__docs__left-menu {
+
+}
+
+.ag__docs__left-menu li a {
+  font-family: "Proxima N W01 Reg";
+}
+
+.ag__docs__left-menu li.menu-title a {
+  font-family: "Proxima N W01 Smbd";
+}
+
+.ag__docs__left-menu.active-menu li.menu-title a {
+  color: black !important;
+}
+
+.ag__docs__left-menu li.active > a {
+  color: #00b5ff !important;
+  border: none !important;
+}
+
+.ag__docs__left-menu li {
+  padding-left: 20px;
+}
+
+.ag__docs__left-menu li.menu-title {
+  padding-left: 0px;
+}
+
+.ag__docs__left-menu li ul {
+  padding-left: 0px;
+}
+
+/***************************************************
+ * DEVICE PREVIEW SCREENSHOTS
+ **************************************************/
+
+.device-preview .device-screenshot {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/***************************************************
+ * SITE FOOTER
+ **************************************************/
+
+.ag__docs__footer {
+  position: relative;
+  z-index: 100;
+  background: #30384a;
+  color: #C7CACD;
+  font-size: 15px;
+  padding-top: 60px;
+}
+
+.ag__docs__footer h3 {
+  color:  #ebebed;
+  font-family: "Proxima N W01 Reg";
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.ag__docs__footer  ul {
+  font-family: "Adelle W01 Light";
+  list-style: none;
+  padding: 0px;
+  font-size: 13px;
+  line-height: 180%;
+  margin-bottom: 40px;
+}
+
+
+.ag__docs__footer a,
+.ag__docs__footer a:link {
+  color: #adb0b5;
+  text-decoration: none;
+}
+
+.ag__docs__footer a:hover,
+.ag__docs__footer a:link:hover {
+  color: #d6d6db;
+  text-decoration: none;
+}
+
+.ag__docs__footer .btn-brand {
+  background: #00b5ff;
+}
+
+.ag__docs__footer .btn-brand:hover,
+.ag__docs__footer .btn-brand:focus,
+.ag__docs__footer .btn-brand:active,
+.ag__docs__footer .btn-brand.active {
+  background: #1abdff;
+}
+
+.ag__docs__footer .social-icon {
+  margin-top: 4px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.ag__docs__footer .social-icon img {
+  display: inline-block;
+}
+
+.ag__docs__footer .btn-mailinglist {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.ag__docs__footer .btn-mailinglist img {
+  display: inline-block;
+  height: 26px;
+}
+
+.ag__docs__footer .ag-footer-copy-notice {
+  margin-top: 20px;
+  background: #1a1f27;
+  color: #828791;
+  font-size: 13px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.ag__docs__footer .btn-mailinglist * {
+  color: #828791;
 }

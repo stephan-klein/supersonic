@@ -1,7 +1,8 @@
 Promise = require 'bluebird'
+superify = require '../superify'
 
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.ui.screen"
+  s = superify 'supersonic.ui.screen', log
 
   ###
    # @namespace supersonic.ui
@@ -34,7 +35,7 @@ module.exports = (steroids, log) ->
    # @exampleJavaScript
    # supersonic.ui.screen.setAllowedRotations(["landscapeLeft", "landscapeRight"]);
   ###
-  setAllowedRotations: bug "setAllowedRotations", (rotations) ->
+  setAllowedRotations: s.promiseF "setAllowedRotations", (rotations) ->
     new Promise (resolve, reject) ->
       steroids.screen.setAllowedRotations(
         {
@@ -65,7 +66,7 @@ module.exports = (steroids, log) ->
    # supersonic.ui.screen.rotateTo(options)
    # ```
   ###
-  rotateTo: bug "rotateTo", (options) ->
+  rotateTo: s.promiseF "rotateTo", (options) ->
     orientations = if typeof options is "string"
       options
     else if options?.orientation?
