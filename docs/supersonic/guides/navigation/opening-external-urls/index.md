@@ -1,10 +1,7 @@
 ---
-layout: guides_architecture
-header_title: Communicating with external apps
-header_sub_title: Learn how to communicate back and forth between other apps on your device.
-section_id: communication
-subsection_id: communicating-with-external-apps
-topics:
+layout: guides_navigation
+section_id: opening-external-urls
+subsections:
   - name: Opening a Web URL
   - name: Opening an External App
   - name: openURL
