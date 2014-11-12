@@ -8,7 +8,7 @@ section_id: data
 <section class="docs-section" id="data">
 # Data management
 
-Supersonic provides an easy way to integrate application to various kinds of backends providing a persistent data storage.
+Supersonic provides an easy way to integrate application to AppGyver Sandbox Database and various kinds of backends providing a persistent data storage.
 
 The ingredients of the data access are:
 
@@ -17,6 +17,6 @@ The ingredients of the data access are:
  - three way data binding
  - generic backend integrations
 
- Start your journey to Supersonic data by reading [how to configure Appgyver Sandbox Database](/data-management/setting-up-appgyver-database/) for your app. Then go and see hof to [access data from your app](/data-management/accessing-data-from-device/).
+ Start your journey to Supersonic data by reading [how to configure Appgyver Sandbox Database](/data-management/setting-up-appgyver-database/) for your app. Then go and see hoe to [access data from your app](/data-management/accessing-data-from-device/).
 
 </section>

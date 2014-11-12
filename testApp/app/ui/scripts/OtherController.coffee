@@ -6,7 +6,7 @@ angular
       supersonic.ui.initialView.show()
 
     $scope.asModal = (url)->
-      v = supersonic.ui.view(url)
+      v = new supersonic.ui.View(url)
       supersonic.ui.modal.show(v, {
         disableAnimation: true
       }).then ()->

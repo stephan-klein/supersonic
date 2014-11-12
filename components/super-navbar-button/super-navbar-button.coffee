@@ -70,31 +70,18 @@ SuperNavbarButtonPrototype.updateOnNavbar = ->
   @parentNode.updateButton @_button
 
 SuperNavbarButtonPrototype._setButtonAction = ->
-
-  # Check if view-id is set
   viewId = @getAttribute "view-id"
+  viewId ?= @getAttribute "location"
+
   if viewId?
     @_button.onTap = () ->
-      supersonic.ui.views.find(viewId)
-        .then (webview) ->
-          supersonic.ui.layers.push(webview)
-        .catch (error) ->
-          throw new Error "Failed to push view: #{error}"
-    return
-
-  # Check if location is set
-  location = @getAttribute "location"
-  if location?
-    webview = supersonic.ui.view location
-    @_button.onTap = () ->
-      supersonic.ui.layers.push(webview)
-        .catch (error) ->
-          throw new Error "Failed to push view: #{error}"
-    return
-
-  # Default action: trigger click on the DOM element
-  @_button.onTap = () =>
-    @click()
+      supersonic.ui.layers.push(viewId)
+      .catch (error) ->
+        throw new Error "Failed to push view: #{error.message}"
+  else
+    # Default action: trigger click on the DOM element
+    @_button.onTap = () =>
+      @click()
 
 SuperNavbarButtonPrototype._setButtonTitle = ->
   @_button.title = @textContent.trim()

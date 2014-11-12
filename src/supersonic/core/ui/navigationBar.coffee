@@ -44,15 +44,14 @@ module.exports = (steroids, log) ->
    # });
    #
   ###
-  show: s.promiseF "show", (params = {})->
+  show: s.promiseF "show", (options = {})->
     filteredParams =
-      animated: params.animated
+      animated: options.animated
 
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.show filteredParams, {
+      steroids.view.navigationBar.show filteredParams,
         onSuccess: resolve
         onFailure: reject
-      }
 
   ###
    # @namespace supersonic.ui.navigationBar
@@ -80,12 +79,11 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.debug("Navigation bar hidden without animation.");
    # });
   ###
-  hide: s.promiseF "hide", (params = {})->
+  hide: s.promiseF "hide", (options = {})->
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.hide params, {
+      steroids.view.navigationBar.hide options,
         onSuccess: resolve
         onFailure: reject
-      }
 
   ###
    # @namespace supersonic.ui.navigationBar
@@ -139,12 +137,11 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.navigationBar.update options
   ###
-  update: s.promiseF "update", (params)->
+  update: s.promiseF "update", (options)->
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.update params, {
+      steroids.view.navigationBar.update options,
         onSuccess: resolve
         onFailure: reject
-      }
 
   ###
    # @namespace supersonic.ui.navigationBar
@@ -172,10 +169,9 @@ module.exports = (steroids, log) ->
   ###
   setClass: s.promiseF "setClass", (className)->
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.setStyleClass className, {
+      steroids.view.navigationBar.setStyleClass className,
         onSuccess: resolve
         onFailure: reject
-      }
 
   ###
    # @namespace supersonic.ui.navigationBar
@@ -203,10 +199,9 @@ module.exports = (steroids, log) ->
   ###
   setStyle: s.promiseF "setStyle", (inlineCssString)->
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.setStyleCSS inlineCssString, {
+      steroids.view.navigationBar.setStyleCSS inlineCssString,
         onSuccess: resolve
         onFailure: reject
-      }
 
   ###
    # @namespace supersonic.ui.navigationBar
@@ -235,7 +230,6 @@ module.exports = (steroids, log) ->
   ###
   setStyleId: s.promiseF "setStyleId", (styleId)->
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.setStyleId styleId, {
+      steroids.view.navigationBar.setStyleId styleId,
         onSuccess: resolve
         onFailure: reject
-      }
