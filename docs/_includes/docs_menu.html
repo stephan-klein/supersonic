@@ -1,23 +1,24 @@
+{% assign parent_id = page.parent_id %}
 {% for section in page.sections %}
 {% assign section_id = section.name | slugify %}
 <ul class="nav left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
   <li class="menu-title">
-    <a href="/{{include.tab_name}}{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
+    <a href="/{{parent_id}}/{{include.tab_name}}{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
     {% if page.section_id == section_id %}
     <li class="menu-section {% if page.subsection_id == 'overview' %}active{% endif %}">
-      <a href="/{{include.tab_name}}/{{section_id}}" class="api-section">Overview</a>
+      <a href="/{{parent_id}}/{{include.tab_name}}/{{section_id}}" class="api-section">Overview</a>
     </li>
     {% for subsection in section.subsections %}
     {% assign subsection_id = subsection.name | slugify %}
     <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
-      <a href="/{{include.tab_name}}/{{section_id}}/{{subsection_id}}" class="api-section">
+      <a href="/{{parent_id}}/{{include.tab_name}}/{{section_id}}/{{subsection_id}}" class="api-section">
         {{subsection.name}}
       </a>
       {% if page.subsection_id == subsection_id %}
       <ul>
         {% for topic in page.topics %}
         <li>
-          <a href="/{{include.tab_name}}/{{section_id}}/#{{topic.name | slugify}}">
+          <a href="/{{parent_id}}/{{include.tab_name}}/{{section_id}}/#{{topic.name | slugify}}">
             {% if topic.method %}
               ↳ <code>{{topic.name}}()</code>
             {% else %}

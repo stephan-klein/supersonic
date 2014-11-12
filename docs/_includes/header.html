@@ -1,3 +1,4 @@
+
 <!-- Blue header -->
 
 <div class="container-fluid ag__docs__header bg-blue text-white">
@@ -7,7 +8,7 @@
       <div class="row">
         <div class="col-xs-12 supersonic-logo">
           <!--<img src="//s3.amazonaws.com/appgyver.assets/global-assets/images/appgyver-universal-logos/supersonic-logo-wide-light.svg" width="100%" alt="">-->
-          SuperSonic
+          <a href="/">AppGyver docs</a>
         </div>
       </div>
 
@@ -28,13 +29,12 @@
   <div class="row">
     <div class="container">
       <div class="row">
-
         <div class="col-xs-12 ag__docs__header-nav-bigscreen">
           <ul class="nav nav-pills ag__docs__header-nav">
             {% for docs_section in page.docs_sections %}
               {% assign docs_tab_id = docs_section.name | slugify %}
               <li {% if page.docs_tab_id == docs_tab_id %}class="active"{% endif %}>
-                <a href="/{{docs_tab_id}}" {% if docs_section.disabled %} class="disabled" {% endif %} >{{docs_section.name}}<div class="nav-pointer"></div></a>
+                <a href="/{{page.container_id}}/{{docs_tab_id}}" {% if docs_section.disabled %} class="disabled" {% endif %} >{{docs_section.name}}<div class="nav-pointer"></div></a>
               </li>
             {% endfor %}
           </ul>
@@ -44,13 +44,12 @@
           <select id="topLevelNavSelect" class="form-control">
             {% for docs_section in page.docs_sections %}
               {% assign docs_tab_id = docs_section.name | slugify %}
-              <option value="/{{docs_tab_id}}"{% if page.docs_tab_id == docs_tab_id %} selected="selected"{% endif %}>
+              <option value="/{{page.container_id}}/{{docs_tab_id}}"{% if page.docs_tab_id == docs_tab_id %} selected="selected"{% endif %}>
                 {{docs_section.name}}
               </option>
             {% endfor %}
           </select>
         </div>
-
       </div>
     </div>
   </div>
