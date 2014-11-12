@@ -17,7 +17,7 @@ fireAfterModalDidHideAndShow = (done) ->
       done()
 
 describe "<super-modal-show> and <super-modal-hide>", ->
-  @timeout 4000
+  @timeout 10000
 
   it "should show modal by clicking on element with route", (done) ->
     fireAfterModalDidHideAndShow done
