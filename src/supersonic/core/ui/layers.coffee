@@ -3,7 +3,7 @@ superify = require '../superify'
 
 module.exports = (steroids, log) ->
   s = superify 'supersonic.ui.layers', log
-  
+
   ###
    # @namespace supersonic.ui
    # @name layers
@@ -17,35 +17,35 @@ module.exports = (steroids, log) ->
    # @name push
    # @function
    # @description
-   # Pushes a new View or StartedView object on top of the navigation stack.
+   # Pushes a View on top of the navigation stack.
    # @usageJavaScript
-   # var view = supersonic.ui.view("bananas#show");
+   # var view = new supersonic.ui.View("bananas#show");
    # supersonic.ui.layers.push(view);
    # @type
    # supersonic.ui.layers.push: (
-   #   view: View|StartedView
+   #   view: View|String
    # ) => Promise
-   # @define {View|StartedView} view A View or StartedView object to be pushed on top of the navigation stack.
+   # @define {View|String} view A View or View identifier to be pushed on top of the navigation stack.
    # @returnsDescription
-   # A promise that gets resolved once the push has started. If the view cannot be pushed, the promise is rejected.
+   # A promise that gets resolved with the provided View instance once the push has started. If the view cannot be pushed, the promise is rejected.
    # @exampleJavaScript
-   # var view = supersonic.ui.view("common#settings");
+   # var view = new supersonic.ui.View("common#settings");
    # supersonic.ui.layers.push(view)
    #
    # supersonic.ui.views.find("settingsView").then( function() {
    #   supersonic.ui.layers.push(startedView)
    # });
   ###
-  push: s.promiseF "push", (view) ->
+  push: s.promiseF "push", (viewOrId) ->
     new Promise (resolve, reject) ->
-      steroids.layers.push {
-        view: view._getWebView()
-      }, {
-        onSuccess: ->
-          resolve()
-        onFailure: (error) ->
-          reject(error)
-      }
+      supersonic.ui.views.find(viewOrId)
+      .then (view)->
+        steroids.layers.push
+          view: view._webView
+        ,
+          onSuccess: ->
+            resolve(view)
+          onFailure: reject
 
   ###
    # @namespace supersonic.ui.layers

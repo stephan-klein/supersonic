@@ -49,10 +49,9 @@ module.exports = (steroids, log) ->
       animated: params.animated
 
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.show filteredParams, {
+      steroids.view.navigationBar.show filteredParams,
         onSuccess: resolve
         onFailure: reject
-      }
 
   ###
    # @namespace supersonic.ui.navigationBar
@@ -82,10 +81,9 @@ module.exports = (steroids, log) ->
   ###
   hide: s.promiseF "hide", (params = {})->
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.hide params, {
+      steroids.view.navigationBar.hide params,
         onSuccess: resolve
         onFailure: reject
-      }
 
   ###
    # @namespace supersonic.ui.navigationBar
@@ -141,10 +139,9 @@ module.exports = (steroids, log) ->
   ###
   update: s.promiseF "update", (params)->
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.update params, {
+      steroids.view.navigationBar.update params,
         onSuccess: resolve
         onFailure: reject
-      }
 
   ###
    # @namespace supersonic.ui.navigationBar
@@ -172,10 +169,9 @@ module.exports = (steroids, log) ->
   ###
   setClass: s.promiseF "setClass", (className)->
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.setStyleClass className, {
+      steroids.view.navigationBar.setStyleClass className,
         onSuccess: resolve
         onFailure: reject
-      }
 
   ###
    # @namespace supersonic.ui.navigationBar
@@ -203,10 +199,9 @@ module.exports = (steroids, log) ->
   ###
   setStyle: s.promiseF "setStyle", (inlineCssString)->
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.setStyleCSS inlineCssString, {
+      steroids.view.navigationBar.setStyleCSS inlineCssString,
         onSuccess: resolve
         onFailure: reject
-      }
 
   ###
    # @namespace supersonic.ui.navigationBar
@@ -235,7 +230,6 @@ module.exports = (steroids, log) ->
   ###
   setStyleId: s.promiseF "setStyleId", (styleId)->
     new Promise (resolve, reject)->
-      steroids.view.navigationBar.setStyleId styleId, {
+      steroids.view.navigationBar.setStyleId styleId,
         onSuccess: resolve
         onFailure: reject
-      }

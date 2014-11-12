@@ -26,24 +26,16 @@ SuperNavigatePrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
 
   @addEventListener action, =>
-    # By pre-loaded view id
     viewId = @getAttribute "view-id"
-    if viewId
-      return supersonic.ui.views.find(viewId)
-        .then (webview) ->
-          supersonic.logger.debug "Pushing preloaded webview #{viewId}"
-          supersonic.ui.layers.push(webview)
-        .catch (error) ->
-          throw new Error "Failed to push view: #{error}"
-    # By location
-    location = @getAttribute "location"
-    if location
-      webview = supersonic.ui.view location
-      return supersonic.ui.layers.push(webview)
-        .catch (error) ->
-          throw new Error "Failed to push view: #{error}"
-    # None set, error
-    throw new Error "Either view-id or location must be set"
+    viewId ?= @getAttribute "location"
+
+    unless viewId?
+      # None set, error
+      throw new Error "Either view-id or location must be set for a super-navigate element"
+
+    supersonic.ui.layers.push(viewId)
+    .catch (error) ->
+      throw new Error "Failed to push view: #{error}"
 
 document.registerElement "super-navigate",
   prototype: SuperNavigatePrototype

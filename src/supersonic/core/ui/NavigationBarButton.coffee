@@ -24,7 +24,7 @@ module.exports = (steroids, log) ->
    # var options = {
    #   title: "Settings",
    #   onTap: function() {
-   #     supersonic.ui.view("common#settings").navigateTo();
+   #     supersonic.ui.layers.push("common#settings")
    #   }
    #
    # var button = new supersonic.ui.NavigationBarButton(options)
