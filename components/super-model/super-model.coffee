@@ -18,7 +18,6 @@ observer = new MutationObserver (mutations) ->
 
 SuperModelPrototype = Object.create HTMLElement.prototype
 
-
 # What is the difference between attached and created?
 SuperModelPrototype.attachedCallback = ->
   console.log "Supermodel attachedCallback"
@@ -27,30 +26,23 @@ SuperModelPrototype.attachedCallback = ->
     attributes: true
     attributeFilter: ["model-name"]
 
-  observer.observe this, observerConfiguration
+  observer.observe @, observerConfiguration
+
+  Model = supersonic.data.model(@getAttribute("model"))
+  console.log "Created Model:", Model
+  Model.all().whenChanged (items)=>
+    console.log "Items received:", items
+    debugger
+    @shadowRoot.innerHTML = Handlebars.compile("{{#each items}}#{@template}{{/each}}")({items: items})
+
+
+
+
+
 
 SuperModelPrototype.createdCallback = ->
-  importSelector = "link[rel=import][href*='supersonic/components/import']"
-  importDocument = document.querySelector(importSelector).import
-  template = importDocument.querySelector("#super-model-template")
-  @shadowRoot = @createShadowRoot()
-  deepClone = true
-
-  # add template to shadowroot
-  @shadowRoot.appendChild template.content.cloneNode(deepClone)
-
-  shadowRootTemplate = @shadowRoot.querySelector("template")
-  shadowRootTemplate.appendChild @cloneNode(true)
-
-  shadowRootTemplate.model = {
-    items: [
-      {name: "WAT"}
-    ]
-  }
-
-
-
-  console.log "Created 6"
+  @template = @innerHTML
+  @createShadowRoot()
 
 
 SuperModelPrototype.detachedCallback = ->
