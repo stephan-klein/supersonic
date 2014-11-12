@@ -1,10 +1,12 @@
 angular
   .module('data')
-  .controller("NewController", ($scope, TaskResource) ->
-    $scope.task = {}
+  .controller("NewController", ($scope, Task) ->
+    $scope.task =
+      description: "some task"
 
     $scope.submitForm = ->
       $scope.showSpinner = true
-      TaskResource.create($scope.task).then ->
+      newTask = new Task($scope.task)
+      newTask.save().then ->
         supersonic.ui.modal.hide()
   )
