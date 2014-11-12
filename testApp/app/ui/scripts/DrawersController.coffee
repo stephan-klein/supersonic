@@ -8,13 +8,15 @@ angular
 
     $scope.asLeftDrawer = (url, width)->
       supersonic.logger.log "Creating left drawer #{url}"
-      supersonic.ui.drawers.init(supersonic.ui.view(url), {width: width, side: "left"})
+      view = new supersonic.ui.View url
+      supersonic.ui.drawers.init(view, {width: width, side: "left"})
         .catch (e)->
           supersonic.logger.error "Error #{e}"
 
     $scope.asRightDrawer = (url, width)->
       supersonic.logger.log "Creating right drawer #{url}"
-      supersonic.ui.drawers.init(supersonic.ui.view(url), {width: width, side: "right"})
+      view = new supersonic.ui.View url
+      supersonic.ui.drawers.init(view, {width: width, side: "right"})
         .catch (e)->
           supersonic.logger.error "Error #{e}"
 

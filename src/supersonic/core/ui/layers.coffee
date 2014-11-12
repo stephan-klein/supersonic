@@ -19,7 +19,7 @@ module.exports = (steroids, log) ->
    # @description
    # Pushes a View on top of the navigation stack.
    # @usageJavaScript
-   # var view = supersonic.ui.view("bananas#show");
+   # var view = new supersonic.ui.View("bananas#show");
    # supersonic.ui.layers.push(view);
    # @type
    # supersonic.ui.layers.push: (

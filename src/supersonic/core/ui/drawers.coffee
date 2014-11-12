@@ -35,7 +35,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that will be resolved once the drawer has been initialized.
    # @exampleJavaScript
-   # var view = supersonic.ui.view("drawers#left");
+   # var view = new supersonic.ui.View("drawers#left");
    # var options = {
    #   side: "left"
    # }
@@ -47,7 +47,7 @@ module.exports = (steroids, log) ->
    #   supersonic.ui.drawers.init(leftDrawer);
    # });
    # @exampleCoffeeScript
-   # view = supersonic.ui.view "drawers#left"
+   # view = new supersonic.ui.View "drawers#left"
    # options =
    #   side: left
    #   width: 150

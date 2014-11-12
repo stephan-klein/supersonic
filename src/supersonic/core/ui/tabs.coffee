@@ -100,7 +100,7 @@ module.exports = (steroids, log) ->
       tab.location = parseRoute tab.location, {prefix: "http://localhost/"}
 
     new Promise (resolve, reject)->
-      steroids.tabBar.replace tabs: tabs,
+      steroids.tabBar.replace tabs: tabsArray,
         onSuccess: resolve
         onFailure: reject
 

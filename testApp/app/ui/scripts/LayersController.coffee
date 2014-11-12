@@ -1,7 +1,7 @@
 angular
   .module('ui')
   .controller 'LayersController', ($scope, $q, supersonic) ->
-    view = supersonic.ui.view("http://google.com", "myView")
+    view = new supersonic.ui.View "http://google.com"
 
     $scope.navigateTo = ->
       supersonic.ui.layers.push(view).then ()->
@@ -28,7 +28,7 @@ angular
           supersonic.logger.log "Layer popped successfully"
         onFailure: (message) ->
           alert "Could not pop a layer! \n\n #{JSON.stringify(message)}"
-        
+
 
     $scope.popAllWithCallback = ()->
       supersonic.ui.layers.popAll

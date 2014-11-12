@@ -32,7 +32,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A promise that is resolved when the modal starts to show. If there modal cannot be shown (e.g. the view is invalid), the promise is rejected.
    # @exampleJavaScript
-   # var modalView = supersonic.ui.view("common#modal");
+   # var modalView = new supersonic.ui.View("common#modal");
    # var options = {
    #   animate: true
    # }

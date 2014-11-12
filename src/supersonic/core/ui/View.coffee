@@ -32,6 +32,9 @@ module.exports = (steroids, log) ->
         @options =
           location: @options
 
+      unless @options.location
+        throw new Error "Cannot initialize a View without any parameters"
+
       @id = @options.id ? @options.location
       location = parseRoute(@options.location)
       @_webView = new steroids.views.WebView

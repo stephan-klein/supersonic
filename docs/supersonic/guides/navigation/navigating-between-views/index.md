@@ -24,7 +24,7 @@ There are separate navigation elements for basic, modal and drawer views.
 You can also just use the Supersonic APIs to create views and manipulate the view stack. To create and push a WebView into view, you would do the following:
 
 ```javascript
-var view = supersonic.ui.view("bananas#show");
+var view = new supersonic.ui.View("bananas#show");
 supersonic.ui.layers.push(view);
 ```
 
