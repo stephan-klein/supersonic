@@ -6,6 +6,13 @@ describe "supersonic.device.compass", ->
     it "should resolve to next known heading and return a proper heading object", ->
       supersonic.device.compass.getHeading().should.eventually.have.keys ['magneticHeading', 'trueHeading', 'headingAccuracy', 'timestamp']
 
+    describe "callbacks", ->
+
+      it "should call onSuccess", (done) ->
+        supersonic.device.compass.getHeading
+          onSuccess: ->
+            done()
+
   describe "watchHeading", ->
     it "should return be a stream of heading updates", ->
 
@@ -13,3 +20,10 @@ describe "supersonic.device.compass", ->
         supersonic.device.compass.watchHeading().onValue resolve
 
       pos.should.eventually.have.keys ['magneticHeading', 'trueHeading', 'headingAccuracy', 'timestamp']
+
+    describe "callbacks", ->
+
+      it "should call onSuccess", (done) ->
+        supersonic.device.compass.watchHeading
+          onSuccess: ->
+            done()

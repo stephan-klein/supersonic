@@ -3,8 +3,10 @@ Bacon = require 'baconjs'
 
 {deviceready} = require '../events'
 
+superify = require '../superify'
+
 module.exports = (steroids, log) ->
-  bug = log.debuggable "supersonic.device.accelerometer"
+  s = superify 'supersonic.device.accelerometer', log
 
   ###
    # @namespace supersonic.device
@@ -71,7 +73,7 @@ module.exports = (steroids, log) ->
    #   );
    # });
   ###
-  watchAcceleration = (options = {}) ->
+  watchAcceleration = s.streamF "watchAcceleration", (options = {}) ->
     accelerationOptions =
       frequency: options?.frequency? || 40
 
@@ -131,7 +133,7 @@ module.exports = (steroids, log) ->
    #   );
    # });
   ###
-  getAcceleration = bug "getAcceleration", ->
+  getAcceleration = s.promiseF "getAcceleration", ->
     new Promise (resolve) ->
       watchAcceleration().take(1).onValue resolve
 

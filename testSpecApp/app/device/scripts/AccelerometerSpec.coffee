@@ -49,6 +49,13 @@ describe "supersonic.device.accelerometer", ->
         checkRecentTimestamp(a)
         done()
 
+    describe "callbacks", ->
+
+      it "should call onSuccess", (done) ->
+        supersonic.device.accelerometer.getAcceleration
+          onSuccess: ->
+            done()
+
   describe "watchAcceleration", ->
     it "should be defined and a function", ->
       supersonic.device.accelerometer.watchAcceleration.should.be.defined
@@ -68,3 +75,10 @@ describe "supersonic.device.accelerometer", ->
       supersonic.device.accelerometer.watchAcceleration().onValue (a)->
         checkRecentTimestamp(a)
         done()
+
+    describe "callbacks", ->
+
+      it "should call onSuccess", (done) ->
+        supersonic.device.accelerometer.watchAcceleration
+          onSuccess: ->
+            done()
