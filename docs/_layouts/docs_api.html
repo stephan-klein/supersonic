@@ -38,6 +38,10 @@ sections:
 
   - name: Device
     subsections:
+      - name: platform
+        method: true
+      - name: vibrate
+        method: true
       - name: accelerometer
         methods:
           - name: getAcceleration
@@ -50,10 +54,6 @@ sections:
         methods:
           - name: getPosition
           - name: watchPosition
-      - name: platform
-        method: true
-      - name: vibrate
-        method: true
 
   - name: Logger
     subsections:
@@ -77,6 +77,10 @@ sections:
     id: ui
     subsections:
       - name: animate
+        method: true
+      - name: navigate
+        method: true
+      - name: view
         method: true
       - name: dialog
         methods:
@@ -103,8 +107,6 @@ sections:
           - name: show
           - name: hide
           - name: hideAll
-      - name: navigate
-        method: true
       - name: navigationBar
         methods:
           - name: show
@@ -130,8 +132,6 @@ sections:
           - name: setStyleClass
           - name: setStyleId
           - name: setStyleCSS
-      - name: view
-        method: true
       - name: View
         class: true
         id: view-class

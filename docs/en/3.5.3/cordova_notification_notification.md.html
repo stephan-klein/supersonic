@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+--><html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+        <meta name="generator" content="joDoc">
+        <link href="//s3.amazonaws.com/appgyver.assets/global-assets/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+        <title>AppGyver Steroids API Documentation</title>
+
+        <!-- AppGyver fonts -->
+        <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/aa8407d2-1212-415a-8e54-031ff8ee71fe.css">
+        <link type="text/css" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
+        <link rel="stylesheet" type="text/css" href="steroids.css">
+        <link rel="stylesheet" type="text/css" href="service_menu.css">
+        <link rel="stylesheet" type="text/css" href="prettify/prettify.css">
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="https://s3.amazonaws.com/appgyver.assets/topbar.js" type="text/javascript"></script>
+
+    </head>
+    <body class="appgyver-x">
+
+      <div class="clear" style="margin-bottom: 50px;"></div>
+
+        <div id="cordova-wrapper">
+
+          <div id="header">
+              <h1 id="nonmobile"><a href="index.html"><strong>AppGyver Steroids</strong> API Documentation</a></h1>
+              <h1 id="mobile"><a href="index.html"><strong>AppGyver Steroids</strong> API Docs</a></h1>
+              <small>
+                  <select><optgroup label="English" value="en">
+<option value="stable">stable</option>
+<option value="edge">edge</option>
+<option value="3.5.7">3.5.7</option>
+<option value="3.5.5">3.5.5</option>
+<option selected value="3.5.3">3.5.3</option>
+<option value="3.5.1">3.5.1</option>
+<option value="3.5.0">3.5.0</option>
+<option value="3.1.9">3.1.9</option>
+</optgroup></select>
+              </small>
+          </div>
+          <div id="subheader">
+              <h1>Notification</h1>
+              <small><select><option value="Notification">Notification</option>
+<option value="Notification_methods">      - Methods</option>
+<option value="Notification_provided_by_the_vibrate_plugin">      - Provided by the Vibrate-plugin</option>
+<option value="notification.alert">notification.alert</option>
+<option value="notification.alert_example">      - Example</option>
+<option value="notification.confirm">notification.confirm</option>
+<option value="notification.confirm_confirmcallback">      - confirmCallback</option>
+<option value="notification.confirm_example">      - Example</option>
+<option value="notification.prompt">notification.prompt</option>
+<option value="notification.prompt_promptcallback">      - promptCallback</option>
+<option value="notification.prompt_example">      - Example</option>
+<option value="notification.prompt_android_quirks">      - Android Quirks</option>
+<option value="notification.beep">notification.beep</option>
+<option value="notification.beep_example">      - Example</option>
+<option value="notification.beep_android_quirks">      - Android Quirks</option>
+<option value="notification.vibrate">notification.vibrate</option>
+<option value="notification.vibrate_example">      - Example</option>
+<option value="notification.vibrate_ios_quirks">      - iOS Quirks</option></select></small>
+          </div>
+
+          <div id="sidebar">
+              <div class="vertical_divider"></div>
+          <h1>Steroids 3.5.3 API Reference</h1>
+<ul>
+<li><a href="steroids_Steroids%20Analytics%20and%20Log_index.md.html#Steroids%C2%A0Analytics%C2%A0and%C2%A0Log">Steroids Analytics and Log</a></li>
+<li><a href="steroids_Steroids%20App%20and%20Device_index.md.html#Steroids%C2%A0App%C2%A0and%C2%A0Device">Steroids App and Device</a></li>
+<li><a href="steroids_Steroids%20Config_index.md.html#Steroids%C2%A0Config">Steroids Config</a></li>
+<li><a href="steroids_Steroids%20Events_index.md.html#Steroids%C2%A0Events">Steroids Events</a></li>
+<li><a href="steroids_Steroids%20File%20System_index.md.html#Steroids%C2%A0File%C2%A0System">Steroids File System</a></li>
+<li><a href="steroids_Steroids%20Media_index.md.html#Steroids%C2%A0Media">Steroids Media</a></li>
+<li><a href="steroids_Steroids%20Views_index.md.html#Steroids%C2%A0Views">Steroids Views</a></li>
+<li><a href="steroids_Steroids%20UI%20Components_index.md.html#Steroids%C2%A0UI%C2%A0Components">Steroids UI Components</a></li>
+</ul>
+<h1>Cordova 3.5.0 API Reference</h1>
+<ul>
+<li><a href="cordova_accelerometer_accelerometer.md.html#Accelerometer">Accelerometer</a></li>
+<li><a href="cordova_camera_camera.md.html#Camera">Camera</a></li>
+<li><a href="cordova_media_capture_capture.md.html#Capture">Capture</a></li>
+<li><a href="cordova_compass_compass.md.html#Compass">Compass</a></li>
+<li><a href="cordova_connection_connection.md.html#Connection">Connection</a></li>
+<li><a href="cordova_contacts_contacts.md.html#Contacts">Contacts</a></li>
+<li><a href="cordova_device_device.md.html#Device">Device</a></li>
+<li><a href="cordova_events_events.md.html#Events">Events</a></li>
+<li><a href="cordova_file_file.md.html#File">File</a></li>
+<li><a href="cordova_file_filetransfer_filetransfer.md.html#FileTransfer">FileTransfer</a></li>
+<li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
+<li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
+<li><a href="cordova_media_media.md.html#Media">Media</a></li>
+<li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
+</ul>
+<h1>Guides</h1>
+<ul><li><a href="_index.html">Keyword Index</a></li></ul>
+</div>
+
+          <div id="scrollable">
+              <div id="content">
+                  <h1><a name="Notification">Notification</a></h1>
+
+<blockquote>
+  <p>Visual, audible, and tactile device notifications.</p>
+</blockquote>
+
+<h2><a name="Notification_methods">Methods</a></h2>
+
+<ul>
+<li><code><a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a></code></li>
+<li><code><a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a></code></li>
+<li><code><a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a></code></li>
+<li><code><a href="cordova_notification_notification.md.html#notification.beep">notification.beep</a></code></li>
+</ul>
+
+<h2><a name="Notification_provided_by_the_vibrate_plugin">Provided by the Vibrate-plugin</a></h2>
+
+<ul>
+<li><code><a href="cordova_notification_notification.md.html#notification.vibrate">notification.vibrate</a></code></li>
+</ul>
+
+<hr>
+
+<h1><a name="notification.alert">notification.alert</a></h1>
+
+<p>Shows a custom alert or dialog box.  Most Cordova implementations use a native
+dialog box for this feature, but some platforms use the browser's <code>alert</code>
+function, which is typically less customizable.</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a>(message, alertCallback, [title], [buttonName])
+</code></pre>
+
+<ul>
+<li><p><strong>message</strong>: Dialog message. <em>(String)</em></p></li>
+<li><p><strong>alertCallback</strong>: Callback to invoke when alert dialog is dismissed. <em>(Function)</em></p></li>
+<li><p><strong>title</strong>: Dialog title. <em>(String)</em> (Optional, defaults to <code>Alert</code>)</p></li>
+<li><p><strong>buttonName</strong>: Button name. <em>(String)</em> (Optional, defaults to <code>OK</code>)</p></li>
+</ul>
+
+<h2><a name="notification.alert_example">Example</a></h2>
+
+<pre class="prettyprint"><code>function alertDismissed() {
+    // do something
+}
+
+navigator.<a href="cordova_notification_notification.md.html#notification.alert">notification.alert</a>(
+    'You are the winner!',  // message
+    alertDismissed,         // callback
+    'Game Over',            // title
+    'Done'                  // buttonName
+);
+</code></pre>
+
+<hr>
+
+<h1><a name="notification.confirm">notification.confirm</a></h1>
+
+<p>Displays a customizable confirmation dialog box.</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a>(message, confirmCallback, [title], [buttonLabels])
+</code></pre>
+
+<ul>
+<li><p><strong>message</strong>: Dialog message. <em>(String)</em></p></li>
+<li><p><strong>confirmCallback</strong>: Callback to invoke with index of button pressed (1, 2, or 3) or when the dialog is dismissed without a button press (0). <em>(Function)</em></p></li>
+<li><p><strong>title</strong>: Dialog title. <em>(String)</em> (Optional, defaults to <code>Confirm</code>)</p></li>
+<li><p><strong>buttonLabels</strong>: Array of strings specifying button labels. <em>(Array)</em>  (Optional, defaults to [<code>OK,Cancel</code>])</p></li>
+</ul>
+
+<h2><a name="notification.confirm_confirmcallback">confirmCallback</a></h2>
+
+<p>The <code>confirmCallback</code> executes when the user presses one of the
+buttons in the confirmation dialog box.</p>
+
+<p>The callback takes the argument <code>buttonIndex</code> <em>(Number)</em>, which is the
+index of the pressed button. Note that the index uses one-based
+indexing, so the value is <code>1</code>, <code>2</code>, <code>3</code>, etc.</p>
+
+<h2><a name="notification.confirm_example">Example</a></h2>
+
+<pre class="prettyprint"><code>function onConfirm(buttonIndex) {
+    alert('You selected button ' + buttonIndex);
+}
+
+navigator.<a href="cordova_notification_notification.md.html#notification.confirm">notification.confirm</a>(
+    'You are the winner!', // message
+     onConfirm,            // callback to invoke with index of button pressed
+    'Game Over',           // title
+    ['Restart','Exit']     // buttonLabels
+);
+</code></pre>
+
+<hr>
+
+<h1><a name="notification.prompt">notification.prompt</a></h1>
+
+<p>Displays a native dialog box that is more customizable than the browser's <code>prompt</code> function.</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a>(message, promptCallback, [title], [buttonLabels], [defaultText])
+</code></pre>
+
+<ul>
+<li><p><strong>message</strong>: Dialog message. <em>(String)</em></p></li>
+<li><p><strong>promptCallback</strong>: Callback to invoke with index of button pressed (1, 2, or 3) or when the dialog is dismissed without a button press (0). <em>(Function)</em></p></li>
+<li><p><strong>title</strong>: Dialog title <em>(String)</em> (Optional, defaults to <code>Prompt</code>)</p></li>
+<li><p><strong>buttonLabels</strong>: Array of strings specifying button labels <em>(Array)</em> (Optional, defaults to <code>["OK","Cancel"]</code>)</p></li>
+<li><p><strong>defaultText</strong>: Default textbox input value (<code>String</code>) (Optional, Default: empty string)</p></li>
+</ul>
+
+<h2><a name="notification.prompt_promptcallback">promptCallback</a></h2>
+
+<p>The <code>promptCallback</code> executes when the user presses one of the buttons
+in the prompt dialog box. The <code>results</code> object passed to the callback
+contains the following properties:</p>
+
+<ul>
+<li><p><strong>buttonIndex</strong>: The index of the pressed button. <em>(Number)</em> Note that the index uses one-based indexing, so the value is <code>1</code>, <code>2</code>, <code>3</code>, etc.</p></li>
+<li><p><strong>input1</strong>: The text entered in the prompt dialog box. <em>(String)</em></p></li>
+</ul>
+
+<h2><a name="notification.prompt_example">Example</a></h2>
+
+<pre class="prettyprint"><code>function onPrompt(results) {
+    alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+}
+
+navigator.<a href="cordova_notification_notification.md.html#notification.prompt">notification.prompt</a>(
+    'Please enter your name',  // message
+    onPrompt,                  // callback to invoke
+    'Registration',            // title
+    ['Ok','Exit'],             // buttonLabels
+    'Jane Doe'                 // defaultText
+);
+</code></pre>
+
+<h2><a name="notification.prompt_android_quirks">Android Quirks</a></h2>
+
+<ul>
+<li><p>Android supports a maximum of three buttons, and ignores any more than that.</p></li>
+<li><p>On Android 3.0 and later, buttons are displayed in reverse order for devices that use the Holo theme.</p></li>
+</ul>
+
+<hr>
+
+<h1><a name="notification.beep">notification.beep</a></h1>
+
+<p>The device plays a beep sound.</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.beep">notification.beep</a>(times);
+</code></pre>
+
+<ul>
+<li>
+<strong>times</strong>: The number of times to repeat the beep. <em>(Number)</em>
+</li>
+</ul>
+
+<h2><a name="notification.beep_example">Example</a></h2>
+
+<pre class="prettyprint"><code>// Beep twice!
+navigator.<a href="cordova_notification_notification.md.html#notification.beep">notification.beep</a>(2);
+</code></pre>
+
+<h2><a name="notification.beep_android_quirks">Android Quirks</a></h2>
+
+<ul>
+<li>Android plays the default <strong><a href="cordova_notification_notification.md.html#Notification">Notification</a> ringtone</strong> specified under the <strong>Settings/Sound &amp; Display</strong> panel.</li>
+</ul>
+
+<hr>
+
+<!---
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+
+
+cbce0d3c02560ccdad6423e62be7f298
+
+
+
+-->
+
+<h1><a name="notification.vibrate">notification.vibrate</a></h1>
+
+<p>Vibrates the device for the specified amount of time.</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.vibrate">notification.vibrate</a>(time)
+</code></pre>
+
+<ul>
+<li>
+<strong>time</strong>: Milliseconds to vibrate the device. <em>(Number)</em>
+</li>
+</ul>
+
+<h2><a name="notification.vibrate_example">Example</a></h2>
+
+<pre class="prettyprint"><code>// Vibrate for 2.5 seconds
+navigator.<a href="cordova_notification_notification.md.html#notification.vibrate">notification.vibrate</a>(2500);
+</code></pre>
+
+<h2><a name="notification.vibrate_ios_quirks">iOS Quirks</a></h2>
+
+<ul>
+<li>
+<p><strong>time</strong>: Ignores the specified time and vibrates for a pre-set amount of time.</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_notification_notification.md.html#notification.vibrate">notification.vibrate</a>();
+navigator.<a href="cordova_notification_notification.md.html#notification.vibrate">notification.vibrate</a>(2500);   // 2500 is ignored
+</code></pre>
+</li>
+</ul>
+
+              </div>
+          </div>
+
+        </div>
+
+        <!-- Functionality and Syntax Highlighting -->
+        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript" src="prettify/prettify.js"></script>
+    </body>
+</html>

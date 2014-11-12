@@ -1,6 +1,6 @@
 ---
-layout: docs
-docs_tab_id: first-mile
+layout: supersonic_tutorial
+docs_tab_id: tutorial
 title: Supersonic First Mile
 header_title: Supersonic First Mile
 sections:
@@ -32,7 +32,7 @@ sections:
 
     <ol class="nav left-menu ag__docs__left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
       <li class="menu-title">
-        <a href="/first-mile{% unless section_id == 'start-building-with-supersonic' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
+        <a href="/supersonic/tutorial{% unless section_id == 'start-building-with-supersonic' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
       </li>
       {% if page.section_id == section_id %}
       {% for subsection in page.subsections %}

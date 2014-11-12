@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+--><html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+        <meta name="generator" content="joDoc">
+        <link href="//s3.amazonaws.com/appgyver.assets/global-assets/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+        <title>AppGyver Steroids API Documentation</title>
+
+        <!-- AppGyver fonts -->
+        <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/aa8407d2-1212-415a-8e54-031ff8ee71fe.css">
+        <link type="text/css" rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="mobile.css" media="only screen and (max-device-width: 1024px)">
+        <link rel="stylesheet" type="text/css" href="steroids.css">
+        <link rel="stylesheet" type="text/css" href="service_menu.css">
+        <link rel="stylesheet" type="text/css" href="prettify/prettify.css">
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="https://s3.amazonaws.com/appgyver.assets/topbar.js" type="text/javascript"></script>
+
+    </head>
+    <body class="appgyver-x">
+
+      <div class="clear" style="margin-bottom: 50px;"></div>
+
+        <div id="cordova-wrapper">
+
+          <div id="header">
+              <h1 id="nonmobile"><a href="index.html"><strong>AppGyver Steroids</strong> API Documentation</a></h1>
+              <h1 id="mobile"><a href="index.html"><strong>AppGyver Steroids</strong> API Docs</a></h1>
+              <small>
+                  <select><optgroup label="English" value="en">
+<option value="stable">stable</option>
+<option value="edge">edge</option>
+<option value="3.5.7">3.5.7</option>
+<option value="3.5.5">3.5.5</option>
+<option selected value="3.5.3">3.5.3</option>
+<option value="3.5.1">3.5.1</option>
+<option value="3.5.0">3.5.0</option>
+<option value="3.1.9">3.1.9</option>
+</optgroup></select>
+              </small>
+          </div>
+          <div id="subheader">
+              <h1>Compass</h1>
+              <small><select><option value="Compass">Compass</option>
+<option value="Compass_supported_platforms">      - Supported Platforms</option>
+<option value="Compass_methods">      - Methods</option>
+<option value="Compass_objects">      - Objects</option>
+<option value="compass.getCurrentHeading">compass.getCurrentHeading</option>
+<option value="compass.getCurrentHeading_example">      - Example</option>
+<option value="compass.watchHeading">compass.watchHeading</option>
+<option value="compass.watchHeading_example">      - Example</option>
+<option value="compass.watchHeading_ios_quirks">      - iOS Quirks</option>
+<option value="compass.watchHeading_android_quirks">      - Android Quirks</option>
+<option value="compass.clearWatch">compass.clearWatch</option>
+<option value="compass.clearWatch_example">      - Example</option>
+<option value="CompassHeading">CompassHeading</option>
+<option value="CompassHeading_properties">      - Properties</option>
+<option value="CompassHeading_android_quirks">      - Android Quirks</option>
+<option value="CompassHeading_ios_quirks">      - iOS Quirks</option>
+<option value="CompassError">CompassError</option>
+<option value="CompassError_properties">      - Properties</option>
+<option value="CompassError_constants">      - Constants</option></select></small>
+          </div>
+
+          <div id="sidebar">
+              <div class="vertical_divider"></div>
+          <h1>Steroids 3.5.3 API Reference</h1>
+<ul>
+<li><a href="steroids_Steroids%20Analytics%20and%20Log_index.md.html#Steroids%C2%A0Analytics%C2%A0and%C2%A0Log">Steroids Analytics and Log</a></li>
+<li><a href="steroids_Steroids%20App%20and%20Device_index.md.html#Steroids%C2%A0App%C2%A0and%C2%A0Device">Steroids App and Device</a></li>
+<li><a href="steroids_Steroids%20Config_index.md.html#Steroids%C2%A0Config">Steroids Config</a></li>
+<li><a href="steroids_Steroids%20Events_index.md.html#Steroids%C2%A0Events">Steroids Events</a></li>
+<li><a href="steroids_Steroids%20File%20System_index.md.html#Steroids%C2%A0File%C2%A0System">Steroids File System</a></li>
+<li><a href="steroids_Steroids%20Media_index.md.html#Steroids%C2%A0Media">Steroids Media</a></li>
+<li><a href="steroids_Steroids%20Views_index.md.html#Steroids%C2%A0Views">Steroids Views</a></li>
+<li><a href="steroids_Steroids%20UI%20Components_index.md.html#Steroids%C2%A0UI%C2%A0Components">Steroids UI Components</a></li>
+</ul>
+<h1>Cordova 3.5.0 API Reference</h1>
+<ul>
+<li><a href="cordova_accelerometer_accelerometer.md.html#Accelerometer">Accelerometer</a></li>
+<li><a href="cordova_camera_camera.md.html#Camera">Camera</a></li>
+<li><a href="cordova_media_capture_capture.md.html#Capture">Capture</a></li>
+<li><a href="cordova_compass_compass.md.html#Compass">Compass</a></li>
+<li><a href="cordova_connection_connection.md.html#Connection">Connection</a></li>
+<li><a href="cordova_contacts_contacts.md.html#Contacts">Contacts</a></li>
+<li><a href="cordova_device_device.md.html#Device">Device</a></li>
+<li><a href="cordova_events_events.md.html#Events">Events</a></li>
+<li><a href="cordova_file_file.md.html#File">File</a></li>
+<li><a href="cordova_file_filetransfer_filetransfer.md.html#FileTransfer">FileTransfer</a></li>
+<li><a href="cordova_geolocation_geolocation.md.html#Geolocation">Geolocation</a></li>
+<li><a href="cordova_globalization_globalization.md.html#Globalization">Globalization</a></li>
+<li><a href="cordova_inappbrowser_inappbrowser.md.html#InAppBrowser">InAppBrowser</a></li>
+<li><a href="cordova_media_media.md.html#Media">Media</a></li>
+<li><a href="cordova_notification_notification.md.html#Notification">Notification</a></li>
+</ul>
+<h1>Guides</h1>
+<ul><li><a href="_index.html">Keyword Index</a></li></ul>
+</div>
+
+          <div id="scrollable">
+              <div id="content">
+                  <h1><a name="Compass">Compass</a></h1>
+
+<p>This plugin provides access to the device's compass. The compass is a sensor
+that detects the direction or heading that the device is pointed, typically
+from the top of the device.  It measures the heading in degrees from 0 to
+359.99, where 0 is north.</p>
+
+<h2><a name="Compass_supported_platforms">Supported Platforms</a></h2>
+
+<ul>
+<li>Android</li>
+<li>iOS</li>
+</ul>
+
+<h2><a name="Compass_methods">Methods</a></h2>
+
+<ul>
+<li><a href="cordova_compass_compass.md.html#compass.getCurrentHeading">compass.getCurrentHeading</a></li>
+<li><a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a></li>
+<li><a href="cordova_compass_compass.md.html#compass.clearWatch">compass.clearWatch</a></li>
+</ul>
+
+<h2><a name="Compass_objects">Objects</a></h2>
+
+<ul>
+<li><a href="cordova_compass_compass.md.html#CompassHeading">CompassHeading</a></li>
+<li><a href="cordova_compass_compass.md.html#CompassError">CompassError</a></li>
+</ul>
+
+<hr>
+
+<h1><a name="compass.getCurrentHeading">compass.getCurrentHeading</a></h1>
+
+<p>Get the current compass heading. The compass heading is returned via a <code><a href="cordova_compass_compass.md.html#CompassHeading">CompassHeading</a></code>
+object using the <code>compassSuccess</code> callback function.</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_compass_compass.md.html#compass.getCurrentHeading">compass.getCurrentHeading</a>(compassSuccess, compassError);
+</code></pre>
+
+<h2><a name="compass.getCurrentHeading_example">Example</a></h2>
+
+<pre class="prettyprint"><code>function onSuccess(heading) {
+    alert('Heading: ' + heading.magneticHeading);
+};
+
+function onError(error) {
+    alert('<a href="cordova_compass_compass.md.html#CompassError">CompassError</a>: ' + error.code);
+};
+
+navigator.<a href="cordova_compass_compass.md.html#compass.getCurrentHeading">compass.getCurrentHeading</a>(onSuccess, onError);
+</code></pre>
+
+<hr>
+
+<h1><a name="compass.watchHeading">compass.watchHeading</a></h1>
+
+<p>Gets the device's current heading at a regular interval. Each time the heading
+is retrieved, the <code>headingSuccess</code> callback function is executed.</p>
+
+<p>The returned watch ID references the compass watch interval. The watch
+ID can be used with <code>navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.clearWatch</a></code> to stop watching the navigator.compass.</p>
+
+<pre class="prettyprint"><code>var watchID = navigator.<a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a>(compassSuccess, compassError, [compassOptions]);
+</code></pre>
+
+<p><code>compassOptions</code> may contain the following keys:</p>
+
+<ul>
+<li>
+<strong>frequency</strong>: How often to retrieve the compass heading in milliseconds. <em>(Number)</em> (Default: 100)</li>
+<li>
+<strong>filter</strong>: The change in degrees required to initiate a watchHeading success callback. When this value is set, <strong>frequency</strong> is ignored. <em>(Number)</em>
+</li>
+</ul>
+
+<h2><a name="compass.watchHeading_example">Example</a></h2>
+
+<pre class="prettyprint"><code>function onSuccess(heading) {
+    var element = document.getElementById('heading');
+    element.innerHTML = 'Heading: ' + heading.magneticHeading;
+};
+
+function onError(compassError) {
+    alert('<a href="cordova_compass_compass.md.html#Compass">Compass</a> error: ' + compassError.code);
+};
+
+var options = {
+    frequency: 3000
+}; // Update every 3 seconds
+
+var watchID = navigator.<a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a>(onSuccess, onError, options);
+</code></pre>
+
+<h2><a name="compass.watchHeading_ios_quirks">iOS Quirks</a></h2>
+
+<p>Only one <code>watchHeading</code> can be in effect at one time in iOS.  If a
+<code>watchHeading</code> uses a filter, calling <code>getCurrentHeading</code> or
+<code>watchHeading</code> uses the existing filter value to specify heading
+changes. Watching heading changes with a filter is more efficient than
+with time intervals.</p>
+
+<h2><a name="compass.watchHeading_android_quirks">Android Quirks</a></h2>
+
+<ul>
+<li>No support for <code>filter</code>.</li>
+</ul>
+
+<hr>
+
+<h1><a name="compass.clearWatch">compass.clearWatch</a></h1>
+
+<p>Stop watching the compass referenced by the watch ID parameter.</p>
+
+<pre class="prettyprint"><code>navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.clearWatch</a>(watchID);
+</code></pre>
+
+<ul>
+<li>
+<strong>watchID</strong>: The ID returned by <code>navigator.<a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a></code>.</li>
+</ul>
+
+<h2><a name="compass.clearWatch_example">Example</a></h2>
+
+<pre class="prettyprint"><code>var watchID = navigator.<a href="cordova_compass_compass.md.html#compass.watchHeading">compass.watchHeading</a>(onSuccess, onError, options);
+
+// ... later on ...
+
+navigator.<a href="cordova_compass_compass.md.html#compass.clearWatch">compass.clearWatch</a>(watchID);
+</code></pre>
+
+<hr>
+
+<h1><a name="CompassHeading">CompassHeading</a></h1>
+
+<p>A <code><a href="cordova_compass_compass.md.html#CompassHeading">CompassHeading</a></code> object is returned to the <code>compassSuccess</code> callback function.</p>
+
+<h2><a name="CompassHeading_properties">Properties</a></h2>
+
+<ul>
+<li><p><strong>magneticHeading</strong>: The heading in degrees from 0-359.99 at a single moment in time. <em>(Number)</em></p></li>
+<li><p><strong>trueHeading</strong>: The heading relative to the geographic North Pole in degrees 0-359.99 at a single moment in time. A negative value indicates that the true heading can't be determined.  <em>(Number)</em></p></li>
+<li><p><strong>headingAccuracy</strong>: The deviation in degrees between the reported heading and the true heading. <em>(Number)</em></p></li>
+<li><p><strong>timestamp</strong>: The time at which this heading was determined.  <em>(milliseconds)</em></p></li>
+</ul>
+
+<h2><a name="CompassHeading_android_quirks">Android Quirks</a></h2>
+
+<ul>
+<li><p>The <code>trueHeading</code> property is not supported, but reports the same value as <code>magneticHeading</code>.</p></li>
+<li><p>The <code>headingAccuracy</code> property is always 0 because there is no difference between the <code>magneticHeading</code> and <code>trueHeading</code>.</p></li>
+</ul>
+
+<h2><a name="CompassHeading_ios_quirks">iOS Quirks</a></h2>
+
+<ul>
+<li><p>The <code>trueHeading</code> property is only returned for location services enabled via <code>navigator.geolocation.watchLocation()</code>.</p></li>
+<li><p>For iOS 4 devices and above, heading factors in the device's current orientation, and does not reference its absolute position, for apps that supports that orientation.</p></li>
+</ul>
+
+<hr>
+
+<h1><a name="CompassError">CompassError</a></h1>
+
+<p>A <code><a href="cordova_compass_compass.md.html#CompassError">CompassError</a></code> object is returned to the <code>compassError</code> callback function when an error occurs.</p>
+
+<h2><a name="CompassError_properties">Properties</a></h2>
+
+<ul>
+<li>
+<strong>code</strong>: One of the predefined error codes listed below.</li>
+</ul>
+
+<h2><a name="CompassError_constants">Constants</a></h2>
+
+<ul>
+<li><code><a href="cordova_compass_compass.md.html#CompassError">CompassError</a>.COMPASS_INTERNAL_ERR</code></li>
+<li><code><a href="cordova_compass_compass.md.html#CompassError">CompassError</a>.COMPASS_NOT_SUPPORTED</code></li>
+</ul>
+
+              </div>
+          </div>
+
+        </div>
+
+        <!-- Functionality and Syntax Highlighting -->
+        <script type="text/javascript" src="index.js"></script>
+        <script type="text/javascript" src="prettify/prettify.js"></script>
+    </body>
+</html>
