@@ -16,4 +16,4 @@ A Supersonic app consists of one or more views. At any given time, there is a si
 
 ## WebView
 
-The most widley used view type is a WebView.
+The most widley used view type is a WebView. It is
