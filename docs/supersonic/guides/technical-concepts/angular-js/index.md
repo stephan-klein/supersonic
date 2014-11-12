@@ -53,4 +53,5 @@ In a nonangularized environment one should explicitly ask Angular to run the `$d
 Learn more about Angular:
 
  - [Angular tutorial](https://docs.angularjs.org/tutorial)
+ - [learn-angular.org](http://www.learn-angular.org/)
  - [Egghead.io](https://egghead.io/technologies/angularjs/)
