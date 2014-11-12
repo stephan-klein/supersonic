@@ -26,6 +26,8 @@ module.exports = (steroids, log) ->
    # @define {=>String} platform.model The name of the device's model or product. The value is set by the device manufacturer and may be different across versions of the same product.
    # @usageCoffeeScript
    # supersonic.device.platform()
+   # @usageJavaScript
+   # supersonic.device.platform();
    # @exampleCoffeeScript
    # supersonic.device.platform().then (platform) ->
    #   steroids.logger.log(
@@ -35,6 +37,14 @@ module.exports = (steroids, log) ->
    #     Model: #{platform.model}
    #     """
    #   )
+   # @exampleJavaScript
+   # supersonic.device.platform().then( function(platform) {
+   #   steroids.logger.log(
+   #     "Name: " + platform.name + "\n" +
+   #     "Version: " + platform.version + "\n" +
+   #     "Model: " + platform.model
+   #   );
+   # });
   ###
   platform = ->
     deviceready.then ->

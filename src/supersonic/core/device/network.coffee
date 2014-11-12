@@ -17,9 +17,15 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @usageCoffeeScript
    # supersonic.device.network.whenOffline()
+   # @usageJavaScript
+   # supersonic.device.network.whenOffline();
    # @exampleCoffeeScript
    # supersonic.device.network.whenOffline().then ->
    #   steroids.logger.log("Device is offline")
+   # @exampleJavaScript
+   # supersonic.device.network.whenOffline().then( function() {
+   #   steroids.logger.log("Device is offline");
+   # });
   ###
   whenOffline: (f)->
     whenOffline = null
@@ -49,9 +55,15 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @usageCoffeeScript
    # supersonic.device.network.whenOnline()
+   # @usageJavaScript
+   # supersonic.device.network.whenOnline();
    # @exampleCoffeeScript
    # supersonic.device.network.whenOnline().then ->
    #   steroids.logger.log("Device is online")
+   # @exampleJavaScript
+   # supersonic.device.network.whenOnline().then( function() {
+   #   steroids.logger.log("Device is online");
+   # });
   ###
   whenOnline: (f)->
     whenOnline = null

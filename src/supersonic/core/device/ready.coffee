@@ -16,8 +16,14 @@ module.exports = (steroids, log) ->
    # supersonic.device.ready : => Promise
    # @usageCoffeeScript
    # supersonic.device.ready.then ->
+   # @usageJavaScript
+   # supersonic.device.ready.then( function() {});
    # @exampleCoffeeScript
    # supersonic.device.ready.then ->
    #   supersonic.logger.log "READY!"
+   # @exampleJavaScript
+   # supersonic.device.ready.then( function() {
+   #   supersonic.logger.log("READY!");
+   # });
   ###
   return deviceready
