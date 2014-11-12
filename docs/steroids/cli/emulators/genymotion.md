@@ -35,7 +35,7 @@ When the device has been created, you can tune the performance by adding more pr
 
 ## Running
 
-To launch Genymotion, type `gen` or `g` in the steroids connect prompt. The emulator should now be booting up and if everything went as expected you should see your app.
+To launch your app in Genymotion, type `gen` or `g` in the `steroids connect` prompt. The emulator should now start and if everything went as expected you should see your app.
 
 ## Troubleshooting
 
