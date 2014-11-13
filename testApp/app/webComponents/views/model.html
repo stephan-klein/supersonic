@@ -5,11 +5,10 @@
 </super-navbar>
 
 <super-model ng-non-bindable model="task">
-  <h1>{{ description }}</h1>
+  <super-navigate>
+  <li class="item item-icon-right">
+    <span>{{ description }}</span>
+    <i class="icon super-ios7-arrow-right"></i>
+  </li>
+  </super-navigate>
 </super-model>
-
-<super-modal-hide>
-  <button class="button button-block">
-    Close Modal
-  </button>
-</super-modal-hide>
