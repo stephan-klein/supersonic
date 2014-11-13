@@ -354,7 +354,7 @@ ul.docs-header li.active a {
 }
 
 .tutorial-image {
-  width:75%;
+  max-width:75%;
 }
 
 /*
