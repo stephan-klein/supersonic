@@ -22,6 +22,41 @@ a:link:hover {
   padding-right: 15px !important;
 }
 
+/* block.css.sass
+ * Style for block type elements.
+ *
+ * Maintained by Tomi Hiltunen
+ */
+
+/**********************************
+ * BLOCKS
+ *********************************/
+
+
+.block.block-vertical-padding {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.block.block-vertical-padding.block-padding-half {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.block.block-top-padding {
+  padding-top: 60px;
+}
+.block.block-top-padding.block-padding-half {
+  padding-top: 30px;
+}
+
+.block.block-bottom-padding {
+  padding-bottom: 60px;
+}
+.block.block-bottom-padding.block-padding-half {
+  padding-bottom: 30px;
+}
+
 /**********************************
  * HEADER
  *********************************/
@@ -144,6 +179,71 @@ a:link:hover {
   content: "hei";
 }
 
+
+/***************************************************
+ * OVERVIEW
+ **************************************************/
+
+.ag-docs-overview .docs-home-row {
+  text-align: left !important;
+}
+
+.ag__content__box {
+  background-color: #f3f3f3;
+  min-height: 400px;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.ag-docs-overview .docs-home-row > div {
+  margin-top: 0;
+}
+
+ .ag-docs-overview h1 + h2 + p {
+  margin-top: 0;
+ }
+
+.ag__content__box h1 a {
+  color: #6c6c6c;
+  font-family: "Proxima N W01 Bold";
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.ag__content__box h1 a:hover {
+  text-decoration: none;
+}
+
+.ag__content__box h2 {
+  text-transform: uppercase;
+  font-family: "Proxima N W01 Smbd";
+  margin: 0px 0 3px 0 !important;
+  padding: 0 !important;
+  font-size: 16px;
+  color: #6c6c6c !important;
+}
+
+.ag__content__box h2 a {
+  padding: 0 !important;
+  font-size: 16px;
+  color: #6c6c6c !important;
+  text-decoration: underline;
+}
+
+.ag__content__box p {
+  line-height: 1.4em;
+}
+
+.ag__docs__content h2.blue-tab {
+  border-top: 6px solid #00b5ff;
+  width: 40px;
+  padding-top: 10px;
+  font-family: "Proxima N W01 Bold";
+  font-size: 40px;
+  margin: 40px 0 0 0;
+}
+
 /***************************************************
  * CONTENT AREA
  **************************************************/
@@ -159,6 +259,62 @@ a:link:hover {
 .ag__docs__content h2 {
   font-family: "Proxima N W01 Reg";
   margin-top: 0px;
+}
+
+.ag__content__box {
+  background-color: #f3f3f3;
+  min-height: 400px;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.ag-docs-overview .docs-home-row > div {
+  margin-top: 0;
+}
+
+ .ag-docs-overview h1 + h2 + p {
+  margin-top: 0;
+ }
+
+.ag__content__box h1 a {
+  color: #6c6c6c;
+  font-family: "Proxima N W01 Bold";
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.ag__content__box h1 a:hover {
+  text-decoration: none;
+}
+
+.ag__content__box h2 {
+  text-transform: uppercase;
+  font-family: "Proxima N W01 Smbd";
+  margin: 0px 0 3px 0 !important;
+  padding: 0 !important;
+  font-size: 16px;
+  color: #6c6c6c !important;
+}
+
+.ag__content__box h2 a {
+  padding: 0 !important;
+  font-size: 16px;
+  color: #6c6c6c !important;
+  text-decoration: underline;
+}
+
+.ag__content__box p {
+  line-height: 1.4em;
+}
+
+.ag__docs__content h2.blue-tab {
+  border-top: 6px solid #00b5ff;
+  width: 40px;
+  padding-top: 10px;
+  font-family: "Proxima N W01 Bold";
+  font-size: 40px;
+  margin: 40px 0 0 0;
 }
 
 .ag__docs__content * + h2 {
