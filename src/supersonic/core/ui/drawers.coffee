@@ -255,9 +255,15 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @usageCoffeeScript
    # supersonic.ui.drawers.whenWillShow()
+   # @usageJavaScript
+   # supersonic.ui.drawers.whenWillShow();
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenWillShow().then ->
    #   steroids.logger.log("Drawers will show")
+   # @exampleJavaScript
+   # supersonic.ui.drawers.whenWillShow().then( function() {
+   #   steroids.logger.log("Drawers will show");
+   # });
   ###
   whenWillShow: (f)->
     id = steroids.drawers.on "willshow", f
@@ -276,9 +282,15 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @usageCoffeeScript
    # supersonic.ui.drawers.whenDidShow()
+   # @usageJavaScript
+   # supersonic.ui.drawers.whenDidShow();
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenDidShow().then ->
    #   steroids.logger.log("Drawers did show")
+   # @exampleJavaScript
+   # supersonic.ui.drawers.whenDidShow().then( function() {
+   #   steroids.logger.log("Drawers did show");
+   # });
   ###
   whenDidShow: (f)->
     id = steroids.drawers.on "didshow", f
@@ -297,9 +309,15 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @usageCoffeeScript
    # supersonic.ui.drawers.whenWillClose()
+   # @usageJavaScript
+   # supersonic.ui.drawers.whenWillClose();
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenWillClose().then ->
    #   steroids.logger.log("Drawers will close")
+   # @exampleJavaScript
+   # supersonic.ui.drawers.whenWillClose().then( function() {
+   #   steroids.logger.log("Drawers will close");
+   # });
   ###
   whenWillClose: (f)->
     id = steroids.drawers.on "willclose", f
@@ -318,9 +336,15 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @usageCoffeeScript
    # supersonic.ui.drawers.whenDidClose()
+   # @usageJavaScript
+   # supersonic.ui.drawers.whenDidClose()
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenDidClose().then ->
    #   steroids.logger.log("Drawers did close")
+   # @exampleJavaScript
+   # supersonic.ui.drawers.whenDidClose().then( function() {
+   #   steroids.logger.log("Drawers did close");
+   # });
   ###
   whenDidClose: (f)->
     id = steroids.drawers.on "didclose", f
