@@ -6,7 +6,7 @@
 
 <ul class="list">
   <super-data-repeat ng-non-bindable model="task">
-    <super-navigate view-id="super-data" params='{ "id": "{{id}}" }'>
+    <super-navigate view-id="super-data" data-params-id="{{id}}">
       <li class="item">
         {{ description }}
       </li>

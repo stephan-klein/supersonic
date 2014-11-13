@@ -47,5 +47,9 @@ module.exports =
     {
       id: "navigate-result"
       location: "webComponents#navigate_result"
+    },
+    {
+      id: "super-data"
+      location: "webComponents#data"
     }
   ]
