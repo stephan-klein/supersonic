@@ -12,11 +12,11 @@ angular.module("initial")
         onSuccess: ->
           supersonic.logger.log "Initial view shown"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.dismissInitialViewWithCallback = ->
       supersonic.ui.initialView.dismiss
         onSuccess: ->
           supersonic.logger.log "Initial view dismissed"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"

@@ -13,7 +13,7 @@ angular
         supersonic.logger.log "Modal shown"
 
     $scope.asModalWithCallback = (url)->
-      v = supersonic.ui.view(url)
+      v = new supersonic.ui.View(url)
       supersonic.ui.modal.show v,
         onSuccess: -> 
           supersonic.logger.log "Modal shown with this callback"

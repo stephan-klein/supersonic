@@ -17,4 +17,4 @@ angular
       $scope.navBarTitle = undefined
 
     $scope.navbarButtonCallback = (msg) ->
-      alert """I'm \"#{msg}\""""
+      supersonic.ui.dialog.alert """I'm \"#{msg}\""""

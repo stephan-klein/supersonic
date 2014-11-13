@@ -6,8 +6,8 @@ header_sub_title: Learn the basics of modifying your app structure and logic
 section_id: third-mile
 subsections:
   - name: Overview
-  - name: Deploying Your App to the Cloud
-  - name: Initializing the Sandbox Database
+  - name: Initialising data
+  - name: AppGyver Sandbox Database
   - name: Defining a Resource
   - name: Adding Data
   - name: Creating an App Scaffold
@@ -29,38 +29,38 @@ In the First and Second miles, we've covered how to:
 Next up, we want to tackle the last missing piece: data. Nearly all apps use data in some form, so we've ensured that it's a super smooth experience to add data to your app – regardless of the source.
 </section>
 
-<section class="docs-section" id="deploying-your-app-to-the-cloud">
-## Deploying Your App to the Cloud
+<section class="docs-section" id="initialising-data">
+## Initialising data
 
-Before we can add data, we need to deploy your app to the AppGyver Cloud. Open the Steroids Connect screen (if you've closed it, run `qr` in the Steroids Development Server console to open it again), and head to the Data tab.
+Before we can actually add data, we need to initialise it. Open the Steroids Connect screen (if you've closed it, run `qr` in the Steroids Development Server console to open it again), and head to the Data tab.
 
-<img src="http://placehold.it/600x400">
+<img class="tutorial-image" src="/img/tutorial/Steroids_connect_data.png">
 
-Ensure you're connected to the Internet and click on "Deploy". This will cause Steroids CLI to deploy your app to the cloud. Wait for it to finish, after which the screen will update to show the Data Manager:
+Ensure you're connected to the Internet and click on "Initialize data". This will cause Steroids CLI to deploy your app to the cloud and provision an AppGyver Sandbox database for use in this app. Wait for it to finish, after which the screen will update to show the Data Manager:
 
-<img src="http://placehold.it/600x400">
+<img class="tutorial-image" src="/img/tutorial/Steroids_connect_data_manager.png">
 </section>
 
-<section class="docs-section" id="initializing-the-sandbox-database">
-## Initializing the Sandbox Database
+<section class="docs-section" id="appgyver-sandbox-database">
+## AppGyver Sandbox Database
 
-As the Data Browser will tell you, your app doesn't have any data providers set. A data provider is basically a proxy between your app and the REST API from which your data is fetched from. They do all sorts of magic – you can read more in the [Data Providers][data-providers] guide – but for now, we just want to add the Sandbox Database provider for our app.
+As the Data Browser will tell you, your app has an AppGyver Sandbox Database preconfigured. A data provider is basically a proxy between your app and the REST API from which your data is fetched from. They do all sorts of magic – you can read more in the [Data Providers][data-providers] guide – but for now, we just want to use the preconfigured Sandbox Database provider in our app.
 
 The Sandbox Database is a free development database provided by AppGyver. It's not intended for full-on production use, but it's great for getting a first version of your app up and running.
 
-Click on the "Initialize Sandbox Database" button. This will instruct the CLI to provision a new Sandbox Database for your app, as well as set up the data provider. After a moment, the view will refresh with the Sandbox Database now listed as an available data provider.
-
-<img src="http://placehold.it/600x400">
-
-Click on it to open the Data Manager.
+Click on the AppGyver Sandbox Database to open the Data Manager.
 </section>
 
 <section class="docs-section" id="defining-a-resource">
 ## Defining a Resource
 
-Before we can add any data, we must create a new resource definition. Click on the "Add Resource" button.
+Before we can add any data, we must create a new resource definition. Click on the "Add new resource" button.
 
-Let's create a new resource with the name `superheroes` for our awesome superhero database app. Let's keep it simple – we'll have a `name`, `alter_ego` and `publisher`.
+Let's create a new resource with the name `superheroes` for our awesome superhero database app. After creating the superheroes resource you can configure the data model for the resource. Let's keep it simple – we'll have a `name`, `alter_ego` and `publisher`. To add a new field to the data model, just type the name of the desired field and press the blue checkmark on the right side of the field:
+
+<img class="tutorial-image" src="/img/tutorial/Steroids_connect_data_edit_model.png">
+
+You'll also have the option of determining the type for each field in the data model, but the default "String" is appropriate for our needs. After defining the three fields, press "Save changes to data model" to save your changes.
 </section>
 
 <section class="docs-section" id="adding-data">
@@ -104,7 +104,7 @@ Though the Connect Screen does its best to keep up with changes, you can always 
 
 Now that we've got a few cool superheroes in our database, we want to show that in our app!
 
-Navigate to the "Generate Scaffold" tab. Since we only have a single resource, it's automatically selected, so you can just click "Generate". This instructs the Steroids CLI to generate a CRUD scaffold for the `superheroes` resource.
+Navigate to the "Generate Scaffolds" tab. Since we only have a single resource, it's automatically selected, so you can just click "Generate". This instructs the Steroids CLI to generate a CRUD scaffold for the `superheroes` resource.
 </section>
 
 <section class="docs-section" id="data-in-your-app">
@@ -140,5 +140,5 @@ You can find all the rest of guides and tutorials on data in the [Data Managemen
 Happy hacking!
 </section>
 
-[data-providers]: /supersonic/guides/supersonic-data/setup/data-providers
-[data-management]: /supersonic/guides/supersonic-data
+[data-providers]: /supersonic/guides/data/other-data-providers/
+[data-management]: /supersonic/guides/data

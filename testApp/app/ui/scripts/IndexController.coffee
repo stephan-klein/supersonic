@@ -29,4 +29,4 @@ angular
       supersonic.ui.screen.setAllowedRotations(options.allowedRotations)
         .then supersonic.ui.screen.rotateTo options.orientation
         .catch (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"

@@ -32,12 +32,12 @@ angular
       leftButton = new supersonic.ui.NavigationBarButton({
         title: "Left"
         onTap: ()->
-          alert "left"
+          supersonic.ui.dialog.alert "left"
       })
       rightButton = new supersonic.ui.NavigationBarButton({
         title: "Right"
         onTap: ()->
-          alert "right"
+          supersonic.ui.dialog.alert "right"
       })
 
       supersonic.ui.navigationBar.update({
@@ -54,7 +54,7 @@ angular
       leftButton = new supersonic.ui.NavigationBarButton({
         title: "New"
         onTap: ()->
-          alert "New left"
+          supersonic.ui.dialog.alert "New left"
       })
       
       supersonic.ui.navigationBar.update({

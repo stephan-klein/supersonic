@@ -21,7 +21,7 @@ angular
           $scope.$apply ->
             $scope.watchPosition = position.timestamp
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.latestPosition = undefined
 
@@ -40,7 +40,7 @@ angular
         onSuccess: (position) ->
           $scope.latestPosition = position.timestamp
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.watchAcceleration = undefined
 
@@ -61,7 +61,7 @@ angular
           $scope.$apply ->
             $scope.watchAcceleration = acceleration.timestamp
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.latestAcceleration = undefined
 
@@ -80,7 +80,7 @@ angular
         onSuccess: (acceleration) ->
           $scope.latestAcceleration = acceleration.timestamp
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.watchHeading = undefined
 
@@ -112,7 +112,7 @@ angular
           $scope.$apply ->
             $scope.watchHeading = heading.timestamp
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.latestHeading = undefined
 
@@ -131,7 +131,7 @@ angular
         onSuccess: (heading) ->
           $scope.latestHeading = heading.timestamp
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.platformName = undefined
     $scope.platformVersion = undefined
@@ -162,9 +162,9 @@ angular
 
     $scope.deviceReady = ->
       supersonic.device.ready.then ->
-        alert "Yep."
+        supersonic.ui.dialog.alert "Yep."
       , ->
-        alert "Nope."
+        supersonic.ui.dialog.alert "Nope."
 
     $scope.offlineCount = 0
     $scope.onlineCount = 0
