@@ -30,7 +30,7 @@ angular
             $scope.pictureURL = imageURI
             imageURI
           (message) ->
-            alert "Could not take a picture! \n\n #{JSON.stringify(message)}"
+            supersonic.ui.dialog.alert "Could not take a picture! \n\n #{JSON.stringify(message)}"
         )
         .then(moveFileToUserFiles)
         .then( (file) ->
@@ -45,7 +45,7 @@ angular
         onSuccess: (imageURI) ->
           $scope.pictureURL = imageURI
         onFailure: (message) ->
-          alert "Could not take a picture! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not take a picture! \n\n #{JSON.stringify(message)}"
 
     moveFileToUserFiles = (imageURI) ->
       deferred = $q.defer()
@@ -105,7 +105,7 @@ angular
             $scope.fromLibraryURL = imageURI
             imageURI
           (message) ->
-            alert "Could not take a picture! \n\n #{JSON.stringify(message)}"
+            supersonic.ui.dialog.alert "Could not take a picture! \n\n #{JSON.stringify(message)}"
         )
         .then(moveFileToUserFiles)
         .then( (file) ->
@@ -121,4 +121,4 @@ angular
         onSuccess: (imageURI) ->
           $scope.fromLibraryURL = imageURI
         onFailure: (message) ->
-          alert "Could not get a picture! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not get a picture! \n\n #{JSON.stringify(message)}"

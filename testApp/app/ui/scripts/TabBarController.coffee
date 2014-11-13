@@ -24,7 +24,7 @@ angular
         onSuccess: ->
           supersonic.logger.log "Tabs hidden"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.showTabs = ->
       supersonic.ui.tabs.show()
@@ -34,7 +34,7 @@ angular
         onSuccess: ->
           supersonic.logger.log "Tabs shown"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.tabsUpdatedCount = 0
 
@@ -61,7 +61,7 @@ angular
           $scope.tabsUpdatedCount += 1
           supersonic.logger.log "Tabs updated"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     tabsArrayForReplace = [
       {
@@ -84,7 +84,7 @@ angular
         onSuccess: ->
           supersonic.logger.log "Tabs replaced"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.select = (tabIndex)->
       supersonic.ui.tabs.select(tabIndex)
@@ -96,7 +96,7 @@ angular
         onSuccess: ->
           supersonic.logger.log "Tab number #{tabIndex} selected"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.updateCurrentTab = ->
       supersonic.ui.tabs.updateCurrentTab
@@ -111,7 +111,7 @@ angular
         onSuccess: ->
           supersonic.logger.log "Current tab updated"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
         
     $scope.setStyleClass = ->
       supersonic.ui.tabs.setStyleClass "greenbg"
@@ -121,7 +121,7 @@ angular
         onSuccess: ->
           supersonic.logger.log "Tab style class set"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.setStyleId = ->
       supersonic.ui.tabs.setStyleId "graybg"
@@ -131,7 +131,7 @@ angular
         onSuccess: ->
           supersonic.logger.log "Tab style id set"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.setStyleCSS = ->
       supersonic.ui.tabs.setStyleCSS "background-color: red;"
@@ -141,7 +141,7 @@ angular
         onSuccess: ->
           supersonic.logger.log "Tab style changed with CSS"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.willChangeCount = 0
     $scope.didChangeCount = 0
