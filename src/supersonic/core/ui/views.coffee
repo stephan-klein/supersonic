@@ -150,5 +150,5 @@ module.exports = (steroids, log) ->
     find: find
     start: start
     stop: stop
-    current: require('./views/current')(log)
+    current: require('./views/current')(steroids, log)
   }

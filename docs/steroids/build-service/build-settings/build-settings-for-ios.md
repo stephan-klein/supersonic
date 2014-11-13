@@ -155,8 +155,7 @@ Then, you have to:
 * Entery your Urban Airship App Key / Secret (if using the Urban Airship plugin)
 
 
-* Upload the different size icons for your app. **NOTE: You need to upload custom app icons for all icon sizes to be able to build for App Store. This is to ensure that apps in App Store do not have the default Steroids icon anywhere.**
-* Upload the different size splashscreens for your app.
+* Upload the different size icons for your app. **NOTE: You need to upload custom app icons for all icon sizes to be able to build for App Store. This is to ensure that apps in App Store do not have the default Steroids icon anywhere.** For convenience, we recommend using a script for Photoshop that creates all of the icons from a single at least 1024x1024 PNG, e.g. [this script](https://gist.github.com/progrmr/11146412)
 
 After you're done, click Update Settings. Then, you can use the Build an Ad Hoc build and Build for App Store buttons on the Build for Distribution tab to request a new build of your app.
 

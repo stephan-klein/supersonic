@@ -36,17 +36,19 @@ superify = require '../superify'
 module.exports = (steroids, log) ->
   s = superify 'supersonic.ui.modal', log
 
-  navigate = (locationOrId) ->
-    new Promise (resolve, reject) ->
+  navigate = (locationOrId, params) ->
+    (new Promise (resolve, reject) ->
       cbObject =
         onSuccess: resolve
         onFailure: reject
 
       if locationOrId is "#back"
         supersonic.ui.layers.pop {}, cbObject
+        return false
 
       if locationOrId is "#root"
         supersonic.ui.layers.popAll {}, cbObject
+        return false
 
       maybeStartedView = new supersonic.ui.View(
         location: locationOrId
@@ -54,8 +56,13 @@ module.exports = (steroids, log) ->
       )
 
       maybeStartedView.isStarted().then (started)->
+        debugger
         if started
+          if params?
+            supersonic.logger.log "Sending parameters (#{params}) to view (id: #{maybeStartedView.id})"
+            supersonic.data.channel("view-params-#{maybeStartedView.id}").publish(params)
           supersonic.ui.layers.push maybeStartedView, cbObject
         else
           maybeStartedView.setId(null).then ->
             supersonic.ui.layers.push maybeStartedView, cbObject
+    )

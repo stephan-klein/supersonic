@@ -43,5 +43,9 @@ module.exports =
     {
       id: "app-index"
       location: "app#index"
+    },
+    {
+      id: "navigate-result"
+      location: "webComponents#navigate_result"
     }
   ]
