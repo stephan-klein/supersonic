@@ -56,18 +56,31 @@ module.exports = (steroids, log) ->
    # @returns {Promise} Promise that is resolved when the screen is rotated.
    # @params {string} orientation  Shorthand. Possible values "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight"
    # @params {Object} options Verbose. Options object with an `orientation` property (string representation of desired orientation)
-   # @usage
-   # ```coffeescript
+   # @usageCoffeeScript
+   # supersonic.ui.screen.rotateTo options
+   # @usageJavaScript
+   # supersonic.ui.screen.rotateTo(options);
+   # @exampleCoffeeScript
    # # Shorthand
-   # supersonic.ui.screen.rotateTo("landscapeLeft")
-   # #Verbose
+   # supersonic.ui.screen.rotateTo "landscapeLeft"
+   # # Verbose
    # options =
    #  orientation: "landscapeLeft"
-   # supersonic.ui.screen.rotateTo(options)
-   # ```
+   # supersonic.ui.screen.rotateTo(options).then ->
+   #  supersonic.logger.log "Screen has been rotated."
+   # @exampleJavaScript
+   # // Shorthand
+   # supersonic.ui.screen.rotateTo("landscapeLeft");
+   # // Verbose
+   # var options = {
+   #  orientation: "landscapeLeft"
+   # };
+   # supersonic.ui.screen.rotateTo(options).then( function() {
+   #  supersonic.logger.log("Screen has been rotated.")
+   # });
   ###
   rotateTo: s.promiseF "rotateTo", (options) ->
-    orientations = if typeof options is "string"
+    orientation = if typeof options is "string"
       options
     else if options?.orientation?
       options.orientation
@@ -76,7 +89,7 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject) ->
       steroids.screen.rotate(
         {
-          orientation: orientations
+          orientation: orientation
         }
         {
           onSuccess: resolve
