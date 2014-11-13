@@ -7,7 +7,7 @@ module.exports = (steroids, log) ->
    # @name View
    # @class
    # @description
-   # A Supersonic View. A View is a pointer to a specific location (route or URL). A View can be passed as an argument to other API calls (like `supersonic.ui.layers.push`). Read more in the [View guide](/ui-and-navigation/html-views/).
+   # A Supersonic View. A View references a specific location (route or URL). A View can be passed as an argument to other API calls (like `supersonic.ui.layers.push`). Read more in the [View guide](/ui-and-navigation/html-views/).
    # @type
    # View: {
    #   getLocation: () => String
