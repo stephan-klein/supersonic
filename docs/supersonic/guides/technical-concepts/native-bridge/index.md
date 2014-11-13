@@ -1,10 +1,7 @@
 ---
 layout: docs_overview
-header_title: Supersonic Overview
-header_sub_title: An overview of the Supersonic library and its inner workings.
 parent_id: supersonic
-section_id: overview
-subsection-id: native-bridge
+section_id: native-bridge
 ---
 <section class="docs-section" id="native-bridge">
 # Supersonic Native API Bridge
