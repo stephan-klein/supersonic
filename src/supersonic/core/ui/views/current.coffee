@@ -7,7 +7,7 @@ module.exports = (steroids, log) ->
   parameterBus = new Bacon.Bus
 
   viewObject = {
-    params: parameterBus.toProperty()
+    params: parameterBus.toProperty(steroids.view.params)
     id: null
   }
 
@@ -33,7 +33,6 @@ module.exports = (steroids, log) ->
 
     viewChannel = channel(window)(channelId)
     parameterBus.plug viewChannel.inbound
-    
   , ->
     console.log "View #{location.href} is not started, wont register channel"
 

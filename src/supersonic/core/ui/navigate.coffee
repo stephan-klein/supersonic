@@ -37,6 +37,13 @@ module.exports = (steroids, log) ->
   s = superify 'supersonic.ui.modal', log
 
   navigate = (locationOrId, params) ->
+    params = if params?
+      try
+        JSON.parse params
+      catch e
+        supersonic.logger.error "#{e}. Passed params must be JSON that can be parsed."
+        throw new Error "#{e}. Passed params must be JSON that can be parsed."
+
     (new Promise (resolve, reject) ->
       cbObject =
         onSuccess: resolve
@@ -56,7 +63,6 @@ module.exports = (steroids, log) ->
       )
 
       maybeStartedView.isStarted().then (started)->
-        debugger
         if started
           if params?
             supersonic.logger.log "Sending parameters (#{params}) to view (id: #{maybeStartedView.id})"
@@ -64,5 +70,7 @@ module.exports = (steroids, log) ->
           supersonic.ui.layers.push maybeStartedView, cbObject
         else
           maybeStartedView.setId(null).then ->
+            if params?
+              maybeStartedView._webView.setParams params
             supersonic.ui.layers.push maybeStartedView, cbObject
     )
