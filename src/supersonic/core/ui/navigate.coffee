@@ -37,12 +37,15 @@ module.exports = (steroids, log) ->
   s = superify 'supersonic.ui.modal', log
 
   navigate = (locationOrId, params) ->
-    params = if params?
-      try
-        JSON.parse params
-      catch e
-        supersonic.logger.error "#{e}. Passed params must be JSON that can be parsed."
-        throw new Error "#{e}. Passed params must be JSON that can be parsed."
+    if params?
+      params = if typeof params is "object"
+        params
+      else
+        try
+          JSON.parse params
+        catch e
+          supersonic.logger.error "#{e}. Passed params must be JSON that can be parsed."
+          throw new Error "#{e}. Passed params must be JSON that can be parsed."
 
     (new Promise (resolve, reject) ->
       cbObject =
