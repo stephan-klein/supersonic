@@ -1,4 +1,5 @@
 Bacon = require 'baconjs'
+Promise = require 'bluebird'
 events = require '../../events'
 channel = require '../../data/channel'
 
@@ -7,7 +8,7 @@ module.exports = (steroids, log) ->
   parameterBus = new Bacon.Bus
 
   viewObject = {
-    params: parameterBus.toProperty(steroids.view.params)
+    params: parameterBus.toProperty(steroids?.view?.params)
     id: null
   }
 
