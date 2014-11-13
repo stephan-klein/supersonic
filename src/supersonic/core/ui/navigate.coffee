@@ -34,7 +34,7 @@ superify = require '../superify'
 ###
 
 module.exports = (steroids, log) ->
-  s = superify 'supersonic.ui.modal', log
+  s = superify 'supersonic.ui.navigate', log
 
   navigate = (locationOrId, params) ->
     params = if params?
