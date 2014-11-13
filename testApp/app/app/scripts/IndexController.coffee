@@ -23,7 +23,7 @@ angular
         () ->
           $scope.successfulOpens++
         (message) ->
-          alert "Could not open URL! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not open URL! \n\n #{JSON.stringify(message)}"
       )
 
     $scope.testOpenURLWithCallback = ->
@@ -31,7 +31,7 @@ angular
         onSuccess: ->
           $scope.successfulOpens++
         onFailure: (message) ->
-          alert "Could not open URL! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not open URL! \n\n #{JSON.stringify(message)}"
 
     $scope.launchURL = undefined
 
@@ -65,14 +65,14 @@ angular
           $scope.sleepDisabled++
           enableSleep()
         onFailure: (message) ->
-          alert "Could not disable sleep! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not disable sleep! \n\n #{JSON.stringify(message)}"
 
     enableSleep = ->
       supersonic.app.sleep.enable
         onSuccess: ->
           $scope.sleepEnabled++
         onFailure: (message) ->
-          alert "Could not enable sleep! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not enable sleep! \n\n #{JSON.stringify(message)}"
 
     $scope.splashscreenShown = 0
     $scope.splashscreenHidden = 0
@@ -92,11 +92,11 @@ angular
               () ->
                 $scope.splashscreenHidden++
               (message) ->
-                alert "Could not hide splashscreen! \n\n #{JSON.stringify(message)}"
+                supersonic.ui.dialog.alert "Could not hide splashscreen! \n\n #{JSON.stringify(message)}"
             )
           , 5000
         (message) ->
-          alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
       )
 
     $scope.testShowAndHideSplashscreenWithCallbacks = ->
@@ -105,14 +105,14 @@ angular
           $scope.splashscreenShown++
           hideSplashscreen()
         onFailure: (message) ->
-          alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not show splashscreen! \n\n #{JSON.stringify(message)}"
 
     hideSplashscreen = ->
       supersonic.app.splashscreen.hide
         onSuccess: ->
           $scope.splashscreenHidden++
         onFailure: (message) ->
-          alert "Could not hide splashscreen! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not hide splashscreen! \n\n #{JSON.stringify(message)}"
 
     $scope.statusBarHidden = 0
     $scope.statusBarShown = 0
@@ -141,10 +141,10 @@ angular
             () ->
               $scope.statusBarShown++
             (message) ->
-              alert "Could not hide status bar! \n\n #{JSON.stringify(message)}"
+              supersonic.ui.dialog.alert "Could not hide status bar! \n\n #{JSON.stringify(message)}"
           )
         (message) ->
-          alert "Could not hide status bar! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not hide status bar! \n\n #{JSON.stringify(message)}"
       )
 
     $scope.testHideAndShowStatusBarWithCallbacks = ->
@@ -153,14 +153,14 @@ angular
           $scope.statusBarHidden++
           showStatusBar()
         onFailure: (message) ->
-          alert "Could not hide statusBar! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not hide statusBar! \n\n #{JSON.stringify(message)}"
 
     showStatusBar = ->
       supersonic.app.statusBar.show
         onSuccess: ->
           $scope.statusBarShown++
         onFailure: (message) ->
-          alert "Could not show statusBar! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not show statusBar! \n\n #{JSON.stringify(message)}"
 
     $scope.pausedCount = 0
     $scope.resumedCount = 0

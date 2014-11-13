@@ -1,3 +1,6 @@
+Promise = require 'bluebird'
+superify = require '../superify'
+
 ###
  # @namespace supersonic.ui
  # @name navigate
@@ -29,3 +32,30 @@
  # // Go back to the root view
  # supersonic.ui.navigate("#root");
 ###
+
+module.exports = (steroids, log) ->
+  s = superify 'supersonic.ui.modal', log
+
+  navigate = (locationOrId) ->
+    new Promise (resolve, reject) ->
+      cbObject =
+        onSuccess: resolve
+        onFailure: reject
+
+      if locationOrId is "#back"
+        supersonic.ui.layers.pop {}, cbObject
+
+      if locationOrId is "#root"
+        supersonic.ui.layers.popAll {}, cbObject
+
+      maybeStartedView = new supersonic.ui.View(
+        location: locationOrId
+        id: locationOrId
+      )
+
+      maybeStartedView.isStarted().then (started)->
+        if started
+          supersonic.ui.layers.push maybeStartedView, cbObject
+        else
+          maybeStartedView.setId(null).then ->
+            supersonic.ui.layers.push maybeStartedView, cbObject

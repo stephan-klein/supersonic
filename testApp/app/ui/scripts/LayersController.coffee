@@ -20,14 +20,14 @@ angular
         onSuccess: ->
           supersonic.logger.log "myView pushed as a layer"
         onFailure: (message) ->
-          alert "Could not push the layer! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not push the layer! \n\n #{JSON.stringify(message)}"
 
     $scope.popWithCallback = ()->
       supersonic.ui.layers.pop
         onSuccess: ->
           supersonic.logger.log "Layer popped successfully"
         onFailure: (message) ->
-          alert "Could not pop a layer! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not pop a layer! \n\n #{JSON.stringify(message)}"
 
 
     $scope.popAllWithCallback = ()->
@@ -35,4 +35,4 @@ angular
         onSuccess: ->
           supersonic.logger.log "All the layers popped successfully"
         onFailure: (message) ->
-          alert "Could not pop the layers! \n\n #{JSON.stringify(message)}"
+          supersonic.ui.dialog.alert "Could not pop the layers! \n\n #{JSON.stringify(message)}"

@@ -26,7 +26,7 @@ angular
         onSuccess: ->
           supersonic.logger.log "Left draver opened with a callback"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.openRight = ->
       supersonic.ui.drawers.open("right")
@@ -45,7 +45,7 @@ angular
         onSuccess: ->
           supersonic.logger.log "Dravers updated"
         onFailure: (error) ->
-          alert "Error: #{JSON.stringify error}"
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
     $scope.willShowCount = 0
     $scope.didShowCount = 0

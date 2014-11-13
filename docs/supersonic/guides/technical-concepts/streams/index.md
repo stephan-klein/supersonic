@@ -6,7 +6,6 @@ header_sub_title: Learn how Supersonic utilizes streams
 section_id: streams
 parent_id: supersonic
 ---
-
 <section class="docs-section" id="streams">
 # Streams
 

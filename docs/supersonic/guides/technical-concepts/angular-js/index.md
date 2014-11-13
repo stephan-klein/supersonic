@@ -7,7 +7,8 @@ parent_id: supersonic
 section_id: angular-js
 ---
 
-## Angular.JS
+<section class="docs-section" id="angular-js">
+# Angular.JS
 
 [Angular JS](https://angularjs.org/) is an open source Javascript MVC-framework developed and maintained by Google. Angular allows a declarative style of building the UI by making it possible to extend HTML vocabulary. Angular makes it easy to build modularized applications where the DOM manipulations are fully separated from application logic. This results code that is easily testable and extendable.
 
@@ -55,3 +56,5 @@ Learn more about Angular:
  - [Angular tutorial](https://docs.angularjs.org/tutorial)
  - [learn-angular.org](http://www.learn-angular.org/)
  - [Egghead.io](https://egghead.io/technologies/angularjs/)
+
+</section>

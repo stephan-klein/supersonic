@@ -51,6 +51,11 @@ module.exports = (log) ->
      # stopListening = supersonic.ui.views.current.whenVisible ->
      #   supersonic.logger.debug "This view is now visible"
      #   stopListening()
+     # @usageJavaScript
+     # var stopListening = supersonic.ui.views.current.whenVisible( function() {
+     #   supersonic.logger.debug("This view is now visible");
+     #   stopListening();
+     # });
     ###
     whenVisible
     ###
@@ -64,9 +69,14 @@ module.exports = (log) ->
      # supersonic.ui.views.current.whenHidden: () => unsubscribe: Function
      # @define {Function} unsubscribe Stop listening for view visibility.
      # @usageCoffeeScript
-     # stopListening = supersonic.ui.views.current.whenVisible ->
+     # stopListening = supersonic.ui.views.current.whenHidden ->
      #   supersonic.logger.debug "This view is now hidden."
      #   stopListening()
+     # @usageJavaScript
+     # var stopListening = supersonic.ui.views.current.whenHidden( function() {
+     #   supersonic.logger.debug("This view is now hidden");
+     #   stopListening();
+     # });
     ###
     whenHidden
   }

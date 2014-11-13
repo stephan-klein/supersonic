@@ -15,4 +15,6 @@ module.exports = (steroids, log) ->
   navigationBar: require("./navigationBar")(steroids, log)
   NavigationBarButton: require("./NavigationBarButton")(steroids, log)
 
+  navigate: require("./navigate")(steroids, log)
+
   animate: require("./animate")(steroids, log)

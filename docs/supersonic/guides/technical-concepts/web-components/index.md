@@ -6,7 +6,6 @@ header_sub_title: Learn how Supersonic utilizes web components
 section_id: web-components
 parent_id: supersonic
 ---
-
 <section class="docs-section" id="web-components">
 # Supersonic uses Web Components
 
