@@ -36,9 +36,13 @@ Before we can actually add data, we need to initialise it. Open the Steroids Con
 
 <img class="tutorial-image" src="/img/tutorial/Steroids_connect_data.png">
 
+*Connect Data tab before deploying app*
+
 Ensure you're connected to the Internet and click on "Initialize data". This will cause Steroids CLI to deploy your app to the cloud and provision an AppGyver Sandbox database for use in this app. Wait for it to finish, after which the screen will update to show the Data Manager:
 
 <img class="tutorial-image" src="/img/tutorial/Steroids_connect_data_manager.png">
+
+*Data manager*
 </section>
 
 <section class="docs-section" id="appgyver-sandbox-database">
@@ -56,9 +60,11 @@ Click on the AppGyver Sandbox Database to open the Data Manager.
 
 Before we can add any data, we must create a new resource definition. Click on the "Add new resource" button.
 
-Let's create a new resource with the name `superheroes` for our awesome superhero database app. After creating the superheroes resource you can configure the data model for the resource. Let's keep it simple – we'll have a `name`, `alter_ego` and `publisher`. To add a new field to the data model, just type the name of the desired field and press the blue checkmark on the right side of the field:
+Let's create a new resource with the name `superhero` for our awesome superhero database app. After creating the superhero resource you can configure the data model for the resource. Let's keep it simple – we'll have a `name`, `alter_ego` and `publisher`. To add a new field to the data model, just type the name of the desired field and press the blue checkmark on the right side of the field:
 
 <img class="tutorial-image" src="/img/tutorial/Steroids_connect_data_edit_model.png">
+
+*Defining a data model*
 
 You'll also have the option of determining the type for each field in the data model, but the default "String" is appropriate for our needs. After defining the three fields, press "Save changes to data model" to save your changes.
 </section>
@@ -66,7 +72,13 @@ You'll also have the option of determining the type for each field in the data m
 <section class="docs-section" id="adding-data">
 ## Adding Data
 
-Now, you can click on the "Add Data" button to add an actual entry to the database. Let's add a few characters – you can copypaste the data below:
+Now, you can click on the "Browse data" button in the top right side of the screen to add an actual entry to the database. Since you only have one resource defined, it will be selected automatically and display an empty resource.
+
+<img class="tutorial-image" src="/img/tutorial/Steroids_connect_data_add_entry.png">
+
+*Resource data browser*
+
+Let's add a few characters by pressing the <span class="glyphicon glyphicon-pencil"></span> button – you can copy the data below:
 
 <table class="table">
   <tr>
@@ -96,7 +108,7 @@ Now, you can click on the "Add Data" button to add an actual entry to the databa
   </tr>
 </table>
 
-Though the Connect Screen does its best to keep up with changes, you can always click the "Resync" button to ensure your local project has the latest configs (the actual data is always fetched from the backend).
+Though the Connect Screen does its best to keep up with changes, you can always click the <span class="glyphicon glyphicon-refresh"></span> button to ensure your local project has the latest configs (the actual data is always fetched from the backend).
 </section>
 
 <section class="docs-section" id="creating-an-app-scaffold">
@@ -119,7 +131,9 @@ rootView:
 
 Save the document, and your app will update with just the index page of our Superhero app:
 
-<img src="http://placehold.it/400x600">
+<img class="tutorial-image" src="/img/tutorial/Steroids_data_scaffold.png">
+
+*Data display in device*
 
 Now, click on any of the superheroes to view more details. You can edit superheroes or remove them. From the index view, you can also create new superheroes.
 </section>
