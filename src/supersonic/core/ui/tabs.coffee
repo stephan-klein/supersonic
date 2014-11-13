@@ -231,9 +231,15 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @usageCoffeeScript
    # supersonic.ui.tabs.whenWillChange()
+   # @usageJavaScript
+   # supersonic.ui.tabs.whenWillChange();
    # @exampleCoffeeScript
    # supersonic.ui.tabs.whenWillChange().then ()->
    #   steroids.logger.log("Tab will change")
+   # @exampleJavaScript
+   # supersonic.ui.tabs.whenWillChange().then( function() {
+   #   steroids.logger.log("Tab will change");
+   # });
   ###
   whenWillChange: (f)->
     id = steroids.tabBar.on "willchange", f
@@ -251,9 +257,15 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @usageCoffeeScript
    # supersonic.ui.tabs.whenDidChange()
+   # @usageJavaScript
+   # supersonic.ui.tabs.whenDidChange();
    # @exampleCoffeeScript
    # supersonic.ui.tabs.whenDidChange().then ()->
    #   steroids.logger.log("Tabs did change")
+   # @exampleJavaScript
+   # supersonic.ui.tabs.whenDidChange().then( funtion() {
+   #   steroids.logger.log("Tabs did change");
+   # });
   ###
   whenDidChange: (f)->
     id = steroids.tabBar.on "didchange", f
