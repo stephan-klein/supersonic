@@ -7,7 +7,7 @@ module.exports =
     {
       title: "Index"
       icon: "icons/pill@2x.png"
-      location: "webComponents#model"
+      location: "common#index"
     }
     {
       title: "Internet"
@@ -16,9 +16,9 @@ module.exports =
     }
   ]
 
-  # initialView:
-  #   id: "initialView"
-  #   location: "initial#start"
+  initialView:
+    id: "initialView"
+    location: "initial#start"
 
   # drawers:
   #   left:
@@ -44,8 +44,8 @@ module.exports =
       id: "app-index"
       location: "app#index"
     }
-    # {
-    #   id: "angular#bindTest"
-    #   location: "angular#bindTest"
-    # }
+    {
+      id: "angular#bindTest"
+      location: "angular#bindTest"
+    }
   ]

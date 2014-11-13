@@ -8,47 +8,25 @@
  # <super-model></super-model>
  # @exampleHtml
 
- # <super-model model-name="task"><span>{{ task.description }}</span></super-model>
+ # <super-model model="task"><span>{{ description }}</span></super-model>
 ###
-observer = new MutationObserver (mutations) ->
-  for mutation in mutations
-    # Check attributes
-    if mutation.type is "attributes"
-      console.log "Mutation", mutation
-
 SuperModelPrototype = Object.create HTMLElement.prototype
 
 # What is the difference between attached and created?
 SuperModelPrototype.attachedCallback = ->
-  console.log "Supermodel attachedCallback"
-  # Observe attributes style and class
-  observerConfiguration =
-    attributes: true
-    attributeFilter: ["model-name"]
-
-  observer.observe @, observerConfiguration
-
-  Model = supersonic.data.model(@getAttribute("model"))
-  console.log "Created Model:", Model
-  Model.all().whenChanged (items)=>
-    console.log "Items received:", items
-    debugger
-    @shadowRoot.innerHTML = Handlebars.compile("{{#each items}}#{@template}{{/each}}")({items: items})
-
-
-
-
-
+  model_name = @getAttribute("model")
+  if model_name?
+    Model = supersonic.data.model(model_name)
+    @__listener = Model.all().whenChanged (items)=>
+      @shadowRoot.innerHTML = Handlebars.compile("{{#each items}}#{@__template}{{/each}}")({items: items})
 
 SuperModelPrototype.createdCallback = ->
-  @template = @innerHTML
+  @__template = @innerHTML
+  @innerHTML = ""
   @createShadowRoot()
 
-
 SuperModelPrototype.detachedCallback = ->
-  #console.log "Navigation bar detachedCallback"
-  observer.disconnect()
-  # Hide the navbar when this node leaves the DOM
+  @__listener() if @__listener?
 
 document.registerElement "super-model",
   prototype: SuperModelPrototype
