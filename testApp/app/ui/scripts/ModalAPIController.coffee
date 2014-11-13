@@ -1,6 +1,6 @@
 angular
   .module('ui')
-  .controller 'OtherController', ($scope, $q, supersonic) ->
+  .controller 'ModalAPIController', ($scope, $q, supersonic) ->
 
     $scope.showInitialView = ()->
       supersonic.ui.initialView.show()
