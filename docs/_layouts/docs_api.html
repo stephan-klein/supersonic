@@ -95,6 +95,10 @@ sections:
           - name: close
           - name: open
           - name: updateOptions
+          - name: whenWillClose
+          - name: whenWillShow
+          - name: whenDidClose
+          - name: whenDidShow
       - name: initialView
         methods:
           - name: show
@@ -123,17 +127,22 @@ sections:
       - name: StartedView
         class: true
         id: startedview-class
+      - name: Screen
+        methods:
+          - name: rotateTo
+          - name: setAllowedRotations
       - name: tabs
         methods:
           - name: show
           - name: hide
-          - name: update
           - name: replace
           - name: select
           - name: updateCurrentTab
           - name: setStyleClass
           - name: setStyleId
           - name: setStyleCSS
+          - name: whenDidChange
+          - name: whenWillChange
       - name: View
         class: true
         id: view-class
