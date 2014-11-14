@@ -10,11 +10,11 @@
     <div ng-hide="showSpinner">
       <h2 ng-bind="task.description"></h2>
 
-
-
-       <p>done: <span ng-bind="task.completed"></span></p> 
-
-
+      <div class="card" ng-if="task.completed">
+        <div class="item item-text-wrap">
+          Completed
+        </div>
+      </div>
 
       <super-modal-show location="data#edit?id={{ task.id }}">
         <button class="button button-block button-positive">
