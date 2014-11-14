@@ -9,4 +9,7 @@ section_id: ui
 
 The `supersonic.ui.*` namespace contains APIs for interacting with the native UI components in Supersonic, including the navigation stack.
 
-To read more, please see the [UI and Navigation](/ui-and-navigation/) section!
+To read more, please see the [UI][ui-guides] and [navigation][nav-guides] section!
+
+[nav-guides]: /supersonic/guides/navigation
+[ui-guides]: /supersonic/guides/ui
