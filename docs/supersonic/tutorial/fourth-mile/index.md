@@ -9,8 +9,8 @@ subsections:
   - name: Basic project structure
   - name: Model-View-Controller architecture
   - name: Angular and Supersonic
-  - name: Utilising the common module
   - name: Building views from partials
+  - name: Utilising the common module
 ---
 
 <section class="docs-section" id="overview">
@@ -46,7 +46,7 @@ Generally, you will only be interested in the `/app` and `/config` folders.
  - `/app` contains all of the application content as created by you. This means all HTML, CSS and script files will be in the `/app` folder.
  - `/config` has special files for configuring your app behaviour. This includes defining the initial views and tab structure of your app, as well as configuration for default behaviour such as enabling and disabling overscroll for all of your app's views.
 
-The rest of the folders contain third-party dependencies required by Supersonic and various other things. The `/dist` folder doesn't exist in completely new project, it is only created once your app is compiled. The contents of `/dist` is created from the contents of `/app`, with certain structural differences.
+The rest of the folders contain third-party dependencies required by Supersonic and various other things. The `/dist` folder doesn't exist in a completely new project, it is only created once your app is compiled. The contents of `/dist` is created from the contents of `/app`, with certain structural differences.
 </section>
 
 <section class="docs-section" id="model-view-controller-architecture">
@@ -69,53 +69,73 @@ The controller is the glue between the view and model, and contains the bulk of 
 >Note: While the above is probably enough to know for getting through these tutorials, it is recommended you take the time to learn more about the MVC pattern and why you should use it by reading the [Google primer](https://developer.chrome.com/apps/app_frameworks) on the subject.
 
 ### MVC in a Supersonic module
-Run `steroids generate testModule` to create an empty module. The basic layout of the module will be
+In the third mile we created a data resource `superhero` and a matching module for it. The structure of the module looks like the following:
 
 ```bash
 .
-└── testModule
-    ├── index.coffee
-    ├── views
-    └── scripts (controllers)
+app/superhero
+├── index.coffee
+├── scripts
+│   ├── EditController.coffee
+│   ├── IndexController.coffee
+│   ├── NewController.coffee
+│   ├── ShowController.coffee
+│   └── SuperheroModel.coffee
+└── views
+    ├── _form.html
+    ├── _spinner.html
+    ├── edit.html
+    ├── index.html
+    ├── layout.html
+    ├── new.html
+    └── show.html
 ```
 
-The basic module will contain placeholders for views and controllers. The file structure by itself has some special signifigance which you will learn about further down this guide, but for now we are interested in how module files handle the different MVC responsibilities. We will go over that in the section below.
+It contains the views, controllers and model for this module. The file structure by itself has some special signifigance which you will learn about further down this guide, but for now we are interested in how module files handle the different MVC responsibilities. We will go over that in the section below.
 </section>
 
 <section class="docs-section" id="Angular">
 ## Angular and Supersonic
 
-Supersonic utilises [AngularJS](https://angularjs.org/) to create the MVC architecture in default apps created with `steroids create`.
-</section>
+By default, Supersonic utilises [AngularJS](https://angularjs.org/) to create the MVC architecture in created apps. Each view in a module declares a controller that handles the logic for that view, e.g. in `/superhero/views/index.html`:
 
-<section class="docs-section" id="utilising-the-common-module">
-## Utilising the `common` module
+```html
+<div ng-controller="IndexController">
+```
 
-The `common` module is the basis for all Supersonic apps. As the name suggests, it is used to house assets that are shared by the entire app (in the default project, it also houses the views). You can find things such as:
+The `/superhero/scripts/IndexController.js` file in turn declares which module the controller belongs to and what dependencies to inject into the controller itself:
 
- - `common/views/layout.html`, which is the layout file applied "around" all views
+```coffeescript
+angular
+  .module('superhero')
+  .controller("IndexController", ($scope, Superhero) ->
+  )
+```
 
+Note that `Superhero` dependency is injected into the controller. That is the data model we defined in the previous tutorial, and it provides this controller access to the `Superhero` object, which in turn can communicate with our database. The next step is tying it all together.
 </section>
 
 <section class="docs-section" id="building-views-from-partials">
 ## Building views from view partials
 
-Unlike `common`, a newly generated module has no `layout.html` file. Instead, the only HTML file, `index.html` looks like the following:
+You may have noticed that the `/superhero/views/index.html` file isn't a complete HTML document. It just declares a `<div>` element that binds a controller to itself with the `ng-controller` attribute. This is known as a view partial. To make it a valid HTML document (and above all a functioning Supersonic view), we need to attach it to a special layout file, which contains all of the missing declarations. When compiling your app, the Steroids CLI looks for a `layout.html` file in the module and attaches all view partials to that layout.
+
+The `/superhero/views/layout.html` file specifies the scripts and stylesheets that should be paired with this view partial. It also has some special logic for bootstrapping the Angular application that makes up the MVC structure in our app.
 
 ```html
-<div ng-controller="IndexController">
+  <% _.each(yield.modules, function(module) { %>
+  <script src="/app/<%= module %>.js"></script>
+  <% }); %>
+</head>
+<body ng-app="<%= yield.moduleName %>" class="content">
 
-  <super-navbar>
-    <super-navbar-title>
-      Index
-    </super-navbar-title>
-  </super-navbar>
-
-  <div class="padding">
-    <h1>Pow! Here's your fresh module!</h1>
-  </div>
-
-</div>
+<%= yield.view %>
 ```
-There is no `<html>`, `<head>` or `<body>` tag declared in the file, just a `<div>` with some content. This is known as a view partial. To make it a valid HTML document (and above all a functioning Supersonic view), we need to attach it to a special layout file, which contains all of the missing declarations. When compiling your app, the Steroids CLI looks for a `layout.html` file in the module and attaches all view partials to that layout. Since the new module does not contain one, you could create a `layout.html` and specify the scripts and stylesheets that should be paired with this view partial, but there is an easier way. The `common` module already contains a layout file (located at `app/common/views/layout.html`), which has all the basic dependecies of your project declared, such as `supersonic.js`, `steroids.js` and `cordova.js`. Because we declared `common` as a dependency to this module, the Steroids CLI will also scan that module for layouts and use the one it finds to template your views in the camera module as well.
+
+The `<%= ... %>` blocks are used to automatically pair each view with the corresponding controller and bootstrap an `ngApp` in that view.
+</section>
+
+<section class="docs-section" id="utilising-the-common-module">
+
+The `common` module also already contains a layout file (located at `app/common/views/layout.html`), which has all the basic dependecies of your project declared, such as `supersonic.js`, `steroids.js` and `cordova.js`. Because `common` is declared as a dependency to all modules by default, the layout file in there can be used to throughout the app just by removing any layout files from the module itself.
 </section>
