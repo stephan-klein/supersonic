@@ -53,7 +53,9 @@
     "mkdirp": "^0.5.0",
     "q": "^1.0.1",
     "semver": "^3.0.1",
-    "winston": "^0.8.0"
+    "winston": "^0.8.0",
+    "sinon": "~1.11.1",
+    "sinon-chai": "~2.6.0"
   },
   "config": {
     "blanket": {
@@ -64,12 +66,9 @@
   },
   "dependencies": {
     "ag-data": "^0.3.0",
-    "baconjs": "^0.7.23",
-    "bluebird": "^2.3.4",
-    "coffee-script": "^1.8.0",
-    "deep-equal": "^0.2.1",
-    "coffee-script": "^1.8.0",
-    "sinon": "~1.11.1",
-    "sinon-chai": "~2.6.0"
+    "baconjs": "0.7.33",
+    "bluebird": "2.3.11",
+    "coffee-script": "1.8.0",
+    "deep-equal": "0.2.1"
   }
 }
