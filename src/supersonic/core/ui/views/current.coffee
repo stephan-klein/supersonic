@@ -71,6 +71,13 @@ module.exports = (steroids, log) ->
         setTimeout notify, 0
 
 
+  ###
+   # @namespace supersonic.ui.views
+   # @name current
+   # @overview
+   # @description
+   # Provides access to the current view and it's visibility state.
+  ###
 
   viewObject.visibility = events.visibility
   ###
@@ -96,7 +103,7 @@ module.exports = (steroids, log) ->
   viewObject.whenVisible = whenVisible
   ###
    # @namespace supersonic.ui.views.current
-   # @name whenVisible
+   # @name whenHidden
    # @function
    # @apiCall supersonic.ui.views.current.whenHidden
    # @description
