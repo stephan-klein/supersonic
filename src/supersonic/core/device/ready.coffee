@@ -7,7 +7,7 @@ module.exports = (steroids, log) ->
 
   ###
    # @namespace supersonic.device
-   # @name platform
+   # @name ready
    # @function
    # @apiCall supersonic.device.ready
    # @description
