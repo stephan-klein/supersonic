@@ -7,9 +7,15 @@ section_id: architecture
 ---
 
 <section class="docs-section" id="overview">
-# Architecture in a Supersonic app
+# Building blocks of a Supersonic application
 
-In this section you will find guides on how a Supersonic app is built, where to place your content, and how to effectively build Multi-Page Applications.
+Supersonic applications utilize the Multi-Page App architecture...
+
+## Application architecture
+
+To learn how a Supersonic app is built, where to place your content, and how to effectively build Multi-Page Applications go to
+the [basic architecture guide][architecture]
+
 
 ## Cross-view communication
 
@@ -17,5 +23,7 @@ To effectively use the Supersonic Multi-Page App architecture, you need to be ab
  Learn about different kind of solutions to share data between different views from [cross-view communication guide][communication].
 
 </section>
+
+[architecture]: /supersonic/guides/architecture/architecture
 
 [communication]: /supersonic/guides/architecture/communication
