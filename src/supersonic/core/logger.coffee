@@ -110,6 +110,8 @@ module.exports = (steroids, window) ->
        # @define {String} message Message to log.
        # @usageCoffeeScript
        # supersonic.logger.info("Just notifying you that X is going on")
+       # @usageJavaScript
+       # supersonic.logger.info("Just notifying you that X is going on");
       ###
       info: streamsPerLogLevel.info.in
 
@@ -125,6 +127,8 @@ module.exports = (steroids, window) ->
        # @define {String} message Message to log.
        # @usageCoffeeScript
        # supersonic.logger.warn("Something that probably should not be happening... is happening.")
+       # @usageJavaScript
+       # supersonic.logger.warn("Something that probably should not be happening... is happening.");
       ###
       warn: streamsPerLogLevel.warn.in
 
@@ -140,6 +144,8 @@ module.exports = (steroids, window) ->
        # @define {String} message Message to log.
        # @usageCoffeeScript
        # supersonic.logger.error("Something failed")
+       # @usageJavaScript
+       # supersonic.logger.error("Something failed");
       ###
       error: streamsPerLogLevel.error.in
 
@@ -155,6 +161,8 @@ module.exports = (steroids, window) ->
        # @define {String} message Message to log.
        # @usageCoffeeScript
        # supersonic.logger.debug("This information is here only for your debugging convenience")
+       # @usageJavaScript
+       # supersonic.logger.debug("This information is here only for your debugging convenience");
       ###
       debug: streamsPerLogLevel.debug.in
     }
