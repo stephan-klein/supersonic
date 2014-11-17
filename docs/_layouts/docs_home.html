@@ -17,13 +17,10 @@
         <div class="col-md-2 col-sm-3 aside-menu">
 
           <div class="docked-menu">
-            {% for section in site.data.supersonic_index %}
+            {% for section in page.sections %}
             <ul class="nav left-menu ag__docs__left-menu {% if page.section_id == section.id %}active-menu{% endif %}">
               <li class="menu-title">
-                <a href="/supersonic/{{section.id}}">{{section.name}}</a>
-                {% if page.section_id == section.id %}
-                  {% include submenu.html sectionId=section.id %}
-                {% endif %}
+                <a href="#{{section.id}}">{{section.name}}</a>
               </li>
             </ul>
             {% endfor %}
