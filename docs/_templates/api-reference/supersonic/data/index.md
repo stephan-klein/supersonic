@@ -7,4 +7,4 @@ section_id: data
 
 # API Reference: supersonic.data.*
 
-The `supersonic.data` namespace includes APIs that work with AppGyver's cloud data services. They provide efficient ways for manipulating data – adding, updating and deleting records. Read more in the [Data Management](/data-management/) section.
+The `supersonic.data` namespace includes APIs that work with AppGyver's cloud data services. They provide efficient ways for manipulating data – creating, updating and deleting records. Read more in the [Data Guides](/supersonic/guides/data/).

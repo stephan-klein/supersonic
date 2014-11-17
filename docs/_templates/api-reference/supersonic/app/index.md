@@ -11,6 +11,5 @@ The `supersonic.app` namespace includes APIs that have to do with the currently 
 
 To read more about how the APIs are used, see the following guides:
 
- - [Communicating with External Apps](/ui-and-navigation/app/communicating-with-external-apps/) guide on how `supersonic.app.getLaunchURL()` and `supersonic.app.openURL()` work.
- - [Splashscreen](/ui-and-navigation/app/splashscreen/) guide on how to set up a  splashscreen for your app.
- - [Status Bar](/ui-and-navigation/app/status-bar/) guide on how to work with the native status bar.
+ - [Splashscreen](/supersonic/guides/ui/app/splashscreen/) guide on how to set up a  splashscreen for your app.
+ - [Status Bar](/supersonic/guides/ui/app/status-bar/) guide on how to work with the native status bar.

@@ -6,4 +6,4 @@ section_id: logger
 
 # API Reference: supersonic.logger
 
-Log messages directly to the web console.
+Log messages directly to the Steroids Connect Screen web console.
