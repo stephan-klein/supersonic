@@ -10,13 +10,13 @@ parent_id: supersonic
 
 # Accessing data from device
 
-The [supersonic.data](api-reference/stable/supersonic/data/) namespace includes APIs that work with _any_ cloud data services [configured](/data-management/setting-up-appgyver-database/) for the application. They provide efficient ways for manipulating data – adding, updating and deleting records.
+The [supersonic.data](api-reference/stable/supersonic/data/) namespace includes APIs that work with _any_ cloud data providers [configured](/data-management/setting-up-appgyver-database/) for the Supersonic application. They provide efficient ways for manipulating data – adding, updating and deleting records.
 
 ## supersonic.data
 
-In the following we demonstrate how supersonic data makes it joyfully easy to manipulate resources in AppGyver Sandbox Database in a clean, object-oriented way.
+In the following we demonstrate how supersonic data makes it joyfully easy to manipulate resources in the defined backend database (such as AppGyver sandbox DB) in a clean, object-oriented way.
 
-Code snippets in above assume that the application has a resource `Beer` with two `string` fields `name` and `brewery`, and an `integer` field `brewed_since` configured.
+Code snippets in below assume that the application has a resource `Beer` with two `string` fields `name` and `brewery`, and an `integer` field `brewed_since` configured.
 
 Once a resource has been defined, app can get hold of it with method [supersonic.data.model](/api-reference/stable/supersonic/data/model/model/) which takes the resource name as parameter:
 
@@ -62,7 +62,9 @@ Beer.findAll({limit:10}).then (beers) ->
 Beer.findAll({skip10, limit:10}).then (beers) ->
 ```
 
-Option can also be a [Mongo DB](http://www.mongodb.org/) style of query parameter. The following returns all the beers where Brewery is "Schlenkerla":
+Option can also be a query parameter. AppgGyver Sandbox Database uses [Mongo DB](http://www.mongodb.org/) query syntax.
+
+The following returns all the beers where the Brewery is "Schlenkerla":
 
 ```js
 query = { "brewery": "Schlenkerla" }
