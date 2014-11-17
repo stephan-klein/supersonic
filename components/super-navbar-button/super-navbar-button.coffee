@@ -9,7 +9,7 @@
  # @attribute side="left" Determines the position of the button on the navigation bar. Allowed values are "left" and "right". If multiple buttons are defined for one side, they will be displayed in order.
  # @attribute onclick= When the native button is tapped, a `click` event is fired on the `<super-navbar-button>` element. This means you can use the `onclick` attribute, or any other framework or method that listens for `click` events.
  # @attribute location A route or a URL that will be [navigated to](/ui-and-navigation/navigation/) when the button is tapped. **Note:** If `location` is set, a `click` event will not be fired when the button is tapped.
- # @attribute view-id The id of a StartedView that will be [navigated to](/ui-and-navigation/navigation/) when the button is tapped. **Note:** If `view-id` is set, `location` will be ignored and a `click` event will not be fired when the button is tapped.
+ # @attribute view-id The id of a started View that will be [navigated to](/ui-and-navigation/navigation/) when the button is tapped. **Note:** If `view-id` is set, `location` will be ignored and a `click` event will not be fired when the button is tapped.
 
  # @exampleHtml
  # <super-navbar>
@@ -17,7 +17,7 @@
  #   <!-- Button using routes -->
  #   <super-navbar-button location="settings#index">Title</super-navbar-button>
  #
- #   <!-- Button using a StartedView id -->
+ #   <!-- Button using a started View id -->
  #   <super-navbar-button view-id="settingsView">Title</super-navbar-button>
  #
  #   <!-- Button with an AngularJS callback -->
