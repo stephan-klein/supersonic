@@ -6,14 +6,20 @@ superify = require '../superify'
  # @name navigate
  # @function
  # @description
- # Navigates to the given [route](/ui-and-navigation/navigation/routes/) or URL. Alternatively, you can pass in a [StartedView id](/ui-and-navigation/views/started-views/). Shorthand for calling `supersonic.ui.layers.push` with a View or StartedView.
+ # Navigates to the given Supersonic route or URL. Alternatively, you can pass in an id for a started View. Uses `supersonic.ui.layers.push` internally.
  # @usageJavaScript
- # supersonic.ui.navigate(locationOrId)
+ # supersonic.ui.navigate(locationOrId, params)
  # @type
  # navigate: (
  #   locationOrId: String
+ #   params?: String|Object
  # ) => Promise
- # @define {String} locationOrId: A [route](/ui-and-navigation/navigation/routes/), full URL or [StartedView id](/ui-and-navigation/views/started-views/) to be navigated to. The special `#back` route will go back in the navigation stack, triggering `supersonic.ui.layers.pop` internally. The special `#root` route will go back to the [root view](/ui-and-navigation/views/root-view/).
+ # @define {String} locationOrId A Supersonic route, full URL or View id to be navigated to. There are also special routes:
+ # <ul>
+ #   <li>`#back` – goes back in the navigation stack, triggering `supersonic.ui.layers.pop` internally.</li>
+ #   <li>`#root` – goes back to the root view, triggering `supersonic.ui.layers.popAll` internally.</li>
+ # </ul>
+ # @define {String|Object} params On object or JSON string of optional parameters to be passed to the target View, accessible via `supersonic.ui.views.params.current`.
  # @returnsDescription
  # A promise that will be resolved once the navigation commences. If the target location or id is invalid, the promise will be rejected.
  # @exampleJavaScript

@@ -7,14 +7,24 @@ module.exports = (steroids, log) ->
    # @name View
    # @class
    # @description
-   # A Supersonic View. A View references a specific location (route or URL). A View can be passed as an argument to other API calls (like `supersonic.ui.layers.push`). Read more in the [View guide](/ui-and-navigation/html-views/).
+   # A Supersonic View. A View instance references a specific location (a Supersonic route or an URL) or, if the View is started, an unique identifier.
+   #
+   # A View can be passed as an argument to other API calls (like `supersonic.ui.layers.push`). Some API calls utilize Views internally, like `supersonic.ui.navigate`, which creates a new View instance and then pushes it to the navigation stack.
    # @type
-   # View: {
-   #   getLocation: () => String
-   #   start: (String) => View
+   # supersonic.ui.View: {
+   #   getLocation: () => location: String
+   #   getId: () => id: String
+   #   setId: (id: String) => Promise(newId: String)
+   #   isStarted: () => Promise(isStarted: Boolean)
+   #   start: (newId?: String) => Promise
+   #   stop: () => Promise
    # }
-   # @define {Function} getLocation Returns the View's location String.
-   # @define {Function} start Shorthand for calling `supersonic.ui.views.start(view, id)` with this view.
+   # @define {Function} getLocation Returns the View's location (as a string).
+   # @define {Function} isStarted Returns a promise that resolves to `true` if the View instance references a started view. The promise resolves to `false` if the view doesn't have an `id` property, or if a matching started view cannot be found.
+   # @define {Function} getId Returns the View's `id` (as a string), used to reference a started View.
+   # @define {Function} setId Sets the View's `id` parameter. Returns a promise that is resolved with the new `id`. If there exists a started view matching the View's current `id`, the Promise is rejected, since the `id` of a started View cannot be changed.
+   # @define {Function} start Starts the View. Returns a promise that is resolved once the View has been started successfully. The promise is rejected if the View could not be started, e.g. if there already exists a started View with the same `id`, or if the View instance has no `id` set.<br><br>To start a View, it must have an `id`, set either in the View constructor, via `View.setId()` or as a parameter to this function.
+   # @define {Function} stop Stops the View, purging it from memory. Returns a promise that is resolved once the View is successfully stopped. The promise is rejected if the View cannot be stopped. A View can only be stopped if its `id` matches an existing started view.
   ###
 
   getApplicationState = ->
@@ -87,7 +97,8 @@ module.exports = (steroids, log) ->
       new Promise (resolve, reject) =>
         @_webView.unload {},
           onSuccess: resolve
-          onFailure: reject #TODO
+          onFailure: (error) ->
+            reject new Error error.errorMessage
 
     on: (event, callback)->
       new Promise (resolve, reject) =>
