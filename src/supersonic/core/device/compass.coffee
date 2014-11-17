@@ -33,7 +33,7 @@ module.exports = (steroids, log) ->
    #   magneticHeading: Number,
    #   trueHeading: Number,
    #   headingAccuracy: Number,
-   #   timestamp: Number
+   #   timestamp: Date
    # }
    # @define {Object} options={} Optional options object.
    # @define {Integer} options.frequency=100 Update interval in milliseconds.
@@ -99,7 +99,7 @@ module.exports = (steroids, log) ->
    #     magneticHeading: Number,
    #     trueHeading: Number,
    #     headingAccuracy: Number,
-   #     timestamp: Number
+   #     timestamp: Date
    #   }
    # @returnsDescription [Promise](todo) is resolved to the next available heading data.
    # @define {=>Object} heading Heading object.

@@ -32,7 +32,7 @@ module.exports = (steroids, log) ->
    #   x: Number,
    #   y: Number,
    #   z: Number,
-   #   timestamp: DOMTimeStamp
+   #   timestamp: Date
    # }
    # @define {Object} options={} Optional options object.
    # @define {Integer} options.frequency=40 Update interval in milliseconds.
@@ -103,7 +103,7 @@ module.exports = (steroids, log) ->
    #     x: Number,
    #     y: Number,
    #     z: Number,
-   #     timestamp: DOMTimeStamp
+   #     timestamp: Date
    #   }
    # @returnsDescription A promise that is resolved with the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.
    # @define {=>Object} acceleration Acceleration object.
