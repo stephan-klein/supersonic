@@ -136,7 +136,7 @@ a:link:hover {
  * HEADER NAVIGATION RESPONSIVENESS
  **************************************************/
 
-@media (min-width: 1000px) {
+@media (min-width: 600px) {
 
   .ag__docs__header-nav-bigscreen {
     display: block;
@@ -148,7 +148,7 @@ a:link:hover {
 
 }
 
-@media (max-width: 999px) {
+@media (max-width: 599px) {
 
   .ag__docs__header-nav-bigscreen {
     display: none;
