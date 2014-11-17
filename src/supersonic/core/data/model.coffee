@@ -217,7 +217,7 @@ module.exports = (logger, window) ->
  # supersonic.data.model('task').find(123).then (task) ->
  #   if task.done
  #     task.delete()
- # @exampleCoffeeScript
+ # @exampleJavaScript
  # supersonic.data.model('task').find(123).then( function(task) {
  #   if (task.done) {
  #     task.delete();
