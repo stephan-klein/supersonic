@@ -9,6 +9,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Performs an in-place animation on the current view.
+   # @usageCoffeeScript
+   # supersonic.ui.animate animationType, options
    # @usageJavaScript
    # supersonic.ui.animate(animationType, options)
    # @type

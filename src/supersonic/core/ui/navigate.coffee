@@ -7,8 +7,10 @@ superify = require '../superify'
  # @function
  # @description
  # Navigates to the given Supersonic route or URL. Alternatively, you can pass in an id for a started View. Uses `supersonic.ui.layers.push` internally.
- # @usageJavaScript
+ # @usageCoffeeScript
  # supersonic.ui.navigate(locationOrId, params)
+ # @usageJavaScript
+ # supersonic.ui.navigate(locationOrId, params);
  # @type
  # navigate: (
  #   locationOrId: String
@@ -22,6 +24,21 @@ superify = require '../superify'
  # @define {String|Object} params On object or JSON string of optional parameters to be passed to the target View, accessible via `supersonic.ui.views.params.current`.
  # @returnsDescription
  # A promise that will be resolved once the navigation commences. If the target location or id is invalid, the promise will be rejected.
+ # @exampleCoffeeScript
+ # # Via route
+ # supersonic.ui.navigate "cars#show"
+ #
+ # # Via id
+ # supersonic.ui.navigate "carsShowView"
+ #
+ # # Via URL
+ # supersonic.ui.navigate "http://www.google.com"
+ #
+ # # Go back to the previous view
+ # supersonic.ui.navigate "#back"
+ #
+ # # Go back to the root view
+ # supersonic.ui.navigate "#root"
  # @exampleJavaScript
  # // Via route
  # supersonic.ui.navigate("cars#show");
