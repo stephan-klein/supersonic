@@ -162,6 +162,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Updates options for drawers.
+   # @usageCoffeeScript
+   # supersonic.ui.drawers.updateOptions options
    # @usageJavaScript
    # supersonic.ui.drawers.updateOptions(options);
    # @type
@@ -196,6 +198,16 @@ module.exports = (steroids, log) ->
    #   <li>`TapCenterView`:  Close the drawer by tapping anywhere in the center view.
    #   <li>`PanDrawerView`: Close the drawer by panning (swiping) anywhere in the drawer view.
    # </ul>
+   # @exampleCoffeeScript
+   # supersonic.ui.drawers.updateOptions(
+   #   shadow: true
+   #   animation:
+   #     type: "slide"
+   #     duration: 1.0
+   #   gestures:
+   #     open: ["PanNavBar", "PanCenterView"]
+   #     close: ["TapNavBar", "TapCenterview"]
+   # )
    # @exampleJavaScript
    # supersonic.ui.drawers.updateOptions({
    #   shadow: true,
