@@ -355,6 +355,10 @@ p {
   font-family: "Proxima N W01 Reg";
 }
 
+.ag__docs__left-menu a code {
+  font-size: 12px !important;
+}
+
 .ag__docs__left-menu li.menu-title a {
   font-family: "Proxima N W01 Smbd";
 }
