@@ -16,19 +16,19 @@ module.exports = (steroids, log) ->
    # @name init
    # @function
    # @description
-   # Initializes a View or a StartedView as a drawer on the given side.
+   # Initializes a View as a drawer on the given side.
    # @usageJavaScript
    # supersonic.ui.drawers.init(view, options);
    # @usageCoffeeScript
    # supersonic.ui.drawers.init view, options
    # @type
    # supersonic.ui.drawers.init: (
-   #  view: View|StartedView
+   #  view: View
    #  options?:
    #    side: String
    #    width: Integer
    # ) => Promise
-   # @define {View|StartedView} view View or StartedView object to be shown as a drawer.
+   # @define {View} view View object to be shown as a drawer.
    # @define {Object} options Options object to define how the drawer will be shown.
    # @define {String} options.side="left" The side on which the drawer will be shown. Possible values are `left` and `right`
    # @define {String} options.width=200 The width of drawer.
@@ -42,7 +42,7 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.drawers.init(view, options);
    #
-   # // You can also pass in a StartedView
+   # // You can also pass in a started View
    # supersonic.ui.views.find("leftDrawer").then( function(leftDrawer) {
    #   supersonic.ui.drawers.init(leftDrawer);
    # });
@@ -54,7 +54,7 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.drawers.init view, options
    #
-   # # You can also pass in a StartedView
+   # # You can also pass in a started View
    # supersonic.ui.views.find("leftDrawer").then (leftDrawer)->
    #   supersonic.ui.drawers.init leftDrawer
   ###
