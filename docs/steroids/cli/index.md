@@ -7,4 +7,8 @@ parent_id: steroids
 section_id: cli
 ---
 
+<section class="docs-section" id="overview">
+# Overview
+This section covers the CLI portion of the AppGyver tooling. The connect screen is a graphical extension of the CLI, and is included in this section.
+</section>
 
