@@ -1,51 +1,17 @@
 ---
 layout: guides_navigation
-section_id: opening-external-urls
-subsections:
-  - name: Opening a Web URL
-  - name: Opening an External App
-  - name: openURL
-    method: true
-  - name: Opening Your App from External Apps
-  - name: getLaunchURL
-    method: true
-  - name: Open
+section_id: navigating-between-apps
+subsection_id: communicating-with-external-apps
 ---
 
 # Communicating with External Apps
 
 Supersonic offers two ways to communicate with external apps, which both utilize the ability for apps to have **Custom URL Schemas** – special URLs that open a specific app.
 
-<section class="docs-section" id="opening-a-web-url">
-## Opening a Web URL
-In a Supersonic app, `<a href>` links won't open in the device's browser. To do that, you need to use the [`supersonic.app.openURL()`](#openurl) method. Passing in an URL that starts with `http://` (or `https://`) will open the URL in the device's default web browser.
-
-### Example: Open Google
-```javascript
-supersonic.app.openURL("http://www.google.com");
-```
-
-</section>
-
-<section class="docs-section" id="opening-an-external-app">
-## Opening an External App from Your Supersonic App
-You can also use the [supersonic.app.openURL](#openurl) method to open an external app such as SMS, Google Maps or Mail from within your app. Just pass the corret URL scheme for the method, and the app will open if it's installed.
-
-### Example: Compose an SMS
-```javascript
-supersonic.app.openURL("sms:1-408-555-1212");
-```
-</section>
-
-<section class="docs-section" id="openurl">
-{% assign method = site.data.supersonic.app.openURL %}
-{% include api_method.md method=method %}
-</section>
-
 <section class="docs-section" id="opening-your-app-from-external-apps">
 ## Opening Your Supersonic App from External Apps
 
-Custom URL schemes work the other way, too. The Build Service allows you to define custom URL schemes – e.g. `myawesomeapp://` – that let other apps communicate with your apps, e.g. a link in an email can open your app directly and then direct the user to a specific location in your app.
+The Build Service allows you to define custom URL schemes – e.g. `myawesomeapp://` – that let other apps communicate with your apps, e.g. a link in an email can open your app directly and then direct the user to a specific location in your app.
 
 The app will open automatically once the link is clicked, but you can use the [`supersonic.app.getLaunchURL()`](#getlaunchurl) function to access the full URL string that was used to open your app.
 
