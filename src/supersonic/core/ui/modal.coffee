@@ -17,16 +17,16 @@ module.exports = (steroids, log) ->
    # @name show
    # @function
    # @description
-   # Shows the given View or StartedView as a modal.
+   # Shows the given View or started View as a modal.
    # @usageJavaScript
    # supersonic.ui.modal.show(view, options);
    # @type
    # supersonic.ui.modal.show: (
-   #   view: View|StartedView
+   #   view: View
    #   options?:
    #     animate?: Boolean
    # ) => Promise
-   # @define {View|StartedView} view The View or StartedView to be shown as a modal.
+   # @define {View} view The View or started View to be shown as a modal.
    # @define {Object} options The options object for defining how the modal will be shown.
    # @define {Boolean} options.animate=true If set to `false`, the modal will be shown immediately, without the default "slide-from-bottom" animation.
    # @returnsDescription
