@@ -10,5 +10,16 @@
       location.href = $(this).val();
     });
 
+    // Check screen height vs content height
+    try {
+      if ($(document).height() <= $(window).height()) {
+        var surroundsHeight = $("body > .ag__docs__footer").first().outerHeight() + $("body > .ag__docs__header").first().outerHeight() + $("body > .ag__docs_navbar").first().outerHeight();
+        var heightToAdd = $(window).height() - surroundsHeight;
+        var $contentElem = $("body > .content-container").first();
+        $contentElem.height(heightToAdd);
+      }
+    } catch(e) {}
+
+
   });
 </script>
