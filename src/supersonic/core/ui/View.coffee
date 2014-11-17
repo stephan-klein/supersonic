@@ -11,7 +11,7 @@ module.exports = (steroids, log) ->
    # @type
    # View: {
    #   getLocation: () => String
-   #   start: (String) => StartedView
+   #   start: (String) => View
    # }
    # @define {Function} getLocation Returns the View's location String.
    # @define {Function} start Shorthand for calling `supersonic.ui.views.start(view, id)` with this view.
