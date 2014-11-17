@@ -79,8 +79,8 @@ module.exports = (steroids, log) ->
    # Provides access to the current view and it's visibility state.
    #
    # ## Methods
-   # * [supersonic.ui.views.current.whenVisible()](whenVisible) – registers a listener that is triggered when the view becomes visible.
-   # * [supersonic.ui.views.current.whenHidden()](whenHidden) – registers a listener that is triggered when the view becomes hidden.
+   # * whenVisible – registers a listener that is triggered when the view becomes visible.
+   # * whenHidden – registers a listener that is triggered when the view becomes hidden.
   ###
 
   viewObject.visibility = events.visibility

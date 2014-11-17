@@ -8,7 +8,7 @@ module.exports = (steroids, log) ->
    # @name statusBar
    # @overview
    # @description
-   # The native status bar shown on the top of the screen, showing network strength, battery percentage etc. All changes to the status bar take effect app-wide. You can determine the initial visibility of the status bar in the `config/app.coffee` file, read more in the [/ui-and-navigation/app/status-bar](Status Bar guide).
+   # The native status bar shown on the top of the screen, showing network strength, battery percentage etc. All changes to the status bar take effect app-wide. You can determine the initial visibility of the status bar in the `config/app.coffee` file, read more in the Status Bar guide.
   ###
 
   ###

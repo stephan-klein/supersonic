@@ -71,9 +71,7 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.ui.views.start
    # @description
-   # Start a View in the background, allowing it to remain running even when it's not in a navigation stack or used in a drawer. Read more in the [Started Views guide](/ui-and-navigation/views/started-views/).
-   # @type
-   # supersonic.ui.views.start: (
+   # Start a View in the background, allowing it to remain running even when it's not in a navigation stack or used in a drawer. Read more in the Started Views guide.
    #  view: View|String
    # ) => Promise view: View
    # @define {View|String} view The View that will be started in the background. Alternatively, you can directly pass a identifier string.
@@ -124,7 +122,7 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.ui.views.stop
    # @description
-   # Stop a View running in the background. It will be destroyed and any memory used freed. A View that is in use(e.g. in the [navigation stack](/ui-and-navigation/navigation/navigation-stack/)) cannot be stopped.
+   # Stop a View running in the background. It will be destroyed and any memory used freed. A View that is in use(e.g. in the navigation stack) cannot be stopped.
    # @type
    # supersonic.ui.views.stop: (
    #  view: View|String
