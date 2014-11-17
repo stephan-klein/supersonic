@@ -29,7 +29,7 @@ module.exports = (steroids, log) ->
    # @define {Array<String>} options.buttonLables=["OK","Cancel"] Array of strings specifying button labels.
    # @define {String} options.defaultText="" Default value for the prompt input textbox.
    # @returnsDescription
-   # Returns a [Promise](todo). Once the prompt dialog is dismissed (by tapping on one of the buttons), the promise is resolved with an object that has the following properties.
+   # Returns a Promise. Once the prompt dialog is dismissed (by tapping on one of the buttons), the promise is resolved with an object that has the following properties.
    # @define {=>Object} result Result object.
    # @define {=>Integer} result.buttonIndex Index of the button tapped by the user.
    # @define {=>String} result.input String inputted by user.

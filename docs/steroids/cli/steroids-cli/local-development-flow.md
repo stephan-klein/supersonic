@@ -3,9 +3,10 @@ layout: steroids_cli
 header_title: Local Development Flow
 header_sub_title: Learn how the Steroids development flow works when you're working locally
 section_id: steroids-cli
+subsection_id: local-development-flow
 parent_id: steroids
 ---
-
+<section class="docs-section" id="local-development-flow">
 # Local Development Flow
 
 The Steroids tooling offers a smooth flow for local development, crafted to minimize the time you have to spend waiting for changes to be visible on your devices.
@@ -66,3 +67,5 @@ The exception is when you make changes to your project's config files (`config/a
 When you change the files in the `config/` folder, a full reload is triggered. The current app state is discarded and a loading screen is shown. After a moment, the app starts with the modified configs.
 
 You can initiate a full reload manually by typing `r` or `reload` in the Steroids Development Console and pressing enter.
+
+</section>

@@ -184,7 +184,7 @@ module.exports = (steroids, log) ->
    # @define {Array<String>} gestures.open An array of gesture types that can be used to open the drawer, e.g. `["PanNavBar", "PanCenterView"]`. Available gestures are:
    # <ul>
    #   <li>`PanNavBar`: Open the drawer by panning (swiping) on the navigation bar.
-   #   <li>`PanBezelCenterView`: Open the drawer by panning from the edge of the center view. The area that catches the gesture is 20 dips [(device-independent pixels)](/ui-and-navigation/overview/device-independent-pixels/) from the edge of the device screen.
+   #   <li>`PanBezelCenterView`: Open the drawer by panning from the edge of the center view. The area that catches the gesture is 20 dips (device-independent pixels) from the edge of the device screen.
    #   <li>`PanCenterView`: Open the drawer by panning anywhere in the center view.
    # </ul>
    # @define {Array<String>} gestures.close An array of gesture types that can be used to close the drawer, e.g. `["TapNavBar", "TapCenterView"]`. Available gestures are:
