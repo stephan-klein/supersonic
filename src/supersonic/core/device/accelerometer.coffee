@@ -113,6 +113,8 @@ module.exports = (steroids, log) ->
    # @define {=>Date} acceleration.timestamp Creation timestamp for acceleration.
    # @usageCoffeeScript
    # supersonic.device.accelerometer.getAcceleration()
+   # @usageJavaScript
+   # supersonic.device.accelerometer.getAcceleration();
    # @exampleCoffeeScript
    # supersonic.device.accelerometer.getAcceleration().then (acceleration) ->
    #   supersonic.logger.log(
