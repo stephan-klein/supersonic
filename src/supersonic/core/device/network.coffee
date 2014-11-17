@@ -6,6 +6,13 @@ module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.device.network"
 
   ###
+   # @namespace supersonic.device
+   # @name network
+   # @overview
+   # @description
+   # Provides information about the network status of the device.
+  ###
+  ###
    # @namespace supersonic.device.network
    # @name whenOffline
    # @function
