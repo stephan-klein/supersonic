@@ -17,7 +17,7 @@ module.exports = (steroids, log) ->
    # @name show
    # @function
    # @description
-   # Shows the Initial View. This causes all other views in your app to be reset and removed from memory, including StartedViews.
+   # Shows the Initial View. This causes all other views in your app to be reset and removed from memory, including started Views.
    # @usageJavaScript
    # supersonic.ui.initialView.show();
    # @type
