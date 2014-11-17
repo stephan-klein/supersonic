@@ -9,13 +9,12 @@ section_id: architecture
 <section class="docs-section" id="overview">
 # Building blocks of a Supersonic application
 
-Supersonic applications utilize the Multi-Page App architecture...
+Supersonic applications utilize the Multi-Page App architecture where all your views and controllers are neatly divided into separate HTML and JS documents. This allows for a clear, modular, MVC-based project file structure, superior memory management, easier bug reproduction, and much more.
 
 ## Application architecture
 
 To learn how a Supersonic app is built, where to place your content, and how to effectively build Multi-Page Applications go to
 the [basic architecture guide][architecture]
-
 
 ## Cross-view communication
 

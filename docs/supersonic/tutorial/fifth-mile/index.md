@@ -1,86 +1,68 @@
 ---
 layout: docs_first_mile
 title: Supersonic Documentation
-header_title: Distributing Supersonic apps
-header_sub_title: Learn how to build and distribute your apps.
+header_title: Interacting with the AppGyver team and your peers
+header_sub_title:
 section_id: fifth-mile
 subsections:
   - name: Overview
-  - name: Deploying to cloud
-  - name: Sharing your progress
-  - name: Configuring a build
-  - name: Installing onto device
-  - name: Publishing to app stores
+  - name: The developer community
+  - name: Reporting issues
+  - name: Creating reproductions
 ---
 
 <section class="docs-section" id="overview">
 ## Overview
 
-In this section you will learn:
-
-- How to deploy your app to the AppGyver cloud and share it with friends or co-workers
-- How to configure and request a build from the AppGyver Build Service
-- How to publish your finished app
-
-Note that building and releasing an app is an inevitably time-consuming process, so completing this mile might take a while, but the skills learned are going to be very useful to you sooner or later.
+We believe that a big part of creating a great product is the userbase around the product.
 </section>
 
-<section class="docs-section" id="deploying-to-cloud">
-##Deploying to cloud
-To deploy your app to the AppGyver Cloud the easiest way to do so is to use the Steroids Connect screen. Open the Connect screen (if you've closed it, run `qr` in the Steroids Development Server console to open it again), and head to the Cloud settings tab.
+<section class="docs-section" id="the-developer-community">
+## The developer community
+AppGyver has an awesome developer community that is constantly growing. Check out the discussion on the [forums][forums]
 
-Ensure you're connected to the Internet and click on "Deploy to cloud". This will cause Steroids CLI to deploy your app to the cloud. Wait for it to finish, after which the screen will update to show the app id of the deployed build and a link to the Cloud Share page, from where you can share your app with others.
+### Your question may already have an answer
+Most often you aren't alone with your problems. Before starting a new thread on a subject, check to see if one already exists by using the search in the AppGyver forums. On non-AppGyver related subjects such as general HTML or JavaScript questions, you will often find help online in places such as [stackoverflow](http://www.stackoverflow.com). For bug reports, also search the [GitHub issue tracker][github-issues].
 
-<img src="http://appgyver-academy-assets.s3.amazonaws.com/images/connect/Steroids_connect_predeploy.png" alt="Steroids connect screen">
+### Found/created something awesome? Share it!
+If you come up with a feature or app that is awesome, don't hesitate to share it with the rest of us. An awesome feature (or feature idea) might be made even better when mulled over by a few more developers. If you send us links to your finished app and we are impressed, you might even get a spot in the [AppGyver showcase][app-showcase].
 </section>
 
-<section class="docs-section" id="sharing-your-progress">
-## Sharing your progress
-To share your app with others, you need a Cloud QR code. It is generated when you deploy your app to the AppGyver Cloud. To access it, open the "Open cloud share page" link in the Steroids Connect screen.
+<section class="docs-section" id="reporting-issues">
+## Reporting issues
+At some point or another, you will most likely run into an problem that blocks you from completing development on your app. The problem might be a bug in the platform or something as trivial as a typo in your code, but when you're stuck it's prudent to reach out for help. The AppGyver team and the rest of the Steroids community are more than happy to help.
 
-<img src="http://appgyver-academy-assets.s3.amazonaws.com/images/connect/Steroids_connect_post_deploy.png" alt="Steroids connect screen">
+### Reporting bugs
+If you believe you've found a bug in the platform, we're very interested in hearing about it. Report your problem in the [AppGyver forums][forums], and accompany the issue description with as much detail as you have available. This includes
 
-You can then share your app with others by copy-pasting the link to that share page. Others can then use their AppGyver Scanners or the Simulator embedded into the page to preview your app.
+  - runtime platform (Android or iOS) and version number used
+  - `steroids.js` and `supersonic.js` versions (check the version numbers from `/bower_components/<library-name>/.bower.json`)
+  - OS version of the test device
+  - whether the issue occurs on scanner or standalone builds (or both)
+  - a [reproduction](#creating-reproductions) of the issue
+  - for CLI issues, also include the OS (and version)of the development machine
+
+The more detail you provide, the easier it will be for us to verify an issue and add it to the backlog to be fixed. All known issues are added to our [GitHub issue tracker][github-issues]. After your issue is verified, you can follow the GitHub issue to be notified when it is fixed, or participate in the discussion that takes place.
+
+### Need help with your code
+Sometimes you just need help implementing some functionality, in which case the [forums][forums] are once again your best starting point. Describe your problem clearly and show what approach you have already tried by providing a [reproduction link](#creating-reproductions). In the case of a one line code snippet it's probably ok to just embed the code in the thread, but be aware that most people are reluctant to debug code they cannot manipulate themselves. Also use proper code formatting by adding a line of three backticks ( \`\`\` ) before and after the code block.
+
+### Requesting new features
+Sometimes you will run into a situation where the feature you want is not yet implemented in the AppGyver superstack. Check The GitHub issue tracker for [feature requests][github-feature-requests] and if you don't find your feature mentioned, create a new thread in the [forums][forums] detailing the feature request. Once again be descriptive and try to provide motivation for why that particular feature would be awesome.
 </section>
 
-<section class="docs-section" id="configuring-a-build">
-## Configuring a build
+<section class="docs-section" id="creating-reproductions">
+## Creating reproductions
 
-There are essentially three situations when you need to request a build from the AppGyver build Service:
+A good reproduction goes a long way towards getting your issue looked at and fixed. You can clone the [Steroids Repro Template][repro-template] to your computer and use it as a template when creating a repro case for the issue at hand. Remember to keep it simple!
 
-1. You want to demo your app in a standalone build
-2. You need to use a custom PhoneGap plugin in your app (see the [Extending with plugins][plugins-mile] for instructions on plugin usage)
-3. You are ready to release your app.
+### Using the repro template
 
-So the general development workflow is based heavily around using Scanners and the QR code, but some special cases and the final release process require a separate build. The build setup process differs somewhat depending on which platform you are using, follow the links below to see how to set up builds for Android and iOS platforms.
-
-- [Build settings for Android][android-build-guide]
-- [Build settings for iOS][ios-build-guide]
-
-</section>
-<section class="docs-section" id="installing-onto-device">
-## Installing onto device
-
-For full instructions on installing your app onto a device, see [this guide][install-guide].
-</section>
-<section class="docs-section" id="publishing-to-app-stores">
-## Publishing to app stores
-
-Publishing to app stores requires that you build an app store version of your app and go through the required setup in the respective store pages.
-
-For Android:
-
-1. Build a Google Play build from the [Build Service][build-service]. The resulting `.apk` will be the app you publish to the Play Store.
-2. Go through the [Google launch checklist](http://developer.android.com/distribute/tools/launch-checklist.html) and upload your app to the store.
-
-For iOS:
-
-1. Build a Distribution -> App Store build of your app. Unlike other build types, you will receive a `.zip` file as the result of your build. You need to use the entire `.zip` when uploading to the App Store, and you cannot test the App Store build beforehand.
-2. Go through the [Apple submission guide](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/SubmittingYourApp/SubmittingYourApp.html#//apple_ref/doc/uid/TP40012582-CH9-SW1)
-
+Now, for an excellent bug reproduction, it's very important that a bare minimum of HTML/CSS/JavaScript is used. This prevents false diagnoses – when the app is complex, it might look like something is broken on the native side, when in reality it's just a JavaScript error caused by a misconfigured framework, a CSS style acting up etc. You should strive to have just the issue and nothing else in your project. Once you have your repro ready, just [report](#reporting-issues) your issue on the forums and link to the reproduction.
 </section>
 
-[android-build-guide]: /steroids/build-settings/build-settings-for-android/
-[install-guide]: /steorids/build-settings/installing-onto-device/
-[ios-build-guide]: /steroids/build-settings/build-settings-for-ios/
-[plugins-mile]: /supersonic/tutorial/seventh-mile
+[app-showcase]: http://www.appgyver.com/showcase
+[forums]: https://forums.appgyver.com
+[github-issues]: https://github.com/AppGyver/steroids/issues
+[github-feature-requests]: https://github.com/AppGyver/steroids/issues?q=is%3Aopen+is%3Aissue+label%3Afeature
+[repro-template]: https://github.com/AppGyver/steroids-repro-template

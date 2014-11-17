@@ -1,141 +1,86 @@
 ---
 layout: docs_first_mile
 title: Supersonic Documentation
-header_title: Supersonic App Logic and Structure
-header_sub_title: Learn the basics of modifying your app structure and logic
+header_title: Distributing Supersonic apps
+header_sub_title: Learn how to build and distribute your apps.
 section_id: fourth-mile
 subsections:
   - name: Overview
-  - name: Basic project structure
-  - name: Model-View-Controller architecture
-  - name: Angular and Supersonic
-  - name: Building views from partials
-  - name: Utilising the common module
+  - name: Deploying to cloud
+  - name: Sharing your progress
+  - name: Configuring a build
+  - name: Installing onto device
+  - name: Publishing to app stores
 ---
 
 <section class="docs-section" id="overview">
 ## Overview
 
-In this section we will take a closer look at how your application is structured. You will learn:
+In this section you will learn:
 
-- The basic layout of a Supersonic project
-- How to use template layouts for your HTML content
-- How to use the `common` module as the basis for all your Supersonic projects
-- How the Steroids² CLI builds your project
+- How to deploy your app to the AppGyver cloud and share it with friends or co-workers
+- How to configure and request a build from the AppGyver Build Service
+- How to publish your finished app
 
-You will also be introduced to some rather large concepts, such as Model-View-Controller Architecture. While we will step through the very basics of these concepts, it is recommended you go through the third-party content we link to properly familiarise yourself with them.
+Note that building and releasing an app is an inevitably time-consuming process, so completing this mile might take a while, but the skills learned are going to be very useful to you sooner or later.
 </section>
 
-<section class="docs-section" id="basic-project-structure">
-## Basic project structure
+<section class="docs-section" id="deploying-to-cloud">
+##Deploying to cloud
+To deploy your app to the AppGyver Cloud the easiest way to do so is to use the Steroids Connect screen. Open the Connect screen (if you've closed it, run `qr` in the Steroids Development Server console to open it again), and head to the Cloud settings tab.
 
-A default Supersonic project has the following directory structure:
+Ensure you're connected to the Internet and click on "Deploy to cloud". This will cause Steroids CLI to deploy your app to the cloud. Wait for it to finish, after which the screen will update to show the app id of the deployed build and a link to the Cloud Share page, from where you can share your app with others.
 
-```bash
-.
-├── app
-├── bower_components
-├── config
-├── dist
-├── logs
-└── node_modules
-```
-
-Generally, you will only be interested in the `/app` and `/config` folders.
-
- - `/app` contains all of the application content as created by you. This means all HTML, CSS and script files will be in the `/app` folder.
- - `/config` has special files for configuring your app behaviour. This includes defining the initial views and tab structure of your app, as well as configuration for default behaviour such as enabling and disabling overscroll for all of your app's views.
-
-The rest of the folders contain third-party dependencies required by Supersonic and various other things. The `/dist` folder doesn't exist in a completely new project, it is only created once your app is compiled. The contents of `/dist` is created from the contents of `/app`, with certain structural differences.
+<img src="http://appgyver-academy-assets.s3.amazonaws.com/images/connect/Steroids_connect_predeploy.png" alt="Steroids connect screen">
 </section>
 
-<section class="docs-section" id="model-view-controller-architecture">
-## Model-View-Controller architecture
+<section class="docs-section" id="sharing-your-progress">
+## Sharing your progress
+To share your app with others, you need a Cloud QR code. It is generated when you deploy your app to the AppGyver Cloud. To access it, open the "Open cloud share page" link in the Steroids Connect screen.
 
-Supersonic apps follow a model-view-controller (or MVC) pattern by default. This means that the UI (__V__iew), app logic (__C__ontroller) and data model (__M__odel) are kept separate from each other, with each one having their own area of responsibility in making your application functional. Using the MVC pattern promotes code readability and reuse, leading to better and less error prone code. The basic responsibilites of the different MVC components is listed below.
+<img src="http://appgyver-academy-assets.s3.amazonaws.com/images/connect/Steroids_connect_post_deploy.png" alt="Steroids connect screen">
 
-### Model
-
-The model of a module manages the data objects of that module. This means a model has no direct influence on the application's UI or logic, but it can be observed by the other components in the module, which will then handle any updates in the application data. In Supersonic projects, the model will usually be provided by Supersonic Data (and/or the Angular `$scope` object).
-
-### View
-
-The view is the outward-facing side of the application and the interface through which users can interact with the app. A view will generally handle gathering input from a user and displaying the results of the input.
-
-### Controller
-
-The controller is the glue between the view and model, and contains the bulk of the app logic. It is responsible for updating a view when the model changes, as well as updating the model based on user input.
-
->Note: While the above is probably enough to know for getting through these tutorials, it is recommended you take the time to learn more about the MVC pattern and why you should use it by reading the [Google primer](https://developer.chrome.com/apps/app_frameworks) on the subject.
-
-### MVC in a Supersonic module
-In the third mile we created a data resource `superhero` and a matching module for it. The structure of the module looks like the following:
-
-```bash
-.
-app/superhero
-├── index.coffee
-├── scripts
-│   ├── EditController.coffee
-│   ├── IndexController.coffee
-│   ├── NewController.coffee
-│   ├── ShowController.coffee
-│   └── SuperheroModel.coffee
-└── views
-    ├── _form.html
-    ├── _spinner.html
-    ├── edit.html
-    ├── index.html
-    ├── layout.html
-    ├── new.html
-    └── show.html
-```
-
-It contains the views, controllers and model for this module. The file structure by itself has some special signifigance which you will learn about further down this guide, but for now we are interested in how module files handle the different MVC responsibilities. We will go over that in the section below.
+You can then share your app with others by copy-pasting the link to that share page. Others can then use their AppGyver Scanners or the Simulator embedded into the page to preview your app.
 </section>
 
-<section class="docs-section" id="Angular">
-## Angular and Supersonic
+<section class="docs-section" id="configuring-a-build">
+## Configuring a build
 
-By default, Supersonic utilises [AngularJS](https://angularjs.org/) to create the MVC architecture in created apps. Each view in a module declares a controller that handles the logic for that view, e.g. in `/superhero/views/index.html`:
+There are essentially three situations when you need to request a build from the AppGyver build Service:
 
-```html
-<div ng-controller="IndexController">
-```
+1. You want to demo your app in a standalone build
+2. You need to use a custom PhoneGap plugin in your app (see the [Extending with plugins][plugins-mile] for instructions on plugin usage)
+3. You are ready to release your app.
 
-The `/superhero/scripts/IndexController.js` file in turn declares which module the controller belongs to and what dependencies to inject into the controller itself:
+So the general development workflow is based heavily around using Scanners and the QR code, but some special cases and the final release process require a separate build. The build setup process differs somewhat depending on which platform you are using, follow the links below to see how to set up builds for Android and iOS platforms.
 
-```coffeescript
-angular
-  .module('superhero')
-  .controller("IndexController", ($scope, Superhero) ->
-  )
-```
+- [Build settings for Android][android-build-guide]
+- [Build settings for iOS][ios-build-guide]
 
-Note that `Superhero` dependency is injected into the controller. That is the data model we defined in the previous tutorial, and it provides this controller access to the `Superhero` object, which in turn can communicate with our database. The next step is tying it all together.
+</section>
+<section class="docs-section" id="installing-onto-device">
+## Installing onto device
+
+For full instructions on installing your app onto a device, see [this guide][install-guide].
+</section>
+<section class="docs-section" id="publishing-to-app-stores">
+## Publishing to app stores
+
+Publishing to app stores requires that you build an app store version of your app and go through the required setup in the respective store pages.
+
+For Android:
+
+1. Build a Google Play build from the [Build Service][build-service]. The resulting `.apk` will be the app you publish to the Play Store.
+2. Go through the [Google launch checklist](http://developer.android.com/distribute/tools/launch-checklist.html) and upload your app to the store.
+
+For iOS:
+
+1. Build a Distribution -> App Store build of your app. Unlike other build types, you will receive a `.zip` file as the result of your build. You need to use the entire `.zip` when uploading to the App Store, and you cannot test the App Store build beforehand.
+2. Go through the [Apple submission guide](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/SubmittingYourApp/SubmittingYourApp.html#//apple_ref/doc/uid/TP40012582-CH9-SW1)
+
 </section>
 
-<section class="docs-section" id="building-views-from-partials">
-## Building views from view partials
-
-You may have noticed that the `/superhero/views/index.html` file isn't a complete HTML document. It just declares a `<div>` element that binds a controller to itself with the `ng-controller` attribute. This is known as a view partial. To make it a valid HTML document (and above all a functioning Supersonic view), we need to attach it to a special layout file, which contains all of the missing declarations. When compiling your app, the Steroids CLI looks for a `layout.html` file in the module and attaches all view partials to that layout.
-
-The `/superhero/views/layout.html` file specifies the scripts and stylesheets that should be paired with this view partial. It also has some special logic for bootstrapping the Angular application that makes up the MVC structure in our app.
-
-```html
-  <% _.each(yield.modules, function(module) { %>
-  <script src="/app/<%= module %>.js"></script>
-  <% }); %>
-</head>
-<body ng-app="<%= yield.moduleName %>" class="content">
-
-<%= yield.view %>
-```
-
-The `<%= ... %>` blocks are used to automatically pair each view with the corresponding controller and bootstrap an `ngApp` in that view.
-</section>
-
-<section class="docs-section" id="utilising-the-common-module">
-
-The `common` module also already contains a layout file (located at `app/common/views/layout.html`), which has all the basic dependecies of your project declared, such as `supersonic.js`, `steroids.js` and `cordova.js`. Because `common` is declared as a dependency to all modules by default, the layout file in there can be used to throughout the app just by removing any layout files from the module itself.
-</section>
+[android-build-guide]: /steroids/build-settings/build-settings-for-android/
+[install-guide]: /steorids/build-settings/installing-onto-device/
+[ios-build-guide]: /steroids/build-settings/build-settings-for-ios/
+[plugins-mile]: /supersonic/tutorial/seventh-mile
