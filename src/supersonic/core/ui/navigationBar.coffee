@@ -9,7 +9,8 @@ module.exports = (steroids, log) ->
    # @name navigationBar
    # @overview
    # @description
-   # Provides methods to work with the native navigation bar. For more information, see the Navigation Bar guide
+   # Provides methods to work with the native navigation bar. For more information, see the Navigation Bar guide.
+  ###
   ###
    # @namespace supersonic.ui.navigationBar
    # @name show
