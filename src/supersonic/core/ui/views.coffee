@@ -32,7 +32,7 @@ module.exports = (steroids, log) ->
    # ) => Promise view: View
    # @define {String} id A string matching the identifier of a view.
    # @returnsDescription
-   # [Promise](todo) that resolves with a View instance representing the given identifier
+   # A Promise that resolves with a View instance representing the given identifier
    # @define {View} view A new View instance matching the identifier given as a parameter.
    # @usageCoffeeScript
    # supersonic.ui.views.find("myCarsView").then (startedView) ->
@@ -76,7 +76,7 @@ module.exports = (steroids, log) ->
    # ) => Promise view: View
    # @define {View|String} view The View that will be started in the background. Alternatively, you can directly pass a identifier string.
    # @returnsDescription
-   # [Promise] that resolves with the given View object. If the view identifier is already in use by another started View, the promise will be rejected.
+   #  A Promise that resolves with the given View object. If the view identifier is already in use by another started View, the promise will be rejected.
    # @usageCoffeeScript
    # supersonic.ui.views.start "cars#show"
    # @usageJavaScript
@@ -129,7 +129,7 @@ module.exports = (steroids, log) ->
    # ) => Promise
    # @define {View|String} view The View that will be started in the background. Alternatively, you can directly pass a identifier string.
    # @returnsDescription
-   # [Promise](todo) that resolves after the View has been stopped.
+   # A Promise that resolves after the View has been stopped.
    # @usageCoffeeScript
    # supersonic.ui.views.stop "carsShowView"
    # @usageJavaScript

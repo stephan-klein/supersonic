@@ -26,7 +26,7 @@ module.exports = (steroids, log) ->
    # @define {String} options.message="" Optional message text shown under the title.
    # @define {String} options.buttonLabel="OK" Custom button text for the alert dialog.
    # @returnsDescription
-   # [Promise](todo), resolved when the the button in the alert dialog is tapped.
+   # A Promise, resolved when the the button in the alert dialog is tapped.
    # @usageCoffeeScript
    # supersonic.ui.dialog.alert "Who's awesome? You're awesome!", options
    # @usageJavaScript
