@@ -53,9 +53,12 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Rotate the screen to one of the four preset orientations. Allowed rotations must be set with `supersonic.ui.screen.setAllowedRotations`, or the call to supersonic.ui.screen.rotate will fail.
+   # @type
+   # rotateTo : (
+   #   orientation: String
+   #) => Promise
+   # @define {String} orientation. Possible values "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight".
    # @returns {Promise} Promise that is resolved when the screen is rotated.
-   # @params {string} orientation  Shorthand. Possible values "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight"
-   # @params {Object} options Verbose. Options object with an `orientation` property (string representation of desired orientation)
    # @usageCoffeeScript
    # supersonic.ui.screen.rotateTo options
    # @usageJavaScript
