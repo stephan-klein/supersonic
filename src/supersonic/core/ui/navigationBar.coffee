@@ -17,6 +17,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Shows the native navigation bar for the current view.
+   # @usageCoffeeScript
+   # supersonic.ui.navigationBar.show options
    # @usageJavaScript
    # supersonic.ui.navigationBar.show(options);
    # @type
@@ -58,6 +60,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Hides the native navigation bar for the current view.
+   # @usageCoffeeScript
+   # supersonic.ui.navigationBar.hide()
    # @usageJavaScript
    # supersonic.ui.navigationBar.hide();
    # @type
@@ -69,6 +73,13 @@ module.exports = (steroids, log) ->
    # @define {Boolean} animated=true If `false`, the navigation bar will be hidden without an animation.
    # @returnsDescription
    # A promise that will be resolved after the navigation bar is hidden. If the navigation bar cannot be hidden (e.g. it is already hidden), the promise will be rejected.
+   # @exampleCoffeeScript
+   # options =
+   #   animated: true
+   #
+   # supersonic.ui.navigationBar.hide(options).then ->
+   #   supersonic.logger.debug "Navigation bar hidden without animation."
+   #
    # @exampleJavaScript
    # var options = {
    #   animated: true
@@ -90,6 +101,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Updates the navigation bar. Only properties defined in the options object are affected. Other properties will continue to use the previous (or default) value.
+   # @usageCoffeeScript
+   # supersonic.ui.navigationBar.update options
    # @usageJavaScript
    # supersonic.ui.navigationBar.update(options);
    # @type
@@ -148,6 +161,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Adds a CSS class name to the navigation bar. Any previous CSS classes will be overriden. **Note:** At the moment, setting CSS classes for the navigation bar affects the whole navigation stack, not just the current view.
+   # @usageCoffeeScript
+   # supersonic.ui.navigationBar.setClass className
    # @usageJavaScript
    # supersonic.ui.navigationBar.setClass(className);
    # @type
@@ -178,6 +193,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Sets inline CSS styling to the navigation bar. Any previous inline styles are overridden. **Note:** At the moment, setting inline CSS styles for the navigation bar affects the whole navigation stack, not just the current view.
+   # @usageCoffeeScript
+   # supersonic.ui.navigationBar.setStyle inlineCssString
    # @usageJavaScript
    # supersonic.ui.navigationBar.setStyle(inlineCssString);
    # @type
@@ -209,6 +226,8 @@ module.exports = (steroids, log) ->
    # @description
    # Sets a CSS style id for navigation bar. Any previous id will be overridden. **Note:** At the moment, setting a CSS style id for the navigation bar affects the whole navigation stack, not just the current view.
    # @apiCall supersonic.ui.navigationBar.setStyleId
+   # @usageCoffeeScript
+   # supersonic.ui.navigationBar.setStyleId id
    # @usageJavaScript
    # supersonic.ui.navigationBar.setStyleId(id);
    # @type
