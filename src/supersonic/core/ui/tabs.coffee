@@ -21,6 +21,9 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Shows the tab bar
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.show()
+   # @type
    # @usageJavaScript
    # supersonic.ui.tabs.show();
    # @type
@@ -41,6 +44,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Hides the tab bar
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.hide()
    # @usageJavaScript
    # supersonic.ui.tabs.hide();
    # @type
@@ -61,6 +66,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Updates the tab bar
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.update [{title: "Hello", badge: "1"}]
    # @usageJavaScript
    # supersonic.ui.tabs.update([{title: "Hello", badge: "1"}]);
    # @type
@@ -84,6 +91,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Replaces the tab bar
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.replace [{title: "Web", location: "http://www.google.com"}]
    # @usageJavaScript
    # supersonic.ui.tabs.replace([{title: "Web", location: "http://www.google.com"}]);
    # @type
@@ -110,6 +119,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Selects the tab bar
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.select 1
    # @usageJavaScript
    # supersonic.ui.tabs.select(1);
    # @type
@@ -132,6 +143,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Selects the tab bar
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.updateCurrentTab {title: "Hello"}
    # @usageJavaScript
    # supersonic.ui.tabs.updateCurrentTab({title: "Hello"});
    # @type
@@ -156,6 +169,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Adds a CSS style class for the native tab bar.
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.setStyleClass "my-awesome-tabs"
    # @usageJavaScript
    # supersonic.ui.tabs.setStyleClass("my-awesome-tabs");
    # @type
@@ -179,6 +194,9 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Adds a CSS style id for the native tab bar.
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.setStyleId "graybg"
+   # @type
    # @usageJavaScript
    # supersonic.ui.tabs.setStyleId("graybg");
    # @type
@@ -202,6 +220,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Adds a CSS style id for the native tab bar.
+   # @usageCoffeeScript
+   # supersonic.ui.tabs.setStyleCSS "background-color: red;"
    # @usageJavaScript
    # supersonic.ui.tabs.setStyleCSS("background-color: red;");
    # @type
