@@ -18,6 +18,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Shows the given View or started View as a modal.
+   # @usageCoffeeScript
+   # supersonic.ui.modal.show view, options
    # @usageJavaScript
    # supersonic.ui.modal.show(view, options);
    # @type
@@ -31,6 +33,12 @@ module.exports = (steroids, log) ->
    # @define {Boolean} options.animate=true If set to `false`, the modal will be shown immediately, without the default "slide-from-bottom" animation.
    # @returnsDescription
    # A promise that is resolved when the modal starts to show. If there modal cannot be shown (e.g. the view is invalid), the promise is rejected.
+   # @exampleCoffeeScript
+   # modalView = new supersonic.ui.View "common#modal"
+   # options =
+   #   animate: true
+   #
+   # supersonic.ui.modal.show modalView, options
    # @exampleJavaScript
    # var modalView = new supersonic.ui.View("common#modal");
    # var options = {
@@ -55,6 +63,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Hides the (topmost) modal on screen.
+   # @usageCoffeeScript
+   # supersonic.ui.modal.hide options
    # @usageJavaScript
    # supersonic.ui.modal.hide(options);
    # @type
@@ -66,6 +76,11 @@ module.exports = (steroids, log) ->
    # @define {Boolean} options.animate=true If set to `false`, the modal will be hidden immediately, without the default "slide-from-top" animation.
    # @returnsDescription
    # A promise that is resolved when the modal starts to hide. If there is no modal on screen, the promise is rejected.
+   # @exampleCoffeeScript
+   # options =
+   #   animate: false
+   #
+   # supersonic.ui.modal.hide options
    # @exampleJavaScript
    # var options = {
    #   animate: false
@@ -87,6 +102,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Hides all modals on screen.
+   # @usageCoffeeScript
+   # supersonic.ui.modal.hideAll options
    # @usageJavaScript
    # supersonic.ui.modal.hideAll(options);
    # @type
@@ -98,6 +115,11 @@ module.exports = (steroids, log) ->
    # @define {Boolean} options.animate=true If set to `false`, the modals will be hidden immediately, without the default "slide-from-top" animation.
    # @returnsDescription
    # A promise that is resolved when the modals start to hide. If there are no modals on screen, the promise is rejected.
+   # @exampleCoffeeScript
+   # options =
+   #   animate: false
+   #
+   # supersonic.ui.modal.hideAll options
    # @exampleJavaScript
    # var options = {
    #   animate: false
