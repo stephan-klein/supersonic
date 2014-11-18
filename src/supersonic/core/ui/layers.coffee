@@ -37,7 +37,7 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.views.find("settingsView").then (startedView) ->
    #   supersonic.ui.layers.push startedView
-   # 
+   #
    # @exampleJavaScript
    # var view = new supersonic.ui.View("common#settings");
    # supersonic.ui.layers.push(view)
