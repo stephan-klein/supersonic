@@ -115,7 +115,7 @@ With your app up and running, we're ready to make some changes. Open the `myProj
   </super-navbar-title>
 </super-navbar>
 ```
-Save the file. The Steroids Development Server automatically notices that a file has changed and refreshes your project. You'll see the navigation bar update with your new title. The automatic updates are handled by a feature called LiveReload – read more in the [Local Development Flow guide][cli-dev-flow] under Steroids tooling.
+Save the file. The Steroids Development Server automatically notices that a file has changed and refreshes your project. The app will reload itself, after which you'll see the navigation bar update with your new title.
 </section>
 
 
@@ -151,5 +151,5 @@ With these skills, you have grasped the core of developing Supersonic apps! Once
 
 [cli-dev-flow]: /steroids/cli/steroids-cli/local-development-flow/
 [nav-bar]: /supersonic/guides/ui/native-components/navigation-bar
-[super-navigate]: /supersonic/guides/navigation/declarative-navigation
+[super-navigate]: /supersonic/api-reference/stable/components/super-navigate
 [second-mile]: /supersonic/tutorial/second-mile
