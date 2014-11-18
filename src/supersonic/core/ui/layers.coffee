@@ -18,6 +18,9 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Pushes a View on top of the navigation stack.
+   # @usageCoffeeScript
+   # view = new supersonic.ui.View "bananas#show"
+   # supersonic.ui.layers.push view
    # @usageJavaScript
    # var view = new supersonic.ui.View("bananas#show");
    # supersonic.ui.layers.push(view);
@@ -28,11 +31,18 @@ module.exports = (steroids, log) ->
    # @define {View|String} view A View or View identifier to be pushed on top of the navigation stack.
    # @returnsDescription
    # A promise that gets resolved with the provided View instance once the push has started. If the view cannot be pushed, the promise is rejected.
+   # @exampleCoffeeScript
+   # view = new supersonic.ui.View "common#settings"
+   # supersonic.ui.layers.push view
+   #
+   # supersonic.ui.views.find("settingsView").then (startedView) ->
+   #   supersonic.ui.layers.push startedView
+   # 
    # @exampleJavaScript
    # var view = new supersonic.ui.View("common#settings");
    # supersonic.ui.layers.push(view)
    #
-   # supersonic.ui.views.find("settingsView").then( function() {
+   # supersonic.ui.views.find("settingsView").then( function(startedView) {
    #   supersonic.ui.layers.push(startedView)
    # });
   ###
@@ -53,6 +63,8 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Pops the topmost view from the navigation stack. Doesn't have to be called from the topmost view.
+   # @usageCoffeeScript
+   # supersonic.ui.layers.pop()
    # @usageJavaScript
    # supersonic.ui.layers.pop();
    # @type
@@ -75,8 +87,10 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Pops all views except for the root view from the navigation stack. Doesn't have to be called from the topmost view.
-   # @usageJavaScript
+   # @usageCoffeeScript
    # supersonic.ui.layers.popAll()
+   # @usageJavaScript
+   # supersonic.ui.layers.popAll();
    # @type
    # supersonic.ui.layers.popAll: () => Promise
    # @returnsDescription
