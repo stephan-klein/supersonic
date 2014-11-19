@@ -43,6 +43,10 @@ Android <4.0:
 
 To inspect your device, connect it to your computer with a USB cable and open `about:inspect` in your desktop Chrome browser. The WebViews running in your app should show up as inspect targets.
 
+### Launch from Steroids CLI
+
+You can also launch the Web Inspector from the CLI by simply typing `cd` or `chrome`.
+
 ## Using the Chrome Web Inspector
 
 ### Inspecting a WebView

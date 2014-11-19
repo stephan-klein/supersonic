@@ -37,7 +37,7 @@ Next, enable Safari's developer tools. Open Safari's preferences by selecting *S
 
 Now, you should see a *Develop* menu item in Safari's top menu bar. Open the *Develop* > *iPhone Simulator* (or your iOS device's name) menu, and you should see a list of WebViews currently open in your app. (`contextmenu.html`, `loading.html` and `background.html` are used internally by Supersonic.)
 
-You can also skip the Safari menu altogether. When in the `steroids connect` prompt, you can use `d` or `debug` command to get a list of currently open WebViews in the iOS Simulator. The command takes an argument like `d views/banana/index.html` to open the Safari Web Inspector for given WebView. Partial file/path names work also, so if you have an open WebView at `views/car/index.html` path you can simply write e.g. `d car/ind`.
+You can also skip the Safari menu altogether. When in the `steroids connect` prompt, you can use `sd` or `safari` command to get a list of currently open WebViews in the iOS Simulator. The command takes an argument like `sd views/banana/index.html` to open the Safari Web Inspector for given WebView. Partial file/path names work also, so if you have an open WebView at `views/car/index.html` path you can simply write e.g. `sd car/ind`.
 
 If you cannot see any WebViews in your Safari Develop menu, restarting your computer might help.
 
