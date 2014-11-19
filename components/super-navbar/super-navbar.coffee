@@ -192,14 +192,6 @@ SuperNavbarPrototype.onStyleIdChanged = ->
 
 # What is the difference between attached and created?
 SuperNavbarPrototype.attachedCallback = ->
-  # Style
-  @class = @getAttribute("class")
-  @id = @getAttribute("id")
-  @style = @getAttribute("style")
-
-  @_onViewVisible()
-
-SuperNavbarPrototype.createdCallback = ->
   # Initiate button arrays
   @_leftButtons = []
   @_rightButtons = []
@@ -207,6 +199,11 @@ SuperNavbarPrototype.createdCallback = ->
   # Back button settings
   @_backButtonAllowed = true
   @_backButton = undefined
+
+  # Style
+  @class = @getAttribute("class")
+  @id = @getAttribute("id")
+  @style = @getAttribute("style")
 
   # Observe attributes style and class
   observerConfiguration =
@@ -224,6 +221,7 @@ SuperNavbarPrototype.createdCallback = ->
       @show()
 
   document.addEventListener "visibilitychange", @_onViewVisible, false
+  @_onViewVisible()
 
 SuperNavbarPrototype.detachedCallback = ->
   #console.log "Navigation bar detachedCallback"
