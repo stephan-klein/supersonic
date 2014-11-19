@@ -110,8 +110,6 @@ Currently (due to OS limitations that we are yet to overcome) the navigation bar
 
 This means that if you set a CSS class for the navigation bar in `index.html`, the same styles will be applied to the navigation bar in `show.html` too, and visa versa.
 
-Navigation bar visibility also applies the whole navigation stack: if you set `<super-navbar style="display: none;">` or use the `supersonic.ui.navigationBar.hide()` API described below, the navigation bar will hidden in all views.
-
 However, navigation bar buttons and title are unique for the view, so you don't have to worry about them overlapping.
 
 Note that each navigation stack has its own navigation bar (tabs and modals have their own navigation stacks).
