@@ -50,7 +50,7 @@ module.exports = (logger, window) ->
 
 ###
 # @namespace supersonic.data
-# @name Model
+# @name model
 # @class
 # @description
 # A Supersonic Data Model class. Provides access to a specific cloud resource through a fluent interface.
@@ -58,16 +58,16 @@ module.exports = (logger, window) ->
 # Model: {
 #   all: (queryParams, options) => Object
 #   findAll: (queryParams) => Promise Collection
-#   find: (id) => Promise Resource
+#   find: (id) => Promise model instance
 # }
 # @methods all find findAll
-# @define {Function} all Retruns an object with properties for accessing a stream of updates to the Collection data.
-# @define {Function} findAll Returns a collection of resources.
-# @define {Function} find Returns a resource by a specific id.
+# @define {Function} all Retuns an object with properties for accessing a stream of updates to the Collection data.
+# @define {Function} findAll Returns a collection of model instances representing the matching resources in the backend.
+# @define {Function} find Returns a model instance matching a cloud resource with a specific id.
 ###
 ###
 # @namespace supersonic.data
-# @name Model.all
+# @name model.all
 # @function
 # @type
 # all: (
@@ -100,12 +100,12 @@ module.exports = (logger, window) ->
 
 ###
  # @namespace supersonic.data
- # @name Model.findAll
+ # @name model.findAll
  # @function
  # @type
- # findAll: () => Promise collection: Collection Resource
+ # findAll: () => Promise collection: Collection model-instance
  # @description
- # Access a collection of resources
+ # Access a collection of model instances
  # @exampleCoffeeScript
  # supersonic.data.model('task').findAll().then (tasks) ->
  #   for task in tasks
@@ -119,12 +119,12 @@ module.exports = (logger, window) ->
 ###
 ###
  # @namespace supersonic.data
- # @name Model.find
+ # @name model.find
  # @function
  # @type
- # find: (id) => Promise Resource
+ # find: (id) => Promise model instance
  # @description
- # Find a resource from the cloud by an id
+ # Find a resource from the cloud by an id and return the matching model instance.
  # @exampleCoffeeScript
  # supersonic.data.model('task').find(123).then (task) ->
  #   console.log task.description
@@ -138,13 +138,13 @@ module.exports = (logger, window) ->
  # @name Collection
  # @class
  # @description
- # A Supersonic Data Collection class. Represents a collection of resources (instances of `supersonic.data.Resource`) fetched from the cloud backend.
+ # A Supersonic Data Collection class. Represents a collection of resources (instances of `supersonic.data.model`) fetched from the cloud backend.
  # @type
  # Collection: {
  #   save: () => Promise
  # }
  # @methods save
- # @define {Function} save Persist all resources in this collection.
+ # @define {Function} save Persist all the model instances in this collection.
 ###
 ###
  # @namespace supersonic.data
@@ -153,9 +153,9 @@ module.exports = (logger, window) ->
  # @type
  # Collection.save: () => Promise
  # @description
- # Persist all resources in this collection.
+ # Persist all model instances in this collection.
  # @returnDescription
- # A promise that resolves once all the resources in the collection have been perisisted to the cloud backend.
+ # A promise that resolves once all the model instances in the collection have been perisisted to the cloud backend.
  # @exampleCoffeeScript
  # supersonic.data.model('task').findAll().then (tasks) ->
  #   for task in tasks
@@ -174,27 +174,27 @@ module.exports = (logger, window) ->
 ###
 ###
  # @namespace supersonic.data
- # @name Resource
- # @class
+ # @name model-instance
+ # @instance
  # @description
- # A Supersonic Data Resource class. Represents a single resource fetched from the cloud backend.
+ # A Supersonic Data Model instance. Represents a single resource fetched from the cloud backend.
  # @type
  # Collection: {
  #   save: () => Promise
  #   delete: () => Promise
  # }
  # @methods save delete
- # @define {Function} save Persist the data in this resource to the cloud backend.
- # @define {Function} delete Remove this resource from the cloud backend.
+ # @define {Function} save Persist the data in this model instance to the cloud backend.
+ # @define {Function} delete Remove this model instance from the cloud backend.
 ###
 ###
  # @namespace supersonic.data
- # @name Resource.save
+ # @name model.save
  # @function
  # @type
- # resource.save: () => Promise
+ # model.save: () => Promise
  # @description
- # Persist the data in this resource to the cloud. If the instance is new, create it in the cloud; otherwise update the existing cloud resource.
+ # Persist the data in this Model instance to the cloud. If the instance is new, create it in the cloud; otherwise update the existing cloud resource.
  # @exampleCoffeeScript
  # supersonic.data.model('task').find(123).then (task) ->
  #   task.done = true
@@ -207,12 +207,12 @@ module.exports = (logger, window) ->
 ###
 ###
  # @namespace supersonic.data
- # @name Resource.delete
+ # @name model.delete
  # @function
  # @type
- # resource.delete: () => Promise
+ # model.delete: () => Promise
  # @description
- # Remove this resource from the cloud backend.
+ # Remove the resource matching this model instance from the cloud backend.
  # @exampleCoffeeScript
  # supersonic.data.model('task').find(123).then (task) ->
  #   if task.done
