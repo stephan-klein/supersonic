@@ -59,10 +59,6 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # Returns a Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
    # @define {=>String} result Image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
-   # @usageCoffeeScript
-   # supersonic.media.camera.takePicture options
-   # @usageJavaScript
-   # supersonic.media.camera.takePicture(options);
    # @exampleCoffeeScript
    # options =
    #   quality: 50
@@ -175,10 +171,6 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # Returns a Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
    # @define {=>String} result Image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
-   # @usageCoffeeScript
-   # supersonic.media.camera.getFromPhotoLibrary options
-   # @usageJavaScript
-   # supersonic.media.camera.getFromPhotoLibrary(options);
    # @exampleCoffeeScript
    # options =
    #   quality: 50
