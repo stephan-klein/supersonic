@@ -14,7 +14,7 @@ module.exports = (steroids, log) ->
    # supersonic.debug.ping : ()
    # => Promise response: String
    # @returnsDescription
-   # Returns a [Promise](todo) that that gets resolved once the ping is successful. Resolves with the string `"Pong!"`.
+   # Returns a Promise that that gets resolved once the ping is successful. Resolves with the string `"Pong!"`.
    # @define {=>String} response The string "Pong!".
    # @usageCoffeeScript
    # supersonic.debug.ping()
