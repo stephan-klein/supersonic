@@ -11,7 +11,7 @@
 {% endif %}
 
 {% if class.params.size > 0 %}
-#### Class Instance Properties
+#### Class Properties
 <table class="table" style="margin:0;">
   <thead>
     <tr>
