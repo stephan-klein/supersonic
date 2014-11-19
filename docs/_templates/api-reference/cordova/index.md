@@ -1,7 +1,7 @@
 ---
 layout: "docs_api"
 title: Cordova API reference
-header_sub_title: Contact object
+header_sub_title: Cordova APIs
 section_id: cordova
 ---
 
