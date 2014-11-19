@@ -2,9 +2,6 @@
 logs
 *.log
 
-# All sass-caches
-.sass-cache
-
 # Runtime data
 pids
 *.pid
