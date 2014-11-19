@@ -29,12 +29,9 @@ module.exports = (steroids) ->
    # @define {=>String} launchURL The full URL that was used to launch this app.
    # @define {=>Object} params An object containing the parameters parsed from the URL string. Contains an empty object if no parameters were present on the launch URL.
    # @define {=>Object} params.param An object whose key matches the parameter name and value its value, e.g. `"password=monkey"` produces an object `{password: "monkey"}`
-   # @usageCoffeeScript
-   # supersonic.app.getLaunchURL()
-   # @usageJavaScript
-   # var urlObject = supersonic.app.getLaunchURL();
    # @exampleCoffeeScript
    # urlObject = supersonic.app.getLaunchURL()
+   #
    # if urlObject?
    #   supersonic.logger.log "Got launch URL #{urlObject.launchURL} with params: #{urlObject.params}"
    # else
@@ -42,6 +39,7 @@ module.exports = (steroids) ->
    #
    # @exampleJavaScript
    # var urlObject = supersonic.app.getLaunchURL();
+   #
    # if (urlObject != null) {
    #   supersonic.logger.log("Got launch URL " + urlObject.launchURL + " with params: " + urlObject.params);
    # } else {

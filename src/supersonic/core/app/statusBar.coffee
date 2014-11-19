@@ -23,9 +23,9 @@ module.exports = (steroids, log) ->
    #   Promise
    # @returnsDescription
    # A promise that is resolved when the status bar is hidden.
-   # @usageCoffeeScript
+   # @exampleCoffeeScript
    # supersonic.app.statusBar.hide()
-   # @usageJavaScript
+   # @exampleJavaScript
    # supersonic.app.statusBar.hide();
   ###
   hide: s.promiseF "hide", ->
@@ -57,10 +57,6 @@ module.exports = (steroids, log) ->
    # </ul>
    # @returnsDescription
    # A promise that is resolved when the status bar is shown.
-   # @usageCoffeeScript
-   # supersonic.app.statusBar.show()
-   # @usageJavaScript
-   # supersonic.app.statusBar.show();
    # @exampleCoffeeScript
    # supersonic.app.statusBar.show("light").then ->
    #   supersonic.logger.log "Status bar shown"
