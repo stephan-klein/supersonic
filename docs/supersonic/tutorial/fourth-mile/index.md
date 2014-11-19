@@ -27,7 +27,7 @@ Note that building and releasing an app is an inevitably time-consuming process,
 
 <section class="docs-section" id="deploying-to-cloud">
 ##Deploying to cloud
-To deploy your app to the AppGyver Cloud the easiest way to do so is to use the Steroids Connect screen. Open the Connect screen (if you've closed it, run `qr` in the Steroids Development Server console to open it again), and head to the Cloud settings tab.
+To deploy your app to the AppGyver Cloud the easiest way to do so is to use the Steroids Connect screen. Open the Connect screen (if you've closed it, run `c` in the Steroids Development Server console to open it again), and head to the Cloud settings tab.
 
 Ensure you're connected to the Internet and click on "Deploy to cloud". This will cause Steroids CLI to deploy your app to the cloud. Wait for it to finish, after which the screen will update to show the app id of the deployed build and a link to the Cloud Share page, from where you can share your app with others.
 
@@ -46,7 +46,7 @@ You can then share your app with others by copy-pasting the link to that share p
 <section class="docs-section" id="configuring-a-build">
 ## Configuring a build
 
-There are essentially three situations when you need to request a build from the AppGyver build Service:
+There are essentially three situations when you need to request a build from the AppGyver Build Service:
 
 1. You want to demo your app in a standalone build
 2. You need to use a custom PhoneGap plugin in your app (see the [Extending with plugins][plugins-guide] for instructions on plugin usage)
