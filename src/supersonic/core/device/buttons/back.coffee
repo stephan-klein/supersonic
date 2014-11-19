@@ -1,6 +1,15 @@
 module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.device.buttons.back"
-
+  ###
+   # @namespace supersonic.device.buttons
+   # @name back
+   # @overview
+   # @description
+   # Provides access to the device's back button (Android only).
+   #
+   # ## Methods
+   # * [whenPressed](/supersonic/api-reference/stable/supersonic/device/buttons/back/whenPressed/) – overrides device back button.
+  ###
   ###
   # @namespace supersonic.device.buttons.back
   # @name whenPressed
