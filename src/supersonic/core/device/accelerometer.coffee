@@ -42,10 +42,6 @@ module.exports = (steroids, log) ->
    # @define {=>Number} acceleration.y Amount of acceleration on the y-axis. (in m/s^2)
    # @define {=>Number} acceleration.z Amount of acceleration on the z-axis. (in m/s^2)
    # @define {=>Date} acceleration.timestamp Creation timestamp for acceleration.
-   # @usageCoffeeScript
-   # supersonic.device.accelerometer.watchAcceleration options
-   # @usageJavaScript
-   # supersonic.device.accelerometer.watchAcceleration(options);
    # @exampleCoffeeScript
    # options =
    #   frequency: 60
@@ -111,10 +107,6 @@ module.exports = (steroids, log) ->
    # @define {=>Number} acceleration.y Amount of acceleration on the y-axis. (in m/s^2)
    # @define {=>Number} acceleration.z Amount of acceleration on the z-axis. (in m/s^2)
    # @define {=>Date} acceleration.timestamp Creation timestamp for acceleration.
-   # @usageCoffeeScript
-   # supersonic.device.accelerometer.getAcceleration()
-   # @usageJavaScript
-   # supersonic.device.accelerometer.getAcceleration();
    # @exampleCoffeeScript
    # supersonic.device.accelerometer.getAcceleration().then (acceleration) ->
    #   supersonic.logger.log(

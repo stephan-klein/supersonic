@@ -22,10 +22,6 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.device.network.whenOffline: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
-   # @usageCoffeeScript
-   # supersonic.device.network.whenOffline()
-   # @usageJavaScript
-   # supersonic.device.network.whenOffline();
    # @exampleCoffeeScript
    # supersonic.device.network.whenOffline().then ->
    #   steroids.logger.log("Device is offline")
@@ -60,10 +56,6 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.device.network.whenOnline: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
-   # @usageCoffeeScript
-   # supersonic.device.network.whenOnline()
-   # @usageJavaScript
-   # supersonic.device.network.whenOnline();
    # @exampleCoffeeScript
    # supersonic.device.network.whenOnline().then ->
    #   steroids.logger.log("Device is online")

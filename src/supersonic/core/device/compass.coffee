@@ -44,10 +44,6 @@ module.exports = (steroids, log) ->
    # @define {=>Number} heading.trueHeading The heading relative to the geographic North Pole in degrees 0-359.99 at a single moment in time. A negative value indicates that the true heading couldn't be determined.
    # @define {=>Number} heading.headingAccuracy The deviation in degrees between the reported heading and the true heading.
    # @define {=>Date} heading.timestamp Creation timestamp for heading.
-   # @usageCoffeeScript
-   # supersonic.device.compass.watchHeading options
-   # @usageJavaScript
-   # supersonic.device.compass.watchHeading(options);
    # @exampleCoffeeScript
    # supersonic.device.compass.watchHeading().onValue (heading) ->
    #   supersonic.logger.log(
@@ -107,10 +103,6 @@ module.exports = (steroids, log) ->
    # @define {=>Number} heading.trueHeading The heading relative to the geographic North Pole in degrees 0-359.99 at a single moment in time. A negative value indicates that the true heading couldn't be determined.
    # @define {=>Number} heading.headingAccuracy The deviation in degrees between the reported heading and the true heading.
    # @define {=>Date} heading.timestamp heading.timestamp Creation timestamp for heading.
-   # @usageCoffeeScript
-   # supersonic.device.compass.getHeading()
-   # @usageJavaScript
-   # supersonic.device.compass.getHeading();
    # @exampleCoffeeScript
    # supersonic.device.compass.getHeading().then (heading) ->
    #   steroids.logger.log(

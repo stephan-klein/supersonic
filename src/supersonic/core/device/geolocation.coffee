@@ -45,10 +45,6 @@ module.exports = (steroids, log) ->
    # @define {=>Number} coord.heading  Direction of travel, specified in degrees counting clockwise relative to the true north.
    # @define {=>Number} coord.speed  Current ground speed of the device, specified in meters per second. (Number)
    # @define {=>Date} position.timestamp Creation timestamp for coords.
-   # @usageCoffeeScript
-   # supersonic.device.geolocation.watchPosition options
-   # @usageJavaScript
-   # supersonic.device.geolocation.watchPosition(options);
    # @exampleCoffeeScript
    # supersonic.device.geolocation.watchPosition().onValue (position) ->
    #   steroids.logger.log(
@@ -105,10 +101,6 @@ module.exports = (steroids, log) ->
    # @define {=>Number} coord.heading  Direction of travel, specified in degrees counting clockwise relative to the true north.
    # @define {=>Number} coord.speed  Current ground speed of the device, specified in meters per second. (Number)
    # @define {=>Date} position.timestamp Creation timestamp for coords.
-   # @usageCoffeeScript
-   # supersonic.device.geolocation.getPosition()
-   # @usageJavaScript
-   # supersonic.device.geolocation.getPosition();
    # @exampleCoffeeScript
    # supersonic.device.geolocation.getPosition().then (position) ->
    #   steroids.logger.log(

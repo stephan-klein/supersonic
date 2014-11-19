@@ -14,9 +14,9 @@ module.exports = (steroids, log) ->
    # Vibrates the device.
    # @type
    # supersonic.device.vibrate : ()
-   # @usageCoffeeScript
+   # @exampleCoffeeScript
    # supersonic.device.vibrate()
-   # @usageJavaScript
+   # @exampleJavaScript
    # supersonic.device.vibrate();
   ###
 

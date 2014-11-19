@@ -20,10 +20,6 @@ module.exports = (steroids, log) ->
   # @type
   # supersonic.device.buttons.back.whenPressed: () => unsubscribe: Function
   # @define {Function} unsubscribe Stop listening
-  # @usageCoffeeScript
-  # supersonic.device.buttons.back.whenPressed()
-  # @usageJavaScript
-  # supersonic.device.buttons.back.whenPressed();
   # @exampleCoffeeScript
   # supersonic.device.buttons.back.whenPressed().then ->
   #   steroids.logger.log("Device back button was pressed.")
