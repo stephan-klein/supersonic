@@ -9,10 +9,6 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Performs an in-place animation on the current view.
-   # @usageCoffeeScript
-   # supersonic.ui.animate animationType, options
-   # @usageJavaScript
-   # supersonic.ui.animate(animationType, options)
    # @type
    # animate: (
    #   animationType: String
@@ -43,6 +39,23 @@ module.exports = (steroids, log) ->
    # </ul>
    # @returnsDescription
    # A `supersonic.ui.Animation` object.
+   # @exampleCoffeeScript
+   # supersonic.ui.animate "curlDown"
+   #
+   # # With options
+   # options =
+   #    duration: 1.2
+   #    curve: "linear"
+   # supersonic.ui.animate "curlDown", options
+   # @exampleJavaScript
+   # supersonic.ui.animate("curlDown");
+   #
+   # // With options
+   # var options = {
+   #    duration: 1.2,
+   #    curve: "linear"
+   # }
+   # supersonic.ui.animate("curlDown", options);
   ###
   SUPPORTED_CURVES = [
     "easeInOut"
