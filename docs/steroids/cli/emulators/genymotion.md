@@ -9,14 +9,15 @@ parent_id: steroids
 # Genymotion
 
 Genymotion heavily simplifies the use of Android emulators by running them in a virtual environment and removes the requirement of having Android SDK installed.
+**Genymotion support is Work in Progress and not guaranteed to work.** Only OS X supported.
 
-## Install
+## Installing
 
 Genymotion runs the emulator in Oracle VirtualBox, so first you need to have that installed.
 On [Oracle VirtualBox](https://www.virtualbox.org/) you will find instructions and download links.
 
 After VirtuaBox is installed, head over to [Genymotion](http://www.genymotion.com/).
-Genymotion is free to for non-commerical use but requires you to create an account. So sign up and download the latest version for your platform.
+Genymotion is free to for non-commericial use but requires you to create an account. So sign up and download the latest version for your platform.
 
 Install Genymotion and make sure to install the **Genymotion Shell** (when prompted about it) too. Without the Shell installed, Steroids CLI won't be able to launch the emulator.
 

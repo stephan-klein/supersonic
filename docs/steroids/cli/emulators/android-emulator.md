@@ -1,7 +1,7 @@
 ---
 layout: steroids_cli
 header_title: Android Emulator
-header_sub_title: Learn how to setup the standard Android emulator.
+header_sub_title: Learn how to setup and use Android emulator.
 section_id: emulators
 subsection_id: android-emulator
 parent_id: steroids
@@ -36,6 +36,19 @@ Now we need to create a new emulator device.
 android create avd -n steroids -t android-21 --abi default/x86_64
 ```
 
+This will create a new device with the name `steroids` with Android 5.0 and a x68 CPU. The name has to be `steroids` in order for the CLI to identify it.
+
 ## Running
 
 To launch your app in the emulator, type `and` or `a` in the `steroids connect` prompt. The emulator should now start and load your app.
+
+## Troubleshooting
+
+### Why is the emulator so slow?
+Android Emulator needs a lot of processing power and is known for not exactly being a speed demon. One way of improving the performance is to set the device to a lower resolution. This can be done through the AVD Manager. Start it by typing:
+
+```bash
+android avd
+```
+
+Here you can create new AVD's and edit existing ones. Remember to give the new device the name `steroids` for the CLI to detect it.

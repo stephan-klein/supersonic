@@ -11,19 +11,17 @@ parent_id: steroids
 
 ## Installing
 
-The iOS Simulator comes bundled with XCode. XCode can be downloaded from Mac App Store. In addition to XCode, Command Line Tools has to be installed. You can trigger the installation with the following command.
+The iOS Simulator is included in XCode. XCode is can be downloaded from Mac App Store. In addition to XCode, Command Line Tools has to be installed. You can trigger the installation with the following command.
 
 ```bash
 xcode-select --install
 ```
 
-You can verify that the Simulator is working by launching it with the following command.
+Verify that the Simulator is working by launching it.
 
 ```bash
 open /Applications/Xcode.app/Contents/Developer/Applications/iOS Simulator.app
 ```
-
-If the Simulator started you are good to go!
 
 ## Running
 
