@@ -4,10 +4,10 @@
 
 {{component.description | markdownify }}
 
-{% if component.usageHtml %}
-### Basic usage
+{% if component.exampleHtml %}
+### Example usage
 ```html
-{{component.usageHtml | escape_xml}}
+{{component.exampleHtml | escape_xml}}
 ```
 {% endif %}
 
@@ -52,11 +52,4 @@
     {% endfor %}
   {% endfor %}
 </table>
-{% endif %}
-
-{% if component.exampleHtml %}
-### Full example
-```html
-{{component.exampleHtml | escape_xml}}
-```
 {% endif %}
