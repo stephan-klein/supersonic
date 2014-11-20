@@ -1,6 +1,10 @@
 {% assign parent_id = page.parent_id %}
 {% for section in page.sections %}
-{% assign section_id = section.name | slugify %}
+{% if section.id %}
+  {% assign section_id = section.id %}
+{% else %}
+  {% assign section_id = section.name | slugify %}
+{% endif %}
 <ul class="nav left-menu ag__docs__left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
   <li class="menu-title">
     <a href="/{{parent_id}}/{{include.tab_name}}{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
@@ -9,7 +13,11 @@
       <a href="/{{parent_id}}/{{include.tab_name}}/{{section_id}}" class="api-section">Overview</a>
     </li>
     {% for subsection in section.subsections %}
-    {% assign subsection_id = subsection.name | slugify %}
+    {% if subsection.id %}
+      {% assign subsection_id = subsection.id %}
+    {% else %}
+      {% assign subsection_id = subsection.name | slugify %}
+    {% endif %}
     <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
       <a href="/{{parent_id}}/{{include.tab_name}}/{{section_id}}/{{subsection_id}}" class="api-section">
         {{subsection.name}}
