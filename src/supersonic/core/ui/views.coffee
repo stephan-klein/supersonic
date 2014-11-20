@@ -25,22 +25,15 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.ui.views.find
    # @description
-   # Get a new view instance by a view identifier. Identifiers can be custom IDs, routes, or URLs.
+   # Get a new view instance by a view identifier.
    # @type
    # supersonic.ui.views.find: (
    #  id: String
    # ) => Promise view: View
    # @define {String} id A string matching the identifier of a view.
    # @returnsDescription
-   # A Promise that resolves with a View instance representing the given identifier
+   # A Promise that resolves with a View instance representing the given identifier.
    # @define {View} view A new View instance matching the identifier given as a parameter.
-   # @usageCoffeeScript
-   # supersonic.ui.views.find("myCarsView").then (startedView) ->
-   #   supersonic.logger.log "myCarsView location: #{startedView.getLocation()}"
-   # @usageJavaScript
-   # supersonic.ui.views.find("myCarsView").then( function(startedView) {
-   #   supersonic.logger.log("myCarsView location: " + startedView.getLocation());
-   # });
    # @exampleCoffeeScript
    # supersonic.ui.views.find("myCarsView").then (startedView) ->
    #   supersonic.logger.log "myCarsView location: #{startedView.getLocation()}"
@@ -63,7 +56,9 @@ module.exports = (steroids, log) ->
               location: preload.startURL
             return
 
-        resolve new View viewOrId
+        resolve new View
+          location: viewOrId
+          id: viewOrId
 
   ###
    # @namespace supersonic.ui.views
@@ -71,16 +66,12 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.ui.views.start
    # @description
-   # Start a View in the background, allowing it to remain running even when it's not in a navigation stack or used in a drawer. Read more in the Started Views guide.
+   # Start a View in the background, allowing it to remain running even when it's not in a navigation stack or used in a drawer.
    #  view: View|String
    # ) => Promise view: View
-   # @define {View|String} view The View that will be started in the background. Alternatively, you can directly pass a identifier string.
+   # @define {View|String} view The View that will be started in the background. Alternatively, you can directly pass an identifier string.
    # @returnsDescription
    #  A Promise that resolves with the given View object. If the view identifier is already in use by another started View, the promise will be rejected.
-   # @usageCoffeeScript
-   # supersonic.ui.views.start "cars#show"
-   # @usageJavaScript
-   # supersonic.ui.views.start("cars#show");
    # @exampleCoffeeScript
    # # With shorthand
    # supersonic.ui.views.start("cars#show").then (carsShowView) ->
@@ -88,27 +79,32 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log "carsShowView id: #{carsShowView.getId()}"
    #
    # # With View object
-   # view = supersonic.ui.views.find("cars#edit")
-   # supersonic.ui.views.start("cars#edit").then (carsEditView) ->
-   #   # The id is "cars#edit"
+   # view = new supersonic.ui.View
+   #   location: "cars#edit"
+   #   id: "carsEdit"
+   #
+   # supersonic.ui.views.start(view).then (carsEditView) ->
+   #   # The id is "carsEdit"
    #   supersonic.logger.log "carsEditView id: #{carsEditView.getId()}"
+   #   supersonic.layers.push carsEditView
    #
    # @exampleJavaScript
    # // With shorthand
-   # supersonic.ui.views.start("cars#show", "carsShowView").then( function(carsShowView) {
+   # supersonic.ui.views.start("cars#show").then( function(carsShowView) {
+   #   // The id is "cars#show"
    #   supersonic.logger.log("carsShowView id: " + carsShowView.getId());
    # });
    #
    # // With View object
-   # var view = supersonic.ui.views("cars#edit");
-   # supersonic.ui.views.start("cars#edit", "carsEditView").then( function(carsEditView) {
-   #   supersonic.logger.log("carsEditView id: " + carsEditView.getId());
+   # var view = new supersonic.ui.View({
+   #   location: "cars#edit",
+   #   id: "carsEdit"
    # });
    #
-   # // The second id param is optional
-   # supersonic.ui.views.start("bananas#index").then( function(bananasIndex) {
-   #   // The id is "bananas#index"
-   #   supersonic.logger.log("bananasIndex id: " + bananasIndex.getId());
+   # supersonic.ui.views.start(view).then( function(carsEditView) {
+   #   // The id is "carsEdit"
+   #   supersonic.logger.log("carsEditView id: " + carsEditView.getId());
+   #   supersonic.layers.push carsEditView
    # });
   ###
   start =  s.promiseF "start", (viewOrId)->
@@ -122,22 +118,21 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.ui.views.stop
    # @description
-   # Stop a View running in the background. It will be destroyed and any memory used freed. A View that is in use(e.g. in the navigation stack) cannot be stopped.
+   # Stop a View running in the background. It will be destroyed and any memory used freed. A View that is in use (e.g. in the navigation stack) cannot be stopped.
    # @type
    # supersonic.ui.views.stop: (
-   #  view: View|String
+   #  viewOrId: View|String
    # ) => Promise
-   # @define {View|String} view The View that will be started in the background. Alternatively, you can directly pass a identifier string.
+   # @define {View|String} viewOrId The View that will be stopped. Alternatively, you can directly pass an identifier string.
    # @returnsDescription
-   # A Promise that resolves after the View has been stopped.
-   # @usageCoffeeScript
-   # supersonic.ui.views.stop "carsShowView"
-   # @usageJavaScript
-   # supersonic.ui.views.stop("carsShowView");
+   # A promise that resolves after the View has been stopped. If the View or identifier doesn't match a started View, the promise will be rejected.
    # @exampleCoffeeScript
-   # supersonic.ui.views.stop "carsShowView"
+   # supersonic.ui.views.stop("carsShowView").then ->
+   #   supersonic.logger.log "View was successfully stopped!"
    # @exampleJavaScript
-   # supersonic.ui.views.stop("carsShowView");
+   # supersonic.ui.views.stop("carsShowView").then( function() {
+   #   supersonic.logger.log("View was succesfully stopped!");
+   # });
   ###
   stop = s.promiseF "stop", (viewOrId) ->
     supersonic.ui.views.find(viewOrId)

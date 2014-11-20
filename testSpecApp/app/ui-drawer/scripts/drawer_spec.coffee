@@ -34,14 +34,11 @@ describe "supersonic.ui.drawers", ->
           resolve e.data
         window.addEventListener "message", listener
 
-      view = new supersonic.ui.View "/app/ui-drawer/postback.html?msg=right"
-
-      supersonic.ui.drawers.init(view, side: "right").should.be.fulfilled
+      supersonic.ui.drawers.init("/app/ui-drawer/postback.html?msg=right", side: "right").should.be.fulfilled
       receivedMessage.should.eventually.equal "right"
 
     it "should not be able to init right again without custom id", ->
-      view = new supersonic.ui.View "/app/ui-drawer/postback.html?msg=right"
-      supersonic.ui.drawers.init(view, side: "right").should.be.rejectedWith("Cannot use a preloaded layer which is currently in use elsewhere in the application")
+      supersonic.ui.drawers.init("/app/ui-drawer/postback.html?msg=right", side: "right").should.be.rejected
 
     it "should be able to init left drawer", ->
       receivedMessage = new Promise (resolve) ->
@@ -50,14 +47,11 @@ describe "supersonic.ui.drawers", ->
           resolve e.data
         window.addEventListener "message", listener
 
-      view = new supersonic.ui.View "/app/ui-drawer/postback.html?msg=left"
-
-      supersonic.ui.drawers.init(view, side: "left").should.be.fulfilled
+      supersonic.ui.drawers.init("/app/ui-drawer/postback.html?msg=left", side: "left").should.be.fulfilled
       receivedMessage.should.eventually.equal "left"
 
     it "should not be able to init left again without custom id", ->
-      view = new supersonic.ui.View "/app/ui-drawer/postback.html?msg=left"
-      supersonic.ui.drawers.init(view, side: "left").should.be.rejectedWith("Cannot use a preloaded layer which is currently in use elsewhere in the application")
+      supersonic.ui.drawers.init("/app/ui-drawer/postback.html?msg=left", side: "left").should.be.rejected
 
   describe "opening and closing", ->
     it "should be able to show left drawer", (done) ->

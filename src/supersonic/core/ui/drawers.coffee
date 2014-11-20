@@ -19,43 +19,42 @@ module.exports = (steroids, log) ->
    # Initializes a View as a drawer on the given side.
    # @type
    # supersonic.ui.drawers.init: (
-   #  view: View
+   #  locationOrId: String
    #  options?:
    #    side: String
    #    width: Integer
    # ) => Promise
-   # @define {View} view View object to be shown as a drawer.
+   # @define {String} locationOrId View location or identifier to be used as a drawer.
    # @define {Object} options Options object to define how the drawer will be shown.
    # @define {String} options.side="left" The side on which the drawer will be shown. Possible values are `left` and `right`
    # @define {String} options.width=200 The width of drawer.
    # @returnsDescription
    # A promise that will be resolved once the drawer has been initialized.
    # @exampleJavaScript
-   # var view = new supersonic.ui.View("drawers#left");
    # var options = {
-   #   side: "left"
+   #   side: "left",
+   #   width: 150
    # }
    #
-   # supersonic.ui.drawers.init(view, options);
+   # supersonic.ui.drawers.init("drawers#left", options);
    #
    # // You can also pass in a started View
    # supersonic.ui.views.find("leftDrawer").then( function(leftDrawer) {
    #   supersonic.ui.drawers.init(leftDrawer);
    # });
    # @exampleCoffeeScript
-   # view = new supersonic.ui.View "drawers#left"
    # options =
    #   side: left
    #   width: 150
    #
-   # supersonic.ui.drawers.init view, options
+   # supersonic.ui.drawers.init "drawers#left", options
    #
    # # You can also pass in a started View
    # supersonic.ui.views.find("leftDrawer").then (leftDrawer)->
    #   supersonic.ui.drawers.init leftDrawer
   ###
 
-  init: s.promiseF "init", (view, options={})->
+  init: s.promiseF "init", (viewOrId, options={})->
     new Promise (resolve, reject)->
       if steroids.nativeBridge.constructor.name is "FreshAndroidBridge"
         reject new Error "Android does not support enabling drawers on runtime."
@@ -64,7 +63,7 @@ module.exports = (steroids, log) ->
       _doInit = (drawerView)->
         params = {}
         webview = drawerView._webView
-        side = if options.side? then options.side else "right"
+        side = if options.side? then options.side else "left"
 
         if options?.width?
           webview.widthOfDrawerInPixels = options.width
@@ -76,12 +75,13 @@ module.exports = (steroids, log) ->
           onFailure: (error)->
             reject new Error error.errorDescription
 
-      view.isStarted().then (started)->
-        if started
-          _doInit(view)
-        else
-          view.start().then ->
+      supersonic.ui.views.find(viewOrId).then (view) ->
+        view.isStarted().then (started)->
+          if started
             _doInit(view)
+          else
+            view.start(view.getLocation()).then ->
+              _doInit(view)
 
   ###
    # @namespace supersonic.ui.drawers

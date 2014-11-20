@@ -5,7 +5,9 @@ angular
     $scope.currentId = null
     supersonic.bind $scope, "currentId"
 
-    view = new supersonic.ui.View "angular#bindTest"
+    view = new supersonic.ui.View
+      location: "angular#bindTest"
+      id: "angularBindTest"
     view.start().catch ->
       # already started, don't care
 

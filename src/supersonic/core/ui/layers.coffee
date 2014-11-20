@@ -21,8 +21,11 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.layers.push: (
    #   view: View|String
+   #   options?:
+   #     params?: Object|String
    # ) => Promise
    # @define {View|String} view A View or View identifier to be pushed on top of the navigation stack.
+   # @define {String|Object} params On object or JSON string of optional parameters to be passed to the target View, accessible via `supersonic.ui.views.params.current`.
    # @returnsDescription
    # A promise that gets resolved with the provided View instance once the push has started. If the view cannot be pushed, the promise is rejected.
    # @exampleCoffeeScript
@@ -40,16 +43,27 @@ module.exports = (steroids, log) ->
    #   supersonic.ui.layers.push(startedView)
    # });
   ###
-  push: s.promiseF "push", (viewOrId) ->
+  push: s.promiseF "push", (viewOrId, options={}) ->
     new Promise (resolve, reject) ->
       supersonic.ui.views.find(viewOrId)
+      .tap (view)->
+        view.isStarted().then (started)->
+          return if params?
+
+          if started
+            supersonic.logger.debug "Sending parameters (#{params}) to view (id: #{view.id})"
+            supersonic.data.channel("view-params-#{view.id}").publish(params)
+          else
+            view._webView.setParams params
+
       .then (view)->
         steroids.layers.push
           view: view._webView
         ,
           onSuccess: ->
-            resolve(view)
-          onFailure: reject
+            resolve view
+          onFailure: (error)->
+            reject new Error error.errorDescription
 
   ###
    # @namespace supersonic.ui.layers
