@@ -18,10 +18,6 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Shows the given View or started View as a modal.
-   # @usageCoffeeScript
-   # supersonic.ui.modal.show view, options
-   # @usageJavaScript
-   # supersonic.ui.modal.show(view, options);
    # @type
    # supersonic.ui.modal.show: (
    #   view: View
@@ -63,10 +59,6 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Hides the (topmost) modal on screen.
-   # @usageCoffeeScript
-   # supersonic.ui.modal.hide options
-   # @usageJavaScript
-   # supersonic.ui.modal.hide(options);
    # @type
    # supersonic.ui.modal.hide: (
    #   options?:
@@ -102,10 +94,6 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Hides all modals on screen.
-   # @usageCoffeeScript
-   # supersonic.ui.modal.hideAll options
-   # @usageJavaScript
-   # supersonic.ui.modal.hideAll(options);
    # @type
    # supersonic.ui.modal.hideAll: (
    #   options?:

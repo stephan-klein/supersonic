@@ -18,12 +18,6 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Pushes a View on top of the navigation stack.
-   # @usageCoffeeScript
-   # view = new supersonic.ui.View "bananas#show"
-   # supersonic.ui.layers.push view
-   # @usageJavaScript
-   # var view = new supersonic.ui.View("bananas#show");
-   # supersonic.ui.layers.push(view);
    # @type
    # supersonic.ui.layers.push: (
    #   view: View|String
@@ -63,14 +57,14 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Pops the topmost view from the navigation stack. Doesn't have to be called from the topmost view.
-   # @usageCoffeeScript
-   # supersonic.ui.layers.pop()
-   # @usageJavaScript
-   # supersonic.ui.layers.pop();
    # @type
    # supersonic.ui.layers.pop: () => Promise
    # @returnsDescription
    # A promise that gets resolved once the view starts to pop. If the view cannot be popped (i.e. there is only the root view in the navigation stack), the promise is rejected. Note that a popped view only lives on for a very short time before it is purged from the app's memory, so be careful to not do too complex things with the promise. It is different if you are popping a started View, since it will remain running outside the navigation stack.
+   # @exampleCoffeeScript
+   # supersonic.ui.layers.pop()
+   # @exampleJavaScript
+   # supersonic.ui.layers.pop();
   ###
   pop: s.promiseF "pop", ()->
     new Promise (resolve, reject)->
@@ -87,14 +81,14 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Pops all views except for the root view from the navigation stack. Doesn't have to be called from the topmost view.
-   # @usageCoffeeScript
-   # supersonic.ui.layers.popAll()
-   # @usageJavaScript
-   # supersonic.ui.layers.popAll();
    # @type
    # supersonic.ui.layers.popAll: () => Promise
    # @returnsDescription
    # A promise that gets resolved once the views start to pop. If there are no views to pop (i.e. there is only the root view in the navigation stack), the promise is rejected. Note that popped views only live on for a very short time before they are purged from the app's memory, so be careful to not do too complex things with the promise. It is different if you are popping started Views, since they will remain running outside the navigation stack.
+   # @exampleCoffeeScript
+   # supersonic.ui.layers.popAll()
+   # @exampleJavaScript
+   # supersonic.ui.layers.popAll();
   ###
   popAll: s.promiseF "popAll", ()->
     new Promise (resolve, reject) ->
