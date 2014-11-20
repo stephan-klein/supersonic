@@ -80,7 +80,7 @@ For iOS:
 
 </section>
 
-[android-build-guide]: /steroids/build-service/build-settings/build-settings-for-android/
-[install-guide]: /steroids/build-service/build-settings/installing-onto-device/
-[ios-build-guide]: /steroids/build-service/build-settings/build-settings-for-ios/
-[plugins-guide]: /steroids/build-service/plugins/configuring-custom-plugins/
+[android-build-guide]: /tooling/build-service/build-settings/build-settings-for-android/
+[install-guide]: /tooling/build-service/build-settings/installing-onto-device/
+[ios-build-guide]: /tooling/build-service/build-settings/build-settings-for-ios/
+[plugins-guide]: /tooling/build-service/plugins/configuring-custom-plugins/

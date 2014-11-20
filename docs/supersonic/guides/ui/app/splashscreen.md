@@ -42,5 +42,5 @@ Splashscreens can be hidden and shown programatically with the `supersonic.app.s
 {% include api_method.md method=method %}
 </section>
 
-[android-build-guide]: /steroids/build-service/build-settings/build-settings-for-android/
-[ios-build-guide]: /steroids/build-service/build-settings/build-settings-for-ios/
+[android-build-guide]: /tooling/build-service/build-settings/build-settings-for-android/
+[ios-build-guide]: /tooling/build-service/build-settings/build-settings-for-ios/

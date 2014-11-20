@@ -195,11 +195,11 @@ To work with plain JavaScript, you can have `steroids create` create your projec
 </section>
 
 [app-coffee]: /supersonic/guides/
-[debug-ios]: /steroids/cli/debugging/debugging-on-ios
-[debug-android]: /steroids/cli/debugging/debugging-on-android
-[debug-best-practices]: /steroids/cli/debugging/best-practices
+[debug-ios]: /tooling/cli/debugging/debugging-on-ios
+[debug-android]: /tooling/cli/debugging/debugging-on-android
+[debug-best-practices]: /tooling/cli/debugging/best-practices
 [device-api]: /supersonic/api-reference
-[logging-guide]: /steroids/cli/debugging/logging
+[logging-guide]: /tooling/cli/debugging/logging
 [native-styles]: /supersonic/guides/ui/styling-native-components
 [ss-structure]: /supersonic/guides/architecture
 [structure-coffee]: /supersonic/guides

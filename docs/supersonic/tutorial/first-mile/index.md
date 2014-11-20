@@ -149,7 +149,7 @@ In this section we've covered the basics of Supersonic App Development. By now y
 With these skills, you have grasped the core of developing Supersonic apps! Once you're ready, dive into the [Second mile][second-mile] tutorial to learn more essential skills, like debugging your app, as well as a deeper insight into how a Supersonic app really works.
 </section>
 
-[cli-dev-flow]: /steroids/cli/steroids-cli/local-development-flow/
+[cli-dev-flow]: /tooling/cli/tooling-cli/local-development-flow/
 [nav-bar]: /supersonic/guides/ui/native-components/navigation-bar
 [super-navigate]: /supersonic/api-reference/stable/components/super-navigate
 [second-mile]: /supersonic/tutorial/second-mile
