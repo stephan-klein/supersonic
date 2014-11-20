@@ -26,10 +26,6 @@ module.exports = (steroids, log) ->
    # @define {Array<String>} rotations Allowed rotations. Possible values are `"portrait"`, `"portraitUpsideDown"`, `"landscapeLeft"` and `"landscapeRight"`.
    # @returnsDescription
    # Returns a Promise that is resolved when the allowed rotations are set.
-   # @usageCoffeeScript
-   # supersonic.ui.screen.setAllowedRotations rotations
-   # @usageJavaScript
-   # supersonic.ui.screen.setAllowedRotations(rotations);
    # @exampleCoffeeScript
    # supersonic.ui.screen.setAllowedRotations ["landscapeLeft", "landscapeRight"]
    # @exampleJavaScript
@@ -60,22 +56,18 @@ module.exports = (steroids, log) ->
    # @define {String} orientation. Possible values "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight".
    # @returnsDescription
    # A Promise that is resolved when the screen is rotated.
-   # @usageCoffeeScript
-   # supersonic.ui.screen.rotateTo options
-   # @usageJavaScript
-   # supersonic.ui.screen.rotateTo(options);
    # @exampleCoffeeScript
-   # # Shorthand
    # supersonic.ui.screen.rotateTo "landscapeLeft"
-   # # Verbose
+   #
+   # # With options
    # options =
    #  orientation: "landscapeLeft"
    # supersonic.ui.screen.rotateTo(options).then ->
    #  supersonic.logger.log "Screen has been rotated."
    # @exampleJavaScript
-   # // Shorthand
    # supersonic.ui.screen.rotateTo("landscapeLeft");
-   # // Verbose
+   #
+   # // With options
    # var options = {
    #  orientation: "landscapeLeft"
    # };
