@@ -1,0 +1,69 @@
+{% for section in page.sections %}
+{% unless section.id %}
+  {% assign section_id = section.name | slugify %}
+{% else %}
+  {% assign section_id = section.id %}
+{% endunless %}
+
+{% assign version = "stable/" %}
+
+{% if section_id == "components" or section_id == "cordova" %}
+  {% assign main_namespace = "" %}
+{% else %}
+  {% assign main_namespace = "supersonic/" %}
+{% endif %}
+
+<ul class="nav left-menu ag__docs__left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
+  <li class="menu-title">
+    <a href="/supersonic/api-reference/{{main_namespace}}{{section_id}}">{{section.name}}</a>
+    {% if page.section_id == section_id %}
+      {% for subsection in section.subsections %}
+        {% if subsection.id %}
+          {% assign subsection_id = subsection.id %}
+        {% else %}
+          {% assign subsection_id = subsection.name | slugify %}
+        {% endif %}
+        <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
+          <a href="/supersonic/api-reference/{{main_namespace}}{{section_id}}/{{subsection_id}}" class="api-section">
+            {% if subsection.method %}
+              ↳ <code>{{subsection.name}}()</code>
+            {% else %}
+              {{subsection.name}}
+            {% endif %}
+          </a>
+          {% if page.subsection_id == subsection_id %}
+            <ul>
+              {% for method in subsection.methods %}
+              {% assign method_id = method.name | slugify %}
+              <li class="{% if page.method_id == method_id %}active{% endif %}">
+                <a href="/supersonic/api-reference/{{main_namespace}}{{section_id}}/{{subsection_id}}/{{method_id}}">
+                  {% if method.class %}
+                    {{method.name}}
+                  {% elsif method.property %}
+                    {{method.name}}
+                  {% else %}
+                    ↳ <code>{{method.name}}()</code>
+                  {% endif %}
+                </a>
+                {% if method.property %}
+                  <ul>
+                    {% for submethod in method.submethods %}
+                    {% assign submethod_id = submethod.name | slugify %}
+                    <li class="{% if page.method_id == method_id %}active{% endif %}">
+                      <a href="/supersonic/api-reference/}{{main_namespace}}{{section_id}}/{{subsection_id}}/{{method_id}}/{{submethod_id}}">
+                        ↳ <code>{{submethod.name}}()</code>
+                      </a>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    {% endif %}
+  </li>
+</ul>
+{% endfor %}

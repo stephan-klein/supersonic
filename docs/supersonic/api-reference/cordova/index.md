@@ -1,5 +1,5 @@
 ---
-layout: "docs_api"
+layout: "docs_cordova_api"
 title: Cordova API reference
 header_sub_title: Cordova APIs
 section_id: cordova
@@ -7,7 +7,7 @@ section_id: cordova
 
 # Cordova APIs
 
-There are some Cordova APIs that have not yet been given the Supersonic treatment, but are available for use in your apps. They've all been tested to work with Supersonic, so use them at will!
+There are some Cordova APIs that have not yet been given the Supersonic treatment, but are available for use in your apps. They've all been tested to work with Supersonic, so use them at will! Naturally, these APIs are also available without Supersonic, as a part of the AppGyver wrapper.
 
 We're working on bringing more Cordova APIs properly under Supersonic. What's more, we're not going to be satisfied with just wrapping the old Cordova APIs – the plan is to gradually replace even the native code plugins with our own Supersonic versions. Let us know what improvements you'd like to see at [contact@appgyver.com](mailto:contact@appgyver.com)!
 
