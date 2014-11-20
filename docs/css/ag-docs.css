@@ -204,15 +204,18 @@ clear: both;
 .ag__docs__breadcrumb-nav > li {
 position: relative;
 display: inline;
+padding: 0px 5px 10px 5px;
 }
 
 .ag__docs__breadcrumb-nav > li > a {
   color:#ecf0f1;
   position: relative;
   display: inline;
-  padding: 0px 15px 10px 0px;
 }
 
+.ag__docs__breadcrumb-nav > li:first-child {
+  padding-left: 0px;
+}
 
 .ag__docs__breadcrumb-nav > li > a:hover, .ag__docs__breadcrumb-nav > li > a:focus {
   color:#ecf0f1;
