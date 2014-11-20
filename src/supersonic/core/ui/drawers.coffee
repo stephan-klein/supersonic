@@ -17,10 +17,6 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Initializes a View as a drawer on the given side.
-   # @usageJavaScript
-   # supersonic.ui.drawers.init(view, options);
-   # @usageCoffeeScript
-   # supersonic.ui.drawers.init view, options
    # @type
    # supersonic.ui.drawers.init: (
    #  view: View
@@ -93,10 +89,6 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Opens the drawer on the given side.
-   # @usageJavaScript
-   # supersonic.ui.drawers.open(side);
-   # @usageCoffeeScript
-   # supersonic.ui.drawers.open side
    # @type
    # supersonic.ui.drawers.open: (
    #  side?: String
@@ -133,10 +125,6 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Closes an open drawer.
-   # @usageJavaScript
-   # supersonic.ui.drawers.close();
-   # @usageCoffeeScript
-   # supersonic.ui.drawers.close()
    # @type
    # supersonic.ui.drawers.close: () => Promise
    # @returnsDescription
@@ -162,9 +150,6 @@ module.exports = (steroids, log) ->
    # @function
    # @description
    # Updates options for drawers.
-   # @usageCoffeeScript
-   # supersonic.ui.drawers.updateOptions options
-   # @usageJavaScript
    # supersonic.ui.drawers.updateOptions(options);
    # @type
    # supersonic.ui.drawers.updateOptions: (
@@ -265,10 +250,6 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.drawers.whenWillShow: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
-   # @usageCoffeeScript
-   # supersonic.ui.drawers.whenWillShow()
-   # @usageJavaScript
-   # supersonic.ui.drawers.whenWillShow();
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenWillShow().then ->
    #   steroids.logger.log("Drawers will show")
@@ -292,10 +273,6 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.drawers.whenDidShow: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
-   # @usageCoffeeScript
-   # supersonic.ui.drawers.whenDidShow()
-   # @usageJavaScript
-   # supersonic.ui.drawers.whenDidShow();
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenDidShow().then ->
    #   steroids.logger.log("Drawers did show")
@@ -319,10 +296,6 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.drawers.whenWillClose: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
-   # @usageCoffeeScript
-   # supersonic.ui.drawers.whenWillClose()
-   # @usageJavaScript
-   # supersonic.ui.drawers.whenWillClose();
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenWillClose().then ->
    #   steroids.logger.log("Drawers will close")
@@ -346,10 +319,6 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.drawers.whenDidClose: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
-   # @usageCoffeeScript
-   # supersonic.ui.drawers.whenDidClose()
-   # @usageJavaScript
-   # supersonic.ui.drawers.whenDidClose()
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenDidClose().then ->
    #   steroids.logger.log("Drawers did close")
