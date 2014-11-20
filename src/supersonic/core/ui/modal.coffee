@@ -3,7 +3,7 @@ superify = require '../superify'
 
 module.exports = (steroids, log) ->
   s = superify 'supersonic.ui.modal', log
-  
+
   ###
    # @namespace supersonic.ui
    # @name modal
@@ -46,12 +46,23 @@ module.exports = (steroids, log) ->
   show: s.promiseF "show", (viewOrId, options = {})->
     new Promise (resolve, reject)->
       supersonic.ui.views.find(viewOrId)
+      .tap (view)->
+        view.isStarted().then (started)->
+          return unless options.params?
+
+          if started
+            supersonic.logger.log "Sending parameters (#{options.params}) to view (id: #{view.id})"
+            supersonic.data.channel("view-params-#{view.id}").publish(options.params)
+          else
+            view._webView.setParams options.params
+
       .then (view)->
         options.view = view._webView
         steroids.modal.show options,
-          onSuccess: resolve
+          onSuccess: ->
+            resolve view
           onFailure: (error)->
-            reject(error)
+            reject new Error error.errorDescription
 
   ###
    # @namespace supersonic.ui.modal

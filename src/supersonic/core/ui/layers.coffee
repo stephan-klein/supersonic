@@ -45,32 +45,25 @@ module.exports = (steroids, log) ->
   ###
   push: s.promiseF "push", (viewOrId, options={}) ->
     new Promise (resolve, reject) ->
-      if options.params?
-        params = if typeof options.params is "object"
-          options.params
-        else
-          try
-            JSON.parse options.params
-          catch e
-            supersonic.logger.error "#{e}. Passed params must be JSON that can be parsed."
-            reject new Error "#{e}. Passed params must be JSON that can be parsed."
-
       supersonic.ui.views.find(viewOrId)
-      .then (view)->
+      .tap (view)->
         view.isStarted().then (started)->
-          if params?
-            if started
-              supersonic.logger.debug "Sending parameters (#{params}) to view (id: #{view.id})"
-              supersonic.data.channel("view-params-#{view.id}").publish(params)
-            else
-              view._webView.setParams params
+          return if params?
 
-          steroids.layers.push
-            view: view._webView
-          ,
-            onSuccess: ->
-              resolve(view)
-            onFailure: reject
+          if started
+            supersonic.logger.debug "Sending parameters (#{params}) to view (id: #{view.id})"
+            supersonic.data.channel("view-params-#{view.id}").publish(params)
+          else
+            view._webView.setParams params
+
+      .then (view)->
+        steroids.layers.push
+          view: view._webView
+        ,
+          onSuccess: ->
+            resolve view
+          onFailure: (error)->
+            reject new Error error.errorDescription
 
   ###
    # @namespace supersonic.ui.layers

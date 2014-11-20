@@ -30,7 +30,16 @@ SuperModalShowPrototype.createdCallback = ->
       # None set, error
       throw new Error "Either view-id or location must be set for a super-modal-show element"
 
-    supersonic.ui.modal.show(viewId)
+    # construct parameters for the modal
+    params = null
+    datasetKeys = Object.keys(@dataset)
+    if datasetKeys? and datasetKeys.length
+      for dataKey in datasetKeys when /^params/.test(dataKey)
+        params = {} unless params?
+        key = dataKey.replace(/^params(.*)$/, "$1").toLowerCase()
+        params[key] = @dataset[dataKey]
+
+    supersonic.ui.modal.show(viewId, { params })
     .catch (error) ->
       throw new Error "Failed to open modal: #{error}"
 
