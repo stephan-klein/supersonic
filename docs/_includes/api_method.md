@@ -3,6 +3,56 @@
 
 {{method.description}}
 
+
+
+
+
+
+
+{% if method.exampleCoffeeScript || method.exampleJavaScript %}
+
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-primary active">CoffeeScript</button>
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-default">JavaScript</button>
+  </div>
+  <h3>Example usage</h3>
+</div>
+
+<div data-role="example-code" data-type="coffee">
+
+{% if method.exampleCoffeeScript %}
+{% highlight coffeescript %}
+{{method.exampleCoffeeScript}}
+{% endhighlight %}
+{% endif %}
+
+</div>
+<div data-role="example-code" data-type="js" style="display: none;">
+
+{% if method.exampleJavaScript %}
+{% highlight javascript %}
+{{method.exampleJavaScript}}
+{% endhighlight %}
+{% endif %}
+
+</div>
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% if method.usageCoffeeScript %}
 ### Basic usage CoffeeScript
 ```coffeescript
@@ -111,16 +161,4 @@
 {% endif %}
 {% endif %}
 
-{% if method.exampleCoffeeScript %}
-### Full example CoffeeScript
-```coffeescript
-{{method.exampleCoffeeScript}}
-```
-{% endif %}
-
-{% if method.exampleJavaScript %}
-### Full example JavaScript
-```javascript
-{{method.exampleJavaScript}}
-```
-{% endif %}
+<br><br>
