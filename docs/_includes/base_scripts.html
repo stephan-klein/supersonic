@@ -36,7 +36,7 @@
     // Todo: detect type
 
     function _switchExamplesState(exampleToUse) {
-      $.cookie('ag__docs__selected-examples', exampleToUse, { expires: 100 });
+      $.cookie('ag__docs__selected-examples', exampleToUse, { expires: 100, path: '/' });
       // Toggle toggles
       $toggles.each(function () {
         if ($(this).attr("data-type") == exampleToUse) {

@@ -27,12 +27,24 @@
 {% endhighlight %}
 {% endif %}
 
+{% if !method.exampleCoffeeScript && method.usageCoffeeScript %}
+{% highlight coffeescript %}
+{{method.usageCoffeeScript}}
+{% endhighlight %}
+{% endif %}
+
 </div>
 <div data-role="example-code" data-type="js" style="display: none;">
 
 {% if method.exampleJavaScript %}
 {% highlight javascript %}
 {{method.exampleJavaScript}}
+{% endhighlight %}
+{% endif %}
+
+{% if !method.exampleJavaScript && method.usageJavaScript %}
+{% highlight javascript %}
+{{method.usageJavaScript}}
 {% endhighlight %}
 {% endif %}
 
@@ -45,26 +57,6 @@
 
 
 
-
-
-
-
-
-
-
-
-{% if method.usageCoffeeScript %}
-### Basic usage CoffeeScript
-```coffeescript
-{{method.usageCoffeeScript}}
-```
-{% endif %}
-{% if method.usageJavaScript %}
-### Basic usage JavaScript
-```javascript
-{{method.usageJavaScript}}
-```
-{% endif %}
 
 {% if method.type %}
 ### Type Signature
