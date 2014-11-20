@@ -4,8 +4,6 @@
  # @component
  # @description
  # When used inside the `<super-navbar>` element, sets a title text on the view's navigation bar. Only text content is supported.
- # @usageHtml
- # <super-navbar-title>This is the title</super-navbar-title>
  # @exampleHtml
  # <!-- Full example including the navbar itself -->
  # <super-navbar>

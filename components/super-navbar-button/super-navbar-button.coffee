@@ -4,8 +4,6 @@
  # @component
  # @description
  # When used inside the `<super-navbar>` element, creates a button that will be displayed on the navigation bar. Only text content is supported for the button title.
- # @usageHtml
- # <super-navbar-button onclick="myfunction()" side="left">Title</super-navbar-button>
  # @attribute side="left" Determines the position of the button on the navigation bar. Allowed values are "left" and "right". If multiple buttons are defined for one side, they will be displayed in order.
  # @attribute onclick= When the native button is tapped, a `click` event is fired on the `<super-navbar-button>` element. This means you can use the `onclick` attribute, or any other framework or method that listens for `click` events.
  # @attribute location A route or a URL that will be [navigated to](/ui-and-navigation/navigation/) when the button is tapped. **Note:** If `location` is set, a `click` event will not be fired when the button is tapped.

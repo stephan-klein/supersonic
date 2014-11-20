@@ -7,8 +7,6 @@ SuperModalShowPrototype = Object.create HTMLElement.prototype
  # Shows a modal. Uses `supersonic.ui.modal.show` internally.
  # @attribute location The route or URL for the view to be shown.
  # @attribute action="click" The action used to trigger the transition.
- # @usageHtml
- # <super-modal-show location="cars#edit" action="click">Edit Car</super-modal-show>
  # @exampleHtml
  # <!-- The action attribute is optional -->
  # <super-modal-show location="cars#edit">Edit Car</super-modal-show>

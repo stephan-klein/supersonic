@@ -6,8 +6,6 @@ SuperModalHidePrototype = Object.create HTMLElement.prototype
  # @description
  # Hides an open modal on screen. Uses `supersonic.ui.modal.hide()` internally.
  # @attribute action="click" The action used to trigger the transition.
- # @usageHtml
- # <super-modal-hide action="click">Hide modal</super-modal-hide>
  # @exampleHtml
  # <!-- The action attribute is optional -->
  # <super-modal-hide>Go back</super-modal-hide>

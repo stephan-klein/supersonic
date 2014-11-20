@@ -4,8 +4,6 @@
  # @component
  # @description
  # Use data from a Supersonic Data record in HTML DOM. The attributes of the object can be accessed via double-mustache notation, e.g. {{ attributeName }} will render object.attributeName. Fetches the record based on the view's current `id` parameter.
- # @usageHtml
- # <super-data model="modelName"></super-data>
  # @exampleHtml
  # <!-- In index.html -->
  # <super-navigate view-id="show" params="{id: 1}"

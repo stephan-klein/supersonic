@@ -4,8 +4,6 @@
  # @component
  # @description
  # Repeat all data from a Supersonic Data Model in HTML DOM. Attributes of each data object can be accessed with double-mustache notation, i.e. {{ attributeName }} will render object.attributeName.
- # @usageHtml
- # <super-data-repeat model="modelName"></super-data-repeat>
  # @exampleHtml
  # <ul class="list">
  #   <super-data-repeat model="task">
