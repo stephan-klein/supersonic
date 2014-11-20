@@ -21,8 +21,11 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.layers.push: (
    #   view: View|String
+   #   options?:
+   #     params?: Object|String
    # ) => Promise
    # @define {View|String} view A View or View identifier to be pushed on top of the navigation stack.
+   # @define {String|Object} params On object or JSON string of optional parameters to be passed to the target View, accessible via `supersonic.ui.views.params.current`.
    # @returnsDescription
    # A promise that gets resolved with the provided View instance once the push has started. If the view cannot be pushed, the promise is rejected.
    # @exampleCoffeeScript
@@ -40,16 +43,34 @@ module.exports = (steroids, log) ->
    #   supersonic.ui.layers.push(startedView)
    # });
   ###
-  push: s.promiseF "push", (viewOrId) ->
+  push: s.promiseF "push", (viewOrId, options={}) ->
     new Promise (resolve, reject) ->
+      if options.params?
+        params = if typeof options.params is "object"
+          options.params
+        else
+          try
+            JSON.parse options.params
+          catch e
+            supersonic.logger.error "#{e}. Passed params must be JSON that can be parsed."
+            reject new Error "#{e}. Passed params must be JSON that can be parsed."
+
       supersonic.ui.views.find(viewOrId)
       .then (view)->
-        steroids.layers.push
-          view: view._webView
-        ,
-          onSuccess: ->
-            resolve(view)
-          onFailure: reject
+        view.isStarted().then (started)->
+          if params?
+            if started
+              supersonic.logger.debug "Sending parameters (#{params}) to view (id: #{view.id})"
+              supersonic.data.channel("view-params-#{view.id}").publish(params)
+            else
+              view._webView.setParams params
+
+          steroids.layers.push
+            view: view._webView
+          ,
+            onSuccess: ->
+              resolve(view)
+            onFailure: reject
 
   ###
    # @namespace supersonic.ui.layers

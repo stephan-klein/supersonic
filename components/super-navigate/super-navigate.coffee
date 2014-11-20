@@ -26,8 +26,8 @@ SuperNavigatePrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
 
   @addEventListener action, =>
-    viewId = @getAttribute "view-id"
-    viewId ?= @getAttribute "location"
+    locationOrId = @getAttribute "view-id"
+    locationOrId ?= @getAttribute "location"
     # construct parameters for navigate
     parameters = null
     datasetKeys = Object.keys(@dataset)
@@ -37,11 +37,11 @@ SuperNavigatePrototype.createdCallback = ->
         key = dataKey.replace(/^params(.*)$/, "$1").toLowerCase()
         parameters[key] = @dataset[dataKey]
 
-    unless viewId?
+    unless locationOrId?
       # None set, error
-      throw new Error "Either view-id or location must be set for a super-navigate element"
+      throw new Error "Either view-id or location attribute must be set for a super-navigate element"
 
-    supersonic.ui.navigate(viewId, parameters)
+    supersonic.ui.layers.push locationOrId, { params: parameters }
     .catch (error) ->
       throw new Error "Failed to push view: #{error}"
 

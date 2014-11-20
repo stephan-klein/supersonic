@@ -7,24 +7,32 @@ module.exports = (steroids, log) ->
    # @name View
    # @class
    # @description
-   # A Supersonic View. A View instance references a specific location (a Supersonic route or an URL) or, if the View is started, an unique identifier.
+   # A Supersonic View. At the heart of a View instance is its location property: a Supersonic route or an URL that is used to determine which HTML file the View will render when it's pushed to the navigation stack (e.g. with `supersonic.ui.layers.push` or `supersonic.ui.modal.show`).
    #
-   # A View can be passed as an argument to other API calls (like `supersonic.ui.layers.push`). Some API calls utilize Views internally, like `supersonic.ui.navigate`, which creates a new View instance and then pushes it to the navigation stack.
+   # If you just define a location for the View, the target HTML document will start loading only after the View is pushed to the navigation stack. The new View animates onto the screen instantly, but a loading spinner is shown until the DOM is loaded.
+   #
+   # Alternatively, you can give the View an identifier (a custom string) and **start** it. Started Views are loaded into memory straight away and continue running until they are stopped, regardless of their position in the navigation stack. To unload a started View from memory, you need to use the `stop()` API call.
+   #
+   # The View constructor accepts either a location string (Supersonic route or URL) or an options object with `location` and (optional) `id` properties.
    # @type
-   # supersonic.ui.View: {
+   # View: {
    #   getLocation: () => location: String
    #   getId: () => id: String
-   #   setId: (id: String) => Promise(newId: String)
-   #   isStarted: () => Promise(isStarted: Boolean)
+   #   isStarted: () => Promise => isStarted: Boolean
+   #   setId: (id: String) => Promise => newId: String
    #   start: (newId?: String) => Promise
    #   stop: () => Promise
    # }
-   # @define {Function} getLocation Returns the View's location (as a string).
-   # @define {Function} isStarted Returns a promise that resolves to `true` if the View instance references a started view. The promise resolves to `false` if the view doesn't have an `id` property, or if a matching started view cannot be found.
-   # @define {Function} getId Returns the View's `id` (as a string), used to reference a started View.
-   # @define {Function} setId Sets the View's `id` parameter. Returns a promise that is resolved with the new `id`. If there exists a started view matching the View's current `id`, the Promise is rejected, since the `id` of a started View cannot be changed.
-   # @define {Function} start Starts the View. Returns a promise that is resolved once the View has been started successfully. The promise is rejected if the View could not be started, e.g. if there already exists a started View with the same `id`, or if the View instance has no `id` set.<br><br>To start a View, it must have an `id`, set either in the View constructor, via `View.setId()` or as a parameter to this function.
-   # @define {Function} stop Stops the View, purging it from memory. Returns a promise that is resolved once the View is successfully stopped. The promise is rejected if the View cannot be stopped. A View can only be stopped if its `id` matches an existing started view.
+   # @define {Function} getLocation Returns the View's location as a string.
+   # @define {Function} getId Returns the View's identifier as a string. An identifier is used to reference a started View.
+   # @define {Function} isStarted Returns a promise that resolves to `true` if the View instance's identifier matches a started View. The promise resolves to `false` if the View doesn't have an identifier, or if a matching started View cannot be found.
+   # @define {Function} setId Sets the View's identifier. Returns a promise that is resolved with the new identifier. The promise will be rejected if trying to change the identifier of a started View.
+   # @define {Function} start Starts the View, causing it load itself into memory and remain active even when not in a navigation stack. Returns a promise that is resolved once the View has been started successfully. The promise will be rejcetd if the view could not be started. Causes for rejection include:
+   # <ul>
+   #  <li>There already exists a started View with the same identifier as this View instance.</li>
+   #  <li>The View has no identifier set and one isn't provided as a parameter to this API call.</li>
+   # </ul>
+   # @define {Function} stop Stops the View, unloading it from memory. Returns a promise that is resolved once the View has been successfully stopped. A View can only be stopped if its identifier matches an existing started View. The promise is rejected if the View cannot be stopped.
   ###
 
   getApplicationState = ->
@@ -45,14 +53,17 @@ module.exports = (steroids, log) ->
       unless @options.location
         throw new Error "Cannot initialize a View without any parameters"
 
-      @id = @options.id ? @options.location
-      location = parseRoute(@options.location)
+      @id = @options.id
+
+      @location = @options.location
       @_webView = new steroids.views.WebView
-        id: @options.id
-        location: location
+        location: parseRoute(@location)
 
     isStarted: ->
       new Promise (resolve, reject) =>
+        unless @id?
+          resolve false
+
         getApplicationState().then (state)=>
           if @id in (preload.id for preload in state.preloads)
             @_webView.id = @id # mark WebView started
@@ -74,11 +85,11 @@ module.exports = (steroids, log) ->
             reject new Error "Cannot change View identifier after it has been started. Stop the View first and then change the identifier."
 
     getLocation: ->
-      @_webView.location
+      @location
 
     start: (newId)->
-      preload = (webView)->
-        new Promise (resolve, reject) ->
+      new Promise (resolve, reject) =>
+        preload = (webView) ->
           webView.preload {},
             onSuccess: ->
               @id = webView.id # mark started
@@ -86,17 +97,24 @@ module.exports = (steroids, log) ->
             onFailure: (error)->
               reject new Error error.errorDescription
 
-      if newId?
-        @setId(newId).then =>
+
+        if newId?
+          @setId(newId).then =>
+            preload(@_webView)
+        else if not @id
+          reject new Error "Cannot start a View without an identifier."
+        else
+          @_webView.id = @id
           preload(@_webView)
-      else
-        @_webView.id = @id
-        preload(@_webView)
 
     stop: ->
       new Promise (resolve, reject) =>
-        @_webView.unload {},
-          onSuccess: resolve
+        webView = @_webView
+        webView.id = @getId()
+        webView.unload {},
+          onSuccess: =>
+            @_webView.id = null
+            resolve()
           onFailure: (error) ->
             reject new Error error.errorMessage
 

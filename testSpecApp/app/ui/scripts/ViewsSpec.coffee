@@ -19,8 +19,11 @@ describe "supersonic.ui.views", ->
     it "is a function", ->
       supersonic.ui.views.start.should.be.a "function"
 
-    it "should not fail to start a view which is not started", (done)->
-      view = new supersonic.ui.View "ui#empty"
+    it "should start a view which is not started", (done)->
+      view = new supersonic.ui.View
+        location: "ui#empty"
+        id: "emptyView?#{Math.random()}"
+
       supersonic.ui.views.start(view).then ->
         view.stop().then ->
           done()
@@ -32,7 +35,22 @@ describe "supersonic.ui.views", ->
     describe "with a started view returned by find", ->
 
       it "should stop the view", (done)->
-        view = new supersonic.ui.View "ui#empty"
+        view = new supersonic.ui.View
+          location: "ui#empty"
+          id: "emptyView?#{Math.random()}"
+
         view.start().then ->
           supersonic.ui.views.stop(view).then ->
+            done()
+
+    describe "with id string", ->
+
+      it "should stop the view", (done)->
+        id = "emptyView?#{Math.random()}"
+        view = new supersonic.ui.View
+          location: "ui#empty"
+          id: id
+
+        view.start().then ->
+          supersonic.ui.views.stop(id).then ->
             done()

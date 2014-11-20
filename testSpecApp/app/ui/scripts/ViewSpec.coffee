@@ -7,22 +7,28 @@ describe "supersonic.ui.View", ->
   it "accepts a route", ->
     view = new supersonic.ui.View 'foo#bar'
     view.should.be.an 'object'
-    view.getLocation().should.equal 'http://localhost/app/foo/bar.html'
+    view.getLocation().should.equal "foo#bar"
+    view._webView.location.should.equal 'http://localhost/app/foo/bar.html'
 
   describe "start()", ->
 
     it "returns a started view that can be stopped", (done)->
-      view = new supersonic.ui.View "ui#empty?#{Math.random()}"
-      view.start()
+      id = "uiEmpty?#{Math.random()}"
+      view = new supersonic.ui.View "ui#empty"
+
+      view.start(id)
       .then ->
         view.stop()
       .then ->
         done()
 
-    describe "with an empty argument", ->
+    describe "with an empty argument if View has id", ->
       it "works", (done)->
-        id = "ui#empty?#{Math.random()}"
-        view = new supersonic.ui.View id
+        id = "uiEmpty?#{Math.random()}"
+        view = new supersonic.ui.View
+          location: "ui#empty"
+          id: id
+
         view.start().then ->
           view.getId().should.equal id
         .then ->
@@ -30,14 +36,7 @@ describe "supersonic.ui.View", ->
         .then ->
           done()
 
-    describe "with an argument", ->
-      it "assigns the argument to the view's id", (done)->
-        id = "this-is-the-id-#{Math.random()}"
-
-        view = new supersonic.ui.View "ui#empty?#{Math.random()}"
-        view.start(id).then ->
-          view.getId().should.equal id
-        .then ->
-          view.stop()
-        .then ->
-          done()
+    describe "failing cases", ->
+      it "when View has only location", ->
+        view = new supersonic.ui.View "ui#empty"
+        view.start().should.be.rejected
