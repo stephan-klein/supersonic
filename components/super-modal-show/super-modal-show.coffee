@@ -5,7 +5,8 @@ SuperModalShowPrototype = Object.create HTMLElement.prototype
  # @component
  # @description
  # Shows a modal. Uses `supersonic.ui.modal.show` internally.
- # @attribute location The route or URL for the view to be shown.
+ # @attribute location The route or URL for the view to be shown. Either `location` or `view-id` must be set.
+ # @attribute view-id The id of a started View that will be navigated to. If `view-id` is set, `location` will be ignored.
  # @attribute action="click" The action used to trigger the transition.
  # @usageHtml
  # <super-modal-show location="cars#edit" action="click">Edit Car</super-modal-show>
@@ -23,12 +24,12 @@ SuperModalShowPrototype.createdCallback = ->
   action = @getAttribute("action") || "click"
 
   @addEventListener action, =>
-    viewId = @getAttribute "view-id"
-    viewId ?= @getAttribute "location"
+    locationOrId = @getAttribute "view-id"
+    locationOrId ?= @getAttribute "location"
 
-    unless viewId?
+    unless locationOrId?
       # None set, error
-      throw new Error "Either view-id or location must be set for a super-modal-show element"
+      throw new Error "Either view-id or location attribute must be set for a super-modal-show element"
 
     # construct parameters for the modal
     params = null
@@ -39,7 +40,7 @@ SuperModalShowPrototype.createdCallback = ->
         key = dataKey.replace(/^params(.*)$/, "$1").toLowerCase()
         params[key] = @dataset[dataKey]
 
-    supersonic.ui.modal.show(viewId, { params })
+    supersonic.ui.modal.show locationOrId, { params }
     .catch (error) ->
       throw new Error "Failed to open modal: #{error}"
 
