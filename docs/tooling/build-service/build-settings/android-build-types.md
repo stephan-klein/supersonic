@@ -33,4 +33,4 @@ All the Android build types described above are also available as Crosswalk buil
 * [check out the blog: Chromium Crosswalk: A huge boost to hybrid-apps on Android](http://blog.appgyver.com/heartbeat/tooling/android-chromium/)
 </section>
 
-[android-build-config]: steroids/build-service/build-settings/build-settings-for-android
+[android-build-config]: /tooling/build-service/build-settings/build-settings-for-android
