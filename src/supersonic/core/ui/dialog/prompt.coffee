@@ -33,10 +33,6 @@ module.exports = (steroids, log) ->
    # @define {=>Object} result Result object.
    # @define {=>Integer} result.buttonIndex Index of the button tapped by the user.
    # @define {=>String} result.input String inputted by user.
-   # @usageCoffeeScript
-   # supersonic.ui.dialog.prompt "Type something!", options
-   # @usageJavaScript
-   # supersonic.ui.dialog.prompt("Type something!", options);
    # @exampleCoffeeScript
    # options =
    #   title: "Please type some text and click on the desired color"
