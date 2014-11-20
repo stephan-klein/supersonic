@@ -13,9 +13,11 @@ This section covers the The AppGyver wrapper, which allows you to run your apps 
 
 The AppGyver wrapper is closely tied to the AppGyver Build Service. The default Scanner app is available in app stores, but you will at some point look to build standalone versions of the app, or even a custom Scanner to utilise custom features.
 
-The AppGyver wrapper will commonly and interchangeably be referred to as the client or runtime. The three available client versions are:
+The AppGyver wrapper will commonly and interchangeably be referred to as the client or runtime. The three available wrapper versions are:
+
   - Android
   - Android Crosswalk
   - iOS
+
 </section>
 
