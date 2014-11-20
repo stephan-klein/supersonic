@@ -11,8 +11,6 @@ module.exports = (steroids, log) ->
    # @class
    # @description
    # A navigation bar button, for use with `supersonic.ui.navigationBar.update`.
-   # @usageJavaScript
-   # var button = new supersonic.ui.NavigationBarButton(options);
    # @type
    # supersonic.ui.NavigationBarButton: (
    #   title: String
@@ -20,11 +18,18 @@ module.exports = (steroids, log) ->
    # )
    # @define {String} title The title text for the button.
    # @define {Function} onTap A function that gets executed when the navigation bar button is tapped.
+   # @exampleCoffeeScript
+   # options =
+   #   title: "Settings"
+   #   onTap: ->
+   #     supersonic.ui.layers.push "common#settings"
+   #
+   # button = new supersonic.ui.NavigationBarButton options
    # @exampleJavaScript
    # var options = {
    #   title: "Settings",
    #   onTap: function() {
-   #     supersonic.ui.layers.push("common#settings")
+   #     supersonic.ui.layers.push("common#settings");
    #   }
    #
    # var button = new supersonic.ui.NavigationBarButton(options)
