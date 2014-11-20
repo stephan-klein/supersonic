@@ -56,17 +56,13 @@
 
 
 
-
-
-{% if method.type %}
-### Type Signature
-```coffeescript
-{{method.type}}
-```
-{% endif %}
-
 {% if method.params.size > 0 %}
-#### Params
+### Parameters
+{% if method.type %}
+{% highlight coffeescript %}
+{{method.type}}
+{% endhighlight %}
+{% endif %}
 <table class="table" style="margin:0;">
   <thead>
     <tr>
