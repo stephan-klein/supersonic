@@ -21,6 +21,7 @@ navigation-bar {
 }
 
 ```
+Please note that the style rules set to the `navigation-bar` selector also apply to the `<super-navbar>` Web Component. No `super-navbar` CSS selector is available.
 
 To set the background color of your navigation bar, just add the `background-color` rule to the selector:
 
