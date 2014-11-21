@@ -59,6 +59,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # Returns a Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
    # @define {=>String} result Image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # options =
    #   quality: 50
@@ -171,6 +172,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # Returns a Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
    # @define {=>String} result Image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # options =
    #   quality: 50
