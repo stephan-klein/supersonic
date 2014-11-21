@@ -8,7 +8,7 @@ parent_id: tooling
 ---
 # Android Emulator
 
-**Android Emulator support is Work in Progress and not guaranteed to work.** Only OS X and Linux are currently supported.
+**Android Emulator support in Steroids CLI is Work in Progress and not guaranteed to work.** Only OS X and Linux are currently supported. We recommend using the [Genymotion](genymotion) emulator instead.
 
 ## Installing
 
