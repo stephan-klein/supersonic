@@ -27,6 +27,7 @@ module.exports = (steroids, log) ->
    # @define {String} options.buttonLabel="OK" Custom button text for the alert dialog.
    # @returnsDescription
    # A Promise, resolved when the the button in the alert dialog is tapped.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # options =
    #   message: "A longer message with \n\n\n\nmultiple lines."

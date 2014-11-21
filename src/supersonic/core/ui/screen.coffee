@@ -26,6 +26,7 @@ module.exports = (steroids, log) ->
    # @define {Array<String>} rotations Allowed rotations. Possible values are `"portrait"`, `"portraitUpsideDown"`, `"landscapeLeft"` and `"landscapeRight"`.
    # @returnsDescription
    # Returns a Promise that is resolved when the allowed rotations are set.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.screen.setAllowedRotations ["landscapeLeft", "landscapeRight"]
    # @exampleJavaScript
@@ -56,6 +57,7 @@ module.exports = (steroids, log) ->
    # @define {String} orientation. Possible values "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight".
    # @returnsDescription
    # A Promise that is resolved when the screen is rotated.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.screen.rotateTo "landscapeLeft"
    #

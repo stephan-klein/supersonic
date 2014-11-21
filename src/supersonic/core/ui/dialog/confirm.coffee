@@ -29,6 +29,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # Returns a Promise. Once the confirm dialog is dismissed (by tapping on one of the buttons), the promise resolves with the index of the button tapped.
    # @define {=>Integer} buttonIndex Index of the button tapped by the user.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # options =
    #   message: "Please reply honestly, now."

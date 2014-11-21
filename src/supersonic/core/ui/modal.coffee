@@ -29,6 +29,7 @@ module.exports = (steroids, log) ->
    # @define {Boolean} options.animate=true If set to `false`, the modal will be shown immediately, without the default "slide-from-bottom" animation.
    # @returnsDescription
    # A promise that is resolved when the modal starts to show. If there modal cannot be shown (e.g. the view is invalid), the promise is rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # modalView = new supersonic.ui.View "common#modal"
    # options =
@@ -79,6 +80,7 @@ module.exports = (steroids, log) ->
    # @define {Boolean} options.animate=true If set to `false`, the modal will be hidden immediately, without the default "slide-from-top" animation.
    # @returnsDescription
    # A promise that is resolved when the modal starts to hide. If there is no modal on screen, the promise is rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # options =
    #   animate: false
@@ -114,6 +116,7 @@ module.exports = (steroids, log) ->
    # @define {Boolean} options.animate=true If set to `false`, the modals will be hidden immediately, without the default "slide-from-top" animation.
    # @returnsDescription
    # A promise that is resolved when the modals start to hide. If there are no modals on screen, the promise is rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # options =
    #   animate: false

@@ -26,6 +26,7 @@ module.exports = (steroids, log) ->
    # ) => Promise
    # @returnsDescription
    # A promise that is resolved when the tab bar has been shown. If tab bar could not be shown, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.tabs.show()
    # @exampleJavaScript
@@ -48,6 +49,7 @@ module.exports = (steroids, log) ->
    # ) => Promise
    # @returnsDescription
    # A promise that is resolved when the tab bar has been hidden. If tab bar could not be hidden, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.tabs.hide()
    # @exampleJavaScript
@@ -72,6 +74,7 @@ module.exports = (steroids, log) ->
    # @define {Array<Object>} tabsArray An array of tab configurations: {title: "Hello", badge: "1"}
    # @returnsDescription
    # A promise that is resolved when the tab bar has been updated. If tab bar could not be updated, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.tabs.update [{title: "Hello", badge: "1"}]
    # @exampleJavaScript
@@ -97,6 +100,7 @@ module.exports = (steroids, log) ->
    # @define {Array<Object>} tabsArray An array of tab configurations: {title: "Hello", badge: "1", location: "myroute#index"}
    # @returnsDescription
    # A promise that is resolved when the tab bar has been replaced. If tab bar could not be replaced, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.tabs.replace [{title: "Web", location: "http://www.google.com"}]
    # @exampleJavaScript
@@ -125,6 +129,7 @@ module.exports = (steroids, log) ->
    # @define {Integer} tabIndex An index number of the tab to select. First tab from the left is 0, second one is 1 and so on.
    # @returnsDescription
    # A promise that is resolved when the tab bar has been selected. If tab bar could not be selected, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.tabs.select 1
    # @exampleJavaScript
@@ -149,6 +154,7 @@ module.exports = (steroids, log) ->
    # @define {Object} config An tab configuration object.
    # @returnsDescription
    # A promise that is resolved when the current tab has been updated. If tab could not be updated, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.tabs.updateCurrentTab {title: "Hello"}
    # @exampleJavaScript
@@ -175,6 +181,7 @@ module.exports = (steroids, log) ->
    # @define {String} className Name of the class to set for tab bar.
    # @returnsDescription
    # A promise that is resolved once the new style class has been set. If class could not be set, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.tabs.setStyleClass "my-awesome-tabs"
    # @exampleJavaScript
@@ -200,6 +207,7 @@ module.exports = (steroids, log) ->
    # @define {String} id Id of the class to set for tab bar.
    # @returnsDescription
    # A promise that is resolved once the new style id has been set. If id could not be set, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.tabs.setStyleId "graybg"
    # @exampleJavaScript
@@ -225,6 +233,7 @@ module.exports = (steroids, log) ->
    # @define {String} css Stylesheet to set for tab bar.
    # @returnsDescription
    # A promise that is resolved once the new style css has been set. If style css could not be set, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.tabs.setStyleCSS "background-color: red;"
    # @exampleJavaScript

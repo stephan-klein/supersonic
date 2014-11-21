@@ -96,6 +96,7 @@ module.exports = (steroids, log) ->
    # @define {String} side=left The side of the drawer to be opened. Valid values are `left` and `right`.
    # @returnsDescription
    # A promise that will be resolved once the drawer has been opened. If there is no drawer initialized on the given side, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleJavaScript
    # supersonic.ui.drawers.open("left").then( function() {
    #   supersonic.logger.debug("Drawer was shown");
@@ -129,6 +130,7 @@ module.exports = (steroids, log) ->
    # supersonic.ui.drawers.close: () => Promise
    # @returnsDescription
    # A promise that will be resolved once the drawer has been closed. If there are no open drawers, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleJavaScript
    # supersonic.ui.drawers.close().then( function() {
    #   supersonic.logger.debug("Drawer was closed");
@@ -183,6 +185,7 @@ module.exports = (steroids, log) ->
    #   <li>`TapCenterView`:  Close the drawer by tapping anywhere in the center view.
    #   <li>`PanDrawerView`: Close the drawer by panning (swiping) anywhere in the drawer view.
    # </ul>
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.drawers.updateOptions(
    #   shadow: true

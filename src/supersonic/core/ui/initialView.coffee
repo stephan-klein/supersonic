@@ -25,6 +25,7 @@ module.exports = (steroids, log) ->
    # @define {Animation} showAnimation=animation("fade") A `supersonic.ui.Animation` object that defines the animation used to dismiss the Initial View (and show your actual app's root view). Defaults to `supersonic.ui.animation("fade")`
    # @returnsDescription
    # A promise that is resolved when the Initial View starts to dismiss. If there the Initial View is not present on the screen, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.initialView.show()
    # @exampleJavaScript
@@ -55,6 +56,7 @@ module.exports = (steroids, log) ->
    # @define {Animation} dismissAnimation= A `supersonic.ui.Animation` object that defines the animation used to dismiss the Initial View (and show your actual app's root view).
    # @returnsDescription
    # A promise that is resolved when the Initial View starts to dismiss. If there the Initial View is not present on the screen, the promise will be rejected.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.initialView.dismiss()
    # @exampleJavaScript
