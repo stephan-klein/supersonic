@@ -110,13 +110,17 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.navigationBar.update: (
    #   options:
-   #     backButton?: Boolean
+   #     title?: String
+   #     overrideBackButton?: Boolean
+   #     backButton?: NavigationBarButton
    #     buttons?:
    #       left?: Array<NavigationBarButton>
    #       right?: Array<NavigationBarButton>
    # )
    # @define {Object} options An object of optional parameters which defines how the navigation bar will be updated.
-   # @define {Boolean} backButton=true If `false`, the automatic back button will not be shown. If defined, the first left button will be shown on its place.
+   # @define {String} title Navigation bar title text.
+   # @define {Boolean} overrideBackButton=false If `true`, the automatic back button will not be shown. If defined, the first left button will be shown on its place.
+   # @define {NavigationBarButton} backButton A supersonic.ui.NavigationBarButton that will be used in place of the native back button.
    # @define {Object} buttons= An object determining the buttons that will be shown on either side of the navigation bar.
    # @define {Array<NavigationBarButton} buttons.left=[] An array of NavigationBarButtons to be shown on the left side of the navigation bar (i.e. left side of the title text/image). Passing an empty array will remove all buttons.
    # @define {Array<NavigationBarButton} buttons.right=[] An array of NavigationBarButtons to be shown on the right side of the navigation bar (i.e. right side of the title text/image). Passing an empty array will remove all buttons.
