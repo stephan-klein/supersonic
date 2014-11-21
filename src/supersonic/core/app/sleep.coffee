@@ -23,6 +23,7 @@ module.exports = (steroids, log) ->
    #   Promise
    # @returnsDescription
    # A promise that is resolved when the native side has successfully disabled automatic sleep.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.app.sleep.disable()
    # @exampleJavaScript
@@ -50,6 +51,7 @@ module.exports = (steroids, log) ->
    #   Promise
    # @returnsDescription
    # A promise that is resolved when the native side has successfully enabled automatic sleep.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.app.sleep.enable()
    # @exampleJavaScript

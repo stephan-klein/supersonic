@@ -24,6 +24,7 @@ module.exports = (steroids, log) ->
    #   Promise
    # @returnsDescription
    # A Promise that is resolved when the splashscreen is shown.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.app.splashscreen.show()
    # @exampleJavaScript
@@ -53,6 +54,7 @@ module.exports = (steroids, log) ->
    #   Promise
    # @returnsDescription
    # A Promise that is resolved when the splashscreen is hidden.
+   # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.app.splashscreen.hide()
    # @exampleJavaScript
