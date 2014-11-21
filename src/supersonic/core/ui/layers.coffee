@@ -48,13 +48,13 @@ module.exports = (steroids, log) ->
       supersonic.ui.views.find(viewOrId)
       .tap (view)->
         view.isStarted().then (started)->
-          return if params?
+          return unless options.params?
 
           if started
-            supersonic.logger.debug "Sending parameters (#{params}) to view (id: #{view.id})"
-            supersonic.data.channel("view-params-#{view.id}").publish(params)
+            supersonic.logger.debug "Sending parameters (#{options.params}) to view (id: #{view.id})"
+            supersonic.data.channel("view-params-#{view.id}").publish(options.params)
           else
-            view._webView.setParams params
+            view._webView.setParams options.params
 
       .then (view)->
         steroids.layers.push
