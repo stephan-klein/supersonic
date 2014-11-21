@@ -5,6 +5,7 @@ email: your-email@domain.com
 description: "The official AppGyver site"
 baseurl: ""
 url: "http://www.appgyver.com"
+exclude: ['README.md']
 
 # Build settings
 markdown: redcarpet
