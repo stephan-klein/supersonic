@@ -64,10 +64,9 @@ For a build-and-watch-for-changes loop, use:
 
 ### Running testApp and testSpecApp
 
-Running testApp and testSpecApp requires [devroids](https://github.com/AppGyver/devroids)
+Running testApp and testSpecApp requires [steroids](https://github.com/AppGyver/steroids)
 
-* Clone [devroids](https://github.com/AppGyver/devroids) repo, install its dependencies (npm install) and run `npm link`.
-* Use devroids as you would use steroids.
+* Clone [steroids](https://github.com/AppGyver/steroids) repo, install its dependencies (npm install) and run `npm link`.
 
 Installing dependencies:
 
@@ -77,8 +76,7 @@ Installing dependencies:
 
 Supersonic documentation is generated in a two-step process. A grunt task extracts metadata from source files. The docs are then presented along with the metadata by a jekyll server.
 
-    gem install jekyll
-    gem install redcarpet -v 3.1.2
+    bundle install
     grunt compile-docs
     cd docs
     jekyll serve
