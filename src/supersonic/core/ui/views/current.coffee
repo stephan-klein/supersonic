@@ -4,7 +4,7 @@ events = require '../../events'
 channel = require '../../data/channel'
 
 
-module.exports = (steroids, log) ->
+module.exports = (steroids, log, global) ->
   parameterBus = new Bacon.Bus
 
   viewObject = {
@@ -17,7 +17,7 @@ module.exports = (steroids, log) ->
     new Promise (resolve, reject)->
       steroids.getApplicationState {},
         onSuccess: (state)->
-          matches = (preload for preload in state.preloads when preload.URL is location.href)
+          matches = (preload for preload in state.preloads when preload.URL is global.location.href)
           if matches.length
             # update .id
             viewObject.id = matches[0].id unless id?
@@ -32,10 +32,10 @@ module.exports = (steroids, log) ->
     channelId = "view-params-#{viewObject.id}"
     unlisten = null
 
-    viewChannel = channel(window)(channelId)
+    viewChannel = channel(global)(channelId)
     parameterBus.plug viewChannel.inbound
   , ->
-    console.log "View #{location.href} is not started, wont register channel"
+    console.log "View #{global.location.href} is not started, wont register channel"
 
 
   whenVisible = (f) ->

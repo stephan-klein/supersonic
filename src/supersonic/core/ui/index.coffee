@@ -1,9 +1,9 @@
 
-module.exports = (steroids, log) ->
+module.exports = (steroids, log, global) ->
   View: require("./View")(steroids, log)
 
   screen: require("./screen")(steroids, log)
-  views: require("./views")(steroids, log)
+  views: require("./views")(steroids, log, global)
   layers: require("./layers")(steroids, log)
   drawers: require("./drawers")(steroids, log)
   tabs: require("./tabs")(steroids, log)

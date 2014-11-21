@@ -1,7 +1,7 @@
 Promise = require 'bluebird'
 superify = require '../superify'
 
-module.exports = (steroids, log) ->
+module.exports = (steroids, log, global) ->
   View = require("./View")(steroids, log)
   s = superify 'supersonic.ui.views', log
 
@@ -146,5 +146,5 @@ module.exports = (steroids, log) ->
     find: find
     start: start
     stop: stop
-    current: require('./views/current')(steroids, log)
+    current: require('./views/current')(steroids, log, global)
   }
