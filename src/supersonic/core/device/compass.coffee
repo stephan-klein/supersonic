@@ -107,7 +107,7 @@ module.exports = (steroids, log) ->
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.device.compass.getHeading().then (heading) ->
-   #   steroids.logger.log(
+   #   supersonic.logger.log(
    #     """
    #     Magnetic heading: #{heading.magneticHeading}
    #     True heading: #{heading.trueHeading}

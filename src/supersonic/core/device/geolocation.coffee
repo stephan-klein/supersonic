@@ -48,7 +48,7 @@ module.exports = (steroids, log) ->
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.device.geolocation.watchPosition().onValue (position) ->
-   #   steroids.logger.log(
+   #   supersonic.logger.log(
    #     """
    #     Latitude: #{position.coords.latitude}
    #     Longitude: #{position.coords.longitude}
@@ -57,7 +57,7 @@ module.exports = (steroids, log) ->
    #   )
    # @exampleJavaScript
    # supersonic.device.geolocation.watchPosition().onValue( function(position) {
-   #   steroids.logger.log(
+   #   supersonic.logger.log(
    #     "Latitude: " + position.coords.latitude + "\n" +
    #     "Longitude: " + position.coords.longitude + "\n" +
    #     "Timestamp: " + position.timestamp
@@ -105,7 +105,7 @@ module.exports = (steroids, log) ->
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.device.geolocation.getPosition().then (position) ->
-   #   steroids.logger.log(
+   #   supersonic.logger.log(
    #     """
    #     Latitude: #{position.coords.latitude}
    #     Longitude: #{position.coords.longitude}
@@ -114,7 +114,7 @@ module.exports = (steroids, log) ->
    #   )
    # @exampleJavaScript
    # supersonic.device.geolocation.getPosition().then( function(position) {
-   #   steroids.logger.log(
+   #   supersonic.logger.log(
    #     "Latitude: " + position.coords.latitude + "\n" +
    #     "Longitude: " + position.coords.longitude + "\n" +
    #     "Timestamp: " + position.timestamp

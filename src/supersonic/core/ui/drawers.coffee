@@ -255,10 +255,10 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenWillShow().then ->
-   #   steroids.logger.log("Drawers will show")
+   #   supersonic.logger.log("Drawers will show")
    # @exampleJavaScript
    # supersonic.ui.drawers.whenWillShow().then( function() {
-   #   steroids.logger.log("Drawers will show");
+   #   supersonic.logger.log("Drawers will show");
    # });
   ###
   whenWillShow: (f)->
@@ -278,10 +278,10 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenDidShow().then ->
-   #   steroids.logger.log("Drawers did show")
+   #   supersonic.logger.log("Drawers did show")
    # @exampleJavaScript
    # supersonic.ui.drawers.whenDidShow().then( function() {
-   #   steroids.logger.log("Drawers did show");
+   #   supersonic.logger.log("Drawers did show");
    # });
   ###
   whenDidShow: (f)->
@@ -301,10 +301,10 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenWillClose().then ->
-   #   steroids.logger.log("Drawers will close")
+   #   supersonic.logger.log("Drawers will close")
    # @exampleJavaScript
    # supersonic.ui.drawers.whenWillClose().then( function() {
-   #   steroids.logger.log("Drawers will close");
+   #   supersonic.logger.log("Drawers will close");
    # });
   ###
   whenWillClose: (f)->
@@ -324,10 +324,10 @@ module.exports = (steroids, log) ->
    # @define {Function} unsubscribe Stop listening
    # @exampleCoffeeScript
    # supersonic.ui.drawers.whenDidClose().then ->
-   #   steroids.logger.log("Drawers did close")
+   #   supersonic.logger.log("Drawers did close")
    # @exampleJavaScript
    # supersonic.ui.drawers.whenDidClose().then( function() {
-   #   steroids.logger.log("Drawers did close");
+   #   supersonic.logger.log("Drawers did close");
    # });
   ###
   whenDidClose: (f)->

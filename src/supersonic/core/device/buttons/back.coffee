@@ -22,10 +22,10 @@ module.exports = (steroids, log) ->
   # @define {Function} unsubscribe Stop listening
   # @exampleCoffeeScript
   # supersonic.device.buttons.back.whenPressed().then ->
-  #   steroids.logger.log("Device back button was pressed.")
+  #   supersonic.logger.log("Device back button was pressed.")
   # @exampleJavaScript
   # supersonic.device.buttons.back.whenPressed().then( function() {
-  #   steroids.logger.log("Device back button was pressed.");
+  #   supersonic.logger.log("Device back button was pressed.");
   # });
   ###
   override = false
