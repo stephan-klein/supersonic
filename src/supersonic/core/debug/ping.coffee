@@ -20,7 +20,7 @@ module.exports = (steroids, log) ->
    # @exampleCoffeeScript
    # supersonic.debug.ping().then (response) ->
    #   supersonic.logger.log response
-   # @exampleJavascript
+   # @exampleJavaScript
    # supersonic.debug.ping().then(function(response) {
    #   supersonic.logger.log(response);
    # });
