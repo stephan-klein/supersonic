@@ -154,25 +154,20 @@ This creates a button and attaches the previously created `getAcceleration` func
 To actually measure the device acceleration, we need to access the device hardware. Supersonic provides access to a wide range of device APIs such as geolocation and accelerometer, and media APIs such as the microphone and camera. You can also find extended support via plugins, but for now the default accelerometer API is enough. Change your controller content to the following:
 
 ```coffeescript
-$scope.acceleration_X = undefined
-$scope.acceleration_Y = undefined
-$scope.acceleration_Z = undefined
+$scope.acceleration = undefined
 
 $scope.getAcceleration = () ->
   supersonic.device.accelerometer.getAcceleration().then (acceleration) ->
-    $scope.acceleration_X = acceleration.x
-    $scope.acceleration_Y = acceleration.y
-    $scope.acceleration_Z = acceleration.z
-    $scope.apply()
+    $scope.acceleration = acceleration
 ```
 
 Now when you click the "Get acceleration" -button, the accelerometer data is added to the `$scope` object. The last step is to display that data in the accelerometer view. To do so, add the following to the `app/accelerometer/views/index.html`, under the previously defined `<button>` element:
 
 ```html
-<div ng-show="acceleration_X">
-Acceleration X: {{acceleration_X}}
-Acceleration Y: {{acceleration_Y}}
-Acceleration Z: {{acceleration_Z}}
+<div ng-show="acceleration">{% raw %}
+  Acceleration X: {{acceleration.x}}
+  Acceleration Y: {{acceleration.y}}
+  Acceleration Z: {{acceleration.z}}{% endraw %}
 </div>
 ```
 
