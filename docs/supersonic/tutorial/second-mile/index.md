@@ -72,7 +72,7 @@ Debugging via the Connect Screen logs is available on all devices and operating 
 
 ## Supersonic modules
 
-By default, Supersonic apps are made up of modules, which contain the HTML and script files for a certain portion of your app functionality. Currently, our project has two modules: `common`, which is a sort of shared space for all of our app content, and `example`, which has all the views you see in the example app. We want to add a new feature to our app, so it makes sense to create a new module for it. You can create a new module by running `steroids generate module <module-name>` in your project folder. Let's create an `accelerometer` module. You will see that the following module is created for your project:
+By default, Supersonic apps are made up of modules, which contain the HTML and script files for a certain portion of your app functionality. Currently, our project has two modules: `common`, which is a shared space for all of our app content, and `example`, which has all the views you see in the example app. We want to add a new feature to our app, so it makes sense to create a new module for it. You can create a new module by running `steroids generate module <module-name>` in your project folder. Let's create an `accelerometer` module. You will see that the following module is created for your project:
 
 ```bash
 app/accelerometer
@@ -96,7 +96,7 @@ Next, you need to attach the new module to the rest of your app's views. Let's r
  - `app.coffee` contains general behaviour settings for your app.
  - `structure.coffee` is used to define the initial configuration of your app's views.
 
-For now, all you need is the `structure.coffee` file. In the file, you will see that a `tabs` property has been set, containing two views, `Index` and `Settings`. Change the tabs property to the following:
+For now, all you need is the `structure.coffee` file. In the file, you will see that a `tabs` property has been set, containing three views, `Index`, `Settings` and `Internet`. Change the tabs property to the following:
 
 ```coffee
 tabs: [
@@ -109,6 +109,11 @@ tabs: [
     title: "Accelerometer"
     id: "accelerometer"
     location: "accelerometer#index"
+  }
+  {
+    title: "Internet"
+    id: "internet"
+    location: "http://google.com"
   }
 ]
 ```
