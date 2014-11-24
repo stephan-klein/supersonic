@@ -19,7 +19,7 @@ module.exports = (steroids, log) ->
    #     version: String,
    #     model: String
    #   }
-   # @returnsDescription A [Promise](/supersonic/guides/technical-concepts/promises/) is resolved to the name and version of the operating system and the model of the device.
+   # @returnsDescription A [`Promise`](/supersonic/guides/technical-concepts/promises/) is resolved to the name and version of the operating system and the model of the device.
    # @define {=>Object} platform Platform object.
    # @define {=>String} platform.name  The device's operating system name.
    # @define {=>String} platform.version  The device's operating system version.

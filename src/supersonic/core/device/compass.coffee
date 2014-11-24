@@ -38,7 +38,7 @@ module.exports = (steroids, log) ->
    # @define {Object} options={} Optional options object.
    # @define {Integer} options.frequency=100 Update interval in milliseconds.
    # @define {Integer} options.filter The change in degrees required to initiate an update. When this value is set, `options.frequency` is ignored.
-   # @returnsDescription A [Stream](/supersonic/guides/technical-concepts/streams/) of heading objects with the following properties:
+   # @returnsDescription A [`Stream`](/supersonic/guides/technical-concepts/streams/) of heading objects with the following properties:
    # @define {=>Object} heading Heading object.
    # @define {=>Number} heading.magneticHeading  The heading in degrees from 0-359.99 at a single moment in time.
    # @define {=>Number} heading.trueHeading The heading relative to the geographic North Pole in degrees 0-359.99 at a single moment in time. A negative value indicates that the true heading couldn't be determined.
@@ -98,7 +98,7 @@ module.exports = (steroids, log) ->
    #     headingAccuracy: Number,
    #     timestamp: Date
    #   }
-   # @returnsDescription A [Promise](/supersonic/guides/technical-concepts/promises/) is resolved to the next available heading data.
+   # @returnsDescription A [`Promise`](/supersonic/guides/technical-concepts/promises/) is resolved to the next available heading data.
    # @define {=>Object} heading Heading object.
    # @define {=>Number} heading.magneticHeading  The heading in degrees from 0-359.99 at a single moment in time.
    # @define {=>Number} heading.trueHeading The heading relative to the geographic North Pole in degrees 0-359.99 at a single moment in time. A negative value indicates that the true heading couldn't be determined.

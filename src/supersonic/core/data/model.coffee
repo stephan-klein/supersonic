@@ -155,7 +155,7 @@ module.exports = (logger, window) ->
  # @description
  # Persist all model instances in this collection.
  # @returnDescription
- # A [Promise](/supersonic/guides/technical-concepts/promises/) that resolves once all the model instances in the collection have been perisisted to the cloud backend.
+ # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that resolves once all the model instances in the collection have been perisisted to the cloud backend.
  # @exampleCoffeeScript
  # supersonic.data.model('task').findAll().then (tasks) ->
  #   for task in tasks
