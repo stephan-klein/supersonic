@@ -66,6 +66,7 @@ In the case that you have multiple devices setup in Genymotion (e.g. testing dif
 ### When I start a virtual device, why does the window remain black?
 
 You are probably in either of the following situations:
+
 - Your network adapter may be misconfigured. In this case:
   - Run VirtualBox.
   - Open File > Preferences > Network (or VirtualBox > Preferences for Mac OS X).
