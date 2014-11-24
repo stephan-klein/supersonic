@@ -35,7 +35,7 @@ module.exports = (steroids) ->
    # if urlObject?
    #   supersonic.logger.log "Got launch URL #{urlObject.launchURL} with params: #{urlObject.params}"
    # else
-   #   supersonic.logger.error "Could not get a launch URL.")
+   #   supersonic.logger.error "Could not get a launch URL."
    #
    # @exampleJavaScript
    # var urlObject = supersonic.app.getLaunchURL();
