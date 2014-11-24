@@ -70,7 +70,7 @@ Publishing to app stores requires that you build an app store version of your ap
 
 For Android:
 
-1. Build a Google Play build from the [Build Service][build-service]. The resulting `.apk` will be the app you publish to the Play Store.
+1. Build a Google Play build from the [Build Service](https://cloud.appgyver.com/applications). The resulting `.apk` will be the app you publish to the Play Store.
 2. Go through the [Google launch checklist](http://developer.android.com/distribute/tools/launch-checklist.html) and upload your app to the store.
 
 For iOS:
