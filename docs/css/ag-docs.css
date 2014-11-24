@@ -498,6 +498,7 @@ p {
   font-family: "Proxima N W01 Reg";
   font-size: 16px;
   margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .ag__docs__footer  ul {
