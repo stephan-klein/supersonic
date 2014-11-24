@@ -23,7 +23,7 @@ module.exports = (steroids, log) ->
    # supersonic.app.splashscreen.show: () =>
    #   Promise
    # @returnsDescription
-   # A Promise that is resolved when the splashscreen is shown.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the splashscreen is shown.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.app.splashscreen.show()
@@ -53,7 +53,7 @@ module.exports = (steroids, log) ->
    # supersonic.app.splashscreen.hide: () =>
    #   Promise
    # @returnsDescription
-   # A Promise that is resolved when the splashscreen is hidden.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the splashscreen is hidden.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.app.splashscreen.hide()
