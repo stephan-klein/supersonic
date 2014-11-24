@@ -46,9 +46,9 @@ module.exports = (window) ->
       @
 
     subscribe: (listener) =>
-      @inbound.onValue listener.bind {
-        reply: @publish
-      }
+      @inbound.onValue (value) =>
+        listener.bind { reply: @publish } #XXX DEPRECATED LEGACY SUPPORT DO NOT DOCUMENT
+        listener(value, @publish)
 
   ###
    # @namespace supersonic.data
@@ -66,14 +66,14 @@ module.exports = (window) ->
    # # WebView one
    # supersonic.data.channel('events').publish('you would not believe what just happened')
    # # WebView two
-   # supersonic.data.channel('events').subscribe (message) ->
-   #   @reply 'well, what happened?'
+   # unsubscribe = supersonic.data.channel('events').subscribe (message, reply) ->
+   #   reply 'well, what happened?'
    # @exampleJavaScript
    # // WebView one
    # supersonic.data.channel('events').publish('you would not believe what just happened');
    # // WebView two
-   # supersonic.data.channel('events').subscribe( function(message) {
-   #   this.reply('well, what happened?');
+   # var unsubscribe = supersonic.data.channel('events').subscribe( function(message, reply) {
+   #   reply('well, what happened?');
    # });
   ###
   return createChannel = (name) ->
