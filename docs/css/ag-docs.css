@@ -73,8 +73,9 @@ a:link:hover {
 }
 
 .ag__docs__header h3 {
+  font-size: 32px;
   text-transform: uppercase;
-  font-family: "Proxima N W01 Smbd";
+  font-family: "Proxima N W01 Bold";
   margin-bottom: 6px;
 }
 
@@ -97,7 +98,7 @@ a:link:hover {
 .ag__docs__header-nav a {
   position: relative;
   background: transparent !important;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 100%;
   font-family: "Proxima N W01 Reg";
   padding: 4px 40px 2px 40px;
@@ -445,6 +446,7 @@ p {
 }
 
 .ag__docs__left-menu li a {
+  font-size: 12px !important;
   font-family: "Proxima N W01 Reg";
 }
 
@@ -453,7 +455,10 @@ p {
 }
 
 .ag__docs__left-menu li.menu-title a {
+  line-height: 24px;
+  font-size: 14px !important;
   font-family: "Proxima N W01 Smbd";
+  color: #7f7f7f !important;
 }
 
 .ag__docs__left-menu.active-menu li.menu-title a {
