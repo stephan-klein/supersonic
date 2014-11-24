@@ -59,6 +59,13 @@ module.exports = (steroids, log) ->
 
       .then (view)->
         options.view = view._webView
+        options.disableAnimation = if options?.animate?
+          switch options.animate
+            when true then false
+            when false then true
+        else
+          false
+
         steroids.modal.show options,
           onSuccess: ->
             resolve view
@@ -94,6 +101,12 @@ module.exports = (steroids, log) ->
    # supersonic.ui.modal.hide(options);
   ###
   hide: s.promiseF "hide", (options = {})->
+    options.disableAnimation = if options?.animate?
+      switch options.animate
+        when true then false
+        when false then true
+    else
+      false
     new Promise (resolve, reject)->
       steroids.modal.hide options, {
         onSuccess: resolve
@@ -131,6 +144,12 @@ module.exports = (steroids, log) ->
   ###
 
   hideAll: s.promiseF "hideAll", (options = {})->
+    options.disableAnimation = if options?.animate?
+      switch options.animate
+        when true then false
+        when false then true
+    else
+      false
     new Promise (resolve, reject)->
       steroids.modal.hideAll options, {
         onSuccess: resolve

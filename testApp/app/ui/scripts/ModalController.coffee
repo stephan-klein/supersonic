@@ -6,8 +6,16 @@ angular
       supersonic.ui.modal.hide().then ->
         supersonic.logger.log "Modal is hidden"
 
+    $scope.hideModalWithoutAnimation = ()->
+      supersonic.ui.modal.hide({animate: false}).then ->
+        supersonic.logger.log "Modal is hidden"
+
     $scope.hideAllModals = ()->
       supersonic.ui.modal.hideAll().then ()->
+        supersonic.logger.log "All the modals are hidden"
+
+    $scope.hideAllModalsWithoutAnimation = ()->
+      supersonic.ui.modal.hideAll({animate: false}).then ()->
         supersonic.logger.log "All the modals are hidden"
 
     $scope.hideModalWithCallback = ->

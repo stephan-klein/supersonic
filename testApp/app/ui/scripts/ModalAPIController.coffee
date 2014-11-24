@@ -8,7 +8,14 @@ angular
     $scope.asModal = (url)->
       v = new supersonic.ui.View(url)
       supersonic.ui.modal.show(v, {
-        disableAnimation: true
+        animate: true
+      }).then ()->
+        supersonic.logger.log "Modal shown"
+
+    $scope.asModalWithoutAnimation = (url)->
+      v = new supersonic.ui.View(url)
+      supersonic.ui.modal.show(v, {
+        animate: false
       }).then ()->
         supersonic.logger.log "Modal shown"
 
