@@ -39,23 +39,28 @@ module.exports = (steroids, log) ->
    # </ul>
    # @returnsDescription
    # A `supersonic.ui.Animation` object.
+   # @define {=>Object} animation A `supersonic.ui.Animation` object.
+   # @define {=>function} animation.perform  A function returning a Promise that resolves when the animation is about to start.
    # @exampleCoffeeScript
-   # supersonic.ui.animate "curlDown"
+   # supersonic.ui.animate("curlDown").perform()
    #
    # # With options
    # options =
    #    duration: 1.2
    #    curve: "linear"
-   # supersonic.ui.animate "curlDown", options
+   # supersonic.ui.animate("curlDown", options).perform().then ->
+   #    supersonic.logger.log "About to start an animation"
    # @exampleJavaScript
-   # supersonic.ui.animate("curlDown");
+   # supersonic.ui.animate("curlDown").perform();
    #
    # // With options
    # var options = {
    #    duration: 1.2,
    #    curve: "linear"
    # }
-   # supersonic.ui.animate("curlDown", options);
+   # supersonic.ui.animate("curlDown", options).perform().then( funtion() {
+   #    supersonic.logger.log("About to start an animation");
+   # });
   ###
   SUPPORTED_CURVES = [
     "easeInOut"
