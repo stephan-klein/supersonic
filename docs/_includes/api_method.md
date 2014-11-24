@@ -105,15 +105,18 @@
       </tr>
     {% endfor %}
   {% endfor %}
+  </tbody>
 </table>
+
 {% endif %}
 
 
 {% if method.returnsDescription %}
-#### Returns
+<h4>Returns</h4>
 {{ method.returnsDescription | markdownify }}
 
 {% if method.returns.size > 0 %}
+
 <table class="table" style="margin:0;">
   <thead>
     <tr>
@@ -145,7 +148,9 @@
       </tr>
     {% endfor %}
   {% endfor %}
+  </tbody>
 </table>
+
 {% endif %}
 {% endif %}
 

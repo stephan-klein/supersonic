@@ -68,6 +68,7 @@
       </tr>
     {% endfor %}
   {% endfor %}
+  </tbody>
 </table>
 {% endif %}
 
@@ -108,6 +109,7 @@
       </tr>
     {% endfor %}
   {% endfor %}
+  </tbody>
 </table>
 {% endif %}
 {% endif %}

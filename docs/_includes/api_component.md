@@ -51,5 +51,6 @@
       </tr>
     {% endfor %}
   {% endfor %}
+  </tbody>
 </table>
 {% endif %}
