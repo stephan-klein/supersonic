@@ -254,10 +254,10 @@ module.exports = (steroids, log) ->
    # supersonic.ui.drawers.whenWillShow: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
    # @exampleCoffeeScript
-   # supersonic.ui.drawers.whenWillShow().then ->
-   #   supersonic.logger.log("Drawers will show")
+   # supersonic.ui.drawers.whenWillShow () ->
+   #   supersonic.logger.log "Drawers will show"
    # @exampleJavaScript
-   # supersonic.ui.drawers.whenWillShow().then( function() {
+   # supersonic.ui.drawers.whenWillShow(function() {
    #   supersonic.logger.log("Drawers will show");
    # });
   ###
@@ -277,10 +277,10 @@ module.exports = (steroids, log) ->
    # supersonic.ui.drawers.whenDidShow: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
    # @exampleCoffeeScript
-   # supersonic.ui.drawers.whenDidShow().then ->
-   #   supersonic.logger.log("Drawers did show")
+   # supersonic.ui.drawers.whenDidShow () ->
+   #   supersonic.logger.log "Drawers did show"
    # @exampleJavaScript
-   # supersonic.ui.drawers.whenDidShow().then( function() {
+   # supersonic.ui.drawers.whenDidShow(function() {
    #   supersonic.logger.log("Drawers did show");
    # });
   ###
@@ -300,10 +300,10 @@ module.exports = (steroids, log) ->
    # supersonic.ui.drawers.whenWillClose: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
    # @exampleCoffeeScript
-   # supersonic.ui.drawers.whenWillClose().then ->
-   #   supersonic.logger.log("Drawers will close")
+   # supersonic.ui.drawers.whenWillClose () ->
+   #   supersonic.logger.log "Drawers will close"
    # @exampleJavaScript
-   # supersonic.ui.drawers.whenWillClose().then( function() {
+   # supersonic.ui.drawers.whenWillClose(function() {
    #   supersonic.logger.log("Drawers will close");
    # });
   ###
@@ -323,10 +323,10 @@ module.exports = (steroids, log) ->
    # supersonic.ui.drawers.whenDidClose: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
    # @exampleCoffeeScript
-   # supersonic.ui.drawers.whenDidClose().then ->
-   #   supersonic.logger.log("Drawers did close")
+   # supersonic.ui.drawers.whenDidClose () ->
+   #   supersonic.logger.log "Drawers did close"
    # @exampleJavaScript
-   # supersonic.ui.drawers.whenDidClose().then( function() {
+   # supersonic.ui.drawers.whenDidClose(function() {
    #   supersonic.logger.log("Drawers did close");
    # });
   ###
