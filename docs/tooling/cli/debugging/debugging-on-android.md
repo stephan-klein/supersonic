@@ -9,7 +9,7 @@ parent_id: tooling
 
 # Debugging on Android
 
-Proper remote debugging via the Chrome Web Inspector is available for Android. For Android version 4.0-4.3, it requires that you use a Crosswalk build – see the Android Crosswalk guide for more. For Android 4.4, remote debugging is available for both regular and Crosswalkd builds
+Proper remote debugging via the Chrome Web Inspector is available for Android. For Android version 4.0-4.3, it requires that you use a Crosswalk build – see the Android Crosswalk guide for more. For Android 4.4, remote debugging is available for both Platform and Crosswalk builds.
 
 
 ## Enable USB debugging on your Android device
