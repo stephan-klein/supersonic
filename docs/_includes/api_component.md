@@ -24,19 +24,29 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Default value</th>
+      <th>Default</th>
       <th>Details</th>
     </tr>
   </thead>
   <tbody>
   {% for attribute in component.attributes %}
   <tr>
-    <td>{{attribute.name}}</td>
+    <td class="highlight">
+      <code class="language-html" data-lang="html">
+        {{attribute.name}}
+      </code>
+    </td>
+    {% if attribute.defaultValue %}
     <td class="highlight">
       <code class="language-html" data-lang="html">
       {{attribute.defaultValue}}
       </code>
     </td>
+    {% endif %}
+    {% if attribute.defaultValue == undefined %}
+    <td>
+    </td>
+    {% endif %}
     <td>{{attribute.description | markdownify}}</td>
   </tr>
     {% for child in attribute.children %}

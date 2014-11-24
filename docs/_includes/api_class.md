@@ -64,7 +64,11 @@
   <tbody>
   {% for param in class.params %}
   <tr>
-    <td>{{param.name}}</td>
+    <td class="highlight">
+      <code class="language-coffeescript" data-lang="coffeescript">
+        {{param.name}}
+      </code>
+    </td>
     <td class="highlight">
       <code class="language-coffeescript" data-lang="coffeescript">
       {{param.type | xml_escape}}
