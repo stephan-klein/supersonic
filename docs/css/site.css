@@ -451,8 +451,8 @@ code, pre {
   font-family: Monaco, Menlo, Consolas, "Courier New", monospace; }
 
 code {
-  margin-left: 3px;
-  margin-right: 3px;
+/*  margin-left: 3px;
+  margin-right: 3px;*/
   padding: 2px 4px;
   font-size: 85%;
   color: #4D8CF4;
