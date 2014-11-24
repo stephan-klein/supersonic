@@ -13,7 +13,7 @@ subsections:
   - name: Creating an App Scaffold
   - name: Data in your App
   - name: Three-way Data Binding
-  - name: More with Data
+  - name: Done!
 ---
 <section class="docs-section" id="overview">
 ## Overview
@@ -144,15 +144,16 @@ Now, click on any of the superheroes to view more details. You can edit superher
 If you now look at the Data Browser in the Connect Screen again, you'll see that it has updated with your modified data. As you can see if you peek inside the source code, AngularJS takes care of keeping your view in sync, and Supersonic Data does the hard lifting for syncing changes between the cloud and your device.
 </section>
 
-<section class="docs-section" id="more-with-data">
-## More with Data
+<section class="docs-section" id="done">
+## Done!
 
 That's it! You've now got a fully functioning app with real live data bolted on. Feel free to play around, browse the docs or go to the [forums](https://forums.appgyver.com) if you run into trouble.
 
 You can find all the rest of guides and tutorials on data in the [Data Management][data-management] section.
 
-Happy hacking!
+Now that you have all the neccessary tools for creating a complete app, the next step is distributing your app. Our [Fourth mile][fourth-mile] tutorial covers how to create standalone versions of your app with the AppGyver Build Service.
 </section>
 
 [data-providers]: /supersonic/guides/data/other-data-providers/
 [data-management]: /supersonic/guides/data
+[fourth-mile]: /supersonic/tutorial/fourth-mile

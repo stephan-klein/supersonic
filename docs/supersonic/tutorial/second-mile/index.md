@@ -13,6 +13,7 @@ subsections:
   - name: App logic in the controller
   - name: Access device hardware
   - name: Allergic to modules and CoffeeScript?
+  - name: Done!
 ---
 <section class="docs-section" id="overview">
 ## Overview
@@ -194,6 +195,19 @@ To work with plain JavaScript, you can have `steroids create` create your projec
 ```
 </section>
 
+<section class="docs-section" id="done">
+## Done!
+
+In this section we learned about the basic tools needed for creating truly excellent applications. You now know:
+
+  - The basic structure of a Supersonic project (created with modules).
+  - How to do basic debugging via the Connect Screen.
+  - How to style the app's native elements with CSS.
+  - How to access device hardware and relay the info onwards.
+
+By now you are able to create a feature-robust offline Supersonic app. The last hurdle is connecting your app to real-life data, something that most apps out there utilise. To learn how to initialise and utilise a data backend for your app, head over to the [Third mile][third-mile] tutorial.
+</section>
+
 [app-coffee]: /supersonic/guides/
 [debug-ios]: /tooling/cli/debugging/debugging-on-ios
 [debug-android]: /tooling/cli/debugging/debugging-on-android
@@ -203,3 +217,4 @@ To work with plain JavaScript, you can have `steroids create` create your projec
 [native-styles]: /supersonic/guides/ui/styling-native-components
 [ss-structure]: /supersonic/guides/architecture
 [structure-coffee]: /supersonic/guides
+[third-mile]: /supersonic/tutorial/third-mile

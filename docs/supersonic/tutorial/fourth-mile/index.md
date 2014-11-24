@@ -11,6 +11,7 @@ subsections:
   - name: Configuring a build
   - name: Installing onto device
   - name: Publishing to app stores
+  - name: Done!
 ---
 
 <section class="docs-section" id="overview">
@@ -22,7 +23,7 @@ In this section you will learn:
 - How to configure and request a build from the AppGyver Build Service
 - How to publish your finished app
 
-Note that building and releasing an app is an inevitably time-consuming process, so completing this mile might take a while, but the skills learned are going to be very useful to you sooner or later.
+Note that building and releasing an app is an inevitably time-consuming process, so completing this mile might take a while, but the skills learned are going to be very useful to you in the long run.
 </section>
 
 <section class="docs-section" id="deploying-to-cloud">
@@ -80,7 +81,14 @@ For iOS:
 
 </section>
 
+<section class="docs-section" id="done">
+## Done!
+
+In this section you learned how to deploy your app to the AppGyver Cloud and create standalone versions of your app for testing and distribution purposes, becoming a full stack Supersonic developer in the process. There's lot's more to learn though, check out the [Fifth mile][fifth-mile] for suggestions on where to go next.
+</section>
+
 [android-build-guide]: /tooling/build-service/build-settings/build-settings-for-android/
 [install-guide]: /tooling/build-service/build-settings/installing-onto-device/
 [ios-build-guide]: /tooling/build-service/build-settings/build-settings-for-ios/
 [plugins-guide]: /tooling/build-service/plugins/configuring-custom-plugins/
+[fifth-mile]: /supersonic/tutorial/fifth-mile
