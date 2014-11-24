@@ -20,14 +20,19 @@ module.exports = (steroids, log) ->
    # @description
    # Detect when device goes offline
    # @type
-   # supersonic.device.network.whenOffline: () => unsubscribe: Function
+   # supersonic.device.network.whenOffline: (
+   #    unsubscribe: Function
+   # ) => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
+   # @returnsDescription
+   # Returns a function given as a parameter when the device goes offline.
+   # @define {=>Function} unsubscribe Stop listening
    # @exampleCoffeeScript
-   # supersonic.device.network.whenOffline().then ->
-   #   supersonic.logger.log("Device is offline")
+   # supersonic.device.network.whenOffline ->
+   #   supersonic.ui.dialog.alert("Device is offline")
    # @exampleJavaScript
-   # supersonic.device.network.whenOffline().then( function() {
-   #   supersonic.logger.log("Device is offline");
+   # supersonic.device.network.whenOffline( function() {
+   #   supersonic.ui.dialog.alert("Device is offline");
    # });
   ###
   whenOffline: (f)->
@@ -54,14 +59,19 @@ module.exports = (steroids, log) ->
    # @description
    # Detect when device goes online
    # @type
-   # supersonic.device.network.whenOnline: () => unsubscribe: Function
+   # supersonic.device.network.whenOnline: (
+   #    unsubcribe: Function
+   # ) => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
+   # @returnsDescription
+   # Returns a function given as a parameter when the device goes online.
+   # @define {=>Function} unsubscribe Stop listening
    # @exampleCoffeeScript
-   # supersonic.device.network.whenOnline().then ->
-   #   supersonic.logger.log("Device is online")
+   # supersonic.device.network.whenOnline ->
+   #   supersonic.ui.dialog.alert("Device is online")
    # @exampleJavaScript
-   # supersonic.device.network.whenOnline().then( function() {
-   #   supersonic.logger.log("Device is online");
+   # supersonic.device.network.whenOnline( function() {
+   #   supersonic.ui.dialog.alert("Device is online");
    # });
   ###
   whenOnline: (f)->
