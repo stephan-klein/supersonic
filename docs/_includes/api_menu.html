@@ -26,7 +26,7 @@
         <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
           <a href="/supersonic/api-reference/{{version}}{{main_namespace}}{{section_id}}/{{subsection_id}}" class="api-section">
             {% if subsection.method %}
-              ↳ <code>{{subsection.name}}()</code>
+              <code>{{subsection.name}}()</code>
             {% else %}
               {{subsection.name}}
             {% endif %}
@@ -42,7 +42,7 @@
                   {% elsif method.property %}
                     {{method.name}}
                   {% else %}
-                    ↳ <code>{{method.name}}()</code>
+                    <code>{{method.name}}()</code>
                   {% endif %}
                 </a>
                 {% if method.property %}
@@ -51,7 +51,7 @@
                     {% assign submethod_id = submethod.name | slugify %}
                     <li class="{% if page.method_id == method_id %}active{% endif %}">
                       <a href="/supersonic/api-reference/{{version}}{{main_namespace}}{{section_id}}/{{subsection_id}}/{{method_id}}/{{submethod_id}}">
-                        ↳ <code>{{submethod.name}}()</code>
+                        <code>{{submethod.name}}()</code>
                       </a>
                     </li>
                     {% endfor %}

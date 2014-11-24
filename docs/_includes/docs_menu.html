@@ -28,7 +28,7 @@
         <li>
           <a href="/{{parent_id}}/{{include.tab_name}}/{{section_id}}/#{{topic.name | slugify}}">
             {% if topic.method %}
-              ↳ <code>{{topic.name}}()</code>
+              <code>{{topic.name}}()</code>
             {% else %}
               {{topic.name}}
             {% endif %}
