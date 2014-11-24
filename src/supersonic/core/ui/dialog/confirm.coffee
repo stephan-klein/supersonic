@@ -27,7 +27,7 @@ module.exports = (steroids, log) ->
    # @define {String} message="" Additional message
    # @define {Array<String>} buttonLabels=["OK","Cancel"] Array of strings specifying button labels.
    # @returnsDescription
-   # Returns a Promise. Once the confirm dialog is dismissed (by tapping on one of the buttons), the promise resolves with the index of the button tapped.
+   # Returns a [Promise](/supersonic/guides/technical-concepts/promises/). Once the confirm dialog is dismissed (by tapping on one of the buttons), the promise resolves with the index of the button tapped.
    # @define {=>Integer} buttonIndex Index of the button tapped by the user.
    # @supportsCallbacks
    # @exampleCoffeeScript

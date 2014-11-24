@@ -57,7 +57,7 @@ module.exports = (steroids, log) ->
    #   <li> `front`: Use the front-facing camera.
    # </ul>
    # @returnsDescription
-   # Returns a Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
+   # Returns a [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
    # @define {=>String} result Image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
    # @supportsCallbacks
    # @exampleCoffeeScript
@@ -170,7 +170,7 @@ module.exports = (steroids, log) ->
    # </ul>
    # @define {Boolean} options.correctOrientation=true Rotate the image to correct for the orientation of the device during capture.
    # @returnsDescription
-   # Returns a Promise that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
+   # Returns a [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved with the the image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
    # @define {=>String} result Image file URI (default) or Base64 encoding of the image data as an argument depending on the destinationType option.
    # @supportsCallbacks
    # @exampleCoffeeScript

@@ -32,7 +32,7 @@ module.exports = (steroids, log, global) ->
    # ) => Promise view: View
    # @define {String} id A string matching the identifier of a view.
    # @returnsDescription
-   # A Promise that resolves with a View instance representing the given identifier.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that resolves with a View instance representing the given identifier.
    # @define {View} view A new View instance matching the identifier given as a parameter.
    # @supportsCallbacks
    # @exampleCoffeeScript
@@ -72,7 +72,7 @@ module.exports = (steroids, log, global) ->
    # ) => Promise view: View
    # @define {View|String} view The View that will be started in the background. Alternatively, you can directly pass an identifier string.
    # @returnsDescription
-   #  A Promise that resolves with the given View object. If the view identifier is already in use by another started View, the promise will be rejected.
+   #  A [Promise](/supersonic/guides/technical-concepts/promises/) that resolves with the given View object. If the view identifier is already in use by another started View, the promise will be rejected.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # # With shorthand
@@ -127,7 +127,7 @@ module.exports = (steroids, log, global) ->
    # ) => Promise
    # @define {View|String} viewOrId The View that will be stopped. Alternatively, you can directly pass an identifier string.
    # @returnsDescription
-   # A promise that resolves after the View has been stopped. If the View or identifier doesn't match a started View, the promise will be rejected.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that resolves after the View has been stopped. If the View or identifier doesn't match a started View, the promise will be rejected.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.views.stop("carsShowView").then ->
