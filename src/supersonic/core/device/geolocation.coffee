@@ -34,7 +34,7 @@ module.exports = (steroids, log) ->
    # }
    # @define {Object} options={} Optional options object.
    # @define {Boolean} options.enableHighAccuracy=true Provides a hint that the application needs the best possible results. By default, the device attempts to retrieve a position using network-based methods. Setting this property to true tells the framework to use more accurate methods, such as satellite positioning.
-   # @returnsDescription A Stream of position objects with the following properties:
+   # @returnsDescription A [Stream](/supersonic/guides/technical-concepts/streams/) of position objects with the following properties:
    # @define {=>Object} position Position object.
    # @define {=>Object} position.coord  A set of geographic coordinates.
    # @define {=>Number} coord.longitude  Longitude in decimal degrees.
@@ -91,7 +91,7 @@ module.exports = (steroids, log) ->
    #     coord: Object,
    #     timestamp: Date
    #   }
-   # @returnsDescription A Promise is resolved to the next available position data. Will wait for data for an indeterminate time; use a timeout if required.
+   # @returnsDescription A [Promise](/supersonic/guides/technical-concepts/promises/) is resolved to the next available position data. Will wait for data for an indeterminate time; use a timeout if required.
    # @define {=>Object} position Position object.
    # @define {=>Object} position.coord  A set of geographic coordinates.
    # @define {=>Number} coord.longitude  Longitude in decimal degrees.

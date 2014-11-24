@@ -22,7 +22,7 @@ module.exports = (steroids, log) ->
    # supersonic.app.statusBar.hide: () =>
    #   Promise
    # @returnsDescription
-   # A promise that is resolved when the status bar is hidden.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the status bar is hidden.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.app.statusBar.hide()
@@ -57,7 +57,7 @@ module.exports = (steroids, log) ->
    #   <li>`"light"`: Show white text in status bar.</li>
    # </ul>
    # @returnsDescription
-   # A promise that is resolved when the status bar is shown.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the status bar is shown.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.app.statusBar.show("light").then ->

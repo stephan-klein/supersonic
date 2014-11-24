@@ -84,8 +84,8 @@ module.exports = (logger, window) ->
 # @define {Integer} options.interval An integer defining how often the backend is polled for new data.
 # @returnsDescription
 # An object with the `whenChanged` property, which accepts a recurring callback function that gets triggered when new data is available.
-# @returns {Function} whenChanged Called with a Collection matching the original query. Called when new data is available. Returns a function that can be used to unsubsribe from the update stream.
-# @returns {Function} whenChanged.unsubscribe Call this function to stop listening for data changes.
+# @define {=>Function} whenChanged Called with a Collection matching the original query. Called when new data is available. Returns a function that can be used to unsubsribe from the update stream.
+# @define {=>Function} whenChanged.unsubscribe Call this function to stop listening for data changes.
 # @exampleCoffeeScript
 # unsubscribe = supersonic.data.model('task').all(queryParameters, options).whenChanged (updatedTasks)->
 #   supersonic.logger.log "First element of updated Task collection: ", updatedTasks[0]
@@ -155,7 +155,7 @@ module.exports = (logger, window) ->
  # @description
  # Persist all model instances in this collection.
  # @returnDescription
- # A promise that resolves once all the model instances in the collection have been perisisted to the cloud backend.
+ # A [Promise](/supersonic/guides/technical-concepts/promises/) that resolves once all the model instances in the collection have been perisisted to the cloud backend.
  # @exampleCoffeeScript
  # supersonic.data.model('task').findAll().then (tasks) ->
  #   for task in tasks

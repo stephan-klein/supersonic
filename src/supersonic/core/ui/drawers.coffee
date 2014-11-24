@@ -29,7 +29,7 @@ module.exports = (steroids, log) ->
    # @define {String} options.side="left" The side on which the drawer will be shown. Possible values are `left` and `right`
    # @define {String} options.width=200 The width of drawer.
    # @returnsDescription
-   # A promise that will be resolved once the drawer has been initialized.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that will be resolved once the drawer has been initialized.
    # @exampleJavaScript
    # var options = {
    #   side: "left",
@@ -95,7 +95,7 @@ module.exports = (steroids, log) ->
    # ) => Promise
    # @define {String} side=left The side of the drawer to be opened. Valid values are `left` and `right`.
    # @returnsDescription
-   # A promise that will be resolved once the drawer has been opened. If there is no drawer initialized on the given side, the promise will be rejected.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that will be resolved once the drawer has been opened. If there is no drawer initialized on the given side, the promise will be rejected.
    # @supportsCallbacks
    # @exampleJavaScript
    # supersonic.ui.drawers.open("left").then( function() {
@@ -129,7 +129,7 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.drawers.close: () => Promise
    # @returnsDescription
-   # A promise that will be resolved once the drawer has been closed. If there are no open drawers, the promise will be rejected.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that will be resolved once the drawer has been closed. If there are no open drawers, the promise will be rejected.
    # @supportsCallbacks
    # @exampleJavaScript
    # supersonic.ui.drawers.close().then( function() {
@@ -185,6 +185,8 @@ module.exports = (steroids, log) ->
    #   <li>`TapCenterView`:  Close the drawer by tapping anywhere in the center view.
    #   <li>`PanDrawerView`: Close the drawer by panning (swiping) anywhere in the drawer view.
    # </ul>
+   # @returnsDescription
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that will be resolved once the drawer options are updated.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.drawers.updateOptions(

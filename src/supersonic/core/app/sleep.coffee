@@ -22,7 +22,7 @@ module.exports = (steroids, log) ->
    # supersonic.app.sleep.disable: () =>
    #   Promise
    # @returnsDescription
-   # A promise that is resolved when the native side has successfully disabled automatic sleep.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the native side has successfully disabled automatic sleep.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.app.sleep.disable()
@@ -45,12 +45,12 @@ module.exports = (steroids, log) ->
    # @function
    # @apiCall supersonic.app.sleep.enable
    # @description
-   # enables the device automatic sleep for your app.
+   # Enables the device automatic sleep for your app.
    # @type
    # supersonic.app.sleep.enable: () =>
    #   Promise
    # @returnsDescription
-   # A promise that is resolved when the native side has successfully enabled automatic sleep.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the native side has successfully enabled automatic sleep.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.app.sleep.enable()

@@ -14,7 +14,7 @@ module.exports = (steroids, log) ->
    # Find out when device is ready for plugins etc.
    # @type
    # supersonic.device.ready : => Promise
-   # @returnsDescription A Promise is resolved when device ready is fired.
+   # @returnsDescription A [Promise](/supersonic/guides/technical-concepts/promises/) is resolved when device ready is fired.
    # @exampleCoffeeScript
    # supersonic.device.ready.then ->
    #   supersonic.logger.log "READY!"

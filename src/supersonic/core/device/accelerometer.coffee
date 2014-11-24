@@ -36,7 +36,7 @@ module.exports = (steroids, log) ->
    # }
    # @define {Object} options={} Optional options object.
    # @define {Integer} options.frequency=40 Update interval in milliseconds.
-   # @returnsDescription A Stream of acceleration objects with the following properties.
+   # @returnsDescription A [Stream](/supersonic/guides/technical-concepts/streams/) of acceleration objects with the following properties.
    # @define {=>Object} acceleration Acceleration object.
    # @define {=>Number} acceleration.x Amount of acceleration on the x-axis. (in m/s^2)
    # @define {=>Number} acceleration.y Amount of acceleration on the y-axis. (in m/s^2)
@@ -102,7 +102,7 @@ module.exports = (steroids, log) ->
    #     z: Number,
    #     timestamp: Date
    #   }
-   # @returnsDescription A promise that is resolved with the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.
+   # @returnsDescription A [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved with the next available acceleration data. Will wait for data for an indeterminate time; use a timeout if required.
    # @define {=>Object} acceleration Acceleration object.
    # @define {=>Number} acceleration.x Amount of acceleration on the x-axis. (in m/s^2)
    # @define {=>Number} acceleration.y Amount of acceleration on the y-axis. (in m/s^2)

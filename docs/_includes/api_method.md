@@ -68,24 +68,33 @@
     <tr>
       <th>Name</th>
       <th>Type</th>
-      <th>Default value</th>
+      <th>Default</th>
       <th>Details</th>
     </tr>
   </thead>
   <tbody>
   {% for param in method.params %}
   <tr>
-    <td>{{param.name}}</td>
+    <td class="highlight">
+      <code class="language-coffeescript" data-lang="coffeescript">
+        {{param.name}}
+      </code>
+    </td>
     <td class="highlight">
       <code class="language-coffeescript" data-lang="coffeescript">
       {{param.type | xml_escape}}
       </code>
     </td>
+    {% if param.defaultValue %}
     <td class="highlight">
       <code class="language-coffeescript" data-lang="coffeescript">
       {{param.defaultValue}}
       </code>
     </td>
+    {% endif %}
+    {% if param.defaultValue == undefined %}
+    <td></td>
+    {% endif %}
     <td>{{param.description | markdownify}}</td>
   </tr>
     {% for property in param.properties %}
@@ -114,6 +123,11 @@
 {% if method.returnsDescription %}
 <h4>Returns</h4>
 {{ method.returnsDescription | markdownify }}
+{% if method.type %}
+{% highlight coffeescript %}
+{{method.type}}
+{% endhighlight %}
+{% endif %}
 
 {% if method.returns.size > 0 %}
 
@@ -128,7 +142,11 @@
   <tbody>
   {% for return in method.returns %}
     <tr>
-      <td>{{return.name}}</td>
+      <td class="highlight">
+        <code class="language-coffeescript" data-lang="coffeescript">
+          {{return.name}}
+        </code>
+      </td>
       <td class="highlight">
         <code class="language-coffeescript" data-lang="coffeescript">
         {{return.type | xml_escape}}

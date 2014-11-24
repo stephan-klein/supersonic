@@ -28,7 +28,7 @@ module.exports = (steroids, log) ->
    # @define {Object} options The options object for defining how the modal will be shown.
    # @define {Boolean} options.animate=true If set to `false`, the modal will be shown immediately, without the default "slide-from-bottom" animation.
    # @returnsDescription
-   # A promise that is resolved when the modal starts to show. If there modal cannot be shown (e.g. the view is invalid), the promise is rejected.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the modal starts to show. If there modal cannot be shown (e.g. the view is invalid), the promise is rejected.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # modalView = new supersonic.ui.View "common#modal"
@@ -86,7 +86,7 @@ module.exports = (steroids, log) ->
    # @define {Object} options The options object for defining how the modal will be hidden.
    # @define {Boolean} options.animate=true If set to `false`, the modal will be hidden immediately, without the default "slide-from-top" animation.
    # @returnsDescription
-   # A promise that is resolved when the modal starts to hide. If there is no modal on screen, the promise is rejected.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the modal starts to hide. If there is no modal on screen, the promise is rejected.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # options =

@@ -25,7 +25,7 @@ module.exports = (steroids, log) ->
    # @define {Object} options={} An object of optional parameters which define how the navigation bar will be shown.
    # @define {Boolean} options.animated=true Determines if the navigation bar will be shown with an animation.
    # @returnsDescription
-   # A promise that will be resolved after the navigation bar is shown.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar is shown.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.navigationBar.show()
@@ -71,7 +71,7 @@ module.exports = (steroids, log) ->
    # @define {Object} options An object of optional parameters which define how the navigation bar will be hidden.
    # @define {Boolean} animated=true If `false`, the navigation bar will be hidden without an animation.
    # @returnsDescription
-   # A promise that will be resolved after the navigation bar is hidden. If the navigation bar cannot be hidden (e.g. it is already hidden), the promise will be rejected.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar is hidden. If the navigation bar cannot be hidden (e.g. it is already hidden), the promise will be rejected.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.navigationBar.hide()
@@ -125,7 +125,7 @@ module.exports = (steroids, log) ->
    # @define {Array<NavigationBarButton} buttons.left=[] An array of NavigationBarButtons to be shown on the left side of the navigation bar (i.e. left side of the title text/image). Passing an empty array will remove all buttons.
    # @define {Array<NavigationBarButton} buttons.right=[] An array of NavigationBarButtons to be shown on the right side of the navigation bar (i.e. right side of the title text/image). Passing an empty array will remove all buttons.
    # @returnsDescription
-   # A promise that will be resolved after the navigation bar has been updated. If the navigation bar cannot be updated, the promise will be rejected.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar has been updated. If the navigation bar cannot be updated, the promise will be rejected.
    # @supportsCallbacks
    # @exampleJavaScript
    # leftButton = new supersonic.ui.NavigationBarButton( {
@@ -176,7 +176,7 @@ module.exports = (steroids, log) ->
    # ) => Promise
    # @define {String} className="" A string of one or more CSS class names, separated by spaces.
    # @returnsDescription
-   # A promise that will be resolved after the navigation bar CSS class is set.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar CSS class is set.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.navigationBar.setClass("my-class").then ()->
@@ -205,7 +205,7 @@ module.exports = (steroids, log) ->
    # ) => Promise
    # @define {String} inlineCssString="" A string of inline CSS styling.
    # @returnsDescription
-   # A promise that will be resolved after the navigation bar style is set.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar style is set.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.navigationBar.setStyle("background-color: #ff0000;").then ()->
@@ -235,7 +235,7 @@ module.exports = (steroids, log) ->
    # ) => Promise
    # @define {String} id="" The style id to set.
    # @returnsDescription
-   # A promise that will be resolved after the navigation bar style id is set.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar style id is set.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.navigationBar.setStyleId("the-button").then ()->

@@ -4,66 +4,116 @@
 
 {{method.description}}
 
-{% if method.usageCoffeeScript %}
-### Basic usage CoffeeScript
-```coffeescript
-{{method.usageCoffeeScript}}
-```
-{% endif %}
-{% if method.usageJavaScript %}
-### Basic usage JavaScript
-```javascript
-{{method.usageJavaScript}}
-```
+{% if method.exampleCoffeeScript || method.exampleJavaScript %}
+
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-primary active">CoffeeScript</button>
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-default">JavaScript</button>
+  </div>
+  <h3>Example usage</h3>
+</div>
+
+<div data-role="example-code" data-type="coffee">
+
+{% if method.exampleCoffeeScript %}
+{% highlight coffeescript %}
+{{method.exampleCoffeeScript}}
+{% endhighlight %}
 {% endif %}
 
+{% if !method.exampleCoffeeScript && method.usageCoffeeScript %}
+{% highlight coffeescript %}
+{{method.usageCoffeeScript}}
+{% endhighlight %}
+{% endif %}
+
+</div>
+<div data-role="example-code" data-type="js" style="display: none;">
+
+{% if method.exampleJavaScript %}
+{% highlight javascript %}
+{{method.exampleJavaScript}}
+{% endhighlight %}
+{% endif %}
+
+{% if !method.exampleJavaScript && method.usageJavaScript %}
+{% highlight javascript %}
+{{method.usageJavaScript}}
+{% endhighlight %}
+{% endif %}
+
+</div>
+
+{% endif %}
+
+{% if method.params.size > 0 %}
+#### Params
+
 {% if method.type %}
-### Type Signature
 ```coffeescript
 {{method.type}}
 ```
 {% endif %}
 
-{% if method.params.size > 0 %}
-#### Params
 <table class="table" style="margin:0;">
   <thead>
     <tr>
       <th>Name</th>
       <th>Type</th>
-      <th>Default value</th>
+      <th>Default</th>
       <th>Details</th>
     </tr>
   </thead>
   <tbody>
   {% for param in method.params %}
   <tr>
-    <td>{{param.name}}</td>
+    <td class="highlight">
+      <code class="language-coffeescript" data-lang="coffeescript">
+        {{param.name}}
+      </code>
+    </td>
     <td class="highlight">
       <code class="language-coffeescript" data-lang="coffeescript">
       {{param.type | xml_escape}}
       </code>
     </td>
+    {% if param.defaultValue %}
     <td class="highlight">
       <code class="language-coffeescript" data-lang="coffeescript">
       {{param.defaultValue}}
       </code>
     </td>
+    {% endif %}
+    {% if param.defaultValue == undefined %}
+    <td>
+    </td>
+    {% endif %}
     <td>{{param.description | markdownify}}</td>
   </tr>
     {% for property in param.properties %}
       <tr>
-        <td class="property">{{property.name}}</td>
+        <td class="property">
+          <code class="language-coffeescript" data-lang="coffeescript">
+            {{property.name}}
+          </code>
+        </td>
         <td class="highlight">
           <code class="language-coffeescript" data-lang="coffeescript">
           {{property.type | xml_escape}}
           </code>
         </td>
+        {% if property.defaultValue %}
         <td class="highlight">
           <code class="language-coffeescript" data-lang="coffeescript">
           {{property.defaultValue}}
           </code>
         </td>
+        {% endif %}
+        {% if property.defaultValue == undefined %}
+        <td>
+        </td>
+        {% endif %}
         <td>{{property.description | markdownify}}</td>
       </tr>
     {% endfor %}
@@ -89,7 +139,11 @@
   <tbody>
   {% for return in method.returns %}
     <tr>
-      <td>{{return.name}}</td>
+      <td class="highlight">
+        <code class="language-coffeescript" data-lang="coffeescript">
+          {{return.name}}
+        </code>
+      </td>
       <td class="highlight">
         <code class="language-coffeescript" data-lang="coffeescript">
         {{return.type | xml_escape}}
@@ -112,18 +166,4 @@
   </tbody>
 </table>
 {% endif %}
-{% endif %}
-
-{% if method.exampleCoffeeScript %}
-### Full example CoffeeScript
-```coffeescript
-{{method.exampleCoffeeScript}}
-```
-{% endif %}
-
-{% if method.exampleJavaScript %}
-### Full example JavaScript
-```javascript
-{{method.exampleJavaScript}}
-```
 {% endif %}

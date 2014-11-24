@@ -27,7 +27,7 @@ module.exports = (steroids, log) ->
    # @define {View|String} view A View or View identifier to be pushed on top of the navigation stack.
    # @define {String|Object} params On object or JSON string of optional parameters to be passed to the target View, accessible via `supersonic.ui.views.params.current`.
    # @returnsDescription
-   # A promise that gets resolved with the provided View instance once the push has started. If the view cannot be pushed, the promise is rejected.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that gets resolved with the provided View instance once the push has started. If the view cannot be pushed, the promise is rejected.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # view = new supersonic.ui.View "common#settings"
@@ -75,7 +75,7 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.layers.pop: () => Promise
    # @returnsDescription
-   # A promise that gets resolved once the view starts to pop. If the view cannot be popped (i.e. there is only the root view in the navigation stack), the promise is rejected. Note that a popped view only lives on for a very short time before it is purged from the app's memory, so be careful to not do too complex things with the promise. It is different if you are popping a started View, since it will remain running outside the navigation stack.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that gets resolved once the view starts to pop. If the view cannot be popped (i.e. there is only the root view in the navigation stack), the promise is rejected. Note that a popped view only lives on for a very short time before it is purged from the app's memory, so be careful to not do too complex things with the promise. It is different if you are popping a started View, since it will remain running outside the navigation stack.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.layers.pop()
@@ -100,7 +100,7 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.layers.popAll: () => Promise
    # @returnsDescription
-   # A promise that gets resolved once the views start to pop. If there are no views to pop (i.e. there is only the root view in the navigation stack), the promise is rejected. Note that popped views only live on for a very short time before they are purged from the app's memory, so be careful to not do too complex things with the promise. It is different if you are popping started Views, since they will remain running outside the navigation stack.
+   # A [Promise](/supersonic/guides/technical-concepts/promises/) that gets resolved once the views start to pop. If there are no views to pop (i.e. there is only the root view in the navigation stack), the promise is rejected. Note that popped views only live on for a very short time before they are purged from the app's memory, so be careful to not do too complex things with the promise. It is different if you are popping started Views, since they will remain running outside the navigation stack.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.layers.popAll()
