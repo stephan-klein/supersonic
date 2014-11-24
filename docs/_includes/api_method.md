@@ -1,5 +1,5 @@
 {% assign method = include.method %}
-## API Reference: {{method.namespace}}.{{method.name}}()
+<h2>API Reference: {{method.namespace}}.{{method.name}}()</h2>
 
 {{method.description}}
 
