@@ -14,9 +14,9 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.app.openURL: (URL: String) =>
    #   Promise
-   # @define {String} URL The URL to be opened. URLs starting with "http(s)://" will be opened in the device's default browser.
+   # @define {String} URL The URL to be opened. URLs starting with `"http(s)://"` will be opened in the device's default browser.
    # @returnsDescription
-   # [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the URL is opened. The promise is rejected if the URL scheme could not be found among the URL schemes registered by the device's apps.
+   # [`Promise`](/supersonic/guides/technical-concepts/promises/) that is resolved when the URL is opened. The promise is rejected if the URL scheme could not be found among the URL schemes registered by the device's apps.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # # Launch the default web browser
