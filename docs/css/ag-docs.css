@@ -307,12 +307,21 @@ border-bottom-color: #ecf0f1 !important;
   line-height: 1.4em;
 }
 
-.ag__docs__content h2.blue-tab {
-  border-top: 6px solid #00b5ff;
-  width: 40px;
+.ag__docs__content h1.blue-tab {
   padding-top: 10px;
   font-family: "Proxima N W01 Bold";
   font-size: 40px;
+  margin: 40px 0 0 0;
+}
+
+.ag__docs__content h1.blue-tab:before {
+  content:'';
+  height:6px;
+  top: -6px;
+  width:40px;
+  background: #00b5ff;
+  position: absolute;
+  padding-top: 10px;
   margin: 40px 0 0 0;
 }
 
