@@ -82,28 +82,28 @@ Let's add a few characters by pressing the <span class="glyphicon glyphicon-penc
 
 <table class="table">
   <tr>
-    <th>Name</th>
     <th>Alter Ego</th>
+    <th>Name</th>
     <th>Publisher</th>
   </tr>
   <tr>
-    <td>Superman</td>
     <td>Clark Kent</td>
+    <td>Superman</td>
     <td>DC Comics</td>
   </tr>
   <tr>
-    <td>Batgirl</td>
     <td>Barbara Gordon</td>
+    <td>Batgirl</td>
     <td>DC Comics</td>
   </tr>
   <tr>
-    <td>Deadpool</td>
-    <td>Wade Winston Wilston</td>
+    <td>Steven Rogers</td>
+    <td>Captain America</td>
     <td>Marvel Comics</td>
   </tr>
   <tr>
-    <td>Scarlet Witch</td>
     <td>Wanda Maximoff</td>
+    <td>Scarlet Witch</td>
     <td>Marvel Comics</td>
   </tr>
 </table>
