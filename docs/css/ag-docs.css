@@ -91,6 +91,7 @@ a:link:hover {
  *********************************/
 
 .ag__docs__header-nav {
+  min-height: 34px;
 }
 
 .ag__docs__header-nav a {
