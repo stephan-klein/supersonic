@@ -40,7 +40,7 @@ module.exports = (steroids, log) ->
    # @returnsDescription
    # A `supersonic.ui.Animation` object.
    # @define {=>Object} animation A `supersonic.ui.Animation` object.
-   # @define {=>function} animation.perform  A function returning a Promise that resolves when the animation is about to start.
+   # @define {=>function} animation.perform  A function returning a [`Promise`](/supersonic/guides/technical-concepts/promises/) that resolves when the animation is about to start.
    # @exampleCoffeeScript
    # supersonic.ui.animate("curlDown").perform()
    #

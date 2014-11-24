@@ -25,7 +25,7 @@ module.exports = (steroids, log) ->
    # Determine which of the four possible screen rotations are enabled on your device. By default all rotations are allowed, with the exception of custom builds where the build settings have been used to lock the app into a certain rotation scheme. Modals are not affected by setting allowed rotations in other views and conversely setting allowed rotations in a modal does not affect the rest of the app.
    # @define {Array<String>} rotations Allowed rotations. Possible values are `"portrait"`, `"portraitUpsideDown"`, `"landscapeLeft"` and `"landscapeRight"`.
    # @returnsDescription
-   # Returns a [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the allowed rotations are set.
+   # Returns a [`Promise`](/supersonic/guides/technical-concepts/promises/) that is resolved when the allowed rotations are set.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.screen.setAllowedRotations ["landscapeLeft", "landscapeRight"]
@@ -54,9 +54,9 @@ module.exports = (steroids, log) ->
    # rotateTo : (
    #   orientation: String
    #) => Promise
-   # @define {String} orientation. Possible values "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight".
+   # @define {String} orientation Possible values "portrait", "portraitUpsideDown", "landscapeLeft", "landscapeRight".
    # @returnsDescription
-   # A [Promise](/supersonic/guides/technical-concepts/promises/) that is resolved when the screen is rotated.
+   # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that is resolved when the screen is rotated.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # supersonic.ui.screen.rotateTo "landscapeLeft"

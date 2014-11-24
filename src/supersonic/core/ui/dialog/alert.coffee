@@ -26,7 +26,7 @@ module.exports = (steroids, log) ->
    # @define {String} options.message="" Optional message text shown under the title.
    # @define {String} options.buttonLabel="OK" Custom button text for the alert dialog.
    # @returnsDescription
-   # A [Promise](/supersonic/guides/technical-concepts/promises/), resolved when the the button in the alert dialog is tapped.
+   # A [`Promise`](/supersonic/guides/technical-concepts/promises/), resolved when the the button in the alert dialog is tapped.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # options =
