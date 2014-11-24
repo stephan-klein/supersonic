@@ -39,7 +39,7 @@ supersonic.data.channel('public_announcements').subscribe (message) ->
   console.log "recieved a message #{message}"
 ```
 
-See the [API reference](/api-reference/stable/supersonic/data/channel/)
+See the [API reference](/supersonic/api-reference/stable/supersonic/data/channel/)
 
 ## superscope
 
