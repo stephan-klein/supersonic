@@ -183,10 +183,6 @@ SuperNavbarPrototype.attachedCallback = ->
   @_leftButtons = []
   @_rightButtons = []
 
-  # Back button settings
-  @_backButtonAllowed = true
-  @_backButton = undefined
-
   # Style
   @class = @getAttribute("class")
   @id = @getAttribute("id")
