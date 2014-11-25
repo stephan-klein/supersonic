@@ -210,23 +210,20 @@ SuperNavbarPrototype.attachedCallback = ->
 
   observer.observe this, observerConfiguration
 
-  # ensure visible (for androids sake)
-  @_onViewVisible = =>
+  @_unsubscribeFromVisibilityChanges = supersonic.ui.views.current.whenVisible ->
     if @isHidden()
       @hide()
     else
       @updateNavBar()
       @show()
 
-  document.addEventListener "visibilitychange", @_onViewVisible, false
-  @_onViewVisible()
-
 SuperNavbarPrototype.detachedCallback = ->
   #console.log "Navigation bar detachedCallback"
   observer.disconnect()
   # Hide the navbar when this node leaves the DOM
   supersonic.ui.navigationBar.hide()
-  document.removeEventListener "visibilitychange", @_onViewVisible, false
+
+  @_unsubscribeFromVisibilityChanges()
 
 document.registerElement "super-navbar",
   prototype: SuperNavbarPrototype
