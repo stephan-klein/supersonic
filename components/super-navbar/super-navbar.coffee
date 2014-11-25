@@ -37,8 +37,6 @@ observer = new MutationObserver (mutations) ->
 
 SuperNavbarPrototype = Object.create HTMLElement.prototype
 
-lazyUpdate = null
-
 Object.defineProperty SuperNavbarPrototype, "title",
   set: (title) ->
     @_title = title
@@ -97,22 +95,26 @@ SuperNavbarPrototype.hide = ->
   supersonic.ui.navigationBar.hide()
 
 # Update navbar
-SuperNavbarPrototype.updateNavBar = ->
-  options = {}
-  # Set base for options
-  options.title = @getTitleForUpdate()
-  options.buttons =
-    left: @_leftButtons
-    right: @_rightButtons
-  # Update UI
+SuperNavbarPrototype.updateNavBar = do ->
+  # KLUDGE: Update the navbar after 20ms unless there are new updates to apply
+  # NOTE: Assuming only one navbar element to update per document
+  lazyUpdate = null
+  ->
+    options = {}
+    # Set base for options
+    options.title = @getTitleForUpdate()
+    options.buttons =
+      left: @_leftButtons
+      right: @_rightButtons
+    # Update UI
 
-  if lazyUpdate?
-    clearTimeout lazyUpdate
-    lazyUpdate = null
+    if lazyUpdate?
+      clearTimeout lazyUpdate
+      lazyUpdate = null
 
-  lazyUpdate = setTimeout ->
-    supersonic.ui.navigationBar.update options
-  , 20
+    lazyUpdate = setTimeout ->
+      supersonic.ui.navigationBar.update options
+    , 20
 
 # Navbar title
 
