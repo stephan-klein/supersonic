@@ -36,14 +36,16 @@ module.exports = (steroids, log) ->
    # @define {Boolean} options.enableHighAccuracy=true Provides a hint that the application needs the best possible results. By default, the device attempts to retrieve a position using network-based methods. Setting this property to true tells the framework to use more accurate methods, such as satellite positioning.
    # @returnsDescription A [`Stream`](/supersonic/guides/technical-concepts/streams/) of position objects with the following properties:
    # @define {=>Object} position Position object.
-   # @define {=>Object} position.coord  A set of geographic coordinates.
-   # @define {=>Number} coord.longitude  Longitude in decimal degrees.
-   # @define {=>Number} coord.latitude  Latitude in decimal degrees.
-   # @define {=>Number} coord.altitude  Height of the position in meters above the ellipsoid.
-   # @define {=>Number} coord.accuracy  Accuracy level of the latitude and longitude coordinates in meters.
-   # @define {=>Number} coord.altitudeAccuracy  Accuracy level of the altitude coordinate in meters. Not supported by Android devices, returning null.
-   # @define {=>Number} coord.heading  Direction of travel, specified in degrees counting clockwise relative to the true north.
-   # @define {=>Number} coord.speed  Current ground speed of the device, specified in meters per second.
+   # @define {=>Object} position.coord  A set of geographic coordinates. The `coord` object has the following properties:
+   # <ul>
+   #   <li>`longitude`: Longitude in decimal degrees (Number).</li>
+   #   <li>`latitude`: Latitude in decimal degrees (Number).</li>
+   #   <li>`altitude`: Height of the position in meters above the ellipsoid (Number).</li>
+   #   <li>`accuracy`: Accuracy level of the latitude and longitude coordinates in meters (Number).</li>
+   #   <li>`altitudeAccuracy`: Accuracy level of the altitude coordinate in meters (Number). Not supported by Android devices, returning null.</li>
+   #   <li>`heading`: Direction of travel, specified in degrees counting clockwise relative to the true north (Number).</li>
+   #   <li>`speed`: Current ground speed of the device, specified in meters per second (Number).</li>
+   # </ul>
    # @define {=>Date} position.timestamp Creation timestamp for coords.
    # @supportsCallbacks
    # @exampleCoffeeScript
