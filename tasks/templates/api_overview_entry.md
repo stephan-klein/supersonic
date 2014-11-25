@@ -6,6 +6,6 @@ section_id: <%= section %>
 subsection_id: <%= subsection %>
 ---
 {% assign entry = <%= liquidDataPath %> %}
-# {{entry.name}}
+## Namespace: {{entry.namespace}}.{{entry.name}}
 
 {{entry.description}}
