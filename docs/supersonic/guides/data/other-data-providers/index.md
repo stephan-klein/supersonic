@@ -8,7 +8,7 @@ section_id: other-data-providers
 
 # Other providers
 
-Besides the AppGyver Database, Supersonic provides an easy way to integrate application to various backends such as [built.io](https://www.built.io/), [Parse](https://www.parse.com/), [Kimono](https://www.kimonolabs.com/) or any custom REST backend.
+Besides the AppGyver Database, Supersonic provides an easy way to integrate application to various backends such as [built.io](https://www.built.io/), [Parse](https://www.parse.com/) or any custom REST backend.
 
 ## built.io backend
 
@@ -36,11 +36,9 @@ When a resource is added, the fields defined for the data model are automaticall
 
 You are then ready to use the data! Please see from [setting up database guide](/supersonic/guides/data/setting-up-appgyver-database/) how to access data from data browser and how to scaffold data accessing application code, and [accessing data from device](/supersonic/guides/data/accessing-data-from-device/) for overview of Supersonic data JS library.
 
-## Parse and Kimono backends
+## Parse backend
 
-Usage of Parse and Kimono as backend is as easy as the use of built.io.
-
-In order to configure Parse, you must configure an backend through Parse web site, and get the id and the api key of your app:
+Usage of Parse is as easy as the use of built.io. In order to configure Parse, you must configure an backend through Parse web site, and get the id and the api key of your app:
 
 <img class="tutorial-image" src="/img/guides/data_parse_conf.png">
 
@@ -49,8 +47,6 @@ Next step is to select Parse from the list of avaliable providers, and to feed t
 <img class="tutorial-image" src="/img/guides/data_parse_provider.png">
 
 From this point on, configuring the resources proceeds simillarly as in the case of the rest of the providers.
-
-The process of definig a Kimono backend is simillar to the above. You just need the api key from your app's Kimono web site!
 
 ## Custom REST backend
 
