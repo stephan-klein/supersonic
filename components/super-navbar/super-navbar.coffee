@@ -22,7 +22,7 @@ observeAttributesOnElement = (element, attributes) ->
       changes = {}
       # Collect changes from tracked attributes
       for mutation in mutations when (mutation.type is "attributes") and (mutation.attributeName in attributes)
-        changes[attributeName] = mutation.target.getAttribute(attributeName) || ""
+        changes[mutation.attributeName] = mutation.target.getAttribute(mutation.attributeName) || ""
       sink changes
 
     # Start observing changes in the tracked attributes
