@@ -74,6 +74,11 @@ module.exports = (steroids, window) ->
     messages.plug streamsPerLogLevel.error.out
     messages.plug streamsPerLogLevel.debug.out
 
+    # Pipe info, warn and error to console by default
+    streamsPerLogLevel.info.out.onValue (envelope) -> console.log envelope.message
+    streamsPerLogLevel.warn.out.onValue (envelope) -> console.log envelope.message
+    streamsPerLogLevel.error.out.onValue (envelope) -> console.error envelope.message
+
     return log = {
       # Don't expose messages, qify for angular goes haywire
       autoFlush: autoFlush messages
