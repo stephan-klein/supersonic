@@ -15,7 +15,7 @@ This means that you cannot create "global" JavaScript variables, that singletons
 
 However, Supersonic has implemented certain ways that overcome these limitations and let you do everything a Single-Page App could do. There various techniques for cross-view communication so you can certainly find a fitting solution for all your use cases!
 
-## publish subscribe channel
+## Publish-subscribe channel
 
 Perhaps the easiest way for cross-view communication is the Supersonic
 [publish-subscribe](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) messaging channel.
@@ -41,7 +41,7 @@ supersonic.data.channel('public_announcements').subscribe (message) ->
 
 See the [API reference](/supersonic/api-reference/stable/supersonic/data/channel/)
 
-## superscope
+## Superscope
 
 It is extremely easy to keep the rendered view and model data in sync by utilizing Angular's two-way data binding. If you have a variable `message` in Angular scope, you could e.g. bind the variable to be rendered in DOM _and_ to an input field:
 
@@ -106,7 +106,7 @@ Now the variable `message` in the both WebViews is kept in synch thanks to super
 
 
 
-## view parameters
+## View parameters
 
 A frequenly occuring pattern in an app is the need to navigate from the list of a document collection to the view of a single document.
 
