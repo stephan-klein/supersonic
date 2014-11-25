@@ -59,7 +59,7 @@ Object.defineProperty SuperNavbarPrototype, "class",
   set: (className) ->
     className = "" if not className
     @_class = className
-    @onClassNameChanged()
+    supersonic.ui.navigationBar.setClass(className) unless @isHidden()
 
   get: ->
     @_class
@@ -68,7 +68,7 @@ Object.defineProperty SuperNavbarPrototype, "style",
   set: (inlineStyle) ->
     inlineStyle = "" if not inlineStyle
     @_style = inlineStyle
-    @onInlineStyleChanged()
+    supersonic.ui.navigationBar.setStyle(inlineStyle) unless @isHidden()
 
   get: ->
     @_style
@@ -77,7 +77,7 @@ Object.defineProperty SuperNavbarPrototype, "id",
   set: (styleId) ->
     styleId = "" if not styleId
     @_styleId = styleId
-    @onStyleIdChanged()
+    supersonic.ui.navigationBar.setStyleId(styleId) unless @isHidden()
 
   get: ->
     @_styleId
@@ -171,24 +171,11 @@ SuperNavbarPrototype.setButtons = (buttons) ->
   @_rightButtons = buttons.right
   @onButtonsChanged()
 
-SuperNavbarPrototype._updateButtons = ->
-  @updateNavBar()
-
-
 SuperNavbarPrototype.onTitleChanged = ->
   @updateNavBarTitle() unless @isHidden()
 
 SuperNavbarPrototype.onButtonsChanged = ->
-  @_updateButtons() unless @isHidden()
-
-SuperNavbarPrototype.onClassNameChanged = ->
-  supersonic.ui.navigationBar.setClass(@_class) unless @isHidden()
-
-SuperNavbarPrototype.onInlineStyleChanged = ->
-  supersonic.ui.navigationBar.setStyle(@_style) unless @isHidden()
-
-SuperNavbarPrototype.onStyleIdChanged = ->
-  supersonic.ui.navigationBar.setStyleId(@_styleId) unless @isHidden()
+  @updateNavBar() unless @isHidden()
 
 # What is the difference between attached and created?
 SuperNavbarPrototype.attachedCallback = ->
