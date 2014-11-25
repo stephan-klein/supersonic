@@ -212,7 +212,7 @@ SuperNavbarPrototype.attachedCallback = ->
 
   observer.observe this, observerConfiguration
 
-  @_unsubscribeFromVisibilityChanges = supersonic.ui.views.current.whenVisible ->
+  @_unsubscribeFromVisibilityChanges = supersonic.ui.views.current.whenVisible =>
     if @isHidden()
       @hide()
     else
