@@ -8,7 +8,7 @@ module.exports = (steroids, log) ->
    # Provides access to the device's back button (Android only).
    #
    # ## Methods
-   # * [whenPressed](/supersonic/api-reference/stable/supersonic/device/buttons/back/whenPressed/) – overrides device back button.
+   # * [whenPressed](/supersonic/api-reference/stable/supersonic/device/buttons/back/whenpressed/) – overrides device back button.
   ###
   ###
   # @namespace supersonic.device.buttons.back
