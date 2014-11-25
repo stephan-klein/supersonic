@@ -12,30 +12,44 @@
  #
  # </super-navbar>
 ###
-observer = new MutationObserver (mutations) ->
-  for mutation in mutations
-    # Check attributes
-    if mutation.type is "attributes"
 
-      # Class changed
-      if mutation.attributeName is "class"
-        mutation.target.class = mutation.target.getAttribute("class")
-      # Style changed
-      if mutation.attributeName is "style"
-        mutation.target.style = mutation.target.getAttribute("style")
-      # id changed
-      if mutation.attributeName is "id"
-        mutation.target.id = mutation.target.getAttribute("id")
 
-      if mutation.attributeName is "title"
-        mutation.target.onTitleChanged()
+# (Element, [attributeName]) -> Bacon.Property attributes
+observeAttributesOnElement = (element, attributes) ->
+  supersonic.internal.Bacon.fromBinder((sink) ->
+    # Set up MutationObserver for streaming changes
+    observer = new MutationObserver (mutations) ->
+      changes = {}
+      # Collect changes from tracked attributes
+      for mutation in mutations when (mutation.type is "attributes") and (mutation.attributeName in attributes)
+        changes[attributeName] = mutation.target.getAttribute(attributeName) || ""
+      sink changes
 
-      if mutation.target.isHidden()
-        mutation.target.hide()
-      else
-        mutation.target.show()
+    # Start observing changes in the tracked attributes
+    observer.observe element, {
+      attributes: true
+      attributeFilter: attributes
+    }
+
+    # Stop listening by disconnecting the observer
+    ->
+      observer.disconnect()
+  ).toProperty(do ->
+    # Make sure there's an initial value
+    initial = {}
+    for attributeName in attributes
+      initial[attributeName] = element.getAttribute(attributeName) || ""
+    initial
+  )
 
 document.registerElement "super-navbar", class SuperNavbar extends HTMLElement
+  _leftButtons: null
+  _leftButtons: null
+
+  constructor: ->
+    @_leftButtons = []
+    @_rightButtons = []
+
   Object.defineProperty @prototype, "title",
     set: (title) ->
       @_title = title
@@ -176,21 +190,10 @@ document.registerElement "super-navbar", class SuperNavbar extends HTMLElement
     @updateNavBar() unless @isHidden()
 
   attachedCallback: ->
-    # Initiate button arrays
-    @_leftButtons = []
-    @_rightButtons = []
-
-    # Style
-    @class = @getAttribute("class")
-    @id = @getAttribute("id")
-    @style = @getAttribute("style")
-
-    # Observe attributes style and class
-    observerConfiguration =
-      attributes: true
-      attributeFilter: ["style", "class", "id", "title"]
-
-    observer.observe this, observerConfiguration
+    @_unsubscribeFromAttributeChanges = observeAttributesOnElement(this, ["style", "class", "id", "title"])
+      .onValue (attributes) =>
+        for key, value of attributes
+          @[key] = value
 
     @_unsubscribeFromVisibilityChanges = supersonic.ui.views.current.whenVisible =>
       if @isHidden()
@@ -200,9 +203,7 @@ document.registerElement "super-navbar", class SuperNavbar extends HTMLElement
         @show()
 
   detachedCallback: ->
-    #console.log "Navigation bar detachedCallback"
-    observer.disconnect()
+    @_unsubscribeFromAttributeChanges()
+    @_unsubscribeFromVisibilityChanges()
     # Hide the navbar when this node leaves the DOM
     supersonic.ui.navigationBar.hide()
-
-    @_unsubscribeFromVisibilityChanges()
