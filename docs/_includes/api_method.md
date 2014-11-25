@@ -99,18 +99,27 @@
   </tr>
     {% for property in param.properties %}
       <tr>
-        <td class="property">{{property.name}}</td>
-        <td class="highlight">
+        <td class="property table_property">
+          <code class="language-coffeescript" data-lang="coffeescript">
+            {{property.name}}
+          </code>
+        </td>
+        <td class="highlight table_property">
           <code class="language-coffeescript" data-lang="coffeescript">
           {{property.type | xml_escape}}
           </code>
         </td>
-        <td class="highlight">
+        {% if property.defaultValue %}
+        <td class="highlight table_property">
           <code class="language-coffeescript" data-lang="coffeescript">
           {{property.defaultValue}}
           </code>
         </td>
-        <td>{{property.description | markdownify}}</td>
+        {% endif %}
+        {% if property.defaultValue == undefined %}
+        <td class="table_property"></td>
+        {% endif %}
+        <td class="table_property">{{property.description | markdownify}}</td>
       </tr>
     {% endfor %}
   {% endfor %}
@@ -156,13 +165,15 @@
     </tr>
     {% for property in return.properties %}
       <tr>
-        <td class="property">{{property.name}}</td>
-        <td class="highlight">
+        <td class="property table_property">
+          <code>{{property.name}}</code>
+        </td>
+        <td class="highlight table_property">
           <code class="language-coffeescript" data-lang="coffeescript">
           {{property.type | xml_escape}}
           </code>
         </td>
-        <td>{{property.description | markdownify}}</td>
+        <td class="table_property">{{property.description | markdownify}}</td>
       </tr>
     {% endfor %}
   {% endfor %}

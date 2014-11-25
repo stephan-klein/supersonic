@@ -442,6 +442,10 @@ a > code {
   color: #4D8CF4;
 }
 
+td.table_property {
+  border-top-style: none !important;
+}
+
 /***************************************************
  * ASIDE MENUS
  **************************************************/
