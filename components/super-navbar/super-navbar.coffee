@@ -190,20 +190,23 @@ document.registerElement "super-navbar", class SuperNavbar extends HTMLElement
     @updateNavBar() unless @isHidden()
 
   attachedCallback: ->
-    @_unsubscribeFromAttributeChanges = observeAttributesOnElement(this, ["style", "class", "id", "title"])
-      .onValue (attributes) =>
+    @_unsubscribeFromAttributeChanges = observeAttributesOnElement(
+        this
+        ["style", "class", "id", "title"]
+      )
+      .doAction((attributes) =>
         for key, value of attributes
           @[key] = value
-
-    @_unsubscribeFromVisibilityChanges = supersonic.ui.views.current.whenVisible =>
-      if @isHidden()
-        @hide()
-      else
-        @updateNavBar()
-        @show()
+      )
+      .filter(supersonic.ui.views.current.visibility)
+      .onValue =>
+        if @isHidden()
+          @hide()
+        else
+          @updateNavBar()
+          @show()
 
   detachedCallback: ->
     @_unsubscribeFromAttributeChanges()
-    @_unsubscribeFromVisibilityChanges()
     # Hide the navbar when this node leaves the DOM
     supersonic.ui.navigationBar.hide()
