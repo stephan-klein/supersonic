@@ -73,10 +73,10 @@ Debugging via the Connect Screen logs is available on all devices and operating 
 
 ## Supersonic modules
 
-By default, Supersonic apps are made up of modules, which contain the HTML and script files for a certain portion of your app functionality. Currently, our project has two modules: `common`, which is a shared space for all of our app content, and `example`, which has all the views you see in the example app. We want to add a new feature to our app, so it makes sense to create a new module for it. You can create a new module by running `steroids generate module <module-name>` in your project folder. Let's create an `accelerometer` module. You will see that the following module is created for your project:
+By default, Supersonic apps are made up of modules, which contain the HTML and script files for a certain portion of your app functionality. Currently, our project has two modules: `common`, which is a shared space for all of our app content, and `example`, which has all the views you see in the example app. We want to add a new feature to our app, so it makes sense to create a new module for it. You can create a new module by running `steroids generate module <module-name>` in your project folder. Let's create a `geolocation` module. You will see that the following module is created for your project:
 
 ```bash
-app/accelerometer
+app/geolocation
 ├── index.coffee
 ├── scripts
 │   └── IndexController.coffee
@@ -107,9 +107,9 @@ tabs: [
     location: "example#getting-started"
   }
   {
-    title: "Accelerometer"
-    id: "accelerometer"
-    location: "accelerometer#index"
+    title: "Geolocation"
+    id: "geolocation"
+    location: "geolocation#index"
   }
   {
     title: "Internet"
@@ -119,7 +119,7 @@ tabs: [
 ]
 ```
 
-The key change is, the second tab now points to our new `accelerometer` module. After the app refreshes on your device, you can check out the second tab to see that it has indeed updated.
+The key change is, the second tab now points to our new `geolocation` module. After the app refreshes on your device, you can check out the second tab to see that it has indeed updated.
 
 </section>
 <section class="docs-section" id="app-logic-in-the-controller">
@@ -129,50 +129,50 @@ With the new module in place, we can add some logic to it. When we generated our
 
 ```coffee
 angular
-  .module('accelerometer')
+  .module('geolocation')
   .controller 'IndexController', ($scope, supersonic) ->
     # Controller functionality here
-    $scope.getAcceleration = () ->
-      alert "Supersonic!"
+    $scope.getPosition = () ->
+      supersonic.ui.dialog.alert "Interstellar!"
 ```
 
-`getAcceleration` is a simple function that is attached to the Angular `$scope`, which is a special object that acts as a link between the application views and data. By attaching `getAcceleration` to `$scope`, we are able to reference it in any view that shares the same `$scope` as the `IndexController`.
+`getPosition` is a simple function that is attached to the Angular `$scope`, which is a special object that acts as a link between the application views and data. By attaching `getPosition` to `$scope`, we are able to reference it in any view that shares the same `$scope` as the `IndexController`.
 
 ### Access app logic from your view
 
-Now that we have a basic function defined, we want to provide a way to trigger it. To do so, open up `app/accelerometer/views/index.html`, and replace the `<h1>` tag with the following:
+Now that we have a basic function defined, we want to provide a way to trigger it. To do so, open up `app/geolocation/views/index.html`, and replace the `<h1>` tag with the following:
 
 ```html
-<button class="button button-block button-positive" ng-click="getAcceleration()">Get acceleration</button>
+<button class="button button-block button-positive" ng-click="getPosition()">Get position</button>
 ```
 
-This creates a button and attaches the previously created `getAcceleration` function to it via an `ng-click` handler. `ng-click` is a variation of a basic `onclick` handler that automatically detects and utilises the `$scope` object. Having defined the button and saved the document, your app should refresh and display the new button. If you click it, the alert you defined in `IndexController` will pop up on the screen. Tying together your app views and logic is as simple as that!
+This creates a button and attaches the previously created `getPosition` function to it via an `ng-click` handler. `ng-click` is a variation of a basic `onclick` handler that automatically detects and utilises the `$scope` object. Having defined the button and saved the document, your app should refresh and display the new button. If you click it, the alert you defined in `IndexController` will pop up on the screen. Tying together your app views and logic is as simple as that!
 
 </section>
 <section class="docs-section" id="access-device-hardware">
 ## Access device hardware
 
-To actually measure the device acceleration, we need to access the device hardware. Supersonic provides access to a wide range of device APIs such as geolocation and accelerometer, and media APIs such as the microphone and camera. You can also find extended support via plugins, but for now the default accelerometer API is enough. Change your controller content to the following:
+To actually see the device's location, we need to access the device hardware. Supersonic provides access to a wide range of device APIs such as geolocation and accelerometer, and media APIs such as the microphone and camera. You can also find extended support via plugins, but for now the default geolocation API is enough. Change your controller content to the following:
 
 ```coffeescript
-$scope.acceleration = undefined
+$scope.position = undefined
 
-$scope.getAcceleration = () ->
-  supersonic.device.accelerometer.getAcceleration().then (acceleration) ->
-    $scope.acceleration = acceleration
+$scope.getPosition = () ->
+  supersonic.device.geolocation.getPosition().then (position) ->
+    $scope.position = position
 ```
 
-Now when you click the "Get acceleration" -button, the accelerometer data is added to the `$scope` object. The last step is to display that data in the accelerometer view. To do so, add the following to the `app/accelerometer/views/index.html`, under the previously defined `<button>` element:
+Now when you click the "Get position" -button, the geolocation data is added to the `$scope` object. The last step is to display that data in the geolocation view. To do so, add the following to the `app/geolocation/views/index.html`, under the previously defined `<button>` element:
 
 ```html
-<div ng-show="acceleration">{% raw %}
-  Acceleration X: {{acceleration.x}}
-  Acceleration Y: {{acceleration.y}}
-  Acceleration Z: {{acceleration.z}}{% endraw %}
-</div>
+<ul class="list" ng-show="position">{% raw %}
+  <li class="item">Latitude: {{position.coords.latitude}}</li>
+  <li class="item">Longitude: {{position.coords.longitude}}</li>
+  <li class="item">Time: {{position.timestamp}}</li>{% endraw %}
+</ul>
 ```
 
-Save both files and you'll see that after you click the button, the accelerometer data appears below it.
+Save both files and you'll see that after you click the button, the geolocation data appears below it. Note that the first time you attempt to access geolocation data, the device will prompt for permission to access that information, which in this case you should of course allow.
 </section>
 
 <section class="docs-section" id="allergic-to-modules-and-coffeescript">
