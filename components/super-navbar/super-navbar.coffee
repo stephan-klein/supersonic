@@ -12,221 +12,168 @@
  #
  # </super-navbar>
 ###
-observer = new MutationObserver (mutations) ->
-  for mutation in mutations
-    # Check attributes
-    if mutation.type is "attributes"
 
-      # Class changed
-      if mutation.attributeName is "class"
-        mutation.target.class = mutation.target.getAttribute("class")
-      # Style changed
-      if mutation.attributeName is "style"
-        mutation.target.style = mutation.target.getAttribute("style")
-      # id changed
-      if mutation.attributeName is "id"
-        mutation.target.id = mutation.target.getAttribute("id")
 
-      if mutation.attributeName is "title"
-        mutation.target.onTitleChanged()
+# (Element, [attributeName]) -> Bacon.Property attributes
+observeAttributesOnElement = (element, attributes) ->
+  supersonic.internal.Bacon.fromBinder((sink) ->
+    # Set up MutationObserver for streaming changes
+    observer = new MutationObserver (mutations) ->
+      changes = {}
+      # Collect changes from tracked attributes
+      for mutation in mutations when (mutation.type is "attributes") and (mutation.attributeName in attributes)
+        changes[mutation.attributeName] = mutation.target.getAttribute(mutation.attributeName) || ""
+      sink changes
 
-      if mutation.target.isHidden()
-        mutation.target.hide()
-      else
-        mutation.target.show()
-
-SuperNavbarPrototype = Object.create HTMLElement.prototype
-
-lazyUpdate = null
-
-Object.defineProperty SuperNavbarPrototype, "title",
-  set: (title) ->
-    @_title = title
-    @onTitleChanged()
-
-  get: ->
-    @_title
-
-Object.defineProperty SuperNavbarPrototype, "buttons",
-  set: (buttons) ->
-    @setButtons buttons
-
-  get: ->
-    {
-      left: @_leftButtons
-      right: @_rightButtons
+    # Start observing changes in the tracked attributes
+    observer.observe element, {
+      attributes: true
+      attributeFilter: attributes
     }
 
-Object.defineProperty SuperNavbarPrototype, "class",
-  set: (className) ->
-    className = "" if not className
-    @_class = className
-    @onClassNameChanged()
+    # Stop listening by disconnecting the observer
+    ->
+      observer.disconnect()
+  ).toProperty(do ->
+    # Make sure there's an initial value
+    initial = {}
+    for attributeName in attributes
+      initial[attributeName] = element.getAttribute(attributeName) || ""
+    initial
+  )
 
-  get: ->
-    @_class
+document.registerElement "super-navbar", class SuperNavbar extends HTMLElement
+  _leftButtons: null
+  _leftButtons: null
+  _propertiesChanged: null
 
-Object.defineProperty SuperNavbarPrototype, "style",
-  set: (inlineStyle) ->
-    inlineStyle = "" if not inlineStyle
-    @_style = inlineStyle
-    @onInlineStyleChanged()
+  Object.defineProperty @prototype, "title",
+    set: (title) ->
+      @_title = title || " " # NOTE: Has space on purpose, an empty string won't do
+      @_propertiesChanged.push "title"
+    get: ->
+      @_title
 
-  get: ->
-    @_style
+  Object.defineProperty @prototype, "buttons",
+    set: (buttons) ->
+      @_leftButtons = buttons.left
+      @_rightButtons = buttons.right
+      @onButtonsChanged()
+    get: ->
+      {
+        left: @_leftButtons
+        right: @_rightButtons
+      }
 
-Object.defineProperty SuperNavbarPrototype, "id",
-  set: (styleId) ->
-    styleId = "" if not styleId
-    @_styleId = styleId
-    @onStyleIdChanged()
+  Object.defineProperty @prototype, "class",
+    set: (className) ->
+      @_class = className || ""
+      @_propertiesChanged.push "class"
+    get: ->
+      @_class
 
-  get: ->
-    @_styleId
+  Object.defineProperty @prototype, "style",
+    set: (inlineStyle) ->
+      @_style = inlineStyle || ""
+      @_propertiesChanged.push "style"
+    get: ->
+      @_style
 
-# Methods for navbar visibility
+  Object.defineProperty @prototype, "id",
+    set: (styleId) ->
+      @_styleId = styleId || ""
+      @_propertiesChanged.push "id"
+    get: ->
+      @_styleId
 
-SuperNavbarPrototype.isHidden = ->
-  style = window.getComputedStyle this
-  return true if style.display is "none" or style.visibility is "hidden"
+  isHidden: ->
+    style = window.getComputedStyle this
+    return true if style.display is "none" or style.visibility is "hidden"
 
-SuperNavbarPrototype.show = ->
-  supersonic.ui.navigationBar.show()
+  # Methods for navbar buttons
 
-SuperNavbarPrototype.hide = ->
-  supersonic.ui.navigationBar.hide()
-
-# Update navbar
-SuperNavbarPrototype.updateNavBar = ->
-  options = {}
-  # Set base for options
-  options.title = @getTitleForUpdate()
-  options.buttons =
-    left: @_leftButtons
-    right: @_rightButtons
-  # Update UI
-
-  if lazyUpdate?
-    clearTimeout lazyUpdate
-    lazyUpdate = null
-
-  lazyUpdate = setTimeout ->
-    supersonic.ui.navigationBar.update options
-  , 20
-
-# Navbar title
-
-SuperNavbarPrototype.getTitleForUpdate = ->
-  if @title? && @title.length is 0
-    @title = " " # hack for not being able to clear the title with empty string
-  return @title
-
-SuperNavbarPrototype.updateNavBarTitle = ->
-  @updateNavBar()
-
-# Methods for navbar buttons
-
-SuperNavbarPrototype.addButton = (button, side="left") ->
-  # Figure out the side where to add button
-  if side is "right" then @_rightButtons.push button
-  else @_leftButtons.push button
-  # Update buttons on UI
-  @onButtonsChanged()
-
-SuperNavbarPrototype.updateButton = (button) ->
-  # First check the left side for the button reference
-  for candidate, idx in @_leftButtons when candidate is button
-    @_leftButtons[idx] = button
+  addButton: (button, side="left") ->
+    # Figure out the side where to add button
+    if side is "right" then @_rightButtons.push button
+    else @_leftButtons.push button
+    # Update buttons on UI
     @onButtonsChanged()
-    return
-  # Check right side for the reference
-  for candidate, idx in @_rightButtons when candidate is button
-    @_rightButtons[idx] = button
+
+  updateButton: (button) ->
+    # First check the left side for the button reference
+    for candidate, idx in @_leftButtons when candidate is button
+      @_leftButtons[idx] = button
+      @onButtonsChanged()
+      return
+    # Check right side for the reference
+    for candidate, idx in @_rightButtons when candidate is button
+      @_rightButtons[idx] = button
+      @onButtonsChanged()
+      return
+
+  changeButtonSide: (button, side="left") ->
+    @_removeButtonSilently button
+    @addButton button, side
+
+  removeButton: (button) ->
+    @_removeButtonSilently button
     @onButtonsChanged()
-    return
 
-SuperNavbarPrototype.changeButtonSide = (button, side="left") ->
-  @_removeButtonSilently button
-  @addButton button, side
+  _removeButtonSilently: (button) ->
+    # First check the left side for the button reference
+    for candidate, idx in @_leftButtons when candidate is button
+      @_leftButtons.splice idx, 1
+      return
+    # Check right side for the reference
+    for candidate, idx in @_rightButtons when candidate is button
+      @_rightButtons.splice idx, 1
+      return
 
-SuperNavbarPrototype.removeButton = (button) ->
-  @_removeButtonSilently button
-  @onButtonsChanged()
+  onButtonsChanged: ->
+    @_propertiesChanged.push "buttons"
 
-SuperNavbarPrototype._removeButtonSilently = (button) ->
-  # First check the left side for the button reference
-  for candidate, idx in @_leftButtons when candidate is button
-    @_leftButtons.splice idx, 1
-    return
-  # Check right side for the reference
-  for candidate, idx in @_rightButtons when candidate is button
-    @_rightButtons.splice idx, 1
-    return
+  attachedCallback: ->
+    # Initialize object state. The regular constructor does not get run.
+    @_leftButtons = []
+    @_rightButtons = []
+    @_propertiesChanged = new supersonic.internal.Bacon.Bus
 
-# Batch set function
-SuperNavbarPrototype.setButtons = (buttons) ->
-  @_leftButtons = buttons.left
-  @_rightButtons = buttons.right
-  @onButtonsChanged()
+    # Listen for changes in attributes and write the changes to properties
+    @_unsubscribeFromAttributeChanges = observeAttributesOnElement(
+        this
+        ["style", "class", "id", "title"]
+      )
+      .onValue (attributes) =>
+        for key, value of attributes
+          @[key] = value
 
-SuperNavbarPrototype._updateButtons = ->
-  @updateNavBar()
+    # TODO: We would like to render if we are in a tab but invisible, but not when we're in a preloaded view.
+    # The current behavior is to defer rendering until we become visible, even if in a tab.
 
+    # Listen for changes in renderable properties
+    @_unsubscribeFromPropertyChanges = @_propertiesChanged
+      # Only trigger renders when visible
+      .filter(supersonic.ui.views.current.visibility)
+      # KLUDGE: produce "all" when becoming visible
+      .merge(supersonic.ui.views.current.visibility.changes().filter((v) -> v).map(-> "all"))
+      # Wait for 20ms to accumulate new changes before rerender
+      .bufferWithTime(20)
+      # Hide the bar if it has become hidden or render and show
+      .onValue (changedProperties) =>
+        if @isHidden()
+          supersonic.ui.navigationBar.hide()
+        else
+          supersonic.ui.navigationBar.setClass @_class
+          supersonic.ui.navigationBar.setStyle @_style
+          supersonic.ui.navigationBar.setStyleId @_styleId
+          supersonic.ui.navigationBar.update {
+            title: @title
+            buttons: @buttons
+          }
+          supersonic.ui.navigationBar.show()
 
-SuperNavbarPrototype.onTitleChanged = ->
-  @updateNavBarTitle() unless @isHidden()
-
-SuperNavbarPrototype.onButtonsChanged = ->
-  @_updateButtons() unless @isHidden()
-
-SuperNavbarPrototype.onClassNameChanged = ->
-  supersonic.ui.navigationBar.setClass(@_class) unless @isHidden()
-
-SuperNavbarPrototype.onInlineStyleChanged = ->
-  supersonic.ui.navigationBar.setStyle(@_style) unless @isHidden()
-
-SuperNavbarPrototype.onStyleIdChanged = ->
-  supersonic.ui.navigationBar.setStyleId(@_styleId) unless @isHidden()
-
-# What is the difference between attached and created?
-SuperNavbarPrototype.attachedCallback = ->
-  # Initiate button arrays
-  @_leftButtons = []
-  @_rightButtons = []
-
-  # Back button settings
-  @_backButtonAllowed = true
-  @_backButton = undefined
-
-  # Style
-  @class = @getAttribute("class")
-  @id = @getAttribute("id")
-  @style = @getAttribute("style")
-
-  # Observe attributes style and class
-  observerConfiguration =
-    attributes: true
-    attributeFilter: ["style", "class", "id", "title"]
-
-  observer.observe this, observerConfiguration
-
-  # ensure visible (for androids sake)
-  @_onViewVisible = =>
-    if @isHidden()
-      @hide()
-    else
-      @updateNavBar()
-      @show()
-
-  document.addEventListener "visibilitychange", @_onViewVisible, false
-  @_onViewVisible()
-
-SuperNavbarPrototype.detachedCallback = ->
-  #console.log "Navigation bar detachedCallback"
-  observer.disconnect()
-  # Hide the navbar when this node leaves the DOM
-  supersonic.ui.navigationBar.hide()
-  document.removeEventListener "visibilitychange", @_onViewVisible, false
-
-document.registerElement "super-navbar",
-  prototype: SuperNavbarPrototype
+  detachedCallback: ->
+    @_unsubscribeFromAttributeChanges()
+    @_unsubscribeFromPropertyChanges()
+    # Hide the navbar when this node leaves the DOM
+    supersonic.ui.navigationBar.hide()

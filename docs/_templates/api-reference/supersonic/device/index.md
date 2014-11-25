@@ -7,4 +7,4 @@ section_id: device
 
 # API Reference: supersonic.device.*
 
-The `supersonic.device.*` namespace contains APIs that have to do with accessing the properites of the actual device: physical sensors, OS information and more.
+The `supersonic.device.*` namespace contains APIs that have to do with accessing the properties of the actual device: physical sensors, OS information and more.
