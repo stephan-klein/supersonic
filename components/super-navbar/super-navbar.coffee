@@ -45,23 +45,20 @@ observeAttributesOnElement = (element, attributes) ->
 document.registerElement "super-navbar", class SuperNavbar extends HTMLElement
   _leftButtons: null
   _leftButtons: null
-
-  constructor: ->
-    @_leftButtons = []
-    @_rightButtons = []
+  _propertiesChanged: null
 
   Object.defineProperty @prototype, "title",
     set: (title) ->
-      @_title = title
-      @onTitleChanged()
-
+      @_title = title || " " # NOTE: Has space on purpose, an empty string won't do
+      @_propertiesChanged.push "title"
     get: ->
       @_title
 
   Object.defineProperty @prototype, "buttons",
     set: (buttons) ->
-      @setButtons buttons
-
+      @_leftButtons = buttons.left
+      @_rightButtons = buttons.right
+      @onButtonsChanged()
     get: ->
       {
         left: @_leftButtons
@@ -70,73 +67,28 @@ document.registerElement "super-navbar", class SuperNavbar extends HTMLElement
 
   Object.defineProperty @prototype, "class",
     set: (className) ->
-      className = "" if not className
-      @_class = className
-      supersonic.ui.navigationBar.setClass(className) unless @isHidden()
-
+      @_class = className || ""
+      @_propertiesChanged.push "class"
     get: ->
       @_class
 
   Object.defineProperty @prototype, "style",
     set: (inlineStyle) ->
-      inlineStyle = "" if not inlineStyle
-      @_style = inlineStyle
-      supersonic.ui.navigationBar.setStyle(inlineStyle) unless @isHidden()
-
+      @_style = inlineStyle || ""
+      @_propertiesChanged.push "style"
     get: ->
       @_style
 
   Object.defineProperty @prototype, "id",
     set: (styleId) ->
-      styleId = "" if not styleId
-      @_styleId = styleId
-      supersonic.ui.navigationBar.setStyleId(styleId) unless @isHidden()
-
+      @_styleId = styleId || ""
+      @_propertiesChanged.push "id"
     get: ->
       @_styleId
-
 
   isHidden: ->
     style = window.getComputedStyle this
     return true if style.display is "none" or style.visibility is "hidden"
-
-  show: ->
-    supersonic.ui.navigationBar.show()
-
-  hide: ->
-    supersonic.ui.navigationBar.hide()
-
-  # Update navbar
-  updateNavBar: do ->
-    # KLUDGE: Update the navbar after 20ms unless there are new updates to apply
-    # NOTE: Assuming only one navbar element to update per document
-    lazyUpdate = null
-    ->
-      options = {}
-      # Set base for options
-      options.title = @getTitleForUpdate()
-      options.buttons =
-        left: @_leftButtons
-        right: @_rightButtons
-      # Update UI
-
-      if lazyUpdate?
-        clearTimeout lazyUpdate
-        lazyUpdate = null
-
-      lazyUpdate = setTimeout ->
-        supersonic.ui.navigationBar.update options
-      , 20
-
-  # Navbar title
-
-  getTitleForUpdate: ->
-    if @title? && @title.length is 0
-      @title = " " # hack for not being able to clear the title with empty string
-    return @title
-
-  updateNavBarTitle: ->
-    @updateNavBar()
 
   # Methods for navbar buttons
 
@@ -177,36 +129,46 @@ document.registerElement "super-navbar", class SuperNavbar extends HTMLElement
       @_rightButtons.splice idx, 1
       return
 
-  # Batch set function
-  setButtons: (buttons) ->
-    @_leftButtons = buttons.left
-    @_rightButtons = buttons.right
-    @onButtonsChanged()
-
-  onTitleChanged: ->
-    @updateNavBarTitle() unless @isHidden()
-
   onButtonsChanged: ->
-    @updateNavBar() unless @isHidden()
+    @_propertiesChanged.push "buttons"
 
   attachedCallback: ->
+    # Initialize object state. The regular constructor does not get run.
+    @_leftButtons = []
+    @_rightButtons = []
+    @_propertiesChanged = new supersonic.internal.Bacon.Bus
+
+    # Listen for changes in attributes and write the changes to properties
     @_unsubscribeFromAttributeChanges = observeAttributesOnElement(
         this
         ["style", "class", "id", "title"]
       )
-      .doAction((attributes) =>
+      .onValue (attributes) =>
         for key, value of attributes
           @[key] = value
-      )
+
+    # Listen for changes in renderable properties
+    @_unsubscribeFromPropertyChanges = @_propertiesChanged
+      # Only trigger renders when visible
       .filter(supersonic.ui.views.current.visibility)
-      .onValue =>
+      # Wait for 20ms to accumulate new changes before rerender
+      .bufferWithTime(20)
+      # Hide the bar if it has become hidden or render and show
+      .onValue (changedProperties) =>
         if @isHidden()
-          @hide()
+          supersonic.ui.navigationBar.hide()
         else
-          @updateNavBar()
-          @show()
+          supersonic.ui.navigationBar.setClass @_class
+          supersonic.ui.navigationBar.setStyle @_style
+          supersonic.ui.navigationBar.setStyleId @_styleId
+          supersonic.ui.navigationBar.update {
+            title: @title
+            buttons: @buttons
+          }
+          supersonic.ui.navigationBar.show()
 
   detachedCallback: ->
     @_unsubscribeFromAttributeChanges()
+    @_unsubscribeFromPropertyChanges()
     # Hide the navbar when this node leaves the DOM
     supersonic.ui.navigationBar.hide()
