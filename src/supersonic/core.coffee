@@ -18,6 +18,9 @@ module.exports = {
   device: require('./core/device')(steroids, logger)
   ui: require('./core/ui')(steroids, logger, global)
   data: require('./core/data')(logger, global)
+  internal:
+    Promise: require 'bluebird'
+    Bacon: require 'baconjs'
 }
 
 # Export to window as global if we're in the browser
