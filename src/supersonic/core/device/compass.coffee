@@ -29,7 +29,7 @@ module.exports = (steroids, log) ->
    #     frequency?: Integer,
    #     filter?: Integer
    #   }
-   # ) => Stream: {
+   # ) => Stream {
    #   magneticHeading: Number,
    #   trueHeading: Number,
    #   headingAccuracy: Number,

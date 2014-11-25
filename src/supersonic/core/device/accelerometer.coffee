@@ -28,7 +28,7 @@ module.exports = (steroids, log) ->
    #   options?: {
    #     frequency?: Integer
    #   }
-   # ) => Stream: {
+   # ) => Stream {
    #   x: Number,
    #   y: Number,
    #   z: Number,

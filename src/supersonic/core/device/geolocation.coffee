@@ -28,7 +28,7 @@ module.exports = (steroids, log) ->
    #   options?: {
    #     enableHighAccuracy?: Boolean
    #   }
-   # ) => Stream: {
+   # ) => Stream {
    #   coord: Object,
    #   timestamp: Date
    # }
