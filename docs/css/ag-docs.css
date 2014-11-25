@@ -431,10 +431,15 @@ pre {
 pre, code {
   font-family: monospace !important;
   font-size: 14px !important;
+  color: #000000;
 }
 
 p {
   margin-bottom: 30px;
+}
+
+a > code {
+  color: #4D8CF4;
 }
 
 /***************************************************
