@@ -147,10 +147,15 @@ document.registerElement "super-navbar", class SuperNavbar extends HTMLElement
         for key, value of attributes
           @[key] = value
 
+    # TODO: We would like to render if we are in a tab but invisible, but not when we're in a preloaded view.
+    # The current behavior is to defer rendering until we become visible, even if in a tab.
+
     # Listen for changes in renderable properties
     @_unsubscribeFromPropertyChanges = @_propertiesChanged
       # Only trigger renders when visible
       .filter(supersonic.ui.views.current.visibility)
+      # KLUDGE: produce "all" when becoming visible
+      .merge(supersonic.ui.views.current.visibility.changes().filter((v) -> v).map(-> "all"))
       # Wait for 20ms to accumulate new changes before rerender
       .bufferWithTime(20)
       # Hide the bar if it has become hidden or render and show
