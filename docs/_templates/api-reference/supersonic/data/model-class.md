@@ -10,7 +10,7 @@ subsection_id: model-class
 {% include api_class.md class=class %}
 
 
-## Class Methods
+<h2>Class Methods</h2>
 
 
 
