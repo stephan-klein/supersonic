@@ -126,6 +126,8 @@ module.exports = (grunt)->
           betterObject.usageHtml = tag.string
         when "exampleHtml"
           betterObject.exampleHtml = tag.string
+        when "supportsCallbacks"
+          betterObject.supportsCallbacks = true
 
     betterObject
 

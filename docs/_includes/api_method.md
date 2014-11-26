@@ -183,4 +183,6 @@
 {% endif %}
 {% endif %}
 
-<br><br>
+{% if method.supportsCallbacks %}
+Supports [callbacks]()
+{% endif %}
