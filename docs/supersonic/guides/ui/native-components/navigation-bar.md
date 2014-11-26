@@ -38,7 +38,7 @@ The navigation bar has two main functions:
   - It displays a **title** and optional **navigation bar buttons** for the current view
   - When applicable, it provides you with an automatic **back button** for going back in the navigation stack
 
-To learn more about how the navigation stack works, please see the [Navigation Stack][navigation-overview] guides.
+To learn more about how the navigation stack works, please see the [Navigation][navigation-overview] guides.
 </section>
 
 <section class="docs-section" id="super-navbar">
