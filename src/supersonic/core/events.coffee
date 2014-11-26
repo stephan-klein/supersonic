@@ -57,4 +57,3 @@ module.exports =
           when "hidden" then false
           else false
       )
-      .skipDuplicates() # KLUDGE: Android 4.0.2-edge6 triggered multiple change events per actual change
