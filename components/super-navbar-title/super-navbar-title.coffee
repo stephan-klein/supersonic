@@ -29,8 +29,7 @@ SuperNavbarTitlePrototype = Object.create HTMLElement.prototype
 SuperNavbarTitlePrototype.setParentTitle = (title)->
   # Check for parent element existence
   if this.parentNode.nodeName == "SUPER-NAVBAR"
-    # Inform parent node of change - it has a setter that triggers a change event
-    this.parentNode.title = title
+    this.parentNode.setTitle title
   else
     # Oops, we have a malformed DOM
     throw new Error "Component super-navbar-title must be an immediate child of super-navbar component"
