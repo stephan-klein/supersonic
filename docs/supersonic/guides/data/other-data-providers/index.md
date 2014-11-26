@@ -8,7 +8,7 @@ section_id: other-data-providers
 
 # Other providers
 
-Besides the AppGyver Database, Supersonic provides an easy way to integrate application to various backends such as [built.io](https://www.built.io/), [Parse](https://www.parse.com/) or any custom REST backend.
+Besides the AppGyver Database, Supersonic provides an easy way to integrate application to various backends such as [built.io](https://www.built.io/), [Parse](https://www.parse.com/), [Kimono](https://www.kimonolabs.com/) or any custom REST backend.
 
 ## built.io backend
 
@@ -94,3 +94,36 @@ The access path prefix should also be defined for action 'get':
 With there definitions in place we are ready to go. We can e.g. browse the data in API with 'data browser' or scaffold a CRUD application in the tab 'Generate scaffolds'.
 
 Refer [setting up database](/supersonic/guides/data/setting-up-appgyver-database/) and [accessing data from device](/supersonic/guides/data/accessing-data-from-device/) for more information of data usage.
+
+## Kimono labs backend
+
+[Kimono](https://www.kimonolabs.com/) is a service that makes it super simple to turn any website to an API.
+
+Once you have signed up to Kimono you can surf to any website and _kimonify_ it, i.e., use the Kimono bookmarklet to define the parts of the site that Kimono should periodically scrape and turn to a collection that is accessable through the API.
+
+In following we have defined a Kimono API for the _latest_ feed of the [TechCrunch website](http://techcrunch.com/).
+
+<img class="tutorial-image" src="/img/guides/data_kimono_docs.png">
+
+As seen from the code sample, the articles in feed can be accessed by making a HTTP GET request to url `https://www.kimonolabs.com/api/3koou162` with query parameter `apikey=ucB3khHPRR7SDLXOheEKIc4YIVwgKkY3`.
+
+From the _data preview_ tab we'll see how the response looks like:
+
+<img class="tutorial-image" src="/img/guides/data_kimono_response.png">
+
+So, the feed items can be accessed by indexing the response with the  _root key_ `results.collection1`.
+
+Now we are ready to set up a custom REST provider to access the TechCrunch feed from a Supersonic app:
+
+<img class="tutorial-image" src="/img/guides/data_kimono_init.png">
+
+The _resource url path_ is the last part of the url:
+
+<img class="tutorial-image" src="/img/guides/data_kimono_resource.png">
+
+We still need to customize the access by specifying the apikey and response the root key:
+
+<img class="tutorial-image" src="/img/guides/data_kimono_customize.png">
+
+Now we are all set! Note that the only operation that a Kimono API support is reading the whole collection, so individual items in the collection do not have own urls.
+
