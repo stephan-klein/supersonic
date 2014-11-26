@@ -4,10 +4,13 @@ Bacon = require 'baconjs'
 # (window) -> (level: string) -> (message: object) -> LeveledLogMessageEnvelope
 logMessageEnvelope = (window) -> (level) -> (message) ->
   {
-    message: try
-        JSON.stringify message
+    message:
+      try
+        JSON.stringify switch typeof message
+          when 'function' then message.toString()
+          else message
       catch e
-        e.toString()
+        "Failed to log message: #{e.toString()}"
     date: (new Date().getTime())
     level: level
     location: window.location.href
