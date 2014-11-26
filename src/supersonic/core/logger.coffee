@@ -75,9 +75,9 @@ module.exports = (steroids, window) ->
     messages.plug streamsPerLogLevel.debug.out
 
     # Pipe info, warn and error to console by default
-    streamsPerLogLevel.info.out.onValue (envelope) -> console.log envelope.message
-    streamsPerLogLevel.warn.out.onValue (envelope) -> console.log envelope.message
-    streamsPerLogLevel.error.out.onValue (envelope) -> console.error envelope.message
+    streamsPerLogLevel.info.out.onValue (envelope) -> console.log "supersonic.logger.info: #{JSON.parse envelope.message}"
+    streamsPerLogLevel.warn.out.onValue (envelope) -> console.log "supersonic.logger.warn: #{JSON.parse envelope.message}"
+    streamsPerLogLevel.error.out.onValue (envelope) -> console.error "supersonic.logger.error: #{JSON.parse envelope.message}"
 
     return log = {
       # Don't expose messages, qify for angular goes haywire
