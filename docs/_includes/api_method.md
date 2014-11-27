@@ -183,4 +183,6 @@
 {% endif %}
 {% endif %}
 
-<br><br>
+{% if method.supportsCallbacks %}
+Also supports [callbacks](/supersonic/guides/technical-concepts/callbacks/).
+{% endif %}
