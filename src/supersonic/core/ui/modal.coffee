@@ -31,13 +31,13 @@ module.exports = (steroids, log) ->
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that is resolved when the modal starts to show. If there modal cannot be shown (e.g. the view is invalid), the promise is rejected.
    # @supportsCallbacks
    # @exampleCoffeeScript
-   # modalView = new supersonic.ui.View "common#modal"
+   # modalView = new supersonic.ui.View "example#settings"
    # options =
    #   animate: true
    #
    # supersonic.ui.modal.show modalView, options
    # @exampleJavaScript
-   # var modalView = new supersonic.ui.View("common#modal");
+   # var modalView = new supersonic.ui.View("example#settings");
    # var options = {
    #   animate: true
    # }

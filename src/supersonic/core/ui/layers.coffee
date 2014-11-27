@@ -30,14 +30,14 @@ module.exports = (steroids, log) ->
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that gets resolved with the provided View instance once the push has started. If the view cannot be pushed, the promise is rejected.
    # @supportsCallbacks
    # @exampleCoffeeScript
-   # view = new supersonic.ui.View "common#settings"
+   # view = new supersonic.ui.View "example#settings"
    # supersonic.ui.layers.push view
    #
    # supersonic.ui.views.find("settingsView").then (startedView) ->
    #   supersonic.ui.layers.push startedView
    #
    # @exampleJavaScript
-   # var view = new supersonic.ui.View("common#settings");
+   # var view = new supersonic.ui.View("example#settings");
    # supersonic.ui.layers.push(view)
    #
    # supersonic.ui.views.find("settingsView").then( function(startedView) {
