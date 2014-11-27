@@ -5,7 +5,6 @@ header_sub_title: Learn how to utilize the native UI components provided by Supe
 section_id: native-components
 subsection_id: drawers
 topics:
-  - name: Overview
   - name: Defining drawers
   - name: Programmatic APIs
   - name: init
@@ -18,8 +17,8 @@ topics:
     method: true
 ---
 
-<section class="docs-section" id="overview">
-# Drawers overview
+<section class="docs-section" id="drawers">
+# Drawers
 
 A drawer is a view container that is located off the left or right side of the app view, and can revealed either by swiping across the screen or using the Supersonic API. The most common use case for a drawer is a side-menu: it is hidden by default and can be pulled into view when it is required, for e.g. navigating to another view. The drawer view can display HTML content just like any regular view. The Supersonic drawer responds to touch gestures just like a native drawer, so the opening gesture can be reversed or canceled at any point.
 </section>

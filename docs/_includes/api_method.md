@@ -185,5 +185,5 @@
 {% endif %}
 
 {% if method.supportsCallbacks %}
-Also supports [callbacks](/supersonic/guides/technical-concepts/callbacks/).
+<p>Also supports <a href="/supersonic/guides/technical-concepts/callbacks/">callbacks</a>.
 {% endif %}

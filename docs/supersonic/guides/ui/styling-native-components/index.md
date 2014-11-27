@@ -8,7 +8,7 @@ section_id: styling-native-components
 
 <section class="docs-section" id="overview">
 
-# Overview
+# Styling native components
 
 Steroids² utilises [Pixate Freestyle][pixate-home] to allow developers to style native UI elements like any other part of their app. For Steroids² apps this means control over the styling of native UI elements like the navigation and tab bars, which would be out of reach for regular CSS styling. Steroids² uses a customised version of Pixate with truly cross-platform functionality.
 
@@ -44,19 +44,13 @@ For a more thorough look at the Supersonic styling APIs, head over to the docs:
 
 ### Media Assets
 
-Media assets are accessed using the url function and must be contained within the Application's bundle or on the device filesystem. Resources in the application bundle can be accessed using bundle://, files on the device are acessessed using file://,  and resources in the device documents folder can be accessed using documents://.  If no protocol is specified, the resources will be searched for first in the documents folder then in the resource bundle.
+Media assets are accessed using the url function and must be located in App files (the contents of `/dist`) or under User Files. The resources will be searched for first in the User Files, so if you have two assets with identical names, the one in User Files will be used. For example, the Android wrapper comes bundled with a back icon in the User Files, which can be referenced with `default_back_icon.png`.
 
-    /* search in documents folder and application bundle for resource */
-    background-image:    url(star.svg);
+    /* search in dist for resource */
+    background-image:    url(icons/cog.svg);
 
-    /* search for resource in a subfolder of Documents */
-    background-image:    url(documents://myResources/star.svg);
-
-    /* search for resource in a subfolder of  */
-    background-image:    url(file://images/star.svg);
-
-    /* search for resource in application bundle */
-    background-image:    url(bundle://star.svg);
+    /* use default Android back-icon */
+    background-image:    url(default_back_icon.png);
 
 ### Importing Style Sheets
 
