@@ -5,6 +5,7 @@ header_sub_title: Learn how to build beautiful mobile apps with the Supersonic U
 parent_id: supersonic
 section_id: communication
 ---
+<section class="ag__docs__content">
 <section class="docs-section" id="sharing-data-in-a-mpa">
 
 ## Sharing data between views in a multi-page application
@@ -27,20 +28,56 @@ There can be any number of channels in one app. Each  channel is identified by a
 
 A WebView can _publish_ a message to a channel (called 'public_announcements') as follows:
 
-```js
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+var message = {
+  sender: "beers#create",
+  contet: "a new beer brewed"
+};
+
+supersonic.data.channel('public_announcements').publish(message);
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 message =
   sender: "beers#create"
   contet: "a new beer brewed"
 
-supersonic.data.channel('public_announcements').publish(data)
-```
+supersonic.data.channel('public_announcements').publish(message)    
+{% endhighlight %}
+</div>
 
 Published message can be any JavaScript object. Message is recieved by _all_ the WebViews who have _subscribed_ for the same channel by registering a callback function:
 
-```js
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+supersonic.data.channel('public_announcements').subscribe( function(message) {
+  console.log("received a message " + message);
+});
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 supersonic.data.channel('public_announcements').subscribe (message) ->
-  console.log "recieved a message #{message}"
-```
+  console.log "received a message #{message}"
+{% endhighlight %}
+</div>
 
 See the [API reference](/supersonic/api-reference/stable/supersonic/data/channel/)
 
@@ -87,7 +124,28 @@ Supersonic provides _superscope_ which makes it possible to keep sync variables 
 
 You bind a variable in the local scope of the first WebView to the superscope as follows:
 
-```js
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+angular
+  .module('first')
+  .controller('FirstController', function($scope, supersonic) {
+    // initialize the variable in local scope
+    $scope.message = null;
+
+    // bind it to superscope
+    supersonic.bind($scope, "message");
+  });
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 angular
   .module('first')
   .controller 'FirstController', ($scope, supersonic) ->
@@ -96,17 +154,37 @@ angular
 
     # bind it to superscope
     supersonic.bind $scope, "message"
-```
+{% endhighlight %}
+</div>
 
 Same should be done in the controller of the second WebView:
 
-```js
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+angular
+  .module('second')
+  .controller('SecondController', function($scope, supersonic) {
+    $scope.message = null;
+    supersonic.bind($scope, "message");
+  });
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 angular
   .module('second')
   .controller 'SecondController', ($scope, supersonic) ->
     $scope.message = null
     supersonic.bind $scope, "message"
-```
+{% endhighlight %}
+</div>
 
 Now the variable `message` in the both WebViews is kept in synch thanks to superscope!
 
@@ -130,14 +208,34 @@ Eg. in the following we have a WebView that lists all documents in colleciton `b
 
 The controller function of WebView `beers#show` can access the view parameter using `steroids.view.params`:
 
-```js
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+supersonic.ui.views.current.whenVisible( function(){
+  var beer_id = steroids.view.params.id;
+
+  Beer.find(beer_id).then( function(beer){
+    $scope.beer = beer;
+  }
+});
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 supersonic.ui.views.current.whenVisible ->
   beer_id = steroids.view.params.id
 
   Beer.find(beer_id).then (beer)->
     $scope.beer = beer
 )
-```
+{% endhighlight %}
+</div>
 
 Now the controller can load the corresponding object form database using [supersonic data](/supersonic/api-reference/stable/supersonic/data/model/model-class/).
 
@@ -152,30 +250,71 @@ Supersonic implements the [window.postMessage API](https://developer.mozilla.org
 
 As an example, we have the following code in one WebView:
 
-```js
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+broadcastMessage( function(msg){
+
+  var message = {
+    recipient: "showView",
+    message: "Hi Show view!"
+  };
+
+  window.postMessage(message);
+});
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 broadcastMessage (msg) ->
 
   message =
     recipient: "showView"
     message: "Hi Show view!"
 
-  window.postMessage(message);
-
-```
+  window.postMessage message
+{% endhighlight %}
+</div>
 
 And then the following in another webview:
 
-```js
-
-messageReceived (event) ->
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+function messageReceived(event) {
 
   // check that the message is intended for us
+  if (event.data.recipient === "showView") {
+    alert(event.data.message);
+  }
+}
+window.addEventListener("message", messageReceived);
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
+messageReceived = (event) ->
+
+  # check that the message is intended for us
   if event.data.recipient == "showView"
     alert(event.data.message)
-}
 
-window.addEventListener("message", messageReceived);
-```
+window.addEventListener "message", messageReceived
+{% endhighlight %}
+</div>
+
 
 The Supersonic usage of `postMessage` is a bit simplified: we do not use the `event.origin` and `event.source` attributes of the received event, nor do we give a `targetOrigin` for the `window.postMessage` API call. Since a Supersonic app is is "walled-off" from the general Internet inside the app package, all postMessage calls are automatically posted to every WebView in memory. It is then up to the sender and receiver to ensure that messages are handled by the correct WebViews.
 
@@ -190,6 +329,7 @@ Hint: to save objects to `localStorage`, you can use `JSON.stringify(object)` to
 
 An important difference to browser apps is that the user won't have access to developer tools for your WebViews. Thus, they cannot manipulate `localStorage` directly – everything you save there remains, even over app updates (of course, cleaning the app cache will empty `localStorage` also).
 
+</section>
 </section>
 
 [app-architecture-mile]: /supersonic/tutorial/fourth-mile
