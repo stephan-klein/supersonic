@@ -35,12 +35,12 @@ module.exports = (steroids, log) ->
    # @define {Function} stop Stops the View, unloading it from memory. Returns a promise that is resolved once the View has been successfully stopped. A View can only be stopped if its identifier matches an existing started View. The promise is rejected if the View cannot be stopped.
    # @exampleCoffeeScript
    # view = new supersonic.ui.View
-   #   location: "cars#edit"
-   #   id: "carsEdit"
+   #   location: "example#learn-more"
+   #   id: "learnMore"
    # @exampleJavaScript
    # var view = new supersonic.ui.View({
-   #   location: "cars#edit",
-   #   id: "carsEdit"
+   #   location: "example#learn-more",
+   #   id: "learnMore"
    # });
   ###
 
