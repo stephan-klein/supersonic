@@ -12,6 +12,7 @@ a:link {
   cursor: pointer;
 }
 
+a:hover,
 a:link:hover {
   text-decoration: underline;
   color: #00b5ff;
@@ -454,9 +455,11 @@ td.table_property {
 
 }
 
-.ag__docs__left-menu li a {
+.ag__docs__left-menu li a,
+.ag__docs__left-menu li a:visited {
   font-size: 12px !important;
   font-family: "Proxima N W01 Reg";
+  color: #7f7f7f;
 }
 
 .ag__docs__left-menu a code {
