@@ -8,9 +8,11 @@ while getopts "e:" opt; do
   case "$opt" in
     e)
       if [ "$OPTARG" == "appgyver.com" ]; then
+        echo "Copying sekrit indexes"
+        cp _includes/_breadcrumb2.html _includes/breadcrumb.html
+        cp _index2.html index2.html
+        rm index.html
         ENVIRONMENT=$OPTARG
-        echo "We are not public yet, use deploy-sekrit to launch secretly"
-        exit 1
       elif [ "$OPTARG" == "testgyver.com" ]; then
         ENVIRONMENT=$OPTARG
       elif [ "$OPTARG" == "devgyver.com" ]; then
@@ -49,6 +51,13 @@ eval $CMD_WITHOUT_DELETE
 
 echo "running $CMD_WITH_DELETE"
 eval $CMD_WITH_DELETE
+
+if [ "$ENVIRONMENT" == "appgyver.com" ]; then
+  echo "Restoring proper index"
+  cp _includes/_breadcrumb1.html _includes/breadcrumb.html
+  cp _index1.html index.html
+  rm index2.html
+fi
 
 # Maybefix based on these:
 # --delete-removed
