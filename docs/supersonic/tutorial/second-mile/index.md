@@ -15,6 +15,7 @@ subsections:
   - name: Allergic to modules and CoffeeScript?
   - name: Done!
 ---
+<section class="ag__docs__content">
 <section class="docs-section" id="overview">
 ## Overview
 
@@ -125,16 +126,38 @@ The key change is, the second tab now points to our new `geolocation` module. Af
 <section class="docs-section" id="app-logic-in-the-controller">
 ## App logic in the controller
 
-With the new module in place, we can add some logic to it. When we generated our new module, an `IndexController.coffee` file was generated for us. It contains an empty angular controller by default, but let's add a simple function to the controller (under the "#Controller functionality here" comment). Be aware that CoffeeScript is finicky about indentation, so you have to be careful to indent properly.
+With the new module in place, we can add some logic to it. When we generated our new module, an `IndexController.js` or `IndexController.coffee` file (if using CoffeeScript) was generated for us. It contains an empty angular controller by default, but let's add a simple function to the controller (under the "#Controller functionality here" comment). If using CoffeeScript, be aware that CoffeeScript is finicky about indentation, so you have to be careful to indent properly.
 
-```coffee
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+angular
+  .module('geolocation')
+  .controller('IndexController', function($scope, supersonic) {
+    // Controller functionality here
+    $scope.getPosition = function() { 
+      supersonic.ui.dialog.alert("Interstellar!");
+    };
+  });
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 angular
   .module('geolocation')
   .controller 'IndexController', ($scope, supersonic) ->
     # Controller functionality here
     $scope.getPosition = () ->
       supersonic.ui.dialog.alert "Interstellar!"
-```
+{% endhighlight %}
+</div>
 
 `getPosition` is a simple function that is attached to the Angular `$scope`, which is a special object that acts as a link between the application views and data. By attaching `getPosition` to `$scope`, we are able to reference it in any view that shares the same `$scope` as the `IndexController`.
 
@@ -154,13 +177,34 @@ This creates a button and attaches the previously created `getPosition` function
 
 To actually see the device's location, we need to access the device hardware. Supersonic provides access to a wide range of device APIs such as geolocation and accelerometer, and media APIs such as the microphone and camera. You can also find extended support via plugins, but for now the default geolocation API is enough. Change your controller content to the following:
 
-```coffeescript
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+$scope.position = undefined;
+
+$scope.getPosition = function() {
+  supersonic.device.geolocation.getPosition().then( funtion(position){
+    $scope.position = position;
+  });
+};
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 $scope.position = undefined
 
 $scope.getPosition = () ->
   supersonic.device.geolocation.getPosition().then (position) ->
     $scope.position = position
-```
+{% endhighlight %}
+</div>
 
 Now when you click the "Get position" -button, the geolocation data is added to the `$scope` object. The last step is to display that data in the geolocation view. To do so, add the following to the `app/geolocation/views/index.html`, under the previously defined `<button>` element:
 
@@ -206,6 +250,7 @@ In this section we learned about the basic tools needed for creating truly excel
   - How to access device hardware and relay the info onwards.
 
 By now you are able to create a feature-robust offline Supersonic app. The last hurdle is connecting your app to real-life data, something that most apps out there utilise. To learn how to initialise and utilise a data backend for your app, head over to the [Third mile][third-mile] tutorial.
+</section>
 </section>
 
 [app-coffee]: /supersonic/guides/
