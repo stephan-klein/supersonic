@@ -79,9 +79,9 @@ In the example above, adding this snippet to `default.css` would send parse erro
 
 - _cache-styles_: `auto`, `none`, `all`, `minimize-styling`, and `cache-images`. Used to toggle caching and to set limits for those caches. This property accepts a comma-delimited list of the preceding values. Values are processed in order and are accumulated. `auto` is the same as `minimize-styling, cache-images`. `minimize-styling` tries to prevent styling of an element if its styling has not changed. `cache-images` caches images generated during styling to avoid unnecessary rendering on future stylings and to generally increase styling speeds. The default (and recommended) value is `auto`.
 
-- _image-cache-count_: [number][number-value]. Determines how many images we be retained in the image cache, assuming it has been turned on with `cache-styles`. If this is set to `0`, then there will be no upper limit to how many images live in the cache. The default value is `10`.
+- _image-cache-count_: [number]. Determines how many images we be retained in the image cache, assuming it has been turned on with `cache-styles`. If this is set to `0`, then there will be no upper limit to how many images live in the cache. The default value is `10`.
 
-- _image-cache-size_: [number][number-value]. Determines how many bytes of image data are retained in the image cache. A value of `0` indicates that there is no upper limit to how many bytes can live in the cache. Note that `image-cache-count` will still be honored. The default value is `0`.
+- _image-cache-size_: [number]. Determines how many bytes of image data are retained in the image cache. A value of `0` indicates that there is no upper limit to how many bytes can live in the cache. Note that `image-cache-count` will still be honored. The default value is `0`.
 
 [Pixate-home]: http://www.pixate.com/
 [navigation-bar-api]:/supersonic/api-reference/stable/supersonic/ui/navigationbar/
