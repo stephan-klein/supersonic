@@ -101,7 +101,7 @@ By default, Supersonic utilises [AngularJS](https://angularjs.org/) to create th
 <div ng-controller="IndexController">
 ```
 
-The `/superhero/scripts/IndexController.coffee` file in turn declares which module the controller belongs to and what dependencies to inject into the controller itself:
+The `/superhero/scripts/IndexController.js` file (or the `/superhero/scripts/IndexController.coffee` file, if using CoffeeScript) in turn declares which module the controller belongs to and what dependencies to inject into the controller itself:
 
 <div class="clearfix">
   <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
