@@ -30,6 +30,7 @@ module.exports = (steroids, log) ->
    # @define {String} options.width=200 The width of drawer.
    # @returnsDescription
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that will be resolved once the drawer has been initialized.
+   # @supportsCallbacks
    # @exampleJavaScript
    # var options = {
    #   side: "left",
