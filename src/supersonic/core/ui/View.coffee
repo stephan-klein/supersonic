@@ -11,7 +11,7 @@ module.exports = (steroids, log) ->
    #
    # If you just define a location for the View, the target HTML document will start loading only after the View is pushed to the navigation stack. The new View animates onto the screen instantly, but a loading spinner is shown until the DOM is loaded.
    #
-   # Alternatively, you can give the View an identifier (a custom string) and **start** it. Started Views are loaded into memory straight away and continue running until they are stopped, regardless of their position in the navigation stack. To unload a started View from memory, you need to use the `stop()` API call.
+   # A View can also have an identifier (a custom string), which enables you to **start** it. Started Views are loaded into memory straight away and continue running until they are stopped, regardless of their position in the navigation stack. To unload a started View from memory, you need to use the `stop()` API call.
    #
    # The View constructor accepts either a location string (Supersonic route or URL) or an options object with `location` and (optional) `id` properties.
    # @type
@@ -34,14 +34,60 @@ module.exports = (steroids, log) ->
    # </ul>
    # @define {Function} stop Stops the View, unloading it from memory. Returns a promise that is resolved once the View has been successfully stopped. A View can only be stopped if its identifier matches an existing started View. The promise is rejected if the View cannot be stopped.
    # @exampleCoffeeScript
+   # # Constructor (id is optional)
    # view = new supersonic.ui.View
    #   location: "example#learn-more"
    #   id: "learnMore"
+   #
+   # # Returns "example#learn-more"
+   # supersonic.logger.log view.getLocation()
+   #
+   # # Returns "learnMore"
+   # supersonic.logger.log view.getId()
+   #
+   # # Is the view started yet?
+   # view.isStarted.then (started) ->
+   #   # started will be false initially
+   #
+   # # Starting a view
+   # view.start()
+   #
+   # # Stop a view
+   # view.stop()
+   #
+   # # Set a new identifier for the view
+   # view.setId("more").then (newId) ->
+   #    supersonic.logger.log newId
+   #
    # @exampleJavaScript
+   # // Constructor (id is optional)
    # var view = new supersonic.ui.View({
    #   location: "example#learn-more",
    #   id: "learnMore"
    # });
+   #
+   # // Returns "example#learn-more"
+   # supersonic.logger.log(view.getLocation());
+   #
+   # // Returns "learnMore"
+   # supersonic.logger.log(view.getId());
+   #
+   # // Is the view started yet?
+   # view.isStarted.then( function(started) {
+   #   // started will be false initially
+   # });
+   #
+   # // Starting a view
+   # view.start();
+   #
+   # // Stop a view
+   # view.stop();
+   #
+   # // Set a new identifier for the view
+   # view.setId("learn").then( function(newId) {
+   #    supersonic.logger.log(newId);
+   # });
+   #
   ###
 
   getApplicationState = ->

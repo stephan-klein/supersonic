@@ -5,6 +5,7 @@ header_sub_title: Learn how to build beautiful mobile apps with the Supersonic U
 parent_id: supersonic
 section_id: app-architecture
 ---
+<section class="ag__docs__content">
 
 <section class="docs-section" id="overview">
 
@@ -100,14 +101,32 @@ By default, Supersonic utilises [AngularJS](https://angularjs.org/) to create th
 <div ng-controller="IndexController">
 ```
 
-The `/superhero/scripts/IndexController.coffee` file in turn declares which module the controller belongs to and what dependencies to inject into the controller itself:
+The `/superhero/scripts/IndexController.js` file (or the `/superhero/scripts/IndexController.coffee` file, if using CoffeeScript) in turn declares which module the controller belongs to and what dependencies to inject into the controller itself:
 
-```coffeescript
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
 angular
   .module('superhero')
-  .controller("IndexController", ($scope, Superhero) ->
-  )
-```
+  .controller("IndexController", function($scope, Superhero) {
+  });
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
+angular
+  .module('superhero')
+  .controller "IndexController", ($scope, Superhero) ->
+    
+{% endhighlight %}
+</div>
 
 Note that `Superhero` dependency is injected into the controller. That is the data model we defined in the previous tutorial, and it provides this controller access to the `Superhero` object, which in turn can communicate with our database. The next step is tying it all together.
 
@@ -140,5 +159,8 @@ The `<%= ... %>` blocks are used to automatically pair each view with the corres
 ## Utilising the common module
 
 The `common` module also already contains a layout file (located at `app/common/views/layout.html`), which has all the basic dependecies of your project declared, such as `supersonic.js`, `steroids.js` and `cordova.js`. Because `common` is declared as a dependency to all modules by default, the layout file in there can be used to throughout the app just by removing any layout files from the module itself.
+<<<<<<< HEAD:docs/supersonic/guides/architecture/app-architecture/index.md
+=======
+</section>
 
 </section>
