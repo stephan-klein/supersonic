@@ -7,28 +7,13 @@
 
 <div class="clearfix">
   <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
-    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-primary active">CoffeeScript</button>
-    <button type="button" data-role="type-switch" data-type="js" class="btn btn-default">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
   </div>
   <h3>Example usage</h3>
 </div>
 
-<div data-role="example-code" data-type="coffee">
-
-{% if class.exampleCoffeeScript %}
-{% highlight coffeescript %}
-{{class.exampleCoffeeScript}}
-{% endhighlight %}
-{% endif %}
-
-{% if !class.exampleCoffeeScript && class.usageCoffeeScript %}
-{% highlight coffeescript %}
-{{class.usageCoffeeScript}}
-{% endhighlight %}
-{% endif %}
-
-</div>
-<div data-role="example-code" data-type="js" style="display: none;">
+<div data-role="example-code" data-type="js">
 
 {% if class.exampleJavaScript %}
 {% highlight javascript %}
@@ -39,6 +24,22 @@
 {% if !class.exampleJavaScript && class.usageJavaScript %}
 {% highlight javascript %}
 {{class.usageJavaScript}}
+{% endhighlight %}
+{% endif %}
+
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+
+{% if class.exampleCoffeeScript %}
+{% highlight coffeescript %}
+{{class.exampleCoffeeScript}}
+{% endhighlight %}
+{% endif %}
+
+{% if !class.exampleCoffeeScript && class.usageCoffeeScript %}
+{% highlight coffeescript %}
+{{class.usageCoffeeScript}}
 {% endhighlight %}
 {% endif %}
 
