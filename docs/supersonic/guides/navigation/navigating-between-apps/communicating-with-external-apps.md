@@ -3,6 +3,7 @@ layout: guides_navigation
 section_id: navigating-between-apps
 subsection_id: communicating-with-external-apps
 ---
+<section class="ag__docs__content">
 
 # Communicating with External Apps
 
@@ -25,12 +26,29 @@ For example, if you open the application with `steroids-scanner://login?username
 
 Typically you would want to make the API call inside the Cordova's `resume` event (triggered when the app returns from the background):
 
-```javascript
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
 document.addEventListener("resume", function() {
+  var urlObject = supersonic.app.getLaunchURL();
+  supersonic.logger.log(urlObject);
+});
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
+document.addEventListener "resume", ->
   urlObject = supersonic.app.getLaunchURL()
   supersonic.logger.log(urlObject)
-});
-```
+{% endhighlight %}
+</div>
 
 It's also a good idea to check in your app initialisation code if `supersonic.app.getLaunchURL()` returns `null`, for the cases where your app is not running when a link with the custom URL scheme is used.
 
@@ -55,4 +73,6 @@ would register your app for both `myawesomeapp://` and `myawesomeapp-dev://` URL
 <section class="docs-section" id="getlaunchurl">
 {% assign method = site.data.supersonic.app.getLaunchURL %}
 {% include api_method.md method=method %}
+</section>
+
 </section>
