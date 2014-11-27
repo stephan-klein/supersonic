@@ -32,6 +32,22 @@
       {% endif %}
     </li>
     {% endfor %}
+    <!--
+    Loop through separately to create anchor menu for long content pages without subsections, e.g. architecture/communication
+    -->
+    {% for topic in section.topics %}
+    <li>
+      <a href="/supersonic/{{include.tab_name}}/{{section_id}}/#{{topic.name | slugify}}">
+        {% if topic.method %}
+          <code>{{topic.name}}()</code>
+        {% elsif topic.component %}
+          <code>&lt;{{topic.name}}&gt;</code>
+        {% else %}
+          {{topic.name}}
+        {% endif %}
+      </a>
+    </li>
+    {% endfor %}
     {% endif %}
   </li>
 </ul>

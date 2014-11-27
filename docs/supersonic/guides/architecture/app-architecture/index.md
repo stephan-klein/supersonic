@@ -3,17 +3,11 @@ layout: guides_architecture
 title: Supersonic Documentation
 header_sub_title: Learn how to build beautiful mobile apps with the Supersonic UI framework.
 parent_id: supersonic
-section_id: application architecture
-subsections:
-  - name: Overview
-  - name: Basic project structure
-  - name: Model-View-Controller architecture
-  - name: Angular and Supersonic
-  - name: Building views from partials
-  - name: Utilising the common module
+section_id: app-architecture
 ---
 
 <section class="docs-section" id="overview">
+
 ## Overview
 
 In this section we will take a closer look at how your application is structured. We'll have a look on
@@ -24,9 +18,10 @@ In this section we will take a closer look at how your application is structured
 - How the Steroids² CLI builds your project
 
 You will also be introduced to some rather large concepts, such as Model-View-Controller Architecture. While we will step through the very basics of these concepts, it is recommended you go through the third-party content we link to properly familiarise yourself with them.
-</section>
 
+</section>
 <section class="docs-section" id="basic-project-structure">
+
 ## Basic project structure
 
 A default Supersonic project has the following directory structure:
@@ -47,9 +42,10 @@ Generally, you will only be interested in the `/app` and `/config` folders.
  - `/config` has special files for configuring your app behaviour. This includes defining the initial views and tab structure of your app, as well as configuration for default behaviour such as enabling and disabling overscroll for all of your app's views.
 
 The rest of the folders contain third-party dependencies required by Supersonic and various other things. The `/dist` folder doesn't exist in a completely new project, it is only created once your app is compiled. The contents of `/dist` is created from the contents of `/app`, with certain structural differences.
-</section>
 
+</section>
 <section class="docs-section" id="model-view-controller-architecture">
+
 ## Model-View-Controller architecture
 
 Supersonic apps follow a model-view-controller (or MVC) pattern by default. This means that the UI (__V__iew), app logic (__C__ontroller) and data model (__M__odel) are kept separate from each other, with each one having their own area of responsibility in making your application functional. Using the MVC pattern promotes code readability and reuse, leading to better and less error prone code. The basic responsibilites of the different MVC components is listed below.
@@ -92,9 +88,10 @@ app/superhero
 ```
 
 It contains the views, controllers and model for this module. The file structure by itself has some special signifigance which you will discuss about a bit later, but for now we are interested in how module files handle the different MVC responsibilities. We will go over that in the section below.
-</section>
 
-<section class="docs-section" id="Angular">
+</section>
+<section class="docs-section" id="angular-and-supersonic">
+
 ## Angular and Supersonic
 
 By default, Supersonic utilises [AngularJS](https://angularjs.org/) to create the MVC architecture in created apps. Each view in a module declares a controller that handles the logic for that view, e.g. in `/superhero/views/index.html`:
@@ -113,9 +110,10 @@ angular
 ```
 
 Note that `Superhero` dependency is injected into the controller. That is the data model we defined in the previous tutorial, and it provides this controller access to the `Superhero` object, which in turn can communicate with our database. The next step is tying it all together.
-</section>
 
+</section>
 <section class="docs-section" id="building-views-from-partials">
+
 ## Building views from view partials
 
 You may have noticed that the `/superhero/views/index.html` file isn't a complete HTML document. It just declares a `<div>` element that binds a controller to itself with the `ng-controller` attribute. This is known as a view partial. To make it a valid HTML document (and above all a functioning Supersonic view), we need to attach it to a special layout file, which contains all of the missing declarations. When compiling your app, the Steroids CLI looks for a `layout.html` file in the module and attaches all view partials to that layout.
@@ -123,6 +121,8 @@ You may have noticed that the `/superhero/views/index.html` file isn't a complet
 The `/superhero/views/layout.html` file specifies the scripts and stylesheets that should be paired with this view partial. It also has some special logic for bootstrapping the Angular application that makes up the MVC structure in our app.
 
 ```html
+<head>
+  <!-- Rest of head tags omitted -->
   <% _.each(yield.modules, function(module) { %>
   <script src="/app/<%= module %>.js"></script>
   <% }); %>
@@ -133,9 +133,12 @@ The `/superhero/views/layout.html` file specifies the scripts and stylesheets th
 ```
 
 The `<%= ... %>` blocks are used to automatically pair each view with the corresponding controller and bootstrap an `ngApp` in that view.
-</section>
 
+</section>
 <section class="docs-section" id="utilising-the-common-module">
 
+## Utilising the common module
+
 The `common` module also already contains a layout file (located at `app/common/views/layout.html`), which has all the basic dependecies of your project declared, such as `supersonic.js`, `steroids.js` and `cordova.js`. Because `common` is declared as a dependency to all modules by default, the layout file in there can be used to throughout the app just by removing any layout files from the module itself.
+
 </section>

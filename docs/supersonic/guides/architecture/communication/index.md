@@ -5,15 +5,18 @@ header_sub_title: Learn how to build beautiful mobile apps with the Supersonic U
 parent_id: supersonic
 section_id: communication
 ---
-<section class="docs-section" id="communication">
-# Sharing data between views in a multi-page application
+<section class="docs-section" id="sharing-data-in-a-mpa">
 
+## Sharing data between views in a multi-page application
 
 The Supersonic Multi-Page App architecture differs from Single-Page App architecture in several ways, and sharing data between various parts of your application is one part that requires different techniques. The most important thing to understand is that each `supersonic.ui.View` object you have in your layer stack (or preloaded to memory) is a separate "browser instance", with its own DOM and JavaScript runtime.
 
 This means that you cannot create "global" JavaScript variables, that singletons such as AngularJS services are not unique (since the code is loaded multiple times, once per WebView, and AngularJS maintains the service singleton separately for each ng-app instance), and so on.
 
 However, Supersonic has implemented certain ways that overcome these limitations and let you do everything a Single-Page App could do. There various techniques for cross-view communication so you can certainly find a fitting solution for all your use cases!
+
+</section>
+<section class="docs-section" id="publish-subscribe-channel">
 
 ## Publish-subscribe channel
 
@@ -40,6 +43,9 @@ supersonic.data.channel('public_announcements').subscribe (message) ->
 ```
 
 See the [API reference](/supersonic/api-reference/stable/supersonic/data/channel/)
+
+</section>
+<section class="docs-section" id="superscope">
 
 ## Superscope
 
@@ -105,6 +111,8 @@ angular
 Now the variable `message` in the both WebViews is kept in synch thanks to superscope!
 
 
+</section>
+<section class="docs-section" id="view-parameters">
 
 ## View parameters
 
@@ -132,6 +140,9 @@ supersonic.ui.views.current.whenVisible ->
 ```
 
 Now the controller can load the corresponding object form database using [supersonic data](/supersonic/api-reference/stable/supersonic/data/model/model-class/).
+
+</section>
+<section class="docs-section" id="postmessage">
 
 ## window.postMessage
 
@@ -167,6 +178,9 @@ window.addEventListener("message", messageReceived);
 ```
 
 The Supersonic usage of `postMessage` is a bit simplified: we do not use the `event.origin` and `event.source` attributes of the received event, nor do we give a `targetOrigin` for the `window.postMessage` API call. Since a Supersonic app is is "walled-off" from the general Internet inside the app package, all postMessage calls are automatically posted to every WebView in memory. It is then up to the sender and receiver to ensure that messages are handled by the correct WebViews.
+
+</section>
+<section class="docs-section" id="localstorage">
 
 ## window.localStorage
 
