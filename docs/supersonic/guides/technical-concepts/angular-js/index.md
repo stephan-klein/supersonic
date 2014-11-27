@@ -6,6 +6,7 @@ header_sub_title: Learn how Supersonic integrates with AngularJS
 parent_id: supersonic
 section_id: angular-js
 ---
+<section class="ag__docs__content">
 
 <section class="docs-section" id="angular-js">
 # Angular.JS
@@ -15,10 +16,27 @@ section_id: angular-js
 Perhaps the most famous feature of Angular is the _two-way data binding_
 that makes it extremely easy to keep view layer and data in synch. Controller functions get access to view through a special Angular service called `$scope` that can be injected to any controller:
 
-```js
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+var myController = function($scope) {
+  $scope.text = "World!";
+};
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 myController = ($scope) ->
   $scope.text = "World!"
-```
+{% endhighlight %}
+</div>
 
 A HTML view can then render the value of a variable in `$scope` by using the 'double mustache'-syntax:
 
@@ -35,7 +53,34 @@ Varibales in `$scope` can also be bound to form controls such as an input field,
 
 Despite being framework agnostic, Supersonic has been built to be fully compatible with Angular JS. In particular, this means that within all the callback functions of various Supersonic API services, one can directly update the application `$scope`:
 
-```js
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+var myController = function($scope, supersonic) {
+  var labels = {
+    buttonLabels: ["Yes", "No"]
+  };
+
+  supersonic.ui.dialog.confirm("Like Angular?", labels).then( function(answer) {
+    if ( answer===0 ) {
+      $scope.answer = "Yes";
+    }
+    else {
+      $scope.answer = "No";
+    }
+  });
+};
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 myController = ($scope, supersonic) ->
   labels =
     buttonLabels: ["Yes", "No"]
@@ -44,8 +89,9 @@ myController = ($scope, supersonic) ->
     if ( answer==0 )
       $scope.answer = "Yes"
     else
-      $scope.answer = "No"
-```
+      $scope.answer = "No"   
+{% endhighlight %}
+</div>
 
 In a non-angularized environment one should explicitly ask Angular to run the `$digest`-loop by calling `$scope.$apply()` in order to get model updates propagated to the whole app.
 
@@ -56,5 +102,7 @@ Learn more about Angular:
  - [Angular tutorial](https://docs.angularjs.org/tutorial)
  - [learn-angular.org](http://www.learn-angular.org/)
  - [Egghead.io](https://egghead.io/technologies/angularjs/)
+
+</section>
 
 </section>
