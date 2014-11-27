@@ -23,6 +23,6 @@ To effectively use the Supersonic Multi-Page App architecture, you need to be ab
 
 </section>
 
-[architecture]: /supersonic/guides/architecture/architecture
+[architecture]: /supersonic/guides/architecture/app-architecture/
 
 [communication]: /supersonic/guides/architecture/communication
