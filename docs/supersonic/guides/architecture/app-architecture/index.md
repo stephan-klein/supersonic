@@ -161,5 +161,3 @@ The `<%= ... %>` blocks are used to automatically pair each view with the corres
 The `common` module also already contains a layout file (located at `app/common/views/layout.html`), which has all the basic dependecies of your project declared, such as `supersonic.js`, `steroids.js` and `cordova.js`. Because `common` is declared as a dependency to all modules by default, the layout file in there can be used to throughout the app just by removing any layout files from the module itself.
 
 </section>
-
-</section>
