@@ -11,9 +11,9 @@ parent_id: tooling
 
 The Steroids Connect Screen is your one-stop shop for app management and debugging. It opens up automatically in your default web browser when you start the Steroids Development Server by running `steroids connect` in your project folder.
 
-You can also type `c` or `connect` in the Development Server console to open the Connect Screen, or simply navigate your browser to [http://connect.appgyver.com](http://connect.appgyver.com). Finally, running `steroids connect --no-connect-screen` will cause Steroids to not open the Connect Screen automatically.
+You can also type `c` or `conn` in the Development Server console to open the Connect Screen. Finally, running `steroids connect --no-connect` will cause Steroids to not open the Connect Screen automatically.
 
-The Connect Screen has five main views: Preview, Logs, Documentation, Build Settings and Data, which are accessible via the menu bar at the top of the page. Each of these views has it's own special purpose, let's take a look at a couple of them.
+The Connect Screen has five main views: Preview, Logs, Documentation, Cloud and Data, which are accessible via the menu bar at the top of the page. Each of these views has it's own special purpose, let's take a look at a couple of them.
 
 ## Preview
 
@@ -33,9 +33,9 @@ See the [Logging guide][logging-guide] for more information.
 
 The Documentation screen provides quick links to our documentation (that's where you're now!), including API reference, guides and tutorials.
 
-## Cloud Settings
+## Cloud
 
-The Cloud Settings screen will let you deploy your app to the AppGyver Cloud. After you have deployed your app, you will have access to [Supersonic Data][data-guide], [Build Settings][build-settings-guide] to create standalone builds, QR code sharing and more.
+The Cloud screen will let you deploy your app to the AppGyver Cloud. After you have deployed your app, you will have access to [Supersonic Data][data-guide], [Build Settings][build-settings-guide] to create standalone builds, QR code sharing and more.
 
 Clicking the *Deploy to Cloud* button will deploy your app to the cloud, and create a new file at `config/cloud.json`. Read more in the [Deploying to Cloud][deploying-to-cloud-guide] guide.
 
