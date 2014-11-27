@@ -5,6 +5,7 @@ header_sub_title: Learn how Supersonic handles navigation between different view
 parent_id: supersonic
 section_id: navigating-between-views
 ---
+<section class="ag__docs__content">
 
 <section class="docs-section" id="navigating-between-views">
 # Navigation
@@ -23,9 +24,27 @@ There are separate navigation elements for basic, modal and drawer views.
 
 You can also just use the Supersonic APIs to create views and manipulate the view stack. To create and push a WebView into view, you would do the following:
 
-```javascript
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
 var view = new supersonic.ui.View("bananas#show");
 supersonic.ui.layers.push(view);
-```
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
+view = new supersonic.ui.View "bananas#show"
+supersonic.ui.layers.push view  
+{% endhighlight %}
+</div>
+
+</section>
 
 </section>
