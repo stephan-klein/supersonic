@@ -37,6 +37,7 @@ Select the orientation you want to use. See the [official documentation](http://
 The [supersonic.ui.screen.setAllowedRotations](#setallowedrotations) API call allows you to override the default allowed device orientations, affecting all app views. The exception is modals, for which you have to set the rotations separately.
 
 </section>
+<hr>
 <section class="docs-section" id="setallowedrotations">
 
 {% assign method = site.data.supersonic.ui.screen.setAllowedRotations %}
