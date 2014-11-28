@@ -5,6 +5,7 @@ header_sub_title: Learn how to style native UI components with CSS.
 parent_id: supersonic
 section_id: styling-native-components
 ---
+<section class="ag__docs__content">
 
 <section class="docs-section" id="overview">
 
@@ -32,9 +33,24 @@ For more fine-tuned control, you can define style classes and id's for all nativ
 
 or use the Supersonic API, e.g.
 
-```coffeescript
-supersonic.ui.navigationBar.setStyleClass("awesome-nav-bar")
-```
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+supersonic.ui.navigationBar.setStyleClass("awesome-nav-bar");
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
+supersonic.ui.navigationBar.setStyleClass "awesome-nav-bar"   
+{% endhighlight %}
+</div>
 
 For a more thorough look at the Supersonic styling APIs, head over to the docs:
 
@@ -87,5 +103,7 @@ In the example above, adding this snippet to `default.css` would send parse erro
 [navigation-bar-api]:/supersonic/api-reference/stable/supersonic/ui/navigationbar/
 [tab-bar-api]:/supersonic/api-reference/stable/supersonic/ui/tabs/
 [navigation-bar-button-api]:/supersonic/api-reference/stable/supersonic/ui/navigationbarbutton-class/
+
+</section>
 
 </section>
