@@ -21,10 +21,11 @@
       }
     } catch(e) {}
 
-    // If content is smaller than menu, force it larger
+    // If content is smaller than menu, make menu not flaotable
     try {
       if ($(".aside-menu").outerHeight() >= $(".ag__docs__content").outerHeight()) {
-        $(".ag__docs__content").height($(".aside-menu").outerHeight())
+        $(".docked-menu").removeClass("docked-menu");
+        //$(".ag__docs__content").height($(".aside-menu").outerHeight())
       }
     } catch(e) {}
 

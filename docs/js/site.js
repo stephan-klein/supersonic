@@ -95,8 +95,12 @@ var ionicSite = (function(){
 
       function docScroll() {
         var win = $(window);
+        var footer = $(".ag__docs__footer");
         var scrollTop = win.scrollTop();
         var winWidth = win.width();
+        var winHeight = win.height();
+        var footerHeight = footer.height();
+        var footerTop = footer.offset().top;
         if(scrollTop + menuTopPadding > fixedMenuTop && winWidth >= 768) {
           // middle of the page
           if(!fixedMenu.hasClass("fixed-menu")) {
@@ -107,6 +111,20 @@ var ionicSite = (function(){
               })
               .addClass("fixed-menu");
           }
+          /* */
+          var footerInSight = footerTop - winHeight - scrollTop;
+          if (footerInSight < 0) {
+            fixedMenu
+              .css({
+                top: (20 + footerInSight) + "px"
+              });
+          } else {
+            fixedMenu
+              .css({
+                top: "20px"
+              });
+          }
+          /* */
         } else {
           // top of page
           if(fixedMenu.hasClass("fixed-menu")) {
