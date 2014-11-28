@@ -6,7 +6,6 @@ subsection_id: edge-versions
 ---
 <section class="docs-section" id="edge-versions">
 # Edge versions
-Note: if you haven't already, read the Overview first!
 
 It takes a while for us to go through the full QA testing, documentation and Scanner App Store/Google Play submission/approval process for a new **stable** wrapper version (especially on iOS, where the Apple review process takes its time). Thus, there are often useful features and bugfixes that are already in our codebase, but not yet available as a **stable** release.
 
