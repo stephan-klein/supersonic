@@ -6,6 +6,8 @@ section_id: debugging
 subsection_id: logging
 parent_id: tooling
 ---
+<section class="ag__docs__content">
+
 <section class="docs-section" id="logging">
 # Logging
 
@@ -35,23 +37,61 @@ Clearing log messages will remove all the currently visible log messages. Note t
 
 The `supersonic.logger` API provides functions to log what's going on in your app. All four log levels are available. The `supersonic.logger.log` shorthand logs an `info` level message.
 
-```javascript
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
 // These are equivalent
-supersonic.logger.log("Something semi-interesting just happened.")
-supersonic.logger.info("Something semi-interesting just happened.")
+supersonic.logger.log("Something semi-interesting just happened.");
+supersonic.logger.info("Something semi-interesting just happened.");
 
-supersonic.logger.debug("Doing something pretty detailed here.")
+supersonic.logger.debug("Doing something pretty detailed here.");
 
-supersonic.logger.warn("Form was submitted with null value.")
+supersonic.logger.warn("Form was submitted with null value.");
 
-supersonic.logger.error("Uh-oh, bad stuff happened!")
-```
+supersonic.logger.error("Uh-oh, bad stuff happened!");
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
+# These are equivalent
+supersonic.logger.log "Something semi-interesting just happened."
+supersonic.logger.info "Something semi-interesting just happened."
+
+supersonic.logger.debug "Doing something pretty detailed here."
+
+supersonic.logger.warn "Form was submitted with null value."
+
+supersonic.logger.error "Uh-oh, bad stuff happened!"
+{% endhighlight %}
+</div>
 
 You can also log JavaScript objects directly:
 
-```javascript
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
 supersonic.logger.log(object);
-```
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
+supersonic.logger.log object
+{% endhighlight %}
+</div>
 
 Be liberal with your use of `supersonic.logger` – it's a great tool for debugging!
 
@@ -73,9 +113,24 @@ Supersonic API calls and Web Components automatically log a bunch of stuff when 
 
 Supersonic logs JavaScript errors automatically. Thus, if you have something like
 
-```javascript
-throw new Error("Oh no, there's a bug in my app!")
-```
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+throw new Error("Oh no, there's a bug in my app!");
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
+throw new Error "Oh no, there's a bug in my app!"
+{% endhighlight %}
+</div>
 
 in your app, the result will be a corresponding `error`-level log line.
 
@@ -84,5 +139,7 @@ in your app, the result will be a corresponding `error`-level log line.
 ### Using `console.log`
 
 You can still use `console.log`, but since it's only available if you've opened up a debug Web Inspector, `supersonic.logger` is preferred.
+</section>
+
 </section>
 [connect-screen-guide]: /tooling/cli/connect-screen/
