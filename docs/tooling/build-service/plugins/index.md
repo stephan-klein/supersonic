@@ -7,7 +7,7 @@ parent_id: tooling
 ---
 
 <section class="docs-section">
-#Overview
+#Plugins
 
 Supersonic is compatible with PhoneGap plugins. This allows you to extend your app's functionality beyond what would regularly be available for a browser instance. Supersonic also comes pre-bundled with some core plugins that are listed under [default plugins][default-plugins].
 </section>

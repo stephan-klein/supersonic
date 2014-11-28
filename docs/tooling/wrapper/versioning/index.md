@@ -5,7 +5,7 @@ section_id: versioning
 ---
 
 <section class="docs-section" id="overview">
-# Overview
+# Versioning
 
 The AppGyver wrapper comes in two different version types: stable and edge. Stable versions are larger releases and are always accompanied by a new AppGyver Scanner app available in the App Store or Google Play. A stable version always goes through extensive quality assurance before it is released.
 

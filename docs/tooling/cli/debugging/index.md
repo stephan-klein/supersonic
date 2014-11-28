@@ -7,7 +7,7 @@ parent_id: tooling
 ---
 
 <section class="docs-section" id="debugging">
-# Overview
+# Debugging
 
 Debugging is an itegral part of app development. Besides the logs in the Connect screen, Appgyver provides a variety of platform-specific debugging options for your convenience.
 </section>
