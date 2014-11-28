@@ -69,7 +69,7 @@ You need a custom Ad Hoc or Scanner build to use custom URL schemes. The custom 
 
 would register your app for both `myawesomeapp://` and `myawesomeapp-dev://` URL schemes.
 </section>
-
+<hr>
 <section class="docs-section" id="getlaunchurl">
 {% assign method = site.data.supersonic.app.getLaunchURL %}
 {% include api_method.md method=method %}

@@ -61,7 +61,7 @@ supersonic.app.openURL "sms:1-408-555-1212"
 </div>
 
 </section>
-
+<hr>
 <section class="docs-section" id="openurl">
 {% assign method = site.data.supersonic.app.openURL %}
 {% include api_method.md method=method %}
