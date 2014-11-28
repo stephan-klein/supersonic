@@ -211,7 +211,7 @@ Beer.all().whenChanged (beers) ->
 
 Any time there are changes in data, the registered callback function is called. So with Angular's databinding and magical touch of Supersonic data one can easily build applications where the data of _all_ the users is kept in sync all the time!
 
-See more form [Steroids.data API](/api-reference/stable/supersonic/data/model/model-class/).
+See more from the [supersonic.data API](/api-reference/stable/supersonic/data/model/model-class/).
 
 </section>
 <section class="docs-section" id="model-instances">

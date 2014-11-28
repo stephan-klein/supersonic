@@ -52,5 +52,5 @@ You can even debug JavaScript by inserting breakpoints: open a `.js` file in the
 When using [LiveReload][livereload-guide], the Web Inspector windows are kept open when the app refreshes. However, if you disable LiveReload with the `--no-livereload` flag or initiate a full refresh by running `r` or `refresh` in the Steroids Developer Sever Console, all open Safari Web Inspector windows are unfortunately closed. You need to manually re-open them after the app has reloaded.
 </section>
 [debug-builds-guide]: /tooling/build-service/build-settings/building-a-debug-build/
-[livereload-guide]: /tooling/cli/tooling-cli/local-development-flow/
+[livereload-guide]: /tooling/cli/steroids-cli/#reloading-with-livereload
 [logging-guide]: /tooling/cli/debugging/logging/

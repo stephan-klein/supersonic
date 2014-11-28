@@ -83,7 +83,7 @@ You can initiate a full reload manually by pressing enter in the Steroids Develo
 By default, the Steroids Development Server triggers a full reload every time your project files change. However, as noted above, this is only really required when the project's config files are changed. When you change regular project HTML, CSS and JS files, your app can refresh itself automatically. To have your app update instantly without any loading screens, you can use the `--livereload` switch.
 
 ```bash
-devroids connect --livereload
+steroids connect --livereload
 ```
 
 This is caused by a special [LiveReload](http://livereload.com/) implementation in the AppGyver Scanner. In short, when a reload is requested, the Steroids Development Server sends a message to the Scanner app, which then instructs each WebView to reload itself.

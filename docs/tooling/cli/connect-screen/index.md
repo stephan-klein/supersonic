@@ -31,7 +31,7 @@ See the [Logging guide][logging-guide] for more information.
 
 ## Documentation
 
-The Documentation screen provides quick links to our documentation (that's where you're now!), including API reference, guides and tutorials.
+The Documentation screen provides quick links to our documentation, including API reference, guides and tutorials.
 
 ## Cloud
 
