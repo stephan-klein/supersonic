@@ -1,34 +1,24 @@
-{% assign parent_id = page.parent_id %}
 {% for section in page.sections %}
-{% if section.id %}
-  {% assign section_id = section.id %}
-{% else %}
-  {% assign section_id = section.name | slugify %}
-{% endif %}
+{% assign section_id = section.name | slugify %}
 <ul class="nav left-menu ag__docs__left-menu {% if page.section_id == section_id %}active-menu{% endif %}">
   <li class="menu-title">
-    <a href="/{{parent_id}}/{{include.tab_name}}{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
+    <a href="/tooling/{{include.tab_name}}{% unless section_id == 'overview' %}/{{section_id}}{% endunless %}">{{section.name}}</a>
     {% if page.section_id == section_id %}
-    <li class="menu-section {% if page.subsection_id == 'overview' %}active{% endif %}">
-      <a href="/{{parent_id}}/{{include.tab_name}}/{{section_id}}" class="api-section">Overview</a>
-    </li>
     {% for subsection in section.subsections %}
-    {% if subsection.id %}
-      {% assign subsection_id = subsection.id %}
-    {% else %}
-      {% assign subsection_id = subsection.name | slugify %}
-    {% endif %}
+    {% assign subsection_id = subsection.name | slugify %}
     <li class="menu-section {% if page.subsection_id == subsection_id %}active{% endif %}">
-      <a href="/{{parent_id}}/{{include.tab_name}}/{{section_id}}/{{subsection_id}}" class="api-section">
+      <a href="/tooling/{{include.tab_name}}/{{section_id}}/{{subsection_id}}" class="api-section">
         {{subsection.name}}
       </a>
       {% if page.subsection_id == subsection_id %}
       <ul>
         {% for topic in page.topics %}
         <li>
-          <a href="/{{parent_id}}/{{include.tab_name}}/{{section_id}}/#{{topic.name | slugify}}">
+          <a href="/tooling/{{include.tab_name}}/{{section_id}}/#{{topic.name | slugify}}">
             {% if topic.method %}
               <code>{{topic.name}}()</code>
+            {% elsif topic.component %}
+              <code>&lt;{{topic.name}}&gt;</code>
             {% else %}
               {{topic.name}}
             {% endif %}
@@ -37,6 +27,22 @@
         {% endfor %}
       </ul>
       {% endif %}
+    </li>
+    {% endfor %}
+    <!--
+    Loop through separately to create anchor menu for long content pages without subsections, e.g. architecture/communication
+    -->
+    {% for topic in section.topics %}
+    <li>
+      <a href="/tooling/{{include.tab_name}}/{{section_id}}/#{{topic.name | slugify}}">
+        {% if topic.method %}
+          <code>{{topic.name}}()</code>
+        {% elsif topic.component %}
+          <code>&lt;{{topic.name}}&gt;</code>
+        {% else %}
+          {{topic.name}}
+        {% endif %}
+      </a>
     </li>
     {% endfor %}
     {% endif %}
