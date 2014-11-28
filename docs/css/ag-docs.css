@@ -594,3 +594,12 @@ td.table_property {
 .ag__docs__footer .btn-mailinglist * {
   color: #828791;
 }
+
+/***************************************************
+ * DOCS IMAGES
+ **************************************************/
+
+.tutorial-image {
+  max-width:75%;
+  border: 1px solid #7f8c8d;
+}
