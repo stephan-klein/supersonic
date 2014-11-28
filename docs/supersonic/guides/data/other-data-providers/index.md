@@ -6,9 +6,14 @@ parent_id: supersonic
 section_id: other-data-providers
 ---
 
+<section class="docs-section" id="other-data-providers">
+
 # Other providers
 
 Besides the AppGyver Database, Supersonic provides an easy way to integrate application to various backends such as [built.io](https://www.built.io/), [Parse](https://www.parse.com/), [Kimono](https://www.kimonolabs.com/) or any custom REST backend.
+
+</section>
+<section class="docs-section" id="built-io-backend">
 
 ## built.io backend
 
@@ -36,6 +41,9 @@ When a resource is added, the fields defined for the data model are automaticall
 
 You are then ready to use the data! Please see from [setting up database guide](/supersonic/guides/data/setting-up-appgyver-database/) how to access data from data browser and how to scaffold data accessing application code, and [accessing data from device](/supersonic/guides/data/accessing-data-from-device/) for overview of Supersonic data JS library.
 
+</section>
+<section class="docs-section" id="parse-backend">
+
 ## Parse backend
 
 Usage of Parse is as easy as the use of built.io. In order to configure Parse, you must configure an backend through Parse web site, and get the id and the api key of your app:
@@ -47,6 +55,9 @@ Next step is to select Parse from the list of avaliable providers, and to feed t
 <img class="tutorial-image" src="/img/guides/data_parse_provider.png">
 
 From this point on, configuring the resources proceeds simillarly as in the case of the rest of the providers.
+
+</section>
+<section class="docs-section" id="custom-rest-backend">
 
 ## Custom REST backend
 
@@ -95,6 +106,9 @@ With there definitions in place we are ready to go. We can e.g. browse the data 
 
 Refer [setting up database](/supersonic/guides/data/setting-up-appgyver-database/) and [accessing data from device](/supersonic/guides/data/accessing-data-from-device/) for more information of data usage.
 
+</section>
+<section class="docs-section" id="kimono-labs-backend">
+
 ## Kimono labs backend
 
 [Kimono](https://www.kimonolabs.com/) is a service that makes it super simple to turn any website to an API.
@@ -127,3 +141,4 @@ We still need to customize the access by specifying the apikey and response the 
 
 Now we are all set! Note that the only operation that a Kimono API support is reading the whole collection, so individual items in the collection do not have own urls.
 
+</section>

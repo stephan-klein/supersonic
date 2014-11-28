@@ -4,21 +4,28 @@ header_sub_title: APIs having to do with the properties and hardware of your mob
 parent_id: supersonic
 section_id: setting-up-appgyver-database
 ---
-<section class="docs-section" id="data-providers">
-# AppGyver Sandbox
+<section class="docs-section" id="setting-up-appgyver-database">
 
-AppGyver's Sandbox Database, is a simple database that's meant to be used to rapidly bootstrap your app development. It's not meant for production use, but to save you the hassle of setting up a data backend when you start developing your app.
+# AppGyver Database
 
-## Deloying application to cloud and initializing the database
+AppGyver's Sandbox Database is a simple database that's meant to be used to rapidly bootstrap your app development. It's not intended for production use, but to save you the hassle of setting up a data backend when you start developing your app.
 
-Steroids Sandbox database is initialized by pressing "Initialize"
-from the "Data" tab of Connect screen. If application is not yet deployed to cloud a deployment is also made at the database initialization.
+</section>
+<section class="docs-section" id="initialising-the-database">
+
+## Initialising the database
+
+Steroids Sandbox database is initialised by pressing "Initialise"
+from the "Data" tab of Connect screen. If application is not yet deployed to cloud a deployment is also made at the database initialisation.
 
 <img class="tutorial-image" src="/img/guides/data_init.png">
 
+</section>
+<section class="docs-section" id="defining-resources">
+
 ## Defining resources
 
-After initialization you will see AppGyver Sandbox Database as a configured provider.
+After initialisation you will see AppGyver Sandbox Database as a configured provider.
 
 <img class="tutorial-image" src="/img/guides/data_providers.png">
 
@@ -34,15 +41,23 @@ After fields are defined, "save changes to data model" should be pressed in orde
 
 The data definition is saved in the file `config/cloud-resources.raml` in the Supersonic project. The file will get updated as resources are added or edited, and is consumed by the Supersonic Data JS library for use in your app.
 
+</section>
+<section class="docs-section" id="editing-resources">
+
 ## Editing and deleting resources
 
 Defined resources can be edited at any time. The name of the resource can be changed by clicking "Manage resource". New fields can be added and existing removed. In case there are changes in field definitions, the "save changes to data model" should be pressed. A resource can also be removed by pressing "Remove resource".
+
+<section class="docs-section" id="accessing-data-with-data-browser">
 
 ## Accessing data with Data browser
 
 The documents in the defined resource can be created, seen, edited amd deleted with "Data browser", where one can navigate from top of the "Data" tab:
 
 <img class="tutorial-image" src="/img/guides/data_browser.png">
+
+</section>
+<section class="docs-section" id="creating-an-app-scaffold">
 
 ## Creating an Application Scaffold
 

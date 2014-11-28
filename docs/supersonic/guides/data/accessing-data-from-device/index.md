@@ -6,11 +6,14 @@ section_id: accessing-data-from-device
 parent_id: supersonic
 ---
 <section class="ag__docs__content">
-<section class="docs-section">
+<section class="docs-section" id="accessing-data-from-device">
 
 # Accessing data from device
 
 The [supersonic.data](api-reference/stable/supersonic/data/) namespace includes APIs that work with _any_ cloud data providers [configured](/data-management/setting-up-appgyver-database/) for the Supersonic application. They provide efficient ways for manipulating data – adding, updating and deleting records.
+
+</section>
+<section class="docs-section" id="supersonic-data">
 
 ## supersonic.data
 
@@ -35,9 +38,12 @@ var Beer = supersonic.data.model('Beer');
 
 <div data-role="example-code" data-type="coffee" style="display: none;">
 {% highlight coffeescript %}
-Beer = supersonic.data.model('Beer') 
+Beer = supersonic.data.model('Beer')
 {% endhighlight %}
 </div>
+
+</section>
+<section class="docs-section" id="getting-data-from-the-server">
 
 ## Getting data from the server
 
@@ -69,7 +75,7 @@ Beer.findAll().then( function(allBeers) {
 Beer = supersonic.data.model('Beer')
 
 Beer.findAll().then (allBeers) ->
-  # access here the collection allBeers 
+  # access here the collection allBeers
 {% endhighlight %}
 </div>
 
@@ -100,11 +106,14 @@ Beer.findAll().then (allBeers) ->
   console.log "the first was #{allBeers[0].name}"
 
   for beer in allBeers
-    console.log "#{beer.name} by #{beer.brewery} brewed since #{beer.brewed_since}" 
+    console.log "#{beer.name} by #{beer.brewery} brewed since #{beer.brewed_since}"
 {% endhighlight %}
 </div>
 
 Objects in the collection are instances of the class [supersonic.data.Model] (/api-reference/stable/supersonic/data/model/model-class/).
+
+</section>
+<section class="docs-section" id="limiting-the-search">
 
 ## Limiting the search
 
@@ -133,7 +142,7 @@ Beer.findAll({skip10, limit:10}).then(function(beers) {});
 Beer.findAll({limit:10}).then (beers) ->
 
 # second page
-Beer.findAll({skip10, limit:10}).then (beers) -> 
+Beer.findAll({skip10, limit:10}).then (beers) ->
 {% endhighlight %}
 </div>
 
@@ -166,6 +175,8 @@ Beer.findAll({query: JSON.stringify(query)}).then (beers) ->
 
 Note that the value of the query has to be a stringified json.
 
+</section>
+<section class="docs-section" id="three-way-data-binding">
 
 ## Three-way Data Binding
 
@@ -194,7 +205,7 @@ Beer.all().whenChanged( function(beers) {
 Beer.all().whenChanged (beers) ->
   console.log "the state of the beers has changed, current "
   for beer in beers
-    console.log "#{beer.name} by #{beer.brewery} brewed since #{beer.brewed_since}" 
+    console.log "#{beer.name} by #{beer.brewery} brewed since #{beer.brewed_since}"
 {% endhighlight %}
 </div>
 
@@ -202,7 +213,10 @@ Any time there are changes in data, the registered callback function is called. 
 
 See more form [Steroids.data API](/api-reference/stable/supersonic/data/model/model-class/).
 
-# Model instances
+</section>
+<section class="docs-section" id="model-instances">
+
+## Model instances
 
 Method `find` in the Model class can be used to get a single object based on the identifier field:
 
@@ -224,7 +238,7 @@ Beer.find("123").then( function(beer) {
 <div data-role="example-code" data-type="coffee" style="display: none;">
 {% highlight coffeescript %}
 Beer.find("123").then (beer) ->
-  console.log "beer with id 123 is #{beer.name} by #{beer.brewery}" 
+  console.log "beer with id 123 is #{beer.name} by #{beer.brewery}"
 {% endhighlight %}
 </div>
 
@@ -255,7 +269,7 @@ Beer.find("123").then( function(beer) {
 Beer.find("123").then (beer) ->
   beer.brewery = "Sierra Nevada Brewing"
   beer.save().then () ->
-    console.log "beer saved" 
+    console.log "beer saved"
 {% endhighlight %}
 </div>
 
@@ -282,11 +296,11 @@ Beer.find("555").then( funtion(beer) {
 {% highlight coffeescript %}
 Beer.find("555").then (beer) ->
   beer.delete().then () ->
-    console.log "a crappy beer was deleted" 
+    console.log "a crappy beer was deleted"
 {% endhighlight %}
 </div>
 
-## Creating new model instances
+### Creating new model instances
 
 Create and save new objects to database is easy:
 
@@ -307,7 +321,7 @@ var object = {
 
 var beer = new Beer(object);
 beer.save().then( function() {
-  console.log("beer created!"); 
+  console.log("beer created!");
 });
 {% endhighlight %}
 </div>
