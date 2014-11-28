@@ -6,6 +6,8 @@ header_sub_title: Learn how Supersonic utilizes promises
 parent_id: supersonic
 section_id: promises
 ---
+<section class="ag__docs__content">
+
 <section class="docs-section" id="promises">
 # Promises
 
@@ -17,7 +19,35 @@ Most of the Supersonic core API's return a promise. Callback functions can be ad
 
 In a simple scenario, use of an API that returns promise does not differ much from usage of a API call that takes a callback as parameter. In the following example Supersonic [dialog][dialog-api] is opened. Dialog returns a promise, that resolves with the user inputed value:
 
-```js
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+var myController = function($scope, supersonic) {
+  var labels = {
+    buttonLabels: ["Yes", "No"]
+  };
+
+  supersonic.ui.dialog.confirm("Like Angular?", labels)
+  .then( function(answer) {
+    if ( answer===0 ) {
+      $scope.answer = "Yes";
+    }
+    else {
+      $scope.answer = "No";
+    }
+  });
+};
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 myController = ($scope, supersonic) ->
   labels =
     buttonLabels: ["Yes", "No"]
@@ -28,13 +58,44 @@ myController = ($scope, supersonic) ->
       $scope.answer = "Yes"
     else
       $scope.answer = "No"
-```
+{% endhighlight %}
+</div>
 
 In the following we have a more complicated example, where the program logic calls in succession four Supersonic functions (two calls to dialog and two to [load data records from backend][data-model-api]), each of which return a promise.
 
 Instead of nesting callbacks, the use of promises makes it possible to _chain_ the callbacks so that their execution appears to be sequential. If any of the chained promises is rejected (i.e. some of the events is unsuccessful), the error is propagated to the error handler that is registered to the last promise:
 
-```js
+<div class="clearfix">
+  <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
+    <button type="button" data-role="type-switch" data-type="js" class="btn btn-primary active">JavaScript</button>
+    <button type="button" data-role="type-switch" data-type="coffee" class="btn btn-default">CoffeeScript</button>
+  </div>
+</div>
+
+<div data-role="example-code" data-type="js">
+{% highlight javascript %}
+var myController = function($scope, supersonic) {
+  var Task = supersonic.data.model('task');
+  var User = supersonic.data.model('user');
+
+  supersonic.ui.dialog.prompt("give a task number")
+  .then( function(input) { 
+    Task.find(parseInt(input));
+  }).then( function(task) {
+    User.find(task.assignee_id);
+  }).then( function(user) {
+    supersonic.ui.dialog.alert("Task was assigned to #{user.name}");
+  }).then( function() {
+    supersonic.logger.log("completed");
+  }, function(error) {
+    supersonic.logger.error("something wrong...");
+  });
+};
+{% endhighlight %}
+</div>
+
+<div data-role="example-code" data-type="coffee" style="display: none;">
+{% highlight coffeescript %}
 myController = ($scope, supersonic) ->
   Task = supersonic.data.model('task')
   User = supersonic.data.model('user')
@@ -48,9 +109,9 @@ myController = ($scope, supersonic) ->
     (user) -> supersonic.ui.dialog.alert "Task was assigned to #{user.name}"
   .then
     () -> supersonic.logger.log "completed",
-    (error) -> supersonic.logger.error "something wrong..."
-
-```
+    (error) -> supersonic.logger.error "something wrong..."  
+{% endhighlight %}
+</div>
 
 With APIs using normal callbacks this code would have lead to extremely complicated structure with nested callbacks and error handling code that would have to been replicated to each of the callback functions.
 
@@ -58,6 +119,8 @@ With APIs using normal callbacks this code would have lead to extremely complica
 
  - [https://docs.angularjs.org/api/ng/service/$q](https://docs.angularjs.org/api/ng/service/$q)
  - [https://github.com/kriskowal/q](https://github.com/kriskowal/q)
+
+</section>
 
 </section>
 
