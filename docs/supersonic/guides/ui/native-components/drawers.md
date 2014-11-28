@@ -58,7 +58,7 @@ The `showOnAppLoad` property determines whether your drawer should be visible on
 
 Supersonic provides API access to drawers at app runtime, so you can programmatically [create](#init), [open](#open) and [close](#close) drawers, as well as [updating or replacing](#updateOptions) them entirely.
 </section>
-
+<hr>
 <section class="docs-section" id="init">
 {% assign method = site.data.supersonic.ui.drawers.init %}
 {% include api_method.md method=method %}

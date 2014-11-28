@@ -128,6 +128,7 @@ Note that there are two namespaces:
   - `supersonic.ui.views.current.navigationBar` that deals with just the current view's navigation bar, i.e. its title and buttons
 
 </section>
+<hr>
 <section class="docs-section" id="show">
 
 {% assign method = site.data.supersonic.ui.navigationBar.show %}
