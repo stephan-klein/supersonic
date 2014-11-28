@@ -11,12 +11,12 @@ section_id: app-architecture
 
 ## Overview
 
-In this section we will take a closer look at how your application is structured. We'll have a look on
+In this section we will take a closer look at how your application is structured. We'll have a look at
 
-- The basic layout of a Supersonic project
-- How to use template layouts for your HTML content
-- How to use the `common` module as the basis for all your Supersonic projects
-- How the Steroids² CLI builds your project
+- the basic layout of a Supersonic project
+- how to use template layouts for your HTML content
+- how to use the `common` module as the basis for all your Supersonic projects
+- how the Steroids² CLI builds your project
 
 You will also be introduced to some rather large concepts, such as Model-View-Controller Architecture. While we will step through the very basics of these concepts, it is recommended you go through the third-party content we link to properly familiarise yourself with them.
 
