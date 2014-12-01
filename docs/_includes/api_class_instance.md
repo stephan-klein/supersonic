@@ -1,6 +1,6 @@
 {% assign method = include.method %}
 {% assign instance_name = method.name | split: '-' %}
-## API Reference: {{method.namespace}}.{{instance_name.first}} instance object
+## API Reference: {{instance_name.first}}
 
 {{method.description}}
 

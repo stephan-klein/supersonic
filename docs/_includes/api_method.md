@@ -1,13 +1,8 @@
 {% assign method = include.method %}
-<h2>API Reference: {{method.namespace}}.{{method.name}}()</h2>
+<h2>API Reference: {% unless include.instance_method %}{{method.namespace}}.{% endunless %}{{method.name}}()</h2>
+
 
 {{method.description}}
-
-
-
-
-
-
 
 {% if method.exampleCoffeeScript || method.exampleJavaScript %}
 
@@ -59,11 +54,13 @@
 
 {% if method.params.size > 0 %}
 ### Parameters
+
 {% if method.type %}
 {% highlight coffeescript %}
 {{method.type}}
 {% endhighlight %}
 {% endif %}
+
 <table class="table" style="margin:0;">
   <thead>
     <tr>
@@ -132,12 +129,15 @@
 
 {% if method.returnsDescription %}
 <h4>Returns</h4>
-{{ method.returnsDescription | markdownify }}
+{% if method.params.size == 0 %}
 {% if method.type %}
 {% highlight coffeescript %}
 {{method.type}}
 {% endhighlight %}
 {% endif %}
+{% endif %}
+
+{{ method.returnsDescription | markdownify }}
 
 {% if method.returns.size > 0 %}
 
