@@ -32,14 +32,14 @@ To deploy your app to the AppGyver Cloud the easiest way to do so is to use the 
 
 Ensure you're connected to the Internet and click on "Deploy to cloud". This will cause Steroids CLI to deploy your app to the cloud. Wait for it to finish, after which the screen will update to show the app id of the deployed build and a link to the Cloud Share page, from where you can share your app with others.
 
-<img src="http://appgyver-academy-assets.s3.amazonaws.com/images/connect/Steroids_connect_predeploy.png" alt="Steroids connect screen">
+<img src="/img/tutorial/Steroids_connect_predeploy.png" alt="Steroids connect screen" width="100%">
 </section>
 
 <section class="docs-section" id="sharing-your-progress">
 ## Sharing your progress
 To share your app with others, you need a Cloud QR code. It is generated when you deploy your app to the AppGyver Cloud. To access it, open the "Open cloud share page" link in the Steroids Connect screen.
 
-<img src="http://appgyver-academy-assets.s3.amazonaws.com/images/connect/Steroids_connect_post_deploy.png" alt="Steroids connect screen">
+<img src="/img/tutorial/Steroids_connect_post_deploy.png" alt="Steroids connect screen" width="100%">
 
 You can then share your app with others by copy-pasting the link to that share page. Others can then use their AppGyver Scanners or the Simulator embedded into the page to preview your app.
 </section>
