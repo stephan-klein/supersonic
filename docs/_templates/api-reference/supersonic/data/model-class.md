@@ -6,13 +6,13 @@ section_id: data
 subsection_id: model-class
 ---
 
-<h1>Class Description</h1>
+<h1>Model Class Description</h1>
 <hr>
 
 {% assign class = site.data.supersonic.data.model.Model-class %}
 {% include api_class.md class=class %}
 
-<h2>Class Methods</h2>
+<h2>Model Class Methods</h2>
 
 The following methods are properties of the Model class.
 
@@ -27,7 +27,7 @@ The following methods are properties of the Model class.
 
 <br><br>
 <section id="model-instance">
-<h1>Class Instance Description</h1>
+<h1>Model Class Instance Description</h1>
 <hr>
 
 {% assign method = site.data.supersonic.data.model.Model-instance %}
