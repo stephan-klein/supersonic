@@ -43,7 +43,7 @@ All the child elements of the navigation-bar will inherit those rules, unless th
 
 ## Child selectors
 <section class="docs-section" id="navigation-bar-title">
-### Styling the navigation-bar title
+### Styling the navigation bar title
 
 The navigation bar title has it's own selector: `navigation-bar title`. This will affect the navigation bar title text. To change the basic title CSS, use the following:
 
@@ -57,7 +57,11 @@ navigation-bar title {
 </section>
 
 <section class="docs-section" id="navigation-bar-back-button">
-### Styling the navigation-bar back button
+### Styling the navigation bar back button
+
+<p class="advanced-panel">
+<strong>Note:</strong> styling the back button is currently not available on iOS. We are working to fix this and will be releasing an update soon.
+</p>
 
 The native back button consists of two parts: the back indicator and the back button itself. The back indicator is the small icon displayed next to the back button text. It can be referenced with the `back-indicator` selector:
 
@@ -75,10 +79,18 @@ navigation-bar back-button {
   font-size: 14px;
 }
 ```
+
+**On Android only**, there is also the `back-button:pressed` pseudo selector, used to set the e.g. color of the back button when it's tapped.
+
+```css
+navigation-bar back-button:pressed {
+  color: #fff;
+}
+```
 </section>
 
 <section class="docs-section" id="navigation-bar-button">
-### Styling the navigation-bar buttons
+### Styling the navigation bar buttons
 
 Navigation bar buttons (apart from the [back button](#navigation-bar-back-button)) can be styled with the `navigation-bar button` selector:
 
