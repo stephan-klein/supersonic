@@ -11,10 +11,10 @@ section_id: angular-js
 <section class="docs-section" id="angular-js">
 # Angular.JS
 
-[Angular JS](https://angularjs.org/) is an open source Javascript MVC-framework developed and maintained by Google. Angular allows a declarative style of building the UI by making it possible to extend HTML vocabulary. Angular makes it easy to build modularized applications where the DOM manipulations are fully separated from application logic. This results code that is easily testable and extendable.
+[Angular JS](https://angularjs.org/) is an open source Javascript MVC-framework developed and maintained by Google. Angular allows a declarative style of UI building by making it possible to extend the HTML vocabulary. Angular makes it easy to build modularized applications, where DOM manipulation is fully separated from application logic. This results in code that is easily testable and extendable.
 
 Perhaps the most famous feature of Angular is the _two-way data binding_
-that makes it extremely easy to keep view layer and data in synch. Controller functions get access to view through a special Angular service called `$scope` that can be injected to any controller:
+that makes it extremely easy to keep views in sync with data in the controller. Controller functions get access to view through a special Angular service called `$scope` that can be injected to any controller:
 
 <div class="clearfix">
   <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
@@ -38,7 +38,7 @@ myController = ($scope) ->
 {% endhighlight %}
 </div>
 
-A HTML view can then render the value of a variable in `$scope` by using the 'double mustache'-syntax:
+An HTML view can then render the value of a variable in `$scope` by using the 'double mustache' syntax:
 
 
 ```html
@@ -47,9 +47,9 @@ A HTML view can then render the value of a variable in `$scope` by using the 'do
 {% endraw %}
 ```
 
-Varibales in `$scope` can also be bound to form controls such as an input field, and all the changes in data caused by the user typing to the input field would be propagated to controllers and other parts of view.
+Varibales in `$scope` can also be _bound_ to form controls such as a text input field: when the user types text into the field, the associated `$scope` variable (such as `$scope.inputText`) gets updated in all controllers and thus propagated to all views that use it.
 
-## Supersonic service
+## Supersonic AngularJS Service
 
 Despite being framework agnostic, Supersonic has been built to be fully compatible with Angular JS. In particular, this means that within all the callback functions of various Supersonic API services, one can directly update the application `$scope`:
 
@@ -62,6 +62,8 @@ Despite being framework agnostic, Supersonic has been built to be fully compatib
 
 <div data-role="example-code" data-type="js">
 {% highlight javascript %}
+// Note that the "supersonic" Angular service is injected
+// into the controller
 var myController = function($scope, supersonic) {
   var labels = {
     buttonLabels: ["Yes", "No"]
@@ -81,6 +83,8 @@ var myController = function($scope, supersonic) {
 
 <div data-role="example-code" data-type="coffee" style="display: none;">
 {% highlight coffeescript %}
+# Note that the "supersonic" Angular service is injected
+# into the controller
 myController = ($scope, supersonic) ->
   labels =
     buttonLabels: ["Yes", "No"]
@@ -89,11 +93,13 @@ myController = ($scope, supersonic) ->
     if ( answer==0 )
       $scope.answer = "Yes"
     else
-      $scope.answer = "No"   
+      $scope.answer = "No"
 {% endhighlight %}
 </div>
 
-In a non-angularized environment one should explicitly ask Angular to run the `$digest`-loop by calling `$scope.$apply()` in order to get model updates propagated to the whole app.
+Without the `supersonic` Angular Service, you need to explicitly ask Angular to run the `$digest`-loop (which propagates updates to `$scope` to the whole app) by calling `$scope.$apply()`.
+
+Note that some `supersonic.*` functions, such as those using [streams](/supersonic/guides/technical-concepts/streams) still require a manual `$scope.$apply()`.
 
 ## Learn more
 
