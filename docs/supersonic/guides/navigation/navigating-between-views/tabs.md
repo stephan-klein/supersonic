@@ -23,7 +23,7 @@ Supersonic offers support for the native tab bar as a way to structure your app'
   ]
 ```
 
-A tab object consists of the `title`, `id` and `location` properties, which are relatively straightforward. The `location` property string can be a URL pointing to your tab, or a [route][route-guide].
+A tab object consists of the `title`, `id` and `location` properties, which are relatively straightforward. The `location` property string can be a URL pointing to your tab, or a [Supersonic route][route-guide].
 </section>
 
 <section class="docs-section" id="tabs-layers">
@@ -45,6 +45,6 @@ For styling your tab with native CSS, see the [styling native components][stylin
 The tab bar JavaScript APIs can be found in the [Supersonic.js API reference][tabs-api].
 </section>
 
-[route-guide]: /supersonic/guides/navigation/route
+[route-guide]: /supersonic/guides/navigation
 [styling-tab-bar]: /supersonic/guides/ui/styling-native-components/tab-bar
 [tabs-api]: /supersonic/api-reference/stable/supersonic/ui/tabs
