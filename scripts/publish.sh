@@ -8,8 +8,7 @@ DIST_DIR=dist
 HEAD_VERSION=$(git rev-parse HEAD)
 DEFAULT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 CURRENT_BRANCH=${TRAVIS_BRANCH:-$DEFAULT_CURRENT_BRANCH}
-SECRET_KEY=932981be6dec428fb8e75219ea78397ef4088d78
-TARGET_REPO=https://supersonic-backdoor:$SECRET_KEY@github.com/AppGyver/supersonic-bower.git
+TARGET_REPO=https://supersonic-backdoor:$SUPERSONIC_BOWER_SECRET_KEY@github.com/AppGyver/supersonic-bower.git
 
 echo Publishing branch $CURRENT_BRANCH version $HEAD_VERSION with message $VERSION
 
