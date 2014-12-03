@@ -228,13 +228,13 @@ Save both files and you'll see that after you click the button, the geolocation 
 <section class="docs-section" id="allergic-to-modules-and-coffeescript">
 ##Allergic to modules and CoffeeScript?
 
-We strive to make the development experience as smooth as possible and through our collective experience have landed on a set of what in our minds is best development practices. This includes the use of CoffeeScript and Angular. Of course you may not agree with us, in which case you are free to utilise any framework you want.
+We strive to make the development experience with Supersonic and Steroids as smooth as possible. Through our collective experience, we have settled on what in our minds are the best development practices. This includes the use of CoffeeScript and AngularJS. Of course you may not agree with us, in which case you are free to utilise any framework you want, or generate your projects and modules with JavaScript.
 
 To work outside the modular app structure, you have two choices.
 
  - If you want to work with the default Supersonic structure, but need some special files that don't really belong in any module, you can place any assets in the `app/common/assets/` folder. The files in that folder will be copied to the application and accessible via their path relative to the `assets` folder (so e.g. `app/common/assets/views/hello.html` would be `views/hello.html` when accessed within your app).
 
- - Alternatively, you can choose to create a Single-Page application when running `steroids create`, which will just install the project dependencies and create a single `www` folder where you can build your app structure as you desire.
+ - Alternatively, you can choose to create a Single-Page Application when running `steroids create`, which will just install the project dependencies and create a single `www` folder, where you can build your app structure as you desire.
 
 To work with plain JavaScript, you can have `steroids create` create your project with JavaScript files by choosing it during the project creation wizard. For cases where you might need just a tiny snippet of JavaScript (maybe for testing out a code snippet), you can just embed it straight into the CoffeeScript files by surrounding your JavaScript with backticks ( \` ):
 
