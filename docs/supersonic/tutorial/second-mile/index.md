@@ -74,20 +74,26 @@ Debugging via the Connect Screen logs is available on all devices and operating 
 
 ## Supersonic modules
 
-By default, Supersonic apps are made up of modules, which contain the HTML and script files for a certain portion of your app functionality. Currently, our project has two modules: `common`, which is a shared space for all of our app content, and `example`, which has all the views you see in the example app. We want to add a new feature to our app, so it makes sense to create a new module for it. You can create a new module by running `steroids generate module <module-name>` in your project folder. Let's create a `geolocation` module. You will see that the following module is created for your project:
+By default, Supersonic apps are made up of modules, which contain the HTML and script files for a certain portion of your app functionality. Currently, our project has two modules: `common`, which is a shared space for all of our app content, and `example`, which has all the views you see in the example app. We want to add a new feature to our app, so it makes sense to create a new module for it. You can create a new module by running `steroids generate module <module-name>` in your project folder. Let's create a `geolocation` module:
+
+```bash
+steroids generate module geolocation
+```
+
+Choose if you want the module to be generated with CoffeeScript or JavaScript. You will see that the following module is created for your project:
 
 ```bash
 app/geolocation
 ├── index.coffee
 ├── scripts
-│   └── IndexController.coffee
+│   └── IndexController.js (or .coffee)
 └── views
     └── index.html
 ```
 
 In the module, the basic view and controller are created for you, as well as the `index.coffee` file, which declares the associated Angular module and its dependencies, which in this case is the `common` module.
 
-To learn about the Supersonic app structure and working with a Model-View-Controller architecture, see the [Supersonic structure guide][ss-structure].
+To learn about the Supersonic app structure and working with a Model-View-Controller architecture, see the [Supersonic App Architecture guide][ss-architecture]. For a rundown of all the project config files, see the [App Config Files guide][ss-config-files].
 
 </section>
 <section class="docs-section" id="app-configuration">
@@ -260,6 +266,7 @@ By now you are able to create a feature-robust offline Supersonic app. The last 
 [device-api]: /supersonic/api-reference
 [logging-guide]: /tooling/cli/debugging/logging
 [native-styles]: /supersonic/guides/ui/styling-native-components
-[ss-structure]: /supersonic/guides/architecture
+[ss-architecture]: /supersonic/guides/architecture
 [structure-coffee]: /supersonic/guides
 [third-mile]: /supersonic/tutorial/third-mile
+[ss-config-files]: /supersonci/guides/architecture/app-config-files/
