@@ -16,13 +16,13 @@ There is currently no way to set up a custom splashscreen for a Supersonic proje
 <section class="docs-section" id="ios-splashscreens">
 
 ## iOS Splashscreens
-For iOS splashscreen configuration, see the [iOS build settings guide][ios-build-guide].
+For iOS splashscreen configuration, see the [iOS Build Settings guide][ios-build-guide].
 
 </section>
 <section class="docs-section" id="android-splashscreens">
 
 ## Android Splashscreens
-Android supports a special 9-Patch image format, which can be used to create splashscreens that scale to various display dimensions without distorting the image. For info on creating and configuring Android splashscreens, see the [Android build settings guide][android-build-guide].
+Android supports a special 9-Patch image format, which can be used to create splashscreens that scale to various display dimensions without distorting the image. For info on creating and configuring Android splashscreens, see the [Android Build Settings guide][android-build-guide].
 
 </section>
 <section class="docs-section" id="programmatic-usage">
