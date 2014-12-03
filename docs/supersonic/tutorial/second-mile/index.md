@@ -53,7 +53,7 @@ Before adding any real logic, it is important to know how to debug your project.
 
 ### Logs in Connect Screen
 
-You may have already noticed that the Connect Screen (the browser window from where you scan the app's QR code) contains a few different tabs, accesible from the top right corner of the window. Go to the "Logs" tab. If you've closed the window at some point, you can re-open it by typing `qr` in the Steroids console and pressing Enter. In the logs screen you will see something akin to:
+You may have already noticed that the Connect Screen (the browser window from where you scan the app's QR code) contains a few different tabs, accesible from the top right corner of the window. Go to the "Logs" tab. If you've closed the window at some point, you can re-open it by typing `c` in the Steroids Development Server console and pressing Enter. In the logs screen you will see something akin to:
 
 <img class="tutorial-image" src="/img/tutorial/Steroids_connect_logs.png">
 
@@ -141,7 +141,7 @@ angular
   .module('geolocation')
   .controller('IndexController', function($scope, supersonic) {
     // Controller functionality here
-    $scope.getPosition = function() { 
+    $scope.getPosition = function() {
       supersonic.ui.dialog.alert("Interstellar!");
     };
   });
