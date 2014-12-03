@@ -269,4 +269,4 @@ By now you are able to create a feature-robust offline Supersonic app. The last 
 [ss-architecture]: /supersonic/guides/architecture
 [structure-coffee]: /supersonic/guides
 [third-mile]: /supersonic/tutorial/third-mile
-[ss-config-files]: /supersonci/guides/architecture/app-config-files/
+[ss-config-files]: /supersonic/guides/architecture/app-config-files/

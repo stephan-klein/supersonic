@@ -75,7 +75,7 @@ After compiling your project, the Steroids CLI will open up the Connect Screen i
 
 <img src="/img/tutorial/Steroids_connect_index.png" style="width:75%;">
 
-*Connect screen QR code.*
+*Connect Screen QR code.*
 
 To run your app on a real device, all you have to do is open the AppGyver Scanner you installed previously and scan the displayed QR code. The Scanner app will then download the required files, establish a connection with the Steroids Development Server and start your app.
 </section>
