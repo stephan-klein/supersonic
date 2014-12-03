@@ -21,10 +21,10 @@ module.exports = (steroids, log) ->
   # supersonic.device.buttons.back.whenPressed: () => unsubscribe: Function
   # @define {Function} unsubscribe Stop listening
   # @exampleCoffeeScript
-  # supersonic.device.buttons.back.whenPressed().then ->
+  # supersonic.device.buttons.back.whenPressed ->
   #   supersonic.logger.log("Device back button was pressed.")
   # @exampleJavaScript
-  # supersonic.device.buttons.back.whenPressed().then( function() {
+  # supersonic.device.buttons.back.whenPressed( function() {
   #   supersonic.logger.log("Device back button was pressed.");
   # });
   ###
@@ -48,7 +48,7 @@ module.exports = (steroids, log) ->
     unless override
       document.addEventListener "backbutton", _handler, false
       override = true
-      
+
     return ->
       _removeCallback(id)
 
