@@ -9,8 +9,6 @@ while getopts "e:" opt; do
     e)
       if [ "$OPTARG" == "appgyver.com" ]; then
         ENVIRONMENT=$OPTARG
-        echo "We are not public yet, use deploy-sekrit to launch secretly"
-        exit 1
       elif [ "$OPTARG" == "testgyver.com" ]; then
         ENVIRONMENT=$OPTARG
       elif [ "$OPTARG" == "devgyver.com" ]; then
