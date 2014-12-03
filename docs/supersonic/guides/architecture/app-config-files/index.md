@@ -44,6 +44,10 @@ The `network.extraResponseHeaders` property is an object of key-value pairs that
 
 This means that with the above configuration, all responses received by your app will behave as though they had the `"Access-Control-Allow-Origin": "*"` and `"Access-Control-Allow-Headers": "Content-Type, X-Requested-With"` headers set, allowing you to circumvent CORS issues.
 
+<p class="advanced-panel">
+<strong>Note:</strong> This feature is currently iOS-only. Android support is coming up.
+</p>
+
 ### WebView settings
 ```coffeescript
 webView:
