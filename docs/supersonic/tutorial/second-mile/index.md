@@ -99,7 +99,7 @@ To learn about the Supersonic app structure and working with a Model-View-Contro
 <section class="docs-section" id="app-configuration">
 ## App configuration
 
-Next, you need to attach the new module to the rest of your app's views. Let's replace the second tab with our new module. Steroids projects have a special `config/` folder where we can define certain presets for our application, including the tabs that will be used. In `config/` there are two files with differing responsibilities:
+Next, you need to attach the new module to the rest of your app's views. Let's replace the second tab with our new module. Supersonic projects have a special `config/` folder where we can define certain presets for our application, including the tabs that will be used. In `config/` there are two files with differing responsibilities:
 
  - `app.coffee` contains general behaviour settings for your app.
  - `structure.coffee` is used to define the initial configuration of your app's views.
