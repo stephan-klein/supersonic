@@ -1,7 +1,7 @@
 ---
 layout: docs_first_mile
 title: Supersonic Documentation
-header_title: Interacting with the AppGyver team and your peers
+header_title: Join the AppGyver community!
 header_sub_title:
 section_id: fifth-mile
 subsections:
@@ -27,7 +27,7 @@ The in-depth guides have been split into two separate sections for clarity. Natu
 The [Supersonic guides][supersonic-guides] cover all things Supersonic. This means you'll find material on the native UI, CSS components, navigation in your app, overviews on app architecture and much more in the Supersonic section.
 
 ### Tooling guides
-Supersonic utilises, but is not a necessary component of the AppGyver tooling. This means things like the AppGyver Build Service and Steroids CLI work independently of, and can be utilised with any JavaScript framework. For this reason, the [tooling guides][tooling-guides] are separated from the Supersonic guides.
+Steroids² is a collection of tools you can use to build hybrid apps, such as the Steroids CLI and the AppGyver Build Service. They're designed to work best with Supersonic, but can be utilised with any JavaScript framework. For this reason, the [Tooling guides][tooling-guides] are separated from the Supersonic guides.
 
 ### API reference
 Pretty much what it says on the label. The complete API reference for Supersonic (and Cordova) can be found [here][api-reference].
