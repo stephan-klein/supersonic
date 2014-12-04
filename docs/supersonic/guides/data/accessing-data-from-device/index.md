@@ -132,7 +132,7 @@ There are several ways to limit what and how many objects the method `findAll` r
 Beer.findAll({limit:10}).then(function(beers) {});
 
 // second page
-Beer.findAll({skip10, limit:10}).then(function(beers) {});
+Beer.findAll({skip:10, limit:10}).then(function(beers) {});
 {% endhighlight %}
 </div>
 
@@ -142,7 +142,7 @@ Beer.findAll({skip10, limit:10}).then(function(beers) {});
 Beer.findAll({limit:10}).then (beers) ->
 
 # second page
-Beer.findAll({skip10, limit:10}).then (beers) ->
+Beer.findAll({skip:10, limit:10}).then (beers) ->
 {% endhighlight %}
 </div>
 
