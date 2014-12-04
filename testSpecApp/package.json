@@ -6,7 +6,7 @@
     "grunt-shell": "^1.1.1"
   },
   "devDependencies": {
-    "grunt-steroids": "git+https://jepjep:e072ec18c4b0a3724637b731e345f2009ffe87f1@github.com/appgyver/grunt-devroids.git#master"
+    "grunt-steroids": "1.x"
   },
   "engines": {
     "steroids": "3.5.0"
