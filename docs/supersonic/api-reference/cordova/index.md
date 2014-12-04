@@ -11,7 +11,7 @@ There are some Cordova APIs that have not yet been given the Supersonic treatmen
 
 We're working on bringing more Cordova APIs properly under Supersonic. What's more, we're not going to be satisfied with just wrapping the old Cordova APIs – the plan is to gradually replace even the native code plugins with our own Supersonic versions. Let us know what improvements you'd like to see at [contact@appgyver.com](mailto:contact@appgyver.com)!
 
-To see the unmigrated documentation, follow the links to the official Cordova documentation below:
+To see the unmigrated documentation, follow the links to the official Cordova documentation below. Keep in mind, the Cordova documentation assumes you are using PhoneGap, so the installation instructions are incorrect. For plugin installation instructions, see [the guide](/tooling/build-service/plugins/configuring-custom-plugins/).
 
 - [Battery status](https://github.com/apache/cordova-plugin-battery-status/blob/master/doc/index.md)
 - [Console](https://github.com/AppGyver/cordova-plugin-camera/blob/master/doc/index.md)
