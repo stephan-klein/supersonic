@@ -17,7 +17,7 @@ grunt build
 
 # Clone target repo
 echo Cloning $TARGET_REPO to $TARGET_DIR
-git clone $TARGET_REPO $TARGET_DIR
+git clone $TARGET_REPO $TARGET_DIR > /dev/null
 (cd $TARGET_DIR ; git config user.email "richard.anderson+supersonic@appgyver.com" ; git config user.name "Richard Anderson")
 
 # Copy distribution artefacts to target bower repo
@@ -31,7 +31,7 @@ echo Updating branch $CURRENT_BRANCH in target repository
 (cd $TARGET_DIR && \
   git add -A && \
   git commit -m $VERSION && \
-  git push origin -f $CURRENT_BRANCH)
+  git push origin -f $CURRENT_BRANCH > /dev/null)
 
 # Clean up
 echo Cleaning up
