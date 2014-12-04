@@ -8,7 +8,7 @@ section_id: splashscreen
 <section class="docs-section" id="overview">
 
 ## Splashscreen
-A splashscreen is shown when your app starts up, while the actual app views are being loaded. Currently splashscreens are defined in the [AppGyver Cloud](http://cloud.appgyver.com) Build Service, separately for each cloud-deployed application. When you build a new Ad Hoc or App Store build, the uploaded custom splashscreens will be used instead of the default AppGyver splashscreen. If you build a custom Scanner build, the custom splashscreen will be used also when loading an application by scanning a QR code.
+A splashscreen is shown when your app starts up, while the actual app views are being loaded. Currently splashscreens are defined in the [AppGyver Build Service](http://cloud.appgyver.com), separately for each cloud-deployed application. When you build a new Ad Hoc or App Store build, the uploaded custom splashscreens will be used instead of the default AppGyver splashscreen. If you build a custom Scanner build, the custom splashscreen will be used also when loading an application by scanning a QR code.
 
 There is currently no way to set up a custom splashscreen for a Supersonic project without using the Cloud Build Service. In the current Steroids app architecture, the splashscreens are set up when the app binary is built, and thus cannot be changed dynamically for apps loaded with the store-downloaded AppGyver Scanner.
 

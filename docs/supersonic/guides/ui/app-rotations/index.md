@@ -15,7 +15,7 @@ There are several cases where rotations come into play with your app. You might 
 
 ## Setting allowed rotations via the Build Service
 
-iOS and Android really want rotations to be the same app-wide, and they're defined during the build phase. Thus, the way to set rotations is in the Build Service, on your app's Build Configuration page. The defaults will apply for all views in your app. (Note that a custom-built Scanner app will also have the same default rotations, which is useful for testing and development.)
+iOS and Android really want rotations to be the same app-wide, and they're defined during the build phase. Thus, the way to set rotations is in the [Build Service][build-service], on your app's Build Configuration page. The defaults will apply for all views in your app. (Note that a custom-built Scanner app will also have the same default rotations, which is useful for testing and development.)
 
 ### iOS
 
@@ -44,3 +44,5 @@ The [supersonic.ui.screen.setAllowedRotations](#setallowedrotations) API call al
 {% include api_method.md method=method %}
 
 </section>
+
+[build-service]: https://cloud.appgyver.com

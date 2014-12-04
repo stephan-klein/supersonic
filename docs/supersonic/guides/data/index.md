@@ -8,7 +8,7 @@ section_id: data
 <section class="docs-section" id="data">
 # Data management
 
-Supersonic provides an easy way to integrate application to AppGyver Sandbox Database and various kinds of backends providing a persistent data storage.
+Supersonic provides an easy way to integrate any backend to your mobile app. AppGyver also provides a free Sandbox Database you can use to get development up and running quickly, if you don't have a production backend for your app yet.
 
 The ingredients of the data access are:
 
