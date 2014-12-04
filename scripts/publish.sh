@@ -16,7 +16,7 @@ echo Publishing branch $CURRENT_BRANCH version $HEAD_VERSION with message $VERSI
 grunt build
 
 # Clone target repo
-echo Cloning $TARGET_REPO to $TARGET_DIR
+echo Cloning supersonic-bower to $TARGET_DIR
 git clone $TARGET_REPO $TARGET_DIR > /dev/null
 (cd $TARGET_DIR ; git config user.email "richard.anderson+supersonic@appgyver.com" ; git config user.name "Richard Anderson")
 
