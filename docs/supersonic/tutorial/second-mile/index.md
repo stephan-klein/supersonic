@@ -126,7 +126,7 @@ tabs: [
 ]
 ```
 
-The key change is, the second tab now points to our new `geolocation` module. After the app refreshes on your device, you can check out the second tab to see that it has indeed updated.
+The key change is, the second tab now points to our new `geolocation` module. After the app refreshes on your device, you can check out the second tab to see that it has indeed updated. Note that changing the id of the tab from `settings` to `geolocation` makes the tab icon disappear, as the icon is defined in the native css. You can reshow the icon by modifying `tab-bar-item#settings` to be `tab-bar-item#geolocation` in the `.css` files found in `app/common/native-styles/`.
 
 </section>
 <section class="docs-section" id="app-logic-in-the-controller">
@@ -195,7 +195,7 @@ To actually see the device's location, we need to access the device hardware. Su
 $scope.position = undefined;
 
 $scope.getPosition = function() {
-  supersonic.device.geolocation.getPosition().then( funtion(position){
+  supersonic.device.geolocation.getPosition().then( function(position){
     $scope.position = position;
   });
 };
