@@ -7,7 +7,5 @@ module.exports =
   travis:
     options:
       compilers: ['coffee:coffee-script/register']
-      coveralls:
-        serviceName: 'travis-ci'
 
     src: ['<%= files.test %>']
