@@ -17,7 +17,7 @@ module.exports = (steroids, log, global) ->
     new Promise (resolve, reject)->
       steroids.getApplicationState {},
         onSuccess: (state)->
-          matches = (preload for preload in state.preloads when preload.URL is global.location.href)
+          matches = (preload for preload in state.preloads when global.location.href in [preload.URL, preload.location]) # iOS: .URL Android: .location
           if matches.length
             # update .id
             viewObject.id = matches[0].id unless id?

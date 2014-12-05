@@ -52,7 +52,6 @@ module.exports = (steroids, log) ->
           return unless options.params?
 
           if started
-            supersonic.logger.debug "Sending parameters (#{options.params}) to view (id: #{view.id})"
             supersonic.data.channel("view-params-#{view.id}").publish(options.params)
           else
             view._webView.setParams options.params
