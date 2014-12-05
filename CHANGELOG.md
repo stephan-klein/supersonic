@@ -2,6 +2,10 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.0.1 (2014-12-05)
+
+- Fixed using super-navigate component, layers.push, modal.show data parameters passing in android.
+
 ## 1.0.0 (2014-12-03) – MACH 1
 
 Initial release. See the documentation at [http://docs.appgyver.com](http://docs.appgyver.com) for more information.
