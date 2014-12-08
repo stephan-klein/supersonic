@@ -722,7 +722,7 @@ body_extra_css_classes: device-preview-page
   <h3 class="title"><a href="#buttons-icons">Icon Buttons</a></h3>
 
   <p>
-    Icons can easily be added to any button by using either the built in Ionicons, or
+    Icons can easily be added to any button by using either the built-in Supersonicons (a fork of Ionicons), or
     any custom font-pack you choose. <a href="#utility-icons">Learn more about icons</a>.
   </p>
 
@@ -1056,7 +1056,7 @@ body_extra_css_classes: device-preview-page
   <p>
     Lists can have icons assigned either to the left and/or right side of each list item,
     and the alignment classes should be assigned to each <code>item</code> element. Icons can easily
-    be added to any item by using either the built in Ionicons, or
+    be added to any item by using either the built in Supersonicons, or
     any custom font-pack you choose. <a href="#utility-icons">Learn more about icons</a>.
   </p>
   <p>
@@ -3440,11 +3440,15 @@ body_extra_css_classes: device-preview-page
   <h3 class="title"><a href="#utility-icons">Icons</a></h3>
 
   <p>
-    Supersonic also comes with a fork of a free and open-sourced icon font, <a href="http://ionicons.com/">Ionicons</a>, with over 500 icons to choose from.
+    Supersonic also comes with a free and open-sourced icon font called Supersonicons (forked from <a href="http://ionicons.com/">Ionicons</a>), with over 500 icons to choose from.
   </p>
 
   <p>
-    Simply add <code>icon</code> and the Ionicon classname for the icon to show, which can be easily looked up on the <a href="http://ionicons.com/">Ionicons</a> homepage.
+    Simply add <code>icon</code> and the classname for the icon to show. The classnames can easily be looked up on the <a href="http://ionicons.com/">Ionicons</a> homepage.
+  </p>
+
+  <p class="advanced-panel">
+    <strong>Note:</strong> Supersonicons use the <code>super-</code> prefix instead of the <code>ion-</code> prefix, so when referencing an icon, simply replace the prefix: e.g. <code>ion-star</code> becomes <code>super-star</code>.
   </p>
 
 {% highlight html %}
@@ -3456,17 +3460,17 @@ body_extra_css_classes: device-preview-page
   </p>
 
   <p>
-    Note: Supersonic is certainly not restricted to using only the Ionicons icon pack, so please feel free to use any icons you wish.
+    Note: Supersonic is certainly not restricted to using only the Supersonicons pack, so please feel free to use any icons you wish.
   </p>
 
   <div class="doc-example ionic">
     <div class="bar bar-header">
-      <div class="h1 title">Ionicons</div>
+      <div class="h1 title">Supersonicons</div>
     </div>
     <div class="content has-header padding">
 
       <ul class="ionicons-demo">
-        <li class="super-Supersonic" data-pack="default" data-tags="badass, framework, sexy, hawt"></li>
+        <li class="super-supersonic" data-pack="default" data-tags="badass, framework, sexy, hawt"></li>
         <li class="super-arrow-up-a" data-pack="default" data-tags=""></li>
         <li class="super-arrow-right-a" data-pack="default" data-tags=""></li>
         <li class="super-arrow-down-a" data-pack="default" data-tags=""></li>
