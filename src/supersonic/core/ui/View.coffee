@@ -27,7 +27,7 @@ module.exports = (steroids, log) ->
    # @define {Function} getId Returns the View's identifier as a string. An identifier is used to reference a started View.
    # @define {Function} isStarted Returns a promise that resolves to `true` if the View instance's identifier matches a started View. The promise resolves to `false` if the View doesn't have an identifier, or if a matching started View cannot be found.
    # @define {Function} setId Sets the View's identifier. Returns a promise that is resolved with the new identifier. The promise will be rejected if trying to change the identifier of a started View.
-   # @define {Function} start Starts the View, causing it load itself into memory and remain active even when not in a navigation stack. Returns a promise that is resolved once the View has been started successfully. The promise will be rejcetd if the view could not be started. Causes for rejection include:
+   # @define {Function} start Starts the View, causing it load itself into memory and remain active even when not in a navigation stack. Returns a promise that is resolved once the View has been started successfully. The promise will be rejected if the view could not be started. Causes for rejection include:
    # <ul>
    #  <li>There already exists a started View with the same identifier as this View instance.</li>
    #  <li>The View has no identifier set and one isn't provided as a parameter to this API call.</li>
