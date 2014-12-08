@@ -284,7 +284,7 @@ It is also possible to delete model instances:
 
 <div data-role="example-code" data-type="js">
 {% highlight javascript %}
-Beer.find("555").then( funtion(beer) {
+Beer.find("555").then( function(beer) {
   beer.delete().then( function() {
     console.log("a crappy beer was deleted");
   });

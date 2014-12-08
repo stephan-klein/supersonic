@@ -58,7 +58,7 @@ module.exports = (steroids, log) ->
    #    duration: 1.2,
    #    curve: "linear"
    # }
-   # supersonic.ui.animate("curlDown", options).perform().then( funtion() {
+   # supersonic.ui.animate("curlDown", options).perform().then( function() {
    #    supersonic.logger.log("About to start an animation");
    # });
   ###
