@@ -1,4 +1,4 @@
-Bacon = require 'baconjs'
+
 data = require 'ag-data'
 
 module.exports = (logger, window) ->
