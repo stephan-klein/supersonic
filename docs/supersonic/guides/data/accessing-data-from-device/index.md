@@ -10,7 +10,7 @@ parent_id: supersonic
 
 # Accessing data from device
 
-The [supersonic.data](api-reference/stable/supersonic/data/) namespace includes APIs that work with _any_ cloud data providers [configured](/data-management/setting-up-appgyver-database/) for the Supersonic application. They provide efficient ways for manipulating data – adding, updating and deleting records.
+The [supersonic.data](/supersonic/api-reference/stable/supersonic/data/) namespace includes APIs that work with _any_ cloud data providers [configured](/supersonic/guides/data/setting-up-appgyver-database/) for the Supersonic application. They provide efficient ways for manipulating data – adding, updating and deleting records.
 
 </section>
 <section class="docs-section" id="supersonic-data">
@@ -21,7 +21,7 @@ In the following we demonstrate how supersonic data makes it joyfully easy to ma
 
 Code snippets in below assume that the application has a resource `Beer` with two `string` fields `name` and `brewery`, and an `integer` field `brewed_since` configured.
 
-Once a resource has been defined, app can get hold of it with method [supersonic.data.model](/api-reference/stable/supersonic/data/model/model/) which takes the resource name as parameter:
+Once a resource has been defined, app can get hold of it with method [supersonic.data.model](/supersonic/api-reference/stable/supersonic/data/model/model/) which takes the resource name as parameter:
 
 <div class="clearfix">
   <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
@@ -47,9 +47,9 @@ Beer = supersonic.data.model('Beer')
 
 ## Getting data from the server
 
-The call `supersonic.data.model('Beer')` returns a [supersonic.data.Model](/api-reference/stable/supersonic/data/model/model-class/) class, that provides methods to accessing the data of the resource.
+The call `supersonic.data.model('Beer')` returns a [supersonic.data.Model](/supersonic/api-reference/stable/supersonic/data/model/model-class/) class, that provides methods to accessing the data of the resource.
 
-The entire collection can be achieved by a [promise](/overview/promises/) returning function `findAll` of the Model class:
+The entire collection can be achieved by a [promise](/supersonic/guides/technical-concepts/promises/) returning function `findAll` of the Model class:
 
 <div class="clearfix">
   <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
@@ -211,7 +211,7 @@ Beer.all().whenChanged (beers) ->
 
 Any time there are changes in data, the registered callback function is called. So with Angular's databinding and magical touch of Supersonic data one can easily build applications where the data of _all_ the users is kept in sync all the time!
 
-See more from the [supersonic.data API](/api-reference/stable/supersonic/data/model/model-class/).
+See more from the [supersonic.data API](/supersonic/api-reference/stable/supersonic/data/model/model-class/).
 
 </section>
 <section class="docs-section" id="model-instances">
@@ -242,7 +242,7 @@ Beer.find("123").then (beer) ->
 {% endhighlight %}
 </div>
 
-The returned objects are instances of [supersonic.data.Model](/api-reference/stable/supersonic/data/model/model-class/).
+The returned objects are instances of [supersonic.data.Model](/supersonic/api-reference/stable/supersonic/data/model/model-class/).
 
 A model instance can be edited and the edited version saved back to the cloud database:
 
