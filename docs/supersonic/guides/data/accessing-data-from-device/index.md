@@ -79,7 +79,7 @@ Beer.findAll().then (allBeers) ->
 {% endhighlight %}
 </div>
 
-The returned object `allBeers` is of type [supersonic.data.Collection](/api-reference/stable/supersonic/data/model/collection-class/) that acts like an `array`:
+The returned object `allBeers` is of type [supersonic.data.Collection](/supersonic/api-reference/stable/supersonic/data/model/model-class/) that acts like an `array`:
 
 <div class="clearfix">
   <div class="btn-group btn-group-xs pull-right" role="group" style="margin-top: 20px;">
@@ -110,7 +110,7 @@ Beer.findAll().then (allBeers) ->
 {% endhighlight %}
 </div>
 
-Objects in the collection are instances of the class [supersonic.data.Model] (/api-reference/stable/supersonic/data/model/model-class/).
+Objects in the collection are instances of the class [supersonic.data.Model](/supersonic/api-reference/stable/supersonic/data/model/model-class/).
 
 </section>
 <section class="docs-section" id="limiting-the-search">
@@ -242,7 +242,7 @@ Beer.find("123").then (beer) ->
 {% endhighlight %}
 </div>
 
-The returned objects are instances of [supersonic.data.Model] (/api-reference/stable/supersonic/data/model/model-class/).
+The returned objects are instances of [supersonic.data.Model](/api-reference/stable/supersonic/data/model/model-class/).
 
 A model instance can be edited and the edited version saved back to the cloud database:
 
