@@ -47,7 +47,6 @@ module.exports = (window) ->
 
     subscribe: (listener) =>
       @inbound.onValue (value) =>
-        listener.bind { reply: @publish } #XXX DEPRECATED LEGACY SUPPORT DO NOT DOCUMENT
         listener(value, @publish)
 
   ###

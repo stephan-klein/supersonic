@@ -27,23 +27,26 @@ describe "supersonic.data.channel", ->
       ).should.eventually.equal('message').and.notify(done)
       channel.inbound.push 'message'
 
-    it "should run listener in a scope with reply()", (done) ->
+    it "should provide the listener with reply()", (done) ->
       channel = supersonic.data.channel channelName
       channel.inbound = new Bacon.Bus
-      channel.subscribe ->
+      channel.subscribe (ignored, reply) ->
         done asserting =>
-          @reply.should.be.a 'function'
+          reply.should.be.a 'function'
       channel.inbound.push 'message'
 
     describe "reply()", ->
       it "pipes to publish", (done) ->
         channel = supersonic.data.channel channelName
         channel.inbound = new Bacon.Bus
+
+        # Hack for expecting a function to be called at a later time
         new Promise((resolve) ->
           channel.publish = resolve
         ).should.eventually.equal('bar').and.notify done
-        channel.subscribe ->
-          @reply('bar')
+
+        channel.subscribe (ignored, reply) ->
+          reply 'bar'
         channel.inbound.push 'message'
 
   describe "publish()", ->
