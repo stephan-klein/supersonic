@@ -72,8 +72,17 @@ SuperNavbarButtonPrototype._setButtonAction = ->
   viewId ?= @getAttribute "location"
 
   if viewId?
-    @_button.onTap = () ->
-      supersonic.ui.layers.push(viewId)
+    @_button.onTap = () =>
+      # construct parameters for the pushed view
+      params = null
+      datasetKeys = Object.keys(@dataset)
+      if datasetKeys? and datasetKeys.length
+        for dataKey in datasetKeys when /^params/.test(dataKey)
+          params = {} unless params?
+          key = dataKey.replace(/^params(.*)$/, "$1").toLowerCase()
+          params[key] = @dataset[dataKey]
+      # Now pus the view
+      supersonic.ui.layers.push viewId, { params }
       .catch (error) ->
         throw new Error "Failed to push view: #{error.message}"
   else
