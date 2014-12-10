@@ -61,7 +61,7 @@ describe "supersonic.data.storage.property", ->
       propertyInOtherView = new Promise((resolve) ->
         supersonic.data.channel(propertyName).subscribe resolve
       )
-      supersonic.ui.views.find("data#storage/property?channel=#{propertyName}&property=#{propertyName}").then (view) ->
+      supersonic.ui.views.find("data#storage/get-property-and-publish?channel=#{propertyName}&property=#{propertyName}").then (view) ->
         view.start().then ->
           propertyInOtherView.then (otherValue) ->
             view.stop()
