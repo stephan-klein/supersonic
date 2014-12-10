@@ -53,3 +53,18 @@ describe "supersonic.data.storage.property", ->
 
       left.set('foobar')
       right.get().should.equal 'foobar'
+
+    it "is shared between web views", ->
+      value = Math.random()
+      supersonic.data.storage.property(propertyName).set(value)
+
+      propertyInOtherView = new Promise((resolve) ->
+        supersonic.data.channel(propertyName).subscribe resolve
+      )
+      supersonic.ui.views.find("data#storage/property?channel=#{propertyName}&property=#{propertyName}").then (view) ->
+        view.start().then ->
+          propertyInOtherView.then (otherValue) ->
+            view.stop()
+            value.should.equal otherValue
+
+
