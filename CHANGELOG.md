@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.0.3 (2014-12-10)
+
+- Added option support for `supersonic.data.model`
+- Added `supersonic.data.storage.property`
+
 ## 1.0.2 (2014-12-10)
 
 - Added support for data-params for super-navbar-button when using "location" or "view-id" parameters (as in super-navigate).
