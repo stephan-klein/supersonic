@@ -1,4 +1,4 @@
-expect = window.chai.expect
+window.expect = window.chai.expect
 window.chai.should()
 
 # Evaluates a function. Returns null if the function is successful, or an Error otherwise.
@@ -7,7 +7,7 @@ window.chai.should()
 #     done asserting ->
 #       "lol".should.equal "lol"
 #
-asserting = (f) ->
+window.asserting = (f) ->
   try
     f()
     null

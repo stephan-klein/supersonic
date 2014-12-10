@@ -1,4 +1,4 @@
-Bacon = require 'baconjs'
+
 data = require 'ag-data'
 
 module.exports = (logger, window) ->
@@ -15,8 +15,12 @@ module.exports = (logger, window) ->
    # @type
    # model: (
    #   name: String
+   #   requestOptions?: {
+   #     headers?: Object
+   #   }
    # ) => Model
    # @define {String} name The name of a configured cloud resource
+   # @define {Object} requestOptions An object of request options to set for all requests performed through this model. Values may be Streams, in which case options are updated whenever the Stream updates.
    # @returnsDescription
    # Returns a Model class that represents the given resource, e.g. `supersonic.data.model("car")` returns a new Car Model class, representing the `Car` resource in the cloud backend.
    # @exampleCoffeeScript
@@ -46,9 +50,9 @@ module.exports = (logger, window) ->
     when window?.ag?.data?
       try
         bundle = data.loadResourceBundle(window.ag.data)
-        (name) ->
+        (name, requestOptions = {}) ->
           try
-            bundle.createModel name
+            bundle.createModel name, requestOptions
           catch err
             logger.error "Tried to access cloud resource '#{name}', but it is not a configured resource"
             throw new Error "Could not load model #{name}: #{err}"
