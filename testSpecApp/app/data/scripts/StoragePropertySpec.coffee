@@ -90,4 +90,28 @@ describe "supersonic.data.storage.property", ->
             resolve v
       ).should.eventually.equal 'foobar'
 
+    it "is shared between instances with the same name", ->
+      left = supersonic.data.storage.property(propertyName)
+      right = supersonic.data.storage.property(propertyName)
+
+      left.set('foobar')
+
+      new Promise((resolve) ->
+        right.values.onValue resolve
+      ).should.eventually.equal 'foobar'
+
+    it "is shared between web views", ->
+      value = "this-is-value-#{Math.random()}"
+      prop = supersonic.data.storage.property(propertyName)
+
+      updatedProperty = new Promise((resolve) ->
+        prop.values.skip(1).onValue resolve
+      )
+
+      supersonic.ui.views.find("data#storage/set-property?property=#{propertyName}&value=#{value}").then (view) ->
+        view.start().then ->
+          updatedProperty.then (otherValue) ->
+            view.stop()
+            otherValue.should.equal value
+
 
