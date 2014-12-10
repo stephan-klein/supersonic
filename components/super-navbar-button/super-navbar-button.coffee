@@ -81,7 +81,7 @@ SuperNavbarButtonPrototype._setButtonAction = ->
           params = {} unless params?
           key = dataKey.replace(/^params(.*)$/, "$1").toLowerCase()
           params[key] = @dataset[dataKey]
-      # Now pus the view
+      # Now push the view
       supersonic.ui.layers.push viewId, { params }
       .catch (error) ->
         throw new Error "Failed to push view: #{error.message}"
