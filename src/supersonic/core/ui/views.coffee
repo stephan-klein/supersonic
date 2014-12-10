@@ -69,7 +69,7 @@ module.exports = (steroids, log, global) ->
    # @description
    # Start a View in the background, allowing it to remain running even when it's not in a navigation stack or used in a drawer.
    #  view: View|String
-   # ) => Promise view: View
+   # ) => Promise View
    # @define {View|String} view The View that will be started in the background. Alternatively, you can directly pass an identifier string.
    # @returnsDescription
    #  A [`Promise`](/supersonic/guides/technical-concepts/promises/) that resolves with the given View object. If the view identifier is already in use by another started View, the promise will be rejected.
@@ -109,10 +109,11 @@ module.exports = (steroids, log, global) ->
    #   supersonic.layers.push carsEditView
    # });
   ###
-  start =  s.promiseF "start", (viewOrId)->
+  start = s.promiseF "start", (viewOrId)->
     supersonic.ui.views.find(viewOrId)
-    .then (view)->
-      view.start()
+      .then (view) ->
+        view.start().then ->
+          view
 
   ###
    # @namespace supersonic.ui.views
@@ -124,7 +125,7 @@ module.exports = (steroids, log, global) ->
    # @type
    # supersonic.ui.views.stop: (
    #  viewOrId: View|String
-   # ) => Promise
+   # ) => Promise View
    # @define {View|String} viewOrId The View that will be stopped. Alternatively, you can directly pass an identifier string.
    # @returnsDescription
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that resolves after the View has been stopped. If the View or identifier doesn't match a started View, the promise will be rejected.
@@ -139,8 +140,9 @@ module.exports = (steroids, log, global) ->
   ###
   stop = s.promiseF "stop", (viewOrId) ->
     supersonic.ui.views.find(viewOrId)
-    .then (view)->
-      view.stop()
+      .then (view) ->
+        view.stop().then ->
+          view
 
   {
     find: find
