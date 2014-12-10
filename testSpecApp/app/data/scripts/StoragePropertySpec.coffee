@@ -1,10 +1,55 @@
 
 describe "supersonic.data.storage.property", ->
+
+  propertyName = null
+
+  beforeEach ->
+    propertyName = "this-is-property-#{Math.random()}"
+
+  afterEach ->
+    supersonic.data.storage.property(propertyName).unset?()
   
   it "is a function", ->
     supersonic.data.storage.property.should.be.a 'function'
 
   it "accepts a name and returns a property with that name", ->
-    supersonic.data.storage.property("this-is-a-property")
+    supersonic.data.storage.property(propertyName)
       .should.have.property('name')
-      .equal 'this-is-a-property'
+      .equal propertyName
+
+  describe "get()", ->
+    it "returns null by default", ->
+      expect(
+        supersonic.data.storage.property(propertyName)
+          .get()
+      ).to.not.exist
+
+  describe "set()", ->
+    it "changes value returned by get()", ->
+      supersonic.data.storage.property(propertyName)
+        .set('this-is-a-value')
+        .get()
+        .should.equal 'this-is-a-value'
+
+    it "can accept an object", ->
+      supersonic.data.storage.property(propertyName)
+        .set({ foo: 'bar' })
+        .get()
+        .should.deep.equal { foo: 'bar' }
+
+  describe "unset()", ->
+    it "resets the value to null", ->
+      expect(
+        supersonic.data.storage.property(propertyName)
+          .set('anything')
+          .unset()
+          .get()
+      ).to.not.exist
+
+  describe "data storage", ->
+    it "is shared between instances with the same name", ->
+      left = supersonic.data.storage.property(propertyName)
+      right = supersonic.data.storage.property(propertyName)
+
+      left.set('foobar')
+      right.get().should.equal 'foobar'
