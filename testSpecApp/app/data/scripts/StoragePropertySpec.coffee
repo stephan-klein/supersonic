@@ -67,4 +67,27 @@ describe "supersonic.data.storage.property", ->
             view.stop()
             value.should.equal otherValue
 
+  describe "values", ->
+    it "is a stream", ->
+      supersonic.data.storage.property(propertyName)
+        .values
+        .should.have.property('onValue')
+        .be.a 'function'
+
+    it "should carry a default value of null", ->
+      new Promise((resolve) ->
+        supersonic.data.storage.property(propertyName)
+          .values
+          .onValue resolve
+      ).should.eventually.not.exist
+
+    it "should get a new value when the property is set", ->
+      new Promise((resolve) ->
+        supersonic.data.storage.property(propertyName)
+          .set('foobar')
+          .values
+          .onValue (v) ->
+            resolve v
+      ).should.eventually.equal 'foobar'
+
 
