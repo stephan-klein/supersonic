@@ -32,7 +32,7 @@ describe "supersonic.data.model", ->
             steroidsAppId: window.ag.data.options.headers.steroidsAppId
         }).findAll().should.be.fulfilled
 
-      it "can set headers from localstorage through options", ->
+      it "can sync headers with localstorage through options", ->
         @timeout 5000
         steroidsApiKey = supersonic.data.storage.property('steroids-api-key').set(window.ag.data.options.headers.steroidsApiKey)
         steroidsAppId = supersonic.data.storage.property('steroids-app-id').set(window.ag.data.options.headers.steroidsAppId)
