@@ -28,6 +28,17 @@ describe "supersonic.ui.views", ->
         view.stop().then ->
           done()
 
+    it "should return a promise that resolves with the started view object", (done) ->
+      view = new supersonic.ui.View
+        location: "ui#empty"
+        id: "emptyView?#{Math.random()}"
+
+      supersonic.ui.views.start(view).then (startedView)->
+        startedView.location.should.equal view.location
+        startedView.id.should.equal view.id
+        startedView.stop().then ->
+          done()
+
   describe "stop()", ->
     it "is a function", ->
       supersonic.ui.views.stop.should.be.a "function"
@@ -41,6 +52,17 @@ describe "supersonic.ui.views", ->
 
         view.start().then ->
           supersonic.ui.views.stop(view).then ->
+            done()
+
+      it "should return promise that resolves with the stopped view object", (done)->
+        view = new supersonic.ui.View
+          location: "ui#empty"
+          id: "emptyView?#{Math.random()}"
+
+        view.start().then ->
+          supersonic.ui.views.stop(view).then (stoppedView)->
+            stoppedView.location.should.equal view.location
+            stoppedView.id.should.equal view.id
             done()
 
     describe "with id string", ->
