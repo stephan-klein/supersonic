@@ -9,4 +9,5 @@ describe "supersonic.data.model", ->
     window.ag.data.resources.task.should.be.an 'object'
 
   it "should be able to retrieve a collection from the cloud with the configured settings", ->
+    @timeout 5000
     supersonic.data.model('task').findAll().should.be.fulfilled
