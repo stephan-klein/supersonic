@@ -51,8 +51,9 @@ describe "supersonic.data.model", ->
 
       it "should retain default headers even after setting new ones", ->
         @timeout 5000
-        # The call to findAll _should_ fail in case this overrides default headers
+        # The call to findAll _should_ fail in case this overrides all default headers,
+        # ie. steroidsApiKey is left out of the request
         supersonic.data.model('task', {
           headers:
-            'a-wonderful-custom-header': 'my-important-value'
+            steroidsAppId: window.ag.data.options.headers.steroidsAppId
         }).findAll().should.be.fulfilled
