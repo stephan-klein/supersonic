@@ -4,8 +4,12 @@ Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appg
 
 ## 1.0.3 (2014-12-10)
 
+Features:
 - Added option support for `supersonic.data.model`
 - Added `supersonic.data.storage.property`
+
+Bugfixes:
+- `supersonic.ui.views.start()` and `supersonic.ui.views.stop()` now properly return the View object started/stopped.
 
 ## 1.0.2 (2014-12-10)
 
