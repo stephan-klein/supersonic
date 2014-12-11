@@ -12,27 +12,47 @@ describe "supersonic.data.model", ->
     @timeout 5000
     supersonic.data.model('task').findAll().should.be.fulfilled
 
-  it "can set headers through options", ->
-    @timeout 5000
-    supersonic.data.model('task', {
-      headers:
-        steroidsApiKey: window.ag.data.options.headers.steroidsApiKey
-        steroidsAppId: window.ag.data.options.headers.steroidsAppId
-    }).findAll().should.be.fulfilled
+  describe "when passing in options", ->
 
-  it "can set headers from localstorage through options", ->
-    @timeout 5000
-    steroidsApiKey = supersonic.data.storage.property('steroids-api-key').set(window.ag.data.options.headers.steroidsApiKey)
-    steroidsAppId = supersonic.data.storage.property('steroids-app-id').set(window.ag.data.options.headers.steroidsAppId)
+    describe "assumptions", ->
+      it "will fail to fetch any data if the correct headers are not in place", ->
+        @timeout 5000
+        supersonic.data.model('task', {
+          headers:
+            steroidsApiKey: 'this is not the key you are looking for'
+        }).findAll().should.not.be.fulfilled
 
-    findAll = supersonic.data.model('task', {
-      headers:
-        steroidsApiKey: steroidsApiKey.values
-        steroidsAppId: steroidsAppId.values
-    }).findAll()
+    describe "behavior", ->
 
-    findAll.finally ->
-      steroidsApiKey.unset()
-      steroidsAppId.unset()
+      it "can set headers through options", ->
+        @timeout 5000
+        supersonic.data.model('task', {
+          headers:
+            steroidsApiKey: window.ag.data.options.headers.steroidsApiKey
+            steroidsAppId: window.ag.data.options.headers.steroidsAppId
+        }).findAll().should.be.fulfilled
 
-    findAll.should.be.fulfilled
+      it "can set headers from localstorage through options", ->
+        @timeout 5000
+        steroidsApiKey = supersonic.data.storage.property('steroids-api-key').set(window.ag.data.options.headers.steroidsApiKey)
+        steroidsAppId = supersonic.data.storage.property('steroids-app-id').set(window.ag.data.options.headers.steroidsAppId)
+
+        findAll = supersonic.data.model('task', {
+          headers:
+            steroidsApiKey: steroidsApiKey.values
+            steroidsAppId: steroidsAppId.values
+        }).findAll()
+
+        findAll.finally ->
+          steroidsApiKey.unset()
+          steroidsAppId.unset()
+
+        findAll.should.be.fulfilled
+
+      it "should retain default headers even after setting new ones", ->
+        @timeout 5000
+        # The call to findAll _should_ fail in case this overrides default headers
+        supersonic.data.model('task', {
+          headers:
+            'a-wonderful-custom-header': 'my-important-value'
+        }).findAll().should.be.fulfilled
