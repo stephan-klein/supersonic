@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.0.7 (2014-12-12)
+
+Bugfixes:
+- Fix an inconsistency in handling `supersonic.data.model` instance state when serializing (`.toJson`) and unserializing (`.fromJson`)
+
 ## 1.0.6 (2014-12-12)
 
 Features:
