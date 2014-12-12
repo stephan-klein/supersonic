@@ -2,12 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## 1.0.7 (2014-12-12)
+## 1.0.6 (2014-12-12)
 
 Features:
 - `.fromJson` on `supersonic.data.model` assumes all the data is in a dirty state, so it will be sent to the cloud in case of `.save()`
 
-## 1.0.6 (2014-12-12)
+## 1.0.5 (2014-12-12)
 
 Features:
 - Added `.fromJson` support to to complement `instance.toJson` on `supersonic.data.model`
