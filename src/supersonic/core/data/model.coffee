@@ -79,11 +79,13 @@ module.exports = (logger, window) ->
 #   all: (queryParams, options) => Object
 #   findAll: (queryParams) => Promise Collection
 #   find: (id) => Promise Model
+#   fromJson: (json) -> Model
 # }
 # @methods all find findAll
 # @define {Function} all Access a stream of Collections. A Collection contains Model instances, representing records in the backend. The stream is updated with fresh data at periodic intervals.
 # @define {Function} findAll Returns a [`Promise`](/supersonic/guides/technical-concepts/promises/) that resolves to a Collection of Model instances, representing all the records in the backend for the resource represented by this Model class.
 # @define {Function} find Returns a [`Promise`](/supersonic/guides/technical-concepts/promises/) that resolves to a Model instance representing the record with the given id.
+# @define {Function} fromJson Create a persisted Model instance from serialized data.
 ###
 ###
 # @namespace supersonic.data
@@ -158,6 +160,25 @@ module.exports = (logger, window) ->
  # supersonic.data.model('task').find(123).then( function(task) {
  #   console.log(task.description);
  # });
+###
+###
+ # @namespace supersonic.data
+ # @name Model.fromJson
+ # @function
+ # @type
+ # fromJson: (json: Object) => Model
+ # @description
+ # Restore a persisted Model instance from serialized data.
+ # @exampleCoffeeScript
+ # Task = supersonic.data.model('task')
+ # Task.find(123).then (task) ->
+ #   serialized = task.toJson()
+ #   # At this point the task can be eg stored to localStorage
+ #   # Retrieve it from the storage-compatible format using fromJson
+ #   task = Task.fromJson(serialized)
+ #   task.description = 'updated!'
+ #   # Unlike the serialized object, the instance has all the behavior intact
+ #   task.save()
 ###
 ###
  # @namespace supersonic.data
