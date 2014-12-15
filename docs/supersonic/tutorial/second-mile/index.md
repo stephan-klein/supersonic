@@ -74,7 +74,7 @@ Debugging via the Connect Screen logs is available on all devices and operating 
 
 ## Supersonic modules
 
-By default, Supersonic apps are made up of modules, which contain the HTML and script files for a certain portion of your app functionality. Currently, our project has two modules: `common`, which is a shared space for all of our app content, and `example`, which has all the views you see in the example app. We want to add a new feature to our app, so it makes sense to create a new module for it. You can create a new module by running `steroids generate module <module-name>` in your project folder. Let's create a `geolocation` module:
+By default, Supersonic apps are made up of modules, which contain the HTML and script files for a certain portion of your app functionality. Currently, our project has two modules: `common`, which is a shared space for all of our app content, and `example`, which has all the views you see in the example app. We want to add a new feature to our app, so it makes sense to create a new module for it. You can create a new module by running `steroids generate module <module-name>` in your project folder or `$ steroids generate module <module-name>` if you have `steroids connect` running. Let's create a `geolocation` module:
 
 ```bash
 steroids generate module geolocation
