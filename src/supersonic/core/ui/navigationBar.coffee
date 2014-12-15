@@ -136,7 +136,7 @@ module.exports = (steroids, log) ->
    # });
    #
    # options = {
-   #   title = "New title",
+   #   title: "New title",
    #   overrideBackButton: true,
    #   buttons: {
    #     left: [leftButton]
@@ -151,7 +151,7 @@ module.exports = (steroids, log) ->
    #     supersonic.ui.dialog.alert "Left button tapped!"
    #
    # options =
-   #   title = "New title"
+   #   title: "New title"
    #   overrideBackButton: true
    #   buttons:
    #     left: [leftButton]
