@@ -282,7 +282,7 @@ module.exports = (steroids, log) ->
    # supersonic.ui.tabs.whenDidChange().then ()->
    #   supersonic.logger.log("Tabs did change")
    # @exampleJavaScript
-   # supersonic.ui.tabs.whenDidChange().then( funtion() {
+   # supersonic.ui.tabs.whenDidChange().then( function() {
    #   supersonic.logger.log("Tabs did change");
    # });
   ###
