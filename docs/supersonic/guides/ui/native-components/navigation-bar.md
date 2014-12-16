@@ -96,6 +96,18 @@ Tapping the button fires a click event on the `<super-navbar-button>` element th
 
 In the above example, the function bound to `$scope.buttonTapped` will be called when the "Tap me" button is tapped.
 
+To display a button on the right side of the navigation bar title, use the `side="right"` attribute:
+
+```html
+<super-navbar>
+  <super-navbar-title>
+    Awesome App
+  </super-navbar-title>
+  <super-navbar-button side="right">
+    Right
+  </super-navbar-button>
+</super-navbar>
+```
 </section>
 <section class="docs-section" id="styling-with-css">
 
