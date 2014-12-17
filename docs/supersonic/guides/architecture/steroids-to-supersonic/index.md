@@ -1,6 +1,18 @@
+---
+layout: guides_architecture
+title: Supersonic Documentation
+header_sub_title: Learn how to build beautiful mobile apps with the Supersonic UI framework.
+parent_id: supersonic
+section_id: steroids-to-supersonic
+---
+<section class="ag__docs__content">
+
+
+
 Migrating your old Steroids app to Supersonic starts with creating a new Supersonic app using Steroids CLI 4.0.0 or newer and running `steroids create <project_name>`.
 
 
+<section class="docs-section" id="what-you-need-to-know">
 
 ## What you need to know
 
@@ -15,6 +27,7 @@ If your old Steroids app logic is in the `/www` folder and structured in a way t
 This guide is written for a CoffeeScript project, but the same things apply to a JavaScript project.
 
 
+<section class="docs-section" id="cheat-sheet">
 
 ## Cheat Sheet
 
@@ -61,6 +74,7 @@ www/javascripts/application.js => app/common/javascripts/application.js (+ add s
 ```
 
 
+<section class="docs-section" id="migrating-the-app-folder">
 
 ## Migrating the `/app` folder
 
@@ -81,6 +95,7 @@ You can either directly copy your files for each module from your old Steroids `
 If you have application-wide layouts in e.g. `app/views/layouts/application.html` or similar, move them to `app/common/views/layout.html`.
 
 
+<section class="docs-section" id="migrating-the-www-folder">
 
 ## Migrating the `/www` folder
 
@@ -116,6 +131,7 @@ If you have e.g. some kind of an `application.js` in your Steroids app that shou
 All configurations that were previously made in `www/config.xml`, `www/config.ios.xml` and `www/config.android.xml` are now made in `config/app.coffee`. Change the values in the generated `config/app.coffee` to match your previous configurations.
 
 
+<section class="docs-section" id="migrating-the-config-folder">
 
 ## Migrating the `/config` folder
 
@@ -124,6 +140,7 @@ All configurations that were previously made in `www/config.xml`, `www/config.io
 As the previous `application.coffee` does not exist in Supersonic anymore, you will have to move the contents of this file into its new residing places. Most of the content in `application.coffee` is configured in `structure.coffee`, as it defines the tabs, initial view, drawer etc. Any `application.coffee` styles will have to migrated to [native styles](supersonic/guides/ui/styling-native-components/).
 
 
+<section class="docs-section" id="done">
 
 ## Done!
 
