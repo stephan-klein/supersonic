@@ -2,6 +2,14 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.0.8 (2014-12-18)
+
+Features:
+- Added `supersonic.ui.layers.replace` API call for replacing the whole navigation stack with a started view.
+
+Bugfixes:
+- Fixed a bug where views returned by `supersonic.ui.views.find` didn't always have the correct `id` set.
+
 ## 1.0.7 (2014-12-12)
 
 Bugfixes:
