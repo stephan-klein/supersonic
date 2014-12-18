@@ -12,7 +12,9 @@ jekyll serve --watch
 
 ## Deploying
 
-To deploy docs, run
+Build the docs first. See [Supersonic README](../README.md) for instructions.
+
+After building, you can deploy the docs:
 
 ```bash
 jekyll build
