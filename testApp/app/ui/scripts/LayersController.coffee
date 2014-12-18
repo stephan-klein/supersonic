@@ -36,3 +36,10 @@ angular
           supersonic.logger.log "All the layers popped successfully"
         onFailure: (message) ->
           supersonic.ui.dialog.alert "Could not pop the layers! \n\n #{JSON.stringify(message)}"
+
+    $scope.replaceWithIndex = ()->
+      supersonic.ui.layers.replace "http://localhost/app/common/index.html"
+      .then ->
+        supersonic.logger.log "Layer stack replaced successfully!"
+      .catch (error)->
+        supersonic.logger.log error
