@@ -1,7 +1,6 @@
-
 data = require 'ag-data'
 
-module.exports = (logger, window) ->
+module.exports = (logger, window, defaultStorage) ->
   # Connect ag-data to a resource bundle from window.ag.data such that errors
   # are correctly wrapped and logged. Notably, if window.ag.data exists but
   # does not define a valid bundle, an error will be logged without interaction.
@@ -51,6 +50,11 @@ module.exports = (logger, window) ->
       try
         bundle = data.loadResourceBundle(window.ag.data)
         (name, requestOptions = {}) ->
+          # Set default cache storage when caching is enabled
+          if requestOptions?.cache?.enabled
+            unless requestOptions.cache.storage?
+              requestOptions.cache.storage = defaultStorage
+
           try
             bundle.createModel name, requestOptions
           catch err
