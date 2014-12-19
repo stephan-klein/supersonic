@@ -29,6 +29,7 @@ Installing dependencies:
 
     npm install
     npm install grunt-cli -g
+    bundle install
 
 Running tests:
 

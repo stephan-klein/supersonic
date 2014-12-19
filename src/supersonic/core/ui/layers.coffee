@@ -112,5 +112,46 @@ module.exports = (steroids, log) ->
         onSuccess: ()->
           resolve()
         onFailure: (error)->
-          reject(error)
+          reject new Error error.errorDescription
       }
+
+  ###
+   # @namespace supersonic.ui.layers
+   # @name replace
+   # @function
+   # @description
+   # Replaces the current view stack with a started View. If called from a drawer, replaces the view stack in the center view.
+   # @type
+   # supersonic.ui.layers.replace: (
+   #   view: View|String
+   # ) => Promise
+   # @define {View|String} view A started View or View identifier matching a started View to be pushed on top of the navigation stack. If the View is not started, the replace is unsuccessful.
+   # @returnsDescription
+   # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that gets resolved once the replace is successful. If the replace is unsuccessful, the promise is rejected.
+   # @supportsCallbacks
+   # @exampleCoffeeScript
+   # view = new supersonic.ui.View "example#settings"
+   # view.start("settings").then (startedView) ->
+   #   supersonic.ui.layers.replace startedView
+   #
+   # # You can also use the View identifier
+   # supersonic.ui.layers.replace "settings"
+   # @exampleJavaScript
+   # view = new supersonic.ui.View("example#settings");
+   # view.start("settings").then( function(startedView) {
+   #   supersonic.ui.layers.replace(startedView);
+   # });
+   #
+   # // You can also use the View identifier
+   # supersonic.ui.layers.replace("settings");
+  ###
+  replace: s.promiseF "replace", (viewOrId) ->
+    new Promise (resolve, reject) ->
+      supersonic.ui.views.find(viewOrId)
+        .then (view) ->
+          steroids.layers.replace view._webView, {
+            onSuccess: ->
+              resolve
+            onFailure: (error)->
+              reject error
+          }

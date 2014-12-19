@@ -52,9 +52,11 @@ module.exports = (steroids, log, global) ->
       getApplicationState().then (state)->
         for preload in state.preloads
           if preload.id == viewOrId
-            resolve new View
+            view = new View
               id: preload.id
               location: preload.startURL
+            view._webView.id = preload.id
+            resolve view
             return
 
         resolve new View
