@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.0.9 (2014-12-19)
+
+Features:
+- Added `cache` option support for `supersonic.data.model`
+
 ## 1.0.8 (2014-12-18)
 
 Features:
