@@ -1,9 +1,6 @@
 data = require 'ag-data'
 
 module.exports = (logger, window, defaultStorage) ->
-  # Connect ag-data to a resource bundle from window.ag.data such that errors
-  # are correctly wrapped and logged. Notably, if window.ag.data exists but
-  # does not define a valid bundle, an error will be logged without interaction.
   ###
    # @namespace supersonic.data
    # @name model
@@ -47,6 +44,9 @@ module.exports = (logger, window, defaultStorage) ->
   ###
   createModel = switch
     when window?.ag?.data?
+      # Connect ag-data to a resource bundle from window.ag.data such that errors
+      # are correctly wrapped and logged. Notably, if window.ag.data exists but
+      # does not define a valid bundle, an error will be logged without interaction.
       try
         bundle = data.loadResourceBundle(window.ag.data)
         (name, requestOptions = {}) ->
