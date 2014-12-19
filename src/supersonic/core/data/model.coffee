@@ -1,10 +1,6 @@
-
 data = require 'ag-data'
 
-module.exports = (logger, window) ->
-  # Connect ag-data to a resource bundle from window.ag.data such that errors
-  # are correctly wrapped and logged. Notably, if window.ag.data exists but
-  # does not define a valid bundle, an error will be logged without interaction.
+module.exports = (logger, window, defaultStorage) ->
   ###
    # @namespace supersonic.data
    # @name model
@@ -15,12 +11,18 @@ module.exports = (logger, window) ->
    # @type
    # model: (
    #   name: String
-   #   requestOptions?: {
+   #   options?: {
    #     headers?: Object
+   #     cache?:
+   #       enabled: Boolean
+   #       timeToLive?: Integer
+   #       storage?: Object
    #   }
    # ) => Model
    # @define {String} name The name of a configured cloud resource
-   # @define {Object} requestOptions An object of request options to set for all requests performed through this model. Values may be Streams, in which case options are updated whenever the Stream updates.
+   # @define {Object} options May have headers to set for all requests performed through this model. May configure caching.
+   # @define {Integer} timeToLive Duration of time for cached objects to stay valid, specified in milliseconds.
+   # @define {Object} storage Storage adapter to use for caching. Defaults to localforage.
    # @returnsDescription
    # Returns a Model class that represents the given resource, e.g. `supersonic.data.model("car")` returns a new Car Model class, representing the `Car` resource in the cloud backend.
    # @exampleCoffeeScript
@@ -48,11 +50,19 @@ module.exports = (logger, window) ->
   ###
   createModel = switch
     when window?.ag?.data?
+      # Connect ag-data to a resource bundle from window.ag.data such that errors
+      # are correctly wrapped and logged. Notably, if window.ag.data exists but
+      # does not define a valid bundle, an error will be logged without interaction.
       try
         bundle = data.loadResourceBundle(window.ag.data)
-        (name, requestOptions = {}) ->
+        (name, options = {}) ->
+          # Set default cache storage when caching is enabled
+          if options?.cache?.enabled
+            unless options.cache.storage?
+              options.cache.storage = defaultStorage
+
           try
-            bundle.createModel name, requestOptions
+            bundle.createModel name, options
           catch err
             logger.error "Tried to access cloud resource '#{name}', but it is not a configured resource"
             throw new Error "Could not load model #{name}: #{err}"

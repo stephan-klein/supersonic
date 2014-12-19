@@ -4,11 +4,10 @@ angular
     $scope.tasks = null
     $scope.showSpinner = true
 
-    supersonic.ui.views.current.whenVisible ->
-      Task.all().whenChanged (tasks)->
-        $scope.$apply ->
-          $scope.tasks = tasks
-          $scope.showSpinner = false
+    Task.all({}, {interval: 1000}).whenChanged (tasks)->
+      $scope.$apply ->
+        $scope.tasks = tasks
+        $scope.showSpinner = false
 
     supersonic.data.channel("events").subscribe (message)->
       supersonic.ui.dialog.alert "Received message! #{message}"
