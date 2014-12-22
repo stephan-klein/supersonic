@@ -20,15 +20,25 @@ echo Cloning supersonic-bower to $TARGET_DIR
 git clone $TARGET_REPO $TARGET_DIR > /dev/null
 (cd $TARGET_DIR ; git config user.email "richard.anderson+supersonic@appgyver.com" ; git config user.name "Richard Anderson")
 
-# Copy distribution artefacts to target bower repo
-# Tag and push repo
 echo Updating branch $CURRENT_BRANCH in target repository
-(cd $TARGET_DIR && (git checkout -b $CURRENT_BRANCH || git checkout $CURRENT_BRANCH)) && \
-(rm -rf $TARGET_DIR/* && \
+(
+  # Check out the announced branch
+  cd $TARGET_DIR && \
+  (
+    git checkout -b $CURRENT_BRANCH || \
+    git checkout $CURRENT_BRANCH
+  )
+) && \
+(
+  # Copy distribution artefacts to target bower repo
+  rm -rf $TARGET_DIR/* && \
   cp -r $DIST_DIR/* $TARGET_DIR && \
   cp bower.json $TARGET_DIR && \
-  cp README.bower.md $TARGET_DIR/README.md) && \
-(cd $TARGET_DIR && \
+  cp README.bower.md $TARGET_DIR/README.md
+) && \
+(
+  # Commit changes to build artefacts
+  cd $TARGET_DIR && \
   git add -A && \
   git commit -m $MESSAGE && \
   (
@@ -41,6 +51,7 @@ echo Updating branch $CURRENT_BRANCH in target repository
     # Otherwise push under the announced branch name
     git push origin --force $CURRENT_BRANCH > /dev/null
   )
+)
 
 # Clean up
 echo Cleaning up
