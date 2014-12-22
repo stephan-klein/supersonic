@@ -12,7 +12,7 @@ CURRENT_BRANCH=${TRAVIS_BRANCH:-$DEFAULT_CURRENT_BRANCH}
 TARGET_REPO=https://supersonic-backdoor:$SUPERSONIC_BOWER_SECRET_KEY@github.com/AppGyver/supersonic-bower.git
 
 # Does the announced branch name looks like a semver tag?
-if [[ $CURRENT_BRANCH =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+if [[ $CURRENT_BRANCH =~ "^v[0-9]+\.[0-9]+\.[0-9]+" ]]; then
   IS_TAG_RELEASE=true
 else
   IS_TAG_RELEASE=false
