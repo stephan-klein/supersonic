@@ -9,6 +9,8 @@ HEAD_VERSION=$(git rev-parse HEAD)
 DEFAULT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 CURRENT_BRANCH=${TRAVIS_BRANCH:-$DEFAULT_CURRENT_BRANCH}
 TARGET_REPO=https://supersonic-backdoor:$SUPERSONIC_BOWER_SECRET_KEY@github.com/AppGyver/supersonic-bower.git
+# Does the announced branch name looks like a semver tag?
+IS_TAG_RELEASE=[[ $CURRENT_BRANCH =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]]
 
 echo Publishing branch $CURRENT_BRANCH version $HEAD_VERSION with message $MESSAGE
 
@@ -42,8 +44,8 @@ echo Updating branch $CURRENT_BRANCH in target repository
   git add -A && \
   git commit -m $MESSAGE && \
   (
-    # If the announced branch name looks like a semver tag, tag and push only the tag
-    [[ $CURRENT_BRANCH =~ ^v[0-9]\.[0-9]\.[0-9] ]] && \
+    # If this is a tag release, tag and push only the tag
+    $IS_TAG_RELEASE && \
       git tag $CURRENT_BRANCH && \
       git push origin --force --tags > /dev/null
   ) || \
