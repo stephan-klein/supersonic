@@ -39,7 +39,9 @@ Before we move forward, you need to install the Steroids² tooling. Head on over
 <section class="docs-section" id="creating-a-new-project">
 ## Creating a New Project
 
-With your brand-new Steroids² CLI running, head on over to your terminal app of choice and create your first app. To do so, just type:
+<p class="advanced-panel">You can also use the Steroids² CLI with an existing Cordova project. Read the <a href="/tooling/cli/usage-with-cordova">Usage with Cordova</a> guide for more information.</p>
+
+With your brand-new Steroids² CLI up and running, head on over to your terminal app of choice and create your first app. To do so, just type:
 
 ```bash
 steroids create myProject

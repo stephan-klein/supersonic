@@ -8,4 +8,6 @@ parent_id: tooling
 <section class="docs-section" id="overview">
 # Overview
 The AppGyver Build Service allows you to build standalone versions of your app, as well as custom scanner apps for when your app requires a custom PhoneGap plugin. Explore the Build Service guides from the left sidebar.
+
+The Build Service is available at [https://build.appgyver.com](https://build.appgyver.com).
 </section>

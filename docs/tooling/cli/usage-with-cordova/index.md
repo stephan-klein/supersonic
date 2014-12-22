@@ -14,7 +14,7 @@ Steroids CLI can be used with Cordova projects (including Ionic projects) to rap
 
 Note that not all features are available – see the [known issues](#known-issues) section below for details.
 </section>
-<section class="docs-section" id="starting-the-steroids-development-server">
+<section class="docs-section" id="starting-the-development-server">
 
 ## Starting the Steroids Development Server
 
@@ -28,11 +28,13 @@ Steroids CLI will auto-detect that your project is a Cordova project (based on t
 
 Note that **Steroids CLI won't modify your project files** – the `dist/` folder (which you might be familiar with from Supersonic projects) is created in the system temporary folder.
 </section>
-<section class="docs-section" id="connecting-with-the-appgyver-scanner-app">
+<section class="docs-section" id="connecting-with-the-scanner-app">
 
 ## Connecting with the AppGyver Scanner app
 
-Scan the QR code with the AppGyver Scanner app, or click on the buttons to launch an Android emulator or the iOS Simulator.
+To connect your mobile device with the Steroids Development Server, you need to install the AppGyver Scanner companion app. It is available in the [Apple App Store for iOS](https://itunes.apple.com/us/app/appgyver-scanner/id575076515?mt=8) and on [Google Play for Android](https://play.google.com/store/apps/details?id=com.appgyver.freshandroid&hl=en).
+
+In the Connect Screen browser window that opened, scan the QR code with the AppGyver Scanner app. Alternatively, you can click on the buttons to launch an Android emulator or the iOS Simulator.
 
 The initial page loaded is read from the `<content >` element in `config.xml` – `www/index.html` by default.
 
