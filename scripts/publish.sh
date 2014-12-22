@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Push a version update commit with this message
-VERSION=$(git rev-parse HEAD)
+MESSAGE=$(git log --oneline -n1)
 
 TARGET_DIR=$(mktemp -d)
 DIST_DIR=dist
@@ -10,7 +10,7 @@ DEFAULT_CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 CURRENT_BRANCH=${TRAVIS_BRANCH:-$DEFAULT_CURRENT_BRANCH}
 TARGET_REPO=https://supersonic-backdoor:$SUPERSONIC_BOWER_SECRET_KEY@github.com/AppGyver/supersonic-bower.git
 
-echo Publishing branch $CURRENT_BRANCH version $HEAD_VERSION with message $VERSION
+echo Publishing branch $CURRENT_BRANCH version $HEAD_VERSION with message $MESSAGE
 
 # Build distributable
 grunt build
@@ -30,8 +30,17 @@ echo Updating branch $CURRENT_BRANCH in target repository
   cp README.bower.md $TARGET_DIR/README.md) && \
 (cd $TARGET_DIR && \
   git add -A && \
-  git commit -m $VERSION && \
-  git push origin -f $CURRENT_BRANCH > /dev/null)
+  git commit -m $MESSAGE && \
+  (
+    # If the announced branch name looks like a semver tag, tag and push only the tag
+    [[ $CURRENT_BRANCH =~ ^v[0-9]\.[0-9]\.[0-9] ]] && \
+      git tag $CURRENT_BRANCH && \
+      git push origin --force --tags > /dev/null
+  ) || \
+  (
+    # Otherwise push under the announced branch name
+    git push origin --force $CURRENT_BRANCH > /dev/null
+  )
 
 # Clean up
 echo Cleaning up
