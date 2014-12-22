@@ -42,7 +42,7 @@ echo Updating branch $CURRENT_BRANCH in target repository
   # Commit changes to build artefacts
   cd $TARGET_DIR && \
   git add -A && \
-  git commit -m $MESSAGE && \
+  git commit -m "$MESSAGE" && \
   (
     # If this is a tag release, tag and push only the tag
     $IS_TAG_RELEASE && \
