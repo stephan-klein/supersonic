@@ -1,5 +1,4 @@
 #!/bin/bash
-set -v
 
 # Push a version update commit with this message
 MESSAGE=$(git log --oneline -n1)
@@ -28,13 +27,17 @@ echo Cloning supersonic-bower to $TARGET_DIR
 git clone $TARGET_REPO $TARGET_DIR --depth 1 > /dev/null
 (cd $TARGET_DIR ; git config user.email "richard.anderson+supersonic@appgyver.com" ; git config user.name "Richard Anderson")
 
-echo Updating branch $CURRENT_BRANCH in target repository
 (
   # Check out the announced branch unless this is a tag release, in which case we operate in master
-  $IS_TAG_RELEASE || \
   (
+    $IS_TAG_RELEASE && \
+    echo "Tagging release $CURRENT_BRANCH in target repository"
+  ) || \
+  (
+    echo "Updating branch $CURRENT_BRANCH in target repository" && \
     cd $TARGET_DIR && \
     (
+
       git checkout -b $CURRENT_BRANCH || \
       git checkout $CURRENT_BRANCH
     )
