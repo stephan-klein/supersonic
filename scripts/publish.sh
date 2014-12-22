@@ -29,11 +29,14 @@ git clone $TARGET_REPO $TARGET_DIR --depth 1 > /dev/null
 
 echo Updating branch $CURRENT_BRANCH in target repository
 (
-  # Check out the announced branch
-  cd $TARGET_DIR && \
+  # Check out the announced branch unless this is a tag release, in which case we operate in master
+  $IS_TAG_RELEASE || \
   (
-    git checkout -b $CURRENT_BRANCH || \
-    git checkout $CURRENT_BRANCH
+    cd $TARGET_DIR && \
+    (
+      git checkout -b $CURRENT_BRANCH || \
+      git checkout $CURRENT_BRANCH
+    )
   )
 ) && \
 (
