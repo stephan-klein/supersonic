@@ -10,7 +10,7 @@ parent_id: tooling
 
 # Using Steroids CLI with Cordova projects
 
-Steroids CLI can be used with Cordova projects to rapidly test, develop and share them without the need for Xcode or Android Studio.
+Steroids CLI can be used with Cordova projects (including Ionic projects) to rapidly test, develop and share them without the need for Xcode or Android Studio.
 
 Note that not all features are available – see the [known issues](#known-issues) section below for details.
 </section>
@@ -18,7 +18,7 @@ Note that not all features are available – see the [known issues](#known-issue
 
 ## Starting the Steroids Development Server
 
-To start the Steroids Development Server in a Cordova project, open your project folder in a terminal window and run
+To start the Steroids Development Server in a Cordova project, open your Cordova (or Ionic) project folder in a terminal window and run
 
 ```
 steroids connect
