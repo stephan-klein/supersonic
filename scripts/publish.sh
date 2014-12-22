@@ -19,7 +19,7 @@ grunt build
 
 # Clone target repo
 echo Cloning supersonic-bower to $TARGET_DIR
-git clone $TARGET_REPO $TARGET_DIR > /dev/null
+git clone $TARGET_REPO $TARGET_DIR --depth 1 > /dev/null
 (cd $TARGET_DIR ; git config user.email "richard.anderson+supersonic@appgyver.com" ; git config user.name "Richard Anderson")
 
 echo Updating branch $CURRENT_BRANCH in target repository
