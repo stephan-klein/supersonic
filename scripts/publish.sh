@@ -13,11 +13,11 @@ TARGET_REPO=https://supersonic-backdoor:$SUPERSONIC_BOWER_SECRET_KEY@github.com/
 # Does the announced branch name looks like a semver tag?
 if [[ "${CURRENT_BRANCH}" =~ "^v[0-9]+\.[0-9]+\.[0-9]+" ]]; then
   IS_TAG_RELEASE=true
+  echo Tagging release $CURRENT_BRANCH with message $MESSAGE
 else
   IS_TAG_RELEASE=false
+  echo Publishing branch $CURRENT_BRANCH version $HEAD_VERSION with message $MESSAGE
 fi
-
-echo Publishing branch $CURRENT_BRANCH version $HEAD_VERSION with message $MESSAGE
 
 # Build distributable
 grunt build
