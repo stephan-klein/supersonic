@@ -54,15 +54,16 @@ git clone $TARGET_REPO $TARGET_DIR --depth 1 > /dev/null
   # Commit changes to build artefacts
   cd $TARGET_DIR && \
   git add -A && \
-  git commit -m "$MESSAGE" && \
   (
     # If this is a tag release, tag and push only the tag
     $IS_TAG_RELEASE && \
+      git commit --allow-empty -m "$MESSAGE" && \
       git tag $CURRENT_BRANCH && \
       git push origin --force --tags > /dev/null
   ) || \
   (
     # Otherwise push under the announced branch name
+    git commit -m "$MESSAGE" && \
     git push origin --force $CURRENT_BRANCH > /dev/null
   )
 )
