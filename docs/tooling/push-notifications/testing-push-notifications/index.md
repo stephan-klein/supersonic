@@ -7,12 +7,14 @@ section_id: testing-push-notifications
 
 # Testing Push Notifications
 
-This guide will cover the steps to testing push notifications by sending a notification directly from your computer to your device and receiving it through Supersonic.
+This guide will cover the steps required to test push notifications. We will be sending a notification directly from your computer to your device and receiving it through Supersonic.
+
+As an alternative to Supersonic, you can use the direct JavaScript API as detailed in the [PushNotifications plugin README](https://github.com/AppGyver/PushNotifications/blob/master/README.md).
 
 
 ## What is needed
 
-For receiving Push Notifications on your device you will need to have successfully built a Scanner client with the Push Notification plugin enabled. See the guides for doing this on [iOS][ios-setup] and [Android][android-setup].
+For receiving Push Notifications on your device you will need to have successfully built a Scanner app with the Push Notification plugin enabled. For details, see the guides for [iOS][ios-setup] and [Android][android-setup].
 
 We will be using a Ruby gem to send push notifications, so you will also need to [have Ruby gems installed](https://rubygems.org/pages/download).
 
@@ -34,7 +36,7 @@ To run either of the scripts, you will need to have the `pushmeup` Ruby gem. To 
 
     $ sudo gem install pushmeup
 
-You should now be able to execute the scripts, eg like this assuming you've chosen to clone the repository:
+You should now be able to execute the scripts. Assuming you've chosen to clone the PushNotifications repository and are in its root folder, you can run:
 
     $ ruby Example/server/pushGCM.rb
 
@@ -42,13 +44,15 @@ However, the scripts will fail to authenticate if you do so. You will need to se
 
 ### Authenticating (iOS)
 
-When you created a push notification certificate for your Scanner client, you will have gotten an `aps_development.p12` file. Convert this file to a `ck.pem` file using the Keychain Access manager.
+When you created a push notification certificate for your Scanner client, you will have gotten an `aps_development.p12` file. Convert this file to a `aps_development.pem` file by either using the Keychain Access manager or by running (in the directory where you saved your `aps_development.p12` file)
 
-There is a line in the `pushAPNS.rb` file that describes the location of your `ck.pem` file. Change it to match where you saved the file.
+    $ openssl pkcs12 -in aps_development.p12 -out aps_development.pem -nodes
 
-    APNS.pem  = '</path/to/my/certificate/ck.pem>'
+There is a line in the `pushAPNS.rb` file that describes the location of your `aps_development.pem` file. Change it to match where you saved the file.
 
-The certificate is also accompanied by a password. Change the following line to match the password you generated your certificate file with.
+    APNS.pem  = '</path/to/my/certificate/aps_development.pem>'
+
+The certificate is also accompanied by a password that you inputted. Change the following line to match the password you generated your certificate file with.
 
     APNS.pass = '<myCertificatePassword>'
 
@@ -83,7 +87,7 @@ In your Supersonic app, run:
 
 ### Extracting the device registration ID
 
-After a successful registration, you will be able to see the device registration ID in the Steroids Connect logs.
+After a successful registration, you will be able to see the device registration ID in the Steroids Connect Screen logs.
 
 ### Connecting the server to the client
 
