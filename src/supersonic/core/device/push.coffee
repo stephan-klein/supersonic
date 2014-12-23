@@ -16,8 +16,13 @@ module.exports = (steroids, log) ->
    # Provides access to Push Notification services.
   ###
 
-  pluginReady = deviceready.then ->
-    window.plugins?.pushNotification
+  getPlugin = ->
+    deviceready.then(->
+      window.plugins?.pushNotification
+    ).then (plugin) ->
+      if !plugin?
+        throw new Error "Could not load pushNotification plugin. Is the plugin installed?"
+      plugin
 
   ###
    # @namespace supersonic.device.push
@@ -41,7 +46,7 @@ module.exports = (steroids, log) ->
    # @supportsCallbacks
   ###
   register = s.promiseF "register", (options = {}) ->
-    pluginReady.then (plugin) ->
+    getPlugin().then (plugin) ->
       new Promise((resolve, reject) ->
         plugin.register(resolve, reject, options)
       ).tap (devicetoken) ->
@@ -57,7 +62,7 @@ module.exports = (steroids, log) ->
    # @supportsCallbacks
   ###
   unregister = s.promiseF "unregister", ->
-    pluginReady.then (plugin) ->
+    getPlugin().then (plugin) ->
       new Promise (resolve, reject) ->
         plugin.unregister(resolve, reject)
 
@@ -75,7 +80,7 @@ module.exports = (steroids, log) ->
   ###
   backgroundNotifications = s.streamF "backgroundNotifications", ->
     Bacon
-      .fromPromise(pluginReady)
+      .fromPromise(getPlugin())
       .flatMap (plugin) ->
         Bacon.fromBinder (sink) ->
           plugin.onMessageInBackground(
@@ -99,7 +104,7 @@ module.exports = (steroids, log) ->
   ###
   foregroundNotifications = s.streamF "foregroundNotifications", ->
     Bacon
-      .fromPromise(pluginReady)
+      .fromPromise(getPlugin())
       .flatMap (plugin) ->
         Bacon.fromBinder (sink) ->
           plugin.onMessageInForeground(
