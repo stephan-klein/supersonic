@@ -9,4 +9,4 @@ module.exports = (steroids, log) ->
   vibrate: require("./vibrate")(steroids, log)
   ready: require("./ready")(steroids, log)
   buttons: require("./buttons")(steroids, log)
-    
+  push: require("./push")(steroids, log)
