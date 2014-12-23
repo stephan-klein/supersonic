@@ -1,0 +1,50 @@
+<div ng-controller="PushController">
+  <super-navbar>
+    <super-navbar-title>
+      Push Notification tests
+    </super-navbar-title>
+  </super-navbar>
+
+  <div class="card padding">
+    <h1>push.register and push.unregister</h1>
+    <button
+      class="button button-block"
+      ng-click="register()">
+      Register device
+    </button>
+    <button
+      class="button button-block button-assertive"
+      ng-click="unregister()">
+      Unregister device
+    </button>
+    <ul>
+      <li>Registration: {{registration}}</li>
+    </ul>
+  </div>
+
+  <div class="card padding">
+    <h1>push.foregroundNotifications</h1>
+    <button
+      class="button button-block"
+      ng-click="watchForegroundNotifications()">
+      Watch foreground notifications
+    </button>
+    <p ng-if="foregroundNotifications !== null">Notifications received: {{foregroundNotifications.length}}</p>
+    <ul>
+      <li ng-repeat="message in foregroundNotifications track by $index">{{ message }}</li>
+    </ul>
+  </div>
+
+  <div class="card padding">
+    <h1>push.backgroundNotifications</h1>
+    <button
+      class="button button-block"
+      ng-click="watchBackgroundNotifications()">
+      Watch background notifications
+    </button>
+    <p ng-if="backgroundNotifications !== null">Notifications received: {{backgroundNotifications.length}}</p>
+    <ul>
+      <li ng-repeat="message in backgroundNotifications track by $index">{{ message }}</li>
+    </ul>
+  </div>
+</div>
