@@ -15,7 +15,6 @@ Naturally Supersonic is closely tied to the AppGyver tooling, but the two are st
   - [CLI and Debugging][cli-guides]
   - [Build Service][build-service-guides]
   - [AppGyver Wrapper][wrapper-guides]
-  - [Push Notifications][push-notifications-guides]
 
 Also, quick context switching between Supersonic and tooling guides is accessible via the quick navigation dropdown in the top left corner of the page.
 
@@ -24,4 +23,3 @@ Also, quick context switching between Supersonic and tooling guides is accessibl
 [cli-guides]: /tooling/cli
 [build-service-guides]: /tooling/build-service
 [wrapper-guides]: /tooling/wrapper
-[push-notifications-guides]: /tooling/push-notifications
