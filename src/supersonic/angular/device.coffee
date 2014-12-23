@@ -43,5 +43,9 @@ module.exports = (angular) ->
           buttons:
             back: decorate device.buttons.back, (back)->
               whenPressed: digestifyFunction(back.whenPressed)
+
+          push: decorate device.push, (push) ->
+            register: qify push.register
+            unregister: qify push.unregister
         }
     )
