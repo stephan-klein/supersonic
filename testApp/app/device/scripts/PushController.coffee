@@ -23,6 +23,5 @@ angular
     $scope.watchBackgroundNotifications = ->
       $scope.backgroundNotifications = []
       supersonic.device.push.backgroundNotifications().onValue (notification) ->
-        supersonic.logger.log notification
         $scope.$apply ->
           $scope.backgroundNotifications.push (notification.message || notification.alert)
