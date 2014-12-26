@@ -21,6 +21,10 @@ Supersonic ships with compiled Javascript, CSS and Web Component assets, along w
 
 To get going with Supersonic, please follow the [First Mile tutorial](http://docs.appgyver.com/supersonic/tutorial/first-mile/)!
 
+### Difference between supersonic.js and supersonic.core.js
+
+`supersonic.core.js` contains the Supersonic APIs, without the [Angular.js](http://docs.appgyver.com/supersonic/guides/technical-concepts/angular-js/) parts. If you are not using AngularJS in your project, you can use `supersonic.core.js` instead of `supersonic.js`.
+
 ## Development
 
 ### Getting started
