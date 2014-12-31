@@ -65,7 +65,7 @@ Using a custom REST backend involves couple of more steps. Let us take as an exa
 
 From the [API documentation](http://openbeerdatabase.com/documentation/breweries-get) we see that the list of beers can be achieved by making a HTTP GET request to url [http://api.openbeerdatabase.com/v1/beers.json](http://api.openbeerdatabase.com/v1/beers.json) and an individual beer is accessed by adding the identifier of the beer to the url, e.g. with [http://api.openbeerdatabase.com/v1/beers/27.json](http://api.openbeerdatabase.com/v1/beers/27.json).
 
-All the urls of the API are prefixed with [http://api.openbeerdatabase.com/v1](), and we can set this as the _base url_ when defining the custom provider:
+All the urls of the API are prefixed with [http://api.openbeerdatabase.com/v1](http://api.openbeerdatabase.com/v1), and we can set this as the _base url_ when defining the custom provider:
 
 <img class="tutorial-image" src="/img/guides/data_custom_init.png">
 
@@ -73,7 +73,7 @@ In the config dialog we could also define the authentication scheme and add some
 
 <img class="tutorial-image" src="/img/guides/data_custom_init2.png">
 
-Authentication ad header definitions not needed in open beer database, so we skip those.
+Authentication and header definitions are not needed in the open beer database, so we skip those.
 
 Next step is to add resources for the provider. The dialog asks for both, the resource name and the resource url path:
 
