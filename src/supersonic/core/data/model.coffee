@@ -126,7 +126,7 @@ module.exports = (logger, window, defaultStorage) ->
 #   supersonic.logger.log("First element of updated Task collection: ", updatedTasks[0]);
 # });
 #
-# // Later on, we can unsusbcribe the listener
+# // Later on, we can stop listening to updates
 # unsubscribe();
 ###
 
