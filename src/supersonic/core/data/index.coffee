@@ -1,6 +1,6 @@
 # KLUDGE: localforage explodes if actually included in node
 localforage = switch
-  when global? then {}
+  when !window? then {}
   else require 'localforage'
 
 module.exports = (logger, window) ->
