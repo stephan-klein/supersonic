@@ -117,7 +117,7 @@ module.exports = (logger, window, defaultStorage) ->
 # @define {Integer} options.interval=1000 An integer defining how often the backend is polled for new data, in ms.
 # @returnsDescription
 # An object with the `whenChanged` property, which accepts a recurring callback function that gets triggered when new data is available.
-# @define {=>Function} whenChanged Called with a Collection matching the original query. Called every `options.interval` ms, but only when new data is available. Returns a function that can be used to unsubsribe from the update stream.
+# @define {=>Function} whenChanged Called with a Collection matching the original query. Called every `options.interval` ms, but only when new data is available. Returns a function that can be used to unsubscribe from the update stream.
 # @define {=>Function} whenChanged.unsubscribe Call this function to stop listening for data changes.
 # @exampleCoffeeScript
 # unsubscribe = supersonic.data.model('task').all(queryParameters, options).whenChanged (updatedTasks)->
