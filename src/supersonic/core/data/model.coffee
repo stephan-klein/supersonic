@@ -97,6 +97,7 @@ module.exports = (logger, window, defaultStorage) ->
 # @define {Function} find Returns a [`Promise`](/supersonic/guides/technical-concepts/promises/) that resolves to a Model instance representing the record with the given id.
 # @define {Function} fromJson Create a persisted Model instance from serialized data.
 ###
+
 ###
 # @namespace supersonic.data
 # @name Model.all
