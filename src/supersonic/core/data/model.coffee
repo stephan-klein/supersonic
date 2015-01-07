@@ -132,6 +132,37 @@ module.exports = (logger, window, defaultStorage) ->
 ###
 
 ###
+# @namespace supersonic.data
+# @name Model.one
+# @function
+# @type
+# one: (
+#   id: String
+# ) =>
+#   whenChanged: (Collection) =>
+#     unsubscribe: Function
+# @description
+# Find a single record from the cloud by an id. The results are made available as a stream that gets updated with the latest data every `interval` ms.
+# @define {String} id An id string matching a record in the cloud resource represented by this Model class.
+# @define {Object} options An optional options object.
+# @define {Integer} options.interval=1000 An integer defining how often the backend is polled for new data, in ms.
+# @returnsDescription
+# An object with the `whenChanged` property, which accepts a recurring callback function that gets triggered when new data is available.
+# @define {=>Function} whenChanged Called with a Model matching the `id`. Called every `options.interval` ms, but only when new data is available. Returns a function that can be used to unsubscribe from the update stream.
+# @define {=>Function} whenChanged.unsubscribe Call this function to stop listening for data changes.
+# @exampleCoffeeScript
+# unsubscribe = supersonic.data.model('task').one('123', options).whenChanged (updatedTask)->
+#   supersonic.logger.log "Most recent data on task 123: ", updatedTask
+# @exampleJavaScript
+# var unsubscribe = supersonic.data.model('task').one('123', options).whenChanged( function(updatedTask) {
+#   supersonic.logger.log("Most recent data on task 123: ", updatedTask);
+# });
+#
+# // Later on, we can stop listening to updates
+# unsubscribe();
+###
+
+###
  # @namespace supersonic.data
  # @name Model.findAll
  # @function
