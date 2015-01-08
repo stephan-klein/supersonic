@@ -2,6 +2,14 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.0.11 (TODO)
+
+Features:
+- Added 3-way data binding support for single records by `one(123).whenChanged` on `supersonic.data.model`
+
+Bugfixes:
+- Resolved issue with `defaultStorage` for `supersonic.data.model` not being defined and the `cache` flag not working without specifying a storage
+
 ## 1.0.10 (2014-12-22)
 
 Bugfixes:
