@@ -15,14 +15,21 @@ module.exports = (steroids, log) ->
    # supersonic.ui.NavigationBarButton: (
    #   title: String
    #   onTap: Function
+   #   styleClass: String
+   #   styleId: String
+   #   styleCSS: String
    # )
    # @define {String} title The title text for the button.
    # @define {Function} onTap A function that gets executed when the navigation bar button is tapped.
+   # @define {String} styleClass A native CSS style class to be applied for the button.
+   # @define {String} styleId A native CSS style id to be applied for the button.
+   # @define {String} styleCSS Custom native CSS to be applied for the button.
    # @exampleCoffeeScript
    # options =
    #   title: "Settings"
    #   onTap: ->
    #     supersonic.ui.layers.push "common#settings"
+   #   styleId: "settings"
    #
    # button = new supersonic.ui.NavigationBarButton options
    # @exampleJavaScript
@@ -31,6 +38,7 @@ module.exports = (steroids, log) ->
    #   onTap: function() {
    #     supersonic.ui.layers.push("common#settings");
    #   }
+   #   styleId: "settings"
    #
    # var button = new supersonic.ui.NavigationBarButton(options)
   ###
