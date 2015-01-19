@@ -1,7 +1,7 @@
 {% assign class = include.class %}
 ## API Reference: {{class.namespace}}.{{class.name}}
 
-{{class.description}}
+{{class.description | markdownify}}
 
 {% if class.exampleCoffeeScript || class.exampleJavaScript %}
 

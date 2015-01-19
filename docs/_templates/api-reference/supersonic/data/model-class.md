@@ -25,8 +25,14 @@ The following methods are properties of the Model class.
 {% assign method = site.data.supersonic.data.model.Model-findAll %}
 {% include api_method.md method=method %}
 
+{% assign method = site.data.supersonic.data.model.Model-fromJson %}
+{% include api_method.md method=method %}
+
+{% assign method = site.data.supersonic.data.model.Model-one %}
+{% include api_method.md method=method %}
+
 <br><br>
-<section id="model-instance">
+
 <h1>Model Class Instance Description</h1>
 <hr>
 
@@ -42,4 +48,3 @@ The following methods are properties of a Model class instance.
 
 {% assign method = site.data.supersonic.data.model.Model-delete %}
 {% include api_method.md method=method instance_method=true %}
-</section>

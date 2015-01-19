@@ -1,8 +1,6 @@
 {% assign method = include.method %}
-{% assign instance_name = method.name | split: '-' %}
-## API Reference: {{instance_name.first}}
 
-{{method.description}}
+{{method.description | markdownify}}
 
 {% if method.exampleCoffeeScript || method.exampleJavaScript %}
 

@@ -89,13 +89,15 @@ module.exports = (logger, window, defaultStorage) ->
 #   all: (queryParams, options) => Object
 #   findAll: (queryParams) => Promise Collection
 #   find: (id) => Promise Model
-#   fromJson: (json) -> Model
+#   fromJson: (json) => Model
+#   one: (options) => Object
 # }
 # @methods all find findAll
-# @define {Function} all Access a stream of Collections. A Collection contains Model instances, representing records in the backend. The stream is updated with fresh data at periodic intervals.
+# @define {Function} all Access a stream of Collections, triggered when new data is available. A Collection contains Model instances, representing records in the backend. The stream is updated with fresh data at periodic intervals.
 # @define {Function} findAll Returns a [`Promise`](/supersonic/guides/technical-concepts/promises/) that resolves to a Collection of Model instances, representing all the records in the backend for the resource represented by this Model class.
 # @define {Function} find Returns a [`Promise`](/supersonic/guides/technical-concepts/promises/) that resolves to a Model instance representing the record with the given id.
 # @define {Function} fromJson Create a persisted Model instance from serialized data.
+# @define {Function} one Access a stream of updates to a single Model instance, triggered when new data is available.
 ###
 
 ###
@@ -120,10 +122,15 @@ module.exports = (logger, window, defaultStorage) ->
 # @define {=>Function} whenChanged Called with a Collection matching the original query. Called every `options.interval` ms, but only when new data is available. Returns a function that can be used to unsubscribe from the update stream.
 # @define {=>Function} whenChanged.unsubscribe Call this function to stop listening for data changes.
 # @exampleCoffeeScript
-# unsubscribe = supersonic.data.model('task').all(queryParameters, options).whenChanged (updatedTasks)->
+# Task = supersonic.data.model 'task'
+# unsubscribe = Task.all(queryParameters, options).whenChanged (updatedTasks)->
 #   supersonic.logger.log "First element of updated Task collection: ", updatedTasks[0]
+#
+# # Later on, we can stop listening to updates
+# unsubscribe()
 # @exampleJavaScript
-# var unsubscribe = supersonic.data.model('task').all(queryParameters, options).whenChanged( function(updatedTasks) {
+# var Task = supersonic.data.model('task');
+# var unsubscribe = Task.all(queryParameters, options).whenChanged( function(updatedTasks) {
 #   supersonic.logger.log("First element of updated Task collection: ", updatedTasks[0]);
 # });
 #
@@ -138,8 +145,10 @@ module.exports = (logger, window, defaultStorage) ->
 # @type
 # one: (
 #   id: String
+#   options?:
+#     interval?: Integer
 # ) =>
-#   whenChanged: (Collection) =>
+#   whenChanged: (Model) =>
 #     unsubscribe: Function
 # @description
 # Find a single record from the cloud by an id. The results are made available as a stream that gets updated with the latest data every `interval` ms.
@@ -153,12 +162,15 @@ module.exports = (logger, window, defaultStorage) ->
 # @exampleCoffeeScript
 # unsubscribe = supersonic.data.model('task').one('123', options).whenChanged (updatedTask)->
 #   supersonic.logger.log "Most recent data on task 123: ", updatedTask
+#
+# # Later on, we can stop listening for updates
+# unsubscribe()
 # @exampleJavaScript
 # var unsubscribe = supersonic.data.model('task').one('123', options).whenChanged( function(updatedTask) {
 #   supersonic.logger.log("Most recent data on task 123: ", updatedTask);
 # });
 #
-# // Later on, we can stop listening to updates
+# // Later on, we can stop listening for updates
 # unsubscribe();
 ###
 
@@ -167,12 +179,12 @@ module.exports = (logger, window, defaultStorage) ->
  # @name Model.findAll
  # @function
  # @type
- # findAll: () => Promise collection: Collection Model
+ # findAll: () => Promise collection: Collection<Model>
  # @description
  # Fetch and access all the records in the cloud resource represented by this Model class.
  # @returnsDescription
  # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that resolves with a Collection of Model instances, each of whom represents a single record.
- # @define {=>Collection Model} collection A Collection that contains Model instances for all the records in the cloud resource represented by this Model class.
+ # @define {=>Collection<Model>} collection A Collection that contains Model instances for all the records in the cloud resource represented by this Model class.
  # @exampleCoffeeScript
  # supersonic.data.model('task').findAll().then (tasks) ->
  #   for task in tasks
@@ -189,7 +201,7 @@ module.exports = (logger, window, defaultStorage) ->
  # @name Model.find
  # @function
  # @type
- # find: (id: String) => Promise model instance
+ # find: (id: String) => Promise Model
  # @description
  # Find a single record from the cloud by an id. Returns a Model instance matching that record.
  # @define {String} id An id string matching a record in the cloud resource represented by this Model class.
@@ -211,16 +223,30 @@ module.exports = (logger, window, defaultStorage) ->
  # fromJson: (json: Object) => Model
  # @description
  # Restore a persisted Model instance from serialized data.
+ # @define {Object} json A JSON object used to create the Model instance.
  # @exampleCoffeeScript
  # Task = supersonic.data.model('task')
  # Task.find(123).then (task) ->
  #   serialized = task.toJson()
- #   # At this point the task can be eg stored to localStorage
+ #   # At this point the task can be e.g. stored to localStorage
  #   # Retrieve it from the storage-compatible format using fromJson
  #   task = Task.fromJson(serialized)
  #   task.description = 'updated!'
- #   # Unlike the serialized object, the instance has all the behavior intact
+ #   # Unlike the serialized JSON object, the restored model instance
+ #   # has all the behavior intact.
  #   task.save()
+ # @exampleJavaScript
+ # var Task = supersonic.data.model('task');
+ # Task.find(123).then( function(task) {
+ #   var serialized = task.toJson();
+ #   // At this point the task can be e.g. stored to localStorage
+ #   // Retrieve it from the storage-compatible format using fromJson
+ #   var task = Task.fromJson(serialized);
+ #   task.description = 'Updated!';
+ #   // Unlike the serialized JSON object, the restored model instance
+ #   // has all the behavior intact.
+ #   task.save();
+ #  });
 ###
 ###
  # @namespace supersonic.data
