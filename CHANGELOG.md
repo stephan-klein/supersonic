@@ -2,10 +2,13 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## 1.0.12 (TODO)
+## 1.1.0 (2015-01-20)
 
 Features:
-- Updated `supersonic.css` to match Ionic's v1.0.0-beta.14 "magnesium-mongoose" release.
+- Updated Supersonic CSS to match Ionic's v1.0.0-beta.14 "magnesium-mongoose" release.
+- Re-enabled some disabled Ionic components to ensure better backwards compatibility with Ionic apps.
+
+*Note: These updates include minor cosmetic tweaks to the UI – nothing major. That said, you might still want to check your app to ensure everything looks as it should after the update. For those interested, full list of changes can be found in [this commit](https://github.com/AppGyver/supersonic/commit/9bc7e85b355206087ff9722954e982957ca21304).*
 
 ## 1.0.11 (2015-01-08)
 
