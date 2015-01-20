@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
 @import
-
-  // Icons
+  // Ionicons
   "ionicons/ionicons.scss",
 
   // Variables
@@ -17,6 +16,8 @@
   // Components
   "action-sheet",
   "backdrop",
+  "bar",
+  "tabs",
   "menu",
   "modal",
   "popover",
@@ -41,10 +42,13 @@
   "button-bar",
 
   // Util
-  "animations",
   "grid",
   "util",
   "platform",
+
+  // Animations
+  "animations",
+  "transitions",
 
   // Web Components
   "web-components";

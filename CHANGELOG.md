@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.0.12 (TODO)
+
+Features:
+- Updated `supersonic.css` to match Ionic's v1.0.0-beta.14 "magnesium-mongoose" release.
+
 ## 1.0.11 (2015-01-08)
 
 Features:
