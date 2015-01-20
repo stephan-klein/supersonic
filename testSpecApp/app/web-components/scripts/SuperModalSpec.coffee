@@ -1,5 +1,5 @@
 before ->
-  importsLoaded
+  window.importsLoaded
 
 fireAfterModalDidShow = (done) ->
   showListener = steroids.modal.on "didshow", ->
@@ -15,6 +15,15 @@ fireAfterModalDidHideAndShow = (done) ->
   fireAfterModalDidShow ->
     fireAfterModalDidHide ->
       done()
+
+clickElement = (id)->
+  element = document.getElementById id
+  element.click()
+
+fireTouchEvent = (obj, evt) ->
+  evObj = document.createEvent "TouchEvent"
+  evObj.initUIEvent evt, true, false
+  obj.dispatchEvent evObj
 
 describe "<super-modal-show> and <super-modal-hide>", ->
   @timeout 10000

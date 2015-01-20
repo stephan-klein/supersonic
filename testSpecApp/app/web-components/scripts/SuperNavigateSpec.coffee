@@ -1,5 +1,5 @@
 before ->
-  importsLoaded
+  window.importsLoaded
 
 fireWhenLayerDidChange = (done) ->
   listener = steroids.layers.on "didchange", ->
@@ -9,6 +9,15 @@ fireWhenLayerDidChange = (done) ->
 fireWhenLayerDidChangeTwice = (done) ->
   fireWhenLayerDidChange ->
     fireWhenLayerDidChange done
+
+clickElement = (id)->
+  element = document.getElementById id
+  element.click()
+
+fireTouchEvent = (obj, evt) ->
+  evObj = document.createEvent "TouchEvent"
+  evObj.initUIEvent evt, true, false
+  obj.dispatchEvent evObj
 
 describe "<super-navigate>", ->
   @timeout 4000
