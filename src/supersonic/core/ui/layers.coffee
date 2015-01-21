@@ -23,11 +23,12 @@ module.exports = (steroids, log) ->
    #   view: View|String
    #   options?:
    #     params?: Object|String
+   #     animation?: Animation
    # ) => Promise
    # @define {View|String} view A View or View identifier to be pushed on top of the navigation stack.
    # @define {Object} options An optional options object.
    # @define {String|Object} options.params On object or JSON string of optional parameters to be passed to the target View, accessible via `supersonic.ui.views.params.current`.
-   # @define {Animation} animation=slideFromRight **(iOS-only)** A custom transition animation, definable by calling `supersonic.ui.animate()`.
+   # @define {Animation} options.animation=slideFromRight **(iOS-only)** A custom transition animation, definable by calling `supersonic.ui.animate()`.
    # @returnsDescription
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that gets resolved with the provided View instance once the push has started. If the view cannot be pushed, the promise is rejected.
    # @supportsCallbacks
@@ -39,7 +40,7 @@ module.exports = (steroids, log) ->
    #   supersonic.ui.layers.push startedView
    #
    # # Push with custom animation
-   # customAnimation = supersonic.ui.animate("flipVerticalFromTop")
+   # customAnimation = supersonic.ui.animate "flipVerticalFromTop"
    # supersonic.ui.layers.push view, { animation: customAnimation }
    #
    # @exampleJavaScript
