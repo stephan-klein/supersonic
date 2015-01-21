@@ -25,7 +25,9 @@ module.exports = (steroids, log) ->
    #     params?: Object|String
    # ) => Promise
    # @define {View|String} view A View or View identifier to be pushed on top of the navigation stack.
-   # @define {String|Object} params On object or JSON string of optional parameters to be passed to the target View, accessible via `supersonic.ui.views.params.current`.
+   # @define {Object} options An optional options object.
+   # @define {String|Object} options.params On object or JSON string of optional parameters to be passed to the target View, accessible via `supersonic.ui.views.params.current`.
+   # @define {Animation} animation=slideFromRight A custom transition animation, definable by calling `supersonic.ui.animate()`.
    # @returnsDescription
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that gets resolved with the provided View instance once the push has started. If the view cannot be pushed, the promise is rejected.
    # @supportsCallbacks
@@ -36,13 +38,21 @@ module.exports = (steroids, log) ->
    # supersonic.ui.views.find("settingsView").then (startedView) ->
    #   supersonic.ui.layers.push startedView
    #
+   # # Push with custom animation
+   # customAnimation = supersonic.ui.animate("flipVerticalFromTop")
+   # supersonic.ui.layers.push view, { animation: customAnimation }
+   #
    # @exampleJavaScript
    # var view = new supersonic.ui.View("example#settings");
-   # supersonic.ui.layers.push(view)
+   # supersonic.ui.layers.push(view);
    #
    # supersonic.ui.views.find("settingsView").then( function(startedView) {
-   #   supersonic.ui.layers.push(startedView)
+   #   supersonic.ui.layers.push(startedView);
    # });
+   #
+   # // Push with custom animation
+   # var customAnimation = supersonic.ui.animate("flipVerticalFromTop");
+   # supersonic.ui.layers.push(view, { animation: customAnimation });
   ###
   push: s.promiseF "push", (viewOrId, options={}) ->
     new Promise (resolve, reject) ->
@@ -59,6 +69,7 @@ module.exports = (steroids, log) ->
       .then (view)->
         steroids.layers.push
           view: view._webView
+          animation: options.animation
         ,
           onSuccess: ->
             resolve view
