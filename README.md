@@ -94,4 +94,4 @@ Publish:
 
     git push origin master --tags
 
-Note that tags will not go through to the `supersonic-bower` repo yet – releases must be tagged manually in that repo.
+After Travis runs its course, the new version will be available on Bower with the version tag you entered.
