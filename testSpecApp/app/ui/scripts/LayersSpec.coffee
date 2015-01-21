@@ -27,7 +27,7 @@ describe "supersonic.ui.layers", ->
         fireWhenLayerDidChangeTwice done
         supersonic.ui.layers.push "ui#empty"
 
-      it "should push with a route and custom animation", (done) ->
+      it "(iOS-only) should push with a route and custom animation", (done) ->
         @timeout 4000
         fireWhenLayerDidChangeTwice done
         customAnimation = supersonic.ui.animate "flipVerticalFromTop"
