@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.1.1 (TODO)
+
+Features:
+- Custom animation support to `supersonic.ui.layers.push` (iOS-only, see [open ticket](https://github.com/AppGyver/steroids/issues/776) about Android native support). Closes [#721](https://github.com/AppGyver/steroids/issues/721).
+
 ## 1.1.0 (2015-01-20)
 
 Features:
