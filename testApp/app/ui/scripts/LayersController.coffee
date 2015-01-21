@@ -7,6 +7,11 @@ angular
       supersonic.ui.layers.push(view).then ()->
         supersonic.logger.log "myView pushed as a layer"
 
+    $scope.navigateWithAnimation = ->
+      customAnimation = supersonic.ui.animate "flipHorizontalFromLeft"
+      supersonic.ui.layers.push(view, animation: customAnimation).then ()->
+        supersonic.logger.log "myView pushed as a layer with custom animation"
+
     $scope.pop = ()->
       supersonic.ui.layers.pop().then ()->
         supersonic.logger.log "Layer popped successfully"

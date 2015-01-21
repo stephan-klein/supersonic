@@ -27,6 +27,12 @@ describe "supersonic.ui.layers", ->
         fireWhenLayerDidChangeTwice done
         supersonic.ui.layers.push "ui#empty"
 
+      it "should push with a route and custom animation", (done) ->
+        @timeout 4000
+        fireWhenLayerDidChangeTwice done
+        customAnimation = supersonic.ui.animate "flipVerticalFromTop"
+        supersonic.ui.layers.push "ui#empty", animation: customAnimation
+
       it "should push a view object with location", (done) ->
         @timeout 4000
         fireWhenLayerDidChangeTwice done
