@@ -26,6 +26,19 @@ Ad Hoc and Google Play builds are standalone versions of your cloud deployed pro
 
 For example, if you have published your app to Google Play or some other app store, you might want to keep a separate development version on the side via Ad Hoc build, so you don't have to overwrite your latest stable store release.
 
+## ARM vs. x86 builds
+
+We strongly recommend that you upload two separate APK files to the Google Play store when you’re using the Crosswalk builds.
+
+1. Crosswalk ARM build allows your APK to be deployed on 95% of Android devices.
+2. Crosswalk x86 build is required for your application to work on Intel based devices, which there are a couple (eg. Asus Memopad, Samsung Galaxy Tab 3).
+
+You can build both builds separately and upload them under the same app in Google Play. See [their Multiple APK guide](http://developer.android.com/google/play/publishing/multiple-apks.html) for more information.
+
+There is also a third option which will build an APK containing both ARM and x86 Crosswalk runtimes. You can use this if you do not care about your APK file size. Especially during testing we recommend this option.
+
+Each native runtime will add ~18MB to the APK file size. So ARM only and x86 only are both ~18MB at minimum, while the APK containing both ARM+x86 is ~35MB at minimum.
+
 ## Crosswalk builds
 
 All the Android build types described above are also available as Crosswalk builds. The Crosswalk builds use [Crosswalk](https://crosswalk-project.org/) for your app's WebView in place of the regular Android Webview. For further information:
