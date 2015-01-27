@@ -11,6 +11,12 @@ parent_id: tooling
 # Steroids² CLI
 The Steroids command-line interface provides tools to build your project and serve it to the testing device. The Connect screen is a GUI extension of the CLI tooling.
 
+To update your Steroids² CLI to the latest version, simply run in a terminal window
+
+```
+npm install steroids -g
+```
+
 </section>
 <section class="docs-section" id="starting-the-steroids-development-server">
 
