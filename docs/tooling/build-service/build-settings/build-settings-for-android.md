@@ -69,6 +69,7 @@ For both Google Play and Ad Hoc Build, you need to enter:
 * Package Identifier for your app. This must be a reverse-domain, Java-language-style package name, e.g. `com.phoenixfoundation.macgyverapp` (or `com.phoneixfoundation.macgyvertest` for an Ad Hoc build). You can use letters, numbers and underscores, but individual package name parts must start with letters. Don't use the `com.example` namespace when publishing your app. The package name has to have at least two parts, i.e. just `myappname` won't work but `com.myappname` will.
 * Version Code. This is an internal version number, set as an integer, e.g. "100". Each successive version of your app must have a higher Version Code.
 * Version Number. The version number shown to users, e.g. "1.0".
+* Minimum and Maximum SDK versions. These settings are used to determine your application's compatibility with different versions of the Android platform. We recommend using as Minimum SDK version 14 and as the Maximum the biggest version possible.
 
 ### Scanner build
 
