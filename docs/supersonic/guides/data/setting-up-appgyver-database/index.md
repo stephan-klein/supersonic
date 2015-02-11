@@ -1,6 +1,6 @@
 ---
 layout: docs_data
-header_sub_title: APIs having to do with the properties and hardware of your mobile device.
+header_sub_title: APIs to access local and cloud data
 parent_id: supersonic
 section_id: setting-up-appgyver-database
 ---
