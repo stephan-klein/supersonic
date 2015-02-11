@@ -7,14 +7,6 @@ subsection_id: drawers
 topics:
   - name: Defining drawers
   - name: Programmatic APIs
-  - name: init
-    method: true
-  - name: close
-    method: true
-  - name: open
-    method: true
-  - name: updateOptions
-    method: true
 ---
 
 <section class="docs-section" id="drawers">
@@ -56,25 +48,5 @@ The `showOnAppLoad` property determines whether your drawer should be visible on
 <section class="docs-section" id="programmatic-apis">
 ## Programmatic APIs
 
-Supersonic provides API access to drawers at app runtime, so you can programmatically [create](#init), [open](#open) and [close](#close) drawers, as well as [updating or replacing](#updateOptions) them entirely.
-</section>
-<hr>
-<section class="docs-section" id="init">
-{% assign method = site.data.supersonic.ui.drawers.init %}
-{% include api_method.md method=method %}
-</section>
-
-<section class="docs-section" id="close">
-{% assign method = site.data.supersonic.ui.drawers.close %}
-{% include api_method.md method=method %}
-</section>
-
-<section class="docs-section" id="open">
-{% assign method = site.data.supersonic.ui.drawers.open %}
-{% include api_method.md method=method %}
-</section>
-
-<section class="docs-section" id="updateOptions">
-{% assign method = site.data.supersonic.ui.drawers.updateOptions %}
-{% include api_method.md method=method %}
+Supersonic also provides JavaScript API access to drawers at app runtime, via the `supersonic.ui.drawers.*` namespace. See the available methods on the [supersonic.ui.drawers API docs page](/supersonic/api-reference/stable/supersonic/ui/drawers/)
 </section>
