@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.1.2 (2015-02-25)
+
+Bugfixes:
+- `super-navbar`, `super-navbar-title` and `super-navbar-button` properly hide their content from the DOM
+
 ## 1.1.1 (2015-01-21)
 
 Features:
