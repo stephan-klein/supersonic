@@ -22,7 +22,7 @@ The **modal screen** is a special kind of container for a `supersonic.ui.View` o
 {% include api_method.md method=method %}
 </section>
 
-<section class="docs-section" id="show">
-{% assign method = site.data.supersonic.ui.modal.hide %}
+<section class="docs-section" id="hideAll">
+{% assign method = site.data.supersonic.ui.modal.hideAll %}
 {% include api_method.md method=method %}
 </section>
