@@ -196,7 +196,7 @@ Now the variable `message` in the both WebViews is kept in synch thanks to super
 
 A frequenly occuring pattern in an app is the need to navigate from the list of a document collection to the view of a single document.
 
-Eg. in the following we have a WebView that lists all documents in colleciton `beers`. Each of the beers have property `id` that identifies the document. When clicking to an document having id 42, the [super-navigate](/supersonic/api-reference/stable/components/super-navbar/) element is used to open the WebView `beers#show?id=42`, where `beers#show` identifies the WebView and rest of the url is a view parameter.
+Eg. in the following we have a WebView that lists all documents in colleciton `beers`. Each of the beers have property `id` that identifies the document. When clicking to a document having id 42, the [super-navigate](/supersonic/api-reference/stable/components/super-navbar/) element is used to open the WebView `beers#show?id=42`, where `beers#show` identifies the WebView and rest of the url is a view parameter.
 
 ```html
 <ul class="list">
