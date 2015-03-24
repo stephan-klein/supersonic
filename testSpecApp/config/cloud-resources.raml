@@ -1,25 +1,106 @@
 #%RAML 0.8
 title: Steroids Data
 mediaType: application/json
-baseUri: http://rest-api.testgyver.com/v1
+baseUri: https://rest-api.appgyver.com/v1/
 
 traits:
   - securedBySteroidsApiKey:
       headers:
         steroidsApiKey:
           type: string
-          example: identificationhashgoeshere
-          default: 28e8afec12e2e21c4a59c6895ce2b51186a52e2bb989d51eb774caafa32d96de
+          example: exampleapikey
+          default: 71fcb87a3c5bea2982997080ebe5d329b1ff37e2f7884d8c4b2471301fc6bb40
         steroidsAppId:
           type: integer
           example: 1234
-          default: 11638
+          default: 52559
 
 schemas:
-  - tasks: '{"$schema":"http://json-schema.org/schema","title":"task collection","type":"object","properties":{"object":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical task representation","properties":{"ACL":{"type":"object"},"app_user_object_uid":{"type":"string"},"completed":{"type":"boolean"},"created_at":{"type":"string"},"description":{"type":"string"},"published":{"type":"boolean"},"tags":{"type":"array"},"uid":{"type":"string"},"updated_at":{"type":"string"},"_version":{"type":"string"}},"required":[]}}}}'
-  - task: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical task representation","properties":{"object":{"type":"object","properties":{"ACL":{"type":"object"},"app_user_object_uid":{"type":"string"},"completed":{"type":"boolean"},"created_at":{"type":"string"},"description":{"type":"string"},"published":{"type":"boolean"},"tags":{"type":"array"},"uid":{"type":"string"},"updated_at":{"type":"string"},"_version":{"type":"string"}},"required":[]}}}'
+  - SandboxTask_collection: '{"$schema":"http://json-schema.org/schema","title":"SandboxTask collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxTask representation","properties":{"description":{"type":"string"},"completed":{"type":"boolean"}},"required":[]}}}}'
+  - SandboxTask_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxTask representation","properties":{"object":{"type":"object","properties":{"description":{"type":"string"},"completed":{"type":"boolean"}},"required":[]}}}'
+  - BuiltIOTask_collection: '{"$schema":"http://json-schema.org/schema","title":"BuiltIOTask collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical BuiltIOTask representation","properties":{"updated_at":{"type":"string"},"created_at":{"type":"string"},"description":{"type":"string"},"completed":{"type":"boolean"},"ACL":{"type":"object"},"tags":{"type":"array"},"updated_by":{"type":"string"},"created_by":{"type":"string"},"app_user_object_uid":{"type":"string"},"published":{"type":"boolean"},"uid":{"type":"string"},"_version":{"type":"integer"}},"required":[]}}}}'
+  - BuiltIOTask_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical BuiltIOTask representation","properties":{"object":{"type":"object","properties":{"updated_at":{"type":"string"},"created_at":{"type":"string"},"description":{"type":"string"},"completed":{"type":"boolean"},"ACL":{"type":"object"},"tags":{"type":"array"},"updated_by":{"type":"string"},"created_by":{"type":"string"},"app_user_object_uid":{"type":"string"},"published":{"type":"boolean"},"uid":{"type":"string"},"_version":{"type":"integer"}},"required":[]}}}'
 
 resourceTypes:
+  - dolan_db_collection:
+      usage: This resourceType should be used for any collection of items
+      is: [ securedBySteroidsApiKey ]
+      get:
+        description: |
+          {
+            "action": "collection"
+          }
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "objects"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>>_collection # e.g cars
+      post:
+        description: |
+          {
+            "action": "create",
+            "rootKey": "object"
+          }
+        body:
+          application/json:
+            schema: <<resourcePathName>>_member
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "object"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>>_member # e.g. car
+
+  - dolan_db_member:
+      usage: This resourceType should be used for any built.io item
+      is: [ securedBySteroidsApiKey ]
+      get:
+        description: |
+          {
+            "action": "find"
+          }
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "object"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>>_member # e.g. car
+      put:
+        description: |
+          {
+            "action": "update",
+            "rootKey": "object"
+          }
+        body:
+          application/json:
+            schema: <<resourcePathName>>_member
+        responses:
+          200:
+            description: |
+              {
+                "rootKey": "object"
+              }
+            body:
+              application/json:
+                schema: <<resourcePathName>>_member
+      delete:
+        description: |
+          {
+            "action": "destroy"
+          }
+        responses:
+          200:
+
   - built_io_collection:
       usage: This resourceType should be used for any collection of items
       is: [ securedBySteroidsApiKey ]
@@ -36,7 +117,7 @@ resourceTypes:
               }
             body:
               application/json:
-                schema: <<resourcePathName>> # e.g cars
+                schema: <<resourcePathName>>_collection # e.g cars
       post:
         description: |
           {
@@ -45,7 +126,7 @@ resourceTypes:
           }
         body:
           application/json:
-            schema: <<resourcePathName | !singularize>>
+            schema: <<resourcePathName>>_member
         responses:
           200:
             description: |
@@ -54,7 +135,7 @@ resourceTypes:
               }
             body:
               application/json:
-                schema: <<resourcePathName | !singularize>> # e.g. car
+                schema: <<resourcePathName>>_member # e.g. car
 
   - built_io_member:
       usage: This resourceType should be used for any built.io item
@@ -72,7 +153,7 @@ resourceTypes:
               }
             body:
               application/json:
-                schema: <<resourcePathName>> # e.g. car
+                schema: <<resourcePathName>>_member # e.g. car
       put:
         description: |
           {
@@ -81,7 +162,7 @@ resourceTypes:
           }
         body:
           application/json:
-            schema: <<resourcePathName | !singularize>>
+            schema: <<resourcePathName>>_member
         responses:
           200:
             description: |
@@ -90,22 +171,34 @@ resourceTypes:
               }
             body:
               application/json:
-                schema: <<resourcePathName>>
+                schema: <<resourcePathName>>_member
       delete:
         description: |
           {
-            "action": "remove"
+            "action": "destroy"
           }
         responses:
           200:
 
 
-/task:
+/SandboxTask:
   description: |
     {
-      "resourceName": "task"
+      "resourceName": "SandboxTask",
+      "identifierKey": "id"
+    }
+  type: dolan_db_collection
+  /{id}:
+    type: dolan_db_member
+
+/BuiltIOTask:
+  description: |
+    {
+      "resourceName": "BuiltIOTask",
+      "identifierKey": "uid"
     }
   type: built_io_collection
   /{id}:
     type: built_io_member
+
 
