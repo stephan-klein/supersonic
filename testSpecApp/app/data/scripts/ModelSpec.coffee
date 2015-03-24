@@ -2,15 +2,23 @@ describe "supersonic.data.model", ->
   it "is a function", ->
     supersonic.data.model.should.be.a 'function'
 
-  it "returns a model class when given the name of a configured cloud resource", ->
-    supersonic.data.model('SandboxTask').should.be.a 'function'
+  describe "for any configured resource", ->
+    it "returns a model class when given the name of a configured cloud resource", ->
+      supersonic.data.model('SandboxTask').should.be.a 'function'
 
-  it "receives configured cloud resources as an injected global in window.ag.data", ->
-    window.ag.data.resources.SandboxTask.should.be.an 'object'
+    it "receives configured cloud resources as an injected global in window.ag.data", ->
+      window.ag.data.resources.SandboxTask.should.be.an 'object'
 
-  it "should be able to retrieve a collection from the cloud with the configured settings", ->
-    @timeout 5000
-    supersonic.data.model('SandboxTask').findAll().should.be.fulfilled
+  describe "accessing sandbox resources", ->
+    it "should be able to retrieve a collection", ->
+      @timeout 5000
+      supersonic.data.model('SandboxTask').findAll().should.be.fulfilled
+
+
+  describe "accessing remote resources", ->
+    it "should be able to retrieve a collection", ->
+      @timeout 5000
+      supersonic.data.model('BuiltIOTask').findAll().should.be.fulfilled
 
   describe "when passing in options", ->
 
