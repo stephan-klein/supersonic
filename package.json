@@ -22,7 +22,6 @@
   "homepage": "https://github.com/AppGyver/supersonic",
   "devDependencies": {
     "canonical-path": "0.0.2",
-    "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
     "coffeeify": "^0.7.0",
     "cpr": "^0.3.2",
@@ -55,7 +54,7 @@
     "semver": "^3.0.1",
     "winston": "^0.8.0",
     "sinon": "~1.11.1",
-    "sinon-chai": "~2.6.0"
+    "sinon-chai": "^2.6.0"
   },
   "config": {
     "blanket": {
