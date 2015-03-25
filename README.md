@@ -5,7 +5,6 @@ SUPERSONIC
 
 [![Build Status](http://img.shields.io/travis/AppGyver/supersonic/master.svg)](https://travis-ci.org/AppGyver/supersonic)
 [![Dependency Status](http://img.shields.io/david/AppGyver/supersonic.svg)](https://david-dm.org/AppGyver/supersonic)
-[![Coverage Status](https://img.shields.io/coveralls/AppGyver/supersonic.svg)](https://coveralls.io/r/AppGyver/supersonic)
 
 Supersonic HTML5 app development on [Steroids](http://www.appgyver.com/steroids). The CSS library is forked from [Ionic](https://github.com/driftyco/ionic/) with love.
 
