@@ -6,9 +6,6 @@
     "grunt-shell": "^1.1.1",
     "grunt-steroids": "^1.0.6"
   },
-  "devDependencies": {
-    "grunt-steroids": "1.x"
-  },
   "engines": {
     "steroids": "3.5.0"
   }
