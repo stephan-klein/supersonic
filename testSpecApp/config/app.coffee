@@ -6,10 +6,12 @@ module.exports =
     name: "Supersonic testSpecApp"
     version: "0.1.0"
 
+  # This config flag is enabled for testing the CORS-issue prevention in the native client.
+  # X-Job-Id, steroidsAppId and steroidsApiKey need to be here for Supersonic Data.
   network:
     extraResponseHeaders:
       "Access-Control-Allow-Origin": "*"
-      "Access-Control-Allow-Headers": "Content-Type, X-Requested-With, steroidsAppId, steroidsApiKey"
+      "Access-Control-Allow-Headers": "Content-Type, X-Requested-With, X-Job-Id, steroidsAppId, steroidsApiKey"
 
   splashscreen:
     autohide: true

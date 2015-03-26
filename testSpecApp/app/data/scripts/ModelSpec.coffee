@@ -2,22 +2,30 @@ describe "supersonic.data.model", ->
   it "is a function", ->
     supersonic.data.model.should.be.a 'function'
 
-  it "returns a model class when given the name of a configured cloud resource", ->
-    supersonic.data.model('task').should.be.a 'function'
+  describe "for any configured resource", ->
+    it "returns a model class when given the name of a configured cloud resource", ->
+      supersonic.data.model('SandboxTask').should.be.a 'function'
 
-  it "receives configured cloud resources as an injected global in window.ag.data", ->
-    window.ag.data.resources.task.should.be.an 'object'
+    it "receives configured cloud resources as an injected global in window.ag.data", ->
+      window.ag.data.resources.SandboxTask.should.be.an 'object'
 
-  it "should be able to retrieve a collection from the cloud with the configured settings", ->
-    @timeout 5000
-    supersonic.data.model('task').findAll().should.be.fulfilled
+  describe "accessing sandbox resources", ->
+    it "should be able to retrieve a collection", ->
+      @timeout 5000
+      supersonic.data.model('SandboxTask').findAll().should.be.fulfilled
+
+
+  describe "accessing remote resources", ->
+    it "should be able to retrieve a collection", ->
+      @timeout 5000
+      supersonic.data.model('BuiltIOTask').findAll().should.be.fulfilled
 
   describe "when passing in options", ->
 
     describe "assumptions", ->
       it "will fail to fetch any data if the correct headers are not in place", ->
         @timeout 5000
-        supersonic.data.model('task', {
+        supersonic.data.model('SandboxTask', {
           headers:
             steroidsApiKey: 'this is not the key you are looking for'
         }).findAll().should.not.be.fulfilled
@@ -26,7 +34,7 @@ describe "supersonic.data.model", ->
 
       it "can set headers through options", ->
         @timeout 5000
-        supersonic.data.model('task', {
+        supersonic.data.model('SandboxTask', {
           headers:
             steroidsApiKey: window.ag.data.options.headers.steroidsApiKey
             steroidsAppId: window.ag.data.options.headers.steroidsAppId
@@ -36,7 +44,7 @@ describe "supersonic.data.model", ->
         @timeout 5000
         # The call to findAll _should_ fail in case this overrides all default headers,
         # ie. steroidsApiKey is left out of the request
-        supersonic.data.model('task', {
+        supersonic.data.model('SandboxTask', {
           headers:
             steroidsAppId: window.ag.data.options.headers.steroidsAppId
         }).findAll().should.be.fulfilled
@@ -49,7 +57,7 @@ describe "supersonic.data.model", ->
         steroidsApiKey = supersonic.data.storage.property('steroids-api-key').set(window.ag.data.options.headers.steroidsApiKey)
         steroidsAppId = supersonic.data.storage.property('steroids-app-id').set(window.ag.data.options.headers.steroidsAppId)
 
-        findAll = supersonic.data.model('task', {
+        findAll = supersonic.data.model('SandboxTask', {
           headers:
             steroidsApiKey: steroidsApiKey.values
             steroidsAppId: steroidsAppId.values
