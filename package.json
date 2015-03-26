@@ -64,11 +64,11 @@
     }
   },
   "dependencies": {
-    "ag-data": "^0.9.1",
-    "baconjs": "^0.7.34",
-    "bluebird": "^2.9.14",
+    "ag-data": "0.9.1",
+    "baconjs": "0.7.34",
+    "bluebird": "2.9.14",
     "coffee-script": "1.8.0",
     "deep-equal": "0.2.1",
-    "localforage": "^1.2.0"
+    "localforage": "1.2.0"
   }
 }
