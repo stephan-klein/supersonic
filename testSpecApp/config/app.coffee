@@ -7,6 +7,7 @@ module.exports =
     version: "0.1.0"
 
   # This config flag is enabled for testing the CORS-issue prevention in the native client.
+  # X-Job-Id, steroidsAppId and steroidsApiKey need to be here for Supersonic Data.
   network:
     extraResponseHeaders:
       "Access-Control-Allow-Origin": "*"
