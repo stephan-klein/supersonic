@@ -1,6 +1,6 @@
 data = require 'ag-data'
 
-module.exports = (logger, window, defaultStorage) ->
+module.exports = (logger, window, createDefaultStorage) ->
   ###
    # @namespace supersonic.data
    # @name model
@@ -59,7 +59,7 @@ module.exports = (logger, window, defaultStorage) ->
           # Set default cache storage when caching is enabled
           if options?.cache?.enabled
             unless options.cache.storage?
-              options.cache.storage = defaultStorage
+              options.cache.storage = createDefaultStorage()
 
           try
             bundle.createModel name, options
