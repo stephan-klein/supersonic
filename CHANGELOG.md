@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.2.0 (2015-03-26)
+
+Features:
+- Asynchronous job protocol enabled when accessing slow HTTP endpoints over the AG proxy v3 API.
+
 ## 1.1.2 (2015-02-25)
 
 Bugfixes:
