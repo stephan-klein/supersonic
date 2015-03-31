@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.2.1 (2015-03-31)
+
+Features:
+- `supersonic.data.storage.adapters` exposes factories for the default `localforage` adapter and an in-memory storage, which can be used as `supersonic.data.model` cache adapters.
+
 ## 1.2.0 (2015-03-26)
 
 Features:
