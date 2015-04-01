@@ -48,7 +48,7 @@ module.exports = (steroids, log, global) ->
    # ## Methods
    # * [whenVisible](/supersonic/api-reference/stable/supersonic/ui/views/current/whenvisible/) – registers a listener that is triggered when the view becomes visible.
    # * [whenHidden](/supersonic/api-reference/stable/supersonic/ui/views/current/whenhidden/) – registers a listener that is triggered when the view becomes hidden.
-   # * [params.onValue](/supersonic/api-reference/stable/supersonic/ui/views/current/params-onValue/) – access the parameters passed to this view by a navigation action.
+   # * [params.onValue](/supersonic/api-reference/stable/supersonic/ui/views/current/params-onvalue/) – access the parameters passed to this view by a navigation action.
   ###
 
   viewObject.visibility = events.visibility
