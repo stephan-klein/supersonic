@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.2.2 (2015-04-02)
+
+Features:
+- Asynchronous job protocol for slow HTTP endpoints also includes a feature flag in the `X-Feature-Jobs` header to improve backwards compatibility.
+
 ## 1.2.1 (2015-03-31)
 
 Features:
