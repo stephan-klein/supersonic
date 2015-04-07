@@ -9,7 +9,7 @@ subsection_id: designing-your-own-backend
 
 # Designing your own backend that works with Supersonic Data
 
-For your own backend to work with Supersonic Data, it needs to adhere to the [Representational State Transfer architecture](http://en.wikipedia.org/wiki/Representational_state_transfer). In short, it needs to be RESTful. All custom backends are configured via the [Custom REST backend](/guides/data/other-data-providers/custom-rest-backend/) provider, so it is a good idea to go through that guide first.
+For your own backend to work with Supersonic Data, it needs to adhere to the [Representational State Transfer architecture](http://en.wikipedia.org/wiki/Representational_state_transfer). In short, it needs to be RESTful. All custom backends are configured via the [Custom REST backend](/supersonic/guides/data/other-data-providers/custom-rest-backend/) provider, so it is a good idea to go through that guide first.
 
 In the case Supersonic Data, your backend should behave as follows:
 
