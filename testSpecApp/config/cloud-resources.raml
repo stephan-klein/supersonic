@@ -1,7 +1,7 @@
 #%RAML 0.8
 title: Steroids Data
 mediaType: application/json
-baseUri: https://rest-api.appgyver.com/v3/
+baseUri: https://rest-api.appgyver.com/v1/
 
 traits:
   - securedBySteroidsApiKey:
@@ -20,6 +20,8 @@ schemas:
   - SandboxTask_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxTask representation","properties":{"object":{"type":"object","properties":{"description":{"type":"string"},"completed":{"type":"boolean"}},"required":[]}}}'
   - BuiltIOTask_collection: '{"$schema":"http://json-schema.org/schema","title":"BuiltIOTask collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical BuiltIOTask representation","properties":{"updated_at":{"type":"string"},"created_at":{"type":"string"},"description":{"type":"string"},"completed":{"type":"boolean"},"ACL":{"type":"object"},"tags":{"type":"array"},"updated_by":{"type":"string"},"created_by":{"type":"string"},"app_user_object_uid":{"type":"string"},"published":{"type":"boolean"},"uid":{"type":"string"},"_version":{"type":"integer"}},"required":[]}}}}'
   - BuiltIOTask_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical BuiltIOTask representation","properties":{"object":{"type":"object","properties":{"updated_at":{"type":"string"},"created_at":{"type":"string"},"description":{"type":"string"},"completed":{"type":"boolean"},"ACL":{"type":"object"},"tags":{"type":"array"},"updated_by":{"type":"string"},"created_by":{"type":"string"},"app_user_object_uid":{"type":"string"},"published":{"type":"boolean"},"uid":{"type":"string"},"_version":{"type":"integer"}},"required":[]}}}'
+  - SandboxFileResource_collection: '{"$schema":"http://json-schema.org/schema","title":"SandboxFileResource collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxFileResource representation","properties":{"description":{"type":"string"},"file":{"type":"string"}},"required":[]}}}}'
+  - SandboxFileResource_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxFileResource representation","properties":{"object":{"type":"object","properties":{"description":{"type":"string"},"file":{"type":"string"}},"required":[]}}}'
 
 resourceTypes:
   - dolan_db_collection:
@@ -200,5 +202,15 @@ resourceTypes:
   type: built_io_collection
   /{id}:
     type: built_io_member
+
+/SandboxFileResource:
+  description: |
+    {
+      "resourceName": "SandboxFileResource",
+      "identifierKey": "id"
+    }
+  type: dolan_db_collection
+  /{id}:
+    type: dolan_db_member
 
 
