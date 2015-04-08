@@ -1,3 +1,23 @@
+
+FileFixture = do ->
+  # Encodes a red dot test image
+  # Source: http://en.wikipedia.org/wiki/Data_URI_scheme#Examples
+  redDotDataUri = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+
+  # Convert a data uri to an uploadable Blob
+  dataUriToBlob = (dataUri) ->
+    [type, encoding, content] = /data:([^;]*);([^,]*),(.*)$/.exec dataUri
+    binary = atob content
+    chars = (binary.charCodeAt(i) for i in [0..binary.length-1])
+    new Blob(
+      [new Uint8Array(chars)]
+      { type }
+    )
+
+  {
+    uploadableBlob: -> dataUriToBlob redDotDataUri
+  }
+
 describe "supersonic.data.model", ->
   it "is a function", ->
     supersonic.data.model.should.be.a 'function'
@@ -20,6 +40,22 @@ describe "supersonic.data.model", ->
       it "should be able to retrieve a collection", ->
         @timeout 5000
         supersonic.data.model('BuiltIOTask').findAll().should.be.fulfilled
+
+  describe "with a sandbox resource that has file fields", ->
+    describe "create", ->
+      it "should handle a file upload", ->
+        supersonic.data.model('SandboxFileResource').create({
+          description: 'supersonic.data.model.create test object'
+          file: FileFixture.uploadableBlob()
+        }).then (fileResource) ->
+          fileResource.should.have.property('file').be.an 'object'
+          fileResource.file.should.have.property('uploaded').equal true
+          fileResource.file.should.have.property('download_url').be.a 'string'
+
+      it "accepts an optional transaction handler that can abort the upload", ->
+        supersonic.data.model('SandboxFileResource').create({}, (t) ->
+          t.abort()
+        ).should.be.rejected
 
   describe "when passing in options", ->
 
