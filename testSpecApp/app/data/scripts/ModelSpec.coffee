@@ -9,16 +9,17 @@ describe "supersonic.data.model", ->
     it "receives configured cloud resources as an injected global in window.ag.data", ->
       window.ag.data.resources.SandboxTask.should.be.an 'object'
 
-  describe "accessing sandbox resources", ->
-    it "should be able to retrieve a collection", ->
-      @timeout 5000
-      supersonic.data.model('SandboxTask').findAll().should.be.fulfilled
+  describe "with a sandbox resource", ->
+    describe "findAll", ->
+      it "should be able to retrieve a collection", ->
+        @timeout 5000
+        supersonic.data.model('SandboxTask').findAll().should.be.fulfilled
 
-
-  describe "accessing remote resources", ->
-    it "should be able to retrieve a collection", ->
-      @timeout 5000
-      supersonic.data.model('BuiltIOTask').findAll().should.be.fulfilled
+  describe "with a remote resource", ->
+    describe "findAll", ->
+      it "should be able to retrieve a collection", ->
+        @timeout 5000
+        supersonic.data.model('BuiltIOTask').findAll().should.be.fulfilled
 
   describe "when passing in options", ->
 
