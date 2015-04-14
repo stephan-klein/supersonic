@@ -44,6 +44,7 @@ describe "supersonic.data.model", ->
   describe "with a sandbox resource that has file fields", ->
     describe "create", ->
       it "should handle a file upload", ->
+        @timeout 5000
         supersonic.data.model('SandboxFileResource').create({
           description: 'supersonic.data.model.create test object'
           file: FileFixture.uploadableBlob()
@@ -53,6 +54,7 @@ describe "supersonic.data.model", ->
           fileResource.file.should.have.property('download_url').be.a 'string'
 
       it "accepts an optional transaction handler that can abort the upload", ->
+        @timeout 5000
         supersonic.data.model('SandboxFileResource').create({}, (t) ->
           t.abort()
         ).should.be.rejected
