@@ -53,11 +53,13 @@ describe "supersonic.data.model", ->
           fileResource.file.should.have.property('uploaded').equal true
           fileResource.file.should.have.property('download_url').be.a 'string'
 
-      it "accepts an optional transaction handler that can abort the upload", ->
+      it "accepts an optional transaction handler", (done) ->
         @timeout 5000
-        supersonic.data.model('SandboxFileResource').create({}, (t) ->
-          t.abort()
-        ).should.be.rejected
+        supersonic.data.model('SandboxFileResource').create {}, (t) ->
+          done asserting ->
+            t.should.be.an 'object'
+            t.should.have.property('done').property('then').be.a 'function'
+            t.should.have.property('abort').be.a 'function'
 
     describe "update", ->
       it "should handle a file upload", ->
@@ -69,13 +71,15 @@ describe "supersonic.data.model", ->
             file: FileFixture.uploadableBlob()
           }).should.eventually.have.property('file').property('uploaded').equal true
 
-      it "accepts an optional transaction handler that can abort the upload", ->
+      it "accepts an optional transaction handler", (done) ->
         supersonic.data.model('SandboxFileResource').create({
           description: 'supersonic.data.model.update test object'
         }).then (fileResource) ->
-          supersonic.data.model('SandboxFileResource').update(fileResource.id, {}, (t) ->
-            t.abort()
-          ).should.be.rejected
+          supersonic.data.model('SandboxFileResource').update fileResource.id, {}, (t) ->
+            done asserting ->
+              t.should.be.an 'object'
+              t.should.have.property('done').property('then').be.a 'function'
+              t.should.have.property('abort').be.a 'function'
 
   describe "when passing in options", ->
 
