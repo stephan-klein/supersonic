@@ -2,7 +2,7 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## 1.3.0
+## 1.3.0 (2015-04-15)
 
 Features:
 - `supersonic.data.model` supports direct file uploads for model fields configured with the type `file`.
