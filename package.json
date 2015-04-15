@@ -64,7 +64,7 @@
     }
   },
   "dependencies": {
-    "ag-data": "0.9.6",
+    "ag-data": "0.10.0",
     "baconjs": "0.7.34",
     "bluebird": "2.9.14",
     "coffee-script": "1.8.0",
