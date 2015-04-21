@@ -1,6 +1,9 @@
 data = require 'ag-data'
+Bacon = require 'baconjs'
 
 module.exports = (logger, window, createDefaultStorage) ->
+  AG_AUTH_ACCESS_TOKEN_KEY = "__ag:auth:access_token"
+
   ###
    # @namespace supersonic.data
    # @name model
@@ -57,8 +60,14 @@ module.exports = (logger, window, createDefaultStorage) ->
       unless options.cache.storage?
         options.cache.storage = createDefaultStorage()
 
-    options
+    if not options.storage
+      options.storage = createDefaultStorage()
 
+    if not options.headers?.Authorization?
+      options.headers ?= {}
+      options.headers.Authorization = Bacon.fromPromise options.storage.getItem(AG_AUTH_ACCESS_TOKEN_KEY)
+
+    options
 
   createModel = do ->
     if not window?.ag?.data?
@@ -76,7 +85,13 @@ module.exports = (logger, window, createDefaultStorage) ->
         options = withDefaults(options)
 
         try
-          bundle.createModel name, options
+          model = bundle.createModel name, options
+          Bacon.combineTemplate({
+            headers: options.headers or {}
+          }).onValue (acualOptions) ->
+            model.resource.setOptions(acualOptions)
+
+          model
         catch err
           logger.error "Tried to access cloud resource '#{name}', but it is not a configured resource"
           throw new Error "Could not load model #{name}: #{err}"

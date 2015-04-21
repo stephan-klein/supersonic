@@ -2,6 +2,7 @@ chai = require('chai')
 chai.should()
 chai.use require 'chai-as-promised'
 
+Promise = require 'bluebird'
 steroids = require '../src/supersonic/mock/steroids'
 window = require '../src/supersonic/mock/window'
 logger = require('../src/supersonic/core/logger')(steroids, window)
@@ -30,7 +31,27 @@ describe "supersonic.data", ->
       data().model.should.be.a 'function'
 
     describe "with default options", ->
-      it.skip "should have authorization header", ->
+      it "should have authorization header", ->
+        model = data(mockResourceBundle)
+          .model('foo', {
+            storage: {
+              getItem: (item) ->
+                if item is "__ag:auth:access_token"
+                  Promise.resolve 'here is the token'
+                else
+                  Promise.reject()
+            }
+          })
+
+        Promise.delay(0).then ->
+          model
+            .resource
+            .getOptions()
+            .should
+              .have.property("headers")
+              .deep.equal {
+                Authorization: 'here is the token'
+              }
 
       it "should have cache enabled", ->
         data(mockResourceBundle)
