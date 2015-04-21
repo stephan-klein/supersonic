@@ -25,8 +25,20 @@ describe "supersonic.data", ->
     ).should.not.throw
 
   describe "model", ->
+
     it "should be a function", ->
       data().model.should.be.a 'function'
+
+    describe "with default options", ->
+      it.skip "should have authorization header", ->
+
+      it "should have cache enabled", ->
+        data(mockResourceBundle)
+          .model('foo')
+          .resource
+          .should.have.property('cache')
+
+      it.skip "should use memory storage adapter", ->
 
     describe "when no resources are configured", ->
       it "should always fail", ->
