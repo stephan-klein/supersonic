@@ -31,6 +31,6 @@ module.exports = (logger, window, channel) ->
       @_channel.publish true
       this
 
-  
+
   return createLocalStorageProperty = (name) ->
     new LocalStorageProperty name

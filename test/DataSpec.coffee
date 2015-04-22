@@ -3,14 +3,32 @@ chai.should()
 chai.use require 'chai-as-promised'
 
 Promise = require 'bluebird'
+Bacon = require 'baconjs'
+
 steroids = require '../src/supersonic/mock/steroids'
 window = require '../src/supersonic/mock/window'
 logger = require('../src/supersonic/core/logger')(steroids, window)
 
 data = (resourceBundle = null) ->
-  require('../src/supersonic/core/data')(logger, {
-    ag: data: resourceBundle
-  })
+  globalsWithResourceBundle = {
+    ag:
+      data: resourceBundle
+  }
+  asyncStorageAdapter = require('../src/supersonic/core/data/storage/adapters').memory
+  syncStorageAdapter = ->
+    property: (name) ->
+      values: null
+
+  model = require('../src/supersonic/core/data/model')(
+    logger
+    globalsWithResourceBundle
+    asyncStorageAdapter
+    syncStorageAdapter
+  )
+
+  return {
+    model
+  }
 
 describe "supersonic.data", ->
 
@@ -34,13 +52,12 @@ describe "supersonic.data", ->
       it "should have authorization header", ->
         model = data(mockResourceBundle)
           .model('foo', {
-            storage: {
-              getItem: (item) ->
-                if item is "__ag:auth:access_token"
-                  Promise.resolve 'here is the token'
-                else
-                  Promise.reject()
-            }
+            storage:
+              property: (name) ->
+                unless name is "__ag:auth:access_token"
+                  throw new Error
+
+                values: Bacon.once 'here is the token'
           })
 
         model
