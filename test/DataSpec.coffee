@@ -43,15 +43,14 @@ describe "supersonic.data", ->
             }
           })
 
-        Promise.delay(0).then ->
-          model
-            .resource
-            .getOptions()
-            .should
-              .have.property("headers")
-              .deep.equal {
-                Authorization: 'here is the token'
-              }
+        model
+          .resource
+          .getOptions()
+          .should
+            .have.property("headers")
+            .deep.equal {
+              Authorization: 'here is the token'
+            }
 
       it "should have cache enabled", ->
         data(mockResourceBundle)
