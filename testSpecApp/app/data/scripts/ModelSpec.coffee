@@ -110,22 +110,25 @@ describe "supersonic.data.model", ->
             steroidsAppId: window.ag.data.options.headers.steroidsAppId
         }).findAll().should.be.fulfilled
 
-      it.skip "can sync headers with localstorage through options", ->
-        # This fails until baconjs can be made a peerdependency:
-        # incompatibility between different instances of baconjs in the runtime
-        # causes the stack to blow up when merging stream values.
-        @timeout 5000
-        steroidsApiKey = supersonic.data.storage.property('steroids-api-key').set(window.ag.data.options.headers.steroidsApiKey)
-        steroidsAppId = supersonic.data.storage.property('steroids-app-id').set(window.ag.data.options.headers.steroidsAppId)
+      describe "options with stream values", ->
+        steroidsApiKey = null
+        steroidsAppId = null
 
-        findAll = supersonic.data.model('SandboxTask', {
-          headers:
-            steroidsApiKey: steroidsApiKey.values
-            steroidsAppId: steroidsAppId.values
-        }).findAll()
+        beforeEach ->
+          steroidsApiKey = supersonic.data.storage.property('steroids-api-key')
+          steroidsAppId = supersonic.data.storage.property('steroids-app-id')
 
-        findAll.finally ->
+        afterEach ->
           steroidsApiKey.unset()
           steroidsAppId.unset()
 
-        findAll.should.be.fulfilled
+        it "can sync headers with localstorage", ->
+          @timeout 5000
+          steroidsApiKey.set(window.ag.data.options.headers.steroidsApiKey)
+          steroidsAppId.set(window.ag.data.options.headers.steroidsAppId)
+
+          supersonic.data.model('SandboxTask', {
+            headers:
+              steroidsApiKey: steroidsApiKey.values
+              steroidsAppId: steroidsAppId.values
+          }).findAll().should.be.fulfilled
