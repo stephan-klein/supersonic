@@ -59,8 +59,6 @@ describe "supersonic.data", ->
           .resource
           .should.have.property('cache')
 
-      it.skip "should use memory storage adapter", ->
-
     describe "when no resources are configured", ->
       it "should always fail", ->
         (-> data().model 'foo').should.throw Error, /no cloud resources/i
