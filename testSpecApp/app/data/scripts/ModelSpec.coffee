@@ -30,10 +30,34 @@ describe "supersonic.data.model", ->
       window.ag.data.resources.SandboxTask.should.be.an 'object'
 
   describe "with a sandbox resource", ->
+    SandboxTaskModel = null
+
+    beforeEach ->
+      SandboxTaskModel = supersonic.data.model('SandboxTask')
+
     describe "findAll", ->
       it "should be able to retrieve a collection", ->
         @timeout 5000
-        supersonic.data.model('SandboxTask').findAll().should.be.fulfilled
+        SandboxTaskModel.findAll().should.be.fulfilled
+
+    describe "all", ->
+      describe "whenChanged", ->
+        it "is notified after a record is created", ->
+          @timeout 5000
+
+          tasksAfterCreate = new Promise (resolve) ->
+            SandboxTaskModel
+              .all({}, interval: 1000)
+              .updates
+              .skip(1)
+              .onValue resolve
+
+          recordCreated = SandboxTaskModel.create(description: "supersonic.data.model.all test object")
+
+          Promise.all([tasksAfterCreate, recordCreated]).spread (tasks, task) ->
+            tasks.toJson().should.deep.include.members [
+              task.toJson()
+            ]
 
   describe "with a remote resource", ->
     describe "findAll", ->
