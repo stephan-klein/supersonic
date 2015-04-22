@@ -34,20 +34,25 @@ describe "supersonic.data.model", ->
       window.ag.data.resources.SandboxTask.should.be.an 'object'
 
   describe "with a sandbox resource", ->
-    SandboxTaskModel = null
-
-    beforeEach ->
-      SandboxTaskModel = supersonic.data.model('SandboxTask')
 
     describe "findAll", ->
       it "should be able to retrieve a collection", ->
         @timeout 5000
+        SandboxTaskModel = supersonic.data.model('SandboxTask', {
+          cache:
+            enabled: false
+        })
+
         SandboxTaskModel.findAll().should.be.fulfilled
 
     describe "all", ->
       describe "whenChanged", ->
         it "is notified after a record is created", ->
           @timeout 5000
+          SandboxTaskModel = supersonic.data.model('SandboxTask', {
+            cache:
+              enabled: true
+          })
 
           tasksAfterCreate = new Promise (resolve) ->
             SandboxTaskModel
@@ -67,7 +72,11 @@ describe "supersonic.data.model", ->
     describe "findAll", ->
       it "should be able to retrieve a collection", ->
         @timeout 5000
-        supersonic.data.model('BuiltIOTask').findAll().should.be.fulfilled
+
+        supersonic.data.model('BuiltIOTask', {
+          cache:
+            enabled: false
+        }).findAll().should.be.fulfilled
 
   describe "with a sandbox resource that has file fields", ->
     describe "create", ->
@@ -117,6 +126,8 @@ describe "supersonic.data.model", ->
         supersonic.data.model('SandboxTask', {
           headers:
             steroidsApiKey: 'this is not the key you are looking for'
+          cache:
+            enabled: false
         }).findAll().should.not.be.fulfilled
 
     describe "behavior", ->
@@ -127,6 +138,8 @@ describe "supersonic.data.model", ->
           headers:
             steroidsApiKey: window.ag.data.options.headers.steroidsApiKey
             steroidsAppId: window.ag.data.options.headers.steroidsAppId
+          cache:
+            enabled: false
         }).findAll().should.be.fulfilled
 
       it "should retain default headers even after setting new ones", ->
@@ -136,6 +149,8 @@ describe "supersonic.data.model", ->
         supersonic.data.model('SandboxTask', {
           headers:
             steroidsAppId: window.ag.data.options.headers.steroidsAppId
+          cache:
+            enabled: false
         }).findAll().should.be.fulfilled
 
       describe "options with stream values", ->
@@ -159,4 +174,6 @@ describe "supersonic.data.model", ->
             headers:
               steroidsApiKey: steroidsApiKey.values
               steroidsAppId: steroidsAppId.values
+            cache:
+              enabled: false
           }).findAll().should.be.fulfilled
