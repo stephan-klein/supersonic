@@ -11,7 +11,7 @@ module.exports =
   network:
     extraResponseHeaders:
       "Access-Control-Allow-Origin": "*"
-      "Access-Control-Allow-Headers": "Content-Type, X-Requested-With, X-Feature-Jobs, X-Job-Id, steroidsAppId, steroidsApiKey"
+      "Access-Control-Allow-Headers": "Content-Type, X-Requested-With, X-Feature-Jobs, X-Job-Id, steroidsAppId, steroidsApiKey, Authorization"
 
   splashscreen:
     autohide: true
