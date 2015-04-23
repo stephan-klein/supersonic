@@ -19,6 +19,10 @@ FileFixture = do ->
   }
 
 describe "supersonic.data.model", ->
+  before ->
+    storage = supersonic.data.storage.adapters.localforage()
+    storage.removeItem "__ag:auth:access_token"
+
   it "is a function", ->
     supersonic.data.model.should.be.a 'function'
 
@@ -30,16 +34,49 @@ describe "supersonic.data.model", ->
       window.ag.data.resources.SandboxTask.should.be.an 'object'
 
   describe "with a sandbox resource", ->
+
     describe "findAll", ->
       it "should be able to retrieve a collection", ->
         @timeout 5000
-        supersonic.data.model('SandboxTask').findAll().should.be.fulfilled
+        SandboxTaskModel = supersonic.data.model('SandboxTask', {
+          cache:
+            enabled: false
+        })
+
+        SandboxTaskModel.findAll().should.be.fulfilled
+
+    describe "all", ->
+      describe "whenChanged", ->
+        it "is notified after a record is created", ->
+          @timeout 5000
+          SandboxTaskModel = supersonic.data.model('SandboxTask', {
+            cache:
+              enabled: true
+          })
+
+          tasksAfterCreate = new Promise (resolve) ->
+            SandboxTaskModel
+              .all({}, interval: 1000)
+              .updates
+              .skip(1)
+              .onValue resolve
+
+          recordCreated = SandboxTaskModel.create(description: "supersonic.data.model.all test object")
+
+          Promise.all([tasksAfterCreate, recordCreated]).spread (tasks, task) ->
+            tasks.toJson().should.deep.include.members [
+              task.toJson()
+            ]
 
   describe "with a remote resource", ->
     describe "findAll", ->
       it "should be able to retrieve a collection", ->
         @timeout 5000
-        supersonic.data.model('BuiltIOTask').findAll().should.be.fulfilled
+
+        supersonic.data.model('BuiltIOTask', {
+          cache:
+            enabled: false
+        }).findAll().should.be.fulfilled
 
   describe "with a sandbox resource that has file fields", ->
     describe "create", ->
@@ -89,6 +126,8 @@ describe "supersonic.data.model", ->
         supersonic.data.model('SandboxTask', {
           headers:
             steroidsApiKey: 'this is not the key you are looking for'
+          cache:
+            enabled: false
         }).findAll().should.not.be.fulfilled
 
     describe "behavior", ->
@@ -99,6 +138,8 @@ describe "supersonic.data.model", ->
           headers:
             steroidsApiKey: window.ag.data.options.headers.steroidsApiKey
             steroidsAppId: window.ag.data.options.headers.steroidsAppId
+          cache:
+            enabled: false
         }).findAll().should.be.fulfilled
 
       it "should retain default headers even after setting new ones", ->
@@ -108,24 +149,31 @@ describe "supersonic.data.model", ->
         supersonic.data.model('SandboxTask', {
           headers:
             steroidsAppId: window.ag.data.options.headers.steroidsAppId
+          cache:
+            enabled: false
         }).findAll().should.be.fulfilled
 
-      it.skip "can sync headers with localstorage through options", ->
-        # This fails until baconjs can be made a peerdependency:
-        # incompatibility between different instances of baconjs in the runtime
-        # causes the stack to blow up when merging stream values.
-        @timeout 5000
-        steroidsApiKey = supersonic.data.storage.property('steroids-api-key').set(window.ag.data.options.headers.steroidsApiKey)
-        steroidsAppId = supersonic.data.storage.property('steroids-app-id').set(window.ag.data.options.headers.steroidsAppId)
+      describe "options with stream values", ->
+        steroidsApiKey = null
+        steroidsAppId = null
 
-        findAll = supersonic.data.model('SandboxTask', {
-          headers:
-            steroidsApiKey: steroidsApiKey.values
-            steroidsAppId: steroidsAppId.values
-        }).findAll()
+        beforeEach ->
+          steroidsApiKey = supersonic.data.storage.property('steroids-api-key')
+          steroidsAppId = supersonic.data.storage.property('steroids-app-id')
 
-        findAll.finally ->
+        afterEach ->
           steroidsApiKey.unset()
           steroidsAppId.unset()
 
-        findAll.should.be.fulfilled
+        it "can sync headers with localstorage", ->
+          @timeout 5000
+          steroidsApiKey.set(window.ag.data.options.headers.steroidsApiKey)
+          steroidsAppId.set(window.ag.data.options.headers.steroidsAppId)
+
+          supersonic.data.model('SandboxTask', {
+            headers:
+              steroidsApiKey: steroidsApiKey.values
+              steroidsAppId: steroidsAppId.values
+            cache:
+              enabled: false
+          }).findAll().should.be.fulfilled

@@ -1,6 +1,9 @@
 data = require 'ag-data'
+Bacon = require 'baconjs'
 
-module.exports = (logger, window, createDefaultStorage) ->
+module.exports = (logger, window, createDefaultCacheStorage, createDefaultPropertyStorage) ->
+  AG_AUTH_ACCESS_TOKEN_KEY = "__ag:auth:access_token"
+
   ###
    # @namespace supersonic.data
    # @name model
@@ -48,31 +51,55 @@ module.exports = (logger, window, createDefaultStorage) ->
    # // Persist our new Task instance to the cloud
    # takeOutTheTrash.save();
   ###
-  createModel = switch
-    when window?.ag?.data?
-      # Connect ag-data to a resource bundle from window.ag.data such that errors
-      # are correctly wrapped and logged. Notably, if window.ag.data exists but
-      # does not define a valid bundle, an error will be logged without interaction.
-      try
-        bundle = data.loadResourceBundle(window.ag.data)
-        (name, options = {}) ->
-          # Set default cache storage when caching is enabled
-          if options?.cache?.enabled
-            unless options.cache.storage?
-              options.cache.storage = createDefaultStorage()
+  withDefaults = (options) ->
+    if options.cache?.enabled != false
+      options.cache ?= {}
+      options.cache.enabled = true
 
-          try
-            bundle.createModel name, options
-          catch err
-            logger.error "Tried to access cloud resource '#{name}', but it is not a configured resource"
-            throw new Error "Could not load model #{name}: #{err}"
-      catch err
-        logger.error "Tried to access a cloud resource, but the configured cloud resource bundle could not be loaded"
-        ->
-          throw new Error "Could not load configured cloud resource bundle: #{err}"
-    else (name) ->
-      logger.error "Tried to access a cloud resource, but no resources have been configured"
-      throw new Error "No cloud resources available"
+    if options.cache.enabled
+      unless options.cache.storage?
+        options.cache.storage = createDefaultCacheStorage()
+
+    if not options.storage
+      options.storage = createDefaultPropertyStorage()
+
+    if not options.headers?.Authorization?
+      options.headers ?= {}
+      options.headers.Authorization = options.storage.property(AG_AUTH_ACCESS_TOKEN_KEY).values
+
+    options
+
+  createModel = do ->
+    if not window?.ag?.data?
+      return (name) ->
+        logger.error "Tried to access a cloud resource, but no resources have been configured"
+        throw new Error "No cloud resources available"
+
+    # Connect ag-data to a resource bundle from window.ag.data such that errors
+    # are correctly wrapped and logged. Notably, if window.ag.data exists but
+    # does not define a valid bundle, an error will be logged without interaction.
+    try
+      bundle = data.loadResourceBundle(window.ag.data)
+
+      return (name, options = {}) ->
+        options = withDefaults(options)
+
+        try
+          model = bundle.createModel name, options
+          Bacon.combineTemplate({
+            headers: options.headers or {}
+          }).onValue (acualOptions) ->
+            model.resource.setOptions(acualOptions)
+
+          model
+        catch err
+          logger.error "Tried to access cloud resource '#{name}', but it is not a configured resource"
+          throw new Error "Could not load model #{name}: #{err}"
+
+    catch err
+      logger.error "Tried to access a cloud resource, but the configured cloud resource bundle could not be loaded"
+      ->
+        throw new Error "Could not load configured cloud resource bundle: #{err}"
 
 ###
 # @namespace supersonic.data

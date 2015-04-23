@@ -2,6 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.4.0 (TODO)
+
+Changes:
+- Enable caching by default for `supersonic.data.model`.
+- Set authorization header by default for `supersonic.data.model`.
+
 ## 1.3.0 (2015-04-15)
 
 Features:
