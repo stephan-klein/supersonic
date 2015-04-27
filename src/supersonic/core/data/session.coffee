@@ -12,7 +12,7 @@ module.exports = (logger, createStoredProperty) ->
   class SessionValidationError extends Error
     constructor: (@message, @errors) ->
       Error.call @
-      Error.captureStackTrace(@, @constructor)
+      Error.captureStackTrace?(@, @constructor)
       @name = @constructor.name
 
     toString: ->
