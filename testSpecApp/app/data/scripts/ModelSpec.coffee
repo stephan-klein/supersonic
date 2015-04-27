@@ -20,8 +20,7 @@ FileFixture = do ->
 
 describe "supersonic.data.model", ->
   before ->
-    storage = supersonic.data.storage.adapters.localforage()
-    storage.removeItem "__ag:auth:access_token"
+    supersonic.data.session.clear()
 
   it "is a function", ->
     supersonic.data.model.should.be.a 'function'
