@@ -43,6 +43,27 @@ describe "supersonic.data", ->
       data(mockResourceBundle)
     ).should.not.throw
 
+  describe "session", ->
+    it "is a stored property", ->
+      data().session.should.include.keys [
+        'get'
+        'set'
+        'unset'
+      ]
+
+    it "can be set with the access token", ->
+      data().session.set(accessToken: 'token').get().should.deep.equal {
+        accessToken: 'token'
+      }
+
+    describe "values", ->
+      it "is a stream", ->
+        session = data().session
+        session.set('value')
+        new Promise((resolve) ->
+          session.values.onValue resolve
+        ).should.eventually.equal 'value'
+
   describe "model", ->
 
     it "should be a function", ->
