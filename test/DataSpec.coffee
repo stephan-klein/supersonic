@@ -1,6 +1,7 @@
 chai = require('chai')
 chai.should()
 chai.use require 'chai-as-promised'
+expect = chai.expect
 
 Promise = require 'bluebird'
 Bacon = require 'baconjs'
@@ -78,6 +79,18 @@ describe "supersonic.data", ->
           session.values.onValue resolve
         ).should.eventually.deep.equal mockSession
 
+    describe "getAccessToken", ->
+      it "is a function", ->
+        data().session.should.have.property('getAccessToken').be.a 'function'
+
+      it "returns empty when there is no session", ->
+        session = data().session
+        expect(session.getAccessToken()).not.to.exist
+
+      it "returns the access token when there is a session", ->
+        session = data().session
+        session.set(mockSession)
+        session.getAccessToken().should.equal mockSession.accessToken
 
   describe "model", ->
 
