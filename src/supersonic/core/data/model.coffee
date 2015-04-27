@@ -2,8 +2,6 @@ data = require 'ag-data'
 Bacon = require 'baconjs'
 
 module.exports = (logger, window, getDefaultCacheStorage, getDefaultSessionStorage) ->
-  AG_AUTH_ACCESS_TOKEN_KEY = "__ag:auth:access_token"
-
   ###
    # @namespace supersonic.data
    # @name model
