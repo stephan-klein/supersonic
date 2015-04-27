@@ -66,7 +66,7 @@ module.exports = (logger, window, getDefaultCacheStorage, getDefaultSessionStora
     if not options.headers?.Authorization?
       options.headers ?= {}
       options.headers.Authorization = options.session.values.map (session) ->
-        session.accessToken
+        session?.accessToken
 
     options
 
