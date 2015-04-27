@@ -6,6 +6,8 @@ module.exports = (logger, createStoredProperty) ->
   SessionType = do ({Object, Optional, String} = types) ->
     Object
       accessToken: String
+      user: Object
+        id: String
 
   class SessionValidationError extends Error
     constructor: (@message, @errors) ->
@@ -35,4 +37,6 @@ module.exports = (logger, createStoredProperty) ->
     values: sessionStorage.values
     getAccessToken: ->
       getSession()?.accessToken
+    getUserId: ->
+      getSession()?.user.id
   }

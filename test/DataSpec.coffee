@@ -50,7 +50,7 @@ describe "supersonic.data", ->
   mockSession =
     accessToken: 'here is the token'
     user:
-      id: 123
+      id: '123'
 
   it "accepts a resource bundle from window.ag.data", ->
     (->
