@@ -46,6 +46,9 @@ describe "supersonic.data", ->
     resources:
       foo: schema: fields: bar: {}
 
+  mockSession =
+    accessToken: 'here is the token'
+
   it "accepts a resource bundle from window.ag.data", ->
     (->
       data(mockResourceBundle)
@@ -59,18 +62,20 @@ describe "supersonic.data", ->
         'unset'
       ]
 
-    it "can be set with the access token", ->
-      data().session.set(accessToken: 'token').get().should.deep.equal {
-        accessToken: 'token'
-      }
+    it "can be set with a new session object", ->
+      data().session.set(mockSession).get().should.deep.equal mockSession
+
+    it "should fail to set an incomplete session object", ->
+      (-> data().session.set({})).should.throw Error
 
     describe "values", ->
       it "is a stream", ->
         session = data().session
-        session.set('value')
+        session.set(mockSession)
         new Promise((resolve) ->
           session.values.onValue resolve
-        ).should.eventually.equal 'value'
+        ).should.eventually.deep.equal mockSession
+
 
   describe "model", ->
 
