@@ -1,7 +1,7 @@
 data = require 'ag-data'
 Bacon = require 'baconjs'
 
-module.exports = (logger, window, createDefaultCacheStorage, createDefaultPropertyStorage) ->
+module.exports = (logger, window, getDefaultCacheStorage, getDefaultSessionStorage) ->
   AG_AUTH_ACCESS_TOKEN_KEY = "__ag:auth:access_token"
 
   ###
@@ -58,14 +58,15 @@ module.exports = (logger, window, createDefaultCacheStorage, createDefaultProper
 
     if options.cache.enabled
       unless options.cache.storage?
-        options.cache.storage = createDefaultCacheStorage()
+        options.cache.storage = getDefaultCacheStorage()
 
-    if not options.storage
-      options.storage = createDefaultPropertyStorage()
+    if not options.session
+      options.session = getDefaultSessionStorage()
 
     if not options.headers?.Authorization?
       options.headers ?= {}
-      options.headers.Authorization = options.storage.property(AG_AUTH_ACCESS_TOKEN_KEY).values
+      options.headers.Authorization = options.session.values.map (session) ->
+        session.accessToken
 
     options
 

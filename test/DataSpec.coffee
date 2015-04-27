@@ -14,20 +14,28 @@ data = (resourceBundle = null) ->
     ag:
       data: resourceBundle
   }
+  volatileProperty = (name) ->
+    value = null
+    values = new Bacon.Bus
+    {
+      set: (v) -> value = v ; values.push true ; this
+      get: -> value
+      unset: -> value = null ; values.push true ; this
+      values: values.toProperty(true).map(-> value)
+    }
   asyncStorageAdapter = require('../src/supersonic/core/data/storage/adapters').memory
-  syncStorageAdapter = ->
-    property: (name) ->
-      values: null
 
+  session = require('../src/supersonic/core/data/session')(logger, volatileProperty)
   model = require('../src/supersonic/core/data/model')(
     logger
     globalsWithResourceBundle
     asyncStorageAdapter
-    syncStorageAdapter
+    -> session
   )
 
   return {
     model
+    session
   }
 
 describe "supersonic.data", ->
