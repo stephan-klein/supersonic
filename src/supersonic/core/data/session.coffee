@@ -27,13 +27,13 @@ module.exports = (logger, createStoredProperty) ->
   getSession = ->
     sessionStorage.get()
 
-  unsetSession = ->
+  clearSession = ->
     sessionStorage.unset()
 
   return session = {
     set: setSession
     get: getSession
-    unset: unsetSession
+    clear: clearSession
     values: sessionStorage.values
     getAccessToken: ->
       getSession()?.accessToken
