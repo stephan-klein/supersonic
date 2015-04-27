@@ -3,11 +3,11 @@ types = require 'ag-types'
 module.exports = (logger, createStoredProperty) ->
   sessionStorage = createStoredProperty "__ag:data:session"
 
-  SessionType = do ({Object, Optional, String} = types) ->
+  SessionType = do ({Object, Optional, String, Number} = types) ->
     Object
       accessToken: String
       user: Object
-        id: String
+        id: Number
 
   class SessionValidationError extends Error
     constructor: (@message, @errors) ->
