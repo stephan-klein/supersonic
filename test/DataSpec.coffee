@@ -63,7 +63,9 @@ describe "supersonic.data", ->
       ]
 
     it "can be set with a new session object", ->
-      data().session.set(mockSession).get().should.deep.equal mockSession
+      session = data().session
+      session.set(mockSession)
+      session.get().should.deep.equal mockSession
 
     it "should fail to set an incomplete session object", ->
       (-> data().session.set({})).should.throw Error
