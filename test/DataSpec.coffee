@@ -62,7 +62,6 @@ describe "supersonic.data", ->
       data().session.should.include.keys [
         'get'
         'set'
-        'unset'
       ]
 
     it "can be set with a new session object", ->
