@@ -113,11 +113,9 @@ describe "supersonic.data", ->
       data().model.should.be.a 'function'
 
     describe "default options", ->
-      it "should have authorization header if it's set in the session", ->
+      it "should have an authorization header when there is a session", ->
         d = data(mockResourceBundle)
-        d.session.set {
-          accessToken: 'here is the token'
-        }
+        d.session.set mockSession
 
         d
           .model('foo')
@@ -126,7 +124,7 @@ describe "supersonic.data", ->
           .should
             .have.property("headers")
             .deep.equal {
-              Authorization: 'here is the token'
+              Authorization: mockSession.accessToken
             }
 
       it "should have cache enabled", ->
