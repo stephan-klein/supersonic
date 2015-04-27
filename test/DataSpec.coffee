@@ -48,19 +48,15 @@ describe "supersonic.data", ->
     it "should be a function", ->
       data().model.should.be.a 'function'
 
-    describe "with default options", ->
-      it "should have authorization header", ->
-        model = data(mockResourceBundle)
-          .model('foo', {
-            storage:
-              property: (name) ->
-                unless name is "__ag:auth:access_token"
-                  throw new Error
+    describe "default options", ->
+      it "should have authorization header if it's set in the session", ->
+        d = data(mockResourceBundle)
+        d.session.set {
+          accessToken: 'here is the token'
+        }
 
-                values: Bacon.once 'here is the token'
-          })
-
-        model
+        d
+          .model('foo')
           .resource
           .getOptions()
           .should
