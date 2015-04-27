@@ -49,6 +49,8 @@ describe "supersonic.data", ->
 
   mockSession =
     accessToken: 'here is the token'
+    user:
+      id: 123
 
   it "accepts a resource bundle from window.ag.data", ->
     (->
@@ -91,6 +93,19 @@ describe "supersonic.data", ->
         session = data().session
         session.set(mockSession)
         session.getAccessToken().should.equal mockSession.accessToken
+
+    describe "getUserId", ->
+      it "is a function", ->
+        data().session.should.have.property('getUserId').be.a 'function'
+
+      it "returns empty when there is no session", ->
+        session = data().session
+        expect(session.getUserId()).not.to.exist
+
+      it "returns the current user's id when there is a session", ->
+        session = data().session
+        session.set(mockSession)
+        session.getUserId().should.equal mockSession.user.id
 
   describe "model", ->
 
