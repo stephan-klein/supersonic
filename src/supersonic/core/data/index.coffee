@@ -11,4 +11,4 @@ module.exports = (logger, window) ->
   model = require('./model')(logger, window, defaultAsyncStorageAdapter, getDefaultSession)
   storage = { adapters, property }
 
-  { channel, model, storage }
+  { channel, model, storage, session }
