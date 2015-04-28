@@ -1,0 +1,16 @@
+<div ng-controller="EnvController">
+  <super-navbar>
+    <super-navbar-title>
+      Environment
+    </super-navbar-title>
+  </super-navbar>
+
+  <div class="padding">
+    <ul class="list">
+      <li class="item" ng-repeat="(key, value) in items">
+        {{key}} = {{value}}
+      </li>
+    </ul>
+  </div>
+
+</div>

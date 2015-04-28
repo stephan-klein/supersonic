@@ -18,6 +18,7 @@ module.exports = {
   device: require('./core/device')(steroids, logger)
   ui: require('./core/ui')(steroids, logger, global)
   data: require('./core/data')(logger, global)
+  env: require('./core/env')(logger, global)
   internal:
     Promise: require 'bluebird'
     Bacon: require 'baconjs'
