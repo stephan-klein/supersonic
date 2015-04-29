@@ -1,4 +1,7 @@
-module.exports = (logger, window) ->
-  users = require("./users")(logger, window)
+module.exports = (logger, window, data) ->
+  users = require("./users")(logger, window, data.session)
 
-  { users }
+  {
+    session: data.session
+    users
+  }

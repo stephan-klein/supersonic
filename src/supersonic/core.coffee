@@ -9,9 +9,11 @@ steroids = if global.steroids?
     require './mock/steroids'
 
 logger = require('./core/logger')(steroids, global)
+data = require('./core/data')(logger, global)
 
 module.exports = {
   logger
+  data
   debug: require('./core/debug')(steroids, logger)
   app: require('./core/app')(steroids, logger)
   media: require('./core/media')(steroids, logger)
@@ -19,7 +21,7 @@ module.exports = {
   ui: require('./core/ui')(steroids, logger, global)
   data: require('./core/data')(logger, global)
   env: require('./core/env')(logger, global)
-  auth: require('./core/auth')(logger, global)
+  auth: require('./core/auth')(logger, global, data)
   internal:
     Promise: require 'bluebird'
     Bacon: require 'baconjs'
