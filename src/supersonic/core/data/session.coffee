@@ -1,42 +1,52 @@
-types = require 'ag-types'
+adapters = require './storage/adapters'
 
-module.exports = (logger, createStoredProperty) ->
-  sessionStorage = createStoredProperty "__ag:data:session"
+# TODO Mistä Error tulee ?
+class SessionValidationError extends Error
 
-  SessionType = do ({Object, Optional, String, Number} = types) ->
-    Object
-      accessToken: String
-      user: Object
-        id: Number
+  constructor: (@message, @errors) ->
+    Error.call @
+    Error.captureStackTrace?(@, @constructor)
+    @name = @constructor.name
 
-  class SessionValidationError extends Error
-    constructor: (@message, @errors) ->
-      Error.call @
-      Error.captureStackTrace?(@, @constructor)
-      @name = @constructor.name
+  toString: ->
+    "#{@name}(#{@message}, #{JSON.stringify @errors})"
 
-    toString: ->
-      "#{@name}(#{@message}, #{JSON.stringify @errors})"
 
-  setSession = (v) ->
-    SessionType(v).map(sessionStorage.set).fold(
-      (errors) -> throw new SessionValidationError "Could not set session", errors
-      -> session
-    )
+class Session
 
-  getSession = ->
-    sessionStorage.get()
+  RAW_SESSION_KEY: "__ag:data:session"
 
-  clearSession = ->
-    sessionStorage.unset()
+  constructor: (window) ->
+    @storage = new adapters.JsonLocalStorage(window)
+    @rawSession = @storage.getItem @RAW_SESSION_KEY
 
-  return session = {
-    set: setSession
-    get: getSession
-    clear: clearSession
-    values: sessionStorage.values
-    getAccessToken: ->
-      getSession()?.accessToken
-    getUserId: ->
-      getSession()?.user.id
-  }
+  ## private
+
+  isValid = (session) ->
+    session.access_token? && session.user_details?.id?
+
+
+  ## public
+
+  set: (rawSession) ->
+    unless isValid(rawSession)
+      throw new SessionValidationError "Invalid data for session", rawSession
+
+    @storage.setItem @RAW_SESSION_KEY, rawSession
+    @rawSession = rawSession
+
+  get: ->
+    @rawSession || {}
+
+  clear: ->
+    @storage.removeItem @RAW_SESSION_KEY
+    @rawSession = null
+
+  getAccessToken: ->
+    @get().access_token
+
+  getUserId: ->
+    @get().user_details.id
+
+
+module.exports = Session

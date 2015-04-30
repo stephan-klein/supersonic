@@ -168,28 +168,3 @@ describe "supersonic.data.model", ->
           cache:
             enabled: false
         }).findAll().should.be.fulfilled
-
-      describe "options with stream values", ->
-        steroidsApiKey = null
-        steroidsAppId = null
-
-        beforeEach ->
-          steroidsApiKey = supersonic.data.storage.property('steroids-api-key')
-          steroidsAppId = supersonic.data.storage.property('steroids-app-id')
-
-        afterEach ->
-          steroidsApiKey.unset()
-          steroidsAppId.unset()
-
-        it "can sync headers with localstorage", ->
-          @timeout 5000
-          steroidsApiKey.set(window.ag.data.options.headers.steroidsApiKey)
-          steroidsAppId.set(window.ag.data.options.headers.steroidsAppId)
-
-          supersonic.data.model('SandboxTask', {
-            headers:
-              steroidsApiKey: steroidsApiKey.values
-              steroidsAppId: steroidsAppId.values
-            cache:
-              enabled: false
-          }).findAll().should.be.fulfilled

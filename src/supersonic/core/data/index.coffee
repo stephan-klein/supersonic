@@ -1,14 +1,14 @@
 adapters = require './storage/adapters'
+Session = require('./session')
 
 module.exports = (logger, window) ->
   channel = require('./channel')(window)
   property = require('./storage/property')(logger, window, channel)
-  session = require('./session')(logger, property)
+  session = new Session(window)
 
   defaultAsyncStorageAdapter = adapters.localforage
-  getDefaultSession = -> session
 
-  model = require('./model')(logger, window, defaultAsyncStorageAdapter, getDefaultSession)
+  model = require('./model')(logger, window, defaultAsyncStorageAdapter, session)
   storage = { adapters, property }
 
   { channel, model, storage, session }

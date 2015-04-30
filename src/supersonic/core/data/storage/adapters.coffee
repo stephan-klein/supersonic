@@ -7,7 +7,10 @@ localforage = switch
 
 data = require 'ag-data'
 
+JsonLocalStorage = require './adapters/JsonLocalStorage'
+
 module.exports = {
   localforage: -> localforage
   memory: data.storages.memory
+  JsonLocalStorage
 }

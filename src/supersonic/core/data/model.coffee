@@ -1,7 +1,7 @@
 data = require 'ag-data'
 Bacon = require 'baconjs'
 
-module.exports = (logger, window, getDefaultCacheStorage, getDefaultSessionStorage) ->
+module.exports = (logger, window, getDefaultCacheStorage, session) ->
   ###
    # @namespace supersonic.data
    # @name model
@@ -59,12 +59,11 @@ module.exports = (logger, window, getDefaultCacheStorage, getDefaultSessionStora
         options.cache.storage = getDefaultCacheStorage()
 
     if not options.session
-      options.session = getDefaultSessionStorage()
+      options.session = session
 
     if not options.headers?.Authorization?
       options.headers ?= {}
-      options.headers.Authorization = options.session.values.map (session) ->
-        session?.accessToken
+      options.headers.Authorization = options.session.getAccessToken()
 
     options
 
@@ -85,10 +84,13 @@ module.exports = (logger, window, getDefaultCacheStorage, getDefaultSessionStora
 
         try
           model = bundle.createModel name, options
-          Bacon.combineTemplate({
-            headers: options.headers or {}
-          }).onValue (acualOptions) ->
-            model.resource.setOptions(acualOptions)
+          # TODO Varmista olettaako mikään enää tätä
+          # Bacon.combineTemplate({
+          #   headers: options.headers or {}
+          # }).onValue (acualOptions) ->
+          #   # TODO Mitä on acualOptions eli mitä on streamin sisällä??
+          #   # TODO aseta setOptions jossa Authorization
+          #   model.resource.setOptions(acualOptions)
 
           model
         catch err
