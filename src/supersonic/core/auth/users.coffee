@@ -3,7 +3,7 @@ data = require 'ag-data'
 module.exports = (logger, window, session) ->
   usersResourceBundle =
     options:
-      baseUrl: window.parent.appgyver?.env.auth.endpoint #TODO supersonic.env
+      baseUrl: window.parent.appgyver?.environment.auth.endpoint
       headers:
         "Authorization": session.getAccessToken()
     resources:
