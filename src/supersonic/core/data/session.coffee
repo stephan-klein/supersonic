@@ -1,6 +1,5 @@
 adapters = require './storage/adapters'
 
-# TODO Mistä Error tulee ?
 class SessionValidationError extends Error
 
   constructor: (@message, @errors) ->
@@ -15,10 +14,10 @@ class SessionValidationError extends Error
 class Session
 
   RAW_SESSION_KEY: "__ag:data:session"
+  rawSession: null
 
   constructor: (window) ->
     @storage = new adapters.JsonLocalStorage(window)
-    @rawSession = @storage.getItem @RAW_SESSION_KEY
 
   ## private
 
@@ -36,7 +35,7 @@ class Session
     @rawSession = rawSession
 
   get: ->
-    @rawSession || {}
+    @rawSession ?= @storage.getItem @RAW_SESSION_KEY
 
   clear: ->
     @storage.removeItem @RAW_SESSION_KEY
