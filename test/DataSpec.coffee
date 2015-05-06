@@ -19,16 +19,7 @@ data = (resourceBundle = null) ->
 
   Session = require('../src/supersonic/core/data/session')
   mockWindow = {
-    localStorage: do ->
-      storage = {}
-      getItem: (key) ->
-        storage[key]
-
-      setItem: (key, value) ->
-        storage[key] = value
-
-      removeItem: (key) ->
-        delete storage[key]
+    localStorage: require('../src/supersonic/mock/localStorage')()
   }
   session = new Session(mockWindow)
 

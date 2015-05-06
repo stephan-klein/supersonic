@@ -3,9 +3,9 @@ data = require 'ag-data'
 module.exports = (logger, window, session) ->
   usersResourceBundle =
     options:
-      baseUrl: window.parent.appgyver?.environment.auth.endpoint
+      baseUrl: window.parent.appgyver?.environment.auth.endpoint || ""
       headers:
-        "Authorization": session.getAccessToken()
+        "Authorization": session.getAccessToken() || ""
     resources:
       users:
         schema:
