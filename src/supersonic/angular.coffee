@@ -30,5 +30,6 @@ module.exports = (angular) ->
         device: supersonicDevice
         ui: supersonic.ui
         data: supersonic.data
+        env: supersonic.env
       }
     )
