@@ -83,16 +83,7 @@ module.exports = (logger, window, getDefaultCacheStorage, session) ->
         options = withDefaults(options)
 
         try
-          model = bundle.createModel name, options
-          # TODO Varmista olettaako mikään enää tätä
-          # Bacon.combineTemplate({
-          #   headers: options.headers or {}
-          # }).onValue (acualOptions) ->
-          #   # TODO Mitä on acualOptions eli mitä on streamin sisällä??
-          #   # TODO aseta setOptions jossa Authorization
-          #   model.resource.setOptions(acualOptions)
-
-          model
+          bundle.createModel name, options
         catch err
           logger.error "Tried to access cloud resource '#{name}', but it is not a configured resource"
           throw new Error "Could not load model #{name}: #{err}"
