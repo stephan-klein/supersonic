@@ -29,4 +29,9 @@ module.exports = (logger, window, session, env) ->
 
   resourceBundle = data.loadResourceBundle(usersResourceBundle)
 
-  return resourceBundle.createModel("users")
+  userModel = resourceBundle.createModel("users")
+
+  userModel.getCurrentUser = ->
+    userModel.find(session.getUserId())
+
+  userModel

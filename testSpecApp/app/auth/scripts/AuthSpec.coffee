@@ -13,5 +13,10 @@ describe "supersonic.auth", ->
         supersonic.auth.users.findAll().then (users) ->
           users.length.should.be.greaterThan 0
 
+    describe "getCurrentUser()", ->
+      it "should return a user", ->
+        supersonic.auth.users.getCurrentUser().then (user) ->
+          user.should.have.property('username')
+
   describe "session", ->
     it "should be defined", ->
