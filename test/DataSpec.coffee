@@ -15,23 +15,28 @@ data = (resourceBundle = null) ->
     ag:
       data: resourceBundle
   }
-  volatileProperty = (name) ->
-    value = null
-    values = new Bacon.Bus
-    {
-      set: (v) -> value = v ; values.push true ; this
-      get: -> value
-      unset: -> value = null ; values.push true ; this
-      values: values.toProperty(true).map(-> value)
-    }
   asyncStorageAdapter = require('../src/supersonic/core/data/storage/adapters').memory
 
-  session = require('../src/supersonic/core/data/session')(logger, volatileProperty)
+  Session = require('../src/supersonic/core/data/session')
+  mockWindow = {
+    localStorage: do ->
+      storage = {}
+      getItem: (key) ->
+        storage[key]
+
+      setItem: (key, value) ->
+        storage[key] = value
+
+      removeItem: (key) ->
+        delete storage[key]
+  }
+  session = new Session(mockWindow)
+
   model = require('../src/supersonic/core/data/model')(
     logger
     globalsWithResourceBundle
     asyncStorageAdapter
-    -> session
+    session
   )
 
   return {
@@ -48,8 +53,8 @@ describe "supersonic.data", ->
       foo: schema: fields: bar: {}
 
   mockSession =
-    accessToken: 'here is the token'
-    user:
+    access_token: 'here is the token'
+    user_details:
       id: 123
 
   it "accepts a resource bundle from window.ag.data", ->
@@ -59,10 +64,9 @@ describe "supersonic.data", ->
 
   describe "session", ->
     it "is a stored property", ->
-      data().session.should.include.keys [
-        'get'
-        'set'
-      ]
+      session = data().session
+      session.should.respondTo 'get'
+      session.should.respondTo 'set'
 
     it "can be set with a new session object", ->
       session = data().session
@@ -71,14 +75,6 @@ describe "supersonic.data", ->
 
     it "should fail to set an incomplete session object", ->
       (-> data().session.set({})).should.throw Error
-
-    describe "values", ->
-      it "is a stream", ->
-        session = data().session
-        session.set(mockSession)
-        new Promise((resolve) ->
-          session.values.onValue resolve
-        ).should.eventually.deep.equal mockSession
 
     describe "getAccessToken", ->
       it "is a function", ->
@@ -91,7 +87,7 @@ describe "supersonic.data", ->
       it "returns the access token when there is a session", ->
         session = data().session
         session.set(mockSession)
-        session.getAccessToken().should.equal mockSession.accessToken
+        session.getAccessToken().should.equal mockSession.access_token
 
     describe "getUserId", ->
       it "is a function", ->
@@ -104,7 +100,7 @@ describe "supersonic.data", ->
       it "returns the current user's id when there is a session", ->
         session = data().session
         session.set(mockSession)
-        session.getUserId().should.equal mockSession.user.id
+        session.getUserId().should.equal mockSession.user_details.id
 
   describe "model", ->
 
@@ -123,7 +119,7 @@ describe "supersonic.data", ->
           .should
             .have.property("headers")
             .deep.equal {
-              Authorization: mockSession.accessToken
+              Authorization: mockSession.access_token
             }
 
       it "should have cache enabled", ->

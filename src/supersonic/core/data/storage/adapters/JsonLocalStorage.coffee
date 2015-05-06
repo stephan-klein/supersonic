@@ -4,7 +4,11 @@ class JsonLocalStorage
     @window = window
 
   getItem: (key) ->
-    JSON.parse @window.localStorage.getItem(key)
+    value = @window.localStorage.getItem key
+    if value?
+      JSON.parse value
+    else
+      null
 
   setItem: (key, value) ->
     @window.localStorage.setItem key, JSON.stringify(value)

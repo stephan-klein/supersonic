@@ -21,16 +21,17 @@ class Session
 
   ## private
 
-  isValid = (session) ->
+  isValidRawSession = (session) ->
     session.access_token? && session.user_details?.id?
 
+  validateSession = (rawSession) ->
+    unless isValidRawSession(rawSession)
+      throw new SessionValidationError "Invalid data for session", rawSession
 
   ## public
 
   set: (rawSession) ->
-    unless isValid(rawSession)
-      throw new SessionValidationError "Invalid data for session", rawSession
-
+    validateSession rawSession
     @storage.setItem @RAW_SESSION_KEY, rawSession
     @rawSession = rawSession
 
@@ -42,10 +43,10 @@ class Session
     @rawSession = null
 
   getAccessToken: ->
-    @get().access_token
+    @get()?.access_token
 
   getUserId: ->
-    @get().user_details.id
+    @get()?.user_details?.id
 
 
 module.exports = Session
