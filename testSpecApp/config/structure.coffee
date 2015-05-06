@@ -1,5 +1,5 @@
 module.exports =
 
   rootView:
-    location: "test-index#index"
+    location: "auth#AuthSpec"
 

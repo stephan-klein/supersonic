@@ -10,18 +10,19 @@ steroids = if global.steroids?
 
 logger = require('./core/logger')(steroids, global)
 data = require('./core/data')(logger, global)
+env = require('./core/env')(logger, global)
 
 module.exports = {
   logger
   data
+  env
   debug: require('./core/debug')(steroids, logger)
   app: require('./core/app')(steroids, logger)
   media: require('./core/media')(steroids, logger)
   device: require('./core/device')(steroids, logger)
   ui: require('./core/ui')(steroids, logger, global)
   data: require('./core/data')(logger, global)
-  env: require('./core/env')(logger, global)
-  auth: require('./core/auth')(logger, global, data)
+  auth: require('./core/auth')(logger, global, data, env)
   internal:
     Promise: require 'bluebird'
     Bacon: require 'baconjs'

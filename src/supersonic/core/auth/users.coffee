@@ -1,11 +1,13 @@
 data = require 'ag-data'
 
-module.exports = (logger, window, session) ->
+module.exports = (logger, window, session, env) ->
   usersResourceBundle =
     options:
-      baseUrl: window.parent.appgyver?.environment.auth.endpoint || ""
+      baseUrl: env?.auth?.endpoint || ""
       headers:
-        "Authorization": session.getAccessToken() || ""
+        Authorization: session.getAccessToken() || ""
+        steroidsApiKey: env?.data?.options?.headers?.steroidsApiKey || ""
+        steroidsAppId: env?.data?.options?.headers?.steroidsAppId || ""
     resources:
       users:
         schema:
