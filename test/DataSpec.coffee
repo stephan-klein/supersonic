@@ -1,6 +1,7 @@
 chai = require('chai')
 chai.should()
 chai.use require 'chai-as-promised'
+expect = chai.expect
 
 Promise = require 'bluebird'
 Bacon = require 'baconjs'
@@ -15,19 +16,32 @@ data = (resourceBundle = null) ->
       data: resourceBundle
   }
   asyncStorageAdapter = require('../src/supersonic/core/data/storage/adapters').memory
-  syncStorageAdapter = ->
-    property: (name) ->
-      values: null
+
+  Session = require('../src/supersonic/core/data/session')
+  mockWindow = {
+    localStorage: do ->
+      storage = {}
+      getItem: (key) ->
+        storage[key]
+
+      setItem: (key, value) ->
+        storage[key] = value
+
+      removeItem: (key) ->
+        delete storage[key]
+  }
+  session = new Session(mockWindow)
 
   model = require('../src/supersonic/core/data/model')(
     logger
     globalsWithResourceBundle
     asyncStorageAdapter
-    syncStorageAdapter
+    session
   )
 
   return {
     model
+    session
   }
 
 describe "supersonic.data", ->
@@ -38,35 +52,74 @@ describe "supersonic.data", ->
     resources:
       foo: schema: fields: bar: {}
 
+  mockSession =
+    access_token: 'here is the token'
+    user_details:
+      id: 123
+
   it "accepts a resource bundle from window.ag.data", ->
     (->
       data(mockResourceBundle)
     ).should.not.throw
+
+  describe "session", ->
+    it "is a stored property", ->
+      session = data().session
+      session.should.respondTo 'get'
+      session.should.respondTo 'set'
+
+    it "can be set with a new session object", ->
+      session = data().session
+      session.set(mockSession)
+      session.get().should.deep.equal mockSession
+
+    it "should fail to set an incomplete session object", ->
+      (-> data().session.set({})).should.throw Error
+
+    describe "getAccessToken", ->
+      it "is a function", ->
+        data().session.should.have.property('getAccessToken').be.a 'function'
+
+      it "returns empty when there is no session", ->
+        session = data().session
+        expect(session.getAccessToken()).not.to.exist
+
+      it "returns the access token when there is a session", ->
+        session = data().session
+        session.set(mockSession)
+        session.getAccessToken().should.equal mockSession.access_token
+
+    describe "getUserId", ->
+      it "is a function", ->
+        data().session.should.have.property('getUserId').be.a 'function'
+
+      it "returns empty when there is no session", ->
+        session = data().session
+        expect(session.getUserId()).not.to.exist
+
+      it "returns the current user's id when there is a session", ->
+        session = data().session
+        session.set(mockSession)
+        session.getUserId().should.equal mockSession.user_details.id
 
   describe "model", ->
 
     it "should be a function", ->
       data().model.should.be.a 'function'
 
-    describe "with default options", ->
-      it "should have authorization header", ->
-        model = data(mockResourceBundle)
-          .model('foo', {
-            storage:
-              property: (name) ->
-                unless name is "__ag:auth:access_token"
-                  throw new Error
+    describe "default options", ->
+      it "should have an authorization header when there is a session", ->
+        d = data(mockResourceBundle)
+        d.session.set mockSession
 
-                values: Bacon.once 'here is the token'
-          })
-
-        model
+        d
+          .model('foo')
           .resource
           .getOptions()
           .should
             .have.property("headers")
             .deep.equal {
-              Authorization: 'here is the token'
+              Authorization: mockSession.access_token
             }
 
       it "should have cache enabled", ->

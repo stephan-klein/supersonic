@@ -20,8 +20,7 @@ FileFixture = do ->
 
 describe "supersonic.data.model", ->
   before ->
-    storage = supersonic.data.storage.adapters.localforage()
-    storage.removeItem "__ag:auth:access_token"
+    supersonic.data.session.clear()
 
   it "is a function", ->
     supersonic.data.model.should.be.a 'function'
@@ -47,6 +46,8 @@ describe "supersonic.data.model", ->
 
     describe "all", ->
       describe "whenChanged", ->
+        recordCreated = null
+
         it "is notified after a record is created", ->
           @timeout 5000
           SandboxTaskModel = supersonic.data.model('SandboxTask', {
@@ -68,6 +69,10 @@ describe "supersonic.data.model", ->
               task.toJson()
             ]
 
+        afterEach ->
+          recordCreated?.then (record) ->
+            record.delete()
+
   describe "with a remote resource", ->
     describe "findAll", ->
       it "should be able to retrieve a collection", ->
@@ -79,39 +84,50 @@ describe "supersonic.data.model", ->
         }).findAll().should.be.fulfilled
 
   describe "with a sandbox resource that has file fields", ->
+    recordCreated = null
+    beforeEach ->
+      recordCreated = null
+    afterEach ->
+      recordCreated?.then (record) ->
+        record.delete()
+
     describe "create", ->
       it "should handle a file upload", ->
         @timeout 5000
-        supersonic.data.model('SandboxFileResource').create({
+        recordCreated = supersonic.data.model('SandboxFileResource').create({
           description: 'supersonic.data.model.create test object'
           file: FileFixture.uploadableBlob()
-        }).then (fileResource) ->
+        })
+        recordCreated.then (fileResource) ->
           fileResource.should.have.property('file').be.an 'object'
           fileResource.file.should.have.property('uploaded').equal true
           fileResource.file.should.have.property('download_url').be.a 'string'
 
       it "accepts an optional transaction handler", (done) ->
         @timeout 5000
-        supersonic.data.model('SandboxFileResource').create {}, (t) ->
+        recordCreated = supersonic.data.model('SandboxFileResource').create {}, (t) ->
           done asserting ->
             t.should.be.an 'object'
             t.should.have.property('done').property('then').be.a 'function'
             t.should.have.property('abort').be.a 'function'
 
     describe "update", ->
+
       it "should handle a file upload", ->
-        supersonic.data.model('SandboxFileResource').create({
+        recordCreated = supersonic.data.model('SandboxFileResource').create({
           description: 'supersonic.data.model.update test object'
-        }).then (fileResource) ->
+        })
+        recordCreated.then (fileResource) ->
           fileResource.should.have.property('file').property('uploaded').equal false
           supersonic.data.model('SandboxFileResource').update(fileResource.id, {
             file: FileFixture.uploadableBlob()
           }).should.eventually.have.property('file').property('uploaded').equal true
 
       it "accepts an optional transaction handler", (done) ->
-        supersonic.data.model('SandboxFileResource').create({
+        recordCreated = supersonic.data.model('SandboxFileResource').create({
           description: 'supersonic.data.model.update test object'
-        }).then (fileResource) ->
+        })
+        recordCreated.then (fileResource) ->
           supersonic.data.model('SandboxFileResource').update fileResource.id, {}, (t) ->
             done asserting ->
               t.should.be.an 'object'
@@ -152,28 +168,3 @@ describe "supersonic.data.model", ->
           cache:
             enabled: false
         }).findAll().should.be.fulfilled
-
-      describe "options with stream values", ->
-        steroidsApiKey = null
-        steroidsAppId = null
-
-        beforeEach ->
-          steroidsApiKey = supersonic.data.storage.property('steroids-api-key')
-          steroidsAppId = supersonic.data.storage.property('steroids-app-id')
-
-        afterEach ->
-          steroidsApiKey.unset()
-          steroidsAppId.unset()
-
-        it "can sync headers with localstorage", ->
-          @timeout 5000
-          steroidsApiKey.set(window.ag.data.options.headers.steroidsApiKey)
-          steroidsAppId.set(window.ag.data.options.headers.steroidsAppId)
-
-          supersonic.data.model('SandboxTask', {
-            headers:
-              steroidsApiKey: steroidsApiKey.values
-              steroidsAppId: steroidsAppId.values
-            cache:
-              enabled: false
-          }).findAll().should.be.fulfilled
