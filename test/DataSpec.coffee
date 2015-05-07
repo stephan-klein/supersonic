@@ -18,10 +18,7 @@ data = (resourceBundle = null) ->
   asyncStorageAdapter = require('../src/supersonic/core/data/storage/adapters').memory
 
   Session = require('../src/supersonic/core/data/session')
-  mockWindow = {
-    localStorage: require('../src/supersonic/mock/localStorage')()
-  }
-  session = new Session(mockWindow)
+  session = new Session(window)
 
   model = require('../src/supersonic/core/data/model')(
     logger
