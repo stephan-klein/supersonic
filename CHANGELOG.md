@@ -2,6 +2,16 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.0 (2015-05-07)
+
+Features:
+- `supersonic.auth.session` provides accessors to the currently authenticated
+  AppGyver Enterprise Session
+- `supersonic.auth.users` provides accessors to the users of the
+  current AppGyver Enterprise application
+- `supersonic.env` provides information of the current AppGyver Enterprise
+  application environment
+
 ## 1.4.0 (2015-04-23)
 
 Changes:
