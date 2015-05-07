@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.1 (2015-05-07)
+
+Fix:
+- `supersonic.data.model` reads configuration from `supersonic.env` if it's available
+
 ## 1.5.0 (2015-05-07)
 
 Features:
