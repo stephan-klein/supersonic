@@ -4,11 +4,15 @@ window.appgyver = {
       endpoint: "https://rest-auth.devgyver.com/api/v2"
     },
     data: {
-      "options": {
-        "headers": {
-          "steroidsAppId": 1026,
-          "steroidsApiKey": "8ce9e528ab7ff3813bcca6fc1a372c03f99eb677871ee1cdebaa60d005eddcfc",
-        }
+      bundle: {
+        options: {
+          baseUrl: "https://proxy-api.devgyver.com/v3/",
+          headers: {
+            steroidsAppId: "1026",
+            steroidsApiKey: "8ce9e528ab7ff3813bcca6fc1a372c03f99eb677871ee1cdebaa60d005eddcfc",
+          }
+        },
+        resources: {}
       }
     }
   }
