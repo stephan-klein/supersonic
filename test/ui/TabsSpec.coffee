@@ -5,8 +5,8 @@ chai.use require 'sinon-chai'
 chai.use require 'chai-as-promised'
 
 global.steroids = require '../../src/supersonic/mock/steroids'
-window = require '../../src/supersonic/mock/window'
-logger = require('../../src/supersonic/core/logger')(steroids, window)
+Window = require '../../src/supersonic/mock/window'
+logger = require('../../src/supersonic/core/logger')(steroids, new Window())
 tabs = require('../../src/supersonic/core/ui/tabs')(steroids, logger)
 
 describe "supersonic.ui.tabs", ->
