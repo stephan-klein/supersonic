@@ -16,11 +16,10 @@ describe "supersonic.env without a storage", ->
     env.mode.should.equal("legacy")
 
 describe "supersonic.env with a storage", ->
-  betterWindow = {
-    appgyver:
-      environment:
-        mode: "better"
-  }
+  betterWindow = require '../../src/supersonic/mock/window'
+  betterWindow.appgyver =
+    environment:
+      mode: "better"
 
   env = require('../../src/supersonic/core/env')(logger, betterWindow)
 
