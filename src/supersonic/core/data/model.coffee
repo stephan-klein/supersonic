@@ -68,7 +68,7 @@ module.exports = (logger, window, getDefaultCacheStorage, session) ->
     options
 
   createModel = do ->
-    if not window?.ag?.data?
+    if not window.parent.appgyver?.environment?.data?.bundle? and not window?.ag?.data?
       return (name) ->
         logger.error "Tried to access a cloud resource, but no resources have been configured"
         throw new Error "No cloud resources available"
