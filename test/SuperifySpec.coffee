@@ -5,9 +5,9 @@ chai = require('chai')
 chai.should()
 chai.use require 'chai-as-promised'
 
-window = require '../src/supersonic/mock/window'
+Window = require '../src/supersonic/mock/window'
 steroids = require '../src/supersonic/mock/steroids'
-logger = require('../src/supersonic/core/logger')(steroids, window)
+logger = require('../src/supersonic/core/logger')(steroids, new Window())
 superify = require '../src/supersonic/core/superify'
 
 describe "supersonic.superify", ->

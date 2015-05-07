@@ -58,17 +58,14 @@ module.exports = (logger, window, getDefaultCacheStorage, session) ->
       unless options.cache.storage?
         options.cache.storage = getDefaultCacheStorage()
 
-    if not options.session
-      options.session = session
-
     if not options.headers?.Authorization?
       options.headers ?= {}
-      options.headers.Authorization = options.session.getAccessToken()
+      options.headers.Authorization = session.getAccessToken()
 
     options
 
   createModel = do ->
-    if not window?.ag?.data?
+    if not window.parent.appgyver?.environment?.data?.bundle? and not window?.ag?.data?
       return (name) ->
         logger.error "Tried to access a cloud resource, but no resources have been configured"
         throw new Error "No cloud resources available"
@@ -77,7 +74,10 @@ module.exports = (logger, window, getDefaultCacheStorage, session) ->
     # are correctly wrapped and logged. Notably, if window.ag.data exists but
     # does not define a valid bundle, an error will be logged without interaction.
     try
-      bundle = data.loadResourceBundle(window.ag.data)
+      bundle = if window.parent.appgyver?.environment?.data?.bundle?
+        data.loadResourceBundle(window.parent.appgyver.environment.data.bundle)
+      else
+        data.loadResourceBundle(window.ag.data)
 
       return (name, options = {}) ->
         options = withDefaults(options)

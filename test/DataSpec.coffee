@@ -7,25 +7,23 @@ Promise = require 'bluebird'
 Bacon = require 'baconjs'
 
 steroids = require '../src/supersonic/mock/steroids'
-window = require '../src/supersonic/mock/window'
-logger = require('../src/supersonic/core/logger')(steroids, window)
+Window = require '../src/supersonic/mock/window'
+logger = require('../src/supersonic/core/logger')(steroids, new Window())
 
 data = (resourceBundle = null) ->
-  globalsWithResourceBundle = {
-    ag:
-      data: resourceBundle
+  window = new Window()
+  window.ag = {
+    data: resourceBundle
   }
+
   asyncStorageAdapter = require('../src/supersonic/core/data/storage/adapters').memory
 
   Session = require('../src/supersonic/core/data/session')
-  mockWindow = {
-    localStorage: require('../src/supersonic/mock/localStorage')()
-  }
-  session = new Session(mockWindow)
+  session = new Session(window)
 
   model = require('../src/supersonic/core/data/model')(
     logger
-    globalsWithResourceBundle
+    window
     asyncStorageAdapter
     session
   )

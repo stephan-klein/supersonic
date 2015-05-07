@@ -1,7 +1,8 @@
 global = if window?
     window
   else
-    require './mock/window'
+    Window = require './mock/window'
+    new Window()
 
 steroids = if global.steroids?
     global.steroids

@@ -3,11 +3,11 @@ chai.should()
 chai.use require 'chai-as-promised'
 
 steroids = require '../../src/supersonic/mock/steroids'
-window = require '../../src/supersonic/mock/window'
-logger = require('../../src/supersonic/core/logger')(steroids, window)
+Window = require '../../src/supersonic/mock/window'
+logger = require('../../src/supersonic/core/logger')(steroids, new Window())
 
 describe "supersonic.env without a storage", ->
-  env = require('../../src/supersonic/core/env')(logger, window)
+  env = require('../../src/supersonic/core/env')(logger, new Window())
 
   it "should exist", ->
     env.should.exist
@@ -16,11 +16,10 @@ describe "supersonic.env without a storage", ->
     env.mode.should.equal("legacy")
 
 describe "supersonic.env with a storage", ->
-  betterWindow = {
-    appgyver:
-      environment:
-        mode: "better"
-  }
+  betterWindow = new Window()
+  betterWindow.appgyver =
+    environment:
+      mode: "better"
 
   env = require('../../src/supersonic/core/env')(logger, betterWindow)
 

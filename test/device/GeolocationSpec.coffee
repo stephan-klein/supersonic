@@ -3,8 +3,8 @@ chai.should()
 chai.use require 'chai-as-promised'
 
 steroids = require '../../src/supersonic/mock/steroids'
-window = require '../../src/supersonic/mock/window'
-logger = require('../../src/supersonic/core/logger')(steroids, window)
+Window = require '../../src/supersonic/mock/window'
+logger = require('../../src/supersonic/core/logger')(steroids, new Window())
 geolocation = require('../../src/supersonic/core/device/geolocation')(steroids, logger)
 
 describe "supersonic.device.geolocation", ->
