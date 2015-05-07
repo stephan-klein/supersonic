@@ -1,4 +1,5 @@
 data = require 'ag-data'
+Promise = require 'bluebird'
 
 module.exports = (logger, window, session, env) ->
   usersResourceBundle =
@@ -30,6 +31,9 @@ module.exports = (logger, window, session, env) ->
   userModel = resourceBundle.createModel("users")
 
   userModel.getCurrentUser = ->
-    userModel.find(session.getUserId())
+    if userId = session.getUserId()
+      userModel.find(userId)
+    else
+      Promise.reject new Error "Cannot access current user without a valid session"
 
   userModel
