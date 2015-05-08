@@ -2,6 +2,15 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.2 (2015-05-08)
+
+Features:
+- Support Enterprise users in the `super-data-repeat` component.
+
+Changes:
+- `supersonic.auth.users.getCurrentUser` provides a meaningful error message
+  if session is not available
+
 ## 1.5.1 (2015-05-07)
 
 Fix:
