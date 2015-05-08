@@ -23,7 +23,11 @@ SuperDataRepeatPrototype = Object.create HTMLElement.prototype
 SuperDataRepeatPrototype.attachedCallback = ->
   model_name = @getAttribute("model")
   if model_name?
-    Model = supersonic.data.model(model_name)
+    Model = if model_name == "users"
+      supersonic.auth.users
+    else
+      supersonic.data.model(model_name)
+
     @__listener = Model.all().whenChanged (items)=>
       @shadowRoot.innerHTML = Handlebars.compile("{{#each items}}#{@__template}{{/each}}")({items: items})
 
