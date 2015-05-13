@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.3 (TODO)
+
+Bugfixes:
+- The promises returned by `supersonic.ui.View.start()` and `supersonic.ui.views.start()` now resolve to the `startedView` object as intended.
+
 ## 1.5.2 (2015-05-08)
 
 Features:

@@ -144,12 +144,12 @@ module.exports = (steroids, log) ->
 
     start: (newId)->
       new Promise (resolve, reject) =>
-        preload = (webView) ->
+        preload = (webView)=>
           webView.preload {},
-            onSuccess: ->
+            onSuccess: =>
               @id = webView.id # mark started
-              resolve()
-            onFailure: (error)->
+              resolve @
+            onFailure: (error)=>
               reject new Error error.errorDescription
 
 
