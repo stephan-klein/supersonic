@@ -257,12 +257,18 @@ module.exports = (steroids, log) ->
    # supersonic.ui.tabs.whenWillChange: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
    # @exampleCoffeeScript
-   # supersonic.ui.tabs.whenWillChange().then ()->
-   #   supersonic.logger.log("Tab will change")
+   # unsubscribe = supersonic.ui.tabs.whenWillChange ->
+   #   supersonic.logger.log "Tab will change"
+   #
+   # # Later on, we can unsubscribe from the change events
+   # unsubscribe()
    # @exampleJavaScript
-   # supersonic.ui.tabs.whenWillChange().then( function() {
+   # var unsubscribe = supersonic.ui.tabs.whenWillChange( function() {
    #   supersonic.logger.log("Tab will change");
    # });
+   #
+   # // Later on, we can unsubscribe from the change events
+   # unsubscribe();
   ###
   whenWillChange: (f)->
     id = steroids.tabBar.on "willchange", f
@@ -279,12 +285,18 @@ module.exports = (steroids, log) ->
    # supersonic.ui.tabs.whenDidChange: () => unsubscribe: Function
    # @define {Function} unsubscribe Stop listening
    # @exampleCoffeeScript
-   # supersonic.ui.tabs.whenDidChange().then ()->
-   #   supersonic.logger.log("Tabs did change")
+   # unsubscribe = supersonic.ui.tabs.whenDidChange ->
+   #   supersonic.logger.log "Tab did change"
+   #
+   # # Later on, we can unsubscribe from the change events
+   # unsubscribe()
    # @exampleJavaScript
-   # supersonic.ui.tabs.whenDidChange().then( function() {
-   #   supersonic.logger.log("Tabs did change");
+   # var unsubscribe = supersonic.ui.tabs.whenDidChange( function() {
+   #   supersonic.logger.log("Tab did change");
    # });
+   #
+   # // Later on, we can unsubscribe from the change events
+   # unsubscribe();
   ###
   whenDidChange: (f)->
     id = steroids.tabBar.on "didchange", f
