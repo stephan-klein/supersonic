@@ -1,0 +1,28 @@
+<p>
+  Try to scroll down! All the content below should be visible without need to scroll.
+</p>
+
+<p>
+  I am the module with initial content.
+</p>
+
+<p>
+  Hello!
+</p>
+
+<div id="appendable-element">
+</div>
+
+
+<script>
+
+function appendElem() {
+    var appendableElement = document.getElementById("appendable-element");
+    var newElement = document.createTextNode("ALL_GOOD if the module container resizes after this message.");
+    appendableElement.appendChild(newElement);
+  }
+
+  setInterval(
+    appendElem, 2500
+  );
+</script>
