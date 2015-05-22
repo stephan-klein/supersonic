@@ -2,7 +2,10 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## 1.5.3 (TODO)
+## 1.5.3 (2015-05-22)
+
+Features:
+- Iframes with `data-module` attribute are detected as AppGyver Enterprise Modules. Their height is automatically adjusted to fit the content height.
 
 Bugfixes:
 - The promises returned by `supersonic.ui.View.start()` and `supersonic.ui.views.start()` now resolve to the `startedView` object as intended.
