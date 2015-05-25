@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.4 (2015-05-25)
+
+Changes:
+- `supersonic.data.model` uses `localStorage` instead of `localforage` for the default cache storage adapter
+
 ## 1.5.3 (2015-05-22)
 
 Features:
