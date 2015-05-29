@@ -15,7 +15,9 @@ Make sure you have [initialized data](/supersonic/guides/data/setting-up-appgyve
 
 Before adding the built.io data provider, ensure that the data model for your application is set up in the [built.io admin console](https://www.built.io/):
 
-<img class="tutorial-image" src="/img/guides/data_built_io_class.png">
+<img class="tutorial-image" src="/img/guides/data_built_io_class_1.png">
+
+<img class="tutorial-image" src="/img/guides/data_built_io_class_2.png">
 
 After setting up the data model, you should create at least one object to each defined resource. This ensures that Supersonic Data can fetch an example object from the built.io backend and populate the Supersonic Data resource schema automatically.
 
