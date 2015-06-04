@@ -1,2 +1,2 @@
-expect = window.chai.expect
+window.expect = window.chai.expect
 window.chai.should()
