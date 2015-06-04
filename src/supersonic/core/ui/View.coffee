@@ -149,7 +149,7 @@ module.exports = (steroids, log) ->
             onSuccess: =>
               @id = webView.id # mark started
               resolve @
-            onFailure: (error)=>
+            onFailure: (error) ->
               reject new Error error.errorDescription
 
 

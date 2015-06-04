@@ -1,0 +1,33 @@
+<style>
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  iframe {
+    height: 30px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 1px black solid;
+  }
+</style>
+
+<div ng-controller="IframeSizeAutoadjustController">
+
+  <super-navbar>
+    <super-navbar-title>
+      Iframe size autoadjust
+    </super-navbar-title>
+  </super-navbar>
+
+  <div>
+    <p>Found the following iframes:</p>
+    <ul>
+      <li ng-repeat="moduleElement in moduleElements">{{ moduleElement.src }}</li>
+    </ul>
+  <div>
+
+  <iframe data-module src="growing-module-iframe.html"></iframe>
+
+</div>
