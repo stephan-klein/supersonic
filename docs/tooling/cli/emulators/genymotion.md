@@ -15,7 +15,7 @@ Note that Genymotion support in Steroids CLI is "Work in Progress".
 
 1. Genymotion runs the emulator in Oracle VirtualBox, so first you need to have that installed. On [Oracle VirtualBox](https://www.virtualbox.org/) you will find instructions and download links. If you are running on Windows, we recommend you downloading the Genymotion version that comes bundled with Virtual Box and skip this step.
 
-2. After VirtuaBox is installed, head over to [Genymotion](http://www.genymotion.com/). Genymotion is free to for non-commericial use but requires you to create an account. So sign up and download the latest version for your platform.
+2. After VirtualBox is installed, head over to [Genymotion](http://www.genymotion.com/). Genymotion is free to for non-commericial use but requires you to create an account. So sign up and download the latest version for your platform.
 
 3. Install Genymotion and make sure to install the **Genymotion Shell** (when prompted about it) too. Without the Shell installed, Steroids CLI won't be able to launch the emulator.
 
