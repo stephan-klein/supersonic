@@ -1,39 +1,16 @@
-<style>
-
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  iframe {
-    height: 30px;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    border: 1px black solid;
-  }
-</style>
-
-<div ng-controller="IndexController">
+<div>
 
   <super-navbar>
     <super-navbar-title>
-      Module Index
+      Module APIs
     </super-navbar-title>
   </super-navbar>
 
-
-  <div class="padding">
-    <h1>Pow! Here's the Enterprise Module!</h1>
-  </div>
-
-  <div>
-    Found the following iframes:
-    <ul>
-      <li ng-repeat="moduleElement in moduleElements">{{ moduleElement.src }}</li>
-    </ul>
-  <div>
-
-
-  <iframe data-module src="module-index.html"></iframe>
-
+  <ul class="list">
+    <super-navigate location="module#iframe-size-autoadjust">
+      <li class="item item-icon-right">
+        Iframe size autoadjust <i class="icon super-ios7-arrow-right"></i>
+      </li>
+    </super-navigate>
+  </ul>
 </div>

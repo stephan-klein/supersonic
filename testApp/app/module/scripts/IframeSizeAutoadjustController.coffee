@@ -1,6 +1,6 @@
 angular
   .module('module')
-  .controller 'IndexController', ($scope) ->
+  .controller 'IframeSizeAutoadjustController', ($scope) ->
     supersonic.module.initialModuleElements.then(
       (elements) ->
         $scope.moduleElements = elements
