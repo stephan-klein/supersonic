@@ -1,0 +1,17 @@
+
+<div ng-controller="AttributeIframeController">
+  <h4>supersonic.module.attributes</h4>
+  <dl>
+    <dt><code>attribute-from-iframe</code>:</dt>
+    <dd>Present: {{ hasIframeAttribute }}</dd>
+    <dd>Value: {{ iframeAttributeValue }}</dd>
+
+    <dt><code>attribute-from-url-param</code>:</dt>
+    <dd ng->Present: {{ hasUrlParamAttribute }}</dd>
+    <dd>Value: {{ urlParamAttributeValue }}</dd>
+
+    <dt><code>attribute-from-nowhere</code>:</dt>
+    <dd>Present: {{ hasAttributeFromNowhere }}</dd>
+    <dd>Value: {{ attributeFromNowhereValue }}</dd>
+  </dl>
+</div>

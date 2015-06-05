@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.6 (2015-06-04)
+
+Features:
+- `supersonic.module.attributes` allows access to AppGyver Enterprise Module instance context
+
 ## 1.5.5 (2015-05-22)
 
 Changes:
