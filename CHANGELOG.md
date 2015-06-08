@@ -2,6 +2,14 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.7 (2015-06-08)
+Changes:
+- Updated Supersonic CSS to match Ionic's v1.0.0 "uranium-unicorn" release.
+
+Breaking Changes:
+- Updated Ionicons to v2.0.1. Naming convention for iOS icons changed from `<icon prefix>-ios7-<icon name>` to `<icon prefix>-ios-<icon name>`.
+
+*Note: These updates include minor cosmetic tweaks to the UI – nothing major. That said, you might still want to check your app to ensure everything looks as it should after the update. For those interested, full list of changes can be found in [this commit](https://github.com/AppGyver/supersonic/commit/3b4fd6059bddf23ea0fff06617b6525f8090977d).*
 ## 1.5.6 (2015-06-04)
 
 Features:
