@@ -2,7 +2,7 @@ Promise = require 'bluebird'
 
 module.exports = (logger) ->
   initialModuleElements = Promise.delay(0).then ->
-    moduleElements = document.querySelectorAll("iframe[data-module]")
+    moduleElements = document?.querySelectorAll("iframe[data-module]") || []
 
     for element in moduleElements
       do (element) ->
