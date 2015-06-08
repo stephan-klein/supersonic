@@ -20,11 +20,38 @@ angular
         .catch (e)->
           supersonic.logger.error "Error #{e}"
 
-
     $scope.openLeft = ->
       supersonic.ui.drawers.open
         onSuccess: ->
-          supersonic.logger.log "Left draver opened with a callback"
+          supersonic.logger.log "Left  opened with a callback"
+        onFailure: (error) ->
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
+
+    $scope.disableLeft = ->
+      supersonic.ui.drawers.disable "left",
+        onSuccess: ->
+          supersonic.logger.log "Left drawer disabled with a callback"
+        onFailure: (error) ->
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
+
+    $scope.enableLeft = ->
+      supersonic.ui.drawers.enable "left",
+        onSuccess: ->
+          supersonic.logger.log "Left drawer enabled with a callback"
+        onFailure: (error) ->
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
+
+    $scope.disableRight = ->
+      supersonic.ui.drawers.disable "right",
+        onSuccess: ->
+          supersonic.logger.log "Right drawer disabled with a callback"
+        onFailure: (error) ->
+          supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
+
+    $scope.enableRight = ->
+      supersonic.ui.drawers.enable "right",
+        onSuccess: ->
+          supersonic.logger.log "Right drawer enabled with a callback"
         onFailure: (error) ->
           supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
@@ -37,13 +64,13 @@ angular
     $scope.updateOptions = ->
       options =
         shadow: true,
-        animation: 
+        animation:
           type: "slide"
           duration: 1.0
 
       supersonic.ui.drawers.updateOptions options,
         onSuccess: ->
-          supersonic.logger.log "Dravers updated"
+          supersonic.logger.log "drawers updated"
         onFailure: (error) ->
           supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
