@@ -25,7 +25,6 @@ describe "supersonic.ui.drawers", ->
         .then ->
           done("should not be able to open the drawer");
         .catch (error) ->
-          done()
           drawers.enable("left").then ->
             drawers.open("left")
             .then ->
