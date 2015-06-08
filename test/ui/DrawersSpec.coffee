@@ -13,6 +13,27 @@ describe "supersonic.ui.drawers", ->
   it "should exist", ->
     drawers.should.exist
 
+  xdescribe "enable and disable", ->
+
+    it "should have enable and disable apis", (done)->
+      drawers.enable.should.exist
+      drawers.disable.should.exist
+
+    it "should disable the left side and not be able to open"
+      drawers.disable("left").then ->
+        drawers.open("left")
+        .then ->
+          done("should not be able to open the drawer");
+        .catch (error) ->
+          done()
+          drawers.enable("left").then ->
+            drawers.open("left")
+            .then ->
+              done()
+            .catch (error) ->
+              done("should be able to open the drawer")
+
+
 
   describe "events", ->
     unsubs = []
