@@ -30,22 +30,22 @@ class Session
 
   ## public
 
-  set: (rawSession) ->
+  set: (rawSession) =>
     validateSession rawSession
     @storage.setItem @RAW_SESSION_KEY, rawSession
     @rawSession = rawSession
 
-  get: ->
+  get: =>
     @rawSession ?= @storage.getItem @RAW_SESSION_KEY
 
-  clear: ->
+  clear: =>
     @storage.removeItem @RAW_SESSION_KEY
     @rawSession = null
 
-  getAccessToken: ->
+  getAccessToken: =>
     @get()?.access_token
 
-  getUserId: ->
+  getUserId: =>
     @get()?.user_details?.id
 
 
