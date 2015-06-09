@@ -5,9 +5,12 @@ class JsonLocalStorage
 
   getItem: (key) ->
     value = @window.localStorage.getItem key
-    if value?
+
+    return null unless value?
+
+    try
       JSON.parse value
-    else
+    catch e
       null
 
   setItem: (key, value) ->
