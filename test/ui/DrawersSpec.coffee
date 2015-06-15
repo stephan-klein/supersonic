@@ -13,13 +13,13 @@ describe "supersonic.ui.drawers", ->
   it "should exist", ->
     drawers.should.exist
 
-  xdescribe "enable and disable", ->
+  describe "enable and disable", ->
 
     it "should have enable and disable apis", (done)->
       drawers.enable.should.exist
       drawers.disable.should.exist
 
-    it "should disable the left side and not be able to open"
+    it "should disable the left side and not be able to open", (done)->
       drawers.disable("left").then ->
         drawers.open("left")
         .then ->
