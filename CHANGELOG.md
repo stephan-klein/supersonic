@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.8 (TODO)
+
+Features:
+- Enabling/Disabling the Drawer via API. Closes [#749](https://github.com/AppGyver/steroids/issues/749).
+
 ## 1.5.7 (2015-06-08)
 Changes:
 - Updated Supersonic CSS to match Ionic's v1.0.0 "uranium-unicorn" release.
