@@ -19,7 +19,7 @@ describe "supersonic.ui.drawers", ->
       drawers.enable.should.exist
       drawers.disable.should.exist
 
-    it "should disable the left side and not be able to open", (done)->
+    xit "should disable the left side and not be able to open", (done)->
       drawers.disable("left").then ->
         drawers.open("left")
         .then ->
