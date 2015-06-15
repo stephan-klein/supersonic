@@ -1,4 +1,5 @@
 Bacon = require 'baconjs'
+Promise = require 'bluebird'
 
 module.exports = (namespace, logger) ->
   ###

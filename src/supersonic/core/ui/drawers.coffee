@@ -149,6 +149,70 @@ module.exports = (steroids, log) ->
 
   ###
    # @namespace supersonic.ui.drawers
+   # @name enable
+   # @function
+   # @description
+   # Enable a specific side of the drawer.
+   # @type
+   # supersonic.ui.drawers.enable: (
+   #  side?: String
+   # ) => Promise
+   # @define {String} side=left The side of the drawer to be enabled. Valid values are `left` and `right`.
+   # @returnsDescription
+   # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that will be resolved once the drawer has been enabled. If there is no drawer initialized on the given side, the promise will be rejected.
+   # @supportsCallbacks
+   # @exampleJavaScript
+   # supersonic.ui.drawers.enable("left").then( function() {
+   #   supersonic.logger.debug("Left drawer was enabled");
+   # });
+   # @exampleCoffeeScript
+   # supersonic.ui.drawers.enable("left").then ->
+   #   supersonic.logger.debug "Left drawer was enabled"
+  ###
+
+  enable: s.promiseF "enable", (side="left", options)->
+    new Promise (resolve, reject)->
+      steroids.drawers.enable {
+        side: side
+      }, {
+        onSuccess: resolve
+        onFailure: reject
+      }
+
+  ###
+   # @namespace supersonic.ui.drawers
+   # @name disable
+   # @function
+   # @description
+   # Disable a specific side of the drawer.
+   # @type
+   # supersonic.ui.drawers.disable: (
+   #  side?: String
+   # ) => Promise
+   # @define {String} side=left The side of the drawer to be disabled. Valid values are `left` and `right`.
+   # @returnsDescription
+   # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that will be resolved once the drawer has been disabled. If there is no drawer initialized on the given side, the promise will be rejected.
+   # @supportsCallbacks
+   # @exampleJavaScript
+   # supersonic.ui.drawers.disable("left").then( function() {
+   #   supersonic.logger.debug("Left drawer was disabled");
+   # });
+   # @exampleCoffeeScript
+   # supersonic.ui.drawers.disable("left").then ->
+   #   supersonic.logger.debug "Left drawer was disabled"
+  ###
+
+  disable: s.promiseF "disable", (side="left", options)->
+    new Promise (resolve, reject)->
+      steroids.drawers.disable {
+        side: side
+      }, {
+        onSuccess: resolve
+        onFailure: reject
+      }
+
+  ###
+   # @namespace supersonic.ui.drawers
    # @name updateOptions
    # @function
    # @description
