@@ -171,14 +171,9 @@ module.exports = (steroids, log) ->
   ###
 
   enable: s.promiseF "enable", (side="left", options)->
-    edge = if side is "right"
-      steroids.screen.edges.RIGHT
-    else
-      steroids.screen.edges.LEFT
-
     new Promise (resolve, reject)->
       steroids.drawers.enable {
-        side: edge
+        side: side
       }, {
         onSuccess: resolve
         onFailure: reject
@@ -208,14 +203,9 @@ module.exports = (steroids, log) ->
   ###
 
   disable: s.promiseF "disable", (side="left", options)->
-    edge = if side is "right"
-      steroids.screen.edges.RIGHT
-    else
-      steroids.screen.edges.LEFT
-
     new Promise (resolve, reject)->
       steroids.drawers.disable {
-        side: edge
+        side: side
       }, {
         onSuccess: resolve
         onFailure: reject
