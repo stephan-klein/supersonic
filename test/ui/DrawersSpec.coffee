@@ -15,7 +15,7 @@ describe "supersonic.ui.drawers", ->
 
   describe "enable and disable", ->
 
-    it "should have enable and disable apis", (done)->
+    it "should have enable and disable apis", ()->
       drawers.enable.should.exist
       drawers.disable.should.exist
 
@@ -23,14 +23,14 @@ describe "supersonic.ui.drawers", ->
       drawers.disable("left").then ->
         drawers.open("left")
         .then ->
-          done("should not be able to open the drawer");
+          done "should not be able to open the drawer"
         .catch (error) ->
           drawers.enable("left").then ->
             drawers.open("left")
             .then ->
               done()
             .catch (error) ->
-              done("should be able to open the drawer")
+              done "should be able to open the drawer"
 
 
 
