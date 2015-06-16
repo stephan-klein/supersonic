@@ -35,7 +35,7 @@ When the device has been created, you can tune the performance by adding more pr
 ### Paths
 
 Steroids CLI defaults to the following installation paths where it looks for Genymotion and Genymotion Shell.
-These paths can be overridden by setting the environment variables `GENYMOTION_APP`/`GENYMOTION_SHELL`.
+As default you do not need to change anything, but if you need to, these paths can be overridden by setting the environment variables `GENYMOTION_APP`/`GENYMOTION_SHELL`.
 
 #### Mac OS X
 ```bash
@@ -56,7 +56,7 @@ GENYMOTION_SHELL=""
 
 ## Running
 
-To launch your app in Genymotion, type `gen` or `g` in the `steroids connect` prompt. The emulator should now start and if everything went as expected you should see your app.
+To launch your app in Genymotion, type `gen` or `g` in the `steroids connect` prompt. The emulator should now start. On first launch it may take some time for the emulator to download the Scanner itself, so do not panic if your app does not open immediately the first time you are getting Genymotion to run. If your app won't start after leaving the emulator open for five minutes, try closing and restarting the emulator.
 
 In the case that you have multiple devices setup in Genymotion (e.g. testing different APIs) you can specify which one you would launch by giving the name of the emulator as a parameter. E.g. `gen nexus4`
 
@@ -74,5 +74,11 @@ You are probably in either of the following situations:
   - Check that the adapter IPv4 address is in the same network (192.168.56.0/24 by default) as the DHCP server address, lower address bound and upper address bound. If not, your virtual device cannot start.
   - You can also remove the Host-only Network by clicking . Genymotion will automatically recreate it at the next virtual device start.
 - Your firewall may block the application. The Genymotion application must connect to the virtual device via the local network. If you have a firewall, make sure that you allowed connections to the Genymotion network, set to 192.168.56.0/24 by default.
+
+### When I start a virtual device, it opens the Android runtime but does not open the Scanner app
+
+This is probably your first time launching the virtual device. Wait for a while for the virtual device to load the Scanner, as it needs to install it on the first launch from Steroids CLI.
+
+If you want to track what is happening in your virtual device (e.g. is it downloading the AppGyver Scanner app), you can see its logs from Android Studio's logcat as with any device that is attached to your computer. To filter only Scanner related logs, use the keyword "appgyver" as filter.
 
 From [Genymotion Pages](https://cloud.genymotion.com/page/faq/#collapse-nostart)
