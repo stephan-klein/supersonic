@@ -1,0 +1,42 @@
+---
+  license: Licensed to the Apache Software Foundation (ASF) under one
+         or more contributor license agreements.  See the NOTICE file
+         distributed with this work for additional information
+         regarding copyright ownership.  The ASF licenses this file
+         to you under the Apache License, Version 2.0 (the
+         "License"); you may not use this file except in compliance
+         with the License.  You may obtain a copy of the License at
+
+           http://www.apache.org/licenses/LICENSE-2.0
+
+         Unless required by applicable law or agreed to in writing,
+         software distributed under the License is distributed on an
+         "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+         KIND, either express or implied.  See the License for the
+         specific language governing permissions and limitations
+         under the License.
+---
+
+# batterystatus
+
+This event fires when the percentage of battery charge changes by at
+least 1 percent, or if the device is plugged in or unplugged.
+
+The battery status handler is passed an object that contains two
+properties:
+
+- __level__: The percentage of battery charge (0-100). _(Number)_
+
+- __isPlugged__: A boolean that indicates whether the device is plugged in. _(Boolean)_
+
+Applications typically should use `window.addEventListener` to
+attach an event listener once the `deviceready` event fires. e.g.:
+
+## Example
+
+    window.addEventListener("batterystatus", onBatteryStatus, false);
+
+    function onBatteryStatus(info) {
+        // Handle the online event
+        console.log("Level: " + info.level + " isPlugged: " + info.isPlugged);
+    }
