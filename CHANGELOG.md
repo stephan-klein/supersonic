@@ -2,10 +2,13 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## 1.5.8 (TODO)
+## 1.5.8 (2015-06-16)
 
-Features:
-- Enabling/Disabling the Drawer via API. Closes [#749](https://github.com/AppGyver/steroids/issues/749).
+Pre-features:
+- Enabling/Disabling the Drawer via API. Closes [#749](https://github.com/AppGyver/steroids/issues/749). *Note: This feature requires wrapper support, which will be out shortly. Until then, the API calls will not work.*
+
+Fixes:
+- Brought back spinning icons that were removed in Supersonic 1.5.7. Closes [#945](https://github.com/AppGyver/steroids/issues/945).
 
 ## 1.5.7 (2015-06-08)
 Changes:
