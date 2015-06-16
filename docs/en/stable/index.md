@@ -19,7 +19,7 @@ license: Licensed to the Apache Software Foundation (ASF) under one
 
 <div id="home">
 
-    <h1>Steroids 3.5.8 API Reference</h1>
+    <h1>Steroids 3.5.12 API Reference</h1>
     <ul>
 
       <li>

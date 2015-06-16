@@ -75,6 +75,8 @@ Only one drawer window per edge can be active at a time.  Closing the drawer by 
 - steroids.drawers.hide
 - steroids.drawers.on
 - steroids.drawers.off
+- steroids.drawers.enable
+- steroids.drawers.disable
 
 ### Deprecated methods
 
