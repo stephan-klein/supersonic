@@ -2,6 +2,14 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.9 (2015-06-17)
+
+Changes:
+- Saving a Supersonic Data model instance merges the server response to the instance instead of replacing the whole instance state.
+
+Fixes:
+- Prevented the potential for a state leak in the HTTP layer of Supersonic Data. `X-Job-Id` headers would get reused by accident in some scenarios.
+
 ## 1.5.8 (2015-06-16)
 
 Pre-features:
