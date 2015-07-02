@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.10 (2015-07-02)
+
+Features:
+- `supersonic.module.transitions` provides view transition animations for Composer Modules
+
 ## 1.5.9 (2015-06-17)
 
 Changes:
