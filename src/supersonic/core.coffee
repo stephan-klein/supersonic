@@ -12,17 +12,18 @@ steroids = if global.steroids?
 logger = require('./core/logger')(steroids, global)
 data = require('./core/data')(logger, global)
 env = require('./core/env')(logger, global)
+ui = require('./core/ui')(steroids, logger, global)
 
 module.exports = {
   logger
   data
   env
+  ui
   debug: require('./core/debug')(steroids, logger)
   app: require('./core/app')(steroids, logger)
   media: require('./core/media')(steroids, logger)
-  module: require('./core/module')(logger)
+  module: require('./core/module')(steroids, ui, logger)
   device: require('./core/device')(steroids, logger)
-  ui: require('./core/ui')(steroids, logger, global)
   data: require('./core/data')(logger, global)
   auth: require('./core/auth')(logger, global, data, env)
   internal:
