@@ -24,7 +24,7 @@ module.exports = (grunt) ->
         dest: "#{__dirname}/bower_components/supersonic/"
     shell:
       "supersonic-build":
-        command: "grunt build"
+        command: "grunt build-dist"
         options:
           execOptions:
             cwd: '..'
