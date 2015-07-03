@@ -10,16 +10,16 @@ steroids = require '../src/supersonic/mock/steroids'
 Window = require '../src/supersonic/mock/window'
 logger = require('../src/supersonic/core/logger')(steroids, new Window())
 
+asyncStorageAdapter = require('../src/supersonic/core/data/storage/adapters')(new Window).memory
+syncStorageAdapter = require('../src/supersonic/mock/localStorage')
+
 data = (resourceBundle = null) ->
   window = new Window()
   window.ag = {
     data: resourceBundle
   }
 
-  asyncStorageAdapter = require('../src/supersonic/core/data/storage/adapters').memory
-
-  Session = require('../src/supersonic/core/data/session')
-  session = new Session(window)
+  session = require('../src/supersonic/core/data/session')(syncStorageAdapter())
 
   model = require('../src/supersonic/core/data/model')(
     logger

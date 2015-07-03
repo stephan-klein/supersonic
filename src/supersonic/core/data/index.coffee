@@ -1,16 +1,15 @@
-adapters = require './storage/adapters'
-Session = require('./session')
+
 Promise = require 'bluebird'
 
 module.exports = (logger, window) ->
   channel = require('./channel')(window)
   property = require('./storage/property')(logger, window, channel)
-  session = new Session(window)
+  adapters = require('./storage/adapters')(window)
 
-  defaultAsyncStorageAdapter = ->
-    getItem: (key) -> Promise.resolve window.localStorage.getItem key
-    setItem: (key, value) -> Promise.resolve window.localStorage.setItem key, value
-    removeItem: (key) -> Promise.resolve window.localStorage.removeItem key
+  syncLocalStorage = require('./storage/adapters/sync-local-storage')(window)
+  session = require('./session')(syncLocalStorage)
+
+  defaultAsyncStorageAdapter = adapters.localStorage
 
   model = require('./model')(logger, window, defaultAsyncStorageAdapter, session)
   storage = { adapters, property }

@@ -1,4 +1,31 @@
-adapters = require './storage/adapters'
+module.exports = (localStorage) ->
+  new class Session
+
+    RAW_SESSION_KEY: "__ag:data:session"
+    storage: localStorage
+
+    set: (rawSession) =>
+      validateSession rawSession
+      @storage.setItem @RAW_SESSION_KEY, rawSession
+
+    get: =>
+      @storage.getItem @RAW_SESSION_KEY
+
+    clear: =>
+      @storage.removeItem @RAW_SESSION_KEY
+
+    getAccessToken: =>
+      @get()?.access_token
+
+    getUserId: =>
+      @get()?.user_details?.id
+
+validateSession = (rawSession) ->
+  unless isValidRawSession(rawSession)
+    throw new SessionValidationError "Invalid data for session", rawSession
+
+isValidRawSession = (session) ->
+  session.access_token? && session.user_details?.id?
 
 class SessionValidationError extends Error
 
@@ -9,44 +36,3 @@ class SessionValidationError extends Error
 
   toString: ->
     "#{@name}(#{@message}, #{JSON.stringify @errors})"
-
-
-class Session
-
-  RAW_SESSION_KEY: "__ag:data:session"
-  rawSession: null
-
-  constructor: (window) ->
-    @storage = new adapters.JsonLocalStorage(window)
-
-  ## private
-
-  isValidRawSession = (session) ->
-    session.access_token? && session.user_details?.id?
-
-  validateSession = (rawSession) ->
-    unless isValidRawSession(rawSession)
-      throw new SessionValidationError "Invalid data for session", rawSession
-
-  ## public
-
-  set: (rawSession) =>
-    validateSession rawSession
-    @storage.setItem @RAW_SESSION_KEY, rawSession
-    @rawSession = rawSession
-
-  get: =>
-    @rawSession ?= @storage.getItem @RAW_SESSION_KEY
-
-  clear: =>
-    @storage.removeItem @RAW_SESSION_KEY
-    @rawSession = null
-
-  getAccessToken: =>
-    @get()?.access_token
-
-  getUserId: =>
-    @get()?.user_details?.id
-
-
-module.exports = Session
