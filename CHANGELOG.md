@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.5.11 (2015-07-03)
+
+Fixes:
+- Switch the default `supersonic.data` cache adapter for a functioning one. The defective adapter caused caching to be effectively disabled.
+
 ## 1.5.10 (2015-07-02)
 
 Features:
