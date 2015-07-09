@@ -31,7 +31,7 @@ Note that new Supersonic features might require a certain version of the [AppGyv
 
 ## Reporting issues
 
-All AppGyver-related issues are tracked centrally on [GitHub](https://github.com/appgyer/steroids/issues). Before submitting a new issue, search through the issues to see if it has been opened or resolved already.
+All AppGyver-related issues are tracked centrally on [GitHub](https://github.com/appgyver/steroids/issues). Before submitting a new issue, search through the issues to see if it has been opened or resolved already.
 
 When submitting a issue, please include as detailed reproduction case as possible. For an excellent bug reproduction, it's very important that a bare minimum of HTML/CSS/JavaScript is used. This prevents false diagnoses – when the app is complex, it might look like something is broken on the native side, when in reality it's just a JavaScript error caused by a misconfigured framework, a CSS style acting up etc. You should strive to have just the issue and nothing else in your project.
 </section>
