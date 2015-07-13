@@ -12,7 +12,6 @@ parent_id: tooling
 
 ## Related Guides
 * [Configuring custom plugins for your app][custom-plugin-config]
-* [Using Cordova CLI with your Steroids project][using-cordova-cli]
 
 *NB: The content below is from the official [Cordova plugin development guide][cordova-plugin-guide], with a few Steroids-specific modifications and clarifications.*
 
@@ -88,5 +87,5 @@ You can find an example of a properly set up Echo plugin repository on [GitHub][
 [custom-plugin-config]: /tooling/build-service/plugins/configuring-custom-plugins/
 [github]: https://github.com
 [plugman]: https://github.com/apache/cordova-plugman
-[steroids-echo-plugin]: https://github.com/AppGyver/tooling-echo-plugin/
+[steroids-echo-plugin]: https://github.com/AppGyver/steroids-echo-plugin/
 </section>
