@@ -79,6 +79,10 @@ The `webView` object contains several preferences that affect how your applicati
 
 * **allowInlineMediaPlayback (boolean, defaults to false, iOS-only)** - when set to true, inline HTML5 video playback is allowed on iPhone (HTML5 videos are normally opened in a native video dialogue). Note that `<video>` elements in the HTML document must also include the `webkit-playsinline="true"` attribute. On iPad, this preference is ignored and all HTML5 video files are always played inline. (Inline audio playback works on both devices regardless of this preference.)
 
+<p class="advanced-panel">
+Other objects under the <code>webview</code> get added into <code>dist/config.xml</code> as-is. This means you can add e.g. <code>KeyboardDisplayRequiresUserActionvalue: "true"</code> and it'll generate the element <code>&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;</code>.
+</p>
+
 
 ### Steroids Add-ons settings
 
