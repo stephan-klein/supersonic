@@ -23,6 +23,8 @@ module.exports = (steroids, log) ->
    #) => Promise
    # @description
    # Determine which of the four possible screen rotations are enabled on your device. By default all rotations are allowed, with the exception of custom builds where the build settings have been used to lock the app into a certain rotation scheme. Modals are not affected by setting allowed rotations in other views and conversely setting allowed rotations in a modal does not affect the rest of the app.
+   #
+   # **Note:** This method is not available on Android due to OS limitations on rotations.
    # @define {Array<String>} rotations Allowed rotations. Possible values are `"portrait"`, `"portraitUpsideDown"`, `"landscapeLeft"` and `"landscapeRight"`.
    # @returnsDescription
    # Returns a [`Promise`](/supersonic/guides/technical-concepts/promises/) that is resolved when the allowed rotations are set.
