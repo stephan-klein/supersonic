@@ -83,6 +83,25 @@ The `webView` object contains several preferences that affect how your applicati
 Other objects under the <code>webview</code> get added into <code>dist/config.xml</code> as-is. This means you can add e.g. <code>KeyboardDisplayRequiresUserActionvalue: "true"</code> and it'll generate the element <code>&lt;preference name="KeyboardDisplayRequiresUserAction" value="false"/&gt;</code>.
 </p>
 
+### Status bar settings (iOS-only)
+
+```coffeescript
+  statusBar:
+    enabled: true
+    style: "default"
+```
+
+The `statusBar.enabled` property defines if the status bar is shown or hidden on app start. If the property is missing or invalid, it defaults to `true`.
+
+The `statusBar.style` property accepts two values:
+
+* `"default"` for black text
+* `"light"` for white text
+
+The status bar background color is determined by the navigation bar background color, or WebView background color if the navigation bar is not used (defaults to white).
+
+<p class="advanced-panel">Note that setting an invalid string for <code>statusBar.style</code> causes the status bar to be hidden regardless of the value of <code>statusBar.enabled</code>.</p>
+
 
 ### Steroids Add-ons settings
 
