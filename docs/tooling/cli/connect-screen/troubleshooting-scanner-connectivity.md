@@ -19,7 +19,7 @@ If the computer has any other internet connections such as ethernet connected, t
 
 ## Is your firewall configured correctly?
 
-Make sure your firewall/NAT are configured correctly. Note that on Windows, Node.js shows up as "Evented I/O for V8 JavaScript" in Firewall.
+Make sure your firewall/NAT are configured correctly. You will need to have port `4567` open. You can also specify a custom port with the `steroids connect --port` argument. Note that on Windows, Node.js shows up as "Evented I/O for V8 JavaScript" in Firewall.
 
 ## Have you disabled Personal Hotspot on iOS?
 
