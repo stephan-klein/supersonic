@@ -187,6 +187,7 @@ drawers:
     id: "left-drawer"
     location: "example#leftDrawer"
     showOnAppLoad: false
+    widthOfDrawerInPixels: 250
   right:
     id: "right-drawer"
     location: "example#rightDrawer"
@@ -197,7 +198,10 @@ drawers:
 
 Define drawers/side menus that will be loaded when the app starts. Drawers can be defined for the left side, right side or both.
 
-The `id` property defines the id of the started View that is displayed in the drawer. The `location` property defines the document shown in the drawer. The `showOnAppLoad` property can only be `true` for one drawer: that drawer will be automatically displayed during app load.
+- `id`: the id of the started View that is displayed in the drawer
+- `location`: defines the document shown in the drawer
+- `showOnAppLoad`: can only be `true` for one drawer; that drawer will be automatically displayed during app load
+- `widthOfDrawerInPixels`: how wide the drawer is when fully opened, in pixels
 
 The `options.animation` property is iOS-only, and determines the animation type used when opening/closing the drawer. See the [supersonic.ui.drawers.updateOptions](/supersonic/api-reference/stable/supersonic/ui/drawers/updateoptions) API docs for a list of supported animation types.
 
