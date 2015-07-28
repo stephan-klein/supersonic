@@ -14,7 +14,7 @@ module.exports = (steroids, ui, logger) ->
         steroids.view.removeLoading()
 
   pop: s.promiseF 'pop', ->
-    supersonic.ui.animate("slideFromLeft", {
+    ui.animate("slideFromLeft", {
       duration: 0.5
       curve: "easeInOut"
     }).perform()
