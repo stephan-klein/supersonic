@@ -1,5 +1,6 @@
 
 module.exports = (steroids, ui, logger) ->
-  initialModuleElements: require('./initial-module-elements')(logger)
   attributes: require('./attributes')(logger)
+  initialModuleElements: require('./initial-module-elements')(logger)
+  router: require('./router')(logger)
   transitions: require('./transitions')(steroids, ui, logger)
