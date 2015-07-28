@@ -1,6 +1,7 @@
 qs = require 'qs'
 
-module.exports = (logger) ->
+module.exports = (logger, env) ->
+  EXPLICIT_ROUTE_TARGETS = env?.modules?.routes ? {}
   ROUTE_PATTERN = /^([\w\-]+)(#([\w\-\/]+))?(\?.+)?$/
   ROOT_PATH = "/components"
   DEFAULT_VIEW_NAME = "index"
@@ -13,8 +14,14 @@ module.exports = (logger) ->
     else
       query ? ''
 
-  formatPath = (module, view, queryString) ->
-    "#{ROOT_PATH}/#{module}/#{view}.html#{queryString}"
+  formatPath = (moduleName, viewName, queryString) ->
+    "#{ROOT_PATH}/#{moduleName}/#{viewName}.html#{queryString}"
+
+  hasExplicitPathFor = (moduleName, viewName) ->
+    EXPLICIT_ROUTE_TARGETS[moduleName]?.views?[viewName]?.path?
+
+  formatExplicitPath = (moduleName, viewName, query, params) ->
+    EXPLICIT_ROUTE_TARGETS[moduleName].views[viewName].path
 
   getPath: (route, params = null) ->
     if !(typeof route is 'string')
@@ -25,7 +32,11 @@ module.exports = (logger) ->
     if !parts?
       throw new Error "Did not recognize route format in: '#{route}'"
 
-    [whole, module, _, view, query] = parts
-    view ?= DEFAULT_VIEW_NAME
-    queryString = formatQueryString query, params
-    formatPath module, view, queryString
+    [whole, moduleName, _, viewName, query] = parts
+    viewName ?= DEFAULT_VIEW_NAME
+
+    if hasExplicitPathFor moduleName, viewName
+      formatExplicitPath moduleName, viewName, query, params
+    else
+      queryString = formatQueryString query, params
+      formatPath moduleName, viewName, queryString
