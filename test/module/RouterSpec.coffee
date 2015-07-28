@@ -52,3 +52,36 @@ describe 'supersonic.module.router', ->
             index:
               path: "path/to/route"
       ).getPath("foo").should.equal "path/to/route"
+
+    describe 'explicit route target', ->
+      it 'may have required params', ->
+        (-> router(
+          foo:
+            views:
+              index:
+                path: "path/to/route"
+                params:
+                  id:
+                    required: true
+        ).getPath("foo")).should.throw Error
+
+        router(
+          foo:
+            views:
+              index:
+                path: "path/to/route"
+                params:
+                  id:
+                    required: true
+        ).getPath("foo", id: 123).should.equal "path/to/route?id=123"
+
+      it 'may be parametrized with :tokens', ->
+        router(
+          foo:
+            views:
+              index:
+                path: "path/to/item/:id"
+                params:
+                  id:
+                    required: true
+        ).getPath("foo", id: 123).should.equal "path/to/item/123"
