@@ -16,11 +16,9 @@ describe "supersonic.ui.layers", ->
 
   describe "push", ->
     layers = null
-    view = null
 
     before ->
       layers = supersonic.ui.layers
-      view = new supersonic.ui.View "ui#empty"
 
     it "should be defined", ->
       layers.push.should.exist
