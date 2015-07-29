@@ -1,7 +1,6 @@
 qs = require 'qs'
 
 module.exports = (logger, env) ->
-  EXPLICIT_ROUTE_TARGETS = env?.modules?.routes ? {}
   ROUTE_PATTERN = /^([^#?]+)(#([^?]+))?(\?(.+))?$/
   ROOT_PATH = "/components"
   DEFAULT_VIEW_NAME = "index"
@@ -19,7 +18,7 @@ module.exports = (logger, env) ->
     "#{ROOT_PATH}/#{moduleName}/#{viewName}.html"
 
   hasExplicitPathFor = (moduleName, viewName) ->
-    EXPLICIT_ROUTE_TARGETS[moduleName]?.views?[viewName]?.path?
+    env?.modules?.routes?[moduleName]?.views?[viewName]?.path?
 
   formatExplicitPath = do ->
     assertRequiredParamsExist = (targetParams, params) ->
@@ -38,7 +37,7 @@ module.exports = (logger, env) ->
       [ path, remainingParams ]
 
     return (moduleName, viewName, params) ->
-      target = EXPLICIT_ROUTE_TARGETS[moduleName].views[viewName]
+      target = env?.modules?.routes?[moduleName].views[viewName]
 
       assertRequiredParamsExist target.params, params
 

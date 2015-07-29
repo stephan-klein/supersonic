@@ -22,7 +22,7 @@ module.exports = {
   debug: require('./core/debug')(steroids, logger)
   app: require('./core/app')(steroids, logger)
   media: require('./core/media')(steroids, logger)
-  module: require('./core/module')(steroids, ui, logger)
+  module: require('./core/module')(steroids, logger, ui, env)
   device: require('./core/device')(steroids, logger)
   data: require('./core/data')(logger, global)
   auth: require('./core/auth')(logger, global, data, env)
