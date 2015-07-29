@@ -2,7 +2,7 @@ qs = require 'qs'
 
 module.exports = (logger, env) ->
   EXPLICIT_ROUTE_TARGETS = env?.modules?.routes ? {}
-  ROUTE_PATTERN = /^([\w\-]+)(#([\w\-\/]+))?(\?(.+))?$/
+  ROUTE_PATTERN = /^([^#?]+)(#([^?]+))?(\?(.+))?$/
   ROOT_PATH = "/components"
   DEFAULT_VIEW_NAME = "index"
 

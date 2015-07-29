@@ -33,6 +33,9 @@ describe 'supersonic.module.router', ->
     it 'may be parametrized with a view name', ->
       router().getPath('foo#bar').should.match /foo\/bar/
 
+    it 'may contain dashes, dots and alnum chars', ->
+      router().getPath('foo-bar.qux123#trog.dor').should.match /foo\-bar\.qux123\/trog\.dor/
+
     describe 'view name', ->
       it 'defaults to "index"', ->
         router().getPath('foo').should.match /foo\/index/
