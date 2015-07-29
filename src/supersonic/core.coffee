@@ -4,8 +4,8 @@ global = if window?
     Window = require './mock/window'
     new Window()
 
-steroids = if global.steroids?
-    global.steroids
+steroids = if global.top?.steroids?
+    global.top?.steroids
   else
     require './mock/steroids'
 
