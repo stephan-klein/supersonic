@@ -18,25 +18,24 @@ module.exports = (steroids, log, global) ->
       steroids.getApplicationState {},
         onSuccess: (state)->
           matches = (preload for preload in state.preloads when global.location.href in [preload.URL, preload.location]) # iOS: .URL Android: .location
-          if matches.length
-            # update .id
-            viewObject.id = matches[0].id unless id?
-            resolve()
+          if matches.length and matches[0].id?
+            resolve matches[0].id
           else
             reject()
         onFailure: ->
           reject(new Error("Could not get application state"))
 
-  isStarted().then ->
-    return unless viewObject.id?
-    channelId = "view-params-#{viewObject.id}"
-    unlisten = null
+  isStarted().then(
+    (startedWithId) ->
+      viewObject.id = startedWithId
+      channelId = "view-params-#{viewObject.id}"
+      unlisten = null
 
-    viewChannel = channel(global)(channelId)
-    parameterBus.plug viewChannel.inbound
-  , ->
-    console.log "View #{global.location.href} is not started, wont register channel"
-
+      viewChannel = channel(global)(channelId)
+      parameterBus.plug viewChannel.inbound
+    ->
+      log.debug "View '#{global.location.href}' is not started, will not register channel"
+  )
 
   ###
    # @namespace supersonic.ui.views
