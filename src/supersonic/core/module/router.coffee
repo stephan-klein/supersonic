@@ -48,13 +48,13 @@ module.exports = (logger, env) ->
 
   mergeQueryParams = (query, params) ->
     queryParams = {}
-    for key, value of (params || {})
+    for key, value of params
       queryParams[key] = value
-    for key, value of qs.parse (query || '')
+    for key, value of qs.parse query
       queryParams[key] = value
     queryParams
 
-  getPath: (route, params = null) ->
+  getPath: (route, params = {}) ->
     if !(typeof route is 'string')
       throw new Error "Route must be a string"
 
@@ -65,6 +65,7 @@ module.exports = (logger, env) ->
 
     [whole, moduleName, _, viewName, _, query] = parts
     viewName ?= DEFAULT_VIEW_NAME
+    query ?= ''
 
     queryParams = mergeQueryParams query, params
 
