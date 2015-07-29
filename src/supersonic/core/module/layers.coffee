@@ -17,3 +17,11 @@ module.exports = (logger, steroids, router) ->
         onFailure: (error) ->
           reject new Error error.errorDescription
       }
+
+  pop: s.promiseF 'pop', ->
+    new Promise (resolve, reject) ->
+      steroids.layers.pop {}, {
+        onSuccess: resolve
+        onFailure: (error) ->
+          reject new Error error.errorDescription
+      }
