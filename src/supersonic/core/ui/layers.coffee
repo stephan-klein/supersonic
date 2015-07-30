@@ -56,8 +56,7 @@ module.exports = (steroids, log) ->
    # supersonic.ui.layers.push(view, { animation: customAnimation });
   ###
   push: s.promiseF "push", (viewOrId, options={}) ->
-    new Promise (resolve, reject) ->
-      supersonic.ui.views.find(viewOrId)
+    supersonic.ui.views.find(viewOrId)
       .tap (view)->
         view.isStarted().then (started)->
           return unless options.params?
@@ -68,14 +67,15 @@ module.exports = (steroids, log) ->
             view._webView.setParams options.params
 
       .then (view)->
-        steroids.layers.push
-          view: view._webView
-          animation: options.animation
-        ,
-          onSuccess: ->
-            resolve view
-          onFailure: (error)->
-            reject new Error error.errorDescription
+        new Promise (resolve, reject) ->
+          steroids.layers.push
+            view: view._webView
+            animation: options.animation
+          ,
+            onSuccess: ->
+              resolve view
+            onFailure: (error)->
+              reject new Error error.errorDescription
 
   ###
    # @namespace supersonic.ui.layers
@@ -158,12 +158,11 @@ module.exports = (steroids, log) ->
    # supersonic.ui.layers.replace("settings");
   ###
   replace: s.promiseF "replace", (viewOrId) ->
-    new Promise (resolve, reject) ->
-      supersonic.ui.views.find(viewOrId)
-        .then (view) ->
-          steroids.layers.replace view._webView, {
-            onSuccess: ->
-              resolve
-            onFailure: (error)->
-              reject error
-          }
+    supersonic.ui.views.find(viewOrId).then (view) ->
+      new Promise (resolve, reject) ->
+        steroids.layers.replace view._webView, {
+          onSuccess: ->
+            resolve
+          onFailure: (error)->
+            reject error
+        }

@@ -1,7 +1,6 @@
 qs = require 'qs'
 
 module.exports = (logger, env) ->
-  EXPLICIT_ROUTE_TARGETS = env?.modules?.routes ? {}
   ROUTE_PATTERN = /^([^#?]+)(#([^?]+))?(\?(.+))?$/
   ROOT_PATH = "/components"
   DEFAULT_VIEW_NAME = "index"
@@ -19,7 +18,7 @@ module.exports = (logger, env) ->
     "#{ROOT_PATH}/#{moduleName}/#{viewName}.html"
 
   hasExplicitPathFor = (moduleName, viewName) ->
-    EXPLICIT_ROUTE_TARGETS[moduleName]?.views?[viewName]?.path?
+    env?.modules?.routes?[moduleName]?.views?[viewName]?.path?
 
   formatExplicitPath = do ->
     assertRequiredParamsExist = (targetParams, params) ->
@@ -38,7 +37,7 @@ module.exports = (logger, env) ->
       [ path, remainingParams ]
 
     return (moduleName, viewName, params) ->
-      target = EXPLICIT_ROUTE_TARGETS[moduleName].views[viewName]
+      target = env?.modules?.routes?[moduleName].views[viewName]
 
       assertRequiredParamsExist target.params, params
 
@@ -48,13 +47,13 @@ module.exports = (logger, env) ->
 
   mergeQueryParams = (query, params) ->
     queryParams = {}
-    for key, value of (params || {})
+    for key, value of params
       queryParams[key] = value
-    for key, value of qs.parse (query || '')
+    for key, value of qs.parse query
       queryParams[key] = value
     queryParams
 
-  getPath: (route, params = null) ->
+  getPath: (route, params = {}) ->
     if !(typeof route is 'string')
       throw new Error "Route must be a string"
 
@@ -65,6 +64,7 @@ module.exports = (logger, env) ->
 
     [whole, moduleName, _, viewName, _, query] = parts
     viewName ?= DEFAULT_VIEW_NAME
+    query ?= ''
 
     queryParams = mergeQueryParams query, params
 
