@@ -2,6 +2,13 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.6.0 (TODO)
+
+Introduces navigation between Composer Modules.
+
+- `supersonic.module.router` maps Composer Module route to installed Modules
+- `supersonic.module.layers` allows pushing and popping Module views from the view stack based on routes
+
 ## 1.5.11 (2015-07-03)
 
 Fixes:
