@@ -2,7 +2,7 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## 1.6.0 (TODO)
+## 1.6.0 (2015-07-30)
 
 Introduces navigation between Composer Modules.
 
