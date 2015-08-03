@@ -12,6 +12,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-shell"
 
+  grunt.loadTasks(__dirname + "/node_modules/grunt-steroids/tasks/module-env")
+
   grunt.initConfig
     clean:
       "supersonic-dist":
@@ -34,4 +36,5 @@ module.exports = (grunt) ->
     "clean:supersonic-dist"
     "copy:supersonic-dist"
     "steroids-make-fresh"
+    "steroids-copy-module-dependencies"
   ]
