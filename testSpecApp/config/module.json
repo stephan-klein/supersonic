@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "com.appgyver.install-test": {
+      "version": "2",
+      "published": "2015-08-03T12:43:08.650Z",
+      "source": "https://devgyver-modules.s3.amazonaws.com/uploads/web_component/module_zip/faba7612-4d1d-4eab-acd4-fd259b9d988c/module.zip"
+    }
+  }
+}
