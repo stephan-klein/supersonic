@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "grunt-shell": "^1.1.1",
-    "grunt-steroids": "^1.0.6"
+    "grunt-steroids": "^1.2.0"
   },
   "engines": {
     "steroids": "3.5.0"
