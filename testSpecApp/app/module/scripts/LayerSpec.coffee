@@ -33,3 +33,10 @@ describe 'supersonic.module.layers', ->
         .then(supersonic.module.layers.pop)
         .then(waitForLayerChange)
         .should.be.fulfilled
+
+    it 'works with an installed module', ->
+      supersonic.module.layers.push('com.appgyver.install-test')
+        .then(waitForLayerChange)
+        .then(supersonic.module.layers.pop)
+        .then(waitForLayerChange)
+        .should.be.fulfilled
