@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.6.1 (2015-08-03)
+
+Changes:
+- `supersonic.module.router` root path for Modules under `/dist` is now `/modules`
+
 ## 1.6.0 (2015-07-30)
 
 Introduces navigation between Composer Modules.
