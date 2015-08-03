@@ -44,8 +44,8 @@ describe 'supersonic.module.router', ->
         router().getPath('foo').should.match /index\.html/
 
   describe 'root path', ->
-    it 'defaults to /components', ->
-      router().getPath('foo').should.match /^\/components/
+    it 'defaults to /modules', ->
+      router().getPath('foo').should.match /^\/modules/
 
   describe 'environment', ->
     it 'may define explicit targets for routes', ->

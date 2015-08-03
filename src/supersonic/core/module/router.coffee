@@ -2,7 +2,7 @@ qs = require 'qs'
 
 module.exports = (logger, env) ->
   ROUTE_PATTERN = /^([^#?]+)(#([^?]+))?(\?(.+))?$/
-  ROOT_PATH = "/components"
+  ROOT_PATH = "/modules"
   DEFAULT_VIEW_NAME = "index"
 
   appendQueryParams = (path, queryParams) ->
