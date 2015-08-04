@@ -109,10 +109,12 @@ module.exports = (steroids, log) ->
         throw new Error "Cannot initialize a View without any parameters"
 
       @id = @options.id
+      @navigationBar = @options.navigationBar
 
       @location = @options.location
       @_webView = new steroids.views.WebView
         location: parseRoute(@location)
+        navigationBar: @navigationBar
 
     isStarted: ->
       new Promise (resolve, reject) =>

@@ -19,12 +19,11 @@ module.exports = (steroids, log) ->
       right = navBarState.buttons["right"].find (button)-> button.id == @options.id
       left = navBarState.buttons["left"].find (button)-> button.id == @options.id
 
-      if right? || left?
-        buttonParams = right || left
-        return new supersonic.ui.NavigationBarButton buttonParams
-      else
-        return null
-      
+      return unless right? || left?
+
+      buttonParams = right || left
+      return new supersonic.ui.NavigationBarButton buttonParams
+
   ###
    # @namespace supersonic.ui
    # @name navigationBar
