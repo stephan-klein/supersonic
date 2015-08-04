@@ -2,6 +2,9 @@ module.exports =
 
   rootView:
     location: "common#index"
+    id: "rootView"
+    navigationBar:
+      title: "Root View"
 
   tabs: [
     {
@@ -14,11 +17,30 @@ module.exports =
       icon: "icons/telescope@2x.png"
       location: "http://www.google.com"
     }
+    {
+      title: "NavBar"
+      icon: "icons/pill@2x.png"
+      location: "common#index"
+      navigationBar:
+        title: "from Config"
+        buttons:
+          right:[
+            id:"exitbutton"
+            title:"Exit"
+          ]
+    }
   ]
 
   initialView:
     id: "initialView"
     location: "initial#start"
+    navigationBar:
+      title: "Login"
+      buttons:
+        right:[
+          id:"loginButton"
+          title:"Login"
+        ]
 
   # drawers:
   #   left:
@@ -43,6 +65,8 @@ module.exports =
     {
       id: "app-index"
       location: "app#index"
+      navigationBar:
+        title: "App Index"
     },
     {
       id: "navigate-result"
