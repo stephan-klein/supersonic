@@ -4,6 +4,27 @@ superify = require '../superify'
 module.exports = (steroids, log) ->
   s = superify 'supersonic.ui.navigationBar', log
 
+  getNativeState: s.promiseF "getNativeState", (options = {})->
+    new Promise (resolve, reject)->
+      steroids.view.navigationBar.getNativeState {},
+        onSuccess: resolve
+        onFailure: reject
+
+  getButtonById: s.promiseF "getButtonById", (options = {})->
+    if @options.constructor?.name == "String"
+      @options =
+        id: @options
+
+    getNativeState().then (navBarState)->
+      right = navBarState.buttons["right"].find (button)-> button.id == @options.id
+      left = navBarState.buttons["left"].find (button)-> button.id == @options.id
+
+      if right? || left?
+        buttonParams = right || left
+        return new supersonic.ui.NavigationBarButton buttonParams
+      else
+        return null
+      
   ###
    # @namespace supersonic.ui
    # @name navigationBar
