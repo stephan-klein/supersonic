@@ -12,9 +12,9 @@ angular
 
     $scope.pushWithNavbar = ()->
       newView = new supersonic.ui.View
-        location:"/app/ui/nav-bar-push.html"
+        location: "http://localhost/app/ui/nav-bar-push.html"
         navigationBar:
-          title: "Pre Config!"
+          title: "Pre Configured!"
           buttons:
             right: [
               {

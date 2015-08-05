@@ -3,6 +3,7 @@ module.exports =
   rootView:
     location: "common#index"
     id: "rootView"
+    hidesNavigationBar:false #default is true for rootview
     navigationBar:
       title: "Root View"
 
@@ -16,18 +17,9 @@ module.exports =
       title: "Internet"
       icon: "icons/telescope@2x.png"
       location: "http://www.google.com"
-    }
-    {
-      title: "NavBar"
-      icon: "icons/pill@2x.png"
-      location: "common#index"
+      hidesNavigationBar:false
       navigationBar:
-        title: "from Config"
-        buttons:
-          right:[
-            id:"exitbutton"
-            title:"Exit"
-          ]
+        title: "Internet"
     }
   ]
 

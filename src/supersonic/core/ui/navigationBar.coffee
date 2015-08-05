@@ -4,26 +4,6 @@ superify = require '../superify'
 module.exports = (steroids, log) ->
   s = superify 'supersonic.ui.navigationBar', log
 
-  getNativeState: s.promiseF "getNativeState", (options = {})->
-    new Promise (resolve, reject)->
-      steroids.view.navigationBar.getNativeState {},
-        onSuccess: resolve
-        onFailure: reject
-
-  getButtonById: s.promiseF "getButtonById", (options = {})->
-    if @options.constructor?.name == "String"
-      @options =
-        id: @options
-
-    getNativeState().then (navBarState)->
-      right = navBarState.buttons["right"].find (button)-> button.id == @options.id
-      left = navBarState.buttons["left"].find (button)-> button.id == @options.id
-
-      return unless right? || left?
-
-      buttonParams = right || left
-      return new supersonic.ui.NavigationBarButton buttonParams
-
   ###
    # @namespace supersonic.ui
    # @name navigationBar
@@ -31,6 +11,100 @@ module.exports = (steroids, log) ->
    # @description
    # Provides methods to work with the native navigation bar. For more information, see the [Navigation Bar guide](/supersonic/guides/ui/native-components/navigation-bar/).
   ###
+
+
+
+  ###
+   # @namespace supersonic.ui.navigationBar
+   # @name getNativeState
+   # @function
+   # @description
+   # Return a NavigationBar Native State which contain all the parameters currently applied to the navigation bar and navigation bar buttons.
+   # @type
+   # supersonic.ui.navigationBar.getNativeState: () => Promise
+   # @returnsDescription
+   # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar state native call is complete.
+   # @supportsCallbacks
+   # @exampleCoffeeScript
+   # supersonic.ui.navigationBar.getNativeState().then (navBarState) ->
+   #   ...
+   # @exampleJavaScript
+   # supersonic.ui.navigationBar.getNativeState().then(function(navBarState){
+   #   ...
+   # });
+   #
+  ###
+  getNativeState: s.promiseF "getNativeState", (options = {})->
+    new Promise (resolve, reject)->
+      steroids.view.navigationBar.getNativeState {},
+        onSuccess: resolve
+        onFailure: reject
+
+  ###
+   # @namespace supersonic.ui.navigationBar
+   # @name getButtonById
+   # @function
+   # @description
+   # Return a NavigationBarButton instance if one exists with the id provided.
+   # @type
+   # supersonic.ui.navigationBar.getButtonById: (
+   #   options?:
+   #     id?: String
+   # ) => Promise
+   # @define {Object} options={} An object of optional parameters which define how the navigation bar will be shown.
+   # @define {String} options.id="some value" The button id.
+   # @returnsDescription
+   # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar button is found / not found.
+   # @supportsCallbacks
+   # @exampleCoffeeScript
+   # supersonic.ui.navigationBar.getButtonById("loginButton").then (button) ->
+   #   button.addEventListener "tap", ->
+   #     ...
+   #
+   # # with options
+   # options =
+   #   id: "loginButton"
+   # supersonic.ui.navigationBar.getButtonById(options).then ->
+   #   ...
+   # @exampleJavaScript
+   # supersonic.ui.navigationBar.getButtonById("loginButton").then(function(button){
+   #   button.addEventListener("tap", function(){
+   #     ...
+   #   });
+   # });
+   #
+   # // with options
+   # var options = {
+   #   id: "loginButton"
+   # }
+   #
+   # supersonic.ui.navigationBar.getButtonById(options).then( function() {
+   #   ...
+   # });
+   #
+  ###
+  getButtonById: s.promiseF "getButtonById", (options = {})->
+    if options.constructor?.name == "String"
+      options =
+        id: options
+
+    find = (list, fn) ->
+      if list?
+        for item in list
+          return item unless fn(item) != true
+
+      return null
+
+    supersonic.ui.navigationBar.getNativeState().then (navBarState)->
+      right = find navBarState.buttons?.right, (button) -> button.id == options.id
+      left = find navBarState.buttons?.left, (button) -> button.id == options.id
+      
+      if right? || left?
+        buttonParams = right || left
+        new supersonic.ui.NavigationBarButton buttonParams
+      else
+        throw new Error "Could not find a NavigationBarButton with id: #{options.id}"
+
   ###
    # @namespace supersonic.ui.navigationBar
    # @name show
