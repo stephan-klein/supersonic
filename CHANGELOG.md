@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.6.x (?)
+
+Changes:
+- Fixed scrolling issues on xwalk 14 - removed overflow: hidden; from body element on supersonic.css
+
 ## 1.6.1 (2015-08-03)
 
 Changes:
