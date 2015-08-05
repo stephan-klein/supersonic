@@ -2,6 +2,14 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.6.2 (2015-08-05)
+
+Changes:
+- `supersonic.module.layers` accesses environment-specific functionality through `supersonic.module.drivers`
+
+Features:
+- Current driver for a view and all its iframes can be accessed through `supersonic.module.drivers.current`
+
 ## 1.6.1 (2015-08-03)
 
 Changes:
