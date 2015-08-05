@@ -4,6 +4,11 @@ global = if window?
     Window = require './mock/window'
     new Window()
 
+superglobal = if window?.top?
+    window.top
+  else
+    global
+
 steroids = if global.top?.steroids?
     global.top?.steroids
   else
@@ -22,7 +27,7 @@ module.exports = {
   debug: require('./core/debug')(steroids, logger)
   app: require('./core/app')(steroids, logger)
   media: require('./core/media')(steroids, logger)
-  module: require('./core/module')(steroids, logger, ui, env)
+  module: require('./core/module')(steroids, logger, superglobal, ui, env)
   device: require('./core/device')(steroids, logger)
   data: require('./core/data')(logger, global)
   auth: require('./core/auth')(logger, global, data, env)
