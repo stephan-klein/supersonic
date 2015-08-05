@@ -2,7 +2,7 @@ chai = require('chai')
 chai.should()
 
 steroids = require '../../src/supersonic/mock/steroids'
-drivers = require('../../src/supersonic/core/module/drivers')(steroids)
+drivers = require('../../src/supersonic/core/module/drivers')(steroids, superglobal = {})
 
 describe 'supersonic.module.drivers', ->
   it 'is an object', ->

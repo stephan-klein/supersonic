@@ -14,15 +14,19 @@ describe 'supersonic.module.drivers', ->
       it 'defaults to the mpa driver', ->
         supersonic.module.drivers.current.get().should.equal supersonic.module.drivers.mpa
 
+    nullDriver =
+      layers:
+        push: ->
+        pop: ->
+
+    afterEach ->
+      supersonic.module.drivers.current.set(supersonic.module.drivers.mpa)
+
     describe 'set', ->
       it 'sets the current driver', ->
-        newDriver =
-          layers:
-            push: ->
-            pop: ->
+        supersonic.module.drivers.current.set(nullDriver)
+        supersonic.module.drivers.current.get().should.equal nullDriver
 
-        supersonic.module.drivers.current.set(newDriver)
-        supersonic.module.drivers.current.get().should.equal newDriver
-
-      after ->
-        supersonic.module.drivers.current.set(supersonic.module.drivers.mpa)
+    it 'is stored in the main frame', ->
+      supersonic.module.drivers.current.set(nullDriver)
+      nullDriver.should.equal window.top.ag?.module?.driver

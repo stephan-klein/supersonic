@@ -1,10 +1,13 @@
-module.exports = (steroids) ->
+module.exports = (steroids, superglobal) ->
 
-  currentDriver = null
+  superglobal.ag ?= {}
+  superglobal.ag.module ?= {}
+
   setCurrentDriver = (driver) ->
-    currentDriver = driver
+    superglobal.ag.module.driver = driver
+
   getCurrentDriver = ->
-    currentDriver
+    superglobal.ag.module.driver
 
   {
     mpa: require('./drivers/mpa')(steroids)

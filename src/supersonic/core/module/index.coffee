@@ -1,9 +1,11 @@
 
-module.exports = (steroids, logger, ui, env) ->
+module.exports = (steroids, logger, superglobal, ui, env) ->
   router = require('./router')(logger, env)
-  drivers = require('./drivers')(steroids)
+  drivers = require('./drivers')(steroids, superglobal)
 
-  drivers.current.set(drivers.mpa)
+  # Set default driver unless it has been set in a parent frame
+  if !drivers.current.get()?
+    drivers.current.set(drivers.mpa)
 
   {
     router
