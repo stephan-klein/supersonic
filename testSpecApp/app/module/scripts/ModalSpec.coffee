@@ -1,8 +1,14 @@
 
-waitForModalChange = ->
+waitForModalShow = ->
   new Promise (resolve) ->
-    listener = window.top.steroids.modal.on "didchange", ->
-      window.top.steroids.modal.off "didchange", listener
+    listener = window.top.steroids.modal.on "didshow", ->
+      window.top.steroids.modal.off "didshow", listener
+      resolve()
+
+waitForModalHide = ->
+  new Promise (resolve) ->
+    listener = window.top.steroids.modal.on "didclose", ->
+      window.top.steroids.modal.off "didclose", listener
       resolve()
 
 describe 'supersonic.module.modal', ->
@@ -29,14 +35,14 @@ describe 'supersonic.module.modal', ->
 
     it 'can show a view matching a given route and can hide it afterwards', ->
       supersonic.module.modal.show('foo')
-        .then(waitForModalChange)
+        .then(waitForModalShow)
         .then(supersonic.module.modal.hide)
-        .then(waitForModalChange)
+        .then(waitForModalHide)
         .should.be.fulfilled
 
     it 'works with an installed module', ->
       supersonic.module.modal.show('com.appgyver.install-test')
-        .then(waitForModalChange)
+        .then(waitForModalShow)
         .then(supersonic.module.modal.hide)
-        .then(waitForModalChange)
+        .then(waitForModalHide)
         .should.be.fulfilled
