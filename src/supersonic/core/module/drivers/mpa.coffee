@@ -1,9 +1,11 @@
 Promise = require 'bluebird'
 
-module.exports = (steroids) ->
+module.exports = (steroids, router) ->
   layers:
-    push: (path) ->
+    push: (route, params) ->
       new Promise (resolve, reject) ->
+        path = router.getPath route, params
+
         view = new steroids.views.WebView
           location: path
 
