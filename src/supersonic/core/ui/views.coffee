@@ -43,13 +43,13 @@ module.exports = (steroids, log, global) ->
    #   supersonic.logger.log("myCarsView location: " + startedView.getLocation());
    # });
   ###
-  find = s.promiseF "find", (viewOrId)->
+  find = s.promiseF "find", (viewOrId) ->
     new Promise (resolve, reject) ->
       if viewOrId.constructor.name is "View"
         resolve viewOrId
         return
 
-      getApplicationState().then (state)->
+      getApplicationState().then (state) ->
         for preload in state.preloads
           if preload.id == viewOrId
             view = new View
@@ -111,7 +111,7 @@ module.exports = (steroids, log, global) ->
    #   supersonic.layers.push carsEditView
    # });
   ###
-  start = s.promiseF "start", (viewOrId)->
+  start = s.promiseF "start", (viewOrId) ->
     supersonic.ui.views.find(viewOrId)
       .then (view) ->
         view.start().then ->

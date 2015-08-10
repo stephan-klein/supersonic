@@ -35,7 +35,7 @@ module.exports = (steroids, log) ->
    #   message: "Please reply honestly, now."
    #   buttonLabels: ["Yes", "No"]
    #
-   # supersonic.ui.dialog.confirm("Are you awesome?", options).then (index)->
+   # supersonic.ui.dialog.confirm("Are you awesome?", options).then (index) ->
    #   if result.index is 0
    #     supersonic.logger.log "User is awesome!"
    #   else
@@ -53,14 +53,14 @@ module.exports = (steroids, log) ->
    #     supersonic.logger.log("User wasn't awesome. :(");
    #   }
    # });
-  
+
   ###
   confirm = s.promiseF "confirm", (title, options = {}) ->
-  
+
     title = title || "Confirm"
     message = options?.message || new String
     buttonLabels = options?.buttonLabels || ["OK","Cancel"]
-  
+
     deviceready
       .then(->
         new Promise (resolve) ->

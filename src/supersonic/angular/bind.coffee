@@ -1,8 +1,8 @@
 deepEqual = require 'deep-equal'
 
-bindFactory = (superscope)->
-  (scope, property)->
-    scope.$watch property, (newValue, oldValue)->
+bindFactory = (superscope) ->
+  (scope, property) ->
+    scope.$watch property, (newValue, oldValue) ->
       # see https://docs.angularjs.org/api/ng/type/$rootScope.Scope
       #
       # After a watcher is registered with the scope, the listener fn is called
@@ -22,7 +22,7 @@ bindFactory = (superscope)->
       else
         superscope.$apply fn
 
-    superscope.$watch property, (newValue, oldValue)->
+    superscope.$watch property, (newValue, oldValue) ->
       fn = ->
         scope[property] = newValue
 

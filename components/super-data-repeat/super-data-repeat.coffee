@@ -28,7 +28,7 @@ SuperDataRepeatPrototype.attachedCallback = ->
     else
       supersonic.data.model(model_name)
 
-    @__listener = Model.all().whenChanged (items)=>
+    @__listener = Model.all().whenChanged (items) =>
       @shadowRoot.innerHTML = Handlebars.compile("{{#each items}}#{@__template}{{/each}}")({items: items})
 
 SuperDataRepeatPrototype.createdCallback = ->

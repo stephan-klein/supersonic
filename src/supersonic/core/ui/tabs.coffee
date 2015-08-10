@@ -33,7 +33,7 @@ module.exports = (steroids, log) ->
    # supersonic.ui.tabs.show();
   ###
   show: s.promiseF "show", ->
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.tabBar.show {},
         onSuccess: resolve
         onFailure: reject
@@ -56,7 +56,7 @@ module.exports = (steroids, log) ->
    # supersonic.ui.tabs.hide();
   ###
   hide: s.promiseF "hide", ->
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.tabBar.hide {},
         onSuccess: resolve
         onFailure: reject
@@ -80,8 +80,8 @@ module.exports = (steroids, log) ->
    # @exampleJavaScript
    # supersonic.ui.tabs.update([{title: "Hello", badge: "1"}]);
   ###
-  update: s.promiseF "update", (tabsArray)->
-    new Promise (resolve, reject)->
+  update: s.promiseF "update", (tabsArray) ->
+    new Promise (resolve, reject) ->
       steroids.tabBar.update tabs: tabsArray,
         onSuccess: resolve
         onFailure: reject
@@ -106,12 +106,12 @@ module.exports = (steroids, log) ->
    # @exampleJavaScript
    # supersonic.ui.tabs.replace([{title: "Web", location: "http://www.google.com"}]);
   ###
-  replace: s.promiseF "replace", (tabsArray)->
+  replace: s.promiseF "replace", (tabsArray) ->
     # support for routing
     for tab in tabsArray
       tab.location = parseRoute tab.location, {prefix: "http://localhost/"}
 
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.tabBar.replace tabs: tabsArray,
         onSuccess: resolve
         onFailure: reject
@@ -135,8 +135,8 @@ module.exports = (steroids, log) ->
    # @exampleJavaScript
    # supersonic.ui.tabs.select(1);
   ###
-  select: s.promiseF "select", (tabIndex)->
-    new Promise (resolve, reject)->
+  select: s.promiseF "select", (tabIndex) ->
+    new Promise (resolve, reject) ->
       steroids.tabBar.selectTab index: tabIndex,
         onSuccess: resolve
         onFailure: reject
@@ -160,10 +160,10 @@ module.exports = (steroids, log) ->
    # @exampleJavaScript
    # supersonic.ui.tabs.updateCurrentTab({title: "Hello"});
   ###
-  updateCurrentTab: s.promiseF "updateCurrentTab", (config={})->
+  updateCurrentTab: s.promiseF "updateCurrentTab", (config={}) ->
     unless typeof config is "object" and Object.keys(config).length
       throw new Error "Could not update current tab without configuration object"
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.tabBar.currentTab.update config,
         onSuccess: resolve
         onFailure: reject
@@ -187,8 +187,8 @@ module.exports = (steroids, log) ->
    # @exampleJavaScript
    # supersonic.ui.tabs.setStyleClass("my-awesome-tabs");
   ###
-  setStyleClass: s.promiseF "setStyleClass", (className)->
-    new Promise (resolve, reject)->
+  setStyleClass: s.promiseF "setStyleClass", (className) ->
+    new Promise (resolve, reject) ->
       steroids.tabBar.setStyleClass className,
         onSuccess: resolve
         onFailure: reject
@@ -213,8 +213,8 @@ module.exports = (steroids, log) ->
    # @exampleJavaScript
    # supersonic.ui.tabs.setStyleId("graybg");
   ###
-  setStyleId: s.promiseF "setStyleId", (id)->
-    new Promise (resolve, reject)->
+  setStyleId: s.promiseF "setStyleId", (id) ->
+    new Promise (resolve, reject) ->
       steroids.tabBar.setStyleId id,
         onSuccess: resolve
         onFailure: reject
@@ -239,8 +239,8 @@ module.exports = (steroids, log) ->
    # @exampleJavaScript
    # supersonic.ui.tabs.setStyleCSS("background-color: red;");
   ###
-  setStyleCSS: s.promiseF "setStyleCSS", (css)->
-    new Promise (resolve, reject)->
+  setStyleCSS: s.promiseF "setStyleCSS", (css) ->
+    new Promise (resolve, reject) ->
       steroids.tabBar.setStyleCSS css,
         onSuccess: resolve
         onFailure: reject
@@ -270,7 +270,7 @@ module.exports = (steroids, log) ->
    # // Later on, we can unsubscribe from the change events
    # unsubscribe();
   ###
-  whenWillChange: (f)->
+  whenWillChange: (f) ->
     id = steroids.tabBar.on "willchange", f
     ->
       steroids.tabBar.off "willchange", id
@@ -298,7 +298,7 @@ module.exports = (steroids, log) ->
    # // Later on, we can unsubscribe from the change events
    # unsubscribe();
   ###
-  whenDidChange: (f)->
+  whenDidChange: (f) ->
     id = steroids.tabBar.on "didchange", f
     ->
       steroids.tabBar.off "didchange", id

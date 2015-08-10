@@ -55,29 +55,29 @@ describe "supersonic.ui.drawers", ->
 
   describe "opening and closing", ->
     it "should be able to show left drawer", (done) ->
-      (new Promise (resolve)->
+      (new Promise (resolve) ->
         steroids.drawers.on "didshow", resolve
       ).should.be.fulfilled.and.notify done
 
       supersonic.ui.drawers.open("left").should.be.fulfilled
 
 
-    it "should be able to close left drawer", (done)->
-      (new Promise (resolve)->
+    it "should be able to close left drawer", (done) ->
+      (new Promise (resolve) ->
         steroids.drawers.on "didclose", resolve
       ).should.be.fulfilled.and.notify done
 
       supersonic.ui.drawers.close().should.be.fulfilled
 
     it "should be able to show right drawer", (done) ->
-      (new Promise (resolve)->
+      (new Promise (resolve) ->
         steroids.drawers.on "didshow", resolve
       ).should.be.fulfilled.and.notify done
 
       supersonic.ui.drawers.open("right").should.be.fulfilled
 
-    it "should be able to close right drawer", (done)->
-      (new Promise (resolve)->
+    it "should be able to close right drawer", (done) ->
+      (new Promise (resolve) ->
         steroids.drawers.on "didclose", resolve
       ).should.be.fulfilled.and.notify done
 

@@ -6,7 +6,7 @@ describe "supersonic.app.getLaunchURL", ->
     urlObject = supersonic.app.getLaunchURL()
     expect(urlObject).to.be.null
 
-  it "should return object after calling openURL with steroids-scanner:// scheme", (done)->
+  it "should return object after calling openURL with steroids-scanner:// scheme", (done) ->
     supersonic.app.openURL("steroids-scanner://?user=quentin&password=monkey").then ->
       supersonic.app.getLaunchURL().should.be.an "object"
       done()

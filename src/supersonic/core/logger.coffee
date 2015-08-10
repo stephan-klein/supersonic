@@ -54,7 +54,7 @@ module.exports = (steroids, window) ->
     xhr
 
   # (messageStream: Bacon.Bus(LogMessageEnvelope)) -> () -> Promise stopFlushing
-  autoFlush = (messageStream) -> () ->
+  autoFlush = (messageStream) -> ->
     shouldAutoFlush().then(
       ->
         defaultLogEndPoint().then (endPoint) ->

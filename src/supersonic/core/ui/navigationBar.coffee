@@ -48,11 +48,11 @@ module.exports = (steroids, log) ->
    # });
    #
   ###
-  show: s.promiseF "show", (options = {})->
+  show: s.promiseF "show", (options = {}) ->
     filteredParams =
       animated: options.animated
 
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.view.navigationBar.show filteredParams,
         onSuccess: resolve
         onFailure: reject
@@ -95,8 +95,8 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.debug("Navigation bar hidden without animation.");
    # });
   ###
-  hide: s.promiseF "hide", (options = {})->
-    new Promise (resolve, reject)->
+  hide: s.promiseF "hide", (options = {}) ->
+    new Promise (resolve, reject) ->
       steroids.view.navigationBar.hide options,
         onSuccess: resolve
         onFailure: reject
@@ -158,8 +158,8 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.navigationBar.update options
   ###
-  update: s.promiseF "update", (options)->
-    new Promise (resolve, reject)->
+  update: s.promiseF "update", (options) ->
+    new Promise (resolve, reject) ->
       steroids.view.navigationBar.update options,
         onSuccess: resolve
         onFailure: reject
@@ -179,7 +179,7 @@ module.exports = (steroids, log) ->
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar CSS class is set.
    # @supportsCallbacks
    # @exampleCoffeeScript
-   # supersonic.ui.navigationBar.setClass("my-class").then ()->
+   # supersonic.ui.navigationBar.setClass("my-class").then () ->
    #   supersonic.logger.log "Navigation bar class was set."
    # @exampleJavaScript
    # supersonic.ui.navigationBar.setClass("my-class").then(function() {
@@ -187,8 +187,8 @@ module.exports = (steroids, log) ->
    # });
    #
   ###
-  setClass: s.promiseF "setClass", (className)->
-    new Promise (resolve, reject)->
+  setClass: s.promiseF "setClass", (className) ->
+    new Promise (resolve, reject) ->
       steroids.view.navigationBar.setStyleClass className,
         onSuccess: resolve
         onFailure: reject
@@ -208,7 +208,7 @@ module.exports = (steroids, log) ->
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar style is set.
    # @supportsCallbacks
    # @exampleCoffeeScript
-   # supersonic.ui.navigationBar.setStyle("background-color: #ff0000;").then ()->
+   # supersonic.ui.navigationBar.setStyle("background-color: #ff0000;").then () ->
    #   supersonic.logger.log "Navigation bar style was set."
    # @exampleJavaScript
    # supersonic.ui.navigationBar.setStyle("background-color: #ff0000;").then(function() {
@@ -216,8 +216,8 @@ module.exports = (steroids, log) ->
    # });
    #
   ###
-  setStyle: s.promiseF "setStyle", (inlineCssString)->
-    new Promise (resolve, reject)->
+  setStyle: s.promiseF "setStyle", (inlineCssString) ->
+    new Promise (resolve, reject) ->
       steroids.view.navigationBar.setStyleCSS inlineCssString,
         onSuccess: resolve
         onFailure: reject
@@ -238,7 +238,7 @@ module.exports = (steroids, log) ->
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/) that will be resolved after the navigation bar style id is set.
    # @supportsCallbacks
    # @exampleCoffeeScript
-   # supersonic.ui.navigationBar.setStyleId("the-button").then ()->
+   # supersonic.ui.navigationBar.setStyleId("the-button").then () ->
    #   supersonic.logger.log "Navigation bar style id was set."
    # @exampleJavaScript
    # supersonic.ui.navigationBar.setStyleId("the-button").then(function() {
@@ -246,8 +246,8 @@ module.exports = (steroids, log) ->
    # });
    #
   ###
-  setStyleId: s.promiseF "setStyleId", (styleId)->
-    new Promise (resolve, reject)->
+  setStyleId: s.promiseF "setStyleId", (styleId) ->
+    new Promise (resolve, reject) ->
       steroids.view.navigationBar.setStyleId styleId,
         onSuccess: resolve
         onFailure: reject

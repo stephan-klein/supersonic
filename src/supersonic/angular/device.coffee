@@ -15,8 +15,8 @@ module.exports = (angular) ->
 
         result
 
-      digestifyFunction = (apiFunction)->
-        (eventFunction)->
+      digestifyFunction = (apiFunction) ->
+        (eventFunction) ->
           apiFunction(-> $timeout(eventFunction))
 
       do (device = supersonic.device) ->
@@ -41,7 +41,7 @@ module.exports = (angular) ->
             whenOnline: digestifyFunction(network.whenOnline)
 
           buttons:
-            back: decorate device.buttons.back, (back)->
+            back: decorate device.buttons.back, (back) ->
               whenPressed: digestifyFunction(back.whenPressed)
 
           push: decorate device.push, (push) ->

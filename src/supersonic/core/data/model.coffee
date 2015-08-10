@@ -142,7 +142,7 @@ module.exports = (logger, window, getDefaultCacheStorage, session) ->
 # @define {=>Function} whenChanged.unsubscribe Call this function to stop listening for data changes.
 # @exampleCoffeeScript
 # Task = supersonic.data.model 'task'
-# unsubscribe = Task.all(queryParameters, options).whenChanged (updatedTasks)->
+# unsubscribe = Task.all(queryParameters, options).whenChanged (updatedTasks) ->
 #   supersonic.logger.log "First element of updated Task collection: ", updatedTasks[0]
 #
 # # Later on, we can stop listening to updates
@@ -179,7 +179,7 @@ module.exports = (logger, window, getDefaultCacheStorage, session) ->
 # @define {=>Function} whenChanged Called with a Model matching the `id`. Called every `options.interval` ms, but only when new data is available. Returns a function that can be used to unsubscribe from the update stream.
 # @define {=>Function} whenChanged.unsubscribe Call this function to stop listening for data changes.
 # @exampleCoffeeScript
-# unsubscribe = supersonic.data.model('task').one('123', options).whenChanged (updatedTask)->
+# unsubscribe = supersonic.data.model('task').one('123', options).whenChanged (updatedTask) ->
 #   supersonic.logger.log "Most recent data on task 123: ", updatedTask
 #
 # # Later on, we can stop listening for updates

@@ -57,8 +57,8 @@ module.exports = (steroids, log) ->
   ###
   push: s.promiseF "push", (viewOrId, options={}) ->
     supersonic.ui.views.find(viewOrId)
-      .tap (view)->
-        view.isStarted().then (started)->
+      .tap (view) ->
+        view.isStarted().then (started) ->
           return unless options.params?
 
           if started
@@ -66,7 +66,7 @@ module.exports = (steroids, log) ->
           else
             view._webView.setParams options.params
 
-      .then (view)->
+      .then (view) ->
         new Promise (resolve, reject) ->
           steroids.layers.push
             view: view._webView
@@ -74,7 +74,7 @@ module.exports = (steroids, log) ->
           ,
             onSuccess: ->
               resolve view
-            onFailure: (error)->
+            onFailure: (error) ->
               reject new Error error.errorDescription
 
   ###
@@ -93,12 +93,12 @@ module.exports = (steroids, log) ->
    # @exampleJavaScript
    # supersonic.ui.layers.pop();
   ###
-  pop: s.promiseF "pop", ()->
-    new Promise (resolve, reject)->
+  pop: s.promiseF "pop", ->
+    new Promise (resolve, reject) ->
       steroids.layers.pop {}, {
-        onSuccess: ()->
+        onSuccess: ->
           resolve()
-        onFailure: (error)->
+        onFailure: (error) ->
           reject(error)
       }
 
@@ -118,12 +118,12 @@ module.exports = (steroids, log) ->
    # @exampleJavaScript
    # supersonic.ui.layers.popAll();
   ###
-  popAll: s.promiseF "popAll", ()->
+  popAll: s.promiseF "popAll", ->
     new Promise (resolve, reject) ->
       steroids.layers.popAll {}, {
-        onSuccess: ()->
+        onSuccess: ->
           resolve()
-        onFailure: (error)->
+        onFailure: (error) ->
           reject new Error error.errorDescription
       }
 
@@ -163,6 +163,6 @@ module.exports = (steroids, log) ->
         steroids.layers.replace view._webView, {
           onSuccess: ->
             resolve
-          onFailure: (error)->
+          onFailure: (error) ->
             reject error
         }

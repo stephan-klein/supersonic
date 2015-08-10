@@ -33,16 +33,16 @@ module.exports = (steroids, log) ->
   _handler = ->
     cb.fn() for cb in callbacks
 
-  _addCallback = (f)->
+  _addCallback = (f) ->
     callbacks.push {id: (new Date()).getTime(), fn: f}
 
-  _removeCallback = (id)->
+  _removeCallback = (id) ->
     if callbacks.length is 0
       document.removeEventListener "backbutton", _handler, false
       override = false
     callbacks = (cb for cb in callbacks when cb.id is id)
 
-  whenPressed = (f)->
+  whenPressed = (f) ->
 
     id = _addCallback(f).id
     unless override

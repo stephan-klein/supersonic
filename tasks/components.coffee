@@ -10,7 +10,7 @@ module.exports = (grunt) ->
 
     componentDirectories = grunt.file.expand grunt.config.get("dir.components")
 
-    async.forEach componentDirectories, (componentDirectory, cb)->
+    async.forEach componentDirectories, (componentDirectory, cb) ->
       coreComponent = {
         name: componentDirectory.split("/")[1]
         path: null
@@ -18,7 +18,7 @@ module.exports = (grunt) ->
         html: null
       }
 
-      grunt.file.recurse componentDirectory, (abspath, rootdir, subdir, filename)->
+      grunt.file.recurse componentDirectory, (abspath, rootdir, subdir, filename) ->
 
         if /\.html/.test filename
           coreComponent.path = abspath
@@ -30,7 +30,7 @@ module.exports = (grunt) ->
           coreComponents.push coreComponent
           cb()
 
-    , ()->
+    , () ->
 
       coreComponentSources = []
       for component in coreComponents

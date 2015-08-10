@@ -2,13 +2,13 @@ angular
   .module('webComponents', ['supersonic'])
   .controller 'DrawerController', ($scope, $element, supersonic) ->
 
-    $scope.openDrawer = ()->
+    $scope.openDrawer = () ->
       # Opens a drawer calling its method
       drawer = $element.find('ss-drawer')[0]
       # drawer && drawer.setAttribute("style", "display: block;")
       drawer && drawer.showDrawer()
 
-    $scope.openDrawer2 = ()->
+    $scope.openDrawer2 = () ->
       # Opens a drawer with CSS
       drawer = $element.find('ss-drawer')[0]
       drawer && drawer.setAttribute("style", "display: block;")

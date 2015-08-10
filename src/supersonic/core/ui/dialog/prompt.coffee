@@ -40,7 +40,7 @@ module.exports = (steroids, log) ->
    #   buttonLabels: ["Blue", "Red", "Yellow"]
    #   defaultText: "Type here"
    #
-   # supersonic.ui.dialog.prompt("Colorize text", options).then (result)->
+   # supersonic.ui.dialog.prompt("Colorize text", options).then (result) ->
    #   supersonic.logger.log "User clicked button number #{result.buttonIndex} with text #{result.input}"
    # @exampleJavaScript
    # var options = {
@@ -54,12 +54,12 @@ module.exports = (steroids, log) ->
    # });
   ###
   prompt = s.promiseF "prompt", (title, options = {}) ->
-  
+
     title = title || "Prompt"
     msg = options?.message || new String
     buttonLabels = options?.buttonLabels || ["OK","Cancel"]
     defaultText = options?.defaultText || new String
-  
+
     deviceready
       .then(->
         new Promise (resolve) ->
@@ -69,4 +69,4 @@ module.exports = (steroids, log) ->
           input: result.input1
 
   return prompt
-  
+

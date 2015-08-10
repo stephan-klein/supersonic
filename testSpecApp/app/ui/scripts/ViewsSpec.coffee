@@ -6,20 +6,20 @@ describe "supersonic.ui.views", ->
     it "is a function", ->
       supersonic.ui.views.find.should.be.a 'function'
 
-    it "should find a view with identifier", (done)->
-      supersonic.ui.views.find("dolan").then (view)->
+    it "should find a view with identifier", (done) ->
+      supersonic.ui.views.find("dolan").then (view) ->
         done()
 
-    it "should find a view with a view", (done)->
+    it "should find a view with a view", (done) ->
       view = new supersonic.ui.View "dolan"
-      supersonic.ui.views.find(view).then (view)->
+      supersonic.ui.views.find(view).then (view) ->
         done()
 
   describe "start()", ->
     it "is a function", ->
       supersonic.ui.views.start.should.be.a "function"
 
-    it "should start a view which is not started", (done)->
+    it "should start a view which is not started", (done) ->
       view = new supersonic.ui.View
         location: "ui#empty"
         id: "emptyView?#{Math.random()}"
@@ -33,7 +33,7 @@ describe "supersonic.ui.views", ->
         location: "ui#empty"
         id: "emptyView?#{Math.random()}"
 
-      supersonic.ui.views.start(view).then (startedView)->
+      supersonic.ui.views.start(view).then (startedView) ->
         startedView.location.should.equal view.location
         startedView.id.should.equal view.id
         startedView.stop().then ->
@@ -45,7 +45,7 @@ describe "supersonic.ui.views", ->
 
     describe "with a started view returned by find", ->
 
-      it "should stop the view", (done)->
+      it "should stop the view", (done) ->
         view = new supersonic.ui.View
           location: "ui#empty"
           id: "emptyView?#{Math.random()}"
@@ -54,20 +54,20 @@ describe "supersonic.ui.views", ->
           supersonic.ui.views.stop(view).then ->
             done()
 
-      it "should return promise that resolves with the stopped view object", (done)->
+      it "should return promise that resolves with the stopped view object", (done) ->
         view = new supersonic.ui.View
           location: "ui#empty"
           id: "emptyView?#{Math.random()}"
 
         view.start().then ->
-          supersonic.ui.views.stop(view).then (stoppedView)->
+          supersonic.ui.views.stop(view).then (stoppedView) ->
             stoppedView.location.should.equal view.location
             stoppedView.id.should.equal view.id
             done()
 
     describe "with id string", ->
 
-      it "should stop the view", (done)->
+      it "should stop the view", (done) ->
         id = "emptyView?#{Math.random()}"
         view = new supersonic.ui.View
           location: "ui#empty"

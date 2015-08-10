@@ -51,17 +51,17 @@ module.exports = (steroids, log) ->
    # supersonic.ui.drawers.init "drawers#left", options
    #
    # # You can also pass in a started View
-   # supersonic.ui.views.find("leftDrawer").then (leftDrawer)->
+   # supersonic.ui.views.find("leftDrawer").then (leftDrawer) ->
    #   supersonic.ui.drawers.init leftDrawer
   ###
 
-  init: s.promiseF "init", (viewOrId, options={})->
-    new Promise (resolve, reject)->
+  init: s.promiseF "init", (viewOrId, options={}) ->
+    new Promise (resolve, reject) ->
       if steroids.nativeBridge.constructor.name is "FreshAndroidBridge"
         reject new Error "Android does not support enabling drawers on runtime."
         return
 
-      _doInit = (drawerView)->
+      _doInit = (drawerView) ->
         params = {}
         webview = drawerView._webView
         side = if options.side? then options.side else "left"
@@ -73,11 +73,11 @@ module.exports = (steroids, log) ->
 
         steroids.drawers.update params,
           onSuccess: resolve
-          onFailure: (error)->
+          onFailure: (error) ->
             reject new Error error.errorDescription
 
       supersonic.ui.views.find(viewOrId).then (view) ->
-        view.isStarted().then (started)->
+        view.isStarted().then (started) ->
           if started
             _doInit(view)
           else
@@ -107,13 +107,13 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.debug "Drawer was shown"
   ###
 
-  open: s.promiseF "open", (side="left", options)->
+  open: s.promiseF "open", (side="left", options) ->
     edge = if side is "right"
       steroids.screen.edges.RIGHT
     else
       steroids.screen.edges.LEFT
 
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.drawers.show {
         edge: edge
       }, {
@@ -142,7 +142,7 @@ module.exports = (steroids, log) ->
   ###
 
   close: s.promiseF "close", ->
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.drawers.hide {},
         onSuccess: resolve
         onFailure: reject
@@ -170,8 +170,8 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.debug "Left drawer was enabled"
   ###
 
-  enable: s.promiseF "enable", (side="left", options)->
-    new Promise (resolve, reject)->
+  enable: s.promiseF "enable", (side="left", options) ->
+    new Promise (resolve, reject) ->
       steroids.drawers.enable {
         side: side
       }, {
@@ -202,8 +202,8 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.debug "Left drawer was disabled"
   ###
 
-  disable: s.promiseF "disable", (side="left", options)->
-    new Promise (resolve, reject)->
+  disable: s.promiseF "disable", (side="left", options) ->
+    new Promise (resolve, reject) ->
       steroids.drawers.disable {
         side: side
       }, {
@@ -276,7 +276,7 @@ module.exports = (steroids, log) ->
    #   }
    # });
   ###
-  updateOptions: s.promiseF "updateOptions", (options)->
+  updateOptions: s.promiseF "updateOptions", (options) ->
     config = {}
 
     if options?.animation?
@@ -305,7 +305,7 @@ module.exports = (steroids, log) ->
     if options?.gestures?.close?
       config.closeGestures = options.gestures.close
 
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.drawers.update options: config,
         onSuccess: resolve
         onFailure: reject
@@ -328,7 +328,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log("Drawers will show");
    # });
   ###
-  whenWillShow: (f)->
+  whenWillShow: (f) ->
     id = steroids.drawers.on "willshow", f
     ->
       steroids.drawers.off "willshow", id
@@ -351,7 +351,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log("Drawers did show");
    # });
   ###
-  whenDidShow: (f)->
+  whenDidShow: (f) ->
     id = steroids.drawers.on "didshow", f
     ->
       steroids.drawers.off "didshow", id
@@ -374,7 +374,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log("Drawers will close");
    # });
   ###
-  whenWillClose: (f)->
+  whenWillClose: (f) ->
     id = steroids.drawers.on "willclose", f
     ->
       steroids.drawers.off "willclose", id
@@ -397,7 +397,7 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log("Drawers did close");
    # });
   ###
-  whenDidClose: (f)->
+  whenDidClose: (f) ->
     id = steroids.drawers.on "didclose", f
     ->
       steroids.drawers.off "didclose", id

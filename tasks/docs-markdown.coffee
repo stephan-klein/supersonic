@@ -1,7 +1,7 @@
 _ = require "lodash"
 path = require "path"
 
-module.exports = (grunt)->
+module.exports = (grunt) ->
   grunt.extendConfig
     "docs-markdown":
       all:

@@ -6,18 +6,18 @@ angular
       shadow: true
       animation: "parallax"
 
-    $scope.asLeftDrawer = (url, width)->
+    $scope.asLeftDrawer = (url, width) ->
       supersonic.logger.log "Creating left drawer #{url}"
       view = new supersonic.ui.View url
       supersonic.ui.drawers.init(view, {width: width, side: "left"})
-        .catch (e)->
+        .catch (e) ->
           supersonic.logger.error "Error #{e}"
 
-    $scope.asRightDrawer = (url, width)->
+    $scope.asRightDrawer = (url, width) ->
       supersonic.logger.log "Creating right drawer #{url}"
       view = new supersonic.ui.View url
       supersonic.ui.drawers.init(view, {width: width, side: "right"})
-        .catch (e)->
+        .catch (e) ->
           supersonic.logger.error "Error #{e}"
 
     $scope.openLeft = ->

@@ -1,7 +1,7 @@
 Promise = require 'bluebird'
 
 module.exports = (steroids) ->
-  getParsedParamsFromURL = (url)->
+  getParsedParamsFromURL = (url) ->
     query = url.substring(url.indexOf("?") + 1)
     result = {}
 

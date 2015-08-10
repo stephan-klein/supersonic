@@ -28,7 +28,7 @@ describe "supersonic.ui.views.current", ->
     it "is a function", ->
       currentView.whenHidden.should.be.a 'function'
 
-    it "accepts a listener that is called when the view is hidden", (done)->
+    it "accepts a listener that is called when the view is hidden", (done) ->
       currentView.whenHidden ->
         done()
 

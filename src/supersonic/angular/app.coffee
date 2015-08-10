@@ -15,8 +15,8 @@ module.exports = (angular) ->
 
         result
 
-      digestifyFunction = (apiFunction)->
-        (eventFunction)->
+      digestifyFunction = (apiFunction) ->
+        (eventFunction) ->
           apiFunction(-> $timeout(eventFunction))
 
       do (app = supersonic.app) ->

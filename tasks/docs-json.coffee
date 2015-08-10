@@ -2,7 +2,7 @@ dox = require "dox"
 _ = require "lodash"
 path = require "path"
 
-module.exports = (grunt)->
+module.exports = (grunt) ->
   grunt.extendConfig
     "docs-json":
       core:
@@ -24,7 +24,7 @@ module.exports = (grunt)->
           betterSrcPath = matchedSrcPath.split("/")[1]
           return path.join dest, betterSrcPath
 
-  cleanUpDoxObject = (object)->
+  cleanUpDoxObject = (object) ->
     parseDefineTag = (defineTag) ->
       nameArray = defineTag.name.split "="
       betterName = nameArray[0]
@@ -57,14 +57,14 @@ module.exports = (grunt)->
         children: []
       }
 
-    getNamespaceFromTag = (betterTag)->
+    getNamespaceFromTag = (betterTag) ->
       namespace = betterTag.name.split(".")[0]
       findTarget = if betterTag.returns
         betterObject.returns
       else
         betterObject.params
 
-      _.find findTarget, (tagName)->
+      _.find findTarget, (tagName) ->
         tagName.name is namespace
 
     betterObject =
@@ -131,7 +131,7 @@ module.exports = (grunt)->
 
     betterObject
 
-  cleanUpDoxArray = (doxArray)->
+  cleanUpDoxArray = (doxArray) ->
     cleanedUpArray = []
 
     for doxObject in doxArray

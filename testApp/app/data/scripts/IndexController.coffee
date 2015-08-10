@@ -14,7 +14,7 @@ angular
       stopUpdating?()
       stopUpdating = null
 
-    supersonic.data.channel("events").subscribe (message)->
+    supersonic.data.channel("events").subscribe (message) ->
       supersonic.ui.dialog.alert "Received message! #{message}"
 
     $scope.sendChannelMessage = ->

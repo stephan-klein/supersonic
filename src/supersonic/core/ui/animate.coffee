@@ -83,13 +83,13 @@ module.exports = (steroids, log) ->
     "slideFromBottom"
   ]
 
-  _getReversedCurve = (curve)->
+  _getReversedCurve = (curve) ->
     switch curve
       when "easeIn" then "easeOut"
       when "easeOut" then "easeIn"
       else curve
 
-  (animationType, options={})->
+  (animationType, options={}) ->
     config = {}
 
     # TODO: check if android and remove curl animations
@@ -139,18 +139,18 @@ module.exports = (steroids, log) ->
         started: onAnimationStartedDeferred.promise
         ended: onAnimationEndedDeferred.promise
 
-      promise = new Promise (resolve, reject)->
+      promise = new Promise (resolve, reject) ->
         _perform {},
           onSuccess: ->
             resolve status
-          onFailure: (err)->
+          onFailure: (err) ->
             reject(err)
           onAnimationStarted: ->
             onAnimationStartedDeferred.resolve status.ended
           onAnimationEnded: ->
             onAnimationEndedDeferred.resolve()
 
-      promise.catch (err)->
+      promise.catch (err) ->
         onAnimationStartedDeferred.reject(err)
         onAnimationEndedDeferred.reject(err)
 

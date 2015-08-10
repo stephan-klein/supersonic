@@ -100,7 +100,7 @@ module.exports = (steroids, log) ->
     _webView: null
     id: null
 
-    constructor: (@options={})->
+    constructor: (@options={}) ->
       if @options.constructor?.name == "String"
         @options =
           location: @options
@@ -119,7 +119,7 @@ module.exports = (steroids, log) ->
         unless @id?
           resolve false
 
-        getApplicationState().then (state)=>
+        getApplicationState().then (state) =>
           if @id in (preload.id for preload in state.preloads)
             @_webView.id = @id # mark WebView started
             resolve true
@@ -129,9 +129,9 @@ module.exports = (steroids, log) ->
     getId: ->
       @id
 
-    setId: (newId)->
+    setId: (newId) ->
       new Promise (resolve, reject) =>
-        @isStarted().then (started)=>
+        @isStarted().then (started) =>
           unless started
             @id = newId
             @_webView.id = newId
@@ -142,9 +142,9 @@ module.exports = (steroids, log) ->
     getLocation: ->
       @location
 
-    start: (newId)->
+    start: (newId) ->
       new Promise (resolve, reject) =>
-        preload = (webView)=>
+        preload = (webView) =>
           webView.preload {},
             onSuccess: =>
               @id = webView.id # mark started
@@ -173,7 +173,7 @@ module.exports = (steroids, log) ->
           onFailure: (error) ->
             reject new Error error.errorMessage
 
-    on: (event, callback)->
+    on: (event, callback) ->
       new Promise (resolve, reject) =>
         try
           handlerId = @_webView.on(event, callback)
@@ -181,7 +181,7 @@ module.exports = (steroids, log) ->
         catch e
           reject e
 
-    off: (event, eventHandlerId)->
+    off: (event, eventHandlerId) ->
       new Promise (resolve, reject) =>
         try
           @_webView.off(event, eventHandlerId)

@@ -23,7 +23,7 @@ module.exports = (steroids, router) ->
             reject new Error error.errorDescription
         }
   modal:
-    show: (route, params)->
+    show: (route, params) ->
       new Promise (resolve, reject) ->
         path = router.getPath route, params
 

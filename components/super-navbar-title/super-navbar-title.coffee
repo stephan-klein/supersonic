@@ -15,10 +15,10 @@
  #   <super-navbar-title ng-bind="titleFromScope"></super-navbar-title>
  # </super-navbar>
 ###
-onContentChanged = (node)->
+onContentChanged = (node) ->
   node.setParentTitle node.textContent
 
-observer = new MutationObserver (mutations)->
+observer = new MutationObserver (mutations) ->
   for mutation in mutations
     # If the mutation is for children in this element
     if mutation.type is "childList"
@@ -26,7 +26,7 @@ observer = new MutationObserver (mutations)->
 
 SuperNavbarTitlePrototype = Object.create HTMLElement.prototype
 
-SuperNavbarTitlePrototype.setParentTitle = (title)->
+SuperNavbarTitlePrototype.setParentTitle = (title) ->
   # Check for parent element existence
   if this.parentNode.nodeName == "SUPER-NAVBAR"
     this.parentNode.setTitle title

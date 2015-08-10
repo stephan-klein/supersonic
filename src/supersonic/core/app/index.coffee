@@ -13,7 +13,7 @@ module.exports = (steroids, log) ->
       .filter((paused) -> !paused)
       .onValue listen
 
-  whenPaused: (listen)->
+  whenPaused: (listen) ->
     events.background
       .filter((paused) -> paused)
       .onValue listen

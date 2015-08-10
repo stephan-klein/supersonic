@@ -44,11 +44,11 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.modal.show(modalView, options);
   ###
-  show: s.promiseF "show", (viewOrId, options = {})->
-    new Promise (resolve, reject)->
+  show: s.promiseF "show", (viewOrId, options = {}) ->
+    new Promise (resolve, reject) ->
       supersonic.ui.views.find(viewOrId)
-      .tap (view)->
-        view.isStarted().then (started)->
+      .tap (view) ->
+        view.isStarted().then (started) ->
           return unless options.params?
 
           if started
@@ -57,7 +57,7 @@ module.exports = (steroids, log) ->
           else
             view._webView.setParams options.params
 
-      .then (view)->
+      .then (view) ->
         options.view = view._webView
         options.disableAnimation = if options?.animate?
           switch options.animate
@@ -69,7 +69,7 @@ module.exports = (steroids, log) ->
         steroids.modal.show options,
           onSuccess: ->
             resolve view
-          onFailure: (error)->
+          onFailure: (error) ->
             reject new Error error.errorDescription
 
   ###
@@ -100,17 +100,17 @@ module.exports = (steroids, log) ->
    #
    # supersonic.ui.modal.hide(options);
   ###
-  hide: s.promiseF "hide", (options = {})->
+  hide: s.promiseF "hide", (options = {}) ->
     options.disableAnimation = if options?.animate?
       switch options.animate
         when true then false
         when false then true
     else
       false
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.modal.hide options, {
         onSuccess: resolve
-        onFailure: (error)->
+        onFailure: (error) ->
           reject(error)
     }
 
@@ -143,16 +143,16 @@ module.exports = (steroids, log) ->
    # supersonic.ui.modal.hideAll(options);
   ###
 
-  hideAll: s.promiseF "hideAll", (options = {})->
+  hideAll: s.promiseF "hideAll", (options = {}) ->
     options.disableAnimation = if options?.animate?
       switch options.animate
         when true then false
         when false then true
     else
       false
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.modal.hideAll options, {
         onSuccess: resolve
-        onFailure: (error)->
+        onFailure: (error) ->
           reject(error)
     }

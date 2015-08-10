@@ -74,14 +74,14 @@ describe "supersonic.data.channel", ->
     describe "cross-view message passing", ->
       startedView = null
 
-      beforeEach (done)->
-        supersonic.ui.views.find("data#channel/pingback?channel=#{channelName}").then (view)->
+      beforeEach (done) ->
+        supersonic.ui.views.find("data#channel/pingback?channel=#{channelName}").then (view) ->
           view.start()
           .then ->
             startedView = view
             done()
 
-      afterEach (done)->
+      afterEach (done) ->
         startedView.stop().then ->
           startedView = null
           done()

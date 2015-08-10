@@ -13,7 +13,7 @@ angular
       "setStyleCSS"
     ]
 
-    $scope.run = (method)->
+    $scope.run = (method) ->
       $scope[method]()
 
     $scope.hideTabs = ->
@@ -52,7 +52,7 @@ angular
       supersonic.ui.tabs.update(tabsArray)
         .then ->
           $scope.tabsUpdatedCount += 1
-        .catch (err)->
+        .catch (err) ->
           supersonic.logger.error "Could not update tabs: #{JSON.stringify(err)}"
 
     $scope.updateTabsWithCallback = ->
@@ -76,7 +76,7 @@ angular
 
     $scope.replaceTabs = ->
       supersonic.ui.tabs.replace(tabsArrayForReplace)
-        .catch (err)->
+        .catch (err) ->
           supersonic.logger.error "Could not replace tabs: #{JSON.stringify(err)}"
 
     $scope.replaceTabsWithCallback = ->
@@ -86,12 +86,12 @@ angular
         onFailure: (error) ->
           supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
 
-    $scope.select = (tabIndex)->
+    $scope.select = (tabIndex) ->
       supersonic.ui.tabs.select(tabIndex)
-        .catch (err)->
+        .catch (err) ->
           supersonic.logger.error "Could not select tabs: #{JSON.stringify(err)}"
 
-    $scope.selectWithCallback = (tabIndex)->
+    $scope.selectWithCallback = (tabIndex) ->
       supersonic.ui.tabs.select tabIndex,
         onSuccess: ->
           supersonic.logger.log "Tab number #{tabIndex} selected"
@@ -104,7 +104,7 @@ angular
         badge: "5"
 
     $scope.updateCurrentTabWithCallback = ->
-      options = 
+      options =
         title: "Asteroids"
         badge: "5"
       supersonic.ui.tabs.updateCurrentTab options,
@@ -112,7 +112,7 @@ angular
           supersonic.logger.log "Current tab updated"
         onFailure: (error) ->
           supersonic.ui.dialog.alert "Error: #{JSON.stringify error}"
-        
+
     $scope.setStyleClass = ->
       supersonic.ui.tabs.setStyleClass "greenbg"
 

@@ -2,27 +2,27 @@ angular
   .module('ui')
   .controller 'ModalAPIController', ($scope, $q, supersonic) ->
 
-    $scope.showInitialView = ()->
+    $scope.showInitialView = () ->
       supersonic.ui.initialView.show()
 
-    $scope.asModal = (url)->
+    $scope.asModal = (url) ->
       v = new supersonic.ui.View(url)
       supersonic.ui.modal.show(v, {
         animate: true
-      }).then ()->
+      }).then () ->
         supersonic.logger.log "Modal shown"
 
-    $scope.asModalWithoutAnimation = (url)->
+    $scope.asModalWithoutAnimation = (url) ->
       v = new supersonic.ui.View(url)
       supersonic.ui.modal.show(v, {
         animate: false
-      }).then ()->
+      }).then () ->
         supersonic.logger.log "Modal shown"
 
-    $scope.asModalWithCallback = (url)->
+    $scope.asModalWithCallback = (url) ->
       v = new supersonic.ui.View(url)
       supersonic.ui.modal.show v,
-        onSuccess: -> 
+        onSuccess: ->
           supersonic.logger.log "Modal shown with this callback"
         onFailure: ->
           supersonic.logger.log "Modal could not be shown"

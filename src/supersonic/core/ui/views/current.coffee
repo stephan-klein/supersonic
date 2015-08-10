@@ -14,9 +14,9 @@ module.exports = (steroids, log, global) ->
 
   # find out if view is started or not (based on current URL matching)
   isStarted = ->
-    new Promise (resolve, reject)->
+    new Promise (resolve, reject) ->
       steroids.getApplicationState {},
-        onSuccess: (state)->
+        onSuccess: (state) ->
           matches = (preload for preload in state.preloads when global.location.href in [preload.URL, preload.location]) # iOS: .URL Android: .location
           if matches.length and matches[0].id?
             resolve matches[0].id
@@ -130,7 +130,7 @@ module.exports = (steroids, log, global) ->
    # A function that can be used to unsubscribe from the parameters stream.
    # @define {=>Function} unsubscribe When called, unsubscribes from the parameters stream.
    # @exampleCoffeeScript
-   # stopListening = supersonic.ui.views.current.params.onValue (params)->
+   # stopListening = supersonic.ui.views.current.params.onValue (params) ->
    #   supersonic.logger.debug "New value for the id param is: #{params.id}"
    #
    # # Later on, we can stop listening to the stream.

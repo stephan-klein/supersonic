@@ -2,7 +2,7 @@ describe "supersonic.app.openURL", ->
   it "should be defined", ->
     supersonic.app.openURL.should.exist
 
-  it "should open Apple Maps", (done)->
+  it "should open Apple Maps", (done) ->
     @timeout 10000
 
     url = "maps://?daddr=San+Francisco,+CA&saddr=cupertino"

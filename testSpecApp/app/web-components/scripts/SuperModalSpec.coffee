@@ -16,7 +16,7 @@ fireAfterModalDidHideAndShow = (done) ->
     fireAfterModalDidHide ->
       done()
 
-clickElement = (id)->
+clickElement = (id) ->
   element = document.getElementById id
   element.click()
 

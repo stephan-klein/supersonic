@@ -12,7 +12,7 @@ describe "supersonic.ui.View", ->
 
   describe "start()", ->
 
-    it "returns a started view that can be stopped", (done)->
+    it "returns a started view that can be stopped", (done) ->
       id = "uiEmpty?#{Math.random()}"
       view = new supersonic.ui.View "ui#empty"
 
@@ -23,7 +23,7 @@ describe "supersonic.ui.View", ->
         done()
 
     describe "with an empty argument if View has id", ->
-      it "works", (done)->
+      it "works", (done) ->
         id = "uiEmpty?#{Math.random()}"
         view = new supersonic.ui.View
           location: "ui#empty"

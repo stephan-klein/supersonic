@@ -5,7 +5,7 @@ angular
     $scope.currentId = null
     supersonic.bind $scope, "currentId"
 
-    $scope.$watch "currentId", (newValue, oldValue)->
+    $scope.$watch "currentId", (newValue, oldValue) ->
       # see https://docs.angularjs.org/api/ng/type/$rootScope.Scope
       #
       # After a watcher is registered with the scope, the listener fn is called

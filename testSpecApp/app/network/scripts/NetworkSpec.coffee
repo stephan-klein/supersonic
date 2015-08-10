@@ -1,5 +1,5 @@
 describe "CORS request", ->
-  it "should make GET to www.appgyver.com that returns correct data", (done)->
+  it "should make GET to www.appgyver.com that returns correct data", (done) ->
     xhr = new XMLHttpRequest()
 
     successfulRequest = false

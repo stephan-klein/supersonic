@@ -38,7 +38,7 @@ initChannel = ->
 
   return channel
 
-initSuperScope = (superRootScope)->
+initSuperScope = (superRootScope) ->
   channel ||= initChannel()
   superscope = superRootScope
 

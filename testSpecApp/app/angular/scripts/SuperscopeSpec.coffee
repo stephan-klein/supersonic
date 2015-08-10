@@ -27,7 +27,7 @@ describe 'supersonic.angular.superscope', ->
       # Let angular do its magic for this tick
       setTimeout done, 100
 
-  it 'should be accessible as an angular-injected service', (done)->
+  it 'should be accessible as an angular-injected service', (done) ->
     inject (superscope) ->
       superscope.should.be.an.object
       done()
@@ -45,7 +45,7 @@ describe 'supersonic.angular.superscope', ->
       $rootScope.$apply ->
         $rootScope.foo = 'this-should-not-get-watched'
 
-  it 'is a singleton instance', (done)->
+  it 'is a singleton instance', (done) ->
     Promise.join(
       new Promise (resolve) ->
         inject (superscope) ->
@@ -64,18 +64,18 @@ describe 'supersonic.angular.superscope', ->
     beforeEach (done) ->
       @timeout 25000
 
-      resolve = (view)->
+      resolve = (view) ->
         startedView = view
         done()
 
-      supersonic.ui.views.find(childViewId).then (view)->
-        view.isStarted().then (started)->
+      supersonic.ui.views.find(childViewId).then (view) ->
+        view.isStarted().then (started) ->
           if started
             view.stop().then ->
               view.start()
           else
             view.start()
-        .then ()->
+        .then () ->
           setTimeout ->
             resolve(view)
           , 2000 # wait for child view dom
@@ -85,7 +85,7 @@ describe 'supersonic.angular.superscope', ->
       .then ->
         startedView = null
         done()
-      .catch (error)->
+      .catch (error) ->
         console.log error.message
         done()
 
