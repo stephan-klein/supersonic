@@ -2,16 +2,19 @@ Promise = require 'bluebird'
 
 module.exports = (logger) ->
   initialModuleElements = Promise.delay(0).then ->
-    moduleElements = document?.querySelectorAll("iframe[data-module]") || []
+    observer = new MutationObserver (records)->
+      for record in records
+        do (record)->
+          if typeof record.addedNodes is "object"
+            for node in record.addedNodes when node.nodeName is "IFRAME"
+              if node.hasAttribute("data-module")
 
-    for element in moduleElements
-      do (element) ->
-        observeModuleElementSize(element)
+                node.onload = ->
+                  Promise.delay(100).then ->
+                    createObserverFor(node)
+                    resizeModuleElement(node)
 
-        element.onload = ->
-          resizeModuleElement(element)
-
-    moduleElements
+    observer.observe(document, {childList: true, subtree: true})
 
   observeModuleElementSize = (moduleElement) ->
     moduleElement.contentDocument.onreadystatechange = ->
@@ -20,7 +23,7 @@ module.exports = (logger) ->
 
 
   createObserverFor = (moduleElement) ->
-    moduleContentObserver = new MutationObserver ->
+    moduleContentObserver = new moduleElement.contentWindow.MutationObserver ->
       resizeModuleElement(moduleElement)
 
     moduleContentObserver.observe(moduleElement.contentDocument.body, {childList: true, subtree: true})
@@ -32,4 +35,3 @@ module.exports = (logger) ->
     moduleElement.style.height = height+unit
 
   return initialModuleElements
-
