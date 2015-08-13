@@ -6,9 +6,7 @@ module.exports = (logger, router, getDriver) ->
 
   show: s.promiseF 'show', (route, params = {}) ->
     params["disable_header"] = true unless params["disable_header"]?
-    path = router.getPath route, params
-    console.log("PATH FROM ROUTER TO MODAL SHOW: #{path}")
-    Promise.resolve(getDriver().modal.show(path))
+    Promise.resolve(getDriver().modal.show(path, params))
 
   hide: s.promiseF 'hide', ->
     Promise.resolve getDriver().modal.hide()
