@@ -2,6 +2,18 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+
+## 1.6.6 (2015-08-13)
+
+Fix:
+- Fix wrongly named variable
+
+
+## 1.6.5 (2015-08-13)
+
+Fix:
+- Fix resolving module path twice in modal route
+
 ## 1.6.4 (2015-08-13)
 
 Fix:
