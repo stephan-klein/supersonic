@@ -21,7 +21,7 @@ module.exports = (logger, env) ->
     env?.modules?.routes?[moduleName]?.views?[viewName]?.path?
 
   formatExplicitPath = do ->
-    assertRequiredParamsExist = (targetParams, params) ->
+    assertRequiredParamsExist = (moduleName, viewName, targetParams, params) ->
       for key, value of (targetParams ? {}) when value.required
         if !params?[key]?
           throw new Error "Missing required parameter '#{key}' for route to '#{moduleName}##{viewName}'"
@@ -39,7 +39,7 @@ module.exports = (logger, env) ->
     return (moduleName, viewName, params) ->
       target = env?.modules?.routes?[moduleName].views[viewName]
 
-      assertRequiredParamsExist target.params, params
+      assertRequiredParamsExist moduleName, viewName, target.params, params
 
       [ path, params ] = replaceTokensInPath target.path, params
 
