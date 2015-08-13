@@ -2,9 +2,9 @@ Promise = require 'bluebird'
 
 module.exports = (logger) ->
   initialModuleElements = Promise.delay(0).then ->
-    observer = new MutationObserver (records)->
+    observer = new MutationObserver (records) ->
       for record in records
-        do (record)->
+        do (record) ->
           if typeof record.addedNodes is "object"
             for node in record.addedNodes when node.nodeName is "IFRAME"
               if node.hasAttribute("data-module")
