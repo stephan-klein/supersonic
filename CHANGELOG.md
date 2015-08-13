@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## TBD
+
+Fix:
+- Fix a bug on module router that happens during the validation of required parameters.
+
 ## 1.6.3 (2015-08-07)
 
 Features:
