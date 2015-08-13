@@ -2,10 +2,13 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## TBD
+## 1.6.4 (2015-08-13)
 
 Fix:
 - Fix a bug on module router that happens during the validation of required parameters.
+- Fix module modal so that it accepts parameters
+- Fix module iframe height observers to detect dynamically added iframes
+- Fix module iframe height fixing in Chrome
 
 ## 1.6.3 (2015-08-07)
 
