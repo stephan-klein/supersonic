@@ -24,7 +24,7 @@ module.exports = (window) ->
         sender: sender
         message: message
       .onValue (data) ->
-        window.postMessage data
+        window.postMessage data, "*"
 
     bus
 

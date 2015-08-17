@@ -2,6 +2,10 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.6.7 (2015-08-17)
+
+Fix:
+- Data channels window.postMessage uses second argument
 
 ## 1.6.6 (2015-08-13)
 
