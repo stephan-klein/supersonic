@@ -2,6 +2,8 @@ Promise = require 'bluebird'
 
 module.exports = (logger) ->
   initialModuleElements = Promise.delay(0).then ->
+    return unless window?.MutationObserver?
+
     observer = new MutationObserver (records) ->
       for record in records
         do (record) ->
