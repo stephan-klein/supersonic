@@ -17,6 +17,11 @@ describe 'supersonic.module.layers', ->
           index:
             path: "app/module/empty.html"
 
+      'will-reply-foo':
+        views:
+          index:
+            path: "app/module/will-reply-foo.html"
+
   describe 'push', ->
     it 'is a function', ->
       supersonic.module.layers.should.have.property('push').be.a 'function'
@@ -40,3 +45,19 @@ describe 'supersonic.module.layers', ->
         .then(supersonic.module.layers.pop)
         .then(waitForLayerChange)
         .should.be.fulfilled
+
+    it 'supports module attribute passing', ->
+      foo = "foo-#{Math.random()}"
+      fooReply = new Promise (resolve) ->
+        supersonic.data.channel('expecting-value-from-foo')
+          .inbound
+          .take(1)
+          .onValue resolve
+      supersonic.module.layers.push('will-reply-foo', { foo })
+        .then(waitForLayerChange)
+        .then(->
+          fooReply
+        )
+        .tap(supersonic.module.layers.pop)
+        .tap(waitForLayerChange)
+        .should.eventually.equal foo

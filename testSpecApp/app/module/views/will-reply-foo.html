@@ -1,0 +1,5 @@
+<h1>Replies the value from attribute <code>foo</code> to channel <code>expecting-value-from-foo</code></h1>
+
+<script>
+supersonic.data.channel('expecting-value-from-foo').publish(supersonic.module.attributes.get('foo'))
+</script>
