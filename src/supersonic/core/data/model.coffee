@@ -1,7 +1,7 @@
 data = require 'ag-data'
 Bacon = require 'baconjs'
 
-module.exports = (logger, window, getDefaultCacheStorage, session) ->
+module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
   ###
    # @namespace supersonic.data
    # @name model
@@ -65,7 +65,11 @@ module.exports = (logger, window, getDefaultCacheStorage, session) ->
     options
 
   createModel = do ->
-    if not window.parent.appgyver?.environment?.data?.bundle? and not window?.ag?.data?
+    bundleDefinition = switch
+      when env?.data?.bundle? then env.data.bundle
+      when superglobal?.ag?.data? then superglobal.ag.data
+
+    if not bundleDefinition?
       return (name) ->
         logger.error "Tried to access a cloud resource, but no resources have been configured"
         throw new Error "No cloud resources available"
@@ -74,10 +78,7 @@ module.exports = (logger, window, getDefaultCacheStorage, session) ->
     # are correctly wrapped and logged. Notably, if window.ag.data exists but
     # does not define a valid bundle, an error will be logged without interaction.
     try
-      bundle = if window.parent.appgyver?.environment?.data?.bundle?
-        data.loadResourceBundle(window.parent.appgyver.environment.data.bundle)
-      else
-        data.loadResourceBundle(window.ag.data)
+      bundle = data.loadResourceBundle bundleDefinition
 
       return (name, options = {}) ->
         options = withDefaults(options)

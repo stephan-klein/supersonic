@@ -1,2 +1,2 @@
-module.exports = (logger, window) ->
-  window.parent.appgyver?.environment || { mode: "legacy" }
+module.exports = (logger, superglobal) ->
+  superglobal.appgyver?.environment || { mode: "legacy" }
