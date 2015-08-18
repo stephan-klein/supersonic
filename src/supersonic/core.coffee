@@ -4,13 +4,13 @@ global = if window?
     Window = require './mock/window'
     new Window()
 
-superglobal = if window?.top?
-    window.top
+superglobal = if window?.parent?
+    window.parent
   else
     global
 
-steroids = if global.top?.steroids?
-    global.top?.steroids
+steroids = if global.parent?.steroids?
+    global.parent?.steroids
   else
     require './mock/steroids'
 
