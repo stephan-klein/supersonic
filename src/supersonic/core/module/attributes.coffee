@@ -1,13 +1,13 @@
 querystring = require 'qs'
 
-module.exports = (logger) ->
+module.exports = (logger, global, superglobal) ->
 
   getModuleFrameAttribute = (name) ->
-    window?.frameElement?.getAttribute? "data-#{name}"
+    global?.frameElement?.getAttribute? "data-#{name}"
 
   getUrlParamAttribute = do ->
     getHrefParamsString = ->
-      href = window?.parent?.location.href || ""
+      href = superglobal?.location.href || ""
       href.slice(href.indexOf('?') + 1)
 
     getParentLocationHrefParams = ->
