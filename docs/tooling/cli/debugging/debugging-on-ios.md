@@ -50,6 +50,10 @@ If you type in `window.location.reload();` or press **CMD + R**, the WebView rel
 You can even debug JavaScript by inserting breakpoints: open a `.js` file in the Safari Web Inspector (e.g. from the *Resource* tab) and click on the line numbers to insert break points. Then, reload the WebView. JavaScript execution will pause at the breakpoints, and the *Debug* tab shows the current call stack.
 
 When using [LiveReload][livereload-guide], the Web Inspector windows are kept open when the app refreshes. However, if you disable LiveReload with the `--no-livereload` flag or initiate a full refresh by running `r` or `refresh` in the Steroids Developer Sever Console, all open Safari Web Inspector windows are unfortunately closed. You need to manually re-open them after the app has reloaded.
+
+## dSYM files
+
+dSYM files stores the debug symbols for your app making it possible for e.g. services like crashlytics to replace the symbols in the crash logs with the correct method names. [dSYM files](ios-dsym-files) are available in the Build Service for all iOS builds.
 </section>
 [debug-builds-guide]: /tooling/build-service/build-settings/building-a-debug-build/
 [livereload-guide]: /tooling/cli/steroids-cli/#reloading-with-livereload
