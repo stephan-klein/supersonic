@@ -5,22 +5,24 @@ module.exports = (logger, global, superglobal) ->
   getModuleFrameAttribute = (name) ->
     global?.frameElement?.getAttribute? "data-#{name}"
 
-  getUrlParamAttribute = do ->
+  makeUrlParamAttributeGetter = (context) ->
     getHrefParamsString = ->
-      href = superglobal?.location.href || ""
+      href = context?.location.href || ""
       href.slice(href.indexOf('?') + 1)
 
-    getParentLocationHrefParams = ->
+    getLocationHrefParams = ->
       querystring.parse getHrefParamsString()
 
     params = null
     (name) ->
-      params = getParentLocationHrefParams() unless params?
+      params = getLocationHrefParams() unless params?
       params[name]
 
+  getSuperglobalUrlParamAttribute = makeUrlParamAttributeGetter superglobal
+  getGlobalUrlParamAttribute = makeUrlParamAttributeGetter global
 
   getAttribute = (name, defaultValue = null) ->
-    for get in [getModuleFrameAttribute, getUrlParamAttribute]
+    for get in [getModuleFrameAttribute, getGlobalUrlParamAttribute, getSuperglobalUrlParamAttribute]
       value = get name
 
       if value?
@@ -29,7 +31,7 @@ module.exports = (logger, global, superglobal) ->
     defaultValue
 
   hasAttribute = (name) ->
-    getModuleFrameAttribute(name)? || getUrlParamAttribute(name)?
+    getModuleFrameAttribute(name)? || getGlobalUrlParamAttribute(name)? || getSuperglobalUrlParamAttribute(name)?
 
   return {
     get: getAttribute
