@@ -21,10 +21,8 @@ module.exports = (steroids) ->
             reject new Error error.errorDescription
         }
   modal:
-    show: (route, params) ->
+    show: (path) ->
       new Promise (resolve, reject) ->
-        path = router.getPath route, params
-
         view = new steroids.views.WebView
           location: path
 
