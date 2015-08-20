@@ -2,7 +2,7 @@ Promise = require 'bluebird'
 
 module.exports = (steroids) ->
   layers:
-    push: (path) ->
+    push: (path, args) ->
       new Promise (resolve, reject) ->
         view = new steroids.views.WebView
           location: path
@@ -13,7 +13,7 @@ module.exports = (steroids) ->
             reject new Error error.errorDescription
         }
 
-    pop: ->
+    pop: (args) ->
       new Promise (resolve, reject) ->
         steroids.layers.pop {}, {
           onSuccess: resolve
@@ -21,7 +21,7 @@ module.exports = (steroids) ->
             reject new Error error.errorDescription
         }
   modal:
-    show: (path) ->
+    show: (path, args) ->
       new Promise (resolve, reject) ->
         view = new steroids.views.WebView
           location: path
@@ -31,7 +31,7 @@ module.exports = (steroids) ->
           onFailure: (error) ->
             reject new Error error.errorDescription
 
-    hide: ->
+    hide: (args) ->
       new Promise (resolve, reject) ->
         steroids.modal.hide {}, {
           onSuccess: resolve

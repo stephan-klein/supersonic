@@ -12,7 +12,7 @@ module.exports = (steroids, logger, superglobal, ui, env, global) ->
     drivers
     attributes: require('./attributes')(logger, global, superglobal)
     initialModuleElements: require('./initial-module-elements')(logger)
-    layers: require('./layers')(logger, router, drivers.current.get)
-    modal: require('./modal')(logger, router, drivers.current.get)
+    layers: require('./layers')(logger, router, drivers.current.get, global)
+    modal: require('./modal')(logger, router, drivers.current.get, global)
     transitions: require('./transitions')(steroids, ui, logger)
   }
