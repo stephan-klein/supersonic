@@ -1,4 +1,4 @@
-module.exports = (steroids, superglobal, router) ->
+module.exports = (steroids, superglobal) ->
 
   superglobal.ag ?= {}
   superglobal.ag.module ?= {}
@@ -10,7 +10,7 @@ module.exports = (steroids, superglobal, router) ->
     superglobal.ag.module.driver
 
   {
-    mpa: require('./drivers/mpa')(steroids, router)
+    mpa: require('./drivers/mpa')(steroids)
     current:
       set: setCurrentDriver
       get: getCurrentDriver
