@@ -1,4 +1,5 @@
-// Disable Ionic's body overflow rules
+// Disable Ionic's body overflow rules:
+// Crosswalk 14 will not scroll with overflow: hidden;
 body {
-  overflow-y: auto !important;
+  overflow: auto;
 }
