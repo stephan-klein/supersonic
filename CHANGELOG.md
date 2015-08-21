@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.6.10 (2015-08-21)
+
+Fixes:
+- Overwrite Ionic's default `overflow:hidden` which blocks scrolling for Crosswalk 14.
+
 ## 1.6.9 (2015-08-21)
 
 Fixes:
