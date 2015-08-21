@@ -2,6 +2,13 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.6.8 (2015-08-21)
+
+Fixes:
+- `supersonic.data.channel` uses `postMessage` from `window.top` to ensure message propagation from Composer Modules
+- `supersonic.module.attributes` looks for attributes from both `window` and `window.parent`
+- Behavior of navigation APIs in `supersonic.module` improved to enable compatibility with the Composer Module web development harness in Steroids Connect
+
 ## 1.6.7 (2015-08-17)
 
 Fix:
