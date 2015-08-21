@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.6.9 (2015-08-21)
+
+Fixes:
+- Composer Module iframe sizes automatically scale according to their content height
+
 ## 1.6.8 (2015-08-21)
 
 Fixes:
