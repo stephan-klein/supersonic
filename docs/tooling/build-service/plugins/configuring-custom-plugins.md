@@ -31,7 +31,7 @@ If your plugin repo is private, please see [the section below](#private_reposito
 
 Once you have added your custom plugins in the Build Service’s Configure iOS/Android Build Settings page, these plugins will be included in all types of builds. So, in addition to the Scanner builds, your custom plugins configurated in the Build Service will be included in Ad Hoc builds and App Store/Google Play builds as well.
 
-**Note:** Steroids currently uses Cordova 3.5.0. The Cordova core features are included by default in Scanner and in all types of builds (Scanner, Ad Hoc, App Store, Debug Scanner, Debug Ad Hoc and Google Play) from the Build Service, so you don't need to include e.g. the [Vibration Plugin](https://github.com/apache/cordova-plugin-vibration) to use the Vibration API. The same applies to the other plugins installed by default. For the complete list of the plugins included by default, see [the Default plugins guide](https://academy.appgyver.com/categories/7-extending-with-plugins/contents/146-default-plugins).
+**Note:** Steroids currently uses Cordova 3.5.0. The Cordova core features are included by default in Scanner and in all types of builds (Scanner, Ad Hoc, App Store, Debug Scanner, Debug Ad Hoc and Google Play) from the Build Service, so you don't need to include e.g. the [Vibration Plugin](https://github.com/apache/cordova-plugin-vibration) to use the Vibration API. The same applies to the other plugins installed by default. For the complete list of the plugins included by default, see [the Default plugins guide][default-plugins].
 
 Our Build Service supports two tools, [plugman](https://github.com/apache/cordova-plugman) and Cordova, for adding the plugin JavaScript files automatically to your custom builds. You need to check the plugin.xml file for each plugin you add to see which method they use:
 
@@ -93,4 +93,5 @@ On iOS, our plugins currently require [ARC support](https://developer.apple.com/
 [android-build-config]: /tooling/build-service/build-settings/build-settings-for-android/
 [ios-build-config]: /tooling/build-service/build-settings/build-settings-for-ios/
 [developing-custom-plugins]: /tooling/build-service/plugins/developing-custom-plugins/
+[default-plugins]: /tooling/build-service/plugins/default-plugins/
 [plugin-xml-spec]: http://cordova.apache.org/docs/en/3.5.0/plugin_ref_spec.md.html
