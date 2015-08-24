@@ -80,6 +80,8 @@ In other words, publishing is automatic. You don't need to do anything.
 
 What the publication process doesn't do yet, is handle semver updates and tagging. This is done manually for the source repo like this.
 
+Update CHANGELOG.md
+
 Update version tags in:
 
     package.json
