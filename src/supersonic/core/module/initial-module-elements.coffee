@@ -9,6 +9,9 @@ module.exports = (logger) ->
         Promise.delay(100).then ->
           createObserverFor(node)
           resizeModuleElement(node)
+          window.setTimeout ->
+            resizeModuleElement(node)
+          , 500
 
     observer = new MutationObserver (records) ->
       for record in records
@@ -27,7 +30,6 @@ module.exports = (logger) ->
     moduleElement.contentDocument.onreadystatechange = ->
       if (moduleElement.contentDocument.readyState == "complete")
         createObserverFor(moduleElement)
-
 
   createObserverFor = (moduleElement) ->
     moduleContentObserver = new moduleElement.contentWindow.MutationObserver ->
