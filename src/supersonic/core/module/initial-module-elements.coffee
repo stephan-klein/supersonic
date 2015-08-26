@@ -9,9 +9,8 @@ module.exports = (logger) ->
         Promise.delay(100).then ->
           createObserverFor(node)
           resizeModuleElement(node)
-          window.setTimeout ->
+          Promise.delay(500).then ->
             resizeModuleElement(node)
-          , 500
 
     observer = new MutationObserver (records) ->
       for record in records
