@@ -23,7 +23,8 @@ module.exports = (logger) ->
     observer.observe(document, {childList: true, subtree: true})
 
     do ->
-      Array.prototype.slice.call(document.body.querySelectorAll("iframe[data-module]")).map attachOnNodeLoad
+      if document.body
+        Array.prototype.slice.call(document.body.querySelectorAll("iframe[data-module]")).map attachOnNodeLoad
 
   observeModuleElementSize = (moduleElement) ->
     moduleElement.contentDocument.onreadystatechange = ->
