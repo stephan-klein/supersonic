@@ -1,7 +1,11 @@
-Promise = require 'bluebird'
-_ = require 'lodash'
+isFunction = require 'lodash/lang/isFunction'
+set = require 'lodash/object/set'
+has = require 'lodash/object/has'
+get = require 'lodash/object/get'
+merge = require 'lodash/object/merge'
+compose = require 'lodash/function/compose'
 
-#to fix the test on travis.. I which I don't have to do this.. so ugly
+#to fix the test on travis... where window does not exist
 if !window?
   global.window = {}
 
@@ -21,42 +25,42 @@ mapPlugins = (cordova) ->
   return unless cordova?
   plugins = cordova.require "cordova/plugin_list"
 
-  cleanPropertyPath = _.curry (fn, path) ->
+  cleanPropertyPath = (fn) -> (path) ->
     if path?.indexOf("window.") == 0
       fn path.substring 7
     else
       fn path
 
   addPlugin = (pluginInstance, path) ->
-    if _.isFunction pluginInstance
-      _.set window, path, pluginInstance
+    if isFunction pluginInstance
+      set window, path, pluginInstance
     else
-      if _.has window, path
-        toMerge = _.get window, path
-        _.merge toMerge, pluginInstance
+      if has window, path
+        toMerge = get window, path
+        merge toMerge, pluginInstance
       else
-        _.set window, path, pluginInstance
+        set window, path, pluginInstance
 
   mapClobber = (plugin) ->
     if plugin.clobbers?.length > 0
-      _.each plugin.clobbers, cleanPropertyPath (path) ->
+      plugin.clobbers.forEach cleanPropertyPath (path) ->
         pluginInstance = cordova.require plugin.id
         addPlugin pluginInstance, path
     plugin
 
   mapMerge = (plugin) ->
     if plugin.merges?.length > 0
-      _.each plugin.merges, cleanPropertyPath (path) ->
+      plugin.merges.forEach cleanPropertyPath (path) ->
         pluginInstance = cordova.require plugin.id
         if path? && path == "window"
-          _.merge window, pluginInstance
+          merge window, pluginInstance
         else if path != ""
           addPlugin pluginInstance, path
     plugin
 
-  mapPlugin = _.compose mapClobber, mapMerge
+  mapPlugin = compose mapClobber, mapMerge
 
-  _.each plugins, mapPlugin
+  plugins.forEach mapPlugin
 
 mapGlobalCordova = ->
   return unless window.parent?.cordova?
@@ -70,6 +74,6 @@ mapEvents = -> ['deviceready'].forEach channelDownEvent
 
 init = ->
   return unless inIframe()
-  _.compose(mapEvents, mapPlugins, mapGlobalCordova, mapGlobalSteroids)()
+  compose(mapEvents, mapPlugins, mapGlobalCordova, mapGlobalSteroids)()
 
 module.exports = {init}
