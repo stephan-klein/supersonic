@@ -1,0 +1,27 @@
+<div ng-controller="IframeLoadingIndicatorController" class="padding">
+
+  <super-navbar>
+    <super-navbar-title>
+      Iframe loading indicator
+    </super-navbar-title>
+  </super-navbar>
+
+  <iframe
+    data-module
+    data-module-name="this is the module name attribute right here"
+    data-module-indicate-loading
+    src="plain-iframe-content.html"></iframe>
+
+  <button
+    class="button button-block button-balanced"
+    ng-click="showLoading()">
+      Take it for a spin
+  </button>
+
+  <button
+    class="button button-block button-assertive"
+    ng-click="hideLoading()">
+      Stop, you're making my head spin
+  </button>
+
+</div>
