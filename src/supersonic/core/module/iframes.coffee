@@ -66,8 +66,7 @@ module.exports = (logger) ->
     Array.prototype.slice.call(parent.querySelectorAll(IFRAME_SELECTOR))
 
   register = (element) ->
-    observeIframeContentSize(element)
-    resize(element)
+    attachToOnLoad(element)
 
   resize = (element) ->
     style = window.getComputedStyle(element.contentDocument.body, null)
