@@ -36,9 +36,9 @@ describe 'supersonic.module.router', ->
     it 'may contain dashes, dots and alnum chars', ->
       router().getPath('foo-bar.qux123#trog.dor').should.match /foo\-bar\.qux123\/trog\.dor/
 
-    describe 'module navigation', ->
+    describe 'without a module name', ->
 
-      it 'should be able to navigate to another view', ->
+      it 'directs to a view in the same base url', ->
         router({}, {
           location:
             href: "http://www.example.com/module1234/index.html"
