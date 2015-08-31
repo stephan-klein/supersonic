@@ -1,6 +1,6 @@
 Promise = require 'bluebird'
 
-module.exports = (logger) ->
+module.exports = (window) ->
 
   IFRAME_SELECTOR = "iframe[data-module]"
   IFRAME_USE_LOAD_INDICATOR_ATTR = "data-module-indicate-loading"
@@ -11,10 +11,10 @@ module.exports = (logger) ->
   Initial operations
   ###
 
-  document.addEventListener "DOMContentLoaded", ->
+  window.document.addEventListener "DOMContentLoaded", ->
     Promise.delay(0).then ->
-      if document.body.querySelectorAll("[data-module-load-indicator-template]").length
-        setLoadIndicatorTemplate(document.body.querySelectorAll("[data-module-load-indicator-template]")[0].innerHTML)
+      if window.document.body.querySelectorAll("[data-module-load-indicator-template]").length
+        setLoadIndicatorTemplate(window.document.body.querySelectorAll("[data-module-load-indicator-template]")[0].innerHTML)
       observeDocumentForNewModules()
       findAll().map attachToOnLoad
 
@@ -31,7 +31,7 @@ module.exports = (logger) ->
             for node in record.addedNodes when node.nodeName is "IFRAME"
               if node.hasAttribute("data-module")
                 attachToOnLoad(node)
-    observer.observe(document, {childList: true, subtree: true})
+    observer.observe(window.document, {childList: true, subtree: true})
 
   observeIframeContentSize = (element) ->
     observer = new element.contentWindow.MutationObserver ->
@@ -50,7 +50,7 @@ module.exports = (logger) ->
           resize(element)
 
   generateLoadIndicatorElement = (element) ->
-    loadIndicatorElement = document.createElement("DIV")
+    loadIndicatorElement = window.document.createElement("DIV")
     loadIndicatorElement.setAttribute("data-module-load-indicator", "")
     loadIndicatorElement.innerHTML = LOAD_INDICATOR_TEMPLATE
     for bindableElement in loadIndicatorElement.querySelectorAll("[bind-module-name]")
@@ -62,7 +62,7 @@ module.exports = (logger) ->
   ###
 
   findAll = (parent = null) ->
-    unless parent then parent = document.body
+    unless parent then parent = window.document.body
     Array.prototype.slice.call(parent.querySelectorAll(IFRAME_SELECTOR))
 
   register = (element) ->
