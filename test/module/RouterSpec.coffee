@@ -36,6 +36,21 @@ describe 'supersonic.module.router', ->
     it 'may contain dashes, dots and alnum chars', ->
       router().getPath('foo-bar.qux123#trog.dor').should.match /foo\-bar\.qux123\/trog\.dor/
 
+    describe 'module navigation', ->
+      win = null
+
+      before ->
+        win = global.window = new Window()
+        win.location.href = "http://www.example.com/module1234/index.html"
+        win.location.origin = "http://www.example.com"
+
+      it 'should be able to navigate to another view', ->
+        router().getPath("#show").should.match /\/module1234\/show\.html/
+
+      it 'supports parameters', ->
+        router().getPath("#show", {foo: "bar"}).should.match /\/module1234\/show\.html\?foo=bar/
+
+
     describe 'view name', ->
       it 'defaults to "index"', ->
         router().getPath('foo').should.match /foo\/index/

@@ -2,6 +2,7 @@ qs = require 'qs'
 
 module.exports = (logger, env) ->
   ROUTE_PATTERN = /^([^#?]+)(#([^?]+))?(\?(.+))?$/
+  IN_MODULE_ROUTE_PATTERN = /(#([^?]+))?(\?(.+))?/
   ROOT_PATH = "/modules"
   DEFAULT_VIEW_NAME = "index"
 
@@ -45,6 +46,27 @@ module.exports = (logger, env) ->
 
       appendQueryParams path, params
 
+  isInModulePath = (route) ->
+    /^\#/.test route
+
+  inModulePath = (route, params) ->
+    currentPath = window.location.href.replace(window.location.origin, "")
+
+    parts = IN_MODULE_ROUTE_PATTERN.exec route
+
+    if !parts?
+      throw new Error "Did not recognize route format in: '#{route}'"
+
+    [whole, _ , viewName, _, query] = parts
+
+    viewName ?= DEFAULT_VIEW_NAME
+    query ?= ''
+
+    queryParams = mergeQueryParams query, params
+
+    url = "#{currentPath.substring(0, currentPath.lastIndexOf("/") + 1)}#{viewName}.html"
+    appendQueryParams url, queryParams
+
   mergeQueryParams = (query, params) ->
     queryParams = {}
     for key, value of params
@@ -57,18 +79,21 @@ module.exports = (logger, env) ->
     if !(typeof route is 'string')
       throw new Error "Route must be a string"
 
-    parts = ROUTE_PATTERN.exec route
-
-    if !parts?
-      throw new Error "Did not recognize route format in: '#{route}'"
-
-    [whole, moduleName, _, viewName, _, query] = parts
-    viewName ?= DEFAULT_VIEW_NAME
-    query ?= ''
-
-    queryParams = mergeQueryParams query, params
-
-    if hasExplicitPathFor moduleName, viewName
-      formatExplicitPath moduleName, viewName, queryParams
+    if isInModulePath route
+      inModulePath route, params
     else
-      appendQueryParams (formatPath moduleName, viewName), queryParams
+      parts = ROUTE_PATTERN.exec route
+
+      if !parts?
+        throw new Error "Did not recognize route format in: '#{route}'"
+
+      [whole, moduleName, _, viewName, _, query] = parts
+      viewName ?= DEFAULT_VIEW_NAME
+      query ?= ''
+
+      queryParams = mergeQueryParams query, params
+
+      if hasExplicitPathFor moduleName, viewName
+        formatExplicitPath moduleName, viewName, queryParams
+      else
+        appendQueryParams (formatPath moduleName, viewName), queryParams
