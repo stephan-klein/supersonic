@@ -5,9 +5,9 @@ steroids = require '../../src/supersonic/mock/steroids'
 Window = require '../../src/supersonic/mock/window'
 logger = require('../../src/supersonic/core/logger')(steroids, new Window())
 
-router = (routes = {}) ->
+router = (routes = {}, global = new Window) ->
   env = modules: { routes }
-  require('../../src/supersonic/core/module/router')(logger, env)
+  require('../../src/supersonic/core/module/router')(logger, env, global)
 
 describe 'supersonic.module.router', ->
   it 'is an object', ->
@@ -37,18 +37,20 @@ describe 'supersonic.module.router', ->
       router().getPath('foo-bar.qux123#trog.dor').should.match /foo\-bar\.qux123\/trog\.dor/
 
     describe 'module navigation', ->
-      win = null
-
-      before ->
-        win = global.window = new Window()
-        win.location.href = "http://www.example.com/module1234/index.html"
-        win.location.origin = "http://www.example.com"
 
       it 'should be able to navigate to another view', ->
-        router().getPath("#show").should.match /\/module1234\/show\.html/
+        router({}, {
+          location:
+            href: "http://www.example.com/module1234/index.html"
+            origin: "http://www.example.com"
+        }).getPath("#show").should.match /\/module1234\/show\.html/
 
       it 'supports parameters', ->
-        router().getPath("#show", {foo: "bar"}).should.match /\/module1234\/show\.html\?foo=bar/
+        router({}, {
+          location:
+            href: "http://www.example.com/module1234/index.html"
+            origin: "http://www.example.com"
+        }).getPath("#show", {foo: "bar"}).should.match /\/module1234\/show\.html\?foo=bar/
 
 
     describe 'view name', ->

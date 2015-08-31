@@ -1,6 +1,6 @@
 
 module.exports = (steroids, logger, superglobal, ui, env, global) ->
-  router = require('./router')(logger, env)
+  router = require('./router')(logger, env, global)
   drivers = require('./drivers')(steroids, superglobal, global)
 
   # Set default driver unless it has been set in a parent frame
