@@ -1,0 +1,26 @@
+/**
+ * Modules
+ * --------------------------------------------------
+ */
+
+iframe[data-module] {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+[data-module-load-indicator] {
+  text-align: center;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.super-module__load-indicator {
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  margin: 0px auto;
+  padding: 4px 10px;
+  border-radius: 4px;
+}

@@ -81,8 +81,8 @@ module.exports = (logger) ->
     element.parentNode.insertBefore(generateLoadIndicatorElement(element), element.nextSibling)
 
   hideLoadIndicator = (element) ->
-    if element.nextSibling and element.nextSibling.hasAttribute("data-module-load-indicator")
-      element.nextSibling.remove()
+    if element.nextElementSibling?.hasAttribute("data-module-load-indicator")
+      element.nextElementSibling.remove()
     element.style.display = "block"
     resize(element)
 
