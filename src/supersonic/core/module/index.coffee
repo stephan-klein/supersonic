@@ -3,7 +3,7 @@ module.exports = (steroids, logger, superglobal, ui, env, global) ->
   router = require('./router')(logger, env, global)
   drivers = require('./drivers')(steroids, superglobal, global)
 
-  cordovaSupport = require('./cordova-support')
+  cordovaSupport = require('./cordova-support')(superglobal, global)
   cordovaSupport.init()
 
   # Set default driver unless it has been set in a parent frame

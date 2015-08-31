@@ -5,75 +5,81 @@ get = require 'lodash/object/get'
 merge = require 'lodash/object/merge'
 compose = require 'lodash/function/compose'
 
-#to fix the test on travis... where window does not exist
-if !window?
-  global.window = {}
+module.exports = (superglobal, global) ->
+  isInIframe = ->
+    global.self isnt superglobal and superglobal.document?
 
-inIframe = ->
-  try
-    window.self != window.top && window.parent?
-  catch
-    true
+  init = switch
+    when isInIframe()
+      ->
+        mapGlobalSteroids()
 
-channelDownEvent = (type) ->
-  window.parent.document.addEventListener type, ->
-    event = window.document.createEvent 'Events'
-    event.initEvent type, false, false
-    window.document.dispatchEvent event
+        cordova = mapGlobalCordova()
+        mapPlugins cordova
 
-mapPlugins = (cordova) ->
-  return unless cordova?
-  plugins = cordova.require "cordova/plugin_list"
-
-  cleanPropertyPath = (fn) -> (path) ->
-    if path?.indexOf("window.") == 0
-      fn path.substring 7
+        mapEvents()
     else
-      fn path
+      noop = ->
 
-  addPlugin = (pluginInstance, path) ->
-    if isFunction pluginInstance
-      set window, path, pluginInstance
-    else
-      if has window, path
-        toMerge = get window, path
-        merge toMerge, pluginInstance
+  channelDownEvent = (type) ->
+    superglobal.document.addEventListener type, ->
+      event = global.document.createEvent 'Events'
+      event.initEvent type, false, false
+      global.document.dispatchEvent event
+
+  mapPlugins = (cordova) ->
+    return unless cordova?
+    plugins = cordova.require "cordova/plugin_list"
+
+    cleanPropertyPath = (fn) -> (path) ->
+      if path?.indexOf("window.") == 0
+        fn path.substring 7
       else
-        set window, path, pluginInstance
+        fn path
 
-  mapClobber = (plugin) ->
-    if plugin.clobbers?.length > 0
-      plugin.clobbers.forEach cleanPropertyPath (path) ->
-        pluginInstance = cordova.require plugin.id
-        addPlugin pluginInstance, path
-    plugin
+    addPlugin = (pluginInstance, path) ->
+      if isFunction pluginInstance
+        set global, path, pluginInstance
+      else
+        if has global, path
+          toMerge = get global, path
+          merge toMerge, pluginInstance
+        else
+          set global, path, pluginInstance
 
-  mapMerge = (plugin) ->
-    if plugin.merges?.length > 0
-      plugin.merges.forEach cleanPropertyPath (path) ->
-        pluginInstance = cordova.require plugin.id
-        if path? && path == "window"
-          merge window, pluginInstance
-        else if path != ""
+    mapClobber = (plugin) ->
+      if plugin.clobbers?.length > 0
+        plugin.clobbers.forEach cleanPropertyPath (path) ->
+          pluginInstance = cordova.require plugin.id
           addPlugin pluginInstance, path
-    plugin
+      plugin
 
-  mapPlugin = compose mapClobber, mapMerge
+    mapMerge = (plugin) ->
+      if plugin.merges?.length > 0
+        plugin.merges.forEach cleanPropertyPath (path) ->
+          pluginInstance = cordova.require plugin.id
+          if path? && path == "window"
+            merge global, pluginInstance
+          else if path != ""
+            addPlugin pluginInstance, path
+      plugin
 
-  plugins.forEach mapPlugin
+    mapPlugin = compose mapClobber, mapMerge
 
-mapGlobalCordova = ->
-  return unless window.parent?.cordova?
-  window.cordova = window.parent.cordova
-  window.cordova
+    for plugin in plugins || []
+      mapPlugin plugin
 
-mapGlobalSteroids = ->
-  window.steroids = window.parent.steroids
+  mapGlobalCordova = ->
+    return unless superglobal?.cordova?
+    global.cordova = superglobal.cordova
+    global.cordova
 
-mapEvents = -> ['deviceready'].forEach channelDownEvent
+  mapGlobalSteroids = ->
+    global.steroids = superglobal.steroids
 
-init = ->
-  return unless inIframe()
-  compose(mapEvents, mapPlugins, mapGlobalCordova, mapGlobalSteroids)()
+  mapEvents = -> ['deviceready'].forEach channelDownEvent
 
-module.exports = {init}
+  return {
+    init
+  }
+
