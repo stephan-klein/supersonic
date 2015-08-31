@@ -1,7 +1,7 @@
 qs = require 'qs'
 
-module.exports = (logger, env) ->
-  ROUTE_PATTERN = /^([^#?]+)(#([^?]+))?(\?(.+))?$/
+module.exports = (logger, env, global) ->
+  ROUTE_PATTERN = /^([^#?]+)?(#([^?]+))?(\?(.+))?$/
   ROOT_PATH = "/modules"
   DEFAULT_VIEW_NAME = "index"
 
@@ -45,6 +45,12 @@ module.exports = (logger, env) ->
 
       appendQueryParams path, params
 
+  formatInModulePath = (viewName, queryParams) ->
+    currentPath = global.location.href.replace(global.location.origin, "")
+    baseUrl = currentPath.substring(0, currentPath.lastIndexOf("/") + 1)
+    url = "#{baseUrl}#{viewName}.html"
+    appendQueryParams url, queryParams
+
   mergeQueryParams = (query, params) ->
     queryParams = {}
     for key, value of params
@@ -68,7 +74,9 @@ module.exports = (logger, env) ->
 
     queryParams = mergeQueryParams query, params
 
-    if hasExplicitPathFor moduleName, viewName
+    if !moduleName
+      formatInModulePath viewName, queryParams
+    else if hasExplicitPathFor moduleName, viewName
       formatExplicitPath moduleName, viewName, queryParams
     else
       appendQueryParams (formatPath moduleName, viewName), queryParams

@@ -5,9 +5,9 @@ steroids = require '../../src/supersonic/mock/steroids'
 Window = require '../../src/supersonic/mock/window'
 logger = require('../../src/supersonic/core/logger')(steroids, new Window())
 
-router = (routes = {}) ->
+router = (routes = {}, global = new Window) ->
   env = modules: { routes }
-  require('../../src/supersonic/core/module/router')(logger, env)
+  require('../../src/supersonic/core/module/router')(logger, env, global)
 
 describe 'supersonic.module.router', ->
   it 'is an object', ->
@@ -35,6 +35,23 @@ describe 'supersonic.module.router', ->
 
     it 'may contain dashes, dots and alnum chars', ->
       router().getPath('foo-bar.qux123#trog.dor').should.match /foo\-bar\.qux123\/trog\.dor/
+
+    describe 'without a module name', ->
+
+      it 'directs to a view in the same base url', ->
+        router({}, {
+          location:
+            href: "http://www.example.com/module1234/index.html"
+            origin: "http://www.example.com"
+        }).getPath("#show").should.match /\/module1234\/show\.html/
+
+      it 'supports parameters', ->
+        router({}, {
+          location:
+            href: "http://www.example.com/module1234/index.html"
+            origin: "http://www.example.com"
+        }).getPath("#show", {foo: "bar"}).should.match /\/module1234\/show\.html\?foo=bar/
+
 
     describe 'view name', ->
       it 'defaults to "index"', ->
