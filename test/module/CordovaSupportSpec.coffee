@@ -18,14 +18,16 @@ describe 'supersonic.module.cordovaSupport', ->
         require: (required) ->
           return cordovaPlugins[required]
 
-      steroidsMock = {}
+      steroidsMock =
+        version: 'vx.y.z'
       parentWindow =
         cordova:cordovaMock
         steroids:steroidsMock
         document:
           addEventListener: ->
 
-      window = {}
+      window =
+        frameElement: {}
       cordovaSupport(parentWindow, window).init()
       window
 

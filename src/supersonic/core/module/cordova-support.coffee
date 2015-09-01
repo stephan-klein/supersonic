@@ -7,7 +7,7 @@ compose = require 'lodash/function/compose'
 
 module.exports = (superglobal, global) ->
   isInIframe = ->
-    global.self isnt superglobal and superglobal.document?
+    global.frameElement?
 
   init = switch
     when isInIframe()
@@ -75,6 +75,7 @@ module.exports = (superglobal, global) ->
     global.cordova
 
   mapGlobalSteroids = ->
+    return unless superglobal?.steroids?.version
     global.steroids = superglobal.steroids
 
   mapEvents = -> ['deviceready'].forEach channelDownEvent
