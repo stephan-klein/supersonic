@@ -2,8 +2,14 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## TBD
-- Add cordova and steroids support to supersonic modules.
+## 1.7.0 (2015-09-01)
+
+Features:
+- Composer Module iframes waiting for loading to complete show a loading indicator.
+- `supersonic.module` navigation functions that accept routes now accept references to the current module's views as `#view-name`.
+
+Changes:
+- When supersonic runs in a Composer Module iframe, cordova and steroids from the parent frame will be used.
 
 ## 1.6.11 (2015-08-24)
 
