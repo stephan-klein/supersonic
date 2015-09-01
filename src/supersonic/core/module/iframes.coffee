@@ -5,7 +5,14 @@ module.exports = (window) ->
   IFRAME_SELECTOR = "iframe[data-module]"
   IFRAME_USE_LOAD_INDICATOR_ATTR = "data-module-indicate-loading"
   IFRAME_NAME_ATTR = "data-module-name"
-  LOAD_INDICATOR_TEMPLATE = """Loading <span bind-module-name></span>..."""
+  LOAD_INDICATOR_TEMPLATE = """
+    <div class="super-module__load-indicator">
+      <i class="icon super-loading-c"></i>
+      &nbsp;
+      Loading
+      <b bind-module-name></b>...
+    </div>
+  """
 
   ###
   Initial operations
