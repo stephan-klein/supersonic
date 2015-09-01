@@ -11,4 +11,7 @@ class Window
   AG_LAYER_ID: 0
   AG_VIEW_ID: 0
 
+  document:
+    addEventListener: ->
+
 module.exports = Window
