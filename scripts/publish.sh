@@ -21,6 +21,7 @@ fi
 
 # Build distributable
 grunt build
+grunt uglify
 
 # Clone target repo
 echo Cloning supersonic-bower to $TARGET_DIR
