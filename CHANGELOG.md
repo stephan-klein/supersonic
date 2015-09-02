@@ -4,6 +4,9 @@ Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appg
 
 ## TODO
 
+Features:
+- Offer minified versions of JS distributables (`supersonic.core.min.js` and `supersonic.min.js`)
+
 Fixes:
 - Update schema for `supersonic.auth.users` to allow changing the user's password.
 
