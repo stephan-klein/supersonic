@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## TODO
+
+Fixes:
+- Update schema for `supersonic.auth.users` to allow changing the user's password.
+
 ## 1.7.0 (2015-09-01)
 
 Features:
