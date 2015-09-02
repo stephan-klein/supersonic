@@ -25,6 +25,8 @@ module.exports = (logger, window, session, env) ->
               type: "array"
             deleted:
               type: "boolean"
+            password:
+              type: "string"
 
   resourceBundle = data.loadResourceBundle(usersResourceBundle)
 
