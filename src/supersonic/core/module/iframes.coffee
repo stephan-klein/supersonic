@@ -42,6 +42,7 @@ module.exports = (window) ->
 
   observeIframeContentSize = (element) ->
     observer = new element.contentWindow.MutationObserver ->
+      findImagesAndAttachOnloadResize(element)
       resize(element)
     observer.observe(element.contentDocument.body, {childList: true, subtree: true})
     element
@@ -53,6 +54,7 @@ module.exports = (window) ->
         observeIframeContentSize(element)
         hideLoadIndicator(element)
         resize(element)
+        findImagesAndAttachOnloadResize(element)
         Promise.delay(500).then ->
           resize(element)
 
@@ -63,6 +65,12 @@ module.exports = (window) ->
     for bindableElement in loadIndicatorElement.querySelectorAll("[bind-module-name]")
       bindableElement.innerHTML = element.getAttribute(IFRAME_NAME_ATTR)
     loadIndicatorElement
+
+  findImagesAndAttachOnloadResize = (element) ->
+    Promise.delay(0).then ->
+      for image in element.contentDocument.body.querySelectorAll("img") when !image.complete
+        image.onload = ->
+          resize(element)
 
   ###
   Public API functionalities
