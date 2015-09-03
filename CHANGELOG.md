@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.7.2 (2015-09-03)
+
+Fixes:
+- Composer Module iframe heights track content height better when images are involved.
+
 ## 1.7.1 (2015-09-02)
 
 Features:
