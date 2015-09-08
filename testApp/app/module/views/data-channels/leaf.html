@@ -1,0 +1,20 @@
+
+<div ng-controller="DataChannelController" class="card">
+
+  <h1 class="item item-divider">Leaf</h1>
+
+  <button
+    class="item button button-block button-positive"
+    ng-click="send()">
+      Send message
+  </button>
+
+  <table class="item">
+    <tr>
+      <td width="33%">Received: {{ received }}</td>
+      <td width="33%">Sent: {{ sent }}</td>
+      <td width="34%">Total: {{ total }}</td>
+    </tr>
+  </table>
+
+</div>

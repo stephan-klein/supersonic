@@ -1,17 +1,19 @@
 angular
   .module('module')
   .constant('ModuleDataChannel', supersonic.data.channel 'module-data-channel')
-  .controller('DataChannelSendController', ($scope, ModuleDataChannel) ->
-    $scope.sentMessages = 0
+  .controller('DataChannelController', ($scope, ModuleDataChannel) ->
+    $scope.sent = 0
+    $scope.received = 0
+    $scope.total = 0
+
+    ModuleDataChannel.subscribe ->
+      $scope.$apply ->
+        $scope.received++
+        $scope.total++
+
     $scope.send = ->
       ModuleDataChannel.publish (new Date).toString()
-      $scope.sentMessages++
+      $scope.sent++
+      $scope.total++
 
-  )
-  .controller('DataChannelReceiveController', ($scope, ModuleDataChannel) ->
-    $scope.messages = []
-
-    ModuleDataChannel.subscribe (message) ->
-      $scope.$apply ->
-        $scope.messages.unshift message
   )
