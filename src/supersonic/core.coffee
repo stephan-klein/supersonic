@@ -4,13 +4,25 @@ global = if window?
     Window = require './mock/window'
     new Window()
 
-superglobal = if window?.parent?
-    window.parent
-  else
-    global
+superglobal = do ->
+  candidate = global
+  # Find the topmost frame with supersonic
+  while candidate.parent? and (candidate.parent isnt candidate) and (candidate.parent.supersonic?)
+    candidate = candidate.parent
+  candidate
 
-steroids = if global.parent?.steroids?
-    global.parent?.steroids
+steroids = do ->
+  frame = global
+  candidate = frame.steroids
+
+  # Find the topmost frame that has steroids
+  while frame.parent? and (frame.parent isnt frame)
+    frame = frame.parent
+    if frame.steroids?.version?
+      candidate = frame.steroids
+
+  if candidate?.version?
+    candidate
   else
     require './mock/steroids'
 
