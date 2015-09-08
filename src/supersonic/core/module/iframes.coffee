@@ -47,9 +47,24 @@ module.exports = (window) ->
     observer.observe(element.contentDocument.body, {childList: true, subtree: true})
     element
 
+  waitForLoad = (element) ->
+    ###
+    We can't rely on any events from the iframe, because it's possible that we
+    missed them or that they won't be sent. Therefore we check whether the
+    iframe body is defined, which is something that should happen after
+    DOMContentLoaded.
+    ###
+    new Promise (resolve) ->
+      interval = setInterval ->
+        if element.contentWindow.document.body?
+          clearInterval(interval)
+          resolve()
+      , 1
+
   attachToOnLoad = (element) ->
     showLoadIndicator(element) if element.hasAttribute(IFRAME_USE_LOAD_INDICATOR_ATTR)
-    element.onload = ->
+
+    waitForLoad(element).then ->
       Promise.delay(100).then ->
         observeIframeContentSize(element)
         hideLoadIndicator(element)
