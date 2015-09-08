@@ -2,6 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.7.3 (2015-09-08)
+
+Fixes:
+- Loading spinner fors Composer Module iframes are removed after frame document body is available. Prevents stale spinners.
+- Supersonic uses the topmost frame that has supersonic for `postMessage` communication. Prevents `supersonic.data.channel` from being unavailable to modules in nested iframes.
+
 ## 1.7.2 (2015-09-03)
 
 Fixes:
