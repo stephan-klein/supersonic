@@ -1,0 +1,14 @@
+
+<div ng-controller="DataChannelReceiveController">
+
+  <h1> Received messages </h1>
+
+  <ul class="list">
+    <li
+      class="item"
+      ng-repeat="message in messages track by $index">
+        <code>{{ message | json }}</code>
+    </li>
+  </ul>
+
+</div>
