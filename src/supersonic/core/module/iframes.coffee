@@ -1,5 +1,6 @@
 Promise = require 'bluebird'
 Bacon = require 'baconjs'
+debug = require('debug')('supersonic:module:iframes')
 
 module.exports = (window) ->
 
@@ -48,6 +49,7 @@ module.exports = (window) ->
 
   attachToOnLoad = (element) ->
     return unless isValidFrame element
+    debug "Starting to watch element for changes:", element
 
     if element.hasAttribute(IFRAME_USE_LOAD_INDICATOR_ATTR)
       showLoadIndicator(element)
@@ -55,11 +57,13 @@ module.exports = (window) ->
     Bacon.fromPromise(waitForLoad element)
       .delay(100) # Why do we need to wait?
       .map(-> element)
+      .doAction(-> debug "Element loaded:", element)
       .takeWhile(isValidFrame)
       .doAction(hideLoadIndicator)
       .flatMap(iframeContentSizeChangeEvents)
+      .doAction(-> debug "Got change event: ", element)
       .takeWhile(isValidFrame)
-      .subscribe(resize)
+      .onValue(resize)
 
   # This will return false for an element removed from the DOM or otherwise inaccessible
   isValidFrame = (iframeElement) ->
@@ -119,7 +123,7 @@ module.exports = (window) ->
 
       contentDocumentBodyMutations(element)
         .flatMap(addImageLoadEvents)
-        .merge Bacon.later(500, element)
+        .merge Bacon.later(500, element) # Do we really need this just-in-cause event?
 
   ###
   Public API functionalities
@@ -145,10 +149,13 @@ module.exports = (window) ->
       element.style.height = "#{height}px"
 
     (element) ->
+      debug "About to resize: ", element
       return element unless isValidFrame element
 
       height = calculateFrameElementHeight element
       setFrameElementHeight element, height
+
+      debug "Resized element to #{height}px: ", element
 
       element
 
