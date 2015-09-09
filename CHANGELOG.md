@@ -2,6 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.7.4 (2015-09-09)
+
+Fixes:
+- Enhanced cross-browser compatibility for Composer Module iframes. Prevents iframes that would not ever resize on Chrome.
+- More robust handling of Composer Module iframe lifetime events. Prevents stale listeners after iframe removal.
+
 ## 1.7.3 (2015-09-08)
 
 Fixes:
