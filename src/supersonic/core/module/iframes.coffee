@@ -56,7 +56,8 @@ module.exports = (window) ->
     ###
     new Promise (resolve) ->
       interval = setInterval ->
-        if element.contentWindow.document.body?
+        document = element.contentWindow.document
+        if document.body? and document.body.innerHTML
           clearInterval(interval)
           resolve()
       , 1
