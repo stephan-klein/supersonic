@@ -53,9 +53,16 @@ module.exports = (window) ->
     missed them or that they won't be sent. Therefore we check whether the
     iframe body is defined, which is something that should happen after
     DOMContentLoaded.
+
+    The iframe element might also become invalid at any point, which we need to
+    detect.
     ###
-    new Promise (resolve) ->
+    new Promise (resolve, reject) ->
       interval = setInterval ->
+        if !element?.contentWindow?.document?
+          clearInterval(interval)
+          return reject new Error "Element is not an iframe, or it was removed"
+
         document = element.contentWindow.document
         if document.body? and document.body.innerHTML
           clearInterval(interval)
@@ -65,14 +72,18 @@ module.exports = (window) ->
   attachToOnLoad = (element) ->
     showLoadIndicator(element) if element.hasAttribute(IFRAME_USE_LOAD_INDICATOR_ATTR)
 
-    waitForLoad(element).then ->
-      Promise.delay(100).then ->
-        observeIframeContentSize(element)
-        hideLoadIndicator(element)
-        resize(element)
-        findImagesAndAttachOnloadResize(element)
-        Promise.delay(500).then ->
+    waitForLoad(element).then
+      ->
+        Promise.delay(100).then ->
+          observeIframeContentSize(element)
+          hideLoadIndicator(element)
           resize(element)
+          findImagesAndAttachOnloadResize(element)
+          Promise.delay(500).then ->
+            resize(element)
+      ->
+        # Iframe failed to load. We won't do anything.
+    )
 
   generateLoadIndicatorElement = (element) ->
     loadIndicatorElement = window.document.createElement("DIV")
