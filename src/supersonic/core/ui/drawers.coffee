@@ -8,7 +8,7 @@ module.exports = (steroids, log) ->
    # @namespace supersonic.ui
    # @name drawers
    # @overview
-   # @description The `supersonic.ui.drawers` namespace provides methods to work with drawers.
+   # @description The `supersonic.ui.drawers` namespace provides methods to work with drawers. Please note that on Android drawers need to be defined in [`structure.coffee`](/supersonic/guides/architecture/app-config-files/#structure-coffee) in order to use the `supersonic.ui.drawers` APIs.
   ###
 
   ###
