@@ -23,12 +23,12 @@ module.exports =
   # drawers:
   #   left:
   #     id: "leftDrawer"
-  #     location: "drawers#left-drawer"
+  #     location: "ui#drawers"
   #     showOnAppLoad: true
   #     widthOfDrawerInPixels: 200
   #   right:
   #     id: "rightDrawer"
-  #     location: "drawers#right-drawer"
+  #     location: "ui#drawers"
   #     showOnAppLoad: false
   #     widthOfDrawerInPixels: 200
   #   options:
