@@ -2,7 +2,7 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## 1.7.5 ()
+## 1.7.5 (2015-09-10)
 
 Features:
 - Update webcomponents.js to v0.7.12
