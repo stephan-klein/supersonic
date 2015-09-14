@@ -48,26 +48,30 @@ describe "supersonic.data.model", ->
       describe "whenChanged", ->
         recordCreated = null
 
-        it "is notified after a record is created", ->
+        it "is notified after a record is created", (done) ->
           @timeout 5000
           SandboxTaskModel = supersonic.data.model('SandboxTask', {
             cache:
               enabled: true
+              timeToLive: 1000
           })
-
-          tasksAfterCreate = new Promise (resolve) ->
-            SandboxTaskModel
-              .all({}, interval: 1000)
-              .updates
-              .skip(1)
-              .onValue resolve
 
           recordCreated = SandboxTaskModel.create(description: "supersonic.data.model.all test object")
 
-          Promise.all([tasksAfterCreate, recordCreated]).spread (tasks, task) ->
-            tasks.toJson().should.deep.include.members [
-              task.toJson()
-            ]
+          SandboxTaskModel.all({}, interval: 1000)
+            .changes
+            .flatMap((tasks) ->
+              supersonic.internal.Bacon.fromPromise recordCreated.then (task) ->
+                for t in tasks when t.id is task.id
+                  return {
+                    tasks: tasks.toJson()
+                    task: task.toJson()
+                  }
+                throw new Error "Created task not in changed tasks"
+            )
+            .take(1)
+            .onValue ->
+              done()
 
         afterEach ->
           recordCreated?.then (record) ->
