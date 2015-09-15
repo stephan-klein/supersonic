@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.7.6 (2015-09-15)
+
+Fixes:
+- `supersonic.data.model` cache inconsistencies ([closes issue #1022](https://github.com/AppGyver/steroids/issues/1022))
+
 ## 1.7.5 (2015-09-10)
 
 Features:
