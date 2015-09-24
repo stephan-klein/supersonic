@@ -2,6 +2,9 @@
 module.exports = (steroids, log, global) ->
   View: require("./View")(steroids, log)
 
+  MediaGallery: require("./MediaGallery")(steroids, log)
+  PDFView: require("./PDFView")(steroids, log)
+
   screen: require("./screen")(steroids, log)
   views: require("./views")(steroids, log, global)
   layers: require("./layers")(steroids, log)
