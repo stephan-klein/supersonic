@@ -20,7 +20,7 @@ module.exports = (window, superglobal) ->
   Initial operations
   ###
 
-  window.document.addEventListener "DOMContentLoaded", ->
+  observeIframeChanges = ->
     Promise.delay(0).then ->
       if window.document.body.querySelectorAll("[data-module-load-indicator-template]").length
         setLoadIndicatorTemplate(window.document.body.querySelectorAll("[data-module-load-indicator-template]")[0].innerHTML)
@@ -41,12 +41,13 @@ module.exports = (window, superglobal) ->
     for iframe in findAll()
       iframe.style.display = iframeVisibility
 
+  # Bind event listeners only on the Runtime window (parent of modules).
+  # That is, do not bind event listeners in the inside of the module's iframe.
   initTopEventListeners = ->
     return if window != superglobal
 
-    window.document.addEventListener 'visibilitychange',
-      toggleIframeVisibility,
-      false
+    window.document.addEventListener "DOMContentLoaded", observeIframeChanges
+    window.document.addEventListener 'visibilitychange', toggleIframeVisibility, false
 
   initTopEventListeners()
 
