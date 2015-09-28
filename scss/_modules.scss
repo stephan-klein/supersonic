@@ -24,3 +24,7 @@ iframe[data-module] {
   padding: 4px 10px;
   border-radius: 4px;
 }
+
+iframe[data-module] .hidden {
+  display: none;
+}

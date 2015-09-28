@@ -2,7 +2,7 @@ Promise = require 'bluebird'
 Bacon = require 'baconjs'
 debug = require('debug')('supersonic:module:iframes')
 
-module.exports = (window) ->
+module.exports = (window, superglobal) ->
 
   IFRAME_SELECTOR = "iframe[data-module]"
   IFRAME_USE_LOAD_INDICATOR_ATTR = "data-module-indicate-loading"
@@ -26,6 +26,29 @@ module.exports = (window) ->
         setLoadIndicatorTemplate(window.document.body.querySelectorAll("[data-module-load-indicator-template]")[0].innerHTML)
       observeDocumentForNewModules().subscribe attachToOnLoad
       findAll().map attachToOnLoad
+
+  toggleIframeVisibility = ->
+    display = {
+      visible: 'block',
+      hidden: 'none'
+    }
+
+    if (window.document.hidden)
+      iframeVisibility = display.hidden
+    else
+      iframeVisibility = display.visible
+
+    for iframe in findAll()
+      iframe.style.display = iframeVisibility
+
+  initTopEventListeners = ->
+    return if window != superglobal
+
+    window.document.addEventListener 'visibilitychange',
+      toggleIframeVisibility,
+      false
+
+  initTopEventListeners()
 
   observeDocumentForNewModules = ->
     return Bacon.never() unless window?.MutationObserver?
