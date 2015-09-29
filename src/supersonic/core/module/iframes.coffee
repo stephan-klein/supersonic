@@ -2,7 +2,7 @@ Promise = require 'bluebird'
 Bacon = require 'baconjs'
 debug = require('debug')('supersonic:module:iframes')
 
-module.exports = (window) ->
+module.exports = (window, superglobal) ->
 
   IFRAME_SELECTOR = "iframe[data-module]"
   IFRAME_USE_LOAD_INDICATOR_ATTR = "data-module-indicate-loading"
@@ -20,12 +20,36 @@ module.exports = (window) ->
   Initial operations
   ###
 
-  window.document.addEventListener "DOMContentLoaded", ->
+  observeIframeChanges = ->
     Promise.delay(0).then ->
       if window.document.body.querySelectorAll("[data-module-load-indicator-template]").length
         setLoadIndicatorTemplate(window.document.body.querySelectorAll("[data-module-load-indicator-template]")[0].innerHTML)
       observeDocumentForNewModules().subscribe attachToOnLoad
       findAll().map attachToOnLoad
+
+  toggleIframeVisibility = ->
+    display = {
+      visible: 'block',
+      hidden: 'none'
+    }
+
+    if (window.document.hidden)
+      iframeVisibility = display.hidden
+    else
+      iframeVisibility = display.visible
+
+    for iframe in findAll()
+      iframe.style.display = iframeVisibility
+
+  # Bind event listeners only on the Runtime window (parent of modules).
+  # That is, do not bind event listeners in the inside of the module's iframe.
+  initTopEventListeners = ->
+    return if window != superglobal
+
+    window.document.addEventListener "DOMContentLoaded", observeIframeChanges
+    window.document.addEventListener 'visibilitychange', toggleIframeVisibility, false
+
+  initTopEventListeners()
 
   observeDocumentForNewModules = ->
     return Bacon.never() unless window?.MutationObserver?
