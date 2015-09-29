@@ -2,7 +2,7 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## 1.7.7 (TBD)
+## 1.7.7 (2015-09-29)
 
 Features:
 - Remove from the DOM Composer modules which are not currently visible.
