@@ -67,13 +67,13 @@ module.exports = (steroids, log) ->
    #   options?: {
    #     block?: String,
    #     animated?: Boolean
-   #     deplay?: Number
+   #     delay?: Number
    #   }
    # ) => Promise
    # @define {Object} options={} An optional options object.
    # @define {String} options.block="webview" Optional. Possible values are "webview" and "app". It defines if the spinner is blocking the webview only or is blocking the entire "app".
    # @define {String} options.animated=true Optional turn on and off the animation when hidding the spinner.
-   # @define {String} options.deplay=0.5 Optional define a delay in seconds before the spinner is hidden.
+   # @define {String} options.delay=0.5 Optional define a delay in seconds before the spinner is hidden.
    # @returnsDescription
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/), resolved when the spinner is hidden.
    # @supportsCallbacks
@@ -81,7 +81,7 @@ module.exports = (steroids, log) ->
    # options =
    #   block: "app"
    #   animated: false
-   #   deplay?: 0.6
+   #   delay?: 0.6
    # supersonic.ui.dialog.spinner.hide(options).then ->
    #   supersonic.logger.log "Spinner is gone."
    #
@@ -89,7 +89,7 @@ module.exports = (steroids, log) ->
    # var options = {
    #   block: "app",
    #   animated: false,
-   #   deplay?: 0.6
+   #   delay?: 0.6
    # };
    #
    # supersonic.ui.dialog.spinner.hide(options).then(function() {
