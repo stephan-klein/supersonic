@@ -2,6 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.7.7 (TBD)
+
+Features:
+- `supersonic.ui.dialog.spinner.*` displays a spinner which can block either
+  the current webview or the whole app.
+
 ## 1.7.6 (2015-09-15)
 
 Fixes:
