@@ -5,6 +5,11 @@ Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appg
 ## 1.7.7 (TBD)
 
 Features:
+- Remove from the DOM Composer modules which are not currently visible.
+  For example:
+  - on `layers.push()` hide modules on the previous layer and bring
+  them back on `layers.pop()`.
+  - hide modules on Tab A when navigating to Tab B.
 - `supersonic.ui.dialog.spinner.*` displays a spinner which can block either
   the current webview or the whole app.
 
