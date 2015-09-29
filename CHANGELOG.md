@@ -7,6 +7,16 @@ Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appg
 Features:
 - `supersonic.ui.dialog.spinner.*` displays a spinner which can block either
   the current webview or the whole app.
+- PreviewFileView now supports remote URLs
+- New API to display a media gallery:
+~~~
+  mediaGallery = new supersonic.ui.MediaGallery([
+    "http://www.mydomain.com/images/promo01.jpg"
+    "images/floor_plan.jpg"
+    "videos/movie.mp4"])
+
+  mediaGallery.start()
+~~~
 
 ## 1.7.6 (2015-09-15)
 
