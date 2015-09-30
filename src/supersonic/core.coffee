@@ -27,7 +27,7 @@ steroids = do ->
     require './mock/steroids'
 
 logger = require('./core/logger')(steroids, global)
-data = require('./core/data')(logger, global)
+data = require('./core/data')(logger, superglobal, env)
 env = require('./core/env')(logger, superglobal)
 ui = require('./core/ui')(steroids, logger, global)
 
@@ -41,7 +41,6 @@ module.exports = {
   media: require('./core/media')(steroids, logger)
   module: require('./core/module')(steroids, logger, superglobal, ui, env, global)
   device: require('./core/device')(steroids, logger)
-  data: require('./core/data')(logger, superglobal, env)
   auth: require('./core/auth')(logger, global, data, env)
   internal:
     Promise: require 'bluebird'
