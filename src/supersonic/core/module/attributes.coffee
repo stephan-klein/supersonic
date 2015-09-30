@@ -2,6 +2,15 @@ querystring = require 'qs'
 
 module.exports = (logger, global, superglobal) ->
 
+  forcedAttributes = {}
+  getForcedAttribute = (name) ->
+    forcedAttributes[name]
+  setForcedAttribute = (name, value) ->
+    if value?
+      forcedAttributes[name] = value
+    else
+      delete forcedAttributes[name]
+
   getModuleFrameAttribute = (name) ->
     global?.frameElement?.getAttribute? "data-#{name}"
 
@@ -18,11 +27,18 @@ module.exports = (logger, global, superglobal) ->
       params = getLocationHrefParams() unless params?
       params[name]
 
-  getSuperglobalUrlParamAttribute = makeUrlParamAttributeGetter superglobal
   getGlobalUrlParamAttribute = makeUrlParamAttributeGetter global
+  getSuperglobalUrlParamAttribute = makeUrlParamAttributeGetter superglobal
+
+  getters = [
+    getForcedAttribute
+    getModuleFrameAttribute
+    getGlobalUrlParamAttribute
+    getSuperglobalUrlParamAttribute
+  ]
 
   getAttribute = (name, defaultValue = null) ->
-    for get in [getModuleFrameAttribute, getGlobalUrlParamAttribute, getSuperglobalUrlParamAttribute]
+    for get in getters
       value = get name
 
       if value?
@@ -31,9 +47,12 @@ module.exports = (logger, global, superglobal) ->
     defaultValue
 
   hasAttribute = (name) ->
-    getModuleFrameAttribute(name)? || getGlobalUrlParamAttribute(name)? || getSuperglobalUrlParamAttribute(name)?
+    for get in getters
+      return true if get(name)?
+    return false
 
   return {
     get: getAttribute
     has: hasAttribute
+    set: setForcedAttribute
   }
