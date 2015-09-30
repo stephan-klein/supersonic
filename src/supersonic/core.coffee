@@ -29,6 +29,7 @@ steroids = do ->
 logger = require('./core/logger')(steroids, global)
 data = require('./core/data')(logger, superglobal, env)
 env = require('./core/env')(logger, superglobal)
+auth = require('./core/auth')(logger, global, data, env)
 ui = require('./core/ui')(steroids, logger, global)
 
 module.exports = {
@@ -36,12 +37,12 @@ module.exports = {
   data
   env
   ui
+  auth
   debug: require('./core/debug')(steroids, logger)
   app: require('./core/app')(steroids, logger)
   media: require('./core/media')(steroids, logger)
-  module: require('./core/module')(steroids, logger, superglobal, ui, env, global)
+  module: require('./core/module')(steroids, logger, superglobal, ui, env, global, data, auth)
   device: require('./core/device')(steroids, logger)
-  auth: require('./core/auth')(logger, global, data, env)
   internal:
     Promise: require 'bluebird'
     Bacon: require 'baconjs'

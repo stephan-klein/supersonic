@@ -89,3 +89,10 @@ describe 'supersonic.module.notifications', ->
             after ->
               supersonic.module.attributes.set 'record-type', null
               supersonic.module.attributes.set 'record-id', null
+
+          describe 'with a valid session', ->
+            it 'has owner_user_id set', ->
+              supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                .changed('stuff')
+                .should.eventually.have.property('owner_user_id')
+                .equal supersonic.auth.session.getUserId()

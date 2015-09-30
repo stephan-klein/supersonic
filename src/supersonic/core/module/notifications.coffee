@@ -1,8 +1,9 @@
 Promise = require 'bluebird'
+merge = require 'lodash/object/merge'
 
 APPGYVER_NOTIFICATION_RESOURCE_NAME = 'AppGyverNotification'
 
-module.exports = (data, attributes) ->
+module.exports = (data, attributes, auth) ->
 
   createAnnouncer = (namespace, events, context) ->
     announcer = {}
@@ -12,19 +13,27 @@ module.exports = (data, attributes) ->
 
     announcer
 
-  eventAnnouncer = (namespace, eventName, context) ->
+  eventAnnouncer = (namespace, eventName, defaults) ->
     announceEvent = (message) ->
       if !message
         return Promise.reject new Error "A message is required"
 
       model = data.model APPGYVER_NOTIFICATION_RESOURCE_NAME
 
-      model.create {
-        record_id: context.id if context.id?
-        record_type: context.type if context.type?
+      model.create merge defaults, {
         type: "#{namespace}:#{eventName}"
         message
       }
+
+  makeDefaults = (context, session) ->
+    defaults = {}
+    defaults.record_id = context.id if context.id?
+    defaults.record_type = context.type if context.type?
+
+    if userId = session.getUserId()
+      defaults.owner_user_id = userId
+
+    defaults
 
   guessContext = (attributes) ->
     recordType = attributes.get 'record-type'
@@ -49,5 +58,7 @@ module.exports = (data, attributes) ->
       if !events.length
         throw new Error "A list of event names is required"
 
-      createAnnouncer namespace, events, (guessContext attributes)
+      context = guessContext attributes
+      defaults = makeDefaults context, auth.session
+      createAnnouncer namespace, events, defaults
   }
