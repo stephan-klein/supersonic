@@ -32,3 +32,18 @@ angular
         onFailure: ->
           supersonic.logger.log "Modal could not be hidden"
 
+    $scope.testIsDisposibleApi = ->
+
+      supersonic.ui.isDisposable = -> false
+
+      # new event used to know when the webview navigation was blocked
+      eventHandler = supersonic.ui.views.current.on 'blocked', (event) ->
+        supersonic.ui.dialog.spinner.show "Saving..."
+        setTimeout ->
+          supersonic.ui.isDisposable = -> true
+          supersonic.ui.views.current.off 'blocked', eventHandler
+
+          supersonic.ui.dialog.spinner.hide()
+          if event.trigger == "close_modal"
+            supersonic.ui.modal.hide()
+        , 2000

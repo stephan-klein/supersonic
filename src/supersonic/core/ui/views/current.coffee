@@ -111,6 +111,76 @@ module.exports = (steroids, log, global) ->
       .filter((visible) -> !visible)
       .onValue listen
 
+  ###
+   # @namespace supersonic.ui.views.current
+   # @name on
+   # @function
+   # @description
+   # Listens for the current view events.
+   # @type
+   # supersonic.ui.views.current.on: (
+   #   eventName: String
+   #   handlerFn: Function
+   # ) => eventHandlerId
+   # @define {String} Name of the event. valid event names are: willchange, didchange, changeblocked
+   # @define {Function} Event handler function that is called when the event is triggered. It received the eventContext as a parameter.
+   # @returnsDescription
+   # A [`eventHandlerId`] that can be used to turn-off the this eventHandler.
+   # @exampleCoffeeScript
+   # eventHandlerId = supersonic.ui.views.current.on "preloaded", (event) ->
+   #   ...
+   #   # turn off only this eventHandlerId in case we have added more event handlers.
+   #   supersonic.ui.views.current.off "preloaded", eventHandlerId
+   #   #OR
+   #   # turn off all "preloaded" event handlers
+   #   supersonic.ui.views.current.off "preloaded"
+   #
+   # @exampleJavaScript
+   # var eventHandlerId = supersonic.ui.views.current.on("preloaded", function(event){
+   #   ...
+   #   // turn off only this eventHandlerId in case we have added more event handlers.
+   #   supersonic.ui.views.current.off("preloaded", eventHandlerId);
+   #   //OR
+   #   // turn off all "willchange" event handlers
+   #   supersonic.ui.views.current.off("preloaded");
+   # });
+  ###
+  viewObject.on = (eventName, handlerFn) -> steroids.view.on eventName, handlerFn
+
+  ###
+   # @namespace supersonic.ui.views.current
+   # @name off
+   # @function
+   # @description
+   # Remove the current view event handlers.
+   # @type
+   # supersonic.ui.views.current.off: (
+   #   eventName: String,
+   #   eventHandlerId: String,
+   # )
+   # @define {String} Name of the event. valid event names are: willchange, didchange, changeblocked
+   # @define {String} Event handler id. If ommited it will remove all event handler for the specified event name.
+   # @exampleCoffeeScript
+   # eventHandlerId = supersonic.ui.views.current.off "willchange", (event)->
+   #   ...
+   #   # turn off only this eventHandlerId in case we have added more event handlers.
+   #   supersonic.ui.views.current.off "willchange", eventHandlerId
+   #   #OR
+   #   # turn off all "willchange" event handlers
+   #   supersonic.ui.views.current.off "willchange"
+   #
+   # @exampleJavaScript
+   # var eventHandlerId = supersonic.ui.views.current.on("willchange", function(event){
+   #   ...
+   #   // turn off only this eventHandlerId in case we have added more event handlers.
+   #   supersonic.ui.views.current.off("willchange", eventHandlerId);
+   #   //OR
+   #   // turn off all "willchange" event handlers
+   #   supersonic.ui.views.current.off("willchange");
+   # });
+  ###
+  viewObject.off = (eventName, eventHandlerId) -> steroids.view.off eventName, eventHandlerId
+
   # pass view object so that params & id can be changed from here
   viewObject
 
