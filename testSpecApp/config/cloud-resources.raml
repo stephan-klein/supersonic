@@ -4,24 +4,26 @@ mediaType: application/json
 baseUri: https://rest-api.appgyver.com/v3/
 
 traits:
-  - securedBySteroidsApiKey:
-      headers:
-        steroidsApiKey:
-          type: string
-          example: exampleapikey
-          default: 71fcb87a3c5bea2982997080ebe5d329b1ff37e2f7884d8c4b2471301fc6bb40
-        steroidsAppId:
-          type: integer
-          example: 1234
-          default: 52559
+    - securedBySteroidsApiKey:
+        headers:
+          steroidsApiKey:
+            type: string
+            example: exampleapikey
+            default: 71fcb87a3c5bea2982997080ebe5d329b1ff37e2f7884d8c4b2471301fc6bb40
+          steroidsAppId:
+            type: integer
+            example: 1234
+            default: 52559
 
 schemas:
   - SandboxTask_collection: '{"$schema":"http://json-schema.org/schema","title":"SandboxTask collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxTask representation","properties":{"description":{"type":"string"},"completed":{"type":"boolean"}},"required":[]}}}}'
   - SandboxTask_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxTask representation","properties":{"object":{"type":"object","properties":{"description":{"type":"string"},"completed":{"type":"boolean"}},"required":[]}}}'
   - BuiltIOTask_collection: '{"$schema":"http://json-schema.org/schema","title":"BuiltIOTask collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical BuiltIOTask representation","properties":{"updated_at":{"type":"string"},"created_at":{"type":"string"},"description":{"type":"string"},"completed":{"type":"boolean"},"ACL":{"type":"object"},"tags":{"type":"array"},"updated_by":{"type":"string"},"created_by":{"type":"string"},"app_user_object_uid":{"type":"string"},"published":{"type":"boolean"},"uid":{"type":"string"},"_version":{"type":"integer"}},"required":[]}}}}'
   - BuiltIOTask_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical BuiltIOTask representation","properties":{"object":{"type":"object","properties":{"updated_at":{"type":"string"},"created_at":{"type":"string"},"description":{"type":"string"},"completed":{"type":"boolean"},"ACL":{"type":"object"},"tags":{"type":"array"},"updated_by":{"type":"string"},"created_by":{"type":"string"},"app_user_object_uid":{"type":"string"},"published":{"type":"boolean"},"uid":{"type":"string"},"_version":{"type":"integer"}},"required":[]}}}'
-  - SandboxFileResource_collection: '{"$schema":"http://json-schema.org/schema","title":"SandboxFileResource collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxFileResource representation","properties":{"description":{"type":"string"},"file":{"type":"file"}},"required":[]}}}}'
-  - SandboxFileResource_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxFileResource representation","properties":{"object":{"type":"object","properties":{"description":{"type":"string"},"file":{"type":"file"}},"required":[]}}}'
+  - SandboxFileResource_collection: '{"$schema":"http://json-schema.org/schema","title":"SandboxFileResource collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxFileResource representation","properties":{"description":{"type":"string"},"file":{"type":"string"}},"required":[]}}}}'
+  - SandboxFileResource_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical SandboxFileResource representation","properties":{"object":{"type":"object","properties":{"description":{"type":"string"},"file":{"type":"string"}},"required":[]}}}'
+  - AppGyverNotification_collection: '{"$schema":"http://json-schema.org/schema","title":"AppGyverNotification collection","type":"object","properties":{"objects":{"type":"array","items":{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical AppGyverNotification representation","properties":{"message":{"type":"string"},"record_id":{"type":"string"},"record_type":{"type":"string"},"type":{"type":"string"},"target_user_ids":{"type":"string"},"owner_user_id":{"type":"string"},"route":{"type":"string"},"route_params":{"type":"string"},"related_record_id":{"type":"string"},"related_record_type":{"type":"string"}},"required":[]}}}}'
+  - AppGyverNotification_member: '{"$schema":"http://json-schema.org/schema","type":"object","description":"The canonical AppGyverNotification representation","properties":{"object":{"type":"object","properties":{"message":{"type":"string"},"record_id":{"type":"string"},"record_type":{"type":"string"},"type":{"type":"string"},"target_user_ids":{"type":"string"},"owner_user_id":{"type":"string"},"route":{"type":"string"},"route_params":{"type":"string"},"related_record_id":{"type":"string"},"related_record_type":{"type":"string"}},"required":[]}}}'
 
 resourceTypes:
   - dolan_db_collection:
@@ -207,6 +209,16 @@ resourceTypes:
   description: |
     {
       "resourceName": "SandboxFileResource",
+      "identifierKey": "id"
+    }
+  type: dolan_db_collection
+  /{id}:
+    type: dolan_db_member
+
+/AppGyverNotification:
+  description: |
+    {
+      "resourceName": "AppGyverNotification",
       "identifierKey": "id"
     }
   type: dolan_db_collection
