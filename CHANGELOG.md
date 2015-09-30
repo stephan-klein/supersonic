@@ -2,6 +2,13 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.7.8 (2015-09-30)
+
+Changes:
+- Hide the module container instead of the module iframe itself.
+  Module might have external chrome which needs to be hidden also to
+  prevent blinking.
+
 ## 1.7.7 (2015-09-29)
 
 Features:
