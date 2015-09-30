@@ -20,6 +20,7 @@ module.exports = (data) ->
       model = data.model APPGYVER_NOTIFICATION_RESOURCE_NAME
 
       model.create {
+        type: "#{namespace}:#{eventName}"
         message
       }
 
@@ -35,4 +36,3 @@ module.exports = (data) ->
 
       createAnnouncer namespace, events
   }
-

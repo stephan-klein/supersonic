@@ -44,3 +44,10 @@ describe 'supersonic.module.notifications', ->
             .changed('this is what happened')
             .should.eventually.have.property('message')
             .equal 'this is what happened'
+
+        describe 'each created notification', ->
+          it 'has a type with the namespace and event', ->
+            supersonic.module.notifications.announcer('namespace', events: ['changed'])
+              .changed('stuff')
+              .should.eventually.have.property('type')
+              .match /namespace:changed/
