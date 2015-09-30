@@ -51,3 +51,41 @@ describe 'supersonic.module.notifications', ->
               .changed('stuff')
               .should.eventually.have.property('type')
               .match /namespace:changed/
+
+          describe 'without CRUD context', ->
+            it 'has empty record_id and record_type', ->
+              supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                .changed('stuff')
+                .then (notification) ->
+                  notification.should.not.have.property('record_id')
+                  notification.should.not.have.property('record_type')
+
+          describe 'with CRUD resource type context', ->
+            before ->
+              supersonic.module.attributes.set 'record-type', 'foo'
+
+            it 'should have record_type set', ->
+              supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                .changed('stuff')
+                .then (notification) ->
+                  notification.should.not.have.property('record_id')
+                  notification.should.have.property('record_type').equal 'foo'
+
+            after ->
+              supersonic.module.attributes.set 'record-type', null
+
+          describe 'with CRUD resource type and record id context', ->
+            before ->
+              supersonic.module.attributes.set 'record-type', 'foo'
+              supersonic.module.attributes.set 'record-id', '123abcdef'
+
+            it 'has record_id and record_type guessed from attributes', ->
+              supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                .changed('stuff')
+                .then (notification) ->
+                  notification.should.have.property('record_id').equal '123abcdef'
+                  notification.should.have.property('record_type').equal 'foo'
+
+            after ->
+              supersonic.module.attributes.set 'record-type', null
+              supersonic.module.attributes.set 'record-id', null
