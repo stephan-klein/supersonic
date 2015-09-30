@@ -1,10 +1,38 @@
+Promise = require 'bluebird'
+
+APPGYVER_NOTIFICATION_RESOURCE_NAME = 'AppGyverNotification'
+
 module.exports = (data) ->
 
-  announcer: (namespace, options = {}) ->
-    if !namespace
-      throw new Error "Module namespace is required"
+  createAnnouncer = (namespace, events) ->
+    announcer = {}
 
-    events = options.events ? []
+    for eventName in events
+      announcer[eventName] = eventAnnouncer namespace, eventName
 
-    if !events.length
-      throw new Error "A list of event names is required"
+    announcer
+
+  eventAnnouncer = (namespace, eventName) ->
+    announceEvent = (message) ->
+      if !message
+        return Promise.reject new Error "A message is required"
+
+      model = data.model APPGYVER_NOTIFICATION_RESOURCE_NAME
+
+      model.create {
+        message
+      }
+
+  {
+    announcer: (namespace, options = {}) ->
+      if !namespace
+        throw new Error "Module namespace is required"
+
+      events = options.events ? []
+
+      if !events.length
+        throw new Error "A list of event names is required"
+
+      createAnnouncer namespace, events
+  }
+
