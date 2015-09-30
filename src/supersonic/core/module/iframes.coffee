@@ -183,6 +183,10 @@ module.exports = (window, superglobal) ->
 
       element
 
+  ###
+  Public API functionalities
+  ###
+
   showLoadIndicator = do ->
     generateLoadIndicatorElement = (element) ->
       loadIndicatorElement = window.document.createElement("DIV")
@@ -207,9 +211,6 @@ module.exports = (window, superglobal) ->
     resize(element)
 
   return {
-    findAll
-    register
-    resize
     showLoadIndicator
     hideLoadIndicator
   }
