@@ -13,5 +13,7 @@ class Window
 
   document:
     addEventListener: ->
+    body:
+      querySelectorAll: -> []
 
 module.exports = Window

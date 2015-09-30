@@ -5,6 +5,7 @@ debug = require('debug')('supersonic:module:iframes')
 module.exports = (window, superglobal) ->
 
   IFRAME_SELECTOR = "iframe[data-module]"
+  MODULE_CONTAINER_SELECTION = ".ag__module-container"
   IFRAME_USE_LOAD_INDICATOR_ATTR = "data-module-indicate-loading"
   IFRAME_NAME_ATTR = "data-module-name"
   LOAD_INDICATOR_TEMPLATE = """
@@ -17,8 +18,11 @@ module.exports = (window, superglobal) ->
   """
 
   ###
-  Initial operations
+  Private API functionalities
   ###
+
+  isRuntimeWindow = ->
+    window == superglobal
 
   observeIframeChanges = ->
     Promise.delay(0).then ->
@@ -27,29 +31,38 @@ module.exports = (window, superglobal) ->
       observeDocumentForNewModules().subscribe attachToOnLoad
       findAll().map attachToOnLoad
 
-  toggleIframeVisibility = ->
+  toggleModuleVisibility = ->
     display = {
       visible: 'block',
       hidden: 'none'
     }
 
     if (window.document.hidden)
-      iframeVisibility = display.hidden
+      visibility = display.hidden
     else
-      iframeVisibility = display.visible
+      visibility = display.visible
 
-    for iframe in findAll()
-      iframe.style.display = iframeVisibility
+    for moduleContainer in findAllContainers()
+      moduleContainer.style.display = visibility
 
   # Bind event listeners only on the Runtime window (parent of modules).
   # That is, do not bind event listeners in the inside of the module's iframe.
-  initTopEventListeners = ->
-    return if window != superglobal
+  initRuntimeEventListeners = ->
+    return unless isRuntimeWindow()
 
     window.document.addEventListener "DOMContentLoaded", observeIframeChanges
-    window.document.addEventListener 'visibilitychange', toggleIframeVisibility, false
+    window.document.addEventListener 'visibilitychange', toggleModuleVisibility, false
 
-  initTopEventListeners()
+  # Initialize the Runtime window. The first tab does not receive `visibilitychange`
+  # event on application refresh, because it is already visibile on the screen.
+  # Set visibility manually on application start. This is also executed on other tabs
+  # than the first one, because there's not a reliable mechanism to know what is
+  # the first tab.
+  initRuntimeWindow = ->
+    return unless isRuntimeWindow()
+
+    # WTF: document.body.querySelectorAll is not available until next tick
+    Promise.delay(0).then -> toggleModuleVisibility()
 
   observeDocumentForNewModules = ->
     return Bacon.never() unless window?.MutationObserver?
@@ -66,10 +79,6 @@ module.exports = (window, superglobal) ->
 
   setLoadIndicatorTemplate = (templateString) ->
     LOAD_INDICATOR_TEMPLATE = templateString
-
-  ###
-  Private API functionalities
-  ###
 
   attachToOnLoad = (element) ->
     return unless isValidFrame element
@@ -149,12 +158,11 @@ module.exports = (window, superglobal) ->
         .flatMap(addImageLoadEvents)
         .merge Bacon.later(500, element) # Do we really need this just-in-cause event?
 
-  ###
-  Public API functionalities
-  ###
+  findAllContainers = ->
+    findAll MODULE_CONTAINER_SELECTION
 
-  findAll = (parent = window.document.body) ->
-    Array.prototype.slice.call(parent.querySelectorAll(IFRAME_SELECTOR))
+  findAll = (selector = IFRAME_SELECTOR) ->
+    Array.prototype.slice.call window.document.body.querySelectorAll(selector)
 
   register = (element) ->
     return unless isValidFrame element
@@ -183,6 +191,10 @@ module.exports = (window, superglobal) ->
 
       element
 
+  ###
+  Public API functionalities
+  ###
+
   showLoadIndicator = do ->
     generateLoadIndicatorElement = (element) ->
       loadIndicatorElement = window.document.createElement("DIV")
@@ -206,10 +218,16 @@ module.exports = (window, superglobal) ->
     element.style.display = "block"
     resize(element)
 
+
+  ###
+  Execute initial operations
+  ###
+
+  initRuntimeEventListeners()
+  initRuntimeWindow()
+
+
   return {
-    findAll
-    register
-    resize
     showLoadIndicator
     hideLoadIndicator
   }
