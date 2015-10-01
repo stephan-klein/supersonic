@@ -90,9 +90,22 @@ describe 'supersonic.module.notifications', ->
               supersonic.module.attributes.set 'record-type', null
               supersonic.module.attributes.set 'record-id', null
 
-          describe 'with a valid session', ->
-            it 'has owner_user_id set', ->
+          describe 'owner_user_id', ->
+            it 'is set when there is a valid session', ->
               supersonic.module.notifications.announcer('namespace', events: ['changed'])
                 .changed('stuff')
                 .should.eventually.have.property('owner_user_id')
                 .equal supersonic.auth.session.getUserId()
+
+
+          describe 'related_record_type and related_record_id', ->
+            it 'is set when an object with type and id is passed', ->
+              supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                .changed('stuff', {
+                  related:
+                    id: '123abcdef'
+                    type: 'foo'
+                })
+                .then (notification) ->
+                  notification.should.have.property('related_record_id').equal '123abcdef'
+                  notification.should.have.property('related_record_type').equal 'foo'

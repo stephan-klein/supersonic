@@ -14,16 +14,32 @@ module.exports = (data, attributes, auth) ->
     announcer
 
   eventAnnouncer = (namespace, eventName, defaults) ->
-    announceEvent = (message) ->
+    announceEvent = (message, options = {}) ->
       if !message
         return Promise.reject new Error "A message is required"
 
       model = data.model APPGYVER_NOTIFICATION_RESOURCE_NAME
 
-      model.create merge defaults, {
+      eventData = {
         type: "#{namespace}:#{eventName}"
         message
       }
+
+      if options.related?
+        eventData = merge eventData, getRelatedRecordProperties options.related
+
+      model.create merge defaults, eventData
+
+  getRelatedRecordProperties = (related) ->
+    relatedRecordProperties = {}
+
+    if related.id?
+      relatedRecordProperties.related_record_id = related.id
+
+    if related.type?
+      relatedRecordProperties.related_record_type = related.type
+
+    relatedRecordProperties
 
   makeDefaults = (context, session) ->
     defaults = {}
