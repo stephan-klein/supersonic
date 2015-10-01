@@ -52,43 +52,45 @@ describe 'supersonic.module.notifications', ->
               .should.eventually.have.property('type')
               .match /namespace:changed/
 
-          describe 'without CRUD context', ->
-            it 'has empty record_id and record_type', ->
-              supersonic.module.notifications.announcer('namespace', events: ['changed'])
-                .changed('stuff')
-                .then (notification) ->
-                  notification.should.not.have.property('record_id')
-                  notification.should.not.have.property('record_type')
 
-          describe 'with CRUD resource type context', ->
-            before ->
-              supersonic.module.attributes.set 'record-type', 'foo'
+          describe 'record_id and record_type', ->
+            describe 'without CRUD context', ->
+              it 'has empty record_id and record_type', ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff')
+                  .then (notification) ->
+                    notification.should.not.have.property('record_id')
+                    notification.should.not.have.property('record_type')
 
-            it 'should have record_type set', ->
-              supersonic.module.notifications.announcer('namespace', events: ['changed'])
-                .changed('stuff')
-                .then (notification) ->
-                  notification.should.not.have.property('record_id')
-                  notification.should.have.property('record_type').equal 'foo'
+            describe 'with CRUD resource type context', ->
+              before ->
+                supersonic.module.attributes.set 'record-type', 'foo'
 
-            after ->
-              supersonic.module.attributes.set 'record-type', null
+              it 'should have record_type set', ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff')
+                  .then (notification) ->
+                    notification.should.not.have.property('record_id')
+                    notification.should.have.property('record_type').equal 'foo'
 
-          describe 'with CRUD resource type and record id context', ->
-            before ->
-              supersonic.module.attributes.set 'record-type', 'foo'
-              supersonic.module.attributes.set 'record-id', '123abcdef'
+              after ->
+                supersonic.module.attributes.set 'record-type', null
 
-            it 'has record_id and record_type guessed from attributes', ->
-              supersonic.module.notifications.announcer('namespace', events: ['changed'])
-                .changed('stuff')
-                .then (notification) ->
-                  notification.should.have.property('record_id').equal '123abcdef'
-                  notification.should.have.property('record_type').equal 'foo'
+            describe 'with CRUD resource type and record id context', ->
+              before ->
+                supersonic.module.attributes.set 'record-type', 'foo'
+                supersonic.module.attributes.set 'record-id', '123abcdef'
 
-            after ->
-              supersonic.module.attributes.set 'record-type', null
-              supersonic.module.attributes.set 'record-id', null
+              it 'has record_id and record_type guessed from attributes', ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff')
+                  .then (notification) ->
+                    notification.should.have.property('record_id').equal '123abcdef'
+                    notification.should.have.property('record_type').equal 'foo'
+
+              after ->
+                supersonic.module.attributes.set 'record-type', null
+                supersonic.module.attributes.set 'record-id', null
 
           describe 'owner_user_id', ->
             it 'is set when there is a valid session', ->
@@ -96,7 +98,6 @@ describe 'supersonic.module.notifications', ->
                 .changed('stuff')
                 .should.eventually.have.property('owner_user_id')
                 .equal supersonic.auth.session.getUserId()
-
 
           describe 'related_record_type and related_record_id', ->
             it 'is set when an object with type and id is passed', ->
