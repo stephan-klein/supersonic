@@ -110,3 +110,40 @@ describe 'supersonic.module.notifications', ->
                 .then (notification) ->
                   notification.should.have.property('related_record_id').equal '123abcdef'
                   notification.should.have.property('related_record_type').equal 'foo'
+
+
+          describe 'route and route_params', ->
+
+            describe.skip 'when record_type and record_id are not set', ->
+              it 'is mandatory', ->
+
+            describe 'when record_type is set', ->
+              before ->
+                supersonic.module.attributes.set 'record-type', 'foo'
+
+              it 'is optional and gets set to CRUD index view', ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff')
+                  .then (notification) ->
+                    notification.should.have.property('route').equal 'data.foo'
+
+              after ->
+                supersonic.module.attributes.set 'record-type', null
+
+            describe 'when record_type and record_id are set', ->
+              before ->
+                supersonic.module.attributes.set 'record-type', 'foo'
+                supersonic.module.attributes.set 'record-id', '123abcdef'
+
+              it 'is optional and gets set to CRUD show view', ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff')
+                  .then (notification) ->
+                    notification.should.have.property('route').equal 'data.foo.show'
+                    notification.should.have.property('route_params').deep.equal {
+                      id: '123abcdef'
+                    }
+
+              after ->
+                supersonic.module.attributes.set 'record-type', null
+                supersonic.module.attributes.set 'record-id', null
