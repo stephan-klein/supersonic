@@ -32,7 +32,7 @@ angular
         onFailure: ->
           supersonic.logger.log "Modal could not be hidden"
 
-    $scope.testIsDisposibleApi = ->
+    $scope.testIsDisposableApi = ->
 
       supersonic.ui.isDisposable = -> false
 

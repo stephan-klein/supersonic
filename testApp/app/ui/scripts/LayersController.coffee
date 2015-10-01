@@ -49,7 +49,7 @@ angular
       .catch (error) ->
         supersonic.logger.log error
 
-    $scope.testIsDisposibleApi = ->
+    $scope.testIsDisposableApi = ->
 
       supersonic.ui.isDisposable = -> false
 
