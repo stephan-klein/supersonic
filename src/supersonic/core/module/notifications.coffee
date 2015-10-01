@@ -5,11 +5,11 @@ APPGYVER_NOTIFICATION_RESOURCE_NAME = 'AppGyverNotification'
 
 module.exports = (data, attributes, auth) ->
 
-  createAnnouncer = (namespace, events, context) ->
+  createAnnouncer = (namespace, events, defaults) ->
     announcer = {}
 
     for eventName in events
-      announcer[eventName] = eventAnnouncer namespace, eventName, context
+      announcer[eventName] = eventAnnouncer namespace, eventName, defaults
 
     announcer
 
