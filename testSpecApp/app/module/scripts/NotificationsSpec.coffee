@@ -182,3 +182,14 @@ describe 'supersonic.module.notifications', ->
                     notification.should.have.property('route_params').deep.equal {
                       id: '123abcdef'
                     }
+
+          describe 'target_user_ids', ->
+
+            it 'can be set by passing a list of receivers', ->
+              withDefaultContext ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff',
+                    receivers: [supersonic.auth.session.getUserId()]
+                  )
+                  .should.eventually.have.property('target_user_ids')
+                  .deep.equal [supersonic.auth.session.getUserId()]

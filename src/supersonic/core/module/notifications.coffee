@@ -23,6 +23,7 @@ module.exports = (data, attributes, auth) ->
 
         eventData = {
           type: "#{namespace}:#{eventName}"
+          target_user_ids: options.receivers ? []
           message
         }
 
