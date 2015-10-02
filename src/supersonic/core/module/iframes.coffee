@@ -223,6 +223,9 @@ module.exports = (window, superglobal) ->
 
 
   return {
+    findAll
+    register
+    resize
     showLoadIndicator
     hideLoadIndicator
   }
