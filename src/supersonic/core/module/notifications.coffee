@@ -18,19 +18,20 @@ module.exports = (data, attributes, auth) ->
       if !message
         return Promise.reject new Error "A message is required"
 
-      model = data.model APPGYVER_NOTIFICATION_RESOURCE_NAME
+      Promise.try ->
+        model = data.model APPGYVER_NOTIFICATION_RESOURCE_NAME
 
-      eventData = {
-        type: "#{namespace}:#{eventName}"
-        message
-      }
+        eventData = {
+          type: "#{namespace}:#{eventName}"
+          message
+        }
 
-      if options.related?
-        eventData = merge eventData, getRelatedRecordProperties options.related
+        eventData = merge eventData, (getRouteProperties (options.route || {}), defaults)
 
-      eventData = merge eventData, (getRouteProperties (options.route || {}), defaults)
+        if options.related?
+          eventData = merge eventData, getRelatedRecordProperties options.related
 
-      model.create merge defaults, eventData
+        model.create merge defaults, eventData
 
   getRelatedRecordProperties = (related) ->
     relatedRecordProperties = {}
@@ -53,12 +54,16 @@ module.exports = (data, attributes, auth) ->
         "data.#{defaults.record_type}.show"
       when defaults.record_type?
         "data.#{defaults.record_type}"
+      else
+        throw new Error "Missing route.view: must be either explicit or determined by attributes"
 
     routeProperties.route_params = switch
       when explicitRoute.params?
         explicitRoute.params
       when defaults.record_id?
         id: defaults.record_id
+      else
+        {}
 
     routeProperties
 

@@ -84,7 +84,10 @@ describe 'supersonic.module.notifications', ->
               it 'has empty record_id and record_type', ->
                 withoutContext ->
                   supersonic.module.notifications.announcer('namespace', events: ['changed'])
-                    .changed('stuff')
+                    .changed('stuff',
+                      route:
+                        view: 'data.AppGyverNotifications'
+                    )
                     .then (notification) ->
                       notification.should.not.have.property('record_id')
                       notification.should.not.have.property('record_type')
@@ -152,7 +155,7 @@ describe 'supersonic.module.notifications', ->
                       foo: true
                     }
 
-            it.skip 'is mandatory when record_type and record_id are not set', ->
+            it 'is mandatory when record_type and record_id are not set', ->
               withoutContext ->
                 supersonic.module.notifications.announcer('namespace', events: ['changed'])
                   .changed('stuff')
