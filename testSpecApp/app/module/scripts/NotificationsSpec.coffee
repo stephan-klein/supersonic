@@ -1,3 +1,27 @@
+Promise = supersonic.internal.Promise
+
+withContextAttributes = (attrs, f) ->
+  previousAttrs = {}
+  for key, value of attrs
+    previousAttrs[key] = supersonic.module.attributes.get key
+    supersonic.module.attributes.set key, value
+
+  Promise.resolve(f()).finally ->
+    for key, value of previousAttrs
+      supersonic.module.attributes.set key, value
+
+withDefaultContext = (f) ->
+  withContextAttributes {
+    'record-type': 'default-record-type'
+    'record-id': 'default-record-id-123'
+  }, f
+
+withoutContext = (f) ->
+  withContextAttributes {
+    'record-type': null
+    'record-id': null
+  }, f
+
 describe 'supersonic.module.notifications', ->
   it 'should be defined', ->
     supersonic.module
@@ -35,107 +59,104 @@ describe 'supersonic.module.notifications', ->
 
       describe 'each event method', ->
         it 'requires a message', ->
-          supersonic.module.notifications.announcer('namespace', events: ['changed'])
-            .changed()
-            .should.be.rejected
+          withDefaultContext ->
+            supersonic.module.notifications.announcer('namespace', events: ['changed'])
+              .changed()
+              .should.be.rejected
 
         it 'resolves to a created notification', ->
-          supersonic.module.notifications.announcer('namespace', events: ['changed'])
-            .changed('this is what happened')
-            .should.eventually.have.property('message')
-            .equal 'this is what happened'
+          withDefaultContext ->
+            supersonic.module.notifications.announcer('namespace', events: ['changed'])
+              .changed('this is what happened')
+              .should.eventually.have.property('message')
+              .equal 'this is what happened'
 
         describe 'each created notification', ->
           it 'has a type with the namespace and event', ->
-            supersonic.module.notifications.announcer('namespace', events: ['changed'])
-              .changed('stuff')
-              .should.eventually.have.property('type')
-              .match /namespace:changed/
-
+            withDefaultContext ->
+              supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                .changed('stuff')
+                .should.eventually.have.property('type')
+                .match /namespace:changed/
 
           describe 'record_id and record_type', ->
             describe 'without CRUD context', ->
               it 'has empty record_id and record_type', ->
-                supersonic.module.notifications.announcer('namespace', events: ['changed'])
-                  .changed('stuff')
-                  .then (notification) ->
-                    notification.should.not.have.property('record_id')
-                    notification.should.not.have.property('record_type')
+                withoutContext ->
+                  supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                    .changed('stuff')
+                    .then (notification) ->
+                      notification.should.not.have.property('record_id')
+                      notification.should.not.have.property('record_type')
 
             describe 'with CRUD resource type context', ->
-              before ->
-                supersonic.module.attributes.set 'record-type', 'foo'
-
               it 'should have record_type set', ->
-                supersonic.module.notifications.announcer('namespace', events: ['changed'])
-                  .changed('stuff')
-                  .then (notification) ->
-                    notification.should.not.have.property('record_id')
-                    notification.should.have.property('record_type').equal 'foo'
-
-              after ->
-                supersonic.module.attributes.set 'record-type', null
+                withContextAttributes {
+                  'record-type': 'foo'
+                }, ->
+                  supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                    .changed('stuff')
+                    .then (notification) ->
+                      notification.should.not.have.property('record_id')
+                      notification.should.have.property('record_type').equal 'foo'
 
             describe 'with CRUD resource type and record id context', ->
-              before ->
-                supersonic.module.attributes.set 'record-type', 'foo'
-                supersonic.module.attributes.set 'record-id', '123abcdef'
-
               it 'has record_id and record_type guessed from attributes', ->
-                supersonic.module.notifications.announcer('namespace', events: ['changed'])
-                  .changed('stuff')
-                  .then (notification) ->
-                    notification.should.have.property('record_id').equal '123abcdef'
-                    notification.should.have.property('record_type').equal 'foo'
+                withContextAttributes {
+                  'record-type': 'foo'
+                  'record-id': '123abcdef'
+                }, ->
+                  supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                    .changed('stuff')
+                    .then (notification) ->
+                      notification.should.have.property('record_id').equal '123abcdef'
+                      notification.should.have.property('record_type').equal 'foo'
 
-              after ->
-                supersonic.module.attributes.set 'record-type', null
-                supersonic.module.attributes.set 'record-id', null
 
           describe 'owner_user_id', ->
             it 'is set when there is a valid session', ->
-              supersonic.module.notifications.announcer('namespace', events: ['changed'])
-                .changed('stuff')
-                .should.eventually.have.property('owner_user_id')
-                .equal supersonic.auth.session.getUserId()
+              withDefaultContext ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff')
+                  .should.eventually.have.property('owner_user_id')
+                  .equal supersonic.auth.session.getUserId()
 
           describe 'related_record_type and related_record_id', ->
             it 'is set when an object with type and id is passed', ->
-              supersonic.module.notifications.announcer('namespace', events: ['changed'])
-                .changed('stuff', {
-                  related:
-                    id: '123abcdef'
-                    type: 'foo'
-                })
-                .then (notification) ->
-                  notification.should.have.property('related_record_id').equal '123abcdef'
-                  notification.should.have.property('related_record_type').equal 'foo'
+              withDefaultContext ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff', {
+                    related:
+                      id: '123abcdef'
+                      type: 'foo'
+                  })
+                  .then (notification) ->
+                    notification.should.have.property('related_record_id').equal '123abcdef'
+                    notification.should.have.property('related_record_type').equal 'foo'
 
 
           describe 'route and route_params', ->
 
-            describe.skip 'when record_type and record_id are not set', ->
-              it 'is mandatory', ->
+            it 'is mandatory when record_type and record_id are not set', ->
+              withoutContext ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff')
+                  .should.be.rejected
 
-            describe 'when record_type is set', ->
-              before ->
-                supersonic.module.attributes.set 'record-type', 'foo'
-
-              it 'is optional and gets set to CRUD index view', ->
+            it 'is optional and gets set to CRUD index view when record_type is set', ->
+              withContextAttributes {
+                'record-type': 'foo'
+              }, ->
                 supersonic.module.notifications.announcer('namespace', events: ['changed'])
                   .changed('stuff')
                   .then (notification) ->
                     notification.should.have.property('route').equal 'data.foo'
 
-              after ->
-                supersonic.module.attributes.set 'record-type', null
-
-            describe 'when record_type and record_id are set', ->
-              before ->
-                supersonic.module.attributes.set 'record-type', 'foo'
-                supersonic.module.attributes.set 'record-id', '123abcdef'
-
-              it 'is optional and gets set to CRUD show view', ->
+            it 'is optional and gets set to CRUD show view when record_type and record_id are set', ->
+              withContextAttributes {
+                'record-type': 'foo'
+                'record-id': '123abcdef'
+              }, ->
                 supersonic.module.notifications.announcer('namespace', events: ['changed'])
                   .changed('stuff')
                   .then (notification) ->
@@ -143,7 +164,3 @@ describe 'supersonic.module.notifications', ->
                     notification.should.have.property('route_params').deep.equal {
                       id: '123abcdef'
                     }
-
-              after ->
-                supersonic.module.attributes.set 'record-type', null
-                supersonic.module.attributes.set 'record-id', null
