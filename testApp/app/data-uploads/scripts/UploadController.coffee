@@ -17,13 +17,16 @@ angular
   )
   .controller 'UploadController', ($scope, supersonic, SandboxFileResource) ->
     $scope.record = new SandboxFileResource {}
+    $scope.uploading = false
     $scope.uploads = []
 
     $scope.upload = ->
       supersonic.logger.log "About to start upload"
+      $scope.uploading = true
       $scope.record.save().then (uploaded) ->
         $scope.$apply ->
           supersonic.logger.log "Upload complete"
           $scope.record = new SandboxFileResource {}
           $scope.uploads.push uploaded
+          $scope.uploading = false
 
