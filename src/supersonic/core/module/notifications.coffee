@@ -28,6 +28,9 @@ module.exports = (data, attributes, auth) ->
       if options.related?
         eventData = merge eventData, getRelatedRecordProperties options.related
 
+      if options.route?
+        eventData = merge eventData, getRouteProperties options.route
+
       model.create merge defaults, eventData
 
   getRelatedRecordProperties = (related) ->
@@ -40,6 +43,17 @@ module.exports = (data, attributes, auth) ->
       relatedRecordProperties.related_record_type = related.type
 
     relatedRecordProperties
+
+  getRouteProperties = (route) ->
+    routeProperties = {}
+
+    if route.view?
+      routeProperties.route = route.view
+
+    if route.params?
+      routeProperties.route_params = route.params
+
+    routeProperties
 
   makeDefaults = (context, session) ->
     defaults = {}

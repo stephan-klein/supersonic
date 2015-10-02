@@ -137,13 +137,28 @@ describe 'supersonic.module.notifications', ->
 
           describe 'route and route_params', ->
 
-            it 'is mandatory when record_type and record_id are not set', ->
+            it 'can be set by passing a route object', ->
+              withoutContext ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff', {
+                    route:
+                      view: 'data.AppGyverNotifications'
+                      params:
+                        foo: true
+                  })
+                  .then (notification) ->
+                    notification.should.have.property('route').equal 'data.AppGyverNotifications'
+                    notification.should.have.property('route_params').deep.equal {
+                      foo: true
+                    }
+
+            it.skip 'is mandatory when record_type and record_id are not set', ->
               withoutContext ->
                 supersonic.module.notifications.announcer('namespace', events: ['changed'])
                   .changed('stuff')
                   .should.be.rejected
 
-            it 'is optional and gets set to CRUD index view when record_type is set', ->
+            it.skip 'is optional and gets set to CRUD index view when record_type is set', ->
               withContextAttributes {
                 'record-type': 'foo'
               }, ->
@@ -152,7 +167,7 @@ describe 'supersonic.module.notifications', ->
                   .then (notification) ->
                     notification.should.have.property('route').equal 'data.foo'
 
-            it 'is optional and gets set to CRUD show view when record_type and record_id are set', ->
+            it.skip 'is optional and gets set to CRUD show view when record_type and record_id are set', ->
               withContextAttributes {
                 'record-type': 'foo'
                 'record-id': '123abcdef'
