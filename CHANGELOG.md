@@ -2,6 +2,17 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.7.9 (2015-10-02)
+
+Features:
+- Enhanced uploading can be requested with `X-AG-Image-Uploader` headers:
+  - Display a native progress bar on upload.
+  - Transparently resize uploaded PNG and JPEG images.
+  - See example usage in `testApp`.
+
+Changes:
+- Set Module runtime's initial visibility on DOM Content Loaded event.
+
 ## 1.7.8 (2015-09-30)
 
 Changes:
