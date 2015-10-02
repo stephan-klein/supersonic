@@ -51,18 +51,14 @@ module.exports = (window, superglobal) ->
     return unless isRuntimeWindow()
 
     window.document.addEventListener "DOMContentLoaded", observeIframeChanges
+
+    # The first tab does not receive `visibilitychange` event so set visibility manually.
+    # Execute on all tabs on init, because there's not a reliable mechanism to
+    # know what is the first tab.
+    window.document.addEventListener "DOMContentLoaded", toggleModuleVisibility, false
+
+    # Remove from the DOM all modules, which aren't on currently visible screen.
     window.document.addEventListener 'visibilitychange', toggleModuleVisibility, false
-
-  # Initialize the Runtime window. The first tab does not receive `visibilitychange`
-  # event on application refresh, because it is already visibile on the screen.
-  # Set visibility manually on application start. This is also executed on other tabs
-  # than the first one, because there's not a reliable mechanism to know what is
-  # the first tab.
-  initRuntimeWindow = ->
-    return unless isRuntimeWindow()
-
-    # WTF: document.body.querySelectorAll is not available until next tick
-    Promise.delay(0).then -> toggleModuleVisibility()
 
   observeDocumentForNewModules = ->
     return Bacon.never() unless window?.MutationObserver?
@@ -224,7 +220,6 @@ module.exports = (window, superglobal) ->
   ###
 
   initRuntimeEventListeners()
-  initRuntimeWindow()
 
 
   return {
