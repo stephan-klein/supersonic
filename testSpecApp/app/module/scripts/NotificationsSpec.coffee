@@ -158,7 +158,7 @@ describe 'supersonic.module.notifications', ->
                   .changed('stuff')
                   .should.be.rejected
 
-            it.skip 'is optional and gets set to CRUD index view when record_type is set', ->
+            it 'gets set to CRUD index view when record_type is set', ->
               withContextAttributes {
                 'record-type': 'foo'
               }, ->
@@ -167,7 +167,7 @@ describe 'supersonic.module.notifications', ->
                   .then (notification) ->
                     notification.should.have.property('route').equal 'data.foo'
 
-            it.skip 'is optional and gets set to CRUD show view when record_type and record_id are set', ->
+            it 'gets set to CRUD show view when record_type and record_id are set', ->
               withContextAttributes {
                 'record-type': 'foo'
                 'record-id': '123abcdef'
