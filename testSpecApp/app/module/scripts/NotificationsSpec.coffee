@@ -58,14 +58,24 @@ describe 'supersonic.module.notifications', ->
           announcer[eventName].should.be.a 'function'
 
       describe 'backwards compatibility', ->
-        it 'will not fail synchronously if the resource dependency does not exist', ->
-          withDefaultContext ->
-            (->
+        describe 'when the resource dependency does not exist', ->
+          it 'will not fail synchronously when creating the announcer', ->
+            withDefaultContext ->
+              (->
+                supersonic.module.notifications.announcer('namespace',
+                  events: ['changed']
+                  resourceName: 'ThisResourceDoesNotExist'
+                )
+              ).should.not.throw Error
+
+          it 'will fail asynchronously when broadcasting event', ->
+            withDefaultContext ->
               supersonic.module.notifications.announcer('namespace',
-                events: ['changed']
-                resourceName: 'ThisResourceDoesNotExist'
-              )
-            ).should.not.throw Error
+                  events: ['changed']
+                  resourceName: 'ThisResourceDoesNotExist'
+                )
+                .changed('stuff')
+                .should.be.rejected
 
       describe 'each event method', ->
         it 'requires a message', ->
