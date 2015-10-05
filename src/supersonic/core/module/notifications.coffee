@@ -9,9 +9,9 @@ module.exports = (data, attributes, auth) ->
     announcer = {}
 
     maybeModel = try
-      data.model resourceName
-    catch e
-      null
+        data.model resourceName
+      catch e
+        null
 
     for eventName in events
       announcer[eventName] = eventAnnouncer namespace, eventName, defaults, maybeModel
@@ -20,14 +20,12 @@ module.exports = (data, attributes, auth) ->
 
   eventAnnouncer = (namespace, eventName, defaults, maybeModel) ->
 
-    announceEvent = (message, options = {}) ->
+    alwaysRejectWith = (message) -> ->
+      return Promise.reject new Error message
+
+    createNotificationEventWithModel = (model) -> (message, options = {}) ->
       if !message
         return Promise.reject new Error "A message is required"
-
-      if !maybeModel?
-        return Promise.reject new Error "Unable to send out notification: this application is not configured with the notification resource."
-
-      model = maybeModel
 
       Promise.try ->
 
@@ -43,6 +41,14 @@ module.exports = (data, attributes, auth) ->
           eventData = merge eventData, getRelatedRecordProperties options.related
 
         model.create merge defaults, eventData
+
+    announceEvent = switch
+      when !maybeModel?
+        alwaysRejectWith "Unable to send out notification: this application is not configured with the notification resource."
+      else
+        model = maybeModel
+        createNotificationEventWithModel model
+
 
   getRelatedRecordProperties = (related) ->
     relatedRecordProperties = {}
