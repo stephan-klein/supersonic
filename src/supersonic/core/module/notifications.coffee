@@ -5,21 +5,23 @@ APPGYVER_NOTIFICATION_RESOURCE_NAME = 'AppGyverNotification'
 
 module.exports = (data, attributes, auth) ->
 
-  createAnnouncer = (namespace, events, defaults) ->
+  createAnnouncer = (namespace, events, defaults, resourceName) ->
     announcer = {}
 
     for eventName in events
-      announcer[eventName] = eventAnnouncer namespace, eventName, defaults
+      announcer[eventName] = eventAnnouncer namespace, eventName, defaults, resourceName
 
     announcer
 
-  eventAnnouncer = (namespace, eventName, defaults) ->
+  eventAnnouncer = (namespace, eventName, defaults, resourceName) ->
+
+    model = data.model resourceName
+
     announceEvent = (message, options = {}) ->
       if !message
         return Promise.reject new Error "A message is required"
 
       Promise.try ->
-        model = data.model APPGYVER_NOTIFICATION_RESOURCE_NAME
 
         eventData = {
           type: "#{namespace}:#{eventName}"
@@ -103,5 +105,7 @@ module.exports = (data, attributes, auth) ->
 
       context = guessContext attributes
       defaults = makeDefaults context, auth.session
-      createAnnouncer namespace, events, defaults
+      resourceName = options.resourceName ? APPGYVER_NOTIFICATION_RESOURCE_NAME
+
+      createAnnouncer namespace, events, defaults, resourceName
   }
