@@ -14,11 +14,12 @@ module.exports = (data, attributes, auth) ->
         null
 
     for eventName in events
-      announcer[eventName] = eventAnnouncer namespace, eventName, defaults, maybeModel
+      eventType = "#{namespace}:#{eventName}"
+      announcer[eventName] = eventAnnouncer eventType, defaults, maybeModel
 
     announcer
 
-  eventAnnouncer = (namespace, eventName, defaults, maybeModel) ->
+  eventAnnouncer = (eventType, defaults, maybeModel) ->
 
     alwaysRejectWith = (message) -> ->
       return Promise.reject new Error message
@@ -30,7 +31,7 @@ module.exports = (data, attributes, auth) ->
       Promise.try ->
 
         eventData = {
-          type: "#{namespace}:#{eventName}"
+          type: eventType
           target_user_ids: options.receivers ? []
           message
         }
