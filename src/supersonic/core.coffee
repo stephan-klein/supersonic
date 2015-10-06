@@ -27,8 +27,8 @@ steroids = do ->
     require './mock/steroids'
 
 logger = require('./core/logger')(steroids, global)
-data = require('./core/data')(logger, superglobal, env)
 env = require('./core/env')(logger, superglobal)
+data = require('./core/data')(logger, superglobal, env)
 auth = require('./core/auth')(logger, global, data, env)
 ui = require('./core/ui')(steroids, logger, global)
 
