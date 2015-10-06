@@ -31,6 +31,7 @@ module.exports = (data, attributes, auth) ->
       Promise.try ->
 
         eventData = {
+          created_at: (new Date).toJSON()
           type: eventType
           target_user_ids: options.receivers ? []
           message

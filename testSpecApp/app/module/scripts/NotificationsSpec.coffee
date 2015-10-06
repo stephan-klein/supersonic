@@ -99,6 +99,14 @@ describe 'supersonic.module.notifications', ->
                 .should.eventually.have.property('type')
                 .match /namespace:changed/
 
+          it 'has a created_at timestamp', ->
+            withDefaultContext ->
+              supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                .changed('stuff')
+                .then (notification) ->
+                  (new Date(notification.created_at)).toJSON()
+                    .should.equal notification.created_at
+
           describe 'record_id and record_type', ->
             describe 'without CRUD context', ->
               it 'has empty record_id and record_type', ->
