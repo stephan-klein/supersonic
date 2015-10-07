@@ -6,7 +6,9 @@ APPGYVER_NOTIFICATION_RESOURCE_NAME = 'AppGyverNotification'
 module.exports = (data, attributes, auth) ->
 
   createAnnouncer = (namespace, events, defaults, resourceName) ->
-    announcer = {}
+    announcer =
+      hasContext: ->
+        defaults.record_type?
 
     maybeModel = try
         data.model resourceName

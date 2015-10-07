@@ -77,6 +77,38 @@ describe 'supersonic.module.notifications', ->
                 .changed('stuff')
                 .should.be.rejected
 
+      describe 'hasContext', ->
+        it 'returns false without context', ->
+          withoutContext ->
+            supersonic.module.notifications.announcer('namespace', events: ['changed'])
+              .hasContext()
+              .should.equal false
+
+        it 'returns true if record-type is defined', ->
+          withContextAttributes {
+            'record-type': 'foo'
+          }, ->
+            supersonic.module.notifications.announcer('namespace', events: ['changed'])
+              .hasContext()
+              .should.equal true
+
+        it 'returns true if record-type and record-id are defined', ->
+          withContextAttributes {
+            'record-type': 'foo'
+            'record-id': '123'
+          }, ->
+            supersonic.module.notifications.announcer('namespace', events: ['changed'])
+              .hasContext()
+              .should.equal true
+
+        it 'returns false if only record-id is defined', ->
+          withContextAttributes {
+            'record-id': '123'
+          }, ->
+            supersonic.module.notifications.announcer('namespace', events: ['changed'])
+              .hasContext()
+              .should.equal false
+
       describe 'each event method', ->
         it 'requires a message', ->
           withDefaultContext ->
@@ -183,7 +215,7 @@ describe 'supersonic.module.notifications', ->
                       foo: true
                     }
 
-            it 'is mandatory when record_type and record_id are not set', ->
+            it 'is mandatory when there is no context', ->
               withoutContext ->
                 supersonic.module.notifications.announcer('namespace', events: ['changed'])
                   .changed('stuff')
