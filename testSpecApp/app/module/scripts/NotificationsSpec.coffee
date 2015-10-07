@@ -246,6 +246,13 @@ describe 'supersonic.module.notifications', ->
 
           describe 'target_user_ids', ->
 
+            it 'is an empty list by default', ->
+              withDefaultContext ->
+                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                  .changed('stuff')
+                  .should.eventually.have.property('target_user_ids')
+                  .deep.equal []
+
             it 'can be set by passing a list of receivers', ->
               withDefaultContext ->
                 supersonic.module.notifications.announcer('namespace', events: ['changed'])
