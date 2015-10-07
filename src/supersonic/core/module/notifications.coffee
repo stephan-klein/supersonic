@@ -76,7 +76,7 @@ module.exports = (data, attributes, auth) ->
       when defaults.record_type?
         "data.#{defaults.record_type}"
       else
-        throw new Error "Missing route.view: must be either explicit or determined by attributes"
+        defaults.route
 
     routeProperties.route_params = switch
       when explicitRoute.params?
@@ -88,8 +88,9 @@ module.exports = (data, attributes, auth) ->
 
     routeProperties
 
-  makeDefaults = (context, session) ->
+  makeDefaults = (namespace, context, session) ->
     defaults = {}
+    defaults.route = namespace
     defaults.record_id = context.id if context.id?
     defaults.record_type = context.type if context.type?
 
@@ -114,6 +115,7 @@ module.exports = (data, attributes, auth) ->
   {
     announcer: (namespace, options = {}) ->
       if !namespace
+        # TODO: Check if the namespace is an actual module name
         throw new Error "Module namespace is required"
 
       events = options.events ? []
@@ -122,7 +124,7 @@ module.exports = (data, attributes, auth) ->
         throw new Error "A list of event names is required"
 
       context = guessContext attributes
-      defaults = makeDefaults context, auth.session
+      defaults = makeDefaults namespace, context, auth.session
       resourceName = options.resourceName ? APPGYVER_NOTIFICATION_RESOURCE_NAME
 
       createAnnouncer namespace, events, defaults, resourceName

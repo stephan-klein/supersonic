@@ -215,11 +215,12 @@ describe 'supersonic.module.notifications', ->
                       foo: true
                     }
 
-            it 'is mandatory when there is no context', ->
+            it 'defaults to the namespace when there is no context', ->
               withoutContext ->
-                supersonic.module.notifications.announcer('namespace', events: ['changed'])
+                supersonic.module.notifications.announcer('com.module.namespace', events: ['changed'])
                   .changed('stuff')
-                  .should.be.rejected
+                  .should.eventually.have.property('route')
+                  .equal 'com.module.namespace'
 
             it 'gets set to CRUD index view when record_type is set', ->
               withContextAttributes {
