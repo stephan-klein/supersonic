@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.8.0 (2015-10-09)
+
+Features:
+- Adds the `supersonic.module.notifications` namespace for sending out notification events from Composer modules
+
 ## 1.7.10 (2015-10-02)
 
 Fix:
