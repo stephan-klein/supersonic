@@ -2,7 +2,7 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
-## 1.7.10 (2015-10-20)
+## 1.7.10 (2015-10-02)
 
 Fix:
 - Bring back some module APIs which were made private in 1.7.8.
