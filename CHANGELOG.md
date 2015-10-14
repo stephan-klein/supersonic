@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.8.1 (2015-10-14)
+
+Changes:
+- Files uploaded via `supersonic.data` get additional metadata stored, containing their mimetype, and get a filename determined based on the file uploaded instead of using an automatically generated one.
+
 ## 1.8.0 (2015-10-09)
 
 Features:
