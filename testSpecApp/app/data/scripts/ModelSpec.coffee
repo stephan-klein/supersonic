@@ -1,3 +1,4 @@
+Promise = supersonic.internal.Promise
 
 FileFixture = do ->
   # Encodes a red dot test image
@@ -86,6 +87,19 @@ describe "supersonic.data.model", ->
           cache:
             enabled: false
         }).findAll().should.be.fulfilled
+
+  describe "with any resource", ->
+
+    describe "supersonic.ui.views.current.isDisposable()", ->
+      it "is triggered by create", ->
+        supersonic.ui.views.current.isDisposable().should.equal true
+        created = supersonic.data.model('SandboxTask').create({
+          description: 'supersonic.data.model.create test object'
+        })
+        Promise.resolve().then ->
+          supersonic.ui.views.current.isDisposable().should.equal false
+          created.then ->
+            supersonic.ui.views.current.isDisposable().should.equal true
 
   describe "with a sandbox resource that has file fields", ->
     recordCreated = null
