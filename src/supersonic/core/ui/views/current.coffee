@@ -113,73 +113,39 @@ module.exports = (steroids, log, global) ->
 
   ###
    # @namespace supersonic.ui.views.current
-   # @name on
+   # @name subscribe
    # @function
    # @description
    # Listens for the current view events.
    # @type
-   # supersonic.ui.views.current.on: (
+   # supersonic.ui.views.current.subscribe: (
    #   eventName: String
-   #   handlerFn: Function
-   # ) => eventHandlerId
-   # @define {String} Name of the event. valid event names are: willchange, didchange, changeblocked
-   # @define {Function} Event handler function that is called when the event is triggered. It received the eventContext as a parameter.
+   #   listener: Function
+   # ) => unsubscribe: Function
+   # @define {String} eventName Name of the event. Valid event names include: willchange, didchange, blocked, preloaded
+   # @define {Function} listener Event handler function that is called when the event is triggered. It receives the eventContext as a parameter.
    # @returnsDescription
-   # A [`eventHandlerId`] that can be used to turn-off the this eventHandler.
+   # A function that can be used to unsubscribe the listener from any future events.
    # @exampleCoffeeScript
-   # eventHandlerId = supersonic.ui.views.current.on "preloaded", (event) ->
-   #   ...
-   #   # turn off only this eventHandlerId in case we have added more event handlers.
-   #   supersonic.ui.views.current.off "preloaded", eventHandlerId
-   #   #OR
-   #   # turn off all "preloaded" event handlers
-   #   supersonic.ui.views.current.off "preloaded"
+   # unsubscribe = supersonic.ui.views.current.subscribe "preloaded", (event) ->
+   #   console.log event
+   #   unsubscribe()
    #
    # @exampleJavaScript
-   # var eventHandlerId = supersonic.ui.views.current.on("preloaded", function(event){
-   #   ...
-   #   // turn off only this eventHandlerId in case we have added more event handlers.
-   #   supersonic.ui.views.current.off("preloaded", eventHandlerId);
-   #   //OR
-   #   // turn off all "willchange" event handlers
-   #   supersonic.ui.views.current.off("preloaded");
+   # var unsubscribe = supersonic.ui.views.current.subscribe("preloaded", function (event) {
+   #   console.log(event);
+   #   unsubscribe()
    # });
   ###
-  viewObject.on = (eventName, handlerFn) -> steroids.view.on eventName, handlerFn
+  viewObject.subscribe = (eventName, listener) ->
+    viewObject.events(eventName).onValue listener
 
-  ###
-   # @namespace supersonic.ui.views.current
-   # @name off
-   # @function
-   # @description
-   # Remove the current view event handlers.
-   # @type
-   # supersonic.ui.views.current.off: (
-   #   eventName: String,
-   #   eventHandlerId: String,
-   # )
-   # @define {String} Name of the event. valid event names are: willchange, didchange, changeblocked
-   # @define {String} Event handler id. If ommited it will remove all event handler for the specified event name.
-   # @exampleCoffeeScript
-   # eventHandlerId = supersonic.ui.views.current.off "willchange", (event)->
-   #   ...
-   #   # turn off only this eventHandlerId in case we have added more event handlers.
-   #   supersonic.ui.views.current.off "willchange", eventHandlerId
-   #   #OR
-   #   # turn off all "willchange" event handlers
-   #   supersonic.ui.views.current.off "willchange"
-   #
-   # @exampleJavaScript
-   # var eventHandlerId = supersonic.ui.views.current.on("willchange", function(event){
-   #   ...
-   #   // turn off only this eventHandlerId in case we have added more event handlers.
-   #   supersonic.ui.views.current.off("willchange", eventHandlerId);
-   #   //OR
-   #   // turn off all "willchange" event handlers
-   #   supersonic.ui.views.current.off("willchange");
-   # });
-  ###
-  viewObject.off = (eventName, eventHandlerId) -> steroids.view.off eventName, eventHandlerId
+  viewObject.events = (eventName) ->
+    Bacon.fromBinder (sink) ->
+      eventHandlerId = steroids.view.on eventName, sink
+
+      unsubscribe = ->
+        steroids.view.off eventName, eventHandlerId
 
   # pass view object so that params & id can be changed from here
   viewObject
