@@ -10,6 +10,7 @@ module.exports = (steroids, log, global) ->
   viewObject = {
     params: parameterBus.toProperty(steroids?.view?.params)
     id: null
+    isDisposable: require('./current/isDisposable')
   }
 
   # find out if view is started or not (based on current URL matching)
