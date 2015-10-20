@@ -19,4 +19,4 @@ module.exports = (steroids, log, global, superglobal, data) ->
   NavigationBarButton: require("./NavigationBarButton")(steroids, log)
 
   animate: require("./animate")(steroids, log)
-  isDisposable: require("./isDisposable")(global, superglobal, data)
+  isDisposable: require("./isDisposable")(superglobal, data)

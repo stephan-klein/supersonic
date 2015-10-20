@@ -1,22 +1,25 @@
 Bacon = require 'baconjs'
 
-module.exports = (global, superglobal, data) ->
+blockingRequests = (requests) ->
+  requests.filter ({ method, url, options, done }) ->
+    method in ['post', 'put', 'del']
 
-  ongoingBlockingRequests = 0
-  data
-    .requests
-    .flatMap ({ method, url, options, done }) ->
-      unless method in ['post', 'put', 'del']
-        Bacon.never()
-      else
-        Bacon.once(1).merge(
-          Bacon.fromPromise(done)
-            .map(-> -1)
-            .mapError(-> -1)
-        )
-    .scan(0, (requests, change) -> requests + change)
-    .onValue (requests) ->
-      ongoingBlockingRequests = requests
+countOngoing = (requests) ->
+  requests.flatMap ({ method, url, options, done }) ->
+    Bacon.once(1).merge(
+      Bacon.fromPromise(done)
+        .map(-> -1)
+        .mapError(-> -1)
+    )
+
+module.exports = (superglobal, data) ->
+
+  superglobal.ag ?= {}
+  superglobal.ag.data ?= {}
+  superglobal.ag.data.blockingRequests ?= 0
+
+  countOngoing(blockingRequests(data.requests)).onValue (change) ->
+    superglobal.ag.data.blockingRequests += change
 
   return isDisposable = ->
-    ongoingBlockingRequests is 0
+    superglobal.ag.data.blockingRequests is 0
