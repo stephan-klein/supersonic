@@ -12,14 +12,49 @@ countOngoing = (requests) ->
         .mapError(-> -1)
     )
 
-module.exports = (superglobal, data) ->
+UNBLOCKED_CHANNEL_NAME = 'supersonic.ui.isDisposable.unblocked'
+
+module.exports = (global, superglobal, data, dialog, views, layers, modal) ->
 
   superglobal.ag ?= {}
   superglobal.ag.data ?= {}
   superglobal.ag.data.blockingRequests ?= 0
 
+  unblocked = data.channel UNBLOCKED_CHANNEL_NAME
+
   countOngoing(blockingRequests(data.requests)).onValue (change) ->
     superglobal.ag.data.blockingRequests += change
+
+    if isDisposable()
+      unblocked.publish true
+
+  if global is superglobal
+    unblockings = data.channel(UNBLOCKED_CHANNEL_NAME).inbound
+
+    waitForUnblock = (event) ->
+      if isDisposable()
+        Bacon.never()
+      else
+        dialog.spinner.show "Saving..."
+        unblockings.take(1).map(-> event)
+
+    pickRetryFunction = (event) ->
+      switch event.trigger
+        when "pop_layer"
+          layers.pop
+        when "close_modal"
+          modal.hide
+        else
+          throw new Error "No idea how to retry '#{trigger}'"
+
+    views.current
+      .events('blocked')
+      .flatMapFirst(waitForUnblock)
+      .map(pickRetryFunction)
+      .onValue (retry) ->
+        dialog.spinner.hide()
+        retry()
+
 
   return isDisposable = ->
     superglobal.ag.data.blockingRequests is 0

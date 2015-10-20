@@ -1,7 +1,7 @@
 Bacon = supersonic.internal.Bacon
 
 angular.module('data-blocking').controller('NotificationIntervalController', ($scope) ->
-  $scope.interval = Math.floor(Math.random() * 9) + 1
+  $scope.interval = 1
   $scope.notification = null
 
   NotificationModel = supersonic.data.model 'AppGyverNotification'
