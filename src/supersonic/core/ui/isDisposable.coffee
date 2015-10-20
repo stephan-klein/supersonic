@@ -1,4 +1,5 @@
 Bacon = require 'baconjs'
+generateUuid = require '../../util/generate-uuid'
 
 blockingRequests = (requests) ->
   requests.filter ({ method, url, options, done }) ->
@@ -12,13 +13,16 @@ countOngoing = (requests) ->
         .mapError(-> -1)
     )
 
-UNBLOCKED_CHANNEL_NAME = 'supersonic.ui.isDisposable.unblocked'
-
 module.exports = (global, superglobal, data, dialog, views, layers, modal) ->
 
   superglobal.ag ?= {}
   superglobal.ag.data ?= {}
   superglobal.ag.data.blockingRequests ?= 0
+
+  superglobal.ag.view ?= {}
+  superglobal.ag.view.id ?= generateUuid()
+
+  UNBLOCKED_CHANNEL_NAME = "supersonic.ui.isDisposable.unblocked:#{superglobal.ag.view.id}"
 
   unblocked = data.channel UNBLOCKED_CHANNEL_NAME
 
