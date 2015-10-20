@@ -32,11 +32,12 @@ module.exports = (global, superglobal, data, dialog, views, layers, modal) ->
     unblockings = data.channel(UNBLOCKED_CHANNEL_NAME).inbound
 
     waitForUnblock = (event) ->
-      if isDisposable()
-        Bacon.never()
-      else
-        dialog.spinner.show "Saving..."
-        unblockings.take(1).map(-> event)
+      dialog.spinner.show "Saving..."
+      unblockings
+        .delay(100)
+        .filter(isDisposable)
+        .take(1)
+        .map(-> event)
 
     pickRetryFunction = (event) ->
       switch event.trigger
