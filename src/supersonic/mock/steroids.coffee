@@ -45,5 +45,8 @@ module.exports = do ->
   drawers:
     on: fakeEvent("steroids.drawers.on")
     off: removeEvent("steroids.drawers.on")
+  view:
+    on: fakeEvent("steroids.view.on")
+    off: removeEvent("steroids.view.on")
   getApplicationState: (params, callbacks) ->
     callbacks.onFailure?()
