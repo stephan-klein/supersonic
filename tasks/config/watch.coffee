@@ -9,16 +9,6 @@ module.exports =
       'build'
     ]
 
-  "build-dist":
-    files: [
-      '<%= files.src %>'
-      '<%= files.stylesheets %>'
-      '<%= files.components %>'
-    ]
-    tasks: [
-      'build-dist'
-    ]
-
   test:
     files: [
       '<%= files.src %>'
