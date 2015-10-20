@@ -35,10 +35,3 @@ describe "supersonic.ui.views.current", ->
       document.dispatchEvent new CustomEvent 'visibilitychange', {
         detail: visibilityState: 'hidden'
       }
-
-  describe 'isDisposable', ->
-    it 'is a function', ->
-      currentView.isDisposable.should.be.a 'function'
-
-    it 'returns a boolean', ->
-      currentView.isDisposable().should.be.a 'boolean'

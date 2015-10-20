@@ -1,5 +1,6 @@
 
 Promise = require 'bluebird'
+data = require 'ag-data'
 
 module.exports = (logger, superglobal, env) ->
   channel = require('./channel')(superglobal)
@@ -14,4 +15,12 @@ module.exports = (logger, superglobal, env) ->
   model = require('./model')(logger, superglobal, defaultAsyncStorageAdapter, session, env)
   storage = { adapters, property }
 
-  { channel, model, storage, session }
+  requests = data.requests
+
+  {
+    channel
+    model
+    storage
+    session
+    requests
+  }

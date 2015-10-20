@@ -90,16 +90,16 @@ describe "supersonic.data.model", ->
 
   describe "with any resource", ->
 
-    describe "supersonic.ui.views.current.isDisposable()", ->
+    describe "supersonic.ui.isDisposable()", ->
       it "is triggered by create", ->
-        supersonic.ui.views.current.isDisposable().should.equal true
+        supersonic.ui.isDisposable().should.equal true
         created = supersonic.data.model('SandboxTask').create({
           description: 'supersonic.data.model.create test object'
         })
         Promise.resolve().then ->
-          supersonic.ui.views.current.isDisposable().should.equal false
+          supersonic.ui.isDisposable().should.equal false
           created.then ->
-            supersonic.ui.views.current.isDisposable().should.equal true
+            supersonic.ui.isDisposable().should.equal true
 
   describe "with a sandbox resource that has file fields", ->
     recordCreated = null
