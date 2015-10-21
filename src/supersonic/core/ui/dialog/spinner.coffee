@@ -15,20 +15,17 @@ module.exports = (steroids, log) ->
    # supersonic.ui.dialog.spinner.show : (
    #   text?: String,
    #   options?: {
-   #     block?: String,
    #     animated?: Boolean
    #   }
    # ) => Promise
    # @define {String} text="Saving..." Spinner dialog text.
    # @define {Object} options={} An optional options object.
-   # @define {String} options.block="webview" Optional. Possible values are "webview" and "app". It defines if the spinner will block the webview only or will block the entire "app". When blocking the webview only the user can still change tabs.
    # @define {String} options.animated=true Optional turn on and off the animation when showing the spinner.
    # @returnsDescription
    # A [`Promise`](/supersonic/guides/technical-concepts/promises/), resolved when the spinner is displayed.
    # @supportsCallbacks
    # @exampleCoffeeScript
    # options =
-   #   block: "app"
    #   animated: false
    #
    # supersonic.ui.dialog.spinner.show("Saving...", options).then ->
@@ -36,7 +33,6 @@ module.exports = (steroids, log) ->
    #
    # @exampleJavaScript
    # var options = {
-   #   block: "app",
    #   animated: false
    # };
    #
@@ -47,7 +43,9 @@ module.exports = (steroids, log) ->
   show : s.promiseF "show", (text, options = {}) ->
     params =
       text : text
-      target : options?.block || "webview"
+      # KLUDGE: hardcoded to "app" instead of defaulting to "webview".
+      # Android does not support locking down an individual webview.
+      target : "app"
       animated : options?.animated || true
 
     new Promise (resolve, reject) ->
@@ -65,13 +63,11 @@ module.exports = (steroids, log) ->
    # @type
    # supersonic.ui.dialog.spinner.hide : (
    #   options?: {
-   #     block?: String,
    #     animated?: Boolean
    #     delay?: Number
    #   }
    # ) => Promise
    # @define {Object} options={} An optional options object.
-   # @define {String} options.block="webview" Optional. Possible values are "webview" and "app". It defines if the spinner is blocking the webview only or is blocking the entire "app".
    # @define {String} options.animated=true Optional turn on and off the animation when hidding the spinner.
    # @define {String} options.delay=0.5 Optional define a delay in seconds before the spinner is hidden.
    # @returnsDescription
@@ -79,7 +75,6 @@ module.exports = (steroids, log) ->
    # @supportsCallbacks
    # @exampleCoffeeScript
    # options =
-   #   block: "app"
    #   animated: false
    #   delay?: 0.6
    # supersonic.ui.dialog.spinner.hide(options).then ->
@@ -87,7 +82,6 @@ module.exports = (steroids, log) ->
    #
    # @exampleJavaScript
    # var options = {
-   #   block: "app",
    #   animated: false,
    #   delay?: 0.6
    # };
@@ -99,7 +93,9 @@ module.exports = (steroids, log) ->
   hide : s.promiseF "hide", (options = {}) ->
     params =
       delay : options?.delay || 0
-      target : options?.block || "webview"
+      # KLUDGE: hardcoded to "app" instead of defaulting to "webview".
+      # Android does not support locking down an individual webview.
+      target : "app"
       animated : options?.animated || true
 
     new Promise (resolve, reject) ->
