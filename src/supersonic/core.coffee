@@ -30,7 +30,7 @@ logger = require('./core/logger')(steroids, global)
 env = require('./core/env')(logger, superglobal)
 data = require('./core/data')(logger, superglobal, env)
 auth = require('./core/auth')(logger, global, data, env)
-ui = require('./core/ui')(steroids, logger, global)
+ui = require('./core/ui')(steroids, logger, global, superglobal, data)
 
 module.exports = {
   logger

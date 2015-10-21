@@ -111,6 +111,42 @@ module.exports = (steroids, log, global) ->
       .filter((visible) -> !visible)
       .onValue listen
 
+  ###
+   # @namespace supersonic.ui.views.current
+   # @name subscribe
+   # @function
+   # @description
+   # Listens for the current view events.
+   # @type
+   # supersonic.ui.views.current.subscribe: (
+   #   eventName: String
+   #   listener: Function
+   # ) => unsubscribe: Function
+   # @define {String} eventName Name of the event. Valid event names include: willchange, didchange, blocked, preloaded
+   # @define {Function} listener Event handler function that is called when the event is triggered. It receives the eventContext as a parameter.
+   # @returnsDescription
+   # A function that can be used to unsubscribe the listener from any future events.
+   # @exampleCoffeeScript
+   # unsubscribe = supersonic.ui.views.current.subscribe "preloaded", (event) ->
+   #   console.log event
+   #   unsubscribe()
+   #
+   # @exampleJavaScript
+   # var unsubscribe = supersonic.ui.views.current.subscribe("preloaded", function (event) {
+   #   console.log(event);
+   #   unsubscribe()
+   # });
+  ###
+  viewObject.subscribe = (eventName, listener) ->
+    viewObject.events(eventName).onValue listener
+
+  viewObject.events = (eventName) ->
+    Bacon.fromBinder (sink) ->
+      eventHandlerId = steroids.view.on eventName, sink
+
+      unsubscribe = ->
+        steroids.view.off eventName, eventHandlerId
+
   # pass view object so that params & id can be changed from here
   viewObject
 

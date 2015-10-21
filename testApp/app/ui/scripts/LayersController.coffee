@@ -48,3 +48,20 @@ angular
         supersonic.logger.log "Layer stack replaced successfully!"
       .catch (error) ->
         supersonic.logger.log error
+
+    $scope.testIsDisposableApi = ->
+
+      supersonic.ui.isDisposable = -> false
+
+      supersonic.ui.views.current
+        .events('blocked')
+        .take(1)
+        .doAction ->
+          supersonic.ui.dialog.spinner.show "Saving..."
+        .delay(2000)
+        .onValue (event) ->
+          supersonic.ui.isDisposable = -> true
+
+          supersonic.ui.dialog.spinner.hide()
+          if event.trigger == "pop_layer"
+            supersonic.ui.layers.pop()
