@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.8.2 (2015-10-21)
+
+Changes:
+- Support for blocking UI interactions while there are `supersonic.data` requests ongoing. Requires iOS client version 4.0.7 or Android client version 4.1.0.
+
 ## 1.8.1 (2015-10-14)
 
 Changes:
