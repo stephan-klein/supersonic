@@ -45,7 +45,7 @@ module.exports = (global, superglobal, data, dialog, views, layers, modal) ->
       else
         dialog.spinner.show "Saving..."
         unblockings
-          .delay(100)
+          .delay(1000)
           .filter(isDisposable)
           .take(1)
           .map(-> event)
