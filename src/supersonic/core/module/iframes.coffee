@@ -157,6 +157,10 @@ module.exports = (window, superglobal) ->
   findAllContainers = ->
     findAll MODULE_CONTAINER_SELECTION
 
+  ###
+  Public API functionalities
+  ###
+
   findAll = (selector = IFRAME_SELECTOR) ->
     Array.prototype.slice.call window.document.body.querySelectorAll(selector)
 
@@ -186,10 +190,6 @@ module.exports = (window, superglobal) ->
       debug "Resized element to #{height}px: ", element
 
       element
-
-  ###
-  Public API functionalities
-  ###
 
   showLoadIndicator = do ->
     generateLoadIndicatorElement = (element) ->
