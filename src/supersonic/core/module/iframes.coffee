@@ -1,12 +1,14 @@
 Promise = require 'bluebird'
 Bacon = require 'baconjs'
 debug = require('debug')('supersonic:module:iframes')
+http = require('../../util/http.coffee')
 
 module.exports = (window, superglobal) ->
 
   IFRAME_SELECTOR = "iframe[data-module]"
   MODULE_CONTAINER_SELECTION = ".ag__module-container"
   IFRAME_USE_LOAD_INDICATOR_ATTR = "data-module-indicate-loading"
+  MODULE_ACTUAL_SRC_ATTR = "ag-src"
   IFRAME_NAME_ATTR = "data-module-name"
   LOAD_INDICATOR_TEMPLATE = """
     <div class="super-module__load-indicator">
@@ -154,6 +156,18 @@ module.exports = (window, superglobal) ->
         .flatMap(addImageLoadEvents)
         .merge Bacon.later(500, element) # Do we really need this just-in-cause event?
 
+  onLocalhostAvailable = (msg) ->
+    # Delay execution until next tick, iframes are tricky on Android.
+    Promise.delay(0).then ->
+      for module in findAll()
+        module.src = module.getAttribute MODULE_ACTUAL_SRC_ATTR
+
+  onLocalhostNotReady = (msg) ->
+    setTimeout(loadWhenLocalhostAvailable, 500)
+
+  loadWhenLocalhostAvailable = (success, failure) ->
+    http().get "http://localhost/cordova.js", success, failure
+
   findAllContainers = ->
     findAll MODULE_CONTAINER_SELECTION
 
@@ -220,6 +234,7 @@ module.exports = (window, superglobal) ->
   ###
 
   initRuntimeEventListeners()
+  loadWhenLocalhostAvailable(onLocalhostAvailable, onLocalhostNotReady)
 
 
   return {
