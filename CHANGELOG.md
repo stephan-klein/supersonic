@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.8.3 (2015-10-26)
+
+Changes:
+- Support for deferred loading of iframes via the `ag-src` property. Circumvents an issue with requests to `localhost` on Android.
+
 ## 1.8.2 (2015-10-21)
 
 Changes:
