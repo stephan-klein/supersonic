@@ -1,12 +1,15 @@
 Promise = require 'bluebird'
 Bacon = require 'baconjs'
 debug = require('debug')('supersonic:module:iframes')
+http = require('../../util/http')
+retryIndefinitelyWithInterval = require('../../util/retry-indefinitely-with-interval')
 
 module.exports = (window, superglobal) ->
 
   IFRAME_SELECTOR = "iframe[data-module]"
   MODULE_CONTAINER_SELECTION = ".ag__module-container"
   IFRAME_USE_LOAD_INDICATOR_ATTR = "data-module-indicate-loading"
+  MODULE_ACTUAL_SRC_ATTR = "ag-src"
   IFRAME_NAME_ATTR = "data-module-name"
   LOAD_INDICATOR_TEMPLATE = """
     <div class="super-module__load-indicator">
@@ -154,8 +157,21 @@ module.exports = (window, superglobal) ->
         .flatMap(addImageLoadEvents)
         .merge Bacon.later(500, element) # Do we really need this just-in-cause event?
 
+  assignModuleSourceAttributes = ->
+    # Delay execution until next tick, iframes are tricky on Android.
+    Promise.delay(0).then ->
+      for module in findAll()
+        module.src = module.getAttribute MODULE_ACTUAL_SRC_ATTR
+
+  whenLocalhostAvailable = ->
+    http.get "http://localhost/cordova.js"
+
   findAllContainers = ->
     findAll MODULE_CONTAINER_SELECTION
+
+  ###
+  Public API functionalities
+  ###
 
   findAll = (selector = IFRAME_SELECTOR) ->
     Array.prototype.slice.call window.document.body.querySelectorAll(selector)
@@ -187,10 +203,6 @@ module.exports = (window, superglobal) ->
 
       element
 
-  ###
-  Public API functionalities
-  ###
-
   showLoadIndicator = do ->
     generateLoadIndicatorElement = (element) ->
       loadIndicatorElement = window.document.createElement("DIV")
@@ -220,7 +232,9 @@ module.exports = (window, superglobal) ->
   ###
 
   initRuntimeEventListeners()
-
+  retryIndefinitelyWithInterval 500, ->
+    whenLocalhostAvailable()
+      .then(assignModuleSourceAttributes)
 
   return {
     findAll
