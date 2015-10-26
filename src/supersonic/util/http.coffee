@@ -1,22 +1,23 @@
-module.exports = http = ->
+Promise = require 'bluebird'
 
-  get = (url, success, failure) ->
+get = (url) ->
+  new Promise (resolve, reject) ->
     xhr = new XMLHttpRequest()
 
     xhr.onreadystatechange = ->
       return unless xhr.readyState == 4
 
       if xhr.status == 200
-        success(xhr.responseText)
+        resolve(xhr.responseText)
       else
-        failure(xhr.responseText)
+        reject(xhr.responseText)
 
     xhr.onerror = (e) ->
-      failure(xhr.responseText)
+      reject(xhr.responseText)
 
     xhr.open("GET", url, true)
     xhr.send(null)
 
-  return {
-    get
-  }
+module.exports = {
+  get
+}

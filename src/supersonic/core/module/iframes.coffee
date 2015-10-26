@@ -1,7 +1,8 @@
 Promise = require 'bluebird'
 Bacon = require 'baconjs'
 debug = require('debug')('supersonic:module:iframes')
-http = require('../../util/http.coffee')
+http = require('../../util/http')
+retryIndefinitelyWithInterval = require('../../util/retry-indefinitely-with-interval')
 
 module.exports = (window, superglobal) ->
 
@@ -156,17 +157,14 @@ module.exports = (window, superglobal) ->
         .flatMap(addImageLoadEvents)
         .merge Bacon.later(500, element) # Do we really need this just-in-cause event?
 
-  onLocalhostAvailable = (msg) ->
+  assignModuleSourceAttributes = ->
     # Delay execution until next tick, iframes are tricky on Android.
     Promise.delay(0).then ->
       for module in findAll()
         module.src = module.getAttribute MODULE_ACTUAL_SRC_ATTR
 
-  onLocalhostNotReady = (msg) ->
-    setTimeout(loadWhenLocalhostAvailable, 500)
-
-  loadWhenLocalhostAvailable = (success, failure) ->
-    http().get "http://localhost/cordova.js", success, failure
+  whenLocalhostAvailable = ->
+    http.get "http://localhost/cordova.js"
 
   findAllContainers = ->
     findAll MODULE_CONTAINER_SELECTION
@@ -234,8 +232,9 @@ module.exports = (window, superglobal) ->
   ###
 
   initRuntimeEventListeners()
-  loadWhenLocalhostAvailable(onLocalhostAvailable, onLocalhostNotReady)
-
+  retryIndefinitelyWithInterval 500, ->
+    whenLocalhostAvailable()
+      .then(assignModuleSourceAttributes)
 
   return {
     findAll
