@@ -6,7 +6,7 @@ angular
 
     stopUpdating = null
     supersonic.ui.views.current.whenVisible ->
-      stopUpdating = Task.all({}, {interval: 1000}).whenChanged (tasks) ->
+      stopUpdating = Task.all().whenChanged (tasks) ->
         $scope.$apply ->
           $scope.tasks = tasks
           $scope.showSpinner = false
