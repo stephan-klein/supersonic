@@ -15,3 +15,6 @@ module.exports = (window) ->
 
   removeItem: (key) ->
     window.localStorage.removeItem key
+
+  keys: ->
+    Object.keys window.localStorage
