@@ -161,10 +161,16 @@ module.exports = (window, superglobal) ->
     # Delay execution until next tick, iframes are tricky on Android.
     Promise.delay(0).then ->
       for module in findAll()
-        module.src = module.getAttribute MODULE_ACTUAL_SRC_ATTR
+        if module.getAttribute MODULE_ACTUAL_SRC_ATTR
+          module.src = module.getAttribute MODULE_ACTUAL_SRC_ATTR
+        else
+          console.error "Attribute '#{MODULE_ACTUAL_SRC_ATTR}' was empty in module", module
 
   whenLocalhostAvailable = ->
-    http.get "http://localhost/cordova.js"
+    if /Crosswalk/.test(navigator.userAgent)
+      http.get "http://localhost/cordova.js"
+    else
+      Promise.resolve()
 
   findAllContainers = ->
     findAll MODULE_CONTAINER_SELECTION
