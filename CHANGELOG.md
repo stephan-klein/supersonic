@@ -2,6 +2,15 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.8.4 (2015-10-27)
+
+Changes:
+- Composer2 modules will check for http://localhost workaround only on Android.
+
+Fixes:
+- Prevents an issue with the `localStorage` cache adapter from preventing `supersonic.data` cache expirations.
+
+
 ## 1.8.3 (2015-10-26)
 
 Changes:
