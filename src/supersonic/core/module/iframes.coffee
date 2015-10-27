@@ -168,7 +168,7 @@ module.exports = (window, superglobal) ->
 
   whenLocalhostAvailable = ->
     if /Crosswalk/.test(navigator.userAgent)
-      http.get "http://localhost/cordova.js"
+      http.get "http://localhost/__localhost_available.html"
     else
       Promise.resolve()
 
