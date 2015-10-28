@@ -3,6 +3,9 @@ Bacon = require 'baconjs'
 
 defaultPollBehavior = require './model/default-poll-behavior'
 
+DEFAULT_BACKEND_POLL_INTERVAL_MILLISECONDS = 10000
+DEFAULT_CACHE_POLL_INTERVAL_MILLISECONDS = 1000
+
 module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
   ###
    # @namespace supersonic.data
@@ -66,6 +69,9 @@ module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
 
     options.followable ?= {
       poll: defaultPollBehavior
+      interval: switch options.cache.enabled
+        when true then DEFAULT_CACHE_POLL_INTERVAL_MILLISECONDS
+        else DEFAULT_BACKEND_POLL_INTERVAL_MILLISECONDS
     }
 
     options
