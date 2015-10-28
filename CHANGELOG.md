@@ -2,6 +2,14 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.8.5 (2015-10-28)
+
+Improves the time to getting refreshed data from `whenChanged`.
+
+Changes:
+- `supersonic.data.model` instances use a different polling logic for `whenChanged` by default. Pollers are started when the view is visible and stopped while the view is hidden.
+- The default polling interval for `supersonic.data.model` instances is 1000ms (down from 10000ms) when caching is enabled.
+
 ## 1.8.4 (2015-10-27)
 
 Changes:
