@@ -1,6 +1,8 @@
 data = require 'ag-data'
 Bacon = require 'baconjs'
 
+defaultPollBehavior = require './model/default-poll-behavior'
+
 module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
   ###
    # @namespace supersonic.data
@@ -61,6 +63,10 @@ module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
     if not options.headers?.Authorization?
       options.headers ?= {}
       options.headers.Authorization = session.getAccessToken()
+
+    options.followable ?= {
+      poll: defaultPollBehavior
+    }
 
     options
 
