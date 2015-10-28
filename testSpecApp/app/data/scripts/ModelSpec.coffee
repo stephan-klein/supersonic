@@ -132,6 +132,13 @@ describe "supersonic.data.model", ->
     describe "update", ->
 
       it "should handle a file upload", ->
+        # TODO: Configure from cloud
+        throw new Error """
+          Needs reconfiguration in the cloud.
+
+          This will be broken until Steroids Connect gets file field support or this test app is connected to a Composer application.
+        """
+
         recordCreated = supersonic.data.model('SandboxFileResource').create({
           description: 'supersonic.data.model.update test object'
         })
