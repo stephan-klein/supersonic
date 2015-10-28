@@ -1,7 +1,7 @@
 Promise = require 'bluebird'
 Bacon = require 'baconjs'
 
-{deviceready} = require '../events'
+{deviceready} = require '../../util/document-events'
 
 superify = require '../superify'
 

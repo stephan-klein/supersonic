@@ -1,6 +1,6 @@
 Promise = require 'bluebird'
 
-{deviceready} = require '../../events'
+{deviceready} = require '../../../util/document-events'
 superify = require '../../superify'
 
 module.exports = (steroids, log) ->
@@ -45,13 +45,13 @@ module.exports = (steroids, log) ->
    #   supersonic.logger.log("Alert closed.");
    # });
   ###
-  
+
   alert = s.promiseF "alert", (title, options = {}) ->
-  
+
     title = title || "Alert"
     message = options?.message || new String
     buttonLabel = options?.buttonLabel || "OK"
-  
+
     deviceready.then ->
       new Promise (resolve) ->
         navigator.notification.alert message, resolve, title, buttonLabel

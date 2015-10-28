@@ -1,6 +1,11 @@
 data = require 'ag-data'
 Bacon = require 'baconjs'
 
+defaultPollBehavior = require './model/default-poll-behavior'
+
+DEFAULT_BACKEND_POLL_INTERVAL_MILLISECONDS = 10000
+DEFAULT_CACHE_POLL_INTERVAL_MILLISECONDS = 1000
+
 module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
   ###
    # @namespace supersonic.data
@@ -49,7 +54,7 @@ module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
    # // Persist our new Task instance to the cloud
    # takeOutTheTrash.save();
   ###
-  withDefaults = (options) ->
+  withDefaults = (name, options) ->
     if options.cache?.enabled != false
       options.cache ?= {}
       options.cache.enabled = true
@@ -61,6 +66,13 @@ module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
     if not options.headers?.Authorization?
       options.headers ?= {}
       options.headers.Authorization = session.getAccessToken()
+
+    options.followable ?= {
+      poll: defaultPollBehavior name
+      interval: switch options.cache.enabled
+        when true then DEFAULT_CACHE_POLL_INTERVAL_MILLISECONDS
+        else DEFAULT_BACKEND_POLL_INTERVAL_MILLISECONDS
+    }
 
     options
 
@@ -81,7 +93,7 @@ module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
       bundle = data.loadResourceBundle bundleDefinition
 
       return (name, options = {}) ->
-        options = withDefaults(options)
+        options = withDefaults(name, options)
 
         try
           bundle.createModel name, options

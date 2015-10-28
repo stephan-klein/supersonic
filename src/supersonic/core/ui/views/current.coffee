@@ -1,6 +1,6 @@
 Bacon = require 'baconjs'
 Promise = require 'bluebird'
-events = require '../../events'
+events = require '../../../util/document-events'
 channel = require '../../data/channel'
 
 
