@@ -96,7 +96,7 @@ describe "supersonic.data.model", ->
         created = supersonic.data.model('SandboxTask').create({
           description: 'supersonic.data.model.create test object'
         })
-        Promise.resolve().then ->
+        Promise.delay(10).then ->
           supersonic.ui.isDisposable().should.equal false
           created.then ->
             supersonic.ui.isDisposable().should.equal true
