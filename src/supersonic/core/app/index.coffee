@@ -1,6 +1,6 @@
 Promise = require 'bluebird'
 
-events = require '../events'
+events = require '../../util/document-events'
 
 module.exports = (steroids, log) ->
   sleep: require("./sleep")(steroids, log)

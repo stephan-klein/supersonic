@@ -1,6 +1,6 @@
 Promise = require 'bluebird'
 superify = require '../superify'
-{deviceready} = require '../events'
+{deviceready} = require '../../util/document-events'
 
 ###
  # @namespace supersonic.media

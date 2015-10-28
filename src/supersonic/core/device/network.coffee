@@ -1,6 +1,6 @@
 Promise = require 'bluebird'
 
-{network} = require '../events'
+{deviceready} = require '../../util/document-events'
 
 module.exports = (steroids, log) ->
   bug = log.debuggable "supersonic.device.network"
