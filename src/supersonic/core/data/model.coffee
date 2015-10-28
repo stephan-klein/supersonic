@@ -54,7 +54,7 @@ module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
    # // Persist our new Task instance to the cloud
    # takeOutTheTrash.save();
   ###
-  withDefaults = (options) ->
+  withDefaults = (name, options) ->
     if options.cache?.enabled != false
       options.cache ?= {}
       options.cache.enabled = true
@@ -68,7 +68,7 @@ module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
       options.headers.Authorization = session.getAccessToken()
 
     options.followable ?= {
-      poll: defaultPollBehavior
+      poll: defaultPollBehavior name
       interval: switch options.cache.enabled
         when true then DEFAULT_CACHE_POLL_INTERVAL_MILLISECONDS
         else DEFAULT_BACKEND_POLL_INTERVAL_MILLISECONDS
@@ -93,7 +93,7 @@ module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
       bundle = data.loadResourceBundle bundleDefinition
 
       return (name, options = {}) ->
-        options = withDefaults(options)
+        options = withDefaults(name, options)
 
         try
           bundle.createModel name, options
