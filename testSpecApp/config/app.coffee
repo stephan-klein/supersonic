@@ -7,11 +7,23 @@ module.exports =
     version: "0.1.0"
 
   # This config flag is enabled for testing the CORS-issue prevention in the native client.
-  # X-Feature-Jobs, X-Job-Id, steroidsAppId and steroidsApiKey need to be here for Supersonic Data.
   network:
     extraResponseHeaders:
       "Access-Control-Allow-Origin": "*"
-      "Access-Control-Allow-Headers": "Content-Type, X-Requested-With, X-Feature-Jobs, X-Job-Id, steroidsAppId, steroidsApiKey, Authorization"
+      "Access-Control-Allow-Headers": [
+        'Content-Type'
+        'Authorization'
+        'X-Requested-With'
+        # Supersonic Data
+        'X-Feature-Jobs'
+        'X-Job-Id'
+        'steroidsAppId'
+        'steroidsApiKey'
+        # Image field uploads
+        'x-ag-image-uploader'
+        'x-ag-image-uploader-jpg-quality'
+        'x-ag-image-uploader-width'
+      ].join ', '
 
   splashscreen:
     autohide: true
