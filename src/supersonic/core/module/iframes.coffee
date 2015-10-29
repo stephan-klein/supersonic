@@ -33,10 +33,10 @@ module.exports = (window, superglobal) ->
         setLoadIndicatorTemplate(window.document.body.querySelectorAll("[data-module-load-indicator-template]")[0].innerHTML)
 
       streamOfModules = observeDocumentForNewModuleIframes()
-      streamOfModules.onValue attachToOnLoad
+      streamOfModules.onValue resizeOnModuleContentChange
       streamOfModules.onValue assignModuleSourceAttributes
 
-      findAll().map attachToOnLoad
+      findAll().map resizeOnModuleContentChange
 
   toggleModuleVisibility = ->
     display = {
@@ -84,7 +84,7 @@ module.exports = (window, superglobal) ->
   setLoadIndicatorTemplate = (templateString) ->
     LOAD_INDICATOR_TEMPLATE = templateString
 
-  attachToOnLoad = (element) ->
+  resizeOnModuleContentChange = (element) ->
     return unless isValidFrame element
     debug "Starting to watch element for changes:", element
 
@@ -190,7 +190,7 @@ module.exports = (window, superglobal) ->
   register = (element) ->
     return unless isValidFrame element
 
-    attachToOnLoad(element)
+    resizeOnModuleContentChange(element)
 
   resize = do ->
     calculateFrameElementHeight = (element) ->
