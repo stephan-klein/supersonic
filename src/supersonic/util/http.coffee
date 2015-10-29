@@ -10,7 +10,7 @@ get = switch
         xhr = new XMLHttpRequest()
 
         xhr.onreadystatechange = ->
-          return unless xhr.readyState == 4
+          return unless xhr.readyState == 4 or xhr.readyState == 0
 
           if xhr.status == 200
             resolve(xhr.responseText)
