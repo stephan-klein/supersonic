@@ -48,8 +48,6 @@ module.exports = (window) ->
     if tabsetElem.querySelectorAll(SELECTOR_TABS).length <= 1
       tabsContainer.style.display = "none"
       panesContainer.style.paddingTop = "0px"
-    else
-      panesContainer.style.paddingTop = tabsContainer.parentElement.offsetHeight + "px"
 
     # Pane activator
     activateTab = (tabIdx) ->
