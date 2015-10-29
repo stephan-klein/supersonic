@@ -31,8 +31,12 @@ module.exports = (window, superglobal) ->
     Promise.delay(0).then ->
       if window.document.body.querySelectorAll("[data-module-load-indicator-template]").length
         setLoadIndicatorTemplate(window.document.body.querySelectorAll("[data-module-load-indicator-template]")[0].innerHTML)
-      observeDocumentForNewModules().subscribe attachToOnLoad
-      findAll().map attachToOnLoad
+
+      streamOfModules = observeDocumentForNewModuleIframes()
+      streamOfModules.onValue resizeOnModuleContentChange
+      streamOfModules.onValue assignModuleSourceAttributes
+
+      findAll().map resizeOnModuleContentChange
 
   toggleModuleVisibility = ->
     display = {
@@ -63,7 +67,7 @@ module.exports = (window, superglobal) ->
     # Remove from the DOM all modules, which aren't on currently visible screen.
     window.document.addEventListener 'visibilitychange', toggleModuleVisibility, false
 
-  observeDocumentForNewModules = ->
+  observeDocumentForNewModuleIframes = ->
     return Bacon.never() unless window?.MutationObserver?
 
     Bacon.fromBinder (sink) ->
@@ -74,12 +78,13 @@ module.exports = (window, superglobal) ->
               for node in record.addedNodes when node.nodeName is "IFRAME"
                 if node.hasAttribute("data-module")
                   sink node
+
       observer.observe(window.document, {childList: true, subtree: true})
 
   setLoadIndicatorTemplate = (templateString) ->
     LOAD_INDICATOR_TEMPLATE = templateString
 
-  attachToOnLoad = (element) ->
+  resizeOnModuleContentChange = (element) ->
     return unless isValidFrame element
     debug "Starting to watch element for changes:", element
 
@@ -185,7 +190,7 @@ module.exports = (window, superglobal) ->
   register = (element) ->
     return unless isValidFrame element
 
-    attachToOnLoad(element)
+    resizeOnModuleContentChange(element)
 
   resize = do ->
     calculateFrameElementHeight = (element) ->
