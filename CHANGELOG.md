@@ -2,6 +2,13 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.8.6 (2015-10-30)
+
+Tabs for composer 2
+
+Features:
+- Adds soft tabs support for Composer 2
+
 ## 1.8.5 (2015-10-28)
 
 Improves the time to getting refreshed data from `whenChanged`.
