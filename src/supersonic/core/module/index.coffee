@@ -16,6 +16,7 @@ module.exports = (steroids, logger, superglobal, ui, env, global, data, auth) ->
     drivers
     cordovaSupport
     attributes
+    tabset: require('./tabset')(global)
     iframes: require('./iframes')(global, superglobal)
     layers: require('./layers')(logger, router, drivers.current.get, global)
     modal: require('./modal')(logger, router, drivers.current.get, global)
