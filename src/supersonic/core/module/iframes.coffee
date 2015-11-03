@@ -63,6 +63,42 @@ module.exports = (window, superglobal) ->
     # Remove from the DOM all modules, which aren't on currently visible screen.
     window.document.addEventListener 'visibilitychange', toggleModuleVisibility, false
 
+  # Sometimes iframe loading fails on Android with Connection Refused.
+  # Crosswalk ticket: https://crosswalk-project.org/jira/browse/XWALK-5621
+  #
+  # This will try to fix ALL iframes.
+  # Eg. collection header doesn't match iframe[data-module] but it might
+  # fail loading.
+  #
+  # Workaround: try to access any property of `contentWindow`. If iframe loading
+  # has failed, a SecurityError will be thrown because the origin of the failed
+  # iframe is "null".
+  initIframeGuard = ->
+    return if !isRuntimeWindow() or !isAndroid()
+
+    # Promise.delay is required because javascript is loaded before the
+    # iframe tag appears in the html document. This causes a race-condition
+    # on Android. Delaying to next-tick helps.
+    Promise.delay(0).then ->
+      for iframe in findAll("iframe") then do (iframe) ->
+        iframe.onload = ->
+          try
+            testProperty = iframe.contentWindow.thisDoesntExist
+
+          catch e
+            if (e instanceof DOMException && e.name == "SecurityError")
+              acualSrc = iframe.src
+              iframe.src = ""
+
+              Promise.delay(0).then ->
+                console.log "Loading of iframe failed, reloading it", acualSrc
+                iframe.src = acualSrc
+                hideLoadIndicator iframe
+                resizeOnModuleContentChange iframe
+
+  isAndroid = ->
+    window.FreshAndroidAPIBridge != null
+
   observeDocumentForNewModuleIframes = ->
     return Bacon.never() unless window?.MutationObserver?
 
@@ -111,6 +147,9 @@ module.exports = (window, superglobal) ->
     missed them or that they won't be sent. Therefore we check whether the
     iframe body is defined, which is something that should happen after
     DOMContentLoaded.
+
+    FIXME: `document.body` is also available on iframes which failed loading
+           due to Android Connection Refused bug.
 
     The iframe element might also become invalid at any point, which we need to
     detect.
@@ -224,6 +263,7 @@ module.exports = (window, superglobal) ->
   ###
 
   initRuntimeEventListeners()
+  initIframeGuard()
 
   return {
     findAll
