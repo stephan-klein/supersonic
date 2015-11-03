@@ -1,15 +1,12 @@
 Promise = require 'bluebird'
 Bacon = require 'baconjs'
 debug = require('debug')('supersonic:module:iframes')
-http = require('../../util/http')
-retryIndefinitelyWithInterval = require('../../util/retry-indefinitely-with-interval')
 
 module.exports = (window, superglobal) ->
 
   IFRAME_SELECTOR = "iframe[data-module]"
   MODULE_CONTAINER_SELECTION = ".ag__module-container"
   IFRAME_USE_LOAD_INDICATOR_ATTR = "data-module-indicate-loading"
-  MODULE_ACTUAL_SRC_ATTR = "ag-src"
   IFRAME_NAME_ATTR = "data-module-name"
   LOAD_INDICATOR_TEMPLATE = """
     <div class="super-module__load-indicator">
@@ -34,7 +31,6 @@ module.exports = (window, superglobal) ->
 
       streamOfModules = observeDocumentForNewModuleIframes()
       streamOfModules.onValue resizeOnModuleContentChange
-      streamOfModules.onValue assignModuleSourceAttributes
 
       findAll().map resizeOnModuleContentChange
 
@@ -162,21 +158,6 @@ module.exports = (window, superglobal) ->
         .flatMap(addImageLoadEvents)
         .merge Bacon.later(500, element) # Do we really need this just-in-cause event?
 
-  assignModuleSourceAttributes = ->
-    # Delay execution until next tick, iframes are tricky on Android.
-    Promise.delay(0).then ->
-      for module in findAll()
-        if module.getAttribute MODULE_ACTUAL_SRC_ATTR
-          module.src = module.getAttribute MODULE_ACTUAL_SRC_ATTR
-        else
-          console.error "Attribute '#{MODULE_ACTUAL_SRC_ATTR}' was empty in module", module
-
-  whenLocalhostAvailable = ->
-    if /Crosswalk/.test(navigator.userAgent)
-      http.get "http://localhost/__localhost_available.html"
-    else
-      Promise.resolve()
-
   findAllContainers = ->
     findAll MODULE_CONTAINER_SELECTION
 
@@ -243,9 +224,6 @@ module.exports = (window, superglobal) ->
   ###
 
   initRuntimeEventListeners()
-  retryIndefinitelyWithInterval 500, ->
-    whenLocalhostAvailable()
-      .then(assignModuleSourceAttributes)
 
   return {
     findAll
