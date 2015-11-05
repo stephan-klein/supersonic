@@ -42,8 +42,8 @@ module.exports = (window) ->
 
   attachToTabset = (tabsetElem) ->
     # Element containers
-    tabsContainer = tabsetElem.querySelectorAll(".module-tabset__tab-bar ul")[0]
-    panesContainer = tabsetElem.querySelectorAll(".module-tabset__content")[0]
+    tabsContainer = tabsetElem.querySelector(".module-tabset__tab-bar")
+    panesContainer = tabsetElem.querySelector(".module-tabset__content")
     # Tab content padding
     if tabsetElem.querySelectorAll(SELECTOR_TABS).length <= 1
       tabsContainer.style.display = "none"
@@ -65,7 +65,7 @@ module.exports = (window) ->
         else
           paneElem.classList.remove "active"
 
-    # Activte first tab
+    # Activate first tab
     activateTab(0)
 
     # Attach tabs
