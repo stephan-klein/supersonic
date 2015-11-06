@@ -2,6 +2,18 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.8.8 (2015-11-06)
+
+Fixes:
+- Workaround for Android's "Connection Refused" problem with iframes.
+  Issue: [XWALK-5621](https://crosswalk-project.org/jira/browse/XWALK-5621)
+
+## 1.8.7 (2015-11-05)
+
+Fixes:
+- Hide module chromes when in tabs.
+- Use wide chromes in mobile.
+
 ## 1.8.6 (2015-10-30)
 
 Tabs for composer 2
