@@ -1,15 +1,12 @@
 Promise = require 'bluebird'
 Bacon = require 'baconjs'
 debug = require('debug')('supersonic:module:iframes')
-http = require('../../util/http')
-retryIndefinitelyWithInterval = require('../../util/retry-indefinitely-with-interval')
 
 module.exports = (window, superglobal) ->
 
   IFRAME_SELECTOR = "iframe[data-module]"
   MODULE_CONTAINER_SELECTION = ".ag__module-container"
   IFRAME_USE_LOAD_INDICATOR_ATTR = "data-module-indicate-loading"
-  MODULE_ACTUAL_SRC_ATTR = "ag-src"
   IFRAME_NAME_ATTR = "data-module-name"
   LOAD_INDICATOR_TEMPLATE = """
     <div class="super-module__load-indicator">
@@ -34,7 +31,6 @@ module.exports = (window, superglobal) ->
 
       streamOfModules = observeDocumentForNewModuleIframes()
       streamOfModules.onValue resizeOnModuleContentChange
-      streamOfModules.onValue assignModuleSourceAttributes
 
       findAll().map resizeOnModuleContentChange
 
@@ -66,6 +62,42 @@ module.exports = (window, superglobal) ->
 
     # Remove from the DOM all modules, which aren't on currently visible screen.
     window.document.addEventListener 'visibilitychange', toggleModuleVisibility, false
+
+  # Sometimes iframe loading fails on Android with Connection Refused.
+  # Crosswalk ticket: https://crosswalk-project.org/jira/browse/XWALK-5621
+  #
+  # This will try to fix ALL iframes.
+  # Eg. collection header doesn't match iframe[data-module] but it might
+  # fail loading.
+  #
+  # Workaround: try to access any property of `contentWindow`. If iframe loading
+  # has failed, a SecurityError will be thrown because the origin of the failed
+  # iframe is "null".
+  initIframeGuard = ->
+    return if !isRuntimeWindow() or !isAndroid()
+
+    # Promise.delay is required because javascript is loaded before the
+    # iframe tag appears in the html document. This causes a race-condition
+    # on Android. Delaying to next-tick helps.
+    Promise.delay(0).then ->
+      for iframe in findAll("iframe") then do (iframe) ->
+        iframe.onload = ->
+          try
+            testProperty = iframe.contentWindow.thisDoesntExist
+
+          catch e
+            if (e instanceof DOMException && e.name == "SecurityError")
+              acualSrc = iframe.src
+              iframe.src = ""
+
+              Promise.delay(0).then ->
+                console.log "Loading of iframe failed, reloading it", acualSrc
+                iframe.src = acualSrc
+                hideLoadIndicator iframe
+                resizeOnModuleContentChange iframe
+
+  isAndroid = ->
+    window.FreshAndroidAPIBridge != null
 
   observeDocumentForNewModuleIframes = ->
     return Bacon.never() unless window?.MutationObserver?
@@ -116,6 +148,9 @@ module.exports = (window, superglobal) ->
     iframe body is defined, which is something that should happen after
     DOMContentLoaded.
 
+    FIXME: `document.body` is also available on iframes which failed loading
+           due to Android Connection Refused bug.
+
     The iframe element might also become invalid at any point, which we need to
     detect.
     ###
@@ -161,21 +196,6 @@ module.exports = (window, superglobal) ->
       contentDocumentBodyMutations(element)
         .flatMap(addImageLoadEvents)
         .merge Bacon.later(500, element) # Do we really need this just-in-cause event?
-
-  assignModuleSourceAttributes = ->
-    # Delay execution until next tick, iframes are tricky on Android.
-    Promise.delay(0).then ->
-      for module in findAll()
-        if module.getAttribute MODULE_ACTUAL_SRC_ATTR
-          module.src = module.getAttribute MODULE_ACTUAL_SRC_ATTR
-        else
-          console.error "Attribute '#{MODULE_ACTUAL_SRC_ATTR}' was empty in module", module
-
-  whenLocalhostAvailable = ->
-    if /Crosswalk/.test(navigator.userAgent)
-      http.get "http://localhost/__localhost_available.html"
-    else
-      Promise.resolve()
 
   findAllContainers = ->
     findAll MODULE_CONTAINER_SELECTION
@@ -243,9 +263,7 @@ module.exports = (window, superglobal) ->
   ###
 
   initRuntimeEventListeners()
-  retryIndefinitelyWithInterval 500, ->
-    whenLocalhostAvailable()
-      .then(assignModuleSourceAttributes)
+  initIframeGuard()
 
   return {
     findAll
