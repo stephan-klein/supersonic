@@ -88,16 +88,16 @@ module.exports = (window) ->
 
         # touch start
         elem.addEventListener "touchstart", (e) ->
-          startX = e.pageX
-          startY = e.pageY
-          lastX = e.pageX
-          lastY = e.pageY
+          touchEvent = e.touches[0]
+          if touchEvent?
+            [startX, startY, lastX, lastY] = [touchEvent.pageX, touchEvent.pageY, touchEvent.pageX, touchEvent.pageY]
         , false
 
         # touch move
         elem.addEventListener "touchmove", (e) ->
-          lastX = e.pageX
-          lastY = e.pageY
+          touchEvent = e.touches[0]
+          if touchEvent?
+            [lastX, lastY] = [touchEvent.pageX, touchEvent.pageY]
         , false
 
         # touch end
