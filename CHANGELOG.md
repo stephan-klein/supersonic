@@ -2,6 +2,11 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.8.9 (2015-11-10)
+
+Fixes:
+- Module soft tabs fixed to work in chrome/android.
+
 ## 1.8.8 (2015-11-06)
 
 Fixes:
