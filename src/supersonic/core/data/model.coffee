@@ -141,9 +141,12 @@ module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
 #   queryParams?: Object
 #   options?:
 #      interval?: Integer
-# ) =>
-#   whenChanged: (Collection) =>
-#     unsubscribe: Function
+# ) => {
+#   whenChanged: (
+#     onChange?: (Collection) => ()
+#     onError?: (Error) => ()
+#   ) => unsubscribe: Function
+# }
 # @description
 # Find and fetch a Collection of Model instances representing records that match the query parameters given to the function. The results of the query are made available as a stream that gets updated with the latest data every `interval` ms.
 # @define {Object} queryParams An object containing parameters for the database query, e.g. `limit: 10`.
@@ -179,9 +182,12 @@ module.exports = (logger, superglobal, getDefaultCacheStorage, session, env) ->
 #   id: String
 #   options?:
 #     interval?: Integer
-# ) =>
-#   whenChanged: (Model) =>
-#     unsubscribe: Function
+# ) => {
+#   whenChanged: (
+#     onChange?: (Model) => ()
+#     onError?: (Error) => ()
+#   ) => unsubscribe: Function
+# }
 # @description
 # Find a single record from the cloud by an id. The results are made available as a stream that gets updated with the latest data every `interval` ms.
 # @define {String} id An id string matching a record in the cloud resource represented by this Model class.
