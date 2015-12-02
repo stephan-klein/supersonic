@@ -2,6 +2,16 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.9.0 (2015-12-02)
+
+Features:
+
+- `whenChanged` methods in `supersonic.data.model` support an error callback argument
+
+Changes:
+
+- `whenChanged` will stop polling for updates if an unrecoverable error (HTTP 4xx) is encountered
+
 ## 1.8.9 (2015-11-10)
 
 Fixes:
