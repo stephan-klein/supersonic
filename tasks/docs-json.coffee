@@ -131,6 +131,9 @@ module.exports = (grunt) ->
 
     betterObject
 
+  shouldIgnoreDox = (doxObject) ->
+    !doxObject.tags?.length or doxObject.tags[0].type == "ignoreDocs"
+
   cleanUpDoxArray = (doxArray) ->
     cleanedUpArray = []
 
@@ -175,8 +178,8 @@ module.exports = (grunt) ->
       coffee = grunt.file.read filePath
 
       doxArray = dox.parseCommentsCoffee(coffee)
-      unless doxArray[0].tags.length > 0
-        return
+
+      return if shouldIgnoreDox doxArray[0]
 
       cleanedUpArray = cleanUpDoxArray(doxArray)
 

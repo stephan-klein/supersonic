@@ -9,6 +9,10 @@ module.exports = (steroids, log) ->
   s = superify 'supersonic.device.push', log
 
   ###
+   # @ignoreDocs
+  ###
+
+  ###
    # @namespace supersonic.device
    # @name push
    # @overview
