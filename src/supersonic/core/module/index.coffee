@@ -1,6 +1,6 @@
 
 module.exports = (steroids, logger, superglobal, ui, env, global, data, auth) ->
-  attributes = require('./attributes')(logger, global, superglobal)
+  attributes = require('./attributes')(logger, global)
   router = require('./router')(logger, env, global)
   drivers = require('./drivers')(steroids, superglobal, global)
 

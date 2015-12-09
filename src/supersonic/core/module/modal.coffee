@@ -17,7 +17,12 @@ module.exports = (logger, router, getDriver, global) ->
    # @define {Object} attributes What attributes to pass to the target
   ###
   show: s.promiseF 'show', (route, attributes = {}) ->
+    # FIXME: What is this about?
     attributes["disable_header"] = true unless attributes["disable_header"]?
+
+    # KLUDGE: Prevent attributes from outside modal leaking into the modal in web
+    # See: ./attributes.coffee
+    attributes["ag-isolate-scope"] = true
 
     path = router.getPath route, attributes
     Promise.resolve(getDriver().modal.show(path, {
