@@ -24,9 +24,9 @@ module.exports = (logger, router, getDriver, global) ->
     # See: ./attributes.coffee
     attributes["ag-isolate-scope"] = true
 
-    path = router.getPath route, attributes
+    { path, uid, attributes } = router.getMapping route, attributes
     Promise.resolve(getDriver().modal.show(path, {
-      route
+      route: uid
       attributes
       origin: global
     }))
