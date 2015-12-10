@@ -2,6 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.9.1 (2015-12-10)
+
+Fixes:
+
+- Prevents module attributes from outside a modal module iframe leaking into the modal in web.
+
 ## 1.9.0 (2015-12-02)
 
 Features:
