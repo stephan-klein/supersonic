@@ -1,21 +1,10 @@
 qs = require 'qs'
 
+ROUTE_PATTERN = /^([^#?]+)?(#([^?]+))?(\?(.+))?$/
+ROOT_PATH = "/modules"
+DEFAULT_VIEW_NAME = "index"
+
 module.exports = (logger, env, global) ->
-  ROUTE_PATTERN = /^([^#?]+)?(#([^?]+))?(\?(.+))?$/
-  ROOT_PATH = "/modules"
-  DEFAULT_VIEW_NAME = "index"
-
-  appendQueryParams = (path, queryParams) ->
-    switch
-      when !Object.keys(queryParams).length
-        path
-      when '?' in path
-        "#{path}&#{qs.stringify queryParams}"
-      else
-        "#{path}?#{qs.stringify queryParams}"
-
-  formatPath = (moduleName, viewName) ->
-    "#{ROOT_PATH}/#{moduleName}/#{viewName}.html"
 
   hasExplicitPathFor = (moduleName, viewName) ->
     env?.modules?.routes?[moduleName]?.views?[viewName]?.path?
@@ -51,32 +40,75 @@ module.exports = (logger, env, global) ->
     url = "#{baseUrl}#{viewName}.html"
     appendQueryParams url, queryParams
 
-  mergeQueryParams = (query, params) ->
-    queryParams = {}
-    for key, value of params
-      queryParams[key] = value
-    for key, value of qs.parse query
-      queryParams[key] = value
-    queryParams
+  return router = {
+    interpret: (route) ->
+      if !(typeof route is 'string')
+        throw new Error "Route must be a string"
 
-  getPath: (route, params = {}) ->
-    if !(typeof route is 'string')
-      throw new Error "Route must be a string"
+      parts = ROUTE_PATTERN.exec route
 
-    parts = ROUTE_PATTERN.exec route
+      if !parts?
+        throw new Error "Did not recognize route format in: '#{route}'"
 
-    if !parts?
-      throw new Error "Did not recognize route format in: '#{route}'"
+      [whole, moduleName, _, viewName, _, query] = parts
 
-    [whole, moduleName, _, viewName, _, query] = parts
-    viewName ?= DEFAULT_VIEW_NAME
-    query ?= ''
+      query = qs.parse(query ? '')
 
-    queryParams = mergeQueryParams query, params
+      { moduleName, viewName, query }
 
-    if !moduleName
-      formatInModulePath viewName, queryParams
-    else if hasExplicitPathFor moduleName, viewName
-      formatExplicitPath moduleName, viewName, queryParams
+    getPath: (route, params = {}) ->
+      { path } = router.getMapping(route, params)
+      path
+
+    getMapping: (route, attributes = {}) ->
+      { moduleName, viewName, query } = router.interpret route
+
+      uid = switch
+        when moduleName? and viewName?
+          "#{moduleName}##{viewName}"
+        when moduleName?
+          moduleName
+        when viewName?
+          "##{viewName}"
+        else
+          "#"
+
+      viewName ?= DEFAULT_VIEW_NAME
+
+      attributes = merge(query, attributes)
+
+      path = switch
+        when !moduleName
+          formatInModulePath viewName, attributes
+        when hasExplicitPathFor moduleName, viewName
+          formatExplicitPath moduleName, viewName, attributes
+        else
+          appendQueryParams (formatPath moduleName, viewName), attributes
+
+      {
+        path
+        uid
+        attributes
+      }
+  }
+
+appendQueryParams = (path, queryParams) ->
+  switch
+    when !Object.keys(queryParams).length
+      path
+    when '?' in path
+      "#{path}&#{qs.stringify queryParams}"
     else
-      appendQueryParams (formatPath moduleName, viewName), queryParams
+      "#{path}?#{qs.stringify queryParams}"
+
+formatPath = (moduleName, viewName) ->
+  "#{ROOT_PATH}/#{moduleName}/#{viewName}.html"
+
+merge = (left, right) ->
+  result = {}
+  for key, value of left
+    result[key] = value
+  for key, value of right
+    result[key] = value
+  result
+

@@ -17,9 +17,9 @@ module.exports = (logger, router, getDriver, global) ->
    # @define {Object} attributes What attributes to pass to the target
   ###
   push: s.promiseF 'push', (route, attributes = {}) ->
-    path = router.getPath route, attributes
+    { path, uid, attributes } = router.getMapping route, attributes
     Promise.resolve(getDriver().layers.push(path, {
-      route
+      route: uid
       attributes
       origin: global
     }))
