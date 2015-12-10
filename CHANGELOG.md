@@ -2,6 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.9.2 (2015-12-10)
+
+Fixes:
+
+- Prevents a scenario where `supersonic.module` drivers did not receive a valid `route` uid in the `context` argument ([see pull request](https://github.com/AppGyver/supersonic/pull/102))
+
 ## 1.9.1 (2015-12-10)
 
 Fixes:
