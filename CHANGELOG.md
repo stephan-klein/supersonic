@@ -2,6 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.9.3 (2015-12-14)
+
+Fixes:
+
+- Enables `supersonic.module.attributes` to be read for module frames where the module was included via the `srcdoc` attribute
+
 ## 1.9.2 (2015-12-10)
 
 Fixes:
