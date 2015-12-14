@@ -5,12 +5,6 @@ querystring = require 'qs'
 module.exports = (logger, global) ->
   superglobal = discoverSuperglobalAttributeScope global
 
-  debug "Picked module attribute discovery locations:", {
-    moduleFrameAttributes: global?.frameElement
-    globalUrlParams: global
-    superglobalUrlParams: superglobal
-  }
-
   forcedAttributes = {}
   getForcedAttribute = (name) ->
     forcedAttributes[name]
@@ -23,27 +17,21 @@ module.exports = (logger, global) ->
   getModuleFrameAttribute = (name) ->
     global?.frameElement?.getAttribute? "data-#{name}"
 
-  makeUrlParamAttributeGetter = (context) ->
-    getHrefParamsString = ->
-      href = context?.location.href || ""
-      href.slice(href.indexOf('?') + 1)
+  globalQueryParamAttributes = makeQueryParamAttributeGetter(getModuleSrc(global) || global.location.href)
+  superglobalQueryParamAttribute = makeQueryParamAttributeGetter(getModuleSrc(superglobal) || superglobal.location.href)
 
-    getLocationHrefParams = ->
-      querystring.parse getHrefParamsString()
-
-    params = null
-    (name) ->
-      params = getLocationHrefParams() unless params?
-      params[name]
-
-  getGlobalUrlParamAttribute = makeUrlParamAttributeGetter global
-  getSuperglobalUrlParamAttribute = makeUrlParamAttributeGetter superglobal
+  debug "Picked module attribute discovery locations:", {
+    context: { global, superglobal }
+    moduleFrameAttributes: global?.frameElement?.attributes
+    globalQueryParams: globalQueryParamAttributes.src
+    superglobalQueryParams: superglobalQueryParamAttribute.src
+  }
 
   getters = [
     getForcedAttribute
     getModuleFrameAttribute
-    getGlobalUrlParamAttribute
-    getSuperglobalUrlParamAttribute
+    globalQueryParamAttributes.get
+    superglobalQueryParamAttribute.get
   ]
 
   getAttribute = (name, defaultValue = null) ->
@@ -88,5 +76,24 @@ discoverSuperglobalAttributeScope = (global) ->
   candidate
 
 isIsolatedIframe = (candidate) ->
-  frameSrc = candidate.frameElement?.attributes?.getNamedItem('src')?.textContent || ''
+  frameSrc = getModuleSrc(candidate) || ''
   frameSrc.indexOf('ag-isolate-scope') isnt -1
+
+getModuleSrc = (global) ->
+  global.frameElement?.attributes?.getNamedItem('src')?.textContent
+
+makeQueryParamAttributeGetter = (src) ->
+  src ||= ""
+
+  parseQueryStringParams = ->
+    queryParamString = src.slice(src.indexOf('?') + 1) || ""
+    querystring.parse queryParamString
+
+  params = null
+
+  return {
+    src: src
+    get: (name) ->
+      params ?= parseQueryStringParams()
+      params[name]
+  }
