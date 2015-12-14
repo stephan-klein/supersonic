@@ -1,7 +1,15 @@
+debug = require('debug')('supersonic:module:attributes')
+
 querystring = require 'qs'
 
 module.exports = (logger, global) ->
   superglobal = discoverSuperglobalAttributeScope global
+
+  debug "Picked module attribute discovery locations:", {
+    moduleFrameAttributes: global?.frameElement
+    globalUrlParams: global
+    superglobalUrlParams: superglobal
+  }
 
   forcedAttributes = {}
   getForcedAttribute = (name) ->
