@@ -2,6 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.9.4 (2015-12-16)
+
+Changes:
+
+- Allow `supersonic.data.model` change listeners to detect whether an error is unrecoverable and no more events will be sent using `error.unrecoverable`.
+
 ## 1.9.3 (2015-12-14)
 
 Fixes:
