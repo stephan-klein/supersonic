@@ -1,6 +1,6 @@
 Promise = require 'bluebird'
 
-module.exports = (env, loadResourceBundle) ->
+module.exports = (env, session, loadResourceBundle) ->
   usersResourceBundle =
     options:
       baseUrl: env?.auth?.endpoint || ""
