@@ -12,15 +12,15 @@ module.exports = (logger, superglobal, env) ->
 
   defaultAsyncStorageAdapter = adapters.localStorage
 
-  model = require('./model')(logger, superglobal, defaultAsyncStorageAdapter, session, env)
-  storage = { adapters, property }
-
-  requests = data.requests
+  loadResourceBundle = require('./model/load-resource-bundle')(logger, session, defaultAsyncStorageAdapter)
+  model = require('./model')(logger, superglobal, env, loadResourceBundle)
+  users = require('./users')(env, loadResourceBundle)
 
   {
     channel
     model
-    storage
     session
-    requests
+    users
+    storage: { adapters, property }
+    requests: data.requests
   }

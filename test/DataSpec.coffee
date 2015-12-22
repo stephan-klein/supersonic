@@ -20,12 +20,14 @@ data = (resourceBundle = null) ->
   }
 
   session = require('../src/supersonic/core/data/session')(syncStorageAdapter())
+  loadResourceBundle = require('../src/supersonic/core/data/model/load-resource-bundle')(logger, session, asyncStorageAdapter)
+  env = {}
 
   model = require('../src/supersonic/core/data/model')(
     logger
     window
-    asyncStorageAdapter
-    session
+    env
+    loadResourceBundle
   )
 
   return {

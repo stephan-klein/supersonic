@@ -1,12 +1,9 @@
-data = require 'ag-data'
 Promise = require 'bluebird'
 
-module.exports = (logger, window, session, env) ->
+module.exports = (env, loadResourceBundle) ->
   usersResourceBundle =
     options:
       baseUrl: env?.auth?.endpoint || ""
-      headers:
-        Authorization: session.getAccessToken() || ""
     resources:
       users:
         schema:
@@ -28,14 +25,12 @@ module.exports = (logger, window, session, env) ->
             password:
               type: "string"
 
-  resourceBundle = data.loadResourceBundle(usersResourceBundle)
+  UserModel = loadResourceBundle(usersResourceBundle).createModel("users")
 
-  userModel = resourceBundle.createModel("users")
-
-  userModel.getCurrentUser = ->
+  UserModel.getCurrentUser = ->
     if userId = session.getUserId()
-      userModel.find(userId)
+      UserModel.find(userId)
     else
       Promise.reject new Error "Cannot access current user without a valid session"
 
-  userModel
+  UserModel

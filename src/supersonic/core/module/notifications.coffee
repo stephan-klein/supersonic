@@ -3,7 +3,7 @@ merge = require 'lodash/object/merge'
 
 APPGYVER_NOTIFICATION_RESOURCE_NAME = 'AppGyverNotification'
 
-module.exports = (data, attributes, auth) ->
+module.exports = (data, attributes, session) ->
 
   createAnnouncer = (namespace, events, defaults, resourceName) ->
     announcer =
@@ -124,7 +124,7 @@ module.exports = (data, attributes, auth) ->
         throw new Error "A list of event names is required"
 
       context = guessContext attributes
-      defaults = makeDefaults namespace, context, auth.session
+      defaults = makeDefaults namespace, context, session
       resourceName = options.resourceName ? APPGYVER_NOTIFICATION_RESOURCE_NAME
 
       createAnnouncer namespace, events, defaults, resourceName

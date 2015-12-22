@@ -1,3 +1,6 @@
+without = require './util/without'
+pick = require './util/pick'
+
 global = if window?
     window
   else
@@ -29,19 +32,18 @@ steroids = do ->
 logger = require('./core/logger')(steroids, global)
 env = require('./core/env')(logger, superglobal)
 data = require('./core/data')(logger, superglobal, env)
-auth = require('./core/auth')(logger, global, data, env)
 ui = require('./core/ui')(steroids, logger, global, superglobal, data)
 
 module.exports = {
   logger
-  data
   env
   ui
-  auth
+  data: without ['users', 'session'], data
+  auth: pick ['users', 'session'], data
   debug: require('./core/debug')(steroids, logger)
   app: require('./core/app')(steroids, logger)
   media: require('./core/media')(steroids, logger)
-  module: require('./core/module')(steroids, logger, superglobal, ui, env, global, data, auth)
+  module: require('./core/module')(steroids, logger, superglobal, ui, env, global, data)
   device: require('./core/device')(steroids, logger)
   internal:
     Promise: require 'bluebird'

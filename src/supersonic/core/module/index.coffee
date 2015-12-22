@@ -1,5 +1,5 @@
 
-module.exports = (steroids, logger, superglobal, ui, env, global, data, auth) ->
+module.exports = (steroids, logger, superglobal, ui, env, global, data) ->
   attributes = require('./attributes')(logger, global)
   router = require('./router')(logger, env, global)
   drivers = require('./drivers')(steroids, superglobal, global)
@@ -20,6 +20,6 @@ module.exports = (steroids, logger, superglobal, ui, env, global, data, auth) ->
     iframes: require('./iframes')(global, superglobal)
     layers: require('./layers')(logger, router, drivers.current.get, global)
     modal: require('./modal')(logger, router, drivers.current.get, global)
-    notifications: require('./notifications')(data, attributes, auth)
+    notifications: require('./notifications')(data, attributes, data.session)
     transitions: require('./transitions')(steroids, ui, logger)
   }
