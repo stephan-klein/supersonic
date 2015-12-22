@@ -2,6 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.9.5 (2015-12-22)
+
+Fixes:
+
+- Configures `supersonic.auth.users` with the same default caching options as `supersonic.data.model` ([see pull request](https://github.com/AppGyver/supersonic/pull/112))
+
 ## 1.9.4 (2015-12-16)
 
 Changes:
