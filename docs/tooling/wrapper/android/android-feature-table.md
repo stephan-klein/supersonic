@@ -11,7 +11,6 @@ subsection_id: android-feature-table
 ## Related guides
 
 - [Android Crosswalk][crosswalk-guide]
-- [And check out the blog: Chromium Crosswalk: A huge boost to hybrid-apps on Android.][blog-post]
 
 This table provides an overview of supported Android features. The table will be updated as new support is added.
 
@@ -23,7 +22,6 @@ You can also view the above content [here][table-link].
 
 </section>
 
-[blog-post]: http://blog.appgyver.com/heartbeat/steroids/android-chromium/
 [crosswalk-guide]: /tooling/wrapper/android/android-crosswalk/
 [table-link]: https://docs.google.com/a/appgyverlabs.com/spreadsheets/d/1MjfSvJ324dyvcR4eTkQhm70MsZAnved-Vl2OnJVdN6k/pubhtml
 

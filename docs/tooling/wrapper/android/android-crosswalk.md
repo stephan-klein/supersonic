@@ -11,7 +11,6 @@ subsection_id: android-crosswalk
 ## Related guides
 
 - [Android feature table][android-feature-table]
-- [And check out the blog: Chromium Crosswalk: A huge boost to hybrid-apps on Android.][blog-post]
 
 The Android runtime includes the ability to use [Crosswalk](https://crosswalk-project.org/) for your app's WebViews, in place of the regular Android WebViews. Crosswalk utilises Chromium, which is an open source web browser project that is used e.g. in Google Chrome – it's significantly more bleeding-edge compared to the default Android web browser. Crosswalk WebViews are supported on Android 4.0 and newer (SDK version 14+).
 
@@ -44,5 +43,4 @@ Crosswalk has currently an issue that WebViews will appear zoomed out unless the
 
 [android-build-settings]: /tooling/build-service/build-settings/build-settings-for-android/
 [android-feature-table]: /tooling/wrapper/android/android-feature-table
-[blog-post]: http://blog.appgyver.com/heartbeat/steroids/android-chromium/
 [debugging-guide]: /tooling/cli/debugging/debugging-on-android/

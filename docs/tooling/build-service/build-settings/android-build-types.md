@@ -41,9 +41,8 @@ Each native runtime will add ~18MB to the APK file size. So ARM only and x86 onl
 
 ## Crosswalk builds
 
-All the Android build types described above are also available as Crosswalk builds. The Crosswalk builds use [Crosswalk](https://crosswalk-project.org/) for your app's WebView in place of the regular Android Webview. For further information:
+All the Android build types described above are also available as Crosswalk builds. The Crosswalk builds use [Crosswalk](https://crosswalk-project.org/) for your app's WebView in place of the regular Android Webview.
 
-* [check out the blog: Chromium Crosswalk: A huge boost to hybrid-apps on Android](http://blog.appgyver.com/heartbeat/tooling/android-chromium/)
 </section>
 
 [android-build-config]: /tooling/build-service/build-settings/build-settings-for-android
