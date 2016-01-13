@@ -2,6 +2,12 @@
 
 Issues are tracked in AppGyver's [unified issue tracker](https://github.com/appgyver/steroids/issues) – please post bug reports and feature requests there.
 
+## 1.9.6 (2016-01-13)
+
+Fixes:
+
+- Race condition with `supersonic.data.model` change listeners possibly not seeing the `error.unrecoverable` flag (see release 1.9.4)
+
 ## 1.9.5 (2015-12-22)
 
 Fixes:
